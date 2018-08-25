@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/24 01:07:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/08/25 19:00:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,33 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-# define ARG_MAX 262144
+# ifndef ARG_MAX
+#  define ARG_MAX 262144
+# endif
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
 
+typedef struct			s_env
+{
+	char				*key;
+	char				*value;
+	struct s_env		*head;
+	struct s_env		*next;
+}						t_env;
+
 typedef struct			s_cmd
 {
 	char				cmd[ARG_MAX];
-	struct s_cmd		*prev; // up arrow
-	struct s_cmd		*next; // down arrow
+	struct s_cmd		*head;
+	struct s_cmd		*prev;
+	struct s_cmd		*next;
 }						t_cmd;
 
 typedef struct			s_shell
 {
-	char				**env; // env[i]="variable=value"
-	t_cmd				*last_cmd;
+	t_cmd				*cmd;
+	t_env				*env;
 }						t_shell;
 
 #endif

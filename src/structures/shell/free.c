@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/25 18:58:20 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/08/25 19:15:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int argc, char **argv, char **environ)
+void	free_shell(t_shell *shell, int full_free)
 {
-	t_env		*env;
-	t_shell		*shell;
-
-	env = NULL;
-	shell = NULL;
-	if (argc > 1)
-		ft_printf("%s runs without argument.\n", argv[0]);
-	shell_init(&shell);
-	environment_init(shell, &env, environ);
-	return (0);
+	if (!shell)
+		return ;
+	if (full_free && shell->env)
+		free_environment(shell->env);
+	free(shell);
 }
