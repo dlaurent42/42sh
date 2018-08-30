@@ -10,4 +10,4 @@ minishell
 *.o
 
 # Valgrind folder
-*dSYM
+*dSYM*
