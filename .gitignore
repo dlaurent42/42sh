@@ -1,0 +1,13 @@
+# Pollution
+.DS_Store
+
+# Executable
+minishell
+*.a
+
+# Compiled sources
+*obj
+*.o
+
+# Valgrind folder
+*dSYM

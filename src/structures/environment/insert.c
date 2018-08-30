@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/30 19:33:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/08/30 21:18:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_env_item	*env_new_item(t_shell *shell, t_env *env, char *k, char *v)
 	if (!(item = (t_env_item *)ft_memalloc(sizeof(t_env_item))))
 		error_malloc(shell, env, "t_env_item");
 	item->key = ft_strdups(k);
-	item->key = ft_strdups(v);
+	item->value = ft_strdups(v);
     return (item);
 }
 

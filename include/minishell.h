@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/30 19:34:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/08/30 21:02:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void					env_delete_specified_item(t_env_item *item);
 void					env_delete_item(t_env *env, const char *key);
 void 					env_delete(t_env* env);
 void 					env_insert(t_shell *shell, t_env *env, char *key, char *value);
-void					env_initialize(t_env *env, char **environ);
+void					env_initialize(t_shell *shell, t_env *env, char **environ);
 char					*env_search(t_env *env, const char *key);
 t_env					*env_new(t_shell *shell);
 
