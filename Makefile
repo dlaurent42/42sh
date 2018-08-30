@@ -6,13 +6,13 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/08/26 21:28:18 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/08/30 19:35:18 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: 		all clean fclean re
 
-NAME_LS 	= 	minishell
+NAME 		= 	minishell
 
 CC 			=	gcc
 CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
@@ -20,11 +20,14 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 SRC_DIR 	=	./src/
 SRC			=	minishell.c													\
 				errors/malloc.c												\
-				structures/environment/add.c								\
-				structures/environment/free.c								\
-				structures/environment/init.c								\
-				structures/shell/init.c										\
-				structures/shell/free.c
+				structures/environment/delete.c								\
+				structures/environment/hash.c								\
+				structures/environment/initialize.c							\
+				structures/environment/insert.c								\
+				structures/environment/new.c								\
+				structures/environment/search.c								\
+				structures/shell/delete.c									\
+				structures/shell/new.c
 
 #				functions/redirect.c										\
 #				functions/cd/cd.c											\
@@ -51,7 +54,7 @@ all:	 		minishell
 
 minishell:		$(OBJ_DIR) $(OBJS)
 				@make -C libft/
-				@$(CC) $(CFLAGS) -o $(NAME_LS) $(OBJS) -L libft/ -lft
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L libft/ -lft
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c $(INCS)
 				$(CC) $(CFLAGS) -c $< -o $@
@@ -78,6 +81,6 @@ clean:
 
 fclean: 		clean
 				@make fclean -C libft/
-				@rm -f $(NAME_LS)
+				@rm -f $(NAME)
 
 re: 			fclean all

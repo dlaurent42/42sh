@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/25 19:09:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/25 19:14:28 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/08/30 19:20:06 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/08/30 19:21:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_environment(t_env *env)
+void	env_initialize(t_env *env, char **environ)
 {
-	t_env	*tmp;
-
-	tmp = NULL;
-	if (!env)
+	if (env && environ)
 		return ;
-	env = env->head;
-	while (env)
-	{
-		tmp = env->next;
-		if (env->key)
-			ft_strdel(&env->key);
-		if (env->value)
-			ft_strdel(&env->value);
-		free(env);
-		env = tmp;
-	}	
 }

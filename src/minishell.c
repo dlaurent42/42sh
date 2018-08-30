@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/26 21:34:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/08/30 19:37:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int		main(int argc, char **argv, char **environ)
 	shell = NULL;
 	if (argc > 1)
 		ft_printf("%s runs without argument.\n", argv[0]);
-	shell_init(&shell);
-	environment_init(shell, &env, environ);
-	free_shell(shell, TRUE);
+	shell = shell_new();
+	env = env_new(shell);
+	shell->env = env;
+	env_initialize(env, environ);
+	env_delete(env);
+	shell_delete(shell);
 	return (0);
 }
