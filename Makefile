@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/08/24 00:40:55 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/08/26 21:28:18 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,19 +19,37 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
 SRC			=	minishell.c													\
+				errors/malloc.c												\
+				structures/environment/add.c								\
+				structures/environment/free.c								\
+				structures/environment/init.c								\
+				structures/shell/init.c										\
+				structures/shell/free.c
+
+#				functions/redirect.c										\
+#				functions/cd/cd.c											\
+#				functions/echo/echo.c										\
+#				functions/env/env.c											\
+#				functions/exit/exit											\
+#				functions/setenv/setenv										\
+#				functions/unsetenv/unsetenv									\
+#				structures/commands/										\
+
+
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
 OBJ_DIR 	=	./obj/
 OBJ		 	=	$(SRC:.c=.o)
-
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
 INC_DIR 	=	./include/
 INC 		=	minishell.h
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
-all:	 		$(OBJ_DIR) $(OBJS)
+all:	 		minishell
+
+minishell:		$(OBJ_DIR) $(OBJS)
 				@make -C libft/
 				@$(CC) $(CFLAGS) -o $(NAME_LS) $(OBJS) -L libft/ -lft
 
@@ -40,6 +58,18 @@ $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c $(INCS)
 
 $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
+				@mkdir -p $(OBJ_DIR)/errors
+				@mkdir -p $(OBJ_DIR)/functions
+				@mkdir -p $(OBJ_DIR)/functions/cd
+				@mkdir -p $(OBJ_DIR)/functions/echo
+				@mkdir -p $(OBJ_DIR)/functions/env
+				@mkdir -p $(OBJ_DIR)/functions/exit
+				@mkdir -p $(OBJ_DIR)/functions/setenv
+				@mkdir -p $(OBJ_DIR)/functions/unsetenv
+				@mkdir -p $(OBJ_DIR)/structures
+				@mkdir -p $(OBJ_DIR)/structures/commands
+				@mkdir -p $(OBJ_DIR)/structures/environment
+				@mkdir -p $(OBJ_DIR)/structures/shell
 
 clean:
 				@make clean -C libft/
