@@ -6,62 +6,64 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/31 16:12:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/08/31 16:13:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		env_delete_specified_item(t_env_item *item)
+void		bin_delete_specified_item(t_bin_item *item)
 {
 	if (item->key)
 		ft_strdel(&item->key);
 	if (item->value)
 		ft_strdel(&item->value);
+	if (item->obj)
+		free(item->obj);
 	free(item);
 }
 
-void		env_delete_item(t_env *env, const char *key)
+void		bin_delete_item(t_bin *bin, const char *key)
 {
 	int			i;
 	int			index;
-	t_env_item	*item;
-	t_env_item	deleleted_item;
+	t_bin_item	*item;
+	t_bin_item	deleleted_item;
 
 	i = 1;
 	deleleted_item.key = NULL;
 	deleleted_item.value = NULL;
-	index = env_get_hash(key, env->size, 0);
-	item = env->items[index];
+	index = bin_get_hash(key, bin->size, 0);
+	item = bin->items[index];
 	while (item)
 	{
 		if (item != &deleleted_item && !ft_strcmp(item->key, key))
 		{
-				env_delete_specified_item(item);
-                env->items[index] = &deleleted_item;
+				bin_delete_specified_item(item);
+                bin->items[index] = &deleleted_item;
         }
-        index = env_get_hash(key, env->size, i);
-        item = env->items[index];
+        index = bin_get_hash(key, bin->size, i);
+        item = bin->items[index];
         i++;
     } 
-    env->count--;
+    bin->count--;
 }
 
-void 		env_delete(t_env *env)
+void 		bin_delete(t_bin *bin)
 {
 	size_t		i;
-	t_env_item	*item;
+	t_bin_item	*item;
 
 	i = 0;
-	if (!env)
+	if (!bin)
 		return ;
-	while (i < env->size)
+	while (i < bin->size)
 	{
-		item = env->items[i];
+		item = bin->items[i];
 		if (item)
-			env_delete_specified_item(item);
+			bin_delete_specified_item(item);
 		i++;
 	}
-	free(env->items);
-	free(env);
+	free(bin->items);
+	free(bin);
 }
