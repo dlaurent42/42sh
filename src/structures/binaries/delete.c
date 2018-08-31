@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/31 16:13:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 01:14:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void		bin_delete_specified_item(t_bin_item *item)
 {
-	if (item->key)
-		ft_strdel(&item->key);
 	if (item->value)
-		ft_strdel(&item->value);
-	if (item->obj)
-		free(item->obj);
+	{
+		ft_strdel(&item->value->name);
+		free(item->value);
+	}
 	free(item);
 }
 
@@ -39,17 +38,17 @@ void		bin_delete_item(t_bin *bin, const char *key)
 	{
 		if (item != &deleleted_item && !ft_strcmp(item->key, key))
 		{
-				bin_delete_specified_item(item);
-                bin->items[index] = &deleleted_item;
-        }
-        index = bin_get_hash(key, bin->size, i);
-        item = bin->items[index];
-        i++;
-    } 
-    bin->count--;
+			bin_delete_specified_item(item);
+			bin->items[index] = &deleleted_item;
+		}
+		index = bin_get_hash(key, bin->size, i);
+		item = bin->items[index];
+		i++;
+	}
+	bin->count--;
 }
 
-void 		bin_delete(t_bin *bin)
+void		bin_delete(t_bin *bin)
 {
 	size_t		i;
 	t_bin_item	*item;

@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:18:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/30 19:32:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 00:05:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int 	env_hash(const char *s, const int a, const int m)
+static int	env_hash(const char *s, const int a, const int m)
 {
 	long	hash;
 	size_t	i;
@@ -27,15 +27,15 @@ static int 	env_hash(const char *s, const int a, const int m)
 		hash %= m;
 		i++;
 	}
-    return ((int)hash);
+	return ((int)hash);
 }
 
-int 		env_get_hash(const char *s, const int num_buckets, const int attempt)
+int			env_get_hash(const char *s, const int buckets, const int attempt)
 {
-    int	hash_a;
+	int	hash_a;
 	int	hash_b;
 
-	hash_a = env_hash(s, ENV_PRIME_1, num_buckets);
-	hash_b = env_hash(s, ENV_PRIME_2, num_buckets);
-    return ((hash_a + (attempt * (hash_b + 1))) % num_buckets);
+	hash_a = env_hash(s, ENV_PRIME_1, buckets);
+	hash_b = env_hash(s, ENV_PRIME_2, buckets);
+	return ((hash_a + (attempt * (hash_b + 1))) % buckets);
 }

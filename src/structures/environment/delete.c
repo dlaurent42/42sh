@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/31 16:12:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 00:04:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ void		env_delete_item(t_env *env, const char *key)
 	{
 		if (item != &deleleted_item && !ft_strcmp(item->key, key))
 		{
-				env_delete_specified_item(item);
-                env->items[index] = &deleleted_item;
-        }
-        index = env_get_hash(key, env->size, i);
-        item = env->items[index];
-        i++;
-    } 
-    env->count--;
+			env_delete_specified_item(item);
+			env->items[index] = &deleleted_item;
+		}
+		index = env_get_hash(key, env->size, i++);
+		item = env->items[index];
+	}
+	env->count--;
 }
 
-void 		env_delete(t_env *env)
+void		env_delete(t_env *env)
 {
 	size_t		i;
 	t_env_item	*item;

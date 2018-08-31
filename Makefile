@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/08/30 19:35:18 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/01 00:57:40 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,13 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 SRC_DIR 	=	./src/
 SRC			=	minishell.c													\
 				errors/malloc.c												\
+				errors/path.c												\
+				structures/binaries/delete.c								\
+				structures/binaries/hash.c									\
+				structures/binaries/initialize.c							\
+				structures/binaries/insert.c								\
+				structures/binaries/new.c									\
+				structures/binaries/search.c								\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
@@ -70,6 +77,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/setenv
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
 				@mkdir -p $(OBJ_DIR)/structures
+				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/shell

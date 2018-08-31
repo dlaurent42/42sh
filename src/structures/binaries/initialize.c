@@ -6,28 +6,49 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/31 16:19:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 01:38:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_initialize(t_shell *shell, t_env *env, char **environ)
+static void		bin_parse_folder(t_shell *shell, t_bin *bin, char *path)
 {
-	// char		*left;
-	// char		*right;
-	// size_t		i;
+	DIR			*dir;
+	t_stat		stats;
+	t_dirent	*dirent;
 
-	// i = 0;
-	// left = NULL;
-	// right = NULL;
-	// while (environ[i])
-	// {
-	// 	right = ft_strchrsp(environ[i], '=');
-	// 	left = ft_strsub(environ[i], 0, ft_strlens(environ[i]) - ft_strlens(right) - 1);
-	// 	env_insert(shell, env, left, right);
-	// 	if (left)
-	// 		ft_strdel(&left);
-	// 	i++;
-	// }
+	if (!(dir = opendir(path)))
+		return ;
+	while ((dirent = readdir(dir)))
+		if (lstat(path, &stats) == 0)
+			bin_insert(
+				shell,
+				bin,
+				bin_new_obj(
+					shell,
+					dirent->d_name,
+					path,
+					stats));
+	closedir(dir);
+}
+
+void			bin_initialize(t_shell *shell, t_env *env, t_bin *bin)
+{
+	int			i;
+	char		*path;
+	char		**path_list;
+
+	i = 0;
+	if (!(path = env_search(env, "PATH")))
+		error_no_path_var(shell);
+	if (!(path_list = ft_strsplit(path, ':')))
+		error_no_path_var(shell);
+	while (path_list[i])
+	{
+		bin_parse_folder(shell, bin, path_list[i]);
+		ft_strdel(&path_list[i]);
+		i++;
+	}
+	free(path_list);
 }
