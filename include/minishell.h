@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 03:01:00 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 21:01:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define MINISHELL_H
 
 # include "../libft/include/libft.h"
+# include <curses.h>
 # include <dirent.h>
+# include <signal.h>
+# include <term.h>
+# include <termios.h>
 # include <time.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -71,9 +75,9 @@ typedef struct			s_bin
 typedef struct			s_cmd
 {
 	char				cmd[ARG_MAX];
+	char				executed;
 	struct s_cmd		*head;
 	struct s_cmd		*prev;
-	struct s_cmd		*next;
 }						t_cmd;
 
 typedef struct			s_shell
@@ -81,6 +85,7 @@ typedef struct			s_shell
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
+	t_term				*term;
 }						t_shell;
 
 /*
@@ -89,8 +94,15 @@ typedef struct			s_shell
 void					error_malloc_shell(t_shell *shell);
 void					error_malloc_env(t_shell *s, t_env *e, char *name);
 void					error_malloc_bin(t_shell *s, t_bin *b, char *name);
+void					error_malloc_term(t_shell *shell, char *name);
 void					error_no_path_var(t_shell *shell);
 void					error_no_term_var(t_shell *shell);
+
+/*
+** reading
+*/
+void					sh_read(t_shell *shell);
+void					signal_catching(void);
 
 /*
 ** structures - binaries
@@ -126,7 +138,7 @@ t_shell					*shell_new(void);
 /*
 ** structures - term
 */
-void					term_delete(t_shell *shell);
+void					term_delete(t_term *term);
 t_term					*term_new(t_shell *shell);
 
 #endif
