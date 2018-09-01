@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 01:37:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/01 03:01:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
+typedef struct termios	t_term;
 
 typedef struct			s_env_item
 {
@@ -89,6 +90,7 @@ void					error_malloc_shell(t_shell *shell);
 void					error_malloc_env(t_shell *s, t_env *e, char *name);
 void					error_malloc_bin(t_shell *s, t_bin *b, char *name);
 void					error_no_path_var(t_shell *shell);
+void					error_no_term_var(t_shell *shell);
 
 /*
 ** structures - binaries
@@ -120,5 +122,11 @@ t_env					*env_new(t_shell *shell, char **environ);
 */
 void					shell_delete(t_shell *shell);
 t_shell					*shell_new(void);
+
+/*
+** structures - term
+*/
+void					term_delete(t_shell *shell);
+t_term					*term_new(t_shell *shell);
 
 #endif

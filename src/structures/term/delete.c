@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 02:59:28 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/01 02:53:56 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/01 02:59:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int argc, char **argv, char **environ)
+void		term_delete(t_shell *shell)
 {
-	t_env		*env;
-	t_shell		*shell;
-
-	env = NULL;
-	shell = NULL;
-	(void)argc;
-	(void)argv;
-	shell = shell_new();
-	shell->env = env_new(shell, environ);
-	shell->bin = bin_new(shell);
-	shell->term = term_new(shell);
-	shell_delete(shell);
-	return (0);
+	if (!shell || !shell->term)
+		return ;
+	if (tcgetattr(0, &(shell->term)) == -1)
+		return ;
+	shell->term.c_lflag = (ICANON | ECHO);
+	if (tcsetattr(0, 0, &(shell->term)) == -1)
+		return ;
 }

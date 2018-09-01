@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 02:59:28 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/01 02:56:06 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/01 02:56:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int argc, char **argv, char **environ)
+void		error_no_term_var(t_shell *shell)
 {
-	t_env		*env;
-	t_shell		*shell;
-
-	env = NULL;
-	shell = NULL;
-	(void)argc;
-	(void)argv;
-	shell = shell_new();
-	shell->env = env_new(shell, environ);
-	shell->bin = bin_new(shell);
-	shell->term = term_new(shell);
-	shell_delete(shell);
-	return (0);
+	if (shell)
+		shell_delete(shell);
+	ft_putendl_fd("TERM variable is unset", 2);
+	exit(EXIT_FAILURE);
 }
