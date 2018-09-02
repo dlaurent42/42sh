@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 19:35:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/02 17:35:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	sig_handler(int signo)
 		ft_printf("received SIGSTOP\n");
 	else if (signo == SIGQUIT)
 		ft_printf("received SIGSTOP\n");
+	else if (signo == SIGWINCH)
+		return ;
 	else
 		ft_printf("another signal (%d) received\n", signo);
 }
@@ -42,4 +44,6 @@ void		signal_catching(void)
 		ft_printf("\ncan't catch SIGABRT\n");	
 	if (signal(SIGILL, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGILL\n");	
+	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
+		ft_printf("\ncan't catch SIGWINCH\n");	
 }

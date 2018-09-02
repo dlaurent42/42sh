@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/01 18:54:39 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/02 18:32:15 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC			=	minishell.c													\
 				structures/environment/search.c								\
 				structures/shell/delete.c									\
 				structures/shell/new.c										\
+				structures/read/delete.c									\
+				structures/read/new.c										\
 				structures/term/delete.c									\
 				structures/term/new.c										\
 
@@ -86,6 +88,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
+				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term
 

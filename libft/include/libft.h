@@ -6,14 +6,14 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/01 06:10:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:43:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 64
 
 # define F_PLUS 0
 # define F_DASH 1
@@ -79,16 +79,16 @@ typedef struct		s_arg
 	struct s_arg	*next;
 }					t_arg;
 
-typedef struct		s_read
+typedef struct		s_gnl
 {
 	int				fd;
 	int				rr;
 	int				gnl;
 	char			*buff;
 	char			*content;
-	struct s_read	*head;
-	struct s_read	*next;
-}					t_read;
+	struct s_gnl	*head;
+	struct s_gnl	*next;
+}					t_gnl;
 
 /*
 ** Conversions

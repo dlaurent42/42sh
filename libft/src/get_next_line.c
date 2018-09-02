@@ -6,129 +6,129 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 13:55:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/08/02 03:54:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:44:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_read	*add_reader(int const fd, t_read *current_reader)
+static t_gnl	*add_r(int const fd, t_gnl *current_gnl_r)
 {
-	t_read	*reader;
+	t_gnl	*r;
 
-	reader = NULL;
-	if (!(reader = (t_read *)malloc(sizeof(t_read))))
+	r = NULL;
+	if (!(r = (t_gnl *)malloc(sizeof(t_gnl))))
 		return (NULL);
-	reader->fd = fd;
-	reader->rr = 1;
-	reader->gnl = -1;
-	reader->content = NULL;
-	reader->head = NULL;
-	reader->next = NULL;
-	if (current_reader)
+	r->fd = fd;
+	r->rr = 1;
+	r->gnl = -1;
+	r->content = NULL;
+	r->head = NULL;
+	r->next = NULL;
+	if (current_gnl_r)
 	{
-		current_reader->next = reader;
-		reader->head = current_reader->head;
+		current_gnl_r->next = r;
+		r->head = current_gnl_r->head;
 	}
 	else
-		reader->head = reader;
-	return (reader);
+		r->head = r;
+	return (r);
 }
 
-static	t_read	*fd_already_stored(int const fd, t_read *reader)
+static	t_gnl	*fd_already_stored(int const fd, t_gnl *r)
 {
-	if (!reader)
-		return (add_reader(fd, reader));
-	reader = reader->head;
-	while (reader->next && reader->fd != fd)
-		reader = reader->next;
-	if (reader->fd == fd)
-		return (reader);
+	if (!r)
+		return (add_r(fd, r));
+	r = r->head;
+	while (r->next && r->fd != fd)
+		r = r->next;
+	if (r->fd == fd)
+		return (r);
 	else
-		return (add_reader(fd, reader));
+		return (add_r(fd, r));
 }
 
-static int		handle_reader(t_read **reader)
+static int		handle_r(t_gnl **r)
 {
-	t_read	*tmp;
+	t_gnl	*tmp;
 
-	if ((*reader)->gnl != 0 || (*reader)->fd > 2)
-		return ((*reader)->gnl);
-	if (*reader == (*reader)->head)
+	if ((*r)->gnl != 0 || (*r)->fd > 2)
+		return ((*r)->gnl);
+	if (*r == (*r)->head)
 	{
-		tmp = (*reader)->next;
+		tmp = (*r)->next;
 		while (tmp)
 		{
-			tmp->head = (*reader)->next;
+			tmp->head = (*r)->next;
 			tmp = tmp->next;
 		}
 	}
 	else
 	{
-		tmp = (*reader)->head;
+		tmp = (*r)->head;
 		while (tmp)
 		{
-			if (tmp->next == (*reader))
-				tmp->next = (*reader)->next;
+			if (tmp->next == (*r))
+				tmp->next = (*r)->next;
 			tmp = tmp->next;
 		}
 	}
-	free((*reader));
+	free((*r));
 	return (0);
 }
 
-static t_read	*manipulate_data(t_read *reader, char **line)
+static t_gnl	*manipulate_data(t_gnl *r, char **line)
 {
 	char	*tmp;
 
 	tmp = NULL;
-	if (ft_strchrs(reader->content, '\n'))
+	if (ft_strchrs(r->content, '\n'))
 	{
-		*line = ft_strsub(reader->content, 0, ft_strlens(reader->content)
-		- ft_strlens(ft_strchrs(reader->content, '\n')));
-		if (!ft_strcmp(ft_strchrs(reader->content, '\n'), "\n"))
-			ft_strdel(&(reader->content));
+		*line = ft_strsub(r->content, 0, ft_strlens(r->content)
+		- ft_strlens(ft_strchrs(r->content, '\n')));
+		if (!ft_strcmp(ft_strchrs(r->content, '\n'), "\n"))
+			ft_strdel(&(r->content));
 		else
 		{
-			tmp = ft_strdup(ft_strchrsp(reader->content, '\n'));
-			ft_strdel(&(reader->content));
-			reader->content = tmp;
+			tmp = ft_strdup(ft_strchrsp(r->content, '\n'));
+			ft_strdel(&(r->content));
+			r->content = tmp;
 		}
-		reader->gnl = 1;
+		r->gnl = 1;
 	}
-	else if (reader->rr >= 0 && reader->rr < BUFF_SIZE)
+	else if (r->rr >= 0 && r->rr < BUFF_SIZE)
 	{
-		if (reader->content[0])
-			*line = ft_strdup(reader->content);
-		reader->gnl = (reader->content[0] == '\0') ? 0 : 1;
-		ft_strdel(&(reader->content));
+		if (r->content[0])
+			*line = ft_strdup(r->content);
+		r->gnl = (r->content[0] == '\0') ? 0 : 1;
+		ft_strdel(&(r->content));
 	}
-	return (reader);
+	return (r);
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	size_t			reading_ok;
-	static t_read	*reader = NULL;
+	size_t				reading_ok;
+	static t_gnl	*r = NULL;
 
-	if (!line || fd < 0 || !(reader = fd_already_stored(fd, reader))
-	|| !(reader->buff = ft_strnew(sizeof(char) * BUFF_SIZE)))
+	if (!line || fd < 0 || !(r = fd_already_stored(fd, r))
+	|| !(r->buff = ft_strnew(sizeof(char) * BUFF_SIZE)))
 		return (-1);
 	reading_ok = 1;
 	while (reading_ok)
 	{
-		if ((reader->rr = read(reader->fd, reader->buff, BUFF_SIZE)) == -1)
+		if ((r->rr = read(r->fd, r->buff, BUFF_SIZE)) == -1)
 			return (-1);
-		reader->buff[reader->rr] = '\0';
-		reader->content = ft_strjoinf(reader->content, reader->buff, 1);
-		if (ft_strchrs(reader->content, '\n')
-		|| (reader->rr >= 0 && reader->rr < BUFF_SIZE))
+		r->buff[r->rr] = '\0';
+		r->content = ft_strjoinf(r->content, r->buff, 1);
+		if (ft_strchrs(r->content, '\n')
+		|| (r->rr >= 0 && r->rr < BUFF_SIZE))
 		{
-			reader = manipulate_data(reader, line);
+			r = manipulate_data(r, line);
 			reading_ok = 0;
 		}
-		ft_strclr(reader->buff);
+		ft_strclr(r->buff);
 	}
-	ft_strdel(&(reader->buff));
-	return (handle_reader(&reader));
+	ft_strdel(&(r->buff));
+	return (handle_r(&r));
 }

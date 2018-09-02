@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:43:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 16:35:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:14:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void		error_malloc_bin(t_shell *shell, t_bin *bin, char *name)
 {
 	if (bin)
 		bin_delete(bin);
+	if (shell)
+		shell_delete(shell);
+	ft_putstr_fd("Cannot malloc ", 2);
+	ft_putendl_fd(name, 2);
+	exit(EXIT_FAILURE);
+}
+
+void		error_malloc_reader(t_shell *shell, char *name)
+{
 	if (shell)
 		shell_delete(shell);
 	ft_putstr_fd("Cannot malloc ", 2);
