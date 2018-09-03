@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 19:57:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/03 20:02:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,23 @@ typedef struct			s_cmd
 
 typedef struct			s_read
 {
+
 	// Cursor
 	unsigned int		cursor_rel_pos; // position in line
 	unsigned int		cursor_abs_pos; // position in buffer
 
-	// Modes
+	// Modes / Flags
 	unsigned char		auto_completion_mode; // boolean
 	unsigned char		esc_mode;
+	unsigned char		display_mode;
 
 	// Buffer
-	unsigned char		buffer[ARG_MAX];
+	char				buffer[ARG_MAX + 1];
 	unsigned int		buffer_len; // to avoid ft_strlen multiple calls
 	t_cmd				*cmd;
 
 	// Header
-	unsigned char		header[ARG_MAX];
+	unsigned char		header[ARG_MAX + 1];
 	unsigned int		header_len; // to avoid ft_strlen multiple calls
 
 	// Window
@@ -128,6 +130,7 @@ void					error_no_term_var(t_shell *shell);
 /*
 ** reading
 */
+void					sh_move_cursor(t_shell *shell, char c);
 void					sh_read(t_shell *shell);
 void					signal_catching(void);
 

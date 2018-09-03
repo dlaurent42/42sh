@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 19:59:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/03 20:03:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,63 +33,45 @@ static void	cmd_run(t_shell *shell)
 	ft_printf("\nNumber of columns: %d\nNumber of lines: %d\n", w.ws_col, w.ws_row);
 	ft_printf("%s", shell->read->buffer);
 	ft_putendl("\n---Command sent---");
+	shell->read->buffer_len = 0;
+	shell->read->cursor_abs_pos = 0;
+	shell->read->cursor_rel_pos = 0;
+	shell->read->display_mode = FALSE;
+	bzero(shell->read->buffer, ARG_MAX);
 }
 
 static void	sh_read_esc(t_shell *shell, unsigned char c)
 {
-	int	i;
-
-	i = -1;
-	(void)shell;
 	if (c == 65)// up arrow
 		return ;
 	else if (c == 66)// down arrow
 		return ;
-	else if (c == 67
-	&& shell->read->cursor_abs_pos < shell->read->buffer_len
-	&& shell->read->cursor_rel_pos < shell->read->w_width)
-	{
-		ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-		shell->read->cursor_abs_pos++;
-		shell->read->cursor_rel_pos++;
-	}
-	else if (c == 67
-	&& shell->read->cursor_rel_pos < shell->read->cursor_abs_pos)
-	{
-		ft_putstr(tgoto(tgetstr("do", NULL), 0, 0));
-		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
-		shell->read->cursor_abs_pos++;
-		shell->read->cursor_rel_pos = 0;
-	}
-	else if (c == 68
-	&& shell->read->cursor_abs_pos > 0
-	&& shell->read->cursor_rel_pos != 0)
-	{
-		ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->read->cursor_abs_pos--;
-		shell->read->cursor_rel_pos--;
-	}
-	else if (c == 68
-	&& shell->read->cursor_rel_pos == 0
-	&& shell->read->cursor_abs_pos > 0)
-	{
-		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
-		while (++i < shell->read->w_width)
-			ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->read->cursor_abs_pos--;
-		shell->read->cursor_rel_pos = shell->read->w_width;		
-	}
-	else if (c == 70) // fn+right arrow
-		ft_putstr(tgoto(tgetstr("do", NULL), 0, 0)); // To be found
-	else if (c == 72)// fn+left arrow
-		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
+	else if (c == 67 || c == 68 || c == 70 || c == 72)
+		sh_move_cursor(shell, c);
 }
 
 static void	sh_read_del(t_shell *shell)
 {
-	(void)shell;
-	ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
+	int	i;
+
+	i = -1;
+	if (shell->read->cursor_abs_pos == 0)
+		return ;
+	if (shell->read->cursor_rel_pos == 0)
+	{
+		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
+		while (++i < shell->read->w_width)
+			ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
+		shell->read->cursor_rel_pos = shell->read->w_width;
+	}
+	else
+	{
+		ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
+		shell->read->cursor_rel_pos--;
+	}
 	ft_putstr(tgetstr("dc", NULL));
+	shell->read->cursor_abs_pos--;
+	shell->read->buffer_len--;
 }
 
 static void	sh_parse_buffer(t_shell *shell, unsigned char *buffer)
@@ -97,6 +79,7 @@ static void	sh_parse_buffer(t_shell *shell, unsigned char *buffer)
 	unsigned char	i;
 
 	i = 0;
+	shell->read->display_mode = TRUE;
 	while (buffer[i])
 	{
 		if (buffer[i] == 10)
@@ -122,11 +105,13 @@ static void	sh_read_autocompletion(t_shell *shell)
 
 void		sh_read(t_shell *shell)
 {
-	unsigned char	buffer[3];
+	unsigned char	buffer[4];
 
 	bzero(buffer, 4);
 	while (TRUE)
 	{
+		if (!shell->read->buffer_len && !shell->read->display_mode)
+			ft_putstr("$> ");
 		read(0, buffer, 3);
 		if (buffer[0] == 4)
 			break ;
