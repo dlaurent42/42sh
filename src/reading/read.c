@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/03 20:03:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/04 19:53:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ static void	sh_parse_buffer(t_shell *shell, unsigned char *buffer)
 			cmd_run(shell);
 		else
 		{
-			shell->read->buffer[shell->read->buffer_len] = buffer[i];
+			shell->read->buffer[shell->read->cursor_abs_pos] = buffer[i];
 			shell->read->buffer_len++;
 			shell->read->cursor_abs_pos++;
 			shell->read->cursor_rel_pos =
 			(shell->read->cursor_rel_pos == shell->read->w_width)
 			? 0 : shell->read->cursor_rel_pos + 1;
-			ft_putchar(buffer[i]);
+			ft_printf("%s%c%s", tgetstr("im", NULL), buffer[i], tgetstr("ei", NULL));
 		}
 		i++;
 	}
@@ -110,8 +110,9 @@ void		sh_read(t_shell *shell)
 	bzero(buffer, 4);
 	while (TRUE)
 	{
-		if (!shell->read->buffer_len && !shell->read->display_mode)
-			ft_putstr("$> ");
+		if (!shell->read->buffer_len && !shell->read->display_mode
+		&& (shell->read->display_mode = TRUE))
+			ft_printf("%s ", shell->read->header);
 		read(0, buffer, 3);
 		if (buffer[0] == 4)
 			break ;

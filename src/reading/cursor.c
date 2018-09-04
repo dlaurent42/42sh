@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/03 19:16:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/04 19:58:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,25 @@ static void	sh_move_right(t_shell *shell)
 		shell->read->cursor_abs_pos++;
 		shell->read->cursor_rel_pos = 0;		
 	}
+	else
+	{
+		ft_printf("\nrel:%d\nabs:%d\n", shell->read->cursor_rel_pos, shell->read->cursor_abs_pos);
+	}
 }
 
 static void	sh_move_start(t_shell *shell)
 {
+	unsigned char	i;
+
+	i = -1;
 	while (shell->read->cursor_abs_pos > shell->read->w_width)
 	{
 		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
 		shell->read->cursor_abs_pos -= shell->read->w_width;
 	}
 	ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
-	ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-	ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-	ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-	ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
+	while (++i < shell->read->header_len + 1)
+		ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
 	shell->read->cursor_abs_pos = 0;
 	shell->read->cursor_rel_pos = 0;
 }

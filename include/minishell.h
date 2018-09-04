@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/03 20:02:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/04 20:10:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct			s_cmd
 	size_t				cmd_length;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
+	struct s_cmd		*next;
 }						t_cmd;
 
 typedef struct			s_read
@@ -100,7 +101,7 @@ typedef struct			s_read
 	t_cmd				*cmd;
 
 	// Header
-	unsigned char		header[ARG_MAX + 1];
+	char				*header;
 	unsigned int		header_len; // to avoid ft_strlen multiple calls
 
 	// Window
