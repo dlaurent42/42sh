@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 20:45:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:36:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	sh_move_left(t_shell *shell)
 		while (++i < shell->term->w_width)
 			ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
 		shell->term->cursor.absolute_position--;
-		shell->term->cursor.relative_position = shell->term->w_width;		
+		shell->term->cursor.relative_position = shell->term->w_width;
 	}
 }
 
@@ -49,7 +49,7 @@ static void	sh_move_right(t_shell *shell)
 		ft_putstr(tgoto(tgetstr("do", NULL), 0, 0));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
 		shell->term->cursor.absolute_position++;
-		shell->term->cursor.relative_position = 0;		
+		shell->term->cursor.relative_position = 0;
 	}
 	else
 	{
@@ -74,7 +74,7 @@ static void	sh_move_start(t_shell *shell)
 	shell->term->cursor.relative_position = 0;
 }
 
-static void sh_move_end(t_shell *shell)
+static void	sh_move_end(t_shell *shell)
 {
 	(void)shell;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   catch.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/03 20:04:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:37:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void		signal_catching(void)
 	if (signal(SIGUSR1, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGUSR1\n");
 	if (signal(SIGUSR2, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGUSR2\n");	
+		ft_printf("\ncan't catch SIGUSR2\n");
 	if (signal(SIGABRT, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGABRT\n");	
+		ft_printf("\ncan't catch SIGABRT\n");
 	if (signal(SIGILL, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGILL\n");	
+		ft_printf("\ncan't catch SIGILL\n");
 	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGWINCH\n");	
+		ft_printf("\ncan't catch SIGWINCH\n");
 }

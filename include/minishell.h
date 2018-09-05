@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 20:45:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:42:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,13 +140,6 @@ void					error_no_path_var(t_shell *shell);
 void					error_no_term_var(t_shell *shell);
 
 /*
-** reading
-*/
-void					sh_move_cursor(t_shell *shell, char c);
-void					sh_read(t_shell *shell);
-void					signal_catching(void);
-
-/*
 ** structures - binaries
 */
 int						bin_get_hash(const char *s, const int b, const int a);
@@ -171,7 +164,6 @@ void					env_initialize(t_shell *shell, t_env *env, char **e);
 char					*env_search(t_env *env, const char *key);
 t_env					*env_new(t_shell *shell, char **environ);
 
-
 /*
 ** structures - reader
 */
@@ -189,5 +181,27 @@ t_shell					*shell_new(void);
 */
 void					term_delete(t_term *term);
 t_term					*term_new(t_shell *shell);
+
+/*
+** terminal - autocompletion
+*/
+void					sh_read_autocompletion(t_shell *shell);
+
+/*
+** terminal - cursor
+*/
+void					sh_move_cursor(t_shell *shell, char c);
+
+/*
+** terminal - reader
+*/
+void					sh_read(t_shell *shell);
+void					sh_print_header(t_shell *shell);
+void					sh_read_delete(t_shell *shell);
+
+/*
+** terminal - signals
+*/
+void					signal_catching(void);
 
 #endif

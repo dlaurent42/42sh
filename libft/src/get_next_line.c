@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 13:55:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 18:44:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:35:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static t_gnl	*manipulate_data(t_gnl *r, char **line)
 
 int				get_next_line(int const fd, char **line)
 {
-	size_t				reading_ok;
+	size_t			reading_ok;
 	static t_gnl	*r = NULL;
 
 	if (!line || fd < 0 || !(r = fd_already_stored(fd, r))

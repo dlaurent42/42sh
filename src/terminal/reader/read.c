@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 20:37:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:46:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ static void	cmd_run(t_shell *shell)
 	bzero(shell->read->buffer.content, ARG_MAX);
 	shell->read->buffer.length = 0;
 	shell->read->buffer.cmd = NULL;
+	shell->term->cursor.absolute_position = 0;
+	shell->term->cursor.relative_position = 0;
 }
 
-static void	sh_read_esc(t_shell *shell, unsigned char c)
+static void	sh_read_esc(t_shell *shell)
 {
+	char c;
+
+	c = shell->read->line[2];
 	if (c == 65)// up arrow
 		return ;
 	else if (c == 66)// down arrow
@@ -49,31 +54,7 @@ static void	sh_read_esc(t_shell *shell, unsigned char c)
 		sh_move_cursor(shell, c);
 }
 
-static void	sh_read_del(t_shell *shell)
-{
-	int	i;
-
-	i = -1;
-	if (shell->term->cursor.absolute_position == 0)
-		return ;
-	if (shell->term->cursor.relative_position == 0)
-	{
-		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
-		while (++i < shell->term->w_width)
-			ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-		shell->term->cursor.relative_position = shell->term->w_width;
-	}
-	else
-	{
-		ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->term->cursor.relative_position--;
-	}
-	ft_putstr(tgetstr("dc", NULL));
-	shell->term->cursor.absolute_position--;
-	shell->read->buffer.length--;
-}
-
-static void	sh_parse_buffer(t_shell *shell)
+static void	sh_fill_buffer(t_shell *shell)
 {
 	unsigned char	i;
 
@@ -97,29 +78,27 @@ static void	sh_parse_buffer(t_shell *shell)
 	}
 }
 
-static void	sh_read_autocompletion(t_shell *shell)
+static void	sh_read_dispatcher(t_shell *shell)
 {
-	shell->term->auto_completion_mode = TRUE;
+	if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
+		sh_read_esc(shell); // rename -> it concerns only arrows
+	else if (shell->read->line[0] == 127)
+		sh_read_delete(shell);
+	else if (shell->read->line[0] == 9)
+		sh_read_autocompletion(shell); // @dav
+	else
+		sh_fill_buffer(shell);
 }
 
 void		sh_read(t_shell *shell)
 {
 	while (TRUE)
 	{
-		if (!shell->read->buffer.length && !shell->term->display_mode
-		&& (shell->term->display_mode = TRUE))
-			ft_printf("%s ", shell->term->header.content);
+		sh_print_header(shell);
 		read(0, shell->read->line, 3);
 		if (shell->read->line[0] == 4)
 			break ;
-		else if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
-			sh_read_esc(shell, shell->read->line[2]);
-		else if (shell->read->line[0] == 127)
-			sh_read_del(shell);
-		else if (shell->read->line[0] == 9)
-			sh_read_autocompletion(shell);
-		else
-			sh_parse_buffer(shell);
+		sh_read_dispatcher(shell);
 		bzero(shell->read->line, 4);
 	}
 }

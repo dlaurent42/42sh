@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/05 20:42:56 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/05 21:38:34 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,11 @@ SRC			=	minishell.c													\
 				structures/shell/new.c										\
 				structures/term/delete.c									\
 				structures/term/new.c										\
-				terminal/cursor/move.c											\
-				terminal/reader/read.c												\
+				terminal/autocompletion/autocompletion.c					\
+				terminal/cursor/move.c										\
+				terminal/reader/delete.c									\
+				terminal/reader/header.c									\
+				terminal/reader/read.c										\
 				terminal/signals/catch.c											
 
 #				functions/redirect.c										\
@@ -92,6 +95,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
 				@mkdir -p $(OBJ_DIR)/terminal/reader
 				@mkdir -p $(OBJ_DIR)/terminal/signals

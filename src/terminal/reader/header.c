@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   header.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/02 18:11:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:35:39 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/05 21:09:17 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/05 21:44:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_read		*read_new(t_shell *shell)
+void	sh_print_header(t_shell *shell)
 {
-	t_read	*read;
-
-	if (!(read = (t_read *)ft_memalloc(sizeof(t_read))))
-		error_malloc_reader(shell, "t_read");
-	return (read);
+	if (shell->read->buffer.length == 0
+	&& shell->term->display_mode == FALSE)
+	{
+		write(
+			1,
+			shell->term->header.content,
+			shell->term->header.length);
+		write(1, " ", 1);
+	}
+	shell->term->display_mode = TRUE;
 }
