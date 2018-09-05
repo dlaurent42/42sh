@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cursor.c                                           :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/04 19:58:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 20:45:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,43 @@ static void	sh_move_left(t_shell *shell)
 	int	i;
 
 	i = -1;
-	if (shell->read->cursor_abs_pos > 0
-	&& shell->read->cursor_rel_pos != 0)
+	if (shell->term->cursor.absolute_position > 0
+	&& shell->term->cursor.relative_position != 0)
 	{
 		ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->read->cursor_abs_pos--;
-		shell->read->cursor_rel_pos--;
+		shell->term->cursor.absolute_position--;
+		shell->term->cursor.relative_position--;
 	}
-	else if (shell->read->cursor_rel_pos == 0
-	&& shell->read->cursor_abs_pos > 0)
+	else if (shell->term->cursor.relative_position == 0
+	&& shell->term->cursor.absolute_position > 0)
 	{
 		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
-		while (++i < shell->read->w_width)
+		while (++i < shell->term->w_width)
 			ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->read->cursor_abs_pos--;
-		shell->read->cursor_rel_pos = shell->read->w_width;		
+		shell->term->cursor.absolute_position--;
+		shell->term->cursor.relative_position = shell->term->w_width;		
 	}
 }
 
 static void	sh_move_right(t_shell *shell)
 {
-	if (shell->read->cursor_abs_pos < shell->read->buffer_len
-	&& shell->read->cursor_rel_pos < shell->read->w_width)
+	if (shell->term->cursor.absolute_position < shell->read->buffer.length
+	&& shell->term->cursor.relative_position < shell->term->w_width)
 	{
 		ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-		shell->read->cursor_abs_pos++;
-		shell->read->cursor_rel_pos++;
+		shell->term->cursor.absolute_position++;
+		shell->term->cursor.relative_position++;
 	}
-	else if (shell->read->cursor_rel_pos < shell->read->cursor_abs_pos)
+	else if (shell->term->cursor.relative_position < shell->term->cursor.absolute_position)
 	{
 		ft_putstr(tgoto(tgetstr("do", NULL), 0, 0));
 		ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
-		shell->read->cursor_abs_pos++;
-		shell->read->cursor_rel_pos = 0;		
+		shell->term->cursor.absolute_position++;
+		shell->term->cursor.relative_position = 0;		
 	}
 	else
 	{
-		ft_printf("\nrel:%d\nabs:%d\n", shell->read->cursor_rel_pos, shell->read->cursor_abs_pos);
+		ft_printf("\nrel:%d\nabs:%d\n", shell->term->cursor.relative_position, shell->term->cursor.absolute_position);
 	}
 }
 
@@ -62,16 +62,16 @@ static void	sh_move_start(t_shell *shell)
 	unsigned char	i;
 
 	i = -1;
-	while (shell->read->cursor_abs_pos > shell->read->w_width)
+	while (shell->term->cursor.absolute_position > shell->term->w_width)
 	{
 		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
-		shell->read->cursor_abs_pos -= shell->read->w_width;
+		shell->term->cursor.absolute_position -= shell->term->w_width;
 	}
 	ft_putstr(tgoto(tgetstr("ch", NULL), 0, 0));
-	while (++i < shell->read->header_len + 1)
+	while (++i < shell->term->header.length + 1)
 		ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-	shell->read->cursor_abs_pos = 0;
-	shell->read->cursor_rel_pos = 0;
+	shell->term->cursor.absolute_position = 0;
+	shell->term->cursor.relative_position = 0;
 }
 
 static void sh_move_end(t_shell *shell)

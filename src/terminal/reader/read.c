@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/04 19:53:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 20:37:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ static void	cmd_run(t_shell *shell)
 
     ioctl(0, TIOCGWINSZ, &w);
 	ft_printf("\nNumber of columns: %d\nNumber of lines: %d\n", w.ws_col, w.ws_row);
-	ft_printf("%s", shell->read->buffer);
+	ft_printf("%s", shell->read->buffer.content);
 	ft_putendl("\n---Command sent---");
-	shell->read->buffer_len = 0;
-	shell->read->cursor_abs_pos = 0;
-	shell->read->cursor_rel_pos = 0;
-	shell->read->display_mode = FALSE;
-	bzero(shell->read->buffer, ARG_MAX);
+	shell->term->display_mode = FALSE;
+	bzero(shell->read->buffer.content, ARG_MAX);
+	shell->read->buffer.length = 0;
+	shell->read->buffer.cmd = NULL;
 }
 
 static void	sh_read_esc(t_shell *shell, unsigned char c)
@@ -55,44 +54,44 @@ static void	sh_read_del(t_shell *shell)
 	int	i;
 
 	i = -1;
-	if (shell->read->cursor_abs_pos == 0)
+	if (shell->term->cursor.absolute_position == 0)
 		return ;
-	if (shell->read->cursor_rel_pos == 0)
+	if (shell->term->cursor.relative_position == 0)
 	{
 		ft_putstr(tgoto(tgetstr("up", NULL), 0, 0));
-		while (++i < shell->read->w_width)
+		while (++i < shell->term->w_width)
 			ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
-		shell->read->cursor_rel_pos = shell->read->w_width;
+		shell->term->cursor.relative_position = shell->term->w_width;
 	}
 	else
 	{
 		ft_putstr(tgoto(tgetstr("le", NULL), 0, 0));
-		shell->read->cursor_rel_pos--;
+		shell->term->cursor.relative_position--;
 	}
 	ft_putstr(tgetstr("dc", NULL));
-	shell->read->cursor_abs_pos--;
-	shell->read->buffer_len--;
+	shell->term->cursor.absolute_position--;
+	shell->read->buffer.length--;
 }
 
-static void	sh_parse_buffer(t_shell *shell, unsigned char *buffer)
+static void	sh_parse_buffer(t_shell *shell)
 {
 	unsigned char	i;
 
 	i = 0;
-	shell->read->display_mode = TRUE;
-	while (buffer[i])
+	shell->term->display_mode = TRUE;
+	while (shell->read->line[i])
 	{
-		if (buffer[i] == 10)
+		if (shell->read->line[i] == 10)
 			cmd_run(shell);
 		else
 		{
-			shell->read->buffer[shell->read->cursor_abs_pos] = buffer[i];
-			shell->read->buffer_len++;
-			shell->read->cursor_abs_pos++;
-			shell->read->cursor_rel_pos =
-			(shell->read->cursor_rel_pos == shell->read->w_width)
-			? 0 : shell->read->cursor_rel_pos + 1;
-			ft_printf("%s%c%s", tgetstr("im", NULL), buffer[i], tgetstr("ei", NULL));
+			shell->read->buffer.content[shell->term->cursor.absolute_position] = shell->read->line[i];
+			shell->read->buffer.length++;
+			shell->term->cursor.absolute_position++;
+			shell->term->cursor.relative_position =
+			(shell->term->cursor.relative_position == shell->term->w_width)
+			? 0 : shell->term->cursor.relative_position + 1;
+			ft_printf("%s%c%s", tgetstr("im", NULL), shell->read->line[i], tgetstr("ei", NULL));
 		}
 		i++;
 	}
@@ -100,30 +99,27 @@ static void	sh_parse_buffer(t_shell *shell, unsigned char *buffer)
 
 static void	sh_read_autocompletion(t_shell *shell)
 {
-	shell->read->auto_completion_mode = TRUE;
+	shell->term->auto_completion_mode = TRUE;
 }
 
 void		sh_read(t_shell *shell)
 {
-	unsigned char	buffer[4];
-
-	bzero(buffer, 4);
 	while (TRUE)
 	{
-		if (!shell->read->buffer_len && !shell->read->display_mode
-		&& (shell->read->display_mode = TRUE))
-			ft_printf("%s ", shell->read->header);
-		read(0, buffer, 3);
-		if (buffer[0] == 4)
+		if (!shell->read->buffer.length && !shell->term->display_mode
+		&& (shell->term->display_mode = TRUE))
+			ft_printf("%s ", shell->term->header.content);
+		read(0, shell->read->line, 3);
+		if (shell->read->line[0] == 4)
 			break ;
-		else if (buffer[0] == 27 && buffer[1] == 91)
-			sh_read_esc(shell, buffer[2]);
-		else if (buffer[0] == 127)
+		else if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
+			sh_read_esc(shell, shell->read->line[2]);
+		else if (shell->read->line[0] == 127)
 			sh_read_del(shell);
-		else if (buffer[0] == 9)
+		else if (shell->read->line[0] == 9)
 			sh_read_autocompletion(shell);
 		else
-			sh_parse_buffer(shell, buffer);
-		bzero(buffer, 4);
+			sh_parse_buffer(shell);
+		bzero(shell->read->line, 4);
 	}
 }

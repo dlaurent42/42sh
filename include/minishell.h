@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 09:59:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 20:45:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct			s_cursor
 typedef struct			s_buffer
 {
 	char				content[ARG_MAX + 1];
-	unsigned int		lenght;
+	unsigned int		length;
 	t_cmd				*cmd;
 }						t_buffer;
 
@@ -104,21 +104,19 @@ typedef struct			s_header
 
 typedef struct			s_read
 {
-	// Modes / Flags
-	unsigned char		auto_completion_mode; // boolean
-	unsigned char		esc_mode;
-	unsigned char		display_mode;
-
-	// Window
-	unsigned short		w_width; // current window width
-
-	t_cursor			cursor;
+	char				line[4];
 	t_buffer			buffer;
 }						t_read;
 
 typedef struct			s_term
 {
-	t_termios			*termcap;
+	unsigned char		auto_completion_mode;
+	unsigned char		esc_mode;
+	unsigned char		display_mode;
+	unsigned short		w_width;
+	t_cursor			cursor;
+	t_header			header;
+	t_termios			*termios;
 }						t_term;
 
 typedef struct			s_shell

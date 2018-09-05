@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/03 19:14:47 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/05 20:42:56 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,6 @@ SRC			=	minishell.c													\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/term.c												\
-				reading/cursor.c											\
-				reading/read.c												\
-				reading/signals.c											\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -37,12 +34,15 @@ SRC			=	minishell.c													\
 				structures/environment/insert.c								\
 				structures/environment/new.c								\
 				structures/environment/search.c								\
-				structures/shell/delete.c									\
-				structures/shell/new.c										\
 				structures/read/delete.c									\
 				structures/read/new.c										\
+				structures/shell/delete.c									\
+				structures/shell/new.c										\
 				structures/term/delete.c									\
 				structures/term/new.c										\
+				terminal/cursor/move.c											\
+				terminal/reader/read.c												\
+				terminal/signals/catch.c											
 
 #				functions/redirect.c										\
 #				functions/cd/cd.c											\
@@ -84,7 +84,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/exit
 				@mkdir -p $(OBJ_DIR)/functions/setenv
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
-				@mkdir -p $(OBJ_DIR)/reading
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
@@ -92,6 +91,10 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term
+				@mkdir -p $(OBJ_DIR)/terminal
+				@mkdir -p $(OBJ_DIR)/terminal/cursor
+				@mkdir -p $(OBJ_DIR)/terminal/reader
+				@mkdir -p $(OBJ_DIR)/terminal/signals
 
 clean:
 				@make clean -C libft/
