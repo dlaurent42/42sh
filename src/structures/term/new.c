@@ -6,13 +6,18 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 20:43:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 19:32:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_term	*term_new(t_shell *shell)
+static void	term_set(t_shell *shell)
+{
+
+}
+
+t_term		*term_new(t_shell *shell)
 {
 	char		*name;
 	t_term		*term;
@@ -23,6 +28,7 @@ t_term	*term_new(t_shell *shell)
 		error_no_term_var(shell);
 	if (!(term = (t_term *)ft_memalloc(sizeof(t_term))))
 		error_malloc_term(shell, "t_term");
+	if (!(term->))
 	if (tcgetattr(0, term) == -1)
 	{
 		free(term);
