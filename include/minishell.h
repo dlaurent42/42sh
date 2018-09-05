@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/04 20:10:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 09:59:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
-typedef struct termios	t_term;
+typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 
 typedef struct			s_env_item
@@ -83,30 +83,43 @@ typedef struct			s_cmd
 	struct s_cmd		*next;
 }						t_cmd;
 
+typedef struct			s_cursor
+{
+	unsigned int		relative_position;
+	unsigned int		absolute_position;
+}						t_cursor;
+
+typedef struct			s_buffer
+{
+	char				content[ARG_MAX + 1];
+	unsigned int		lenght;
+	t_cmd				*cmd;
+}						t_buffer;
+
+typedef struct			s_header
+{
+	char				*content;
+	unsigned int		length;
+}						t_header;
+
 typedef struct			s_read
 {
-
-	// Cursor
-	unsigned int		cursor_rel_pos; // position in line
-	unsigned int		cursor_abs_pos; // position in buffer
-
 	// Modes / Flags
 	unsigned char		auto_completion_mode; // boolean
 	unsigned char		esc_mode;
 	unsigned char		display_mode;
 
-	// Buffer
-	char				buffer[ARG_MAX + 1];
-	unsigned int		buffer_len; // to avoid ft_strlen multiple calls
-	t_cmd				*cmd;
-
-	// Header
-	char				*header;
-	unsigned int		header_len; // to avoid ft_strlen multiple calls
-
 	// Window
 	unsigned short		w_width; // current window width
+
+	t_cursor			cursor;
+	t_buffer			buffer;
 }						t_read;
+
+typedef struct			s_term
+{
+	t_termios			*termcap;
+}						t_term;
 
 typedef struct			s_shell
 {
