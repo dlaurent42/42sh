@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 20:42:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 12:37:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	term_set_header(t_shell *shell, t_term *term)
 		error_malloc_term(shell, "t_header");
 	}
 	term->header.length = ft_strlens(term->header.content);
+	term->header.length_mod = term->header.length % term->w_width;
 }
 
 t_term		*term_new(t_shell *shell)

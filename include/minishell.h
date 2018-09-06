@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 22:44:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 13:34:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ typedef struct			s_cmd
 
 typedef struct			s_cursor
 {
-	unsigned int		relative_position;
-	unsigned int		absolute_position;
+	unsigned int		x;
+	unsigned int		y;
+	unsigned int		abs_pos;
 }						t_cursor;
 
 typedef struct			s_buffer
@@ -100,6 +101,7 @@ typedef struct			s_header
 {
 	char				*content;
 	unsigned int		length;
+	unsigned int		length_mod;
 }						t_header;
 
 typedef struct			s_read
@@ -127,6 +129,8 @@ typedef struct			s_shell
 	t_read				*read;
 	t_term				*term;
 }						t_shell;
+
+void					sh_debug(t_shell *shell, char *msg);
 
 /*
 ** errors

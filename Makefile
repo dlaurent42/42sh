@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/05 22:39:49 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/06 11:33:57 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
 SRC			=	minishell.c													\
+				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/term.c												\
@@ -44,6 +45,7 @@ SRC			=	minishell.c													\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/cursor/move.c										\
 				terminal/reader/delete.c									\
+				terminal/reader/fill_buffer.c								\
 				terminal/reader/header.c									\
 				terminal/reader/read.c										\
 				terminal/signals/catch.c											
