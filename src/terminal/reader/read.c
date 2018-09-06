@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 15:25:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:35:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void		sh_read(t_shell *shell)
 	while (TRUE)
 	{
 		sh_print_header(shell);
-		read(0, shell->read->line, 3);
+		read(0, shell->read->line, 4);
 		if (shell->read->line[0] == 4)
 			break ;
 		sh_read_dispatcher(shell);
-		bzero(shell->read->line, 4);
+		bzero(shell->read->line, 5);
 	}
 }

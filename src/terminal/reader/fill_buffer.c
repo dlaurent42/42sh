@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 15:26:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:38:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		sh_fill_buffer(t_shell *shell)
 	unsigned char	i;
 
 	i = 0;
+	sh_debug(shell, shell->read->line);
 	while (shell->read->line[i])
 	{
 		if (shell->read->line[i] == 10)
@@ -55,9 +56,9 @@ void		sh_fill_buffer(t_shell *shell)
 		else
 		{
 			sh_add_character(shell, shell->read->line[i]);
-			ft_printf("%s%c%s", tgetstr("im", NULL), shell->read->line[i], tgetstr("ei", NULL));
 			sh_move_cursor(shell);
 		}
 		i++;
 	}
+	ft_printf("%s%s%s", tgetstr("im", NULL), shell->read->line, tgetstr("ei", NULL));
 }

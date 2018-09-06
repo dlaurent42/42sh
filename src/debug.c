@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 14:14:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:39:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	sh_debug(t_shell *shell, char *msg)
 	ft_putnbr_fd(shell->term->header.length, fd);
 	ft_putstr_fd(", window width: ", fd);
 	ft_putnbr_fd(shell->term->w_width, fd);
+	ft_putstr_fd(", buffer: ", fd);
+	ft_putstr_fd(shell->read->buffer.content, fd);
 	ft_putstr_fd("}\n-----------------", fd);
 	(void)shell;
 	close(fd);

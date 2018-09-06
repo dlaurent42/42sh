@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 13:34:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:35:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct			s_header
 
 typedef struct			s_read
 {
-	char				line[4];
+	char				line[5];
 	t_buffer			buffer;
 }						t_read;
 
