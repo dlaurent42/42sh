@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/05 21:38:34 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/05 22:39:49 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC			=	minishell.c													\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/term.c												\
+				functions/redirect.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\

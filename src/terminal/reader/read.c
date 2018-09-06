@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:46:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 11:06:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@
 // 67 : right
 // 68 : left
 
-static void	cmd_run(t_shell *shell)
-{
-	struct winsize w;
-
-    ioctl(0, TIOCGWINSZ, &w);
-	ft_printf("\nNumber of columns: %d\nNumber of lines: %d\n", w.ws_col, w.ws_row);
-	ft_printf("%s", shell->read->buffer.content);
-	ft_putendl("\n---Command sent---");
-	shell->term->display_mode = FALSE;
-	bzero(shell->read->buffer.content, ARG_MAX);
-	shell->read->buffer.length = 0;
-	shell->read->buffer.cmd = NULL;
-	shell->term->cursor.absolute_position = 0;
-	shell->term->cursor.relative_position = 0;
-}
-
 static void	sh_read_esc(t_shell *shell)
 {
 	char c;
@@ -54,28 +38,21 @@ static void	sh_read_esc(t_shell *shell)
 		sh_move_cursor(shell, c);
 }
 
-static void	sh_fill_buffer(t_shell *shell)
-{
-	unsigned char	i;
+	if (c == 67)
+		sh_move_right(shell);
+	else if (c == 68)
+		sh_move_left(shell);
+	else if (c == 70)
+		sh_move_end(shell);
+	else if (c == 72)
+		sh_move_start(shell);
 
-	i = 0;
-	shell->term->display_mode = TRUE;
-	while (shell->read->line[i])
-	{
-		if (shell->read->line[i] == 10)
-			cmd_run(shell);
-		else
-		{
-			shell->read->buffer.content[shell->term->cursor.absolute_position] = shell->read->line[i];
-			shell->read->buffer.length++;
-			shell->term->cursor.absolute_position++;
-			shell->term->cursor.relative_position =
-			(shell->term->cursor.relative_position == shell->term->w_width)
-			? 0 : shell->term->cursor.relative_position + 1;
-			ft_printf("%s%c%s", tgetstr("im", NULL), shell->read->line[i], tgetstr("ei", NULL));
-		}
-		i++;
-	}
+static void	sh_arrows_dispatcher(t_shell *shell)
+{
+	if (shell->read->line[2] == 67
+	|| shell->read->line[2] == 68
+	|| shell->read->line[2] == 70
+	|| shell->read->line[2] == 72)
 }
 
 static void	sh_read_dispatcher(t_shell *shell)

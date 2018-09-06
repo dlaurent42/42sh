@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:42:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/05 22:44:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,11 @@ void					error_no_path_var(t_shell *shell);
 void					error_no_term_var(t_shell *shell);
 
 /*
+** functions
+*/
+void					sh_command_run(t_shell *shell);
+
+/*
 ** structures - binaries
 */
 int						bin_get_hash(const char *s, const int b, const int a);
@@ -190,7 +195,10 @@ void					sh_read_autocompletion(t_shell *shell);
 /*
 ** terminal - cursor
 */
-void					sh_move_cursor(t_shell *shell, char c);
+void					sh_move_left(t_shell *shell);
+void					sh_move_right(t_shell *shell);
+void					sh_move_start(t_shell *shell);
+void					sh_move_end(t_shell *shell);
 
 /*
 ** terminal - reader
@@ -198,6 +206,7 @@ void					sh_move_cursor(t_shell *shell, char c);
 void					sh_read(t_shell *shell);
 void					sh_print_header(t_shell *shell);
 void					sh_read_delete(t_shell *shell);
+void					sh_fill_buffer(t_shell *shell);
 
 /*
 ** terminal - signals

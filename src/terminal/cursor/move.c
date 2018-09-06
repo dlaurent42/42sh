@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:36:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/06 11:06:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	sh_move_left(t_shell *shell)
+void	sh_move_left(t_shell *shell)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static void	sh_move_left(t_shell *shell)
 	}
 }
 
-static void	sh_move_right(t_shell *shell)
+void	sh_move_right(t_shell *shell)
 {
 	if (shell->term->cursor.absolute_position < shell->read->buffer.length
 	&& shell->term->cursor.relative_position < shell->term->w_width)
@@ -57,7 +57,7 @@ static void	sh_move_right(t_shell *shell)
 	}
 }
 
-static void	sh_move_start(t_shell *shell)
+void	sh_move_start(t_shell *shell)
 {
 	unsigned char	i;
 
@@ -74,19 +74,8 @@ static void	sh_move_start(t_shell *shell)
 	shell->term->cursor.relative_position = 0;
 }
 
-static void	sh_move_end(t_shell *shell)
+void	sh_move_end(t_shell *shell)
 {
 	(void)shell;
 }
 
-void		sh_move_cursor(t_shell *shell, char c)
-{
-	if (c == 67)
-		sh_move_right(shell);
-	else if (c == 68)
-		sh_move_left(shell);
-	else if (c == 70)
-		sh_move_end(shell);
-	else if (c == 72)
-		sh_move_start(shell);
-}
