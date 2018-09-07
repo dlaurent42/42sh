@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 16:04:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 17:37:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sh_debug2(t_shell *shell)
 	unsigned int		i;
 
 	i = 0;
-	fd = open("/dev/ttys003", O_RDWR);
+	fd = open("/dev/ttys08", O_RDWR);
 	while (i < shell->read->buffer.unicode_length)
 	{
 		ft_putendl_fd("", fd);
@@ -36,7 +36,7 @@ void	sh_debug(t_shell *shell, char *msg)
 {
 	int		fd;
 
-	fd = open("/dev/ttys002", O_RDWR);
+	fd = open("/dev/ttys005", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (msg)
 		ft_putstr_fd(msg, fd);

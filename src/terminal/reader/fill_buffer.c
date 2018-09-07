@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 16:53:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 17:49:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,14 @@ static void	sh_move_cursor(t_shell *shell, unsigned char c) // = move right ?
 		target_x = shell->term->cursor.x + 1;
 		target_y = shell->term->cursor.y;
 	}
-	shell->term->cursor.x = ;
-	shell->term->cursor.y = (shell->read->buffer.display_length + shell->term->header.display_length_mod + 1) % shell->term->w_width;
+	shell->term->cursor.y = (shell->read->buffer.display_length + shell->term->header.display_length_mod + 1) / shell->term->w_width;
+	shell->term->cursor.x = (shell->term->cursor.y == 0) ? shell->read->buffer.display_length
+	: (shell->read->buffer.display_length + shell->term->header.display_length_mod + 1) % shell->term->w_width;
 	shell->term->cursor.rel_pos = shell->read->buffer.unicode_length;
 	shell->term->cursor.abs_pos = shell->read->buffer.display_length;
-	while (shell->term->cursor.x != target_x && shell->term->cursor.y != target_y)
+	while (target_x != shell->term->cursor.x || target_y != shell->term->cursor.y)
 		sh_move_left(shell);
-}
-
-int			myputchr(int c)
-{
-	write(1, &c, 1);
-	return (c);
+	sh_debug(shell, "debugging");
 }
 
 void		sh_fill_buffer(t_shell *shell)
@@ -76,9 +72,8 @@ void		sh_fill_buffer(t_shell *shell)
 		sh_add_character(shell, shell->read->line[i]);
 		if (shell->read->line[i] != 10)
 		{
+			ft_printf("%s", shell->read->buffer.content + shell->term->cursor.rel_pos);
 			sh_move_cursor(shell, shell->read->line[i]);
-			//ft_printf("%s", shell->read->buffer.content + shell->term->cursor.rel_pos - 1);
-			tputs((char *)(shell->read->buffer.content + shell->term->cursor.rel_pos - 1), 0, myputchr);
 		}
 		i++;
 	}
