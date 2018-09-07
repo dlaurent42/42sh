@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 15:35:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 15:44:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,29 @@ typedef struct			s_cursor
 	unsigned int		x;
 	unsigned int		y;
 	unsigned int		abs_pos;
+	unsigned int		rel_pos;
 }						t_cursor;
 
 typedef struct			s_buffer
 {
-	char				content[ARG_MAX + 1];
-	unsigned int		length;
+	unsigned int		display_length;
+	unsigned int		unicode_length;
+	unsigned char		content[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
 
 typedef struct			s_header
 {
-	char				*content;
-	unsigned int		length;
-	unsigned int		length_mod;
+	unsigned int		unicode_length;
+	unsigned int		display_length;
+	unsigned int		display_length_mod;
+	unsigned char		*content;
 }						t_header;
 
 typedef struct			s_read
 {
-	char				line[5];
+	unsigned char		line[5];
+	unsigned char		unicode_bytes_left;
 	t_buffer			buffer;
 }						t_read;
 

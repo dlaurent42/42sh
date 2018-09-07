@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 12:37:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 14:59:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,20 @@ static void	term_set_termios(t_shell *shell, t_term *term)
 
 static void	term_set_header(t_shell *shell, t_term *term)
 {
-	if (!(term->header.content = getcwd(term->header.content, PATH_MAX)))
+	if (!(term->header.content = (unsigned char *)getcwd((char *)term->header.content, PATH_MAX)))
 	{
 		free(term->termios);
 		free(term);
 		error_malloc_term(shell, "t_header");
 	}
-	term->header.length = ft_strlens(term->header.content);
-	term->header.length_mod = term->header.length % term->w_width;
+	while (term->header.content[term->header.unicode_length])
+	{
+		if (term->header.content[term->header.unicode_length] >= 0b11000000
+		|| term->header.content[term->header.unicode_length] < 0b10000000)
+			term->header.display_length++;
+		term->header.unicode_length++;
+	}
+	term->header.display_length_mod = term->header.display_length % term->w_width;
 }
 
 t_term		*term_new(t_shell *shell)

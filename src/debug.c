@@ -6,34 +6,66 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 15:39:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 16:04:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	sh_debug2(t_shell *shell)
+{
+	int		fd;
+	unsigned int		i;
+
+	i = 0;
+	fd = open("/dev/ttys003", O_RDWR);
+	while (i < shell->read->buffer.unicode_length)
+	{
+		ft_putendl_fd("", fd);
+		ft_putnbr_fd((char)shell->read->buffer.content[i], fd);
+		ft_putstr_fd(" [", fd);
+		ft_putchar_fd((char)shell->read->buffer.content[i], fd);
+		ft_putendl_fd("]", fd);
+		i++;
+	}
+	ft_putstr_fd("\n-----------------", fd);
+	close(fd);
+}
+
 void	sh_debug(t_shell *shell, char *msg)
 {
 	int		fd;
 
-	fd = open("/dev/ttys003", O_RDWR);
+	fd = open("/dev/ttys002", O_RDWR);
 	ft_putendl_fd("", fd);
-	ft_putstr_fd(msg, fd);
-	ft_putstr_fd(":\t{x: ", fd);
-	ft_putnbr_fd(shell->term->cursor.x, fd);
-	ft_putstr_fd(", y: ", fd);
-	ft_putnbr_fd(shell->term->cursor.y, fd);
-	ft_putstr_fd(", abs: ", fd);
-	ft_putnbr_fd(shell->term->cursor.abs_pos, fd);
-	ft_putstr_fd(", buff_len: ", fd);
-	ft_putnbr_fd(shell->read->buffer.length, fd);
-	ft_putstr_fd(", head_len: ", fd);
-	ft_putnbr_fd(shell->term->header.length, fd);
-	ft_putstr_fd(", window width: ", fd);
-	ft_putnbr_fd(shell->term->w_width, fd);
-	ft_putstr_fd(", buffer: ", fd);
-	ft_putstr_fd(shell->read->buffer.content, fd);
-	ft_putstr_fd("}\n-----------------", fd);
-	(void)shell;
+	if (msg)
+		ft_putstr_fd(msg, fd);
+	if (shell)
+	{
+		ft_putstr_fd("\n\tcursor.x: ", fd);
+		ft_putnbr_fd(shell->term->cursor.x, fd);
+		ft_putstr_fd("\n\tcursor.y: ", fd);
+		ft_putnbr_fd(shell->term->cursor.y, fd);
+		ft_putstr_fd("\n\tcursor.abs_pos: ", fd);
+		ft_putnbr_fd(shell->term->cursor.abs_pos, fd);
+		ft_putstr_fd("\n\tcursor.rel_pos: ", fd);
+		ft_putnbr_fd(shell->term->cursor.rel_pos, fd);
+		ft_putstr_fd("\n\tbuffer.display_length: ", fd);
+		ft_putnbr_fd(shell->read->buffer.display_length, fd);
+		ft_putstr_fd("\n\tbuffer.unicode_length: ", fd);
+		ft_putnbr_fd(shell->read->buffer.unicode_length, fd);
+		ft_putstr_fd("\n\tbuffer.content: ", fd);
+		ft_putstr_fd((char *)shell->read->buffer.content, fd);
+		ft_putstr_fd("\n\theader.unicode_length: ", fd);
+		ft_putnbr_fd(shell->term->header.unicode_length, fd);
+		ft_putstr_fd("\n\theader.display_length: ", fd);
+		ft_putnbr_fd(shell->term->header.display_length, fd);
+		ft_putstr_fd("\n\theader.display_length_mod: ", fd);
+		ft_putnbr_fd(shell->term->header.display_length_mod, fd);
+		ft_putstr_fd("\n\tterm->w_width: ", fd);
+		ft_putnbr_fd(shell->term->w_width, fd);
+	}
+	ft_putstr_fd("\n-----------------", fd);
 	close(fd);
+	sh_debug2(shell);
 }

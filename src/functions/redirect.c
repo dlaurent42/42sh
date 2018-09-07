@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/06 15:20:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/07 14:56:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void		sh_command_run(t_shell *shell)
 	ft_putendl("\n---Command sent---");
 	shell->term->display_mode = FALSE;
 	bzero(shell->read->buffer.content, ARG_MAX);
-	shell->read->buffer.length = 0;
-	shell->read->buffer.cmd = NULL;
-	shell->term->cursor.abs_pos = 0;
-	shell->term->cursor.x = 0;
-	shell->term->cursor.y = 0;
+	ft_memset((void *)shell->read, 0, sizeof(t_read));
+	ft_memset((void *)&shell->term->cursor, 0, sizeof(t_cursor));
 }
