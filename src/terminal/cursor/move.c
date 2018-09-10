@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/10 21:42:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/10 23:01:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		sh_move_right(t_shell *shell)
 	sh_debug(shell, "before move right");
 	if (shell->term->cursor.abs_pos >= shell->read->buffer.display_length)
 		return ;
-	else if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 1 + shell->term->header.display_length_mod + 1 >= shell->term->w_width)
+	if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 1 + shell->term->header.display_length_mod + 1 >= shell->term->w_width)
 	|| (shell->term->cursor.y > 0 && shell->term->cursor.x + 1 >= shell->term->w_width))
 	{
 		ft_putstr(tgoto(tgetstr("do", NULL), 0, 0));
@@ -96,8 +96,7 @@ void		sh_move_right(t_shell *shell)
 		shell->term->cursor.x = 0;
 		shell->term->cursor.y++;
 	}
-	else if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 1 + shell->term->header.display_length_mod + 1 < shell->term->w_width)
-	|| (shell->term->cursor.y > 0 && shell->term->cursor.x + 1 < shell->term->w_width))
+	else
 	{
 		ft_putstr(tgoto(tgetstr("nd", NULL), 0, 0));
 		shell->term->cursor.abs_pos++;
