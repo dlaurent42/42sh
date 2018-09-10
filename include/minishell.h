@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 15:44:11 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/10 17:54:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct			s_bin
 
 typedef struct			s_cmd
 {
-	char				cmd[ARG_MAX];
+	char				cmd[ARG_MAX + 1];
 	size_t				cmd_length;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
@@ -107,11 +107,19 @@ typedef struct			s_header
 	unsigned char		*content;
 }						t_header;
 
+typedef struct			s_wchar_buffer
+{
+	unsigned char		tmp[5];
+	unsigned char		length;
+	unsigned char		size;
+}						t_wchar_buffer;
+
 typedef struct			s_read
 {
 	unsigned char		line[5];
 	unsigned char		unicode_bytes_left;
 	t_buffer			buffer;
+	t_wchar_buffer		wchar;
 }						t_read;
 
 typedef struct			s_term
