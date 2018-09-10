@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/10 17:18:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/10 21:41:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	sh_debug2(t_shell *shell)
 {
-	int		fd;
+	int					fd;
 	unsigned int		i;
 
 	i = 0;
-	fd = open("/dev/ttys08", O_RDWR);
+	fd = open("/dev/ttys04", O_RDWR);
 	while (i < shell->read->buffer.unicode_length)
 	{
 		ft_putendl_fd("", fd);
@@ -34,9 +34,11 @@ void	sh_debug2(t_shell *shell)
 
 void	sh_debug(t_shell *shell, char *msg)
 {
+	int		i;
 	int		fd;
 
-	fd = open("/dev/ttys007", O_RDWR);
+	i = 0;
+	fd = open("/dev/ttys000", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (msg)
 		ft_putstr_fd(msg, fd);
@@ -56,7 +58,15 @@ void	sh_debug(t_shell *shell, char *msg)
 		ft_putnbr_fd(shell->read->buffer.unicode_length, fd);
 		ft_putstr_fd("\n\tbuffer.content: ", fd);
 		ft_putstr_fd((char *)shell->read->buffer.content, fd);
-		ft_putstr_fd("\n\theader.unicode_length: ", fd);
+		ft_putstr_fd("\n\t[", fd);
+		while (shell->read->buffer.content[i])
+		{
+			ft_putstr_fd(" ", fd);
+			ft_putnbr_fd(shell->read->buffer.content[i], fd);
+			ft_putstr_fd(" ", fd);
+			i++;
+		}
+		ft_putstr_fd("]\n\theader.unicode_length: ", fd);
 		ft_putnbr_fd(shell->term->header.unicode_length, fd);
 		ft_putstr_fd("\n\theader.display_length: ", fd);
 		ft_putnbr_fd(shell->term->header.display_length, fd);
@@ -67,5 +77,6 @@ void	sh_debug(t_shell *shell, char *msg)
 	}
 	ft_putstr_fd("\n-----------------", fd);
 	close(fd);
-	sh_debug2(shell);
+	if (shell)
+		sh_debug2(shell);
 }

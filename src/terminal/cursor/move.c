@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 16:34:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/10 21:42:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		sh_move_start(t_shell *shell)
 	sh_debug(shell, "after move start");
 }
 
-void		sh_move_right(t_shell *shell) // just put else ?
+void		sh_move_right(t_shell *shell)
 {
 	sh_debug(shell, "before move right");
 	if (shell->term->cursor.abs_pos >= shell->read->buffer.display_length)
