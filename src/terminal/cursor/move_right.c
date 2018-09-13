@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 15:46:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 01:00:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		sh_move_right(t_shell *shell)
 {
 	if (shell->term->cursor.abs_pos >= shell->read->buffer.display_length)
 		return ;
-	if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 2 + shell->term->header.display_length_mod + 1 > shell->term->w_width)
+	if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 2 + shell->term->header.display_length_mod > shell->term->w_width)
 	|| (shell->term->cursor.y > 0 && shell->term->cursor.x + 2 > shell->term->w_width))
 	{
 		ft_putstr(K_DOWN);

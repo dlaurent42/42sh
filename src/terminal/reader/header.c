@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:09:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 12:47:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 00:24:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	sh_print_header(t_shell *shell)
 			shell->term->header.content,
 			shell->term->header.unicode_length);
 		write(1, " ", 1);
+		if (shell->term->header.display_length_mod == 0)
+		{
+			ft_putstr(K_DOWN);
+			ft_putstr(K_COL_0);
+		}
 	}
 	shell->term->display_mode = TRUE;
 }

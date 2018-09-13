@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 23:43:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 00:46:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 static void	sh_move_cursor(t_shell *shell)
 {
-	unsigned int x;
-	unsigned int y;
+	unsigned int	x;
+	unsigned int	y;
+	unsigned int	buffer_len;
+	unsigned int	header_len;
+	unsigned int	window_width;
 
 	x = shell->term->cursor.x;
 	y = shell->term->cursor.y;
-	sh_debug(shell, "cas 0");
-	shell->term->cursor.y = (shell->read->buffer.display_length + shell->term->header.display_length_mod + 1) / shell->term->w_width;
+	buffer_len = shell->read->buffer.display_length;
+	header_len = shell->term->header.display_length_mod;
+	window_width = shell->term->w_width;
+	shell->term->cursor.y = (buffer_len + header_len) / window_width;
 	shell->term->cursor.x = (shell->term->cursor.y)
-	? (shell->read->buffer.display_length + shell->term->header.display_length_mod + 1) % shell->term->w_width
-	: shell->read->buffer.display_length;
-	if ((y == 0 && x + 1 + 1 + shell->term->header.display_length_mod + 1 > shell->term->w_width)
-	|| (y > 0 && x + 1 + 1 > shell->term->w_width))
-	{
-		sh_debug(NULL, "cas 1");
+		? (buffer_len + header_len) % window_width
+		: buffer_len;
+	if ((y == 0 && x + 2 + header_len > window_width)
+	|| (y > 0 && x + 2 > window_width))
 		sh_move_to_xy(shell, 0, y + 1);
-	}
 	else
-	{
-		sh_debug(NULL, "cas 2");
 		sh_move_to_xy(shell, x + 1, y);
-	}
 }
 
 static void	sh_add_char(t_shell *shell, unsigned char c)
@@ -50,7 +49,9 @@ static void	sh_add_char(t_shell *shell, unsigned char c)
 	shell->read->buffer.content[i] = c;
 	shell->read->buffer.display_length++;
 	shell->read->buffer.unicode_length++;
-	ft_printf("%s", shell->read->buffer.content + shell->term->cursor.rel_pos);
+	ft_printf("%s",
+		shell->read->buffer.content
+		+ shell->term->cursor.rel_pos);
 	sh_move_cursor(shell);
 }
 
@@ -67,8 +68,7 @@ static void	sh_add_wchar(t_shell *shell, unsigned char c)
 		i--;
 	}
 	shell->read->buffer.content[i] = c;
-	if (c >= 0b11000000)
-		shell->read->buffer.display_length++;
+	shell->read->buffer.display_length += (c >= 0b11000000) ? 1 : 0;
 	shell->read->buffer.unicode_length++;
 	shell->term->cursor.rel_pos++;
 	pointer = (c >= 0b11000000) ? 1 : pointer;
@@ -77,7 +77,9 @@ static void	sh_add_wchar(t_shell *shell, unsigned char c)
 	counter = (c < 0b11000000) ? counter - 1 : pointer;
 	if (counter == 0)
 	{
-		ft_printf("%s", shell->read->buffer.content + shell->term->cursor.rel_pos - pointer - 1);
+		ft_printf("%s",
+			shell->read->buffer.content
+			+ shell->term->cursor.rel_pos - pointer - 1);
 		sh_move_cursor(shell);
 	}
 }

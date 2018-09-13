@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:32:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 18:17:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 00:35:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void			sh_read_delete(t_shell *shell)
 	sh_perform_deletion(shell);
 	ft_putstr(K_DEL);
 	ft_putstr(K_LEFT);
-	ft_putstr((char *)(shell->read->buffer.content + shell->term->cursor.rel_pos));
+	ft_printf("%s",
+		shell->read->buffer.content
+		+ shell->term->cursor.rel_pos);
 	while (display_length != shell->read->buffer.display_length)
 	{
 		ft_putchar(' ');
