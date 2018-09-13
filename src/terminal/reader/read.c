@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 11:54:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/11 20:05:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	sh_arrows_dispatcher(t_shell *shell)
 	else if (shell->read->line[2] == 70)
 		sh_move_end(shell);
 	else if (shell->read->line[2] == 72)
-		sh_move_start(shell);
+		sh_move_home(shell);
 }
 
 static void	sh_read_dispatcher(t_shell *shell)

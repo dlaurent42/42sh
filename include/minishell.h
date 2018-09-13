@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/11 14:06:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/12 15:31:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,10 +203,22 @@ void					sh_read_autocompletion(t_shell *shell);
 /*
 ** terminal - cursor
 */
+void					sh_move_home(t_shell *shell);
+void					sh_move_beginning_of_line(t_shell *shell);
+void					sh_move_down(t_shell *shell);
+void					sh_move_end(t_shell *shell);
+void					sh_move_end_of_line(t_shell *shell);
 void					sh_move_left(t_shell *shell);
 void					sh_move_right(t_shell *shell);
-void					sh_move_start(t_shell *shell);
-void					sh_move_end(t_shell *shell);
+void					sh_move_up(t_shell *shell);
+void					sh_move_to_xy(
+							t_shell *shell,
+							unsigned int x,
+							unsigned int y);
+void					sh_set_rel_pos(
+							t_shell *shell,
+							unsigned int delta,
+							int dir);
 
 /*
 ** terminal - reader

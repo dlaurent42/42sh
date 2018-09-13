@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/06 11:33:57 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/12 15:36:58 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,16 @@ SRC			=	minishell.c													\
 				structures/term/delete.c									\
 				structures/term/new.c										\
 				terminal/autocompletion/autocompletion.c					\
-				terminal/cursor/move.c										\
+				terminal/cursor/move_beginning_of_block.c					\
+				terminal/cursor/move_beginning_of_line.c					\
+				terminal/cursor/move_down.c									\
+				terminal/cursor/move_end_of_block.c							\
+				terminal/cursor/move_end_of_line.c							\
+				terminal/cursor/move_left.c									\
+				terminal/cursor/move_right.c								\
+				terminal/cursor/move_up.c									\
+				terminal/cursor/move_xy.c									\
+				terminal/cursor/utils.c										\
 				terminal/reader/delete.c									\
 				terminal/reader/fill_buffer.c								\
 				terminal/reader/header.c									\
