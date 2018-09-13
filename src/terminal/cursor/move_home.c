@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   move_home.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 18:16:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:01:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sh_set_rel_pos(t_shell *shell, unsigned int delta, int dir)
+void		sh_move_home(t_shell *shell)
 {
-	unsigned char	c;
+	unsigned char	i;
 
-	while (delta > 0)
+	i = 0;
+	ft_putstr(K_HOME);
+	while (i < shell->term->header.display_length_mod + 1)
 	{
-		shell->term->cursor.rel_pos += dir;
-		c = shell->read->buffer.content[shell->term->cursor.rel_pos];
-		if (c < 0b10000000 || c >= 0b11000000)
-			delta--;
+		ft_putstr(K_RIGHT);
+		i++;
 	}
+	shell->term->cursor.x = 0;
+	shell->term->cursor.y = 0;
+	shell->term->cursor.abs_pos = 0;
+	shell->term->cursor.rel_pos = 0;
 }

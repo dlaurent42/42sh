@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/12 15:36:58 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/13 16:07:02 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,18 +43,14 @@ SRC			=	minishell.c													\
 				structures/term/delete.c									\
 				structures/term/new.c										\
 				terminal/autocompletion/autocompletion.c					\
-				terminal/cursor/move_beginning_of_block.c					\
-				terminal/cursor/move_beginning_of_line.c					\
-				terminal/cursor/move_down.c									\
-				terminal/cursor/move_end_of_block.c							\
-				terminal/cursor/move_end_of_line.c							\
+				terminal/cursor/move_end.c									\
+				terminal/cursor/move_home.c									\
 				terminal/cursor/move_left.c									\
 				terminal/cursor/move_right.c								\
-				terminal/cursor/move_up.c									\
 				terminal/cursor/move_xy.c									\
 				terminal/cursor/utils.c										\
+				terminal/printer/buffer.c									\
 				terminal/reader/delete.c									\
-				terminal/reader/fill_buffer.c								\
 				terminal/reader/header.c									\
 				terminal/reader/read.c										\
 				terminal/signals/catch.c											
@@ -109,6 +105,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
+				@mkdir -p $(OBJ_DIR)/terminal/printer
 				@mkdir -p $(OBJ_DIR)/terminal/reader
 				@mkdir -p $(OBJ_DIR)/terminal/signals
 
