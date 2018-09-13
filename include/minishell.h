@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 20:17:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 22:42:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct			s_shell
 	t_env				*env;
 	t_read				*read;
 	t_term				*term;
+	unsigned char		debug;
 }						t_shell;
 
 void					sh_debug(t_shell *shell, char *msg);
@@ -214,6 +215,7 @@ void					sh_read_autocompletion(t_shell *shell);
 ** terminal - cursor
 */
 void					sh_move_home(t_shell *shell);
+void					sh_move_home_xy(t_shell *shell, unsigned int x, unsigned int y);
 void					sh_move_end(t_shell *shell);
 void					sh_move_left(t_shell *shell);
 void					sh_move_right(t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 18:16:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 23:01:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	sh_move_x(t_shell *shell, unsigned int x)
 
 void		sh_move_to_xy(t_shell *shell, unsigned int x, unsigned int y)
 {
+	shell->term->cursor.y -= (shell->term->cursor.x == 0 && shell->term->cursor.y) ? 1 : 0;
 	sh_move_home(shell);
 	sh_move_y(shell, y);
 	sh_move_x(shell, x);

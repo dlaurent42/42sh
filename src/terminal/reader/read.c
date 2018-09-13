@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 14:51:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 21:57:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	sh_arrows_dispatcher(t_shell *shell)
 
 static void	sh_read_dispatcher(t_shell *shell)
 {
-	if (shell->read->line[0] == 10)
-		sh_command_run(shell);
-	else if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
+	if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
 		sh_arrows_dispatcher(shell);
 	else if (shell->read->line[0] == 127)
 		sh_read_delete(shell);
