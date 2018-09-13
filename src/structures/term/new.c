@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/07 14:59:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 20:09:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ t_term		*term_new(t_shell *shell)
 	if (!(term = (t_term *)ft_memalloc(sizeof(t_term))))
 		error_malloc_term(shell, "t_term");
 	term_set_termios(shell, term);
-	ft_printf(tgetstr("cl", NULL));
-	ft_printf(tgetstr("cl", NULL));
+	ft_putstr(CLEAR_SCREEN);
 	ioctl(0, TIOCGWINSZ, &window);
 	term->w_width = window.ws_col;
 	term_set_header(shell, term);

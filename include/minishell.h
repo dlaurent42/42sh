@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 16:34:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/13 20:17:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define K_HOME			"\x1b\x5b\x48"
 # define K_COL_0		"\x1b\x5b\x31\x47"
 # define K_DEL			"\x7f"
+# define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
