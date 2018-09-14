@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 14:53:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:57:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	sh_add_char(t_shell *shell, unsigned char c)
 	shell->read->buffer.content[i] = c;
 	shell->read->buffer.display_length++;
 	shell->read->buffer.unicode_length++;
-	ft_printf("%s",
+	ft_printf("%s ",
 		shell->read->buffer.content
 		+ shell->term->cursor.rel_pos);
 	sh_move_cursor(shell);
@@ -77,7 +77,7 @@ static void	sh_add_wchar(t_shell *shell, unsigned char c)
 	counter = (c < 0b11000000) ? counter - 1 : pointer;
 	if (counter == 0)
 	{
-		ft_printf("%s",
+		ft_printf("%s ",
 			shell->read->buffer.content
 			+ shell->term->cursor.rel_pos - pointer - 1);
 		sh_move_cursor(shell);
