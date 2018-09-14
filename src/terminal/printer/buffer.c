@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 16:54:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 20:06:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void		sh_fill_buffer(t_shell *shell)
 	{
 		if (shell->read->line[i] == 10)
 			sh_command_run(shell);
-		else if (shell->read->line[i] < 0b10000000)
+		else if (shell->read->line[i] < 0b10000000 && ft_isprint(shell->read->line[i]))
 			sh_add_char(shell, shell->read->line[i]);
-		else
+		else if (shell->read->line[i] >= 0b10000000)
 			sh_add_wchar(shell, shell->read->line[i]);
 		i++;
 	}
