@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 23:52:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:50:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,14 @@ void	sh_debug(t_shell *shell, char *msg)
 		ft_putnbr_fd(shell->term->header.display_length, fd);
 		ft_putstr_fd("\n\theader.display_length_mod: ", fd);
 		ft_putnbr_fd(shell->term->header.display_length_mod, fd);
-		ft_putstr_fd("\n\tterm->w_width: ", fd);
-		ft_putnbr_fd(shell->term->w_width, fd);
+		ft_putstr_fd("\n\tterm->window.width: ", fd);
+		ft_putnbr_fd(shell->term->window.width, fd);
+		ft_putstr_fd("\n\tterm->window.height: ", fd);
+		ft_putnbr_fd(shell->term->window.height, fd);
+		ft_putstr_fd("\n\tterm->window.scroll_x: ", fd);
+		ft_putnbr_fd(shell->term->window.scroll_x, fd);
+		ft_putstr_fd("\n\tterm->window.scroll_y: ", fd);
+		ft_putnbr_fd(shell->term->window.scroll_y, fd);
 	}
 	ft_putstr_fd("\n-----------------", fd);
 	close(fd);

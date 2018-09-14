@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 00:26:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:49:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,22 @@ typedef struct			s_read
 	t_buffer			buffer;
 }						t_read;
 
+typedef struct			s_window
+{
+	unsigned short		width;
+	unsigned short		height;
+	unsigned short		scroll_x;
+	unsigned short		scroll_y;
+}						t_window;
+
 typedef struct			s_term
 {
 	unsigned char		auto_completion_mode;
 	unsigned char		esc_mode;
 	unsigned char		display_mode;
-	unsigned short		w_width;
 	t_cursor			cursor;
 	t_header			header;
+	t_window			window;
 	t_termios			*termios;
 }						t_term;
 

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 00:46:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:53:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	sh_move_cursor(t_shell *shell)
 	y = shell->term->cursor.y;
 	buffer_len = shell->read->buffer.display_length;
 	header_len = shell->term->header.display_length_mod;
-	window_width = shell->term->w_width;
+	window_width = shell->term->window.width;
 	shell->term->cursor.y = (buffer_len + header_len) / window_width;
 	shell->term->cursor.x = (shell->term->cursor.y)
 		? (buffer_len + header_len) % window_width

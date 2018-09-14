@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 01:00:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:52:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sh_move_y(t_shell *shell, unsigned int y)
 		ft_putstr(K_DOWN);
 		shell->term->cursor.y++;
 		shell->term->cursor.x = shell->term->header.display_length_mod;
-		shell->term->cursor.abs_pos += shell->term->w_width;
+		shell->term->cursor.abs_pos += shell->term->window.width;
 	}
 }
 

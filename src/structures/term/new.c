@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 00:28:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:53:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	term_set_header(t_shell *shell, t_term *term)
 	}
 	term->header.display_length++;
 	term->header.unicode_length++;
-	term->header.display_length_mod = term->header.display_length % term->w_width;
+	term->header.display_length_mod = term->header.display_length % term->window.width;
 }
 
 t_term		*term_new(t_shell *shell)
@@ -72,7 +72,8 @@ t_term		*term_new(t_shell *shell)
 	term_set_termios(shell, term);
 	ft_putstr(CLEAR_SCREEN);
 	ioctl(0, TIOCGWINSZ, &window);
-	term->w_width = window.ws_col;
+	term->window.width = window.ws_col;
+	term->window.height = window.ws_row;
 	term_set_header(shell, term);
 	return (term);
 }

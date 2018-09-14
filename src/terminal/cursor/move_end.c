@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 01:00:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:52:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void		sh_move_end(t_shell *shell)
 {
 	ft_putstr(K_COL_0);
 	shell->term->cursor.x = 0;
-	while (shell->term->cursor.y < (shell->read->buffer.display_length + shell->term->header.display_length_mod) / shell->term->w_width)
+	while (shell->term->cursor.y < (shell->read->buffer.display_length + shell->term->header.display_length_mod) / shell->term->window.width)
 	{
 		ft_putstr(K_DOWN);
 		shell->term->cursor.y++;
 	}
-	while ((shell->term->cursor.y && shell->term->cursor.x < (shell->read->buffer.display_length + shell->term->header.display_length_mod) % shell->term->w_width)
+	while ((shell->term->cursor.y && shell->term->cursor.x < (shell->read->buffer.display_length + shell->term->header.display_length_mod) % shell->term->window.width)
 	|| (shell->term->cursor.y == 0 && shell->term->cursor.x < shell->read->buffer.display_length + shell->term->header.display_length_mod))
 	{
 		ft_putstr(K_RIGHT);

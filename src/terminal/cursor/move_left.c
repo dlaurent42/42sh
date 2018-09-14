@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 01:00:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:52:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		sh_move_left(t_shell *shell)
 	}
 	else
 	{
-		while (i < shell->term->w_width)
+		while (i < shell->term->window.width)
 		{
 			ft_putstr(K_RIGHT);
 			i++;
@@ -34,8 +34,8 @@ void		sh_move_left(t_shell *shell)
 		ft_putstr(K_UP);
 		shell->term->cursor.y--;
 		shell->term->cursor.x = (shell->term->cursor.y == 0)
-		? shell->term->w_width - shell->term->header.display_length_mod - 2
-		: shell->term->w_width - 1;
+		? shell->term->window.width - shell->term->header.display_length_mod - 2
+		: shell->term->window.width - 1;
 	}
 	shell->term->cursor.abs_pos--;
 	sh_set_rel_pos(shell, 1, -1);
