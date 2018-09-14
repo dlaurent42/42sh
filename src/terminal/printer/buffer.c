@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 20:06:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 21:20:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	sh_move_cursor(t_shell *shell)
 	shell->term->cursor.x = (shell->term->cursor.y)
 		? (buffer_len + header_len) % window_width
 		: buffer_len;
+	sh_debug(shell, "printing", shell->term->header.content);
 	if ((y == 0 && x + 2 + header_len > window_width) || (y > 0 && x + 2 > window_width))
 		sh_move_to_xy(shell, 0, y + 1);
 	else

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 14:49:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 21:07:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct			s_header
 	unsigned int		display_length;
 	unsigned int		display_length_mod;
 	unsigned char		*content;
+	unsigned char		*location;
 }						t_header;
 
 typedef struct			s_read
@@ -150,10 +151,9 @@ typedef struct			s_shell
 	t_env				*env;
 	t_read				*read;
 	t_term				*term;
-	unsigned char		debug;
 }						t_shell;
 
-void					sh_debug(t_shell *shell, char *msg);
+void					sh_debug(t_shell *shell, char *msg, unsigned char *str);
 
 /*
 ** errors
@@ -212,6 +212,7 @@ t_shell					*shell_new(void);
 ** structures - term
 */
 void					term_delete(t_term *term);
+void					term_set_header(t_shell *shell, t_term *term, unsigned char *location);
 t_term					*term_new(t_shell *shell);
 
 /*

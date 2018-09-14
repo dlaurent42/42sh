@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/13 16:07:02 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/14 20:46:31 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC			=	minishell.c													\
 				structures/shell/new.c										\
 				structures/term/delete.c									\
 				structures/term/new.c										\
+				structures/term/set_header.c								\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\

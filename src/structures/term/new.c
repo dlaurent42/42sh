@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 14:53:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/14 21:11:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,21 @@ static void	term_set_termios(t_shell *shell, t_term *term)
 	}
 }
 
-static void	term_set_header(t_shell *shell, t_term *term)
+static void	term_init_header(t_shell *shell, t_term *term)
 {
-	if (!(term->header.content = (unsigned char *)getcwd((char *)term->header.content, PATH_MAX)))
+	unsigned char	*header;
+
+	header = NULL;
+	header = (unsigned char *)getcwd((char *)header, PATH_MAX);
+	term_set_header(shell, term, header);
+	if (header)
+		ft_strdel((char **)&header);
+	if (!term->header.content)
 	{
 		free(term->termios);
 		free(term);
 		error_malloc_term(shell, "t_header");
 	}
-	while (term->header.content[term->header.unicode_length])
-	{
-		if (term->header.content[term->header.unicode_length] >= 0b11000000
-		|| term->header.content[term->header.unicode_length] < 0b10000000)
-			term->header.display_length++;
-		term->header.unicode_length++;
-	}
-	term->header.display_length++;
-	term->header.unicode_length++;
-	term->header.display_length_mod = term->header.display_length % term->window.width;
 }
 
 t_term		*term_new(t_shell *shell)
@@ -74,6 +71,6 @@ t_term		*term_new(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &window);
 	term->window.width = window.ws_col;
 	term->window.height = window.ws_row;
-	term_set_header(shell, term);
+	term_init_header(shell, term);
 	return (term);
 }
