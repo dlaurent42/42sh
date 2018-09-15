@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 21:50:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 12:34:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ void					term_set_header(t_shell *shell, t_term *term,
 
 	if (!location)
 		return ;
-	if (term->header.content)
-		ft_strdel((char **)&term->header.content);
-	if (term->header.location)
-		ft_strdel((char **)&term->header.location);
+	(term->header.content) ? ft_strdel((char **)&term->header.content) : 0;
+	(term->header.location) ? ft_strdel((char **)&term->header.location) : 0;
 	length = ft_strlens((char *)location);
 	term->header.location = (unsigned char *)ft_strdups((char *)location);
 	if (length == 0)
@@ -73,8 +71,7 @@ void					term_set_header(t_shell *shell, t_term *term,
 		term->header.content = (unsigned char *)ft_strdup("~");
 	else
 	{
-		if (location[length - 1] == '/')
-			location[length--] = '\0';
+		(location[length - 1] == '/') ? location[length--] = '\0' : 0;
 		counter = sh_count_slash(location);
 		term->header.content = (location[0] == '/' && counter == 1)
 			? (unsigned char *)ft_strdup((char *)location)

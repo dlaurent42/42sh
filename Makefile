@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/14 20:46:31 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/15 13:57:57 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,8 @@ SRC			=	minishell.c													\
 				terminal/cursor/move_xy.c									\
 				terminal/cursor/utils.c										\
 				terminal/printer/buffer.c									\
+				terminal/printer/header.c									\
 				terminal/reader/delete.c									\
-				terminal/reader/header.c									\
 				terminal/reader/read.c										\
 				terminal/signals/catch.c											
 

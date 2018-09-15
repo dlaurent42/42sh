@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:09:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 00:24:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 13:53:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ void	sh_print_header(t_shell *shell)
 	if (shell->read->buffer.unicode_length == 0
 	&& shell->term->display_mode == FALSE)
 	{
-		write(
-			1,
-			shell->term->header.content,
-			shell->term->header.unicode_length);
-		write(1, " ", 1);
+		ft_printf("\e[1;32;40m%s\033[0m ", shell->term->header.content);
 		if (shell->term->header.display_length_mod == 0)
 		{
 			ft_putstr(K_DOWN);
