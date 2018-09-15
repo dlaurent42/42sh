@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 21:07:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 15:49:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,6 @@ typedef struct stat		t_stat;
 typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 
-typedef struct			s_env_item
-{
-	char				*key;
-	char				*value;
-}						t_env_item;
-
-typedef struct			s_env
-{
-	size_t				size;
-	size_t				count;
-	t_env_item			**items;
-}						t_env;
-
 typedef struct			s_bin_obj
 {
 	char				*name;
@@ -83,6 +70,20 @@ typedef struct			s_bin
 	size_t				count;
 	t_bin_item			**items;
 }						t_bin;
+
+typedef struct			s_env_item
+{
+	char				*key;
+	char				*value;
+}						t_env_item;
+
+typedef struct			s_env
+{
+	char				*environment[ENV_MAX_SIZE];
+	size_t				size;
+	size_t				count;
+	t_env_item			**items;
+}						t_env;
 
 typedef struct			s_cmd
 {
@@ -212,7 +213,10 @@ t_shell					*shell_new(void);
 ** structures - term
 */
 void					term_delete(t_term *term);
-void					term_set_header(t_shell *shell, t_term *term, unsigned char *location);
+void					term_set_header(
+							t_shell *shell,
+							t_term *term,
+							unsigned char *location);
 t_term					*term_new(t_shell *shell);
 
 /*

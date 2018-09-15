@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 19:20:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 00:06:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 15:46:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	env_initialize(t_shell *shell, t_env *env, char **environ)
 		left = ft_strsub(environ[i], 0,
 			ft_strlens(environ[i]) - ft_strlens(right) - 1);
 		env_insert(shell, env, left, right);
-		if (left)
-			ft_strdel(&left);
+		(left) ? ft_strdel(&left) : 0;
+		env->environment[i] = ft_strdups(environ[i]);
 		i++;
 	}
 }

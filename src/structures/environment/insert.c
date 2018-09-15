@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 00:08:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 16:21:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,41 @@ static t_env_item	*env_new_item(t_shell *shell, t_env *env, char *k, char *v)
 	return (item);
 }
 
+// static void			env_insert_item_into_array(t_env *env, char *k, char *v)
+// {
+// 	unsigned char	i;
+
+// 	i = 0;
+// 	while (env->environment[i])
+// 		i++;
+// 	env->environment[i] = ft_strjoins(k, "=");
+// 	env->environment[i] = ft_strjoinf(env->environment[i], v, 1);
+// }
+
 void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
 {
 	int			i;
 	int			index;
 	t_env_item	*item;
-	t_env_item	*current_item;
-	t_env_item	deleleted_item;
+	t_env_item	*curr_item;
+	t_env_item	del_item;
 
 	i = 1;
-	deleleted_item.key = NULL;
-	deleleted_item.value = NULL;
+	del_item.key = NULL;
+	del_item.value = NULL;
+	//env_insert_item_into_array(env, k, v);
 	item = env_new_item(shell, env, k, v);
 	index = env_get_hash(item->key, env->size, 0);
-	current_item = env->items[index];
-	while (current_item)
+	curr_item = env->items[index];
+	while (curr_item)
 	{
-		if (current_item != &deleleted_item
-		&& !ft_strcmp(current_item->key, k))
+		if (curr_item != &del_item && !ft_strcmp(curr_item->key, k))
 		{
 			env->items[index] = item;
-			return (env_delete_specified_item(current_item));
+			return (env_delete_specified_item(curr_item));
 		}
 		index = env_get_hash(item->key, env->size, i++);
-		current_item = env->items[index];
+		curr_item = env->items[index];
 	}
 	env->items[index] = item;
 	env->count++;
