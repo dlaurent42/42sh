@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 16:21:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 16:38:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,22 @@ static t_env_item	*env_new_item(t_shell *shell, t_env *env, char *k, char *v)
 	return (item);
 }
 
-// static void			env_insert_item_into_array(t_env *env, char *k, char *v)
-// {
-// 	unsigned char	i;
+static void			env_insert_item_into_array(t_env *env, char *k, char *v)
+{
+	char			*var;
+	unsigned char	i;
 
-// 	i = 0;
-// 	while (env->environment[i])
-// 		i++;
-// 	env->environment[i] = ft_strjoins(k, "=");
-// 	env->environment[i] = ft_strjoinf(env->environment[i], v, 1);
-// }
+	i = 0;
+	var = ft_strjoins(k, "=");
+	var = ft_strjoinf(var, v, 1);
+	while (env->environment[i])
+	{
+		if (ft_strcmps(env->environment[i], var) == 0)
+			return (ft_strdel(&var));
+		i++;
+	}
+	env->environment[i] = ft_strdupf(var);
+}
 
 void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
 {
@@ -45,7 +51,7 @@ void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
 	i = 1;
 	del_item.key = NULL;
 	del_item.value = NULL;
-	//env_insert_item_into_array(env, k, v);
+	env_insert_item_into_array(env, k, v);
 	item = env_new_item(shell, env, k, v);
 	index = env_get_hash(item->key, env->size, 0);
 	curr_item = env->items[index];

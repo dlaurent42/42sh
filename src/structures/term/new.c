@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 21:11:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ static void	term_set_termios(t_shell *shell, t_term *term)
 	}
 }
 
-static void	term_init_header(t_shell *shell, t_term *term)
+static void	term_init_prompt(t_shell *shell, t_term *term)
 {
-	unsigned char	*header;
+	unsigned char	*prompt;
 
-	header = NULL;
-	header = (unsigned char *)getcwd((char *)header, PATH_MAX);
-	term_set_header(shell, term, header);
-	if (header)
-		ft_strdel((char **)&header);
-	if (!term->header.content)
+	prompt = NULL;
+	prompt = (unsigned char *)getcwd((char *)prompt, PATH_MAX);
+	term_set_prompt(shell, term, (char *)prompt);
+	if (prompt)
+		ft_strdel((char **)&prompt);
+	if (!term->prompt.content)
 	{
 		free(term->termios);
 		free(term);
-		error_malloc_term(shell, "t_header");
+		error_malloc_term(shell, "t_prompt");
 	}
 }
 
@@ -71,6 +71,6 @@ t_term		*term_new(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &window);
 	term->window.width = window.ws_col;
 	term->window.height = window.ws_row;
-	term_init_header(shell, term);
+	term_init_prompt(shell, term);
 	return (term);
 }

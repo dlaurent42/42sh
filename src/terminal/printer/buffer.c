@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 13:57:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static void	sh_move_cursor(t_shell *shell)
 	unsigned int	x;
 	unsigned int	y;
 	unsigned int	buffer_len;
-	unsigned int	header_len;
+	unsigned int	prompt_len;
 	unsigned int	window_width;
 
 	x = shell->term->cursor.x;
 	y = shell->term->cursor.y;
 	buffer_len = shell->read->buffer.display_length + 1;
-	header_len = shell->term->header.display_length_mod;
+	prompt_len = shell->term->prompt.display_length_mod;
 	window_width = shell->term->window.width;
-	shell->term->cursor.y = (buffer_len + header_len) / window_width;
+	shell->term->cursor.y = (buffer_len + prompt_len) / window_width;
 	shell->term->cursor.x = (shell->term->cursor.y)
-		? (buffer_len + header_len) % window_width
+		? (buffer_len + prompt_len) % window_width
 		: buffer_len;
-	if ((y == 0 && x + 2 + header_len > window_width) || (y > 0 && x + 2 > window_width))
+	if ((y == 0 && x + 2 + prompt_len > window_width) || (y > 0 && x + 2 > window_width))
 		sh_move_to_xy(shell, 0, y + 1);
 	else
 		sh_move_to_xy(shell, x + 1, y);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 01:14:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 18:25:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		bin_delete_specified_item(t_bin_item *item)
 	if (item->value)
 	{
 		ft_strdel(&item->value->name);
+		ft_strdel(&item->value->path);
 		free(item->value);
 	}
 	free(item);

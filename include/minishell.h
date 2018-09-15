@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 15:49:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct winsize	t_winsize;
 typedef struct			s_bin_obj
 {
 	char				*name;
-	char				path[PATH_MAX + 1];
+	char				*path;
 	t_stat				stats;
 }						t_bin_obj;
 
@@ -110,14 +110,13 @@ typedef struct			s_buffer
 	t_cmd				*cmd;
 }						t_buffer;
 
-typedef struct			s_header
+typedef struct			s_prompt
 {
-	unsigned int		unicode_length;
 	unsigned int		display_length;
 	unsigned int		display_length_mod;
 	unsigned char		*content;
 	unsigned char		*location;
-}						t_header;
+}						t_prompt;
 
 typedef struct			s_read
 {
@@ -140,7 +139,7 @@ typedef struct			s_term
 	unsigned char		esc_mode;
 	unsigned char		display_mode;
 	t_cursor			cursor;
-	t_header			header;
+	t_prompt			prompt;
 	t_window			window;
 	t_termios			*termios;
 }						t_term;
@@ -181,6 +180,7 @@ void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
 void					bin_insert(t_shell *s, t_bin *b, t_bin_obj *obj);
 void					bin_initialize(t_shell *shell, t_env *env, t_bin *bin);
+char					*bin_execute_fetch(t_shell *sh, char *path, char **av);
 t_bin					*bin_new(t_shell *shell);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
@@ -213,10 +213,10 @@ t_shell					*shell_new(void);
 ** structures - term
 */
 void					term_delete(t_term *term);
-void					term_set_header(
+void					term_set_prompt(
 							t_shell *shell,
 							t_term *term,
-							unsigned char *location);
+							char *location);
 t_term					*term_new(t_shell *shell);
 
 /*
@@ -244,7 +244,7 @@ void					sh_set_rel_pos(
 ** terminal - reader
 */
 void					sh_read(t_shell *shell);
-void					sh_print_header(t_shell *shell);
+void					sh_print_prompt(t_shell *shell);
 void					sh_read_delete(t_shell *shell);
 void					sh_fill_buffer(t_shell *shell);
 

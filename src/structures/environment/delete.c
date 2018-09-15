@@ -6,32 +6,37 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 16:20:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 16:44:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void		env_delete_item_from_array(t_env *env, const char *key)
-// {
-// 	unsigned char	i;
+void		env_delete_item_from_array(t_env *env, const char *key)
+{
+	unsigned char	i;
+	unsigned char	j;
 
-// 	i = 0;
-// 	while (env->environment[i])
-// 	{
-// 		if (ft_strcmps(env->environment[i], key) == 0)
-// 		{
-// 			ft_strdel(&env->environment[i]);
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	while (env->environment[i])
-// 	{
-// 		env->environment[i] = env->environment[i + 1];
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (env->environment[i])
+	{
+		j = 0;
+		while (env->environment[i][j] && key[j]
+		&& env->environment[i][j] == key[j])
+			j++;
+		if (key[j] && key[j] == '=')
+		{
+			ft_strdel(&env->environment[i]);
+			break ;
+		}
+		i++;
+	}
+	while (env->environment[i])
+	{
+		env->environment[i] = env->environment[i + 1];
+		i++;
+	}
+}
 
 void		env_delete_specified_item(t_env_item *item)
 {
@@ -52,9 +57,9 @@ void		env_delete_item(t_env *env, const char *key)
 	i = 1;
 	deleleted_item.key = NULL;
 	deleleted_item.value = NULL;
+	env_delete_item_from_array(env, key);
 	index = env_get_hash(key, env->size, 0);
 	item = env->items[index];
-	// env_delete_item_from_array(env, key);
 	while (item)
 	{
 		if (item != &deleleted_item && !ft_strcmp(item->key, key))
@@ -70,22 +75,25 @@ void		env_delete_item(t_env *env, const char *key)
 
 void		env_delete(t_env *env)
 {
-	unsigned char	i;
+	size_t		i;
+	t_env_item	*item;
 
 	i = 0;
 	if (!env)
 		return ;
 	while (i < env->size)
 	{
-		(env->items[i]) ? env_delete_specified_item(env->items[i]) : 0;
+		item = env->items[i];
+		if (item)
+			env_delete_specified_item(item);
 		i++;
 	}
-	// i = 0;
-	// while (env->environment[i])
-	// {
-	// 	ft_strdel(&env->environment[i]);
-	// 	i++;
-	// }
+	i = 0;
+	while (env->environment[i])
+	{
+		ft_strdel(&env->environment[i]);
+		i++;
+	}
 	free(env->items);
 	free(env);
 }

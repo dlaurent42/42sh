@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 21:18:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sh_debug(t_shell *shell, char *msg, unsigned char *str)
 	int	fd;
 
 	i = 0;
-	fd = open("/dev/ttys008", O_RDWR);
+	fd = open("/dev/ttys004", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (str)
 		while (str[i])
@@ -48,12 +48,10 @@ void	sh_debug(t_shell *shell, char *msg, unsigned char *str)
 		ft_putnbr_fd(shell->read->buffer.unicode_length, fd);
 		ft_putstr_fd("\tcontent: ", fd);
 		ft_putstr_fd((char *)shell->read->buffer.content, fd);
-		ft_putstr_fd("\nheader\n\tunicode_length: ", fd);
-		ft_putnbr_fd(shell->term->header.unicode_length, fd);
 		ft_putstr_fd("\tdisplay_length: ", fd);
-		ft_putnbr_fd(shell->term->header.display_length, fd);
+		ft_putnbr_fd(shell->term->prompt.display_length, fd);
 		ft_putstr_fd("\tdisplay_length_mod: ", fd);
-		ft_putnbr_fd(shell->term->header.display_length_mod, fd);
+		ft_putnbr_fd(shell->term->prompt.display_length_mod, fd);
 		ft_putstr_fd("\nterm->window\n\twidth: ", fd);
 		ft_putnbr_fd(shell->term->window.width, fd);
 		ft_putstr_fd("\theight: ", fd);

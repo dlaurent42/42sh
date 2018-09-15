@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 21:57:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static void	sh_read_dispatcher(t_shell *shell)
 
 void		sh_read(t_shell *shell)
 {
+	sh_debug(shell, NULL, NULL);
 	while (TRUE)
 	{
-		sh_print_header(shell);
+		sh_print_prompt(shell);
 		read(0, shell->read->line, 4);
 		if (shell->read->line[0] == 4)
 			break ;

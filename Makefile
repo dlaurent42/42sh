@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/15 13:57:57 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/15 22:25:19 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC			=	minishell.c													\
 				errors/term.c												\
 				functions/redirect.c										\
 				structures/binaries/delete.c								\
+				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
 				structures/binaries/insert.c								\
@@ -42,7 +43,7 @@ SRC			=	minishell.c													\
 				structures/shell/new.c										\
 				structures/term/delete.c									\
 				structures/term/new.c										\
-				structures/term/set_header.c								\
+				structures/term/set_prompt.c								\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -51,7 +52,7 @@ SRC			=	minishell.c													\
 				terminal/cursor/move_xy.c									\
 				terminal/cursor/utils.c										\
 				terminal/printer/buffer.c									\
-				terminal/printer/header.c									\
+				terminal/printer/prompt.c									\
 				terminal/reader/delete.c									\
 				terminal/reader/read.c										\
 				terminal/signals/catch.c											

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:32:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/14 19:52:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:25:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	sh_move_cursor(t_shell *shell, unsigned int displayed_len)
 	y = shell->term->cursor.y;
 	shell->term->cursor.rel_pos = shell->read->buffer.unicode_length + displayed_len - shell->read->buffer.display_length;
 	shell->term->cursor.abs_pos = shell->read->buffer.display_length + displayed_len - shell->read->buffer.display_length;
-	shell->term->cursor.y = (shell->term->cursor.abs_pos + shell->term->header.display_length_mod) / shell->term->window.width;
+	shell->term->cursor.y = (shell->term->cursor.abs_pos + shell->term->prompt.display_length_mod) / shell->term->window.width;
 	shell->term->cursor.x = (shell->term->cursor.y)
-		? (shell->term->cursor.abs_pos + shell->term->header.display_length_mod) % shell->term->window.width
+		? (shell->term->cursor.abs_pos + shell->term->prompt.display_length_mod) % shell->term->window.width
 		: shell->term->cursor.abs_pos;
 	while (displayed_len != shell->read->buffer.display_length)
 	{

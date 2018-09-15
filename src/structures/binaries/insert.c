@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 01:29:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 18:24:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_bin_obj			*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st)
 	if (!(obj = (t_bin_obj *)ft_memalloc(sizeof(t_bin_obj))))
 		error_malloc_bin(sh, NULL, "t_bin_obj structure");
 	obj->name = ft_strdups(n);
-	ft_strcpy(obj->path, p);
+	obj->path = ft_strjoins(p, "/");
+	obj->path = ft_strjoinf(obj->path, n, 1);
 	obj->stats = st;
 	return (obj);
 }
