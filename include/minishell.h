@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:50:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,10 +213,7 @@ t_shell					*shell_new(void);
 ** structures - term
 */
 void					term_delete(t_term *term);
-void					term_set_prompt(
-							t_shell *shell,
-							t_term *term,
-							char *location);
+void					term_set_prompt(t_shell *shell, t_term *term);
 t_term					*term_new(t_shell *shell);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 02:54:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:51:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,7 @@ static void	term_set_termios(t_shell *shell, t_term *term)
 
 static void	term_init_prompt(t_shell *shell, t_term *term)
 {
-	unsigned char	*prompt;
-
-	prompt = NULL;
-	prompt = (unsigned char *)getcwd((char *)prompt, PATH_MAX);
-	term_set_prompt(shell, term, (char *)prompt);
-	if (prompt)
-		ft_strdel((char **)&prompt);
+	term_set_prompt(shell, term);
 	if (!term->prompt.content)
 	{
 		free(term->termios);

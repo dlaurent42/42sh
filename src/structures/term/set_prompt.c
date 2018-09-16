@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 14:34:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,56 +44,94 @@ static char	*term_get_folder_name(t_env *env, char *location, size_t length)
 	return (ft_strdups(location + length + 1));
 }
 
-static char	*parse_git_branch(char *str)
-{
-	int		i;
-	int		j;
-	char	*output;
+// static char	*parse_git_branch(char *str)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*output;
 
-	i = 0;
-	while (str[i] && str[i] != '*')
-		i++;
-	j = i;
-	while (str[j] && str[j] != '\n')
-		j++;
-	if (i + 2 >= j && j - i - 1 > 0)
+// 	i = 0;
+// 	while (str[i] && str[i] != '*')
+// 		i++;
+// 	j = i;
+// 	while (str[j] && str[j] != '\n')
+// 		j++;
+// 	if (i + 2 >= j && j - i - 1 > 0)
+// 		return (NULL);
+// 	output = ft_strsub(str, i + 2, j - i - 2);
+// 	ft_strdel(&str); 
+// 	output = ft_strjoinf(" \e[1;34;40mgit:[\e[1;31;40m", output, 2);
+// 	output = ft_strjoinf(output, "\e[1;34;40m]", 1);
+// 	return (output);
+// }
+static char *term_get_git_branch_name(unsigned char *location)
+{
+	int		fd;
+	char	*line;
+
+	line = NULL;
+	ft_strcat((char *)location, "/.git/HEAD");
+	if ((fd = open((char *)location, O_RDONLY)) == -1)
 		return (NULL);
-	output = ft_strsub(str, i + 2, j - i - 2);
-	ft_strdel(&str); 
-	output = ft_strjoinf(" \e[1;34;40mgit:[\e[1;31;40m", output, 2);
-	output = ft_strjoinf(output, "\e[1;34;40m]", 1);
-	return (output);
+	get_next_line(fd, &line);
+	close(fd);
+	return (line);
 }
 
-static char	*term_get_git_branch(t_shell *shell)
+static char	*term_get_git_branch(unsigned char *location)
 {
-	char			*args[3];
-	char			*output;
-	t_bin_obj		*obj;
+	char			*git;
+	DIR				*dir;
+	t_dirent		*dirent;
 
-	args[0] = "git";
-	args[1] = "branch"; 
-	args[2] = NULL;
-	if (!(obj = bin_search(shell->bin, "git")))
-		return (NULL);
-	if (!(output = bin_execute_fetch(shell, obj->path, args)))
-		return (NULL);
-	return (parse_git_branch(output));
+	git = NULL;
+	dirent = NULL;
+	while (!git)
+	{
+		sh_debug(NULL, (char *)location, NULL);
+		if (!(dir = opendir((char *)location)))
+			return (NULL);
+		while ((dirent = readdir(dir)))
+			if (dirent->d_namlen == 4 && ft_strcmps(dirent->d_name, ".git") == 0)
+			{
+				git = term_get_git_branch_name(location);
+				break ;
+			}
+		closedir(dir);
+		ft_strcat((char *)location, "/..");
+	}
+	return (git);
 }
 
-void		term_set_prompt(t_shell *shell, t_term *term, char *location)
+// static char	*term_get_git_branch(t_shell *shell)
+// {
+// 	char			*args[3];
+// 	char			*output;
+// 	t_bin_obj		*obj;
+
+// 	args[0] = "git";
+// 	args[1] = "branch"; 
+// 	args[2] = NULL;
+// 	if (!(obj = bin_search(shell->bin, "git")))
+// 		return (NULL);
+// 	if (!(output = bin_execute_fetch(shell, obj->path, args)))
+// 		return (NULL);
+// 	return (parse_git_branch(output));
+// }
+
+void		term_set_prompt(t_shell *shell, t_term *term)
 {
 	char	*git;
 	size_t	length;
-
+	
 	git = NULL;
 	(term->prompt.content) ? ft_strdel((char **)&term->prompt.content) : 0;
 	(term->prompt.location) ? ft_strdel((char **)&term->prompt.location) : 0;
-	term->prompt.location = (unsigned char *)ft_strdups(location);
-	if ((length = ft_strlens((char *)location)) == 0)
+	term->prompt.location = (unsigned char *)getcwd((char *)term->prompt.location, PATH_MAX);
+	if ((length = ft_strlens((char *)term->prompt.location)) == 0)
 		return ;
-	term->prompt.content = (unsigned char *)ft_strjoinf("\e[1;32;40m", term_get_folder_name(shell->env, location, length), 2);
-	if ((git = term_get_git_branch(shell)))
+	term->prompt.content = (unsigned char *)ft_strjoinf("\e[1;32;40m", term_get_folder_name(shell->env, (char *)term->prompt.location, length), 2);
+	if ((git = term_get_git_branch(term->prompt.location)))
 		term->prompt.content = (unsigned char *)ft_strjoinf((char *)term->prompt.content, git, 3);
 	term->prompt.content = (unsigned char *)ft_strjoinf((char *)term->prompt.content, " \e[1;32;40m▸\033[0m ", 1);
 	(git)
