@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 01:09:41 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/14 23:53:12 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "auto_completion.h"
 
 void				print_spaces(int diff)
 {

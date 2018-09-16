@@ -6,37 +6,20 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/23 17:28:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/15 00:07:42 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "auto_completion.h"
 
-static char			*get_string(t_frame *frame, char *content)
+static t_frame		create_frame(t_shell *shell, char *str)
 {
-	char			*str;
-	ft_printf("GETTING: %s\n", content);
+	t_frame			frame;
 
-	if (!(str = ft_strrchr(content, ' ')))
-	{
-		str = content;
-		frame->auto_mode = AUTO_BIN;
-	}
-	else
-	{
-		str++;
-		frame->auto_mode = AUTO_REG;
-	}
-	ft_printf("Mode is %d\n", frame->auto_mode);
-	return (str);
-}
-
-static t_frame		create_frame(t_frame frame, t_shell *shell, char *str)
-{
+	ft_bzero(&frame, sizeof(frame));
 	frame.shell = shell;
 	if(!(frame.argv = (char **)malloc(sizeof(char *) * 3)))
 		error_exit(&frame, "Malloc Failed");
-	ft_printf("GOT: [%s]\n", str);
 	frame.argv[0] = str;
 	frame.argv[1] = str;
 	frame.argv[2] = NULL;
@@ -45,14 +28,20 @@ static t_frame		create_frame(t_frame frame, t_shell *shell, char *str)
 	return (frame);
 }
 
-void				auto_completion(t_shell *shell)
+static void			auto_completion(t_shell *shell, char *str)
 {
 	t_frame			frame;
 
-	ft_bzero(&frame, sizeof(frame));
-	sh_replace_buffer(shell, "ls ");//Sample initial buffer content.
-	frame = create_frame(frame, shell, get_string(&frame, shell->read->buffer.content));
+	frame = create_frame(shell, str);
 	get_args(&frame);
 	issuance(&frame);
 	free_frame(&frame);
+}
+
+int					main(int argc, char **argv)
+{
+	if (argc)
+		;
+	auto_completion(NULL, argv[1]);
+	return (0);
 }

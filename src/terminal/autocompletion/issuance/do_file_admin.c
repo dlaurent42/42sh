@@ -6,11 +6,11 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/14 23:54:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "auto_completion.h"
 
 static void			get_mode(t_frame *frame, t_args *head)
 {
