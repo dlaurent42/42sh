@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 18:20:43 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 11:48:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,89 @@ typedef struct			s_shell
 t_shell					*g_sh;
 
 void					sh_debug(t_shell *sh, char *msg, char *str);
+/*
+** ------------------- auto_completion structs ---------------------
+*/
+
+typedef struct		s_data
+{
+	int				file_number;
+
+	char			*str;
+	char			*parent_path;
+	char			*path;
+
+	int				len_of_str;
+
+	unsigned char	no_file	: 1;
+	unsigned char	fill	: 7;
+
+	int				type;
+	mode_t			mode;
+	int				links;
+	int				rdev;
+	char			sym_path[RL_BUFSIZE + 1];
+
+	unsigned char	ifo		: 1;
+	unsigned char	chr		: 1;
+	unsigned char	dir		: 1;
+	unsigned char	blk		: 1;
+	unsigned char	reg		: 1;
+	unsigned char	lnk		: 1;
+	unsigned char	sock	: 1;
+	unsigned char	wht		: 1;
+}					t_data;
+
+typedef struct		s_args
+{
+	t_data			data;
+	struct s_args	*next;
+	struct s_args	*show_next;
+	struct s_args	*show_prev;
+}					t_args;
+
+typedef struct		s_frame
+{
+	char			**argv;
+
+	char			*malloc_failed;
+
+	char			*file_name;
+	int				file_name_len;
+	char			cmp_mode;
+
+	unsigned char	at_mode	: 1;
+	unsigned char	fill	: 7;
+
+	int				len_file_name;
+	int				items_to_display;
+	int				total_blocks;
+
+	int				width;
+	int				number_of_columns;
+
+	t_args			*args;
+	t_args			*current_args;
+	t_args			*head;
+	t_args			*track;
+	t_args			*select;
+
+	t_shell			*shell;
+
+	bool			(*sort_function)(struct s_frame *frame);
+}					t_frame;
+
+typedef struct		s_read_dir
+{
+	t_frame			*frame;
+	t_args			*args;
+	t_args			*tmp;
+	t_args			*head;
+	t_args			*last_args;
+	DIR				*directory;
+	struct dirent	*file;
+}					t_read_dir;
+
 
 /*
 ** errors
@@ -258,5 +341,36 @@ void					sh_read_delete(t_shell *sh);
 */
 void					signal_catching(void);
 void					sh_window_resize(t_shell *sh);
+
+/*
+** terminal - auto_completion
+*/
+void				get_args(t_frame *frame);
+void				free_args(t_frame *frame, t_args **args);
+t_args				*create_args(void);
+
+void				issuance(t_frame *frame);
+void				get_attributes(t_frame *frame);
+void				loop_dirs(t_frame *frame);
+void				loop_valid_dir(t_frame *frame, t_args *args);
+void				do_ls(t_frame *frame, t_args *args);
+void				do_file_admin(t_frame *frame, t_args *args);
+void				calc_len_file_name(t_frame *frame, t_args *args);
+void				calculate_number_of_columns(t_frame *frame);
+void				path(t_frame *frame, t_args *args, char *path, char *name);
+void				move_right(t_frame *frame);
+void				move_left(t_frame *frame);
+bool				is_executeable(t_args *args);
+
+void				sort(t_frame *frame);
+bool				sort_alpha(t_frame *frame);
+
+void				display(t_frame *frame, t_args *args);
+void				file_name(t_frame *frame, t_args *args);
+void				print_spaces(int diff);
+int					get_diff(t_frame *frame, char *str, long long num, int flag);
+
+void				error_exit(t_frame *frame, char *error_str);
+void				free_frame(t_frame *frame);
 
 #endif
