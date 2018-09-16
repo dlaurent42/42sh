@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:49:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 19:54:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,11 @@ int					ft_isnumber(char *str);
 ** Get_next_line.c
 */
 int					get_next_line(int const fd, char **line);
+
+/*
+** options
+*/
+unsigned long		options(char **argv);
 
 /*
 ** 	~~~~~~~~~~~~~~~~~~~~ PRINTF FUNCTIONS ~~~~~~~~~~~~~~~~~~~~ **
