@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:56:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:11:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void		term_set_prompt(t_shell *shell, t_term *term)
 	git = NULL;
 	(term->prompt.content) ? ft_strdel((char **)&term->prompt.content) : 0;
 	(term->prompt.location) ? ft_strdel((char **)&term->prompt.location) : 0;
-	term->prompt.location = (unsigned char *)getcwd((char *)term->prompt.location, PATH_MAX);
+	if (!(term->prompt.location = (unsigned char *)getcwd((char *)term->prompt.location, PATH_MAX)))
+		return ;
 	if ((length = ft_strlens((char *)term->prompt.location)) == 0)
 		return ;
 	term->prompt.content = (unsigned char *)term_get_folder_name(shell->env, (char *)term->prompt.location, length);

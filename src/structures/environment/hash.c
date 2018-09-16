@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:18:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 00:05:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:19:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	env_hash(const char *s, const int a, const int m)
 
 	i = 0;
 	hash = 0;
-	length = ft_strlen(s);
+	length = ft_strlens(s);
 	while (i < length)
 	{
 		hash += (long)ft_pow(a, length - (i + 1)) * s[i];

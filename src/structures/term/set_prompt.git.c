@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:49:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:11:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char				*term_get_git_branch_name(unsigned char *location)
 	ft_strcat((char *)location, "/.git/HEAD");
 	if ((fd = open((char *)location, O_RDONLY)) == -1)
 		return (NULL);
-	get_next_line(fd, &line);
+	if (get_next_line(fd, &line) == -1)
+		return (NULL);
 	close(fd);
 	return (line);
 }
@@ -76,7 +77,10 @@ char					*term_get_git_branch(unsigned char *location)
 		while ((dirent = readdir(dir)))
 			if (dirent->d_namlen == 4
 			&& ft_strcmps(dirent->d_name, ".git") == 0)
+			{
 				git = term_get_git_branch_name(location);
+				break ;
+			}
 		closedir(dir);
 		location = term_prompt_get_next_location(location);
 	}
