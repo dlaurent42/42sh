@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 18:24:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:27:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				bin_insert(t_shell *shell, t_bin *bin, t_bin_obj *obj)
 	while (current_item)
 	{
 		if (current_item != &deleleted_item
-		&& !ft_strcmp(current_item->key, obj->name))
+		&& !ft_strcmps(current_item->key, obj->name))
 		{
 			bin->items[index] = item;
 			return (bin_delete_specified_item(current_item));

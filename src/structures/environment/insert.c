@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:21:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:28:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
 	curr_item = env->items[index];
 	while (curr_item)
 	{
-		if (curr_item != &del_item && !ft_strcmp(curr_item->key, k))
+		if (curr_item != &del_item && !ft_strcmps(curr_item->key, k))
 		{
 			env->items[index] = item;
 			return (env_delete_specified_item(curr_item));

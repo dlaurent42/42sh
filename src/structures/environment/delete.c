@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 16:44:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:28:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		env_delete_item(t_env *env, const char *key)
 	item = env->items[index];
 	while (item)
 	{
-		if (item != &deleleted_item && !ft_strcmp(item->key, key))
+		if (item != &deleleted_item && !ft_strcmps(item->key, key))
 		{
 			env_delete_specified_item(item);
 			env->items[index] = &deleleted_item;

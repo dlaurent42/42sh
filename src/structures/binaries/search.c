@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/01 01:16:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 16:28:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bin_obj	*bin_search(t_bin *bin, const char *key)
 	item = bin->items[index];
 	while (item)
 	{
-		if (item != &deleted_item && !ft_strcmp(item->key, key))
+		if (item != &deleted_item && !ft_strcmps(item->key, key))
 			return (item->value);
 		index = bin_get_hash(key, bin->size, i);
 		item = bin->items[index];
