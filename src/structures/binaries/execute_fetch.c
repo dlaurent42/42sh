@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 19:22:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 21:42:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 15:56:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*parent_handler(int *pipe_fd)
 	return (command_output);
 }
 
-char	*bin_execute_fetch(t_shell *shell, char *path, char **args)
+char		*bin_execute_fetch(t_shell *shell, char *path, char **args)
 {
 	pid_t	pid;
 	int		pipe_fd[2];

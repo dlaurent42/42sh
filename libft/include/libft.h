@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 18:43:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/16 15:49:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinf(char *s1, char *s2, int opt);
 char				*ft_strjoins(char const *s1, char const *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
-char				*ft_strleft(const char *src, size_t len);
+char				*ft_strleft(char *src, size_t len);
 char				*ft_strright(const char *src, size_t len);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlens(const char *s);

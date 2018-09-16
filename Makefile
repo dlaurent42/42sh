@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/15 22:25:19 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/16 15:15:01 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRC			=	minishell.c													\
 				structures/term/delete.c									\
 				structures/term/new.c										\
 				structures/term/set_prompt.c								\
+				structures/term/set_prompt.folder.c							\
+				structures/term/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
