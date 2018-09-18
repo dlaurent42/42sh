@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:18:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/18 20:25:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	sh_debug(t_shell *shell, char *msg, unsigned char *str)
 		ft_putnbr_fd(shell->term->window.width, fd);
 		ft_putstr_fd("\theight: ", fd);
 		ft_putnbr_fd(shell->term->window.height, fd);
-		ft_putstr_fd("\tscroll_x: ", fd);
-		ft_putnbr_fd(shell->term->window.scroll_x, fd);
 		ft_putstr_fd("\tscroll_y: ", fd);
-		ft_putnbr_fd(shell->term->window.scroll_y, fd);
+		ft_putnbr_fd(shell->term->cursor.scroll_y, fd);
 	}
 	ft_putstr_fd("\n-----------------", fd);
 	close(fd);
