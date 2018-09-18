@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:16:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/18 13:13:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct			s_cursor
 	unsigned int		y;
 	unsigned int		abs_pos;
 	unsigned int		rel_pos;
+	unsigned int		scroll_x;
 }						t_cursor;
 
 typedef struct			s_buffer
@@ -129,8 +130,6 @@ typedef struct			s_window
 {
 	unsigned short		width;
 	unsigned short		height;
-	unsigned short		scroll_x;
-	unsigned short		scroll_y;
 }						t_window;
 
 typedef struct			s_term
