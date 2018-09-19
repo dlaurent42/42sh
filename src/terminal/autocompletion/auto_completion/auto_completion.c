@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/15 00:07:42 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/17 19:58:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "auto_completion.h"
+#include "minishell.h"
 
 static t_frame		create_frame(t_shell *shell, char *str)
 {
@@ -28,7 +28,7 @@ static t_frame		create_frame(t_shell *shell, char *str)
 	return (frame);
 }
 
-static void			auto_completion(t_shell *shell, char *str)
+void				auto_completion(t_shell *shell, char *str)
 {
 	t_frame			frame;
 
@@ -36,12 +36,4 @@ static void			auto_completion(t_shell *shell, char *str)
 	get_args(&frame);
 	issuance(&frame);
 	free_frame(&frame);
-}
-
-int					main(int argc, char **argv)
-{
-	if (argc)
-		;
-	auto_completion(NULL, argv[1]);
-	return (0);
 }
