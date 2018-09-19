@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 20:04:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/19 20:00:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <term.h>
 # include <termios.h>
 # include <time.h>
+# include <limits.h>
+# include <stdbool.h>
 # include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -45,6 +47,47 @@
 # define K_COL_0		"\x1b\x5b\x31\x47"
 # define K_DEL			"\x7f"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
+
+# define OPTIONS	"-AFGNRSTUacdfgiloprtux1"
+# define RL_BUFSIZE	1024
+# define NUM_FILES	"--------------\nFiles: %d\n"
+# define CHRSIZELEN	8
+
+# define AT_FIRST	0
+# define AT_REST	1
+
+# define MODE_NON	0
+# define MODE_CMP	1
+# define MODE_STR	2
+
+# define LEN_INO	1
+# define LEN_LINKS	2
+# define LEN_USER	3
+# define LEN_GROUP	4
+# define LEN_SIZE	5
+# define LEN_SIZE_C	6
+# define LEN_NAME	7
+
+# define TYPE_IFO	010000
+# define TYPE_CHR	020000
+# define TYPE_DIR	040000
+# define TYPE_BLK	060000
+# define TYPE_REG	0100000
+# define TYPE_LNK	0120000
+# define TYPE_SOCK	0140000
+# define TYPE_WHT	0160000
+
+# define COL_IFO	"\x1b[33m"
+# define COL_CHR	"\x1b[1;33m"
+# define COL_DIR	"\x1b[1;31m"
+# define COL_BLK	"\x1b[1;33m"
+# define COL_REG	"\x1b[0m"
+# define COL_LNK	"\x1b[1;36m"
+# define COL_SOCK	"\x1b[32m"
+# define COL_WHT	"\x1b[31m"
+# define COL_EXE	"\x1b[1;32m"
+# define COL_BG		"\x1b[30;47m"
+# define COL_CLR	"\x1b[0m"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -338,6 +381,7 @@ void					signal_catching(void);
 /*
 ** terminal - auto_completion
 */
+void				auto_completion(t_shell *shell, char *str);
 void				get_args(t_frame *frame);
 void				free_args(t_frame *frame, t_args **args);
 t_args				*create_args(void);
@@ -351,8 +395,10 @@ void				do_file_admin(t_frame *frame, t_args *args);
 void				calc_len_file_name(t_frame *frame, t_args *args);
 void				calculate_number_of_columns(t_frame *frame);
 void				path(t_frame *frame, t_args *args, char *path, char *name);
-void				move_right(t_frame *frame);
+void				move_up(t_frame *frame);
+void				move_down(t_frame *frame);
 void				move_left(t_frame *frame);
+void				move_right(t_frame *frame);
 bool				is_executeable(t_args *args);
 
 void				sort(t_frame *frame);
