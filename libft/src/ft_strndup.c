@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_left.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:43:54 by dhojt            ###   ########.fr       */
+/*   Created: 2018/01/27 15:38:01 by dhojt             #+#    #+#             */
+/*   Updated: 2018/04/15 19:00:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void				move_left(t_frame *frame)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	frame->select = frame->select->show_prev;
+	char	*s2;
+	size_t	i;
+
+	i = 0;
+	if (!(s2 = ft_strnew(n)))
+		return (NULL);
+	while (s1[i] && i < n)
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
 }

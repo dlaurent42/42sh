@@ -6,11 +6,11 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 19:58:55 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/14 23:53:09 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/17 08:44:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "auto_completion.h"
+#include "minishell.h"
 
 int					get_diff(t_frame *frame, char *str, long long num, int flag)
 {
