@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/21 00:39:45 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/27 11:49:04 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,32 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
+				terminal/autocompletion/sort/sort.c \
+				terminal/autocompletion/sort/sort_alpha.c \
+				terminal/autocompletion/issuance/issuance.c \
+				terminal/autocompletion/issuance/move_up.c \
+				terminal/autocompletion/issuance/move_down.c \
+				terminal/autocompletion/issuance/move_left.c \
+				terminal/autocompletion/issuance/move_right.c \
+				terminal/autocompletion/issuance/get_attributes.c \
+				terminal/autocompletion/issuance/do_ls.c \
+				terminal/autocompletion/issuance/path.c \
+				terminal/autocompletion/issuance/loop_dirs.c \
+				terminal/autocompletion/issuance/loop_valid_dir.c \
+				terminal/autocompletion/issuance/calc_len_file_name.c \
+				terminal/autocompletion/issuance/is_executeable.c \
+				terminal/autocompletion/issuance/do_file_admin.c \
+				terminal/autocompletion/issuance/calculate_number_of_columns.c \
+				terminal/autocompletion/display/display.c \
+				terminal/autocompletion/display/get_diff.c \
+				terminal/autocompletion/display/file_name.c \
+				terminal/autocompletion/display/print_spaces.c \
+				terminal/autocompletion/auto_completion/auto_completion.c \
+				terminal/autocompletion/auto_completion/free_frame.c \
+				terminal/autocompletion/auto_completion/error_exit.c \
+				terminal/autocompletion/auto_completion/get_args.c \
+				terminal/autocompletion/auto_completion/create_args.c \
+				terminal/autocompletion/auto_completion/free_args.c \
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
 				terminal/cursor/move_left.c									\
@@ -59,6 +85,7 @@ SRC			=	shell.c														\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c		
 
+				
 #				functions/redirect.c										\
 #				functions/cd/cd.c											\
 #				functions/echo/echo.c										\
@@ -108,6 +135,10 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/sort
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/issuance
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/display
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/auto_completion
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
 				@mkdir -p $(OBJ_DIR)/terminal/printer
 				@mkdir -p $(OBJ_DIR)/terminal/reader

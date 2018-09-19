@@ -6,11 +6,11 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 17:18:49 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/14 23:54:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/17 08:43:59 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "auto_completion.h"
+#include "minishell.h"
 
 void				path(t_frame *frame, t_args *args, char *path, char *name)
 {

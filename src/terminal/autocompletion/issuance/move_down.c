@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_left.c                                        :+:      :+:    :+:   */
+/*   move_down.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:43:54 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/19 19:58:57 by dhojt             #+#    #+#             */
+/*   Updated: 2018/09/19 19:59:04 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				move_left(t_frame *frame)
+void				move_down(t_frame *frame)
 {
-	frame->select = frame->select->show_prev;
+	frame->select = frame->select->show_next;
 }

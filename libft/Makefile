@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/16 19:54:59 by dhojt            ###   ########.fr        #
+#    Updated: 2018/09/17 19:55:24 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ SRC =	ft_atoi.c\
 		ft_strncmp.c\
 		ft_strncpy.c\
 		ft_strncpys.c\
+		ft_strndup.c\
 		ft_strnequ.c\
 		ft_strnew.c\
 		ft_strnstr.c\
