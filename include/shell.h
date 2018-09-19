@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/18 20:26:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:46:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SHELL_H
+# define SHELL_H
 
 # include "../libft/include/libft.h"
 # include <curses.h>
@@ -88,7 +88,7 @@ typedef struct			s_env
 typedef struct			s_cmd
 {
 	char				cmd[ARG_MAX + 1];
-	size_t				cmd_length;
+	size_t				cmd_len;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
@@ -96,52 +96,49 @@ typedef struct			s_cmd
 
 typedef struct			s_cursor
 {
-	unsigned int		x;
-	unsigned int		y;
-	unsigned int		abs_pos;
-	unsigned int		rel_pos;
-	unsigned int		scroll_y;
+	int					x;
+	int					y;
+	int					abs_pos;
+	int					rel_pos;
+	int					scroll_y;
 }						t_cursor;
 
 typedef struct			s_buffer
 {
-	unsigned int		unicode_length;
-	unsigned int		display_length;
-	unsigned char		content[ARG_MAX + 1];
+	int					unicode_len;
+	int					display_len;
+	char				content[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
 
 typedef struct			s_prompt
 {
-	unsigned int		display_length;
-	unsigned int		display_length_mod;
-	unsigned char		*content;
-	unsigned char		*location;
+	int					len;
+	int					len_mod;
+	char				*content;
+	char				*location;
 }						t_prompt;
 
 typedef struct			s_read
 {
-	unsigned char		line[5];
-	unsigned char		unicode_bytes_left;
+	char				line[5];
+	char				unicode_bytes_left;
 	t_buffer			buffer;
 }						t_read;
 
 typedef struct			s_window
 {
-	unsigned short		width;
-	unsigned short		height;
+	short				width;
+	short				height;
 }						t_window;
 
-typedef struct			s_term
+typedef struct			s_modes
 {
-	unsigned char		auto_completion_mode;
-	unsigned char		esc_mode;
-	unsigned char		display_mode;
-	t_cursor			cursor;
-	t_prompt			prompt;
-	t_window			window;
-	t_termios			*termios;
-}						t_term;
+	unsigned char		auto_completion	: 1;
+	unsigned char		esc				: 1;
+	unsigned char		display			: 1;
+	unsigned char		others			: 5;
+}						t_modes;
 
 typedef struct			s_shell
 {
@@ -149,102 +146,92 @@ typedef struct			s_shell
 	t_cmd				*cmd;
 	t_env				*env;
 	t_read				*read;
-	t_term				*term;
+	t_modes				modes;
+	t_cursor			cursor;
+	t_prompt			prompt;
+	t_window			window;
+	t_termios			*termios;
 }						t_shell;
 
-void					sh_debug(t_shell *shell, char *msg, unsigned char *str);
+void					sh_debug(t_shell *sh, char *msg, char *str);
 
 /*
 ** errors
 */
-void					error_malloc_shell(t_shell *shell);
-void					error_malloc_env(t_shell *s, t_env *e, char *name);
-void					error_malloc_bin(t_shell *s, t_bin *b, char *name);
-void					error_malloc_reader(t_shell *shell, char *name);
-void					error_malloc_term(t_shell *shell, char *name);
-void					error_no_path_var(t_shell *shell);
-void					error_no_term_var(t_shell *shell);
+void					error_malloc_sh(t_shell *sh);
+void					error_malloc_env(t_shell *sh, t_env *e, char *name);
+void					error_malloc_bin(t_shell *sh, t_bin *b, char *name);
+void					error_malloc_reader(t_shell *sh, char *name);
+void					error_no_path_var(t_shell *sh);
 
 /*
 ** functions
 */
-void					sh_command_run(t_shell *shell);
+void					sh_command_run(t_shell *sh);
 
 /*
 ** structures - binaries
 */
-int						bin_get_hash(const char *s, const int b, const int a);
+int						bin_get_hash(const char *sh, const int b, const int a);
 void					bin_delete_specified_item(t_bin_item *item);
 void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
-void					bin_insert(t_shell *s, t_bin *b, t_bin_obj *obj);
-void					bin_initialize(t_shell *shell, t_env *env, t_bin *bin);
+void					bin_insert(t_shell *sh, t_bin *b, t_bin_obj *obj);
+void					bin_initialize(t_shell *sh, t_env *env, t_bin *bin);
 char					*bin_execute_fetch(t_shell *sh, char *path, char **av);
-t_bin					*bin_new(t_shell *shell);
+t_bin					*bin_new(t_shell *sh);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 
 /*
 ** structures - environment
 */
-int						env_get_hash(const char *s, const int b, const int a);
+int						env_get_hash(const char *sh, const int b, const int a);
 void					env_delete_specified_item(t_env_item *item);
 void					env_delete_item(t_env *env, const char *key);
 void					env_delete(t_env *env);
-void					env_insert(t_shell *s, t_env *e, char *k, char *v);
-void					env_initialize(t_shell *shell, t_env *env, char **e);
+void					env_insert(t_shell *sh, t_env *e, char *k, char *v);
+void					env_initialize(t_shell *sh, t_env *env, char **e);
 char					*env_search(t_env *env, const char *key);
-t_env					*env_new(t_shell *shell, char **environ);
+t_env					*env_new(t_shell *sh, char **environ);
 
 /*
 ** structures - reader
 */
 void					read_delete(t_read *read);
-t_read					*read_new(t_shell *shell);
+t_read					*read_new(t_shell *sh);
 
 /*
 ** structures - shell
 */
-void					shell_delete(t_shell *shell);
-t_shell					*shell_new(void);
-
-/*
-** structures - term
-*/
-void					term_delete(t_term *term);
-void					term_set_prompt(t_shell *shell, t_term *term);
-char					*term_get_folder_name(t_env *e, char *l, size_t len);
-char					*term_get_git_branch(unsigned char *location);
-t_term					*term_new(t_shell *shell);
+void					sh_delete(t_shell *sh);
+void					sh_set_prompt(t_shell *sh);
+char					*sh_get_folder_name(t_env *e, char *l, size_t len);
+char					*sh_get_git_branch(char *location);
+t_shell					*sh_new(char **environ);
 
 /*
 ** terminal - autocompletion
 */
-void					sh_read_autocompletion(t_shell *shell);
+void					sh_read_autocompletion(t_shell *sh);
 
 /*
 ** terminal - cursor
 */
-void					sh_move_home(t_shell *shell);
-void					sh_move_end(t_shell *shell);
-void					sh_move_left(t_shell *shell);
-void					sh_move_right(t_shell *shell);
-void					sh_move_to_xy(
-							t_shell *shell,
-							unsigned int x,
-							unsigned int y);
-void					sh_set_rel_pos(
-							t_shell *shell,
-							unsigned int delta,
-							int dir);
+void					sh_move_home(t_shell *sh);
+void					sh_move_end(t_shell *sh);
+void					sh_move_left(t_shell *sh);
+void					sh_move_right(t_shell *sh);
+void					sh_move_to_xy(t_shell *sh, int x, int y);
+void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
 
 /*
 ** terminal - reader
 */
-void					sh_read(t_shell *shell);
-void					sh_print_prompt(t_shell *shell);
-void					sh_read_delete(t_shell *shell);
-void					sh_fill_buffer(t_shell *shell);
+void					sh_read(t_shell *sh);
+void					sh_print_prompt(t_shell *sh);
+void					sh_read_delete(t_shell *sh);
+void					sh_fill_buffer(t_shell *sh);
 
 /*
 ** terminal - signals

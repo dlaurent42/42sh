@@ -6,11 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:28:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 char	*env_search(t_env *env, const char *key)
 {

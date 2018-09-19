@@ -6,24 +6,24 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:18:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:19:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:46:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 static int	env_hash(const char *s, const int a, const int m)
 {
 	long	hash;
 	size_t	i;
-	size_t	length;
+	size_t	len;
 
 	i = 0;
 	hash = 0;
-	length = ft_strlens(s);
-	while (i < length)
+	len = ft_strlens(s);
+	while (i < len)
 	{
-		hash += (long)ft_pow(a, length - (i + 1)) * s[i];
+		hash += (long)ft_pow(a, len - (i + 1)) * s[i];
 		hash %= m;
 		i++;
 	}

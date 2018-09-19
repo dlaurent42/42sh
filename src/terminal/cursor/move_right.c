@@ -6,29 +6,29 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:47:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void		sh_move_right(t_shell *shell)
+void		sh_move_right(t_shell *sh)
 {
-	if (shell->term->cursor.abs_pos >= shell->read->buffer.display_length)
+	if (sh->cursor.abs_pos >= sh->read->buffer.display_len)
 		return ;
-	if ((shell->term->cursor.y == 0 && shell->term->cursor.x + 2 + shell->term->prompt.display_length_mod > shell->term->window.width)
-	|| (shell->term->cursor.y > 0 && shell->term->cursor.x + 2 > shell->term->window.width))
+	if ((sh->cursor.y == 0 && sh->cursor.x + 2 + sh->prompt.len_mod > sh->window.width)
+	|| (sh->cursor.y > 0 && sh->cursor.x + 2 > sh->window.width))
 	{
 		ft_putstr(K_DOWN);
 		ft_putstr(K_COL_0);
-		shell->term->cursor.x = 0;
-		shell->term->cursor.y++;
+		sh->cursor.x = 0;
+		sh->cursor.y++;
 	}
 	else
 	{
 		ft_putstr(K_RIGHT);
-		shell->term->cursor.x++;
+		sh->cursor.x++;
 	}
-	shell->term->cursor.abs_pos++;
-	sh_set_rel_pos(shell, 1, 1);
+	sh->cursor.abs_pos++;
+	sh_set_rel_pos(sh, 1, 1);
 }

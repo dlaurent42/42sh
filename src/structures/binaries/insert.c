@@ -6,18 +6,18 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:27:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-static t_bin_item	*bin_new_item(t_shell *shell, t_bin *bin, t_bin_obj *obj)
+static t_bin_item	*bin_new_item(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 {
 	t_bin_item	*item;
 
 	if (!(item = (t_bin_item *)ft_memalloc(sizeof(t_bin_item))))
-		error_malloc_bin(shell, bin, "t_bin_item structure");
+		error_malloc_bin(sh, bin, "t_bin_item structure");
 	item->key = obj->name;
 	item->value = obj;
 	return (item);
@@ -36,7 +36,7 @@ t_bin_obj			*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st)
 	return (obj);
 }
 
-void				bin_insert(t_shell *shell, t_bin *bin, t_bin_obj *obj)
+void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 {
 	int			i;
 	int			index;
@@ -47,7 +47,7 @@ void				bin_insert(t_shell *shell, t_bin *bin, t_bin_obj *obj)
 	i = 1;
 	deleleted_item.key = NULL;
 	deleleted_item.value = NULL;
-	item = bin_new_item(shell, bin, obj);
+	item = bin_new_item(sh, bin, obj);
 	index = bin_get_hash(item->key, bin->size, 0);
 	current_item = bin->items[index];
 	while (current_item)

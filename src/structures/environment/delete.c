@@ -6,11 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:28:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 void		env_delete_item_from_array(t_env *env, const char *key)
 {

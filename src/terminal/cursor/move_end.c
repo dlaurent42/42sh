@@ -6,29 +6,29 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:46:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void		sh_move_end(t_shell *shell)
+void		sh_move_end(t_shell *sh)
 {
 	ft_putstr(K_COL_0);
-	shell->term->cursor.x = 0;
-	while (shell->term->cursor.y < (shell->read->buffer.display_length + shell->term->prompt.display_length_mod) / shell->term->window.width)
+	sh->cursor.x = 0;
+	while (sh->cursor.y < (sh->read->buffer.display_len + sh->prompt.len_mod) / sh->window.width)
 	{
 		ft_putstr(K_DOWN);
-		shell->term->cursor.y++;
+		sh->cursor.y++;
 	}
-	while ((shell->term->cursor.y && shell->term->cursor.x < (shell->read->buffer.display_length + shell->term->prompt.display_length_mod) % shell->term->window.width)
-	|| (shell->term->cursor.y == 0 && shell->term->cursor.x < shell->read->buffer.display_length + shell->term->prompt.display_length_mod))
+	while ((sh->cursor.y && sh->cursor.x < (sh->read->buffer.display_len + sh->prompt.len_mod) % sh->window.width)
+	|| (sh->cursor.y == 0 && sh->cursor.x < sh->read->buffer.display_len + sh->prompt.len_mod))
 	{
 		ft_putstr(K_RIGHT);
-		shell->term->cursor.x++;
+		sh->cursor.x++;
 	}
-	if (shell->term->cursor.y == 0)
-		shell->term->cursor.x = shell->read->buffer.display_length;
-	shell->term->cursor.abs_pos = shell->read->buffer.display_length;
-	shell->term->cursor.rel_pos = shell->read->buffer.unicode_length;
+	if (sh->cursor.y == 0)
+		sh->cursor.x = sh->read->buffer.display_len;
+	sh->cursor.abs_pos = sh->read->buffer.display_len;
+	sh->cursor.rel_pos = sh->read->buffer.unicode_len;
 }

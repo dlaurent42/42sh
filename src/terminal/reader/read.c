@@ -6,46 +6,46 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:09:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-static void	sh_arrows_dispatcher(t_shell *shell)
+static void	sh_arrows_dispatcher(t_shell *sh)
 {
-	if (shell->read->line[2] == 67)
-		sh_move_right(shell);
-	else if (shell->read->line[2] == 68)
-		sh_move_left(shell);
-	else if (shell->read->line[2] == 70)
-		sh_move_end(shell);
-	else if (shell->read->line[2] == 72)
-		sh_move_home(shell);
+	if (sh->read->line[2] == 67)
+		sh_move_right(sh);
+	else if (sh->read->line[2] == 68)
+		sh_move_left(sh);
+	else if (sh->read->line[2] == 70)
+		sh_move_end(sh);
+	else if (sh->read->line[2] == 72)
+		sh_move_home(sh);
 }
 
-static void	sh_read_dispatcher(t_shell *shell)
+static void	sh_read_dispatcher(t_shell *sh)
 {
-	if (shell->read->line[0] == 27 && shell->read->line[1] == 91)
-		sh_arrows_dispatcher(shell);
-	else if (shell->read->line[0] == 127)
-		sh_read_delete(shell);
-	else if (shell->read->line[0] == 9)
-		sh_read_autocompletion(shell);
+	if (sh->read->line[0] == 27 && sh->read->line[1] == 91)
+		sh_arrows_dispatcher(sh);
+	else if (sh->read->line[0] == 127)
+		sh_read_delete(sh);
+	else if (sh->read->line[0] == 9)
+		sh_read_autocompletion(sh);
 	else
-		sh_fill_buffer(shell);
+		sh_fill_buffer(sh);
 }
 
-void		sh_read(t_shell *shell)
+void		sh_read(t_shell *sh)
 {
-	sh_debug(shell, NULL, NULL);
+	sh_debug(sh, NULL, NULL);
 	while (TRUE)
 	{
-		sh_print_prompt(shell);
-		read(0, shell->read->line, 4);
-		if (shell->read->line[0] == 4)
+		sh_print_prompt(sh);
+		read(0, sh->read->line, 4);
+		if (sh->read->line[0] == 4)
 			break ;
-		sh_read_dispatcher(shell);
-		bzero(shell->read->line, 5);
+		sh_read_dispatcher(sh);
+		bzero(sh->read->line, 5);
 	}
 }

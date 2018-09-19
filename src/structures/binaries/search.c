@@ -6,11 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:28:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 t_bin_obj	*bin_search(t_bin *bin, const char *key)
 {

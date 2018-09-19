@@ -6,11 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:37:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:09:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 static void	sig_handler(int signo)
 {

@@ -6,11 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 19:22:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 15:56:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 static void	child_handler(int *pipe_fd, char *path, char **argv, char **envp)
 {
@@ -38,7 +38,7 @@ static char	*parent_handler(int *pipe_fd)
 	return (command_output);
 }
 
-char		*bin_execute_fetch(t_shell *shell, char *path, char **args)
+char		*bin_execute_fetch(t_shell *sh, char *path, char **args)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -50,7 +50,7 @@ char		*bin_execute_fetch(t_shell *shell, char *path, char **args)
 	if ((pid = fork()) == -1)
 		return (NULL);
 	else if (pid == 0)
-		child_handler(pipe_fd, path, args, shell->env->environment);
+		child_handler(pipe_fd, path, args, sh->env->environment);
 	else
 		command_output = parent_handler(pipe_fd);
 	return (command_output);

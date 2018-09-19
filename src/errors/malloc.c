@@ -6,55 +6,48 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:43:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 18:14:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:14:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void		error_malloc_shell(t_shell *shell)
+void		error_malloc_sh(t_shell *sh)
 {
-	if (shell)
-		shell_delete(shell);
+	(sh) ? sh_delete(sh) : 0;
 	ft_putendl_fd("Cannot malloc t_shell structure", 2);
 	exit(EXIT_FAILURE);
 }
 
-void		error_malloc_env(t_shell *shell, t_env *env, char *name)
+void		error_malloc_env(t_shell *sh, t_env *env, char *name)
 {
-	if (env)
-		env_delete(env);
-	if (shell)
-		shell_delete(shell);
+	(env) ? env_delete(env) : 0;
+	(sh) ? sh_delete(sh) : 0;
 	ft_putstr_fd("Cannot malloc ", 2);
 	ft_putendl_fd(name, 2);
 	exit(EXIT_FAILURE);
 }
 
-void		error_malloc_bin(t_shell *shell, t_bin *bin, char *name)
+void		error_malloc_bin(t_shell *sh, t_bin *bin, char *name)
 {
-	if (bin)
-		bin_delete(bin);
-	if (shell)
-		shell_delete(shell);
+	(bin) ? bin_delete(bin) : 0;
+	(sh) ? sh_delete(sh) : 0;
 	ft_putstr_fd("Cannot malloc ", 2);
 	ft_putendl_fd(name, 2);
 	exit(EXIT_FAILURE);
 }
 
-void		error_malloc_reader(t_shell *shell, char *name)
+void		error_malloc_reader(t_shell *sh, char *name)
 {
-	if (shell)
-		shell_delete(shell);
+	(sh) ? sh_delete(sh) : 0;
 	ft_putstr_fd("Cannot malloc ", 2);
 	ft_putendl_fd(name, 2);
 	exit(EXIT_FAILURE);
 }
 
-void		error_malloc_term(t_shell *shell, char *name)
+void		error_malloc_term(t_shell *sh, char *name)
 {
-	if (shell)
-		shell_delete(shell);
+	(sh) ? sh_delete(sh) : 0;
 	ft_putstr_fd("Cannot malloc ", 2);
 	ft_putendl_fd(name, 2);
 	exit(EXIT_FAILURE);

@@ -6,28 +6,28 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:46:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void		sh_move_home(t_shell *shell)
+void		sh_move_home(t_shell *sh)
 {
-	while (shell->term->cursor.y)
+	while (sh->cursor.y)
 	{
 		ft_putstr(K_UP);
-		shell->term->cursor.y--;
+		sh->cursor.y--;
 	}
 	ft_putstr(K_COL_0);
-	shell->term->cursor.x = 0;
-	while (shell->term->cursor.x < shell->term->prompt.display_length_mod)
+	sh->cursor.x = 0;
+	while (sh->cursor.x < sh->prompt.len_mod)
 	{
 		ft_putstr(K_RIGHT);
-		shell->term->cursor.x++;
+		sh->cursor.x++;
 	}
-	shell->term->cursor.x = 0;
-	shell->term->cursor.y = 0;
-	shell->term->cursor.abs_pos = 0;
-	shell->term->cursor.rel_pos = 0;
+	sh->cursor.x = 0;
+	sh->cursor.y = 0;
+	sh->cursor.abs_pos = 0;
+	sh->cursor.rel_pos = 0;
 }

@@ -6,23 +6,27 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/02 18:32:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:15:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void	shell_delete(t_shell *shell)
+void	sh_delete(t_shell *sh)
 {
-	if (!shell)
+	if (!sh)
 		return ;
-	if (shell->env)
-		env_delete(shell->env);
-	if (shell->bin)
-		bin_delete(shell->bin);
-	if (shell->read)
-		read_delete(shell->read);
-	if (shell->term)
-		term_delete(shell->term);
-	free(shell);
+	(sh->env) ? env_delete(sh->env) : 0;
+	(sh->bin) ? bin_delete(sh->bin) : 0;
+	(sh->read) ? read_delete(sh->read) : 0;
+	if (sh->termios)
+	{
+		tcgetattr(0, sh->termios);
+		sh->termios->c_lflag = (ICANON | ECHO);
+		tcsetattr(0, 0, sh->termios);
+		free(sh->termios);
+	}
+	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
+	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
+	free(sh);
 }

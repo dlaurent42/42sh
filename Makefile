@@ -6,23 +6,22 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/16 15:15:01 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/19 21:49:17 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: 		all clean fclean re
 
-NAME 		= 	minishell
+NAME 		= 	shell
 
 CC 			=	gcc
 CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
-SRC			=	minishell.c													\
+SRC			=	shell.c														\
 				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
-				errors/term.c												\
 				functions/redirect.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
@@ -41,11 +40,9 @@ SRC			=	minishell.c													\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
 				structures/shell/new.c										\
-				structures/term/delete.c									\
-				structures/term/new.c										\
-				structures/term/set_prompt.c								\
-				structures/term/set_prompt.folder.c							\
-				structures/term/set_prompt.git.c							\
+				structures/shell/set_prompt.c								\
+				structures/shell/set_prompt.folder.c						\
+				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -77,12 +74,12 @@ OBJ		 	=	$(SRC:.c=.o)
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
 INC_DIR 	=	./include/
-INC 		=	minishell.h
+INC 		=	shell.h
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
-all:	 		minishell
+all:	 		shell
 
-minishell:		$(OBJ_DIR) $(OBJS)
+shell:			$(OBJ_DIR) $(OBJS)
 				@make -C libft/
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L libft/ -lft -lcurses
 

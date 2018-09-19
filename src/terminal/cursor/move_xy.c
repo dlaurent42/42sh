@@ -6,44 +6,44 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/15 22:25:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 21:47:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-static void	sh_move_y(t_shell *shell, unsigned int y)
+static void	sh_move_y(t_shell *sh, int y)
 {
-	while (shell->term->cursor.y < y)
+	while (sh->cursor.y < y)
 	{
 		ft_putstr(K_DOWN);
-		shell->term->cursor.y++;
-		shell->term->cursor.x = shell->term->prompt.display_length_mod;
-		shell->term->cursor.abs_pos += shell->term->window.width;
+		sh->cursor.y++;
+		sh->cursor.x = sh->prompt.len_mod;
+		sh->cursor.abs_pos += sh->window.width;
 	}
 }
 
-static void	sh_move_x(t_shell *shell, unsigned int x)
+static void	sh_move_x(t_shell *sh, int x)
 {
-	while (shell->term->cursor.x != x)
+	while (sh->cursor.x != x)
 	{
-		shell->term->cursor.x > x
+		sh->cursor.x > x
 			? ft_putstr(K_LEFT)
 			: ft_putstr(K_RIGHT);
-		shell->term->cursor.abs_pos += (shell->term->cursor.x > x)
+		sh->cursor.abs_pos += (sh->cursor.x > x)
 			? (-1)
 			: 1;
-		shell->term->cursor.x += (shell->term->cursor.x > x)
+		sh->cursor.x += (sh->cursor.x > x)
 			? (-1)
 			: 1;
 	}
 }
 
-void		sh_move_to_xy(t_shell *shell, unsigned int x, unsigned int y)
+void		sh_move_to_xy(t_shell *sh, int x, int y)
 {
-	shell->term->cursor.y -= (shell->term->cursor.x == 0 && shell->term->cursor.y) ? 1 : 0;
-	sh_move_home(shell);
-	sh_move_y(shell, y);
-	sh_move_x(shell, x);
-	sh_set_rel_pos(shell, shell->term->cursor.abs_pos, 1);
+	sh->cursor.y -= (sh->cursor.x == 0 && sh->cursor.y) ? 1 : 0;
+	sh_move_home(sh);
+	sh_move_y(sh, y);
+	sh_move_x(sh, x);
+	sh_set_rel_pos(sh, sh->cursor.abs_pos, 1);
 }

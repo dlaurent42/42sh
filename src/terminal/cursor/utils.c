@@ -6,20 +6,20 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/13 18:16:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:24:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-void	sh_set_rel_pos(t_shell *shell, unsigned int delta, int dir)
+void	sh_set_rel_pos(t_shell *sh, int delta, int dir)
 {
 	unsigned char	c;
 
 	while (delta > 0)
 	{
-		shell->term->cursor.rel_pos += dir;
-		c = shell->read->buffer.content[shell->term->cursor.rel_pos];
+		sh->cursor.rel_pos += dir;
+		c = (unsigned char)sh->read->buffer.content[sh->cursor.rel_pos];
 		if (c < 0b10000000 || c >= 0b11000000)
 			delta--;
 	}

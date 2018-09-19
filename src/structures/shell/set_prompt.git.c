@@ -6,20 +6,21 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/16 16:11:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:23:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
-static char				*term_get_git_branch_name(unsigned char *location)
+static char	*sh_get_git_branch_name(char *location)
 {
 	int		fd;
 	char	*line;
 
 	line = NULL;
-	ft_strcat((char *)location, "/.git/HEAD");
-	if ((fd = open((char *)location, O_RDONLY)) == -1)
+	if (!(location = ft_strcat(location, "/.git/HEAD")))
+		return (NULL);
+	if ((fd = open(location, O_RDONLY)) == -1)
 		return (NULL);
 	if (get_next_line(fd, &line) == -1)
 		return (NULL);
@@ -27,7 +28,7 @@ static char				*term_get_git_branch_name(unsigned char *location)
 	return (line);
 }
 
-static unsigned char	*term_prompt_get_next_location(unsigned char *location)
+static char	*sh_prompt_get_next_location(char *location)
 {
 	unsigned char	i;
 	unsigned char	j;
@@ -47,7 +48,7 @@ static unsigned char	*term_prompt_get_next_location(unsigned char *location)
 	return (location);
 }
 
-static char				*term_prompt_format_git(char *git)
+static char	*sh_prompt_format_git(char *git)
 {
 	char	*formatted;
 
@@ -61,7 +62,7 @@ static char				*term_prompt_format_git(char *git)
 	return (formatted);
 }
 
-char					*term_get_git_branch(unsigned char *location)
+char		*sh_get_git_branch(char *location)
 {
 	char			*git;
 	DIR				*dir;
@@ -71,18 +72,18 @@ char					*term_get_git_branch(unsigned char *location)
 	dirent = NULL;
 	while (!git)
 	{
-		sh_debug(NULL, (char *)location, NULL);
-		if (!(dir = opendir((char *)location)))
+		sh_debug(NULL, location, NULL);
+		if (!(dir = opendir(location)))
 			return (NULL);
 		while ((dirent = readdir(dir)))
 			if (dirent->d_namlen == 4
 			&& ft_strcmps(dirent->d_name, ".git") == 0)
 			{
-				git = term_get_git_branch_name(location);
+				git = sh_get_git_branch_name(location);
 				break ;
 			}
 		closedir(dir);
-		location = term_prompt_get_next_location(location);
+		location = sh_prompt_get_next_location(location);
 	}
-	return (term_prompt_format_git(git));
+	return (sh_prompt_format_git(git));
 }
