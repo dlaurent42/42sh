@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:07:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 12:07:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -594,6 +594,7 @@ void				free_frame(t_frame *frame);
 /*
 ** terminal - auto_completion
 */
+void				auto_completion(t_shell *shell, char *str);
 void				get_args(t_frame *frame);
 void				free_args(t_frame *frame, t_args **args);
 t_args				*create_args(void);
@@ -607,8 +608,10 @@ void				do_file_admin(t_frame *frame, t_args *args);
 void				calc_len_file_name(t_frame *frame, t_args *args);
 void				calculate_number_of_columns(t_frame *frame);
 void				path(t_frame *frame, t_args *args, char *path, char *name);
-void				move_right(t_frame *frame);
+void				move_up(t_frame *frame);
+void				move_down(t_frame *frame);
 void				move_left(t_frame *frame);
+void				move_right(t_frame *frame);
 bool				is_executeable(t_args *args);
 
 void				sort(t_frame *frame);
