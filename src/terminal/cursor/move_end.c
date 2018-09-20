@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 18:36:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 00:22:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void		sh_move_end(t_shell *sh)
 {
 	ft_putstr(K_COL_0);
 	sh->cursor.x = 0;
-	while (sh->cursor.y < (sh->buffer.display_len + sh->prompt.len_mod) / sh->window.width)
+	while (sh->cursor.y <
+		(sh->buffer.display_len + sh->prompt.len_mod) / sh->window.width)
 	{
 		ft_putstr(K_DOWN);
 		sh->cursor.y++;
 	}
-	while ((sh->cursor.y && sh->cursor.x < (sh->buffer.display_len + sh->prompt.len_mod) % sh->window.width)
-	|| (sh->cursor.y == 0 && sh->cursor.x < sh->buffer.display_len + sh->prompt.len_mod))
+	while ((sh->cursor.y && sh->cursor.x <
+		(sh->buffer.display_len + sh->prompt.len_mod) % sh->window.width)
+	|| (sh->cursor.y == 0 && sh->cursor.x <
+		sh->buffer.display_len + sh->prompt.len_mod))
 	{
 		ft_putstr(K_RIGHT);
 		sh->cursor.x++;

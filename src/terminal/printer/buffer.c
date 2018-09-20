@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 22:13:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 00:21:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	sh_move_cursor(t_shell *sh)
 	sh->cursor.x = (sh->cursor.y)
 		? (buffer_len + prompt_len) % window_width
 		: buffer_len;
-	if ((y == 0 && x + 2 + prompt_len > window_width) || (y > 0 && x + 2 > window_width))
+	if ((y == 0 && x + 2 + prompt_len > window_width)
+	|| (y > 0 && x + 2 > window_width))
 		sh_move_to_xy(sh, 0, y + 1);
 	else
 		sh_move_to_xy(sh, x + 1, y);
@@ -76,7 +77,7 @@ static int	sh_add_wchar(t_shell *sh, unsigned char c)
 	return (-1);
 }
 
-void			sh_print_str(t_shell *sh, char *str)
+void		sh_print_str(t_shell *sh, char *str)
 {
 	int				res;
 	unsigned char	i;
@@ -94,7 +95,7 @@ void			sh_print_str(t_shell *sh, char *str)
 	}
 }
 
-void			sh_fill_buffer(t_shell *sh)
+void		sh_fill_buffer(t_shell *sh)
 {
 	int				res;
 	unsigned char	i;

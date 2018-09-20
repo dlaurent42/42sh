@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 23:50:47 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 00:20:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	sh_reset_cursor_after_resize(t_shell *sh, int x, int y)
 	}
 }
 
-void	sh_window_resize(t_shell *sh)
+void		sh_window_resize(t_shell *sh)
 {
 	int			x;
 	int			y;

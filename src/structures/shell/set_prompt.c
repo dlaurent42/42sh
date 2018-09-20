@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 19:16:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 00:22:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void		sh_set_prompt(t_shell *sh)
 	sh->prompt.content = sh_get_folder_name(sh->env, sh->prompt.location, len);
 	if ((git = sh_get_git_branch(sh->prompt.location)))
 		sh->prompt.content = ft_strjoinf(sh->prompt.content, git, 3);
-	sh->prompt.content = ft_strjoinf(sh->prompt.content, " \e[1;32;40m▸\033[0m ", 1);
+	sh->prompt.content = ft_strjoinf(
+		sh->prompt.content,
+		" \e[1;32;40m▸\033[0m ",
+		1);
 	(git)
 		? sh_set_prompt_properties(sh, 1)
 		: sh_set_prompt_properties(sh, 0);
