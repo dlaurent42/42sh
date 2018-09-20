@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:09:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 19:25:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	sh_read_dispatcher(t_shell *sh)
 
 void		sh_read(t_shell *sh)
 {
-	sh_debug(sh, NULL, NULL);
 	while (TRUE)
 	{
 		sh_print_prompt(sh);
