@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:47:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 18:36:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putstr_fd("\trel_pos: ", fd);
 		ft_putnbr_fd(sh->cursor.rel_pos, fd);
 		ft_putstr_fd("\nbuffer\n\tdisplay_len: ", fd);
-		ft_putnbr_fd(sh->read->buffer.display_len, fd);
+		ft_putnbr_fd(sh->buffer.display_len, fd);
 		ft_putstr_fd("\tunicode_len: ", fd);
-		ft_putnbr_fd(sh->read->buffer.unicode_len, fd);
+		ft_putnbr_fd(sh->buffer.unicode_len, fd);
 		ft_putstr_fd("\tcontent: ", fd);
-		ft_putstr_fd((char *)sh->read->buffer.content, fd);
+		ft_putstr_fd((char *)sh->buffer.content, fd);
 		ft_putstr_fd("\tdisplay_len: ", fd);
 		ft_putnbr_fd(sh->prompt.len, fd);
 		ft_putstr_fd("\tdisplay_len_mod: ", fd);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:09:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:47:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 18:36:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sh_print_prompt(t_shell *sh)
 {
-	if (sh->read->buffer.unicode_len == 0
+	if (sh->buffer.unicode_len == 0
 	&& sh->modes.display == FALSE)
 	{
 		ft_putstr(sh->prompt.content);

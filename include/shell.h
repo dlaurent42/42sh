@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:46:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 18:34:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ typedef struct			s_read
 {
 	char				line[5];
 	char				unicode_bytes_left;
-	t_buffer			buffer;
 }						t_read;
 
 typedef struct			s_window
@@ -150,6 +149,7 @@ typedef struct			s_shell
 	t_cursor			cursor;
 	t_prompt			prompt;
 	t_window			window;
+	t_buffer			buffer;
 	t_termios			*termios;
 }						t_shell;
 
