@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 18:34:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 23:44:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@
 # define K_END			"\x1b\x5b\x46"
 # define K_HOME			"\x1b\x5b\x48"
 # define K_COL_0		"\x1b\x5b\x31\x47"
+# define K_COL_ROW_0	"\x1b\x5b\x48"
 # define K_DEL			"\x7f"
+# define K_DEL_ALL		"\x1b\x5b\x4a"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
 
 typedef struct dirent	t_dirent;
@@ -113,6 +115,7 @@ typedef struct			s_buffer
 
 typedef struct			s_prompt
 {
+	int					rows;
 	int					len;
 	int					len_mod;
 	char				*content;
@@ -152,6 +155,8 @@ typedef struct			s_shell
 	t_buffer			buffer;
 	t_termios			*termios;
 }						t_shell;
+
+t_shell					*g_sh;
 
 void					sh_debug(t_shell *sh, char *msg, char *str);
 
@@ -226,16 +231,23 @@ void					sh_move_to_xy(t_shell *sh, int x, int y);
 void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
 
 /*
+** terminal - printer
+*/
+void					sh_fill_buffer(t_shell *sh);
+void					sh_print_prompt(t_shell *sh);
+void					sh_print_str(t_shell *sh, char *str);
+
+/*
 ** terminal - reader
 */
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
-void					sh_fill_buffer(t_shell *sh);
 
 /*
 ** terminal - signals
 */
 void					signal_catching(void);
+void					sh_window_resize(t_shell *sh);
 
 #endif

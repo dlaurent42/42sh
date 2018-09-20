@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:29:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 22:54:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_shell		*sh_new(char **environ)
 	(tgetent(NULL, name) == ERR) ? error_malloc_sh(sh) : 0;
 	sh_set_termios(sh);
 	ft_putstr(CLEAR_SCREEN);
+	ft_putstr("\e[3J");
 	ioctl(0, TIOCGWINSZ, &window);
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
