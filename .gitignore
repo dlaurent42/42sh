@@ -2,7 +2,7 @@
 .DS_Store
 
 # Executable
-minishell
+shell
 *.a
 
 # Compiled sources
@@ -10,4 +10,4 @@ minishell
 *.o
 
 # Valgrind folder
-minishell.dSYM
+shell.dSYM
