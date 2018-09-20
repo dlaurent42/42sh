@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:07:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 01:54:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 static void	sh_arrows_dispatcher(t_shell *sh)
 {
-	if (sh->read->line[1] == 91)
-	{
-		if (sh->read->line[2] == 67)
-			sh_move_right(sh);
-		else if (sh->read->line[2] == 68)
-			sh_move_left(sh);
-		else if (sh->read->line[2] == 70)
-			sh_move_end(sh);
-		else if (sh->read->line[2] == 72)
-			sh_move_home(sh);
-	}
-	else if (sh->read->line[1] == 27 && sh->read->line[2] == 91)
-	{
-		if (sh->read->line[3] == 67)
-			sh_move_next_word(sh);
-		else if (sh->read->line[3] == 68)
-			sh_move_previous_word(sh);
-	}
+	char	*line;
+
+	line = sh->read->line;
+	(line[1] == 91 && line[2] == 67) ? sh_move_right(sh) : 0;
+	(line[1] == 91 && line[2] == 68) ? sh_move_left(sh) : 0;
+	(line[1] == 91 && line[2] == 70) ? sh_move_end(sh) : 0;
+	(line[1] == 91 && line[2] == 72) ? sh_move_home(sh) : 0;
+	(line[1] == 27 && line[2] == 91 && line[3] == 67)
+		? sh_move_next_word(sh) : 0;
+	(line[1] == 27 && line[2] == 91 && line[3] == 68)
+		? sh_move_previous_word(sh) : 0;
+	(line[1] == 91 && line[2] == 49 && line[3] == 59 && line[4] == 50
+	&& line[5] == 68) ? sh_select_left(sh) : 0;
+	(line[1] == 91 && line[2] == 49 && line[3] == 59 && line[4] == 50
+	&& line[5] == 67) ? sh_select_right(sh) : 0;
 }
 
 static void	sh_read_dispatcher(t_shell *sh)
@@ -52,10 +49,10 @@ void		sh_read(t_shell *sh)
 	while (TRUE)
 	{
 		(sh->modes.display) ? 0 : sh_print_prompt(sh);
-		read(0, sh->read->line, 6);
-		if (sh->read->line[0] == 6)
+		read(0, sh->read->line, 7);
+		if (sh->read->line[0] == 4)
 			break ;
 		sh_read_dispatcher(sh);
-		bzero(sh->read->line, 7);
+		bzero(sh->read->line, 8);
 	}
 }

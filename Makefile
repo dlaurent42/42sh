@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/21 00:39:45 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/21 01:56:01 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,12 @@ SRC			=	shell.c														\
 				terminal/cursor/move_prev_word.c							\
 				terminal/cursor/move_next_word.c							\
 				terminal/cursor/utils.c										\
-				terminal/printer/buffer.c									\
-				terminal/printer/prompt.c									\
-				terminal/reader/delete.c									\
-				terminal/reader/read.c										\
+				terminal/print/buffer.c										\
+				terminal/print/prompt.c										\
+				terminal/read/delete.c										\
+				terminal/read/read.c										\
+				terminal/select/select_left.c								\
+				terminal/select/select_right.c								\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c		
 
@@ -109,8 +111,9 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
-				@mkdir -p $(OBJ_DIR)/terminal/printer
-				@mkdir -p $(OBJ_DIR)/terminal/reader
+				@mkdir -p $(OBJ_DIR)/terminal/print
+				@mkdir -p $(OBJ_DIR)/terminal/read
+				@mkdir -p $(OBJ_DIR)/terminal/select
 				@mkdir -p $(OBJ_DIR)/terminal/signals
 
 clean:

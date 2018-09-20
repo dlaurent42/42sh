@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:08:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 01:55:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct			s_prompt
 
 typedef struct			s_read
 {
-	char				line[7];
+	char				line[8];
 	char				unicode_bytes_left;
 }						t_read;
 
@@ -139,7 +139,8 @@ typedef struct			s_modes
 	unsigned char		auto_completion	: 1;
 	unsigned char		esc				: 1;
 	unsigned char		display			: 1;
-	unsigned char		others			: 5;
+	unsigned char		select			: 1;
+	unsigned char		others			: 4;
 }						t_modes;
 
 typedef struct			s_shell
@@ -233,18 +234,24 @@ void					sh_move_previous_word(t_shell *sh);
 void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
 
 /*
-** terminal - printer
+** terminal - print
 */
 void					sh_fill_buffer(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_print_str(t_shell *sh, char *str);
 
 /*
-** terminal - reader
+** terminal - read
 */
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
+
+/*
+** terminal - select
+*/
+void					sh_select_left(t_shell *sh);
+void					sh_select_right(t_shell *sh);
 
 /*
 ** terminal - signals
