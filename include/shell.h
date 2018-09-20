@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 23:44:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 01:08:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct			s_prompt
 
 typedef struct			s_read
 {
-	char				line[5];
+	char				line[7];
 	char				unicode_bytes_left;
 }						t_read;
 
@@ -228,6 +228,8 @@ void					sh_move_end(t_shell *sh);
 void					sh_move_left(t_shell *sh);
 void					sh_move_right(t_shell *sh);
 void					sh_move_to_xy(t_shell *sh, int x, int y);
+void					sh_move_next_word(t_shell *sh);
+void					sh_move_previous_word(t_shell *sh);
 void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
 
 /*

@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/20 19:09:18 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/21 00:39:45 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC			=	shell.c														\
 				terminal/cursor/move_left.c									\
 				terminal/cursor/move_right.c								\
 				terminal/cursor/move_xy.c									\
+				terminal/cursor/move_prev_word.c							\
+				terminal/cursor/move_next_word.c							\
 				terminal/cursor/utils.c										\
 				terminal/printer/buffer.c									\
 				terminal/printer/prompt.c									\
