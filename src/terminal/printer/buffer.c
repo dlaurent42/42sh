@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 18:36:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 22:13:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	sh_move_cursor(t_shell *sh)
 		sh_move_to_xy(sh, x + 1, y);
 }
 
-static void	sh_add_char(t_shell *sh, char c)
+static int	sh_add_char(t_shell *sh, char c)
 {
 	int	i;
 
@@ -48,13 +48,10 @@ static void	sh_add_char(t_shell *sh, char c)
 	sh->buffer.content[i] = c;
 	sh->buffer.display_len++;
 	sh->buffer.unicode_len++;
-	ft_printf("%s ",
-		sh->buffer.content
-		+ sh->cursor.rel_pos);
-	sh_move_cursor(sh);
+	return (sh->cursor.rel_pos);
 }
 
-static void	sh_add_wchar(t_shell *sh, unsigned char c)
+static int	sh_add_wchar(t_shell *sh, unsigned char c)
 {
 	int			i;
 	static char	pointer = 0;
@@ -75,27 +72,49 @@ static void	sh_add_wchar(t_shell *sh, unsigned char c)
 	pointer = (c >= 0b11110000) ? 3 : pointer;
 	counter = (c < 0b11000000) ? counter - 1 : pointer;
 	if (counter == 0)
+		return (sh->cursor.rel_pos - pointer - 1);
+	return (-1);
+}
+
+void			sh_print_str(t_shell *sh, char *str)
+{
+	int				res;
+	unsigned char	i;
+
+	i = 0;
+	while (str[i])
 	{
-		ft_printf("%s ",
-			sh->buffer.content
-			+ sh->cursor.rel_pos - pointer - 1);
-		sh_move_cursor(sh);
+		if ((unsigned char)str[i] < 0b10000000 && ft_isprint(str[i]))
+			res = sh_add_char(sh, str[i]);
+		else if ((unsigned char)str[i] >= 0b10000000)
+			res = sh_add_wchar(sh, (unsigned char)str[i]);
+		(res != -1) ? ft_printf("%s ", sh->buffer.content + res) : 0;
+		(res != -1) ? sh_move_cursor(sh) : 0;
+		i++;
 	}
 }
 
-void		sh_fill_buffer(t_shell *sh)
+void			sh_fill_buffer(t_shell *sh)
 {
+	int				res;
 	unsigned char	i;
+	unsigned char	c;
 
 	i = 0;
 	while (sh->read->line[i])
 	{
-		if (sh->read->line[i] == 10)
+		c = sh->read->line[i];
+		if (c == 10)
 			sh_command_run(sh);
-		else if ((unsigned char)sh->read->line[i] < 0b10000000 && ft_isprint(sh->read->line[i]))
-			sh_add_char(sh, sh->read->line[i]);
-		else if ((unsigned char)sh->read->line[i] >= 0b10000000)
-			sh_add_wchar(sh, (unsigned char)sh->read->line[i]);
+		else
+		{
+			if ((unsigned char)c < 0b10000000 && ft_isprint(c))
+				res = sh_add_char(sh, c);
+			else if ((unsigned char)c >= 0b10000000)
+				res = sh_add_wchar(sh, (unsigned char)c);
+			(res != -1) ? ft_printf("%s ", sh->buffer.content + res) : 0;
+			(res != -1) ? sh_move_cursor(sh) : 0;
+		}
 		i++;
 	}
 }

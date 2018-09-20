@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:23:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 23:51:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char		*sh_get_git_branch(char *location)
 	dirent = NULL;
 	while (!git)
 	{
-		sh_debug(NULL, location, NULL);
 		if (!(dir = opendir(location)))
 			return (NULL);
 		while ((dirent = readdir(dir)))

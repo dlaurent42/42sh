@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/19 21:49:17 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/20 19:09:18 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRC			=	shell.c														\
 				terminal/printer/prompt.c									\
 				terminal/reader/delete.c									\
 				terminal/reader/read.c										\
-				terminal/signals/catch.c											
+				terminal/signals/catch.c									\
+				terminal/signals/resize.c		
 
 #				functions/redirect.c										\
 #				functions/cd/cd.c											\

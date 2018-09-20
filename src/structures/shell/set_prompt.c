@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:46:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/20 19:16:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	sh_set_prompt_properties(t_shell *sh, unsigned char has_git)
 	}
 	sh->prompt.len -= (has_git) ? 54 : 24;
 	sh->prompt.len_mod = sh->prompt.len % sh->window.width;
+	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;
 }
 
 void		sh_set_prompt(t_shell *sh)
