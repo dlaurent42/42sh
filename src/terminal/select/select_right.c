@@ -1,18 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_select_right.c                                  :+:      :+:    :+:   */
+/*   select_right.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 01:47:00 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:47:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 05:11:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_select_right(t_shell *sh)
+static unsigned char	sh_assess_stop_pos(t_shell *sh)
 {
-	(void)sh;
+	unsigned char	c;
+
+	c = sh->buffer.content[sh->cursor.rel_pos];
+	if (c >= 0b11110000)
+		return (4);
+	if (c >= 0b11100000)
+		return (3);
+	if (c >= 0b11000000)
+		return (2);
+	return (1);
+}
+
+void					sh_select_right_char(t_shell *sh)
+{
+	int	i;
+
+	i = 0;
+	if (sh->cursor.abs_pos >= sh->buffer.display_len)
+		return ;
+	if (sh->modes.select && sh->cursor.rel_pos + 1 <= sh->selection.stop)
+	{
+		sh_move_right(sh);
+		return ;
+	}
+	if (sh->modes.select == FALSE)
+	{
+		sh->selection.start_rel = sh->cursor.rel_pos;
+		sh->selection.start_abs = sh->cursor.abs_pos;
+	}
+	sh->modes.select = TRUE;
+	ft_putstr(K_DEL);
+	ft_putstr(K_LEFT);
+	sh->selection.stop = sh->cursor.rel_pos + sh_assess_stop_pos(sh);
+	sh_select_print(sh);
+	sh_select_set_pos(sh);
+	sh_move_right(sh);
 }

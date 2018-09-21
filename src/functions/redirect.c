@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 23:56:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 02:24:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		sh_command_run(t_shell *sh)
 {
+	sh->modes.select = FALSE;
 	sh->modes.display = FALSE;
 	sh_move_end(sh);
 	ft_putchar('\n');

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:54:00 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 04:57:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,29 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 		? sh_move_next_word(sh) : 0;
 	(line[1] == 27 && line[2] == 91 && line[3] == 68)
 		? sh_move_previous_word(sh) : 0;
-	(line[1] == 91 && line[2] == 49 && line[3] == 59 && line[4] == 50
-	&& line[5] == 68) ? sh_select_left(sh) : 0;
-	(line[1] == 91 && line[2] == 49 && line[3] == 59 && line[4] == 50
-	&& line[5] == 67) ? sh_select_right(sh) : 0;
+	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x44") == 0)
+		? sh_select_left_char(sh) : 0;
+	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x43") == 0)
+		? sh_select_right_char(sh) : 0;
+	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x44") == 0)
+		? sh_select_left_word(sh) : 0;
+	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x43") == 0)
+		? sh_select_right_word(sh) : 0;
 }
 
 static void	sh_read_dispatcher(t_shell *sh)
 {
-	sh_debug(NULL, NULL, sh->read->line);
-	if (sh->read->line[0] == 27)
+	//sh_debug(NULL, NULL, sh->read->line);
+	if (sh->modes.select
+	&& !(sh->read->line[0] == 3
+	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x43") == 0
+	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x44") == 0
+	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x43") == 0
+	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x44") == 0))
+		sh_unselect(sh);
+	if (sh->read->line[0] == 3)
+		sh_copy_selection(sh);
+	else if (sh->read->line[0] == 27)
 		sh_arrows_dispatcher(sh);
 	else if (sh->read->line[0] == 127)
 		sh_read_delete(sh);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:55:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 04:46:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,13 @@ typedef struct			s_modes
 	unsigned char		others			: 4;
 }						t_modes;
 
+typedef struct			s_select
+{
+	int					start_rel;
+	int					start_abs;
+	int					stop;
+}						t_select;
+
 typedef struct			s_shell
 {
 	t_bin				*bin;
@@ -154,6 +161,7 @@ typedef struct			s_shell
 	t_prompt			prompt;
 	t_window			window;
 	t_buffer			buffer;
+	t_select			selection;
 	t_termios			*termios;
 }						t_shell;
 
@@ -250,8 +258,14 @@ void					sh_read_delete(t_shell *sh);
 /*
 ** terminal - select
 */
-void					sh_select_left(t_shell *sh);
-void					sh_select_right(t_shell *sh);
+void					sh_copy_selection(t_shell *sh);
+void					sh_select_left_char(t_shell *sh);
+void					sh_select_left_word(t_shell *sh);
+void					sh_select_right_char(t_shell *sh);
+void					sh_select_right_word(t_shell *sh);
+void					sh_unselect(t_shell *sh);
+void					sh_select_set_pos(t_shell *sh);
+void					sh_select_print(t_shell *sh);
 
 /*
 ** terminal - signals
