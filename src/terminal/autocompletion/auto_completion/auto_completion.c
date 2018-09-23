@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/23 17:28:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 00:20:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void				auto_completion(t_shell *shell)
 
 	ft_bzero(&frame, sizeof(frame));
 	sh_replace_buffer(shell, "ls ");//Sample initial buffer content.
-	frame = create_frame(frame, shell, get_string(&frame, shell->read->buffer.content));
+	frame = create_frame(frame, shell, get_string(&frame, shell->buffer.content));
 	get_args(&frame);
 	issuance(&frame);
 	free_frame(&frame);

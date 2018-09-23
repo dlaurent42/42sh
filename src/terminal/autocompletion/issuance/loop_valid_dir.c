@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 14:59:25 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 00:16:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				loop_valid_dir(t_frame *frame, t_args *head)
 		sh_replace_buffer(frame->shell, frame->select->data.str);
 		ft_printf("%s %s\n",
 				(char *)frame->shell->prompt.content,
-				(char *)frame->shell->read->buffer.content
+				(char *)frame->shell->buffer.content
 				);
 		do_loop(frame, args, &position_on_row);
 		if (position_on_row)
