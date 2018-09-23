@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:08:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 12:10:07 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -562,7 +562,7 @@ void					sh_window_resize(t_shell *sh);
 /*
 ** terminal - auto_completion
 */
-void				auto_completion(t_shell *shell, char *str);
+void				auto_completion(t_shell *shell);
 void				get_args(t_frame *frame);
 void				free_args(t_frame *frame, t_args **args);
 t_args				*create_args(void);
