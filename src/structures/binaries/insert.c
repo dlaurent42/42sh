@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 18:31:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/23 22:59:06 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ static void			generate_list_for_auto_completion(t_bin *bin, char *str)
 {
 	t_bin_auto		*new;
 
-	new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto));//Protect
-	new->name = ft_strdup(str);//Prtect
-	new->next = bin->bin_auto;
-	bin->bin_auto = new;
+	if (strcmp(str, ".") && strcmp(str, ".."))
+	{
+		new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto));//Protect
+		new->name = ft_strdup(str);//Prtect
+		new->next = bin->bin_auto;
+		bin->bin_auto = new;
+	}
 }
 
 static t_bin_item	*bin_new_item(t_shell *sh, t_bin *bin, t_bin_obj *obj)
@@ -64,7 +67,7 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	while (current_item)
 	{
 		if (current_item != &deleleted_item
-		&& !ft_strcmps(current_item->key, obj->name))
+				&& !ft_strcmps(current_item->key, obj->name))
 		{
 			bin->items[index] = item;
 			return (bin_delete_specified_item(current_item));
