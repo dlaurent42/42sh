@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 18:25:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/23 18:31:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			generate_list_for_auto_completion(t_bin *bin, char *str)
 	t_bin_auto		*new;
 
 	new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto));//Protect
-	new->name = str;
+	new->name = ft_strdup(str);//Prtect
 	new->next = bin->bin_auto;
 	bin->bin_auto = new;
 }
