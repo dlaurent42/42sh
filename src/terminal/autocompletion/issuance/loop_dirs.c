@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 17:32:15 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:43:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 00:47:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 void				loop_dirs(t_frame *frame)
 {

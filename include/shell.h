@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 00:09:09 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 00:11:59 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@
 # define RL_BUFSIZE	1024
 # define NUM_FILES	"--------------\nFiles: %d\n"
 # define CHRSIZELEN	8
+
+# define AUTO_NON	0
+# define AUTO_BIN	1
+# define AUTO_REG	2
 
 # define AT_FIRST	0
 # define AT_REST	1
@@ -260,6 +264,7 @@ typedef struct		s_frame
 	char			*file_name;
 	int				file_name_len;
 	char			cmp_mode;
+	char			auto_mode;
 
 	unsigned char	at_mode	: 1;
 	unsigned char	fill	: 7;
@@ -378,6 +383,7 @@ void					sh_print_str(t_shell *sh, char *str);
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
+void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 
 /*
 ** terminal - signals
@@ -422,7 +428,7 @@ void				free_frame(t_frame *frame);
 /*
 ** terminal - auto_completion
 */
-void				auto_completion(t_shell *shell, char *str);
+void				auto_completion(t_shell *shell);
 void				get_args(t_frame *frame);
 void				free_args(t_frame *frame, t_args **args);
 t_args				*create_args(void);
