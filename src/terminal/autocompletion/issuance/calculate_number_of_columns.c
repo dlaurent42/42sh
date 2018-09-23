@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 13:29:46 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:43:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 00:47:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 void				calculate_number_of_columns(t_frame *frame)
 {
