@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:08:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/23 18:12:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,18 @@ typedef struct			s_bin_item
 	t_bin_obj			*value;
 }						t_bin_item;
 
+typedef struct			s_bin_auto
+{
+	char				*name;
+	struct s_bin_auto	*next;
+}
+
 typedef struct			s_bin
 {
 	size_t				size;
 	size_t				count;
 	t_bin_item			**items;
+	t_bin_auto			*bin_auto;
 }						t_bin;
 
 typedef struct			s_env_item
