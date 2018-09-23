@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:10:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/23 23:14:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,18 @@ void		bin_delete(t_bin *bin)
 {
 	size_t		i;
 	t_bin_item	*item;
+	t_bin_auto	*bin_auto;
 
 	i = 0;
 	if (!bin)
 		return ;
+	while (bin->bin_auto)
+	{
+		bin_auto = bin->bin_auto->next;
+		free(bin->bin_auto->name);
+		free(bin->bin_auto);
+		bin->bin_auto = bin_auto;
+	}
 	while (i < bin->size)
 	{
 		item = bin->items[i];
