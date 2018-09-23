@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 18:12:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/23 18:20:43 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct			s_bin_auto
 {
 	char				*name;
 	struct s_bin_auto	*next;
-}
+}						t_bin_auto;
 
 typedef struct			s_bin
 {
