@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:43:40 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 00:47:50 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 #include <sys/stat.h>
 
 static bool			read_directory(t_read_dir *read_dir)

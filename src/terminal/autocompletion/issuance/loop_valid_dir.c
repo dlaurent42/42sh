@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/19 19:57:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 14:59:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 static void			do_loop(t_frame *frame, t_args *args, int *position_on_row)
 {
@@ -77,15 +77,15 @@ void				loop_valid_dir(t_frame *frame, t_args *head)
 		ft_putstr("\x1b[H\x1b[2J");//DELETE
 		calculate_number_of_columns(frame);
 		args = head;
-		ft_printf("%s%s %s\n",
-				(char *)frame->shell->term->prompt.content,
-				"cat",
-				frame->select->data.str
+		sh_replace_buffer(frame->shell, frame->select->data.str);
+		ft_printf("%s %s\n",
+				(char *)frame->shell->prompt.content,
+				(char *)frame->shell->read->buffer.content
 				);
 		do_loop(frame, args, &position_on_row);
 		if (position_on_row)
 			ft_putchar('\n');
-		sh_print_prompt(frame->shell);
+		//sh_print_prompt(frame->shell);
 		read(0, frame->shell->read->line, 4);
 		if (frame->shell->read->line[0] == 4)
 			break ;

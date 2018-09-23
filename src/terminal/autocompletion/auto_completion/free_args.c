@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 22:36:12 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/18 02:29:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 00:47:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 static void		free_individual_arg(t_frame *frame, t_args *args)
 {
