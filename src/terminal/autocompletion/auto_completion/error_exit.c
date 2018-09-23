@@ -6,11 +6,11 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 22:57:51 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/17 08:44:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/20 00:47:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 
 void				error_exit(t_frame *frame, char *error_str)
 {

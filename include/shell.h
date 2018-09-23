@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:07:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 12:08:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,6 +431,7 @@ typedef struct		s_frame
 	char			*file_name;
 	int				file_name_len;
 	char			cmp_mode;
+	char			auto_mode;
 
 	unsigned char	at_mode	: 1;
 	unsigned char	fill	: 7;
@@ -550,6 +551,7 @@ void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own fun
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
+void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 
 /*
 ** terminal - signals
@@ -594,7 +596,7 @@ void				free_frame(t_frame *frame);
 /*
 ** terminal - auto_completion
 */
-void				auto_completion(t_shell *shell, char *str);
+void				auto_completion(t_shell *shell);
 void				get_args(t_frame *frame);
 void				free_args(t_frame *frame, t_args **args);
 t_args				*create_args(void);
