@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 22:59:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 23:01:35 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			generate_list_for_auto_completion(t_shell *sh, t_bin *bin, char *str)
+static void			bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *str)
 {
 	t_bin_auto		*new;
 
@@ -63,7 +63,7 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	t_bin_item	deleleted_item;
 
 	i = 1;
-	generate_list_for_auto_completion(sh, bin, obj->name);
+	bin_gen_list_for_auto_comp(sh, bin, obj->name);
 	deleleted_item.key = NULL;
 	deleleted_item.value = NULL;
 	item = bin_new_item(sh, bin, obj);

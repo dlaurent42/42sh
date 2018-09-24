@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 22:59:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 23:02:03 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			sort_list_for_auto(t_bin *bin)
+static void			bin_sort_list_for_auto(t_bin *bin)
 {
 	bool			sorted;
 	char			*tmp;
@@ -56,7 +56,7 @@ static void		bin_parse_folder(t_shell *sh, t_bin *bin, char *path)
 					dirent->d_name,
 					path,
 					stats));
-	sort_list_for_auto(bin);
+	bin_sort_list_for_auto(bin);
 	closedir(dir);
 }
 
