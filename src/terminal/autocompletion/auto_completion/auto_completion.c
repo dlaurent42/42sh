@@ -6,11 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/09/24 00:20:16 by dhojt            ###   ########.fr       */
-=======
-/*   Updated: 2018/09/23 17:28:20 by dhojt            ###   ########.fr       */
->>>>>>> d775b7104264c575618a8c5391da8fe9646b8ca2
+/*   Updated: 2018/09/24 22:36:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +51,7 @@ void				auto_completion(t_shell *shell)
 
 	ft_bzero(&frame, sizeof(frame));
 	sh_replace_buffer(shell, "ls ");//Sample initial buffer content.
-<<<<<<< HEAD
 	frame = create_frame(frame, shell, get_string(&frame, shell->buffer.content));
-=======
-	frame = create_frame(frame, shell, get_string(&frame, shell->read->buffer.content));
->>>>>>> d775b7104264c575618a8c5391da8fe9646b8ca2
 	get_args(&frame);
 	issuance(&frame);
 	free_frame(&frame);

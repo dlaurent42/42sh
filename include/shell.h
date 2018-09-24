@@ -6,11 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/09/24 00:13:57 by dhojt            ###   ########.fr       */
-=======
-/*   Updated: 2018/09/23 17:27:30 by dhojt            ###   ########.fr       */
->>>>>>> d775b7104264c575618a8c5391da8fe9646b8ca2
+/*   Updated: 2018/09/24 22:33:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,11 +383,6 @@ void					sh_print_str(t_shell *sh, char *str);
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
-<<<<<<< HEAD
-=======
-void					sh_fill_buffer(t_shell *sh);
->>>>>>> d775b7104264c575618a8c5391da8fe9646b8ca2
-void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 
 /*
 ** terminal - signals
@@ -420,6 +411,7 @@ void				move_up(t_frame *frame);
 void				move_down(t_frame *frame);
 void				move_left(t_frame *frame);
 void				move_right(t_frame *frame);
+void				sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 bool				is_executeable(t_args *args);
 
 void				sort(t_frame *frame);
