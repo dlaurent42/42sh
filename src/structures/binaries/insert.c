@@ -6,20 +6,25 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 22:59:06 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 22:58:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			generate_list_for_auto_completion(t_bin *bin, char *str)
+static void			generate_list_for_auto_completion(t_shell *sh, t_bin *bin, char *str)
 {
 	t_bin_auto		*new;
 
 	if (strcmp(str, ".") && strcmp(str, ".."))
 	{
-		new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto));//Protect
-		new->name = ft_strdup(str);//Prtect
+		if(!(new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto))))
+			error_malloc_bin(sh, bin, "t_bin_auto structure");
+		if(!(new->name = ft_strdup(str)))
+		{
+			free(new);
+			error_malloc_bin(sh, bin, "t_bin_auto name string");
+		}
 		new->next = bin->bin_auto;
 		bin->bin_auto = new;
 	}
@@ -58,7 +63,7 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	t_bin_item	deleleted_item;
 
 	i = 1;
-	generate_list_for_auto_completion(bin, obj->name);
+	generate_list_for_auto_completion(sh, bin, obj->name);
 	deleleted_item.key = NULL;
 	deleleted_item.value = NULL;
 	item = bin_new_item(sh, bin, obj);
