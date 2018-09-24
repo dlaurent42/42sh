@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 22:58:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/24 22:59:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void			generate_list_for_auto_completion(t_shell *sh, t_bin *bin, char *s
 {
 	t_bin_auto		*new;
 
-	if (strcmp(str, ".") && strcmp(str, ".."))
+	if (ft_strcmps(str, ".") && ft_strcmps(str, ".."))
 	{
 		if(!(new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto))))
 			error_malloc_bin(sh, bin, "t_bin_auto structure");
