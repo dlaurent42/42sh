@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:52:21 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 06:15:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/24 19:56:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		sh_unselect_char(t_shell *sh)
 			sh_select_left_char(sh);
 }
 
-void		sh_select_left_word(t_shell *sh)
+void			sh_select_left_word(t_shell *sh)
 {
 	if (sh->cursor.abs_pos == 0)
 		return ;

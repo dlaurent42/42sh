@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 19:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 23:51:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/24 19:54:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	sh_move_y(t_shell *sh, int y)
+void	sh_move_y(t_shell *sh, int y)
 {
 	while (sh->cursor.y < y)
 	{
@@ -23,7 +23,7 @@ static void	sh_move_y(t_shell *sh, int y)
 	}
 }
 
-static void	sh_move_x(t_shell *sh, int x)
+void	sh_move_x(t_shell *sh, int x)
 {
 	while (sh->cursor.x != x)
 	{
@@ -39,7 +39,7 @@ static void	sh_move_x(t_shell *sh, int x)
 	}
 }
 
-void		sh_move_to_xy(t_shell *sh, int x, int y)
+void	sh_move_to_xy(t_shell *sh, int x, int y)
 {
 	sh->cursor.y -= (sh->cursor.x == 0 && sh->cursor.y) ? 1 : 0;
 	sh_move_home(sh);

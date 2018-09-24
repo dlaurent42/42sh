@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 17:09:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/24 19:55:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 		? sh_select_home(sh) : 0;
 	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x46") == 0)
 		? sh_select_end(sh) : 0;
-
 }
 
 static void	sh_read_dispatcher(t_shell *sh)
 {
-	sh_debug(NULL, NULL, sh->read->line);
 	if (sh->modes.select
 	&& !(sh->read->line[0] == 3
 	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x43") == 0

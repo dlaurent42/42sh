@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:11:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 04:54:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/24 19:55:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void	sh_unselect_move_to_start(t_shell *sh)
 	x = (y)
 		? (sh->selection.start_abs + sh->prompt.len_mod) % sh->window.width
 		: sh->selection.start_abs;
-	sh_move_to_xy(sh, x, y);
+	sh_move_home(sh);
+	sh_move_y(sh, y);
+	sh_move_x(sh, x);
+	sh_set_rel_pos(sh, sh->cursor.abs_pos, 1);
 }
 
 void		sh_unselect(t_shell *sh)
