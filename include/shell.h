@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:10:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 12:12:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -551,7 +551,6 @@ void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own fun
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_delete(t_shell *sh);
-void					sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 
 /*
 ** terminal - signals
@@ -580,40 +579,7 @@ void				move_up(t_frame *frame);
 void				move_down(t_frame *frame);
 void				move_left(t_frame *frame);
 void				move_right(t_frame *frame);
-bool				is_executeable(t_args *args);
-
-void				sort(t_frame *frame);
-bool				sort_alpha(t_frame *frame);
-
-void				display(t_frame *frame, t_args *args);
-void				file_name(t_frame *frame, t_args *args);
-void				print_spaces(int diff);
-int					get_diff(t_frame *frame, char *str, long long num, int flag);
-
-void				error_exit(t_frame *frame, char *error_str);
-void				free_frame(t_frame *frame);
-
-/*
-** terminal - auto_completion
-*/
-void				auto_completion(t_shell *shell);
-void				get_args(t_frame *frame);
-void				free_args(t_frame *frame, t_args **args);
-t_args				*create_args(void);
-
-void				issuance(t_frame *frame);
-void				get_attributes(t_frame *frame);
-void				loop_dirs(t_frame *frame);
-void				loop_valid_dir(t_frame *frame, t_args *args);
-void				do_ls(t_frame *frame, t_args *args);
-void				do_file_admin(t_frame *frame, t_args *args);
-void				calc_len_file_name(t_frame *frame, t_args *args);
-void				calculate_number_of_columns(t_frame *frame);
-void				path(t_frame *frame, t_args *args, char *path, char *name);
-void				move_up(t_frame *frame);
-void				move_down(t_frame *frame);
-void				move_left(t_frame *frame);
-void				move_right(t_frame *frame);
+void				sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
 bool				is_executeable(t_args *args);
 
 void				sort(t_frame *frame);
