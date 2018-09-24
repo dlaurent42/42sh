@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 04:46:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/21 16:57:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,6 +263,8 @@ void					sh_select_left_char(t_shell *sh);
 void					sh_select_left_word(t_shell *sh);
 void					sh_select_right_char(t_shell *sh);
 void					sh_select_right_word(t_shell *sh);
+void					sh_select_end(t_shell *sh);
+void					sh_select_home(t_shell *sh);
 void					sh_unselect(t_shell *sh);
 void					sh_select_set_pos(t_shell *sh);
 void					sh_select_print(t_shell *sh);

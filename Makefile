@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/21 04:45:50 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/21 16:57:28 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,8 @@ SRC			=	shell.c														\
 				terminal/select/select_left_word.c							\
 				terminal/select/select_right.c								\
 				terminal/select/select_right_word.c							\
+				terminal/select/select_to_end.c								\
+				terminal/select/select_to_home.c							\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
