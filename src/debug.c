@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 19:08:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/25 13:30:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 	int	fd;
 
 	i = 0;
-	fd = open("/dev/ttys002", O_RDWR);
+	fd = open("/dev/ttys003", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (str)
 		while (str[i])

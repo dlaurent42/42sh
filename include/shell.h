@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 19:55:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:08:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@
 # define K_DEL			"\x7f"
 # define K_DEL_ALL		"\x1b\x5b\x4a"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
+
+/*
+** Move
+**   ← ............ move one char to left				|	\x1b\x5b\x44
+**   → ............ move one char to right				|	\x1b\x5b\x43
+**   ↖ ............ move to begining of line			|	\x1b\x5b\x48
+**   ↘ ............ move to end of line					|	\x1b\x5b\x46
+**   ⌥ + ← ........ move one word to left				|	\x1b\x1b\x5b\x44
+**   ⌥ + → ........ move one word to right				|	\x1b\x1b\x5b\x43
+**   ⌥ + ↑ ........ move one row up						|	\x1b\x1b\x5b\x41
+**   ⌥ + ↓ ........ move one row down					|	\x1b\x1b\x5b\x42
+** 
+** Select
+**   ⇧ + ← ........ select left char					|	\x1b\x5b\x31\x3b\x32\x44
+**   ⇧ + → ........ select right char					|	\x1b\x5b\x31\x3b\x32\x43
+**   ⇧ + ↖ ........ select chars to begining of line	|	\x1b\x5b\x31\x3b\x32\x48
+**   ⇧ + ↘ ........ select chars to end of line			|	\x1b\x5b\x31\x3b\x32\x46
+**   ⇧ + ⌥ + ← .... select left word					|	\x1b\x5b\x31\x3b\x31\x30\x44
+**   ⇧ + ⌥ + → .... select right word					|	\x1b\x5b\x31\x3b\x31\x30\x43
+**   ⇧ + ⌥ + ↑ .... select row above					|	\x1b\x5b\x31\x3b\x31\x30\x41
+**   ⇧ + ⌥ + ↓ .... select row below					|	\x1b\x5b\x31\x3b\x31\x30\x42
+*/
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -236,6 +258,8 @@ void					sh_move_home(t_shell *sh);
 void					sh_move_end(t_shell *sh);
 void					sh_move_left(t_shell *sh);
 void					sh_move_right(t_shell *sh);
+void					sh_move_up(t_shell *sh);
+void					sh_move_down(t_shell *sh);
 void					sh_move_y(t_shell *sh, int y);
 void					sh_move_x(t_shell *sh, int x);
 void					sh_move_to_xy(t_shell *sh, int x, int y);
@@ -249,6 +273,7 @@ void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
 void					sh_fill_buffer(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_print_str(t_shell *sh, char *str);
+void					sh_welcome(void);
 
 /*
 ** terminal - read
@@ -261,12 +286,14 @@ void					sh_read_delete(t_shell *sh);
 ** terminal - select
 */
 void					sh_copy_selection(t_shell *sh);
+void					sh_select_down(t_shell *sh);
 void					sh_select_left_char(t_shell *sh);
 void					sh_select_left_word(t_shell *sh);
 void					sh_select_right_char(t_shell *sh);
 void					sh_select_right_word(t_shell *sh);
 void					sh_select_end(t_shell *sh);
 void					sh_select_home(t_shell *sh);
+void					sh_select_up(t_shell *sh);
 void					sh_unselect(t_shell *sh);
 void					sh_select_set_pos(t_shell *sh);
 void					sh_select_print(t_shell *sh);

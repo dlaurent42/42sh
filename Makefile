@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/21 16:57:28 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/25 16:08:15 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,25 +44,30 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
+				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
 				terminal/cursor/move_left.c									\
 				terminal/cursor/move_right.c								\
+				terminal/cursor/move_up.c									\
 				terminal/cursor/move_xy.c									\
 				terminal/cursor/move_prev_word.c							\
 				terminal/cursor/move_next_word.c							\
 				terminal/cursor/utils.c										\
 				terminal/print/buffer.c										\
 				terminal/print/prompt.c										\
+				terminal/print/welcome.c									\
 				terminal/read/delete.c										\
 				terminal/read/read.c										\
 				terminal/select/copy.c										\
+				terminal/select/select_down.c								\
 				terminal/select/select_left.c								\
 				terminal/select/select_left_word.c							\
 				terminal/select/select_right.c								\
 				terminal/select/select_right_word.c							\
 				terminal/select/select_to_end.c								\
 				terminal/select/select_to_home.c							\
+				terminal/select/select_up.c									\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\

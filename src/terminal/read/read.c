@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 19:55:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:43:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,46 @@
 
 static void	sh_arrows_dispatcher(t_shell *sh)
 {
-	char	*line;
+	char	*s;
 
-	line = sh->read->line;
-	(line[1] == 91 && line[2] == 67) ? sh_move_right(sh) : 0;
-	(line[1] == 91 && line[2] == 68) ? sh_move_left(sh) : 0;
-	(line[1] == 91 && line[2] == 70) ? sh_move_end(sh) : 0;
-	(line[1] == 91 && line[2] == 72) ? sh_move_home(sh) : 0;
-	(line[1] == 27 && line[2] == 91 && line[3] == 67)
-		? sh_move_next_word(sh) : 0;
-	(line[1] == 27 && line[2] == 91 && line[3] == 68)
-		? sh_move_previous_word(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x44") == 0)
-		? sh_select_left_char(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x43") == 0)
-		? sh_select_right_char(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x44") == 0)
-		? sh_select_left_word(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x43") == 0)
-		? sh_select_right_word(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x48") == 0)
-		? sh_select_home(sh) : 0;
-	(ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x46") == 0)
-		? sh_select_end(sh) : 0;
+	s = sh->read->line;
+	(!ft_strcmps(s, "\x1b\x5b\x43")) ? sh_move_right(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x44")) ? sh_move_left(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x46")) ? sh_move_end(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x48")) ? sh_move_home(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x1b\x5b\x41")) ? sh_move_up(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x1b\x5b\x42")) ? sh_move_down(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x1b\x5b\x43")) ? sh_move_next_word(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x1b\x5b\x44")) ? sh_move_previous_word(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x43")) ? sh_select_right_char(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x44")) ? sh_select_left_char(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x46")) ? sh_select_end(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x48")) ? sh_select_home(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x41")) ? sh_select_up(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x42")) ? sh_select_down(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x43")) ? sh_select_right_word(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44")) ? sh_select_left_word(sh) : 0;
+
+}
+
+static char	sh_is_select_combination(char *s)
+{
+	if (s[0] == 3
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x43") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x44") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x46") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x48") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x41") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x42") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x43") == 0
+	|| ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44") == 0)
+		return (TRUE);
+	return (FALSE);
 }
 
 static void	sh_read_dispatcher(t_shell *sh)
 {
-	if (sh->modes.select
-	&& !(sh->read->line[0] == 3
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x43") == 0
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x44") == 0
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x43") == 0
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x31\x30\x44") == 0
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x48") == 0
-	|| ft_strcmps(sh->read->line, "\x1b\x5b\x31\x3b\x32\x46") == 0))
+	if (sh->modes.select && !sh_is_select_combination(sh->read->line))
 		sh_unselect(sh);
 	if (sh->read->line[0] == 3)
 		sh_copy_selection(sh);
