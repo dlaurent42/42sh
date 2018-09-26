@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/25 16:08:15 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/25 19:51:39 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,9 @@ SRC			=	shell.c														\
 				terminal/print/welcome.c									\
 				terminal/read/delete.c										\
 				terminal/read/read.c										\
+				terminal/select/cut.c										\
 				terminal/select/copy.c										\
+				terminal/select/paste.c										\
 				terminal/select/select_down.c								\
 				terminal/select/select_left.c								\
 				terminal/select/select_left_word.c							\
