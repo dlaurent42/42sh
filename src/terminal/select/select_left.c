@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 01:47:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 05:45:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/26 14:47:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		sh_select_char(t_shell *sh)
 
 static void		sh_unselect_char(t_shell *sh)
 {
+	sh_debug(NULL, "sh unselect left", NULL);
 	sh_move_left(sh);
 	sh->selection.stop = sh->cursor.abs_pos;
 	sh_select_print(sh);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/25 16:08:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:54:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@
 **   ⇧ + ⌥ + → .... select right word					|	\x1b\x5b\x31\x3b\x31\x30\x43
 **   ⇧ + ⌥ + ↑ .... select row above					|	\x1b\x5b\x31\x3b\x31\x30\x41
 **   ⇧ + ⌥ + ↓ .... select row below					|	\x1b\x5b\x31\x3b\x31\x30\x42
+
+ctrl + A : se déplace au début de la ligne
+ctrl + E : se déplace vers la fin de la ligne
+ctrl + B : remonter un caractère
+ctrl + F : avance un personnage
+esc + B  : remonter un mot
+esc + F  : avancer un mot
+ctrl + U : supprimez du slider au début de la ligne
+ctrl + K : supprimer du slider jusqu'à la fin de la ligne
+ctrl + W : supprimer du slider au début du mot courant
+
 */
 
 typedef struct dirent	t_dirent;
@@ -170,6 +181,7 @@ typedef struct			s_select
 	int					start_rel;
 	int					start_abs;
 	int					stop;
+	char				*content;
 }						t_select;
 
 typedef struct			s_shell
@@ -274,6 +286,7 @@ void					sh_fill_buffer(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_print_str(t_shell *sh, char *str);
 void					sh_welcome(void);
+void					sh_select_print(t_shell *sh);
 
 /*
 ** terminal - read
@@ -285,7 +298,9 @@ void					sh_read_delete(t_shell *sh);
 /*
 ** terminal - select
 */
+void					sh_cut_selection(t_shell *sh);
 void					sh_copy_selection(t_shell *sh);
+void					sh_paste_selection(t_shell *sh);
 void					sh_select_down(t_shell *sh);
 void					sh_select_left_char(t_shell *sh);
 void					sh_select_left_word(t_shell *sh);
@@ -296,7 +311,7 @@ void					sh_select_home(t_shell *sh);
 void					sh_select_up(t_shell *sh);
 void					sh_unselect(t_shell *sh);
 void					sh_select_set_pos(t_shell *sh);
-void					sh_select_print(t_shell *sh);
+int						sh_get_selection_len(t_shell *sh);
 
 /*
 ** terminal - signals

@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 03:48:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:54:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_select_set_pos(t_shell *sh)
+void		sh_select_set_pos(t_shell *sh)
 {
 	int	x;
 	int	y;
@@ -28,22 +28,25 @@ void	sh_select_set_pos(t_shell *sh)
 	sh_move_to_xy(sh, x, y);
 }
 
-void	sh_select_print(t_shell *sh)
+int			sh_get_selection_len(t_shell *sh)
 {
-	int	i;
+	int	len;
+	int	abs_i;
+	int	rel_i;
 
-	i = 0;
-	while (sh->buffer.content[sh->cursor.rel_pos + i])
+	len = 0;
+	abs_i = sh->selection.start_abs;
+	rel_i = sh->selection.start_rel;
+	while (abs_i < sh->selection.stop)
 	{
-		if (sh->cursor.rel_pos + i >= sh->selection.start_rel
-		&& sh->cursor.rel_pos + i < sh->selection.stop)
-			ft_printf("\e[7;37;40m%c\033[0m",
-				sh->buffer.content[sh->cursor.rel_pos + i]);
-		else
-		{
-			ft_printf("%s ", sh->buffer.content + sh->cursor.rel_pos + i);
-			break ;
-		}
-		i++;
+		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11110000) ? 1 : 0;
+		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11100000) ? 1 : 0;
+		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11000000) ? 2 : 0;
+		len += ((unsigned char)sh->buffer.content[rel_i] < 0b10000000) ? 1 : 0;
+		if ((unsigned char)sh->buffer.content[rel_i] >= 0b11000000
+		|| (unsigned char)sh->buffer.content[rel_i] < 0b10000000)
+			abs_i++;
+		rel_i++;
 	}
+	return (len);
 }

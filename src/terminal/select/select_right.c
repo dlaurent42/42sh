@@ -6,27 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 01:47:00 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 05:41:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:52:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static unsigned char	sh_assess_stop_pos(t_shell *sh)
-{
-	unsigned char	c;
-
-	c = sh->buffer.content[sh->cursor.rel_pos];
-	if (c >= 0b11110000)
-		return (4);
-	if (c >= 0b11100000)
-		return (3);
-	if (c >= 0b11000000)
-		return (2);
-	return (1);
-}
-
-static void				sh_select_char(t_shell *sh)
+static void	sh_select_char(t_shell *sh)
 {
 	if (sh->modes.select == FALSE)
 	{
@@ -36,13 +22,13 @@ static void				sh_select_char(t_shell *sh)
 	sh->modes.select = TRUE;
 	ft_putstr(K_DEL);
 	ft_putstr(K_LEFT);
-	sh->selection.stop = sh->cursor.rel_pos + sh_assess_stop_pos(sh);
+	sh->selection.stop = sh->cursor.abs_pos + 1;
 	sh_select_print(sh);
 	sh_select_set_pos(sh);
 	sh_move_right(sh);
 }
 
-static void				sh_unselect_char(t_shell *sh)
+static void	sh_unselect_char(t_shell *sh)
 {
 	int	curr_stop;
 
@@ -57,7 +43,7 @@ static void				sh_unselect_char(t_shell *sh)
 	sh_select_set_pos(sh);
 }
 
-void					sh_select_right_char(t_shell *sh)
+void		sh_select_right_char(t_shell *sh)
 {
 	if (sh->cursor.abs_pos >= sh->buffer.display_len)
 		return ;

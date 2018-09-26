@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cut.c                                              :+:      :+:    :+:   */
+/*   paste.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 19:43:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/25 19:47:20 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/25 19:51:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/26 08:35:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_cut_selection(t_shell *sh)
+void	sh_paste_selection(t_shell *sh)
 {
-	int	start;
-	int	stop;
-
-	if (!sh->modes.select)
+	if (!sh->selection.content)
 		return ;
-	start = sh->selection.start_abs;
-	stop = sh->selection.stop;
-	sh_copy_selection(sh);
-	while (sh->cursor.abs_pos < stop)
-		sh_move_right(sh);
-	while (sh->cursor.abs_pos > start)
-		sh_read_delete(sh);
+	sh_print_str(sh, sh->selection.content);
+	sh_debug(NULL, sh->selection.content, NULL);
 }
