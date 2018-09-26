@@ -4,10 +4,7 @@
 # Executable && lib
 *.a
 a.out
-shell
-
-# Source files
-debug.c
+/shell
 
 # Compiled sources
 *obj
