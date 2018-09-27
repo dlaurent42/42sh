@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:11:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 19:55:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 12:51:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,24 @@ void		sh_unselect(t_shell *sh)
 	sh->selection.stop = -1;
 	sh->selection.start_abs = -1;
 	sh->selection.start_rel = -1;
+}
+
+void		sh_unselect_delete(t_shell *sh, unsigned char c)
+{
+	int	stop;
+	int	start;
+
+	stop = sh->selection.stop;
+	start = sh->selection.start_abs;
+	if (!sh->modes.select)
+		return ;
+	if ((!ft_isprint(c) && c < 0b10000000)
+	|| (c >= 0b10000000 && c < 0b11000000)
+	|| c == 3)
+		return (sh_unselect(sh));
+	while (sh->cursor.abs_pos < stop)
+		sh_move_right(sh);
+	while (sh->cursor.abs_pos > start)
+		sh_read_delete(sh);
+	sh->modes.select = FALSE;
 }

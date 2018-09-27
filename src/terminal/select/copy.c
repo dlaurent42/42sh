@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 04:38:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/26 17:36:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 12:46:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		sh_copy_selection(t_shell *sh)
 {
-	sh_debug(NULL, ft_itoa(sh->modes.select), NULL);
 	if (!sh->modes.select)
 		return ;
 	(sh->selection.content) ? ft_strdel(&sh->selection.content) : 0;

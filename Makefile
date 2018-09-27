@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/25 19:51:39 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/26 20:30:37 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC			=	shell.c														\
 				terminal/cursor/utils.c										\
 				terminal/print/buffer.c										\
 				terminal/print/prompt.c										\
+				terminal/print/selection.c									\
 				terminal/print/welcome.c									\
 				terminal/read/delete.c										\
 				terminal/read/read.c										\
