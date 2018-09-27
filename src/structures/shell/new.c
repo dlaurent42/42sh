@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 15:52:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 20:27:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ t_shell		*sh_new(char **environ)
 	sh->read = read_new(sh);
 	command_import(sh);
 	sh_init_prompt(sh);
+	g_sh = sh;
 	return (sh);
 }
