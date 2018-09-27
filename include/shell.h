@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 18:45:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:20:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,10 @@ t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 /*
 ** structures - commands
 */
+void					command_add(t_shell *sh, char *command);
+void					command_delete_all(t_shell *sh);
 void					command_import(t_shell *sh);
+void					command_export_all(t_shell *sh);
 
 /*
 ** structures - environment

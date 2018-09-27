@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 18:43:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:30:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	command_key_verified(int fd)
 	if (read(fd, line, 33) != 33)
 		return (FALSE);
 	line[32] = '\0';
-	if (ft_strcmps(line, "j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"))
+	if (ft_strcmps(line, VERIF_KEY))
 		return (FALSE);
 	return (TRUE);
 }

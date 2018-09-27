@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 20:21:33 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/27 19:11:47 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/27 20:06:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void		command_delete_all(t_shell *sh)
 {
-	t_shell		*sh;
+	t_cmd	*tmp;
+	t_cmd	*cmd;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	g_sh = sh;
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	if (!sh->cmd)
+		return ;
+	cmd = sh->cmd;
+	while (cmd)
+	{
+		tmp = cmd->next;
+		(cmd) ? ft_memdel((void **)&cmd) : 0;
+		cmd = tmp;
+	}
+	cmd = NULL;
+	tmp = NULL;
+	sh->cmd = NULL;
 }

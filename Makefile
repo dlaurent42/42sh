@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/27 15:52:40 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/27 19:12:51 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ SRC			=	shell.c														\
 				structures/binaries/insert.c								\
 				structures/binaries/new.c									\
 				structures/binaries/search.c								\
+				structures/commands/add.c									\
+				structures/commands/delete.c								\
+				structures/commands/export.c								\
 				structures/commands/import.c								\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
@@ -47,10 +50,10 @@ SRC			=	shell.c														\
 				terminal/autocompletion/autocompletion.c					\
 				terminal/delete/delete_all.c								\
 				terminal/delete/delete_char.c								\
-				terminal/delete/delete_current_char.c								\
-				terminal/delete/delete_left_word.c								\
-				terminal/delete/delete_right_word.c								\
-				terminal/delete/delete_from_home.c								\
+				terminal/delete/delete_current_char.c						\
+				terminal/delete/delete_left_word.c							\
+				terminal/delete/delete_right_word.c							\
+				terminal/delete/delete_from_home.c							\
 				terminal/delete/delete_to_end.c								\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
