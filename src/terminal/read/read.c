@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:55:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:01:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,46 +55,21 @@ static void	sh_read_dispatcher(t_shell *sh)
 {
 	sh_debug(sh, "before", sh->read->line);
 	if (sh->modes.select && !sh_is_select_combination(sh->read->line))
-	{
-		sh_debug(NULL, "01", NULL);
 		sh_unselect_delete(sh, (unsigned char)sh->read->line[0]);
-	}
 	if (sh->read->line[0] == 3)
-	{
-		sh_debug(NULL, "02", NULL);
 		sh_copy_selection(sh);
-	}
 	else if (sh->read->line[0] == 22)
-	{
-		sh_debug(NULL, "03", NULL);
 		sh_paste_selection(sh);
-	}
 	else if (sh->read->line[0] == 24)
-	{
-		sh_debug(NULL, "04", NULL);
 		sh_cut_selection(sh);
-	}
 	else if (sh->read->line[0] == 27)
-	{
-		sh_debug(NULL, "05", NULL);
 		sh_arrows_dispatcher(sh);
-	}
 	else if (sh->read->line[0] == 127)
-	{
-		sh_debug(NULL, "06", NULL);
 		sh_read_delete(sh);
-	}
 	else if (sh->read->line[0] == 9)
-	{
-		sh_debug(NULL, "07", NULL);
 		sh_read_autocompletion(sh);
-	}
 	else
-	{
-		sh_debug(NULL, "08", NULL);
 		sh_fill_buffer(sh);
-	}
-	sh_debug(sh, "after", NULL);
 }
 
 void		sh_read(t_shell *sh)
