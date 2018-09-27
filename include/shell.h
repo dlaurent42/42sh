@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 16:29:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:45:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,35 +52,24 @@
 
 /*
 ** Move
-**   ← ............ move one char to left				|	\x1b\x5b\x44
-**   → ............ move one char to right				|	\x1b\x5b\x43
-**   ↖ ............ move to begining of line			|	\x1b\x5b\x48
-**   ↘ ............ move to end of line					|	\x1b\x5b\x46
-**   ⌥ + ← ........ move one word to left				|	\x1b\x1b\x5b\x44
-**   ⌥ + → ........ move one word to right				|	\x1b\x1b\x5b\x43
-**   ⌥ + ↑ ........ move one row up						|	\x1b\x1b\x5b\x41
-**   ⌥ + ↓ ........ move one row down					|	\x1b\x1b\x5b\x42
-** 
+**   ← .......... one char to left			|	\x1b\x5b\x44
+**   → .......... one char to right			|	\x1b\x5b\x43
+**   ↖ .......... to begining of line		|	\x1b\x5b\x48
+**   ↘ .......... to end of line			|	\x1b\x5b\x46
+**   ⌥ + ← ...... one word to left			|	\x1b\x1b\x5b\x44
+**   ⌥ + → ...... one word to right			|	\x1b\x1b\x5b\x43
+**   ⌥ + ↑ ...... one row up				|	\x1b\x1b\x5b\x41
+**   ⌥ + ↓ ...... one row down				|	\x1b\x1b\x5b\x42
+**
 ** Select
-**   ⇧ + ← ........ select left char					|	\x1b\x5b\x31\x3b\x32\x44
-**   ⇧ + → ........ select right char					|	\x1b\x5b\x31\x3b\x32\x43
-**   ⇧ + ↖ ........ select chars to begining of line	|	\x1b\x5b\x31\x3b\x32\x48
-**   ⇧ + ↘ ........ select chars to end of line			|	\x1b\x5b\x31\x3b\x32\x46
-**   ⇧ + ⌥ + ← .... select left word					|	\x1b\x5b\x31\x3b\x31\x30\x44
-**   ⇧ + ⌥ + → .... select right word					|	\x1b\x5b\x31\x3b\x31\x30\x43
-**   ⇧ + ⌥ + ↑ .... select row above					|	\x1b\x5b\x31\x3b\x31\x30\x41
-**   ⇧ + ⌥ + ↓ .... select row below					|	\x1b\x5b\x31\x3b\x31\x30\x42
-
-ctrl + A : se déplace au début de la ligne
-ctrl + E : se déplace vers la fin de la ligne
-ctrl + B : remonter un caractère
-ctrl + F : avance un personnage
-esc + B  : remonter un mot
-esc + F  : avancer un mot
-ctrl + U : supprimez du slider au début de la ligne
-ctrl + K : supprimer du slider jusqu'à la fin de la ligne
-ctrl + W : supprimer du slider au début du mot courant
-
+**   ⇧ + ← ...... left char					|	\x1b\x5b\x31\x3b\x32\x44
+**   ⇧ + → ...... right char				|	\x1b\x5b\x31\x3b\x32\x43
+**   ⇧ + ↖ ...... chars to begining of line	|	\x1b\x5b\x31\x3b\x32\x48
+**   ⇧ + ↘ ...... chars to end of line		|	\x1b\x5b\x31\x3b\x32\x46
+**   ⇧ + ⌥ + ← .. left word					|	\x1b\x5b\x31\x3b\x31\x30\x44
+**   ⇧ + ⌥ + → .. right word				|	\x1b\x5b\x31\x3b\x31\x30\x43
+**   ⇧ + ⌥ + ↑ .. row above					|	\x1b\x5b\x31\x3b\x31\x30\x41
+**   ⇧ + ⌥ + ↓ .. row below					|	\x1b\x5b\x31\x3b\x31\x30\x42
 */
 
 typedef struct dirent	t_dirent;

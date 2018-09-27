@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 17:36:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:43:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		command_import(t_shell *sh)
 		if (command_parse_and_add(sh, buffer) == 0)
 		{
 			ft_strdel(&buffer);
-			return (command_import_error(fd, path));	
+			return (command_import_error(fd, path));
 		}
 		ft_strdel(&buffer);
 	}

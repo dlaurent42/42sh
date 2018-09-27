@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 15:24:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:50:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x48")) ? sh_select_home(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x41")) ? sh_select_up(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x42")) ? sh_select_down(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x43")) ? sh_select_right_word(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44")) ? sh_select_left_word(sh) : 0;
-
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x43"))
+		? sh_select_right_word(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44"))
+		? sh_select_left_word(sh) : 0;
 }
 
 static void	sh_deletion_dispatcher(t_shell *sh)

@@ -6,21 +6,21 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 23:01:35 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 18:49:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *str)
+static void			bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *s)
 {
 	t_bin_auto		*new;
 
-	if (ft_strcmps(str, ".") && ft_strcmps(str, ".."))
+	if (ft_strcmps(s, ".") && ft_strcmps(s, ".."))
 	{
-		if(!(new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto))))
+		if (!(new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto))))
 			error_malloc_bin(sh, bin, "t_bin_auto structure");
-		if(!(new->name = ft_strdup(str)))
+		if (!(new->name = ft_strdup(s)))
 		{
 			free(new);
 			error_malloc_bin(sh, bin, "t_bin_auto name string");
@@ -59,26 +59,25 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	int			i;
 	int			index;
 	t_bin_item	*item;
-	t_bin_item	*current_item;
-	t_bin_item	deleleted_item;
+	t_bin_item	*curr_item;
+	t_bin_item	del_item;
 
 	i = 1;
 	bin_gen_list_for_auto_comp(sh, bin, obj->name);
-	deleleted_item.key = NULL;
-	deleleted_item.value = NULL;
+	del_item.key = NULL;
+	del_item.value = NULL;
 	item = bin_new_item(sh, bin, obj);
 	index = bin_get_hash(item->key, bin->size, 0);
-	current_item = bin->items[index];
-	while (current_item)
+	curr_item = bin->items[index];
+	while (curr_item)
 	{
-		if (current_item != &deleleted_item
-				&& !ft_strcmps(current_item->key, obj->name))
+		if (curr_item != &del_item && !ft_strcmps(curr_item->key, obj->name))
 		{
 			bin->items[index] = item;
-			return (bin_delete_specified_item(current_item));
+			return (bin_delete_specified_item(curr_item));
 		}
 		index = bin_get_hash(item->key, bin->size, i++);
-		current_item = bin->items[index];
+		curr_item = bin->items[index];
 	}
 	bin->items[index] = item;
 	bin->count++;

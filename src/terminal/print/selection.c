@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/26 17:54:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:50:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void		sh_select_print(t_shell *sh)
 			ft_printf("%c", sh->buffer.content[sh->cursor.rel_pos + i]);
 		else
 		{
-			ft_printf("\033[0m%s ", sh->buffer.content + sh->cursor.rel_pos + i);
+			ft_printf("\033[0m%s ",
+				sh->buffer.content + sh->cursor.rel_pos + i);
 			break ;
 		}
 		i++;

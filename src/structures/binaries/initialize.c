@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 23:02:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/27 18:46:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			bin_sort_list_for_auto(t_bin *bin)
+static void		bin_sort_list_for_auto(t_bin *bin)
 {
 	bool			sorted;
 	char			*tmp;
