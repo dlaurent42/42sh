@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 13:01:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:03:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static char	sh_is_select_combination(char *s)
 
 static void	sh_read_dispatcher(t_shell *sh)
 {
-	sh_debug(sh, "before", sh->read->line);
 	if (sh->modes.select && !sh_is_select_combination(sh->read->line))
 		sh_unselect_delete(sh, (unsigned char)sh->read->line[0]);
 	if (sh->read->line[0] == 3)
