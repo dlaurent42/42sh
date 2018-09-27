@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 13:07:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 14:32:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,17 @@ t_shell					*sh_new(char **environ);
 void					sh_read_autocompletion(t_shell *sh);
 
 /*
+** terminal - delete
+*/
+void					sh_delete_char(t_shell *sh);
+void					sh_delete_current_char(t_shell *sh);
+void					sh_delete_all(t_shell *sh);
+void					sh_delete_to_end(t_shell *sh);
+void					sh_delete_from_home(t_shell *sh);
+void					sh_delete_previous_word(t_shell *sh);
+void					sh_delete_next_word(t_shell *sh);
+
+/*
 ** terminal - cursor
 */
 void					sh_move_home(t_shell *sh);
@@ -300,7 +311,9 @@ void					sh_select_print(t_shell *sh);
 */
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
-void					sh_read_delete(t_shell *sh);
+void					sh_read_dispatcher(t_shell *sh);
+char					sh_is_select_combination(char *s);
+char					sh_is_delete_combination(char *s);
 
 /*
 ** terminal - select

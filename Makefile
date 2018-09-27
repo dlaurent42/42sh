@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/26 20:30:37 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/27 14:45:03 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,13 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
+				terminal/delete/delete_all.c								\
+				terminal/delete/delete_char.c								\
+				terminal/delete/delete_current_char.c								\
+				terminal/delete/delete_left_word.c								\
+				terminal/delete/delete_right_word.c								\
+				terminal/delete/delete_from_home.c								\
+				terminal/delete/delete_to_end.c								\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -58,8 +65,9 @@ SRC			=	shell.c														\
 				terminal/print/prompt.c										\
 				terminal/print/selection.c									\
 				terminal/print/welcome.c									\
-				terminal/read/delete.c										\
+				terminal/read/dispatcher.c									\
 				terminal/read/read.c										\
+				terminal/read/utils.c										\
 				terminal/select/cut.c										\
 				terminal/select/copy.c										\
 				terminal/select/paste.c										\
@@ -125,6 +133,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
+				@mkdir -p $(OBJ_DIR)/terminal/delete
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
 				@mkdir -p $(OBJ_DIR)/terminal/print
 				@mkdir -p $(OBJ_DIR)/terminal/read

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:11:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:51:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 14:47:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void		sh_unselect_delete(t_shell *sh, unsigned char c)
 	while (sh->cursor.abs_pos < stop)
 		sh_move_right(sh);
 	while (sh->cursor.abs_pos > start)
-		sh_read_delete(sh);
+		sh_delete_char(sh);
 	sh->modes.select = FALSE;
 }

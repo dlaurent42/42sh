@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cut.c                                              :+:      :+:    :+:   */
+/*   delete_to_end.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 19:43:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 14:47:03 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/27 14:34:51 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/27 15:24:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_cut_selection(t_shell *sh)
+void					sh_delete_to_end(t_shell *sh)
 {
-	int	start;
-	int	stop;
+	int	curr_pos;
 
-	if (!sh->modes.select)
-		return ;
-	start = sh->selection.start_abs;
-	stop = sh->selection.stop;
-	sh_copy_selection(sh);
-	while (sh->cursor.abs_pos < stop)
-		sh_move_right(sh);
-	while (sh->cursor.abs_pos > start)
+	curr_pos = sh->cursor.abs_pos;
+	sh_move_end(sh);
+	while (sh->cursor.abs_pos != curr_pos)
 		sh_delete_char(sh);
 }
