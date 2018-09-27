@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/27 14:45:03 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/27 15:52:40 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC			=	shell.c														\
 				structures/binaries/insert.c								\
 				structures/binaries/new.c									\
 				structures/binaries/search.c								\
+				structures/commands/import.c								\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\

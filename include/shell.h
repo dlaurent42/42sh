@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 14:32:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 16:29:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # ifndef ARG_MAX
 #  define ARG_MAX 		262144
 # endif
+
+# define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
 
 # define ENV_MAX_SIZE	999
 # define ENV_PRIME_1	3
@@ -130,7 +132,8 @@ typedef struct			s_env
 typedef struct			s_cmd
 {
 	char				cmd[ARG_MAX + 1];
-	size_t				cmd_len;
+	unsigned int		len;
+	unsigned int		id;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
@@ -239,6 +242,11 @@ t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 
 /*
+** structures - commands
+*/
+void					command_import(t_shell *sh);
+
+/*
 ** structures - environment
 */
 int						env_get_hash(const char *sh, const int b, const int a);
@@ -271,17 +279,6 @@ t_shell					*sh_new(char **environ);
 void					sh_read_autocompletion(t_shell *sh);
 
 /*
-** terminal - delete
-*/
-void					sh_delete_char(t_shell *sh);
-void					sh_delete_current_char(t_shell *sh);
-void					sh_delete_all(t_shell *sh);
-void					sh_delete_to_end(t_shell *sh);
-void					sh_delete_from_home(t_shell *sh);
-void					sh_delete_previous_word(t_shell *sh);
-void					sh_delete_next_word(t_shell *sh);
-
-/*
 ** terminal - cursor
 */
 void					sh_move_home(t_shell *sh);
@@ -296,6 +293,17 @@ void					sh_move_to_xy(t_shell *sh, int x, int y);
 void					sh_move_next_word(t_shell *sh);
 void					sh_move_previous_word(t_shell *sh);
 void					sh_set_rel_pos(t_shell *sh, int delta, int dir);
+
+/*
+** terminal - delete
+*/
+void					sh_delete_char(t_shell *sh);
+void					sh_delete_current_char(t_shell *sh);
+void					sh_delete_all(t_shell *sh);
+void					sh_delete_to_end(t_shell *sh);
+void					sh_delete_from_home(t_shell *sh);
+void					sh_delete_previous_word(t_shell *sh);
+void					sh_delete_next_word(t_shell *sh);
 
 /*
 ** terminal - print
