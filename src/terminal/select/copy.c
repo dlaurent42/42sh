@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/25 19:39:25 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/21 04:38:29 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/27 12:46:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_delete(t_shell *sh)
+void		sh_copy_selection(t_shell *sh)
 {
-	if (!sh)
+	if (!sh->modes.select)
 		return ;
-	(sh->env) ? env_delete(sh->env) : 0;
-	(sh->bin) ? bin_delete(sh->bin) : 0;
-	(sh->read) ? read_delete(sh->read) : 0;
-	if (sh->termios)
-	{
-		tcgetattr(0, sh->termios);
-		sh->termios->c_lflag = (ICANON | ECHO);
-		tcsetattr(0, 0, sh->termios);
-		free(sh->termios);
-	}
 	(sh->selection.content) ? ft_strdel(&sh->selection.content) : 0;
-	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
-	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
-	free(sh);
+	sh->selection.content = ft_strsub(
+		sh->buffer.content,
+		sh->selection.start_rel,
+		sh_get_selection_len(sh));
+	sh_unselect(sh);
 }

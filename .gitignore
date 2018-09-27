@@ -1,8 +1,10 @@
 # Pollution
 .DS_Store
 
-# Executable
+# Executable && lib
 *.a
+a.out
+/shell
 
 # Compiled sources
 *obj

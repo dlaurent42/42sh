@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   cut.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/25 13:38:26 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/25 19:43:32 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/25 19:47:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void	sh_cut_selection(t_shell *sh)
 {
-	t_shell		*sh;
+	int	start;
+	int	stop;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	g_sh = sh;
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	if (!sh->modes.select)
+		return ;
+	start = sh->selection.start_abs;
+	stop = sh->selection.stop;
+	sh_copy_selection(sh);
+	while (sh->cursor.abs_pos < stop)
+		sh_move_right(sh);
+	while (sh->cursor.abs_pos > start)
+		sh_read_delete(sh);
 }

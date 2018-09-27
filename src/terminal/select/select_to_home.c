@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   select_to_home.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/25 13:38:26 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/21 16:53:16 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/21 16:55:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void	sh_select_home(t_shell *sh)
 {
-	t_shell		*sh;
-
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	g_sh = sh;
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	if (sh->cursor.abs_pos == 0)
+		return ;
+	while (sh->cursor.abs_pos)
+		sh_select_left_char(sh);
 }
