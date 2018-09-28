@@ -6,23 +6,22 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 21:35:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 20:06:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:50:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_add(t_shell *sh, char *command)
+void		command_add(t_shell *sh)
 {
 	t_cmd	*new;
 
-	if (!command)
-		return ;
 	if (!(new = (t_cmd *)ft_memalloc(sizeof(t_cmd))))
 		return ;
 	new->id = (sh->cmd) ? sh->cmd->id + 1 : 1;
-	ft_strcpy(new->cmd, command);
-	new->len = ft_strlens(command);
+	ft_strcpy(new->content, sh->buffer.content);
+	new->display_len = sh->buffer.display_len;
+	new->unicode_len = sh->buffer.unicode_len;
 	new->next = (sh->cmd) ? sh->cmd : NULL;
 	new->last = (sh->cmd) ? sh->cmd->last : new;
 	(sh->cmd) ? sh->cmd->prev = new : 0;

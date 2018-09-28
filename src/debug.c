@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 19:28:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 15:20:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 	int	fd;
 
 	i = 0;
-	fd = open("/dev/ttys002", O_RDWR);
+	fd = open("/dev/ttys000", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (str)
 		while (str[i])
@@ -34,6 +34,16 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putstr_fd(msg, fd);
 	if (sh)
 	{
+		ft_putstr_fd("\nmodes\n\tac: ", fd);
+		ft_putnbr_fd(sh->modes.auto_completion, fd);
+		ft_putstr_fd("\tesc: ", fd);
+		ft_putnbr_fd(sh->modes.esc, fd);
+		ft_putstr_fd("\tdisplay: ", fd);
+		ft_putnbr_fd(sh->modes.display, fd);
+		ft_putstr_fd("\tselect: ", fd);
+		ft_putnbr_fd(sh->modes.select, fd);
+		ft_putstr_fd("\tbrowse: ", fd);
+		ft_putnbr_fd(sh->modes.browse, fd);
 		ft_putstr_fd("\ncursor\n\tx: ", fd);
 		ft_putnbr_fd(sh->cursor.x, fd);
 		ft_putstr_fd("\ty: ", fd);
@@ -48,6 +58,8 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putnbr_fd(sh->buffer.unicode_len, fd);
 		ft_putstr_fd("\tcontent: ", fd);
 		ft_putstr_fd((char *)sh->buffer.content, fd);
+		ft_putstr_fd("\tstored: ", fd);
+		ft_putstr_fd((char *)sh->buffer.stored, fd);
 		ft_putstr_fd("\nprompt\n\tdisplay_len: ", fd);
 		ft_putnbr_fd(sh->prompt.len, fd);
 		ft_putstr_fd("\tdisplay_len_mod: ", fd);

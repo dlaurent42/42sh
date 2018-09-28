@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 18:57:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 20:20:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:23:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		command_export_all(t_shell *sh)
 		id = ft_itoa(cmd->id);
 		ft_putstr_fd(id, fd);
 		ft_putchar_fd(':', fd);
-		ft_putendl_fd(cmd->cmd, fd);
+		ft_putendl_fd(cmd->content, fd);
 		ft_strdel(&id);
 		cmd = cmd->prev;
 	}

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 14:01:54 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/28 14:32:50 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 15:25:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_command_run(t_shell *sh)
+void	sh_print_cmd(t_shell *sh, t_cmd *cmd)
 {
-	(sh->buffer.display_len) ? command_add(sh) : 0;
-	sh->modes.select = FALSE;
-	sh->modes.display = FALSE;
-	sh_move_end(sh);
-	ft_putchar('\n');
-	ft_bzero(sh->buffer.content, sh->buffer.display_len);
-	sh->buffer.display_len = 0;
-	sh->buffer.unicode_len = 0;
-	sh->buffer.cmd = NULL;
-	ft_memset((void *)sh->read, 0, sizeof(t_read));
-	ft_memset((void *)&sh->cursor, 0, sizeof(t_cursor));
+	sh->buffer.cmd = cmd;
+	sh_delete_all(sh);
+	sh_print_str(sh, cmd->content);
+	sh->modes.browse = TRUE;
 }

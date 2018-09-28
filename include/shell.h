@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 22:15:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:49:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,9 @@ typedef struct			s_env
 
 typedef struct			s_cmd
 {
-	char				cmd[ARG_MAX + 1];
-	unsigned int		len;
+	char				content[ARG_MAX + 1];
+	int					unicode_len;
+	int					display_len;
 	unsigned int		id;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
@@ -142,7 +143,7 @@ typedef struct			s_buffer
 	int					unicode_len;
 	int					display_len;
 	char				content[ARG_MAX + 1];
-	char				stored_written_content[ARG_MAX + 1];
+	char				stored[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
 
@@ -235,7 +236,7 @@ t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 /*
 ** structures - commands
 */
-void					command_add(t_shell *sh, char *command);
+void					command_add(t_shell *sh);
 void					command_delete_all(t_shell *sh);
 void					command_import(t_shell *sh);
 void					command_export_all(t_shell *sh);
@@ -300,9 +301,17 @@ void					sh_delete_previous_word(t_shell *sh);
 void					sh_delete_next_word(t_shell *sh);
 
 /*
+** terminal - history
+*/
+void					sh_browse_next(t_shell *sh);
+void					sh_browse_prev(t_shell *sh);
+void					sh_browse_freeze(t_shell *sh);
+
+/*
 ** terminal - print
 */
 void					sh_fill_buffer(t_shell *sh);
+void					sh_print_cmd(t_shell *sh, t_cmd *cmd);
 void					sh_print_prompt(t_shell *sh);
 void					sh_print_str(t_shell *sh, char *str);
 void					sh_welcome(void);
@@ -314,6 +323,7 @@ void					sh_select_print(t_shell *sh);
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_dispatcher(t_shell *sh);
+char					sh_is_arrow_combination(char *s);
 char					sh_is_select_combination(char *s);
 char					sh_is_delete_combination(char *s);
 

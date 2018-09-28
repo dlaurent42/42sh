@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_next.c                                     :+:      :+:    :+:   */
+/*   ft_strlenu.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 22:06:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 22:06:53 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/28 14:04:07 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 14:06:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "libft.h"
 
-void	sh_browse_next(t_shell *sh)
+size_t	ft_strlenu(const char *s)
 {
+	int		i;
+	size_t	len;
 
+	i = 0;
+	len = 0;
+	if (!s)
+		return (len);
+	while (s[i])
+	{
+		if ((unsigned char)s[i] < 0b10000000
+		|| (unsigned char)s[i] >= 0b11000000)
+			len++;
+		i++;
+	}
+	return (len);
 }

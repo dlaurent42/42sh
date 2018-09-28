@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 22:05:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 15:26:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 	char	*s;
 
 	s = sh->read->line;
-	(!ft_strcmps(s, "\x1b\x5b\x41")) ? sh_history_prev(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x42")) ? sh_history_next(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x41")) ? sh_browse_prev(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x42")) ? sh_browse_next(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x43")) ? sh_move_right(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x44")) ? sh_move_left(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x46")) ? sh_move_end(sh) : 0;
@@ -61,6 +61,9 @@ void		sh_read_dispatcher(t_shell *sh)
 {
 	if (sh->modes.select && !sh_is_select_combination(sh->read->line))
 		sh_unselect_delete(sh, (unsigned char)sh->read->line[0]);
+	if (sh->modes.browse && !(sh_is_select_combination(sh->read->line)
+	|| sh_is_arrow_combination(sh->read->line)))
+		sh_browse_freeze(sh);
 	if (sh->read->line[0] == 3)
 		sh_copy_selection(sh);
 	else if (sh->read->line[0] == 22)

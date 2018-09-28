@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/27 19:12:51 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/28 14:52:02 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,13 +48,6 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/autocompletion.c					\
-				terminal/delete/delete_all.c								\
-				terminal/delete/delete_char.c								\
-				terminal/delete/delete_current_char.c						\
-				terminal/delete/delete_left_word.c							\
-				terminal/delete/delete_right_word.c							\
-				terminal/delete/delete_from_home.c							\
-				terminal/delete/delete_to_end.c								\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -65,7 +58,18 @@ SRC			=	shell.c														\
 				terminal/cursor/move_prev_word.c							\
 				terminal/cursor/move_next_word.c							\
 				terminal/cursor/utils.c										\
+				terminal/delete/delete_all.c								\
+				terminal/delete/delete_char.c								\
+				terminal/delete/delete_current_char.c						\
+				terminal/delete/delete_left_word.c							\
+				terminal/delete/delete_right_word.c							\
+				terminal/delete/delete_from_home.c							\
+				terminal/delete/delete_to_end.c								\
+				terminal/history/browse_next.c								\
+				terminal/history/browse_prev.c								\
+				terminal/history/freeze.c									\
 				terminal/print/buffer.c										\
+				terminal/print/command.c									\
 				terminal/print/prompt.c										\
 				terminal/print/selection.c									\
 				terminal/print/welcome.c									\
@@ -137,8 +141,9 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
-				@mkdir -p $(OBJ_DIR)/terminal/delete
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
+				@mkdir -p $(OBJ_DIR)/terminal/delete
+				@mkdir -p $(OBJ_DIR)/terminal/history
 				@mkdir -p $(OBJ_DIR)/terminal/print
 				@mkdir -p $(OBJ_DIR)/terminal/read
 				@mkdir -p $(OBJ_DIR)/terminal/select

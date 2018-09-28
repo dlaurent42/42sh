@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   freeze.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 14:01:54 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/09/28 14:46:24 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 14:49:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_command_run(t_shell *sh)
+void		sh_browse_freeze(t_shell *sh)
 {
-	(sh->buffer.display_len) ? command_add(sh) : 0;
-	sh->modes.select = FALSE;
-	sh->modes.display = FALSE;
-	sh_move_end(sh);
-	ft_putchar('\n');
-	ft_bzero(sh->buffer.content, sh->buffer.display_len);
-	sh->buffer.display_len = 0;
-	sh->buffer.unicode_len = 0;
 	sh->buffer.cmd = NULL;
-	ft_memset((void *)sh->read, 0, sizeof(t_read));
-	ft_memset((void *)&sh->cursor, 0, sizeof(t_cursor));
+	ft_bzero(sh->buffer.stored, ARG_MAX + 1);
+	sh->modes.browse = FALSE;
 }
