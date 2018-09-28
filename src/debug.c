@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 15:20:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 16:25:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putnbr_fd(sh->prompt.len, fd);
 		ft_putstr_fd("\tdisplay_len_mod: ", fd);
 		ft_putnbr_fd(sh->prompt.len_mod, fd);
+		ft_putstr_fd("\tlocation: ", fd);
+		ft_putstr_fd(sh->prompt.location, fd);
 		ft_putstr_fd("\nwindow\n\twidth: ", fd);
 		ft_putnbr_fd(sh->window.width, fd);
 		ft_putstr_fd("\theight: ", fd);

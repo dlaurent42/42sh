@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/28 14:52:02 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/28 16:39:09 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				functions/redirect.c										\
+				functions/cd/cd.c											\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
@@ -92,8 +93,6 @@ SRC			=	shell.c														\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c		
 
-#				functions/redirect.c										\
-#				functions/cd/cd.c											\
 #				functions/echo/echo.c										\
 #				functions/env/env.c											\
 #				functions/exit/exit											\

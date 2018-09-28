@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 14:49:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 16:41:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct			s_prompt
 	int					len_mod;
 	char				*content;
 	char				*location;
+	char				last_exec_succeed;
 }						t_prompt;
 
 typedef struct			s_read
@@ -218,6 +219,7 @@ void					error_no_path_var(t_shell *sh);
 ** functions
 */
 void					sh_command_run(t_shell *sh);
+char					sh_cd(t_shell *sh, char *path);
 
 /*
 ** structures - binaries
