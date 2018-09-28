@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/29 00:50:48 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/29 01:41:12 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC			=	shell.c														\
 				terminal/delete/delete_to_end.c								\
 				terminal/history/browse_next.c								\
 				terminal/history/browse_prev.c								\
+				terminal/history/comparison.c								\
 				terminal/history/freeze.c									\
 				terminal/print/buffer.c										\
 				terminal/print/command.c									\

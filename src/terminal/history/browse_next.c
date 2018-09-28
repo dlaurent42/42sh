@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 22:06:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 15:26:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 01:49:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ void		sh_browse_next(t_shell *sh)
 	tmp = sh->buffer.cmd->prev;
 	while (tmp)
 	{
-		if (ft_strcmps(tmp->content, sh->buffer.stored) >= 0)
+		if (sh->buffer.cmd
+		&& ft_strcmps(sh->buffer.cmd->content, tmp->content) == 0)
+			tmp = tmp->prev;
+		else if (sh_browse_compare(tmp->content, sh->buffer.stored) == 0)
 		{
 			cmd = tmp;
 			break ;
 		}
-		tmp = tmp->prev;
+		else
+			tmp = tmp->prev;
 	}
 	(cmd) ? sh_print_cmd(sh, cmd) : 0;
 	(!tmp) ? sh_reset_history(sh) : 0;

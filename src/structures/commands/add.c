@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 21:35:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 14:50:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 01:45:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		command_add(t_shell *sh)
 {
 	t_cmd	*new;
 
+	if (sh->cmd && ft_strcmps(sh->cmd->content, sh->buffer.content) == 0)
+		return ;
 	if (!(new = (t_cmd *)ft_memalloc(sizeof(t_cmd))))
 		return ;
 	new->id = (sh->cmd) ? sh->cmd->id + 1 : 1;

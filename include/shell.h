@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 01:08:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 01:47:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,7 @@ void					sh_delete_next_word(t_shell *sh);
 void					sh_browse_next(t_shell *sh);
 void					sh_browse_prev(t_shell *sh);
 void					sh_browse_freeze(t_shell *sh);
+char					sh_browse_compare(char *command, char *buffer);
 
 /*
 ** terminal - print
