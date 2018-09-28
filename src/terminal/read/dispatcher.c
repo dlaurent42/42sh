@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 18:50:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 22:05:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 	char	*s;
 
 	s = sh->read->line;
+	(!ft_strcmps(s, "\x1b\x5b\x41")) ? sh_history_prev(sh) : 0;
+	(!ft_strcmps(s, "\x1b\x5b\x42")) ? sh_history_next(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x43")) ? sh_move_right(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x44")) ? sh_move_left(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x46")) ? sh_move_end(sh) : 0;

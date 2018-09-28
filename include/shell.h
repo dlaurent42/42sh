@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 19:20:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/27 22:15:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct			s_buffer
 	int					unicode_len;
 	int					display_len;
 	char				content[ARG_MAX + 1];
+	char				stored_written_content[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
 
@@ -172,7 +173,8 @@ typedef struct			s_modes
 	unsigned char		esc				: 1;
 	unsigned char		display			: 1;
 	unsigned char		select			: 1;
-	unsigned char		others			: 4;
+	unsigned char		browse			: 1;
+	unsigned char		others			: 3;
 }						t_modes;
 
 typedef struct			s_select
