@@ -6,35 +6,38 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 17:32:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 00:37:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_cd(t_shell *sh, char *path)
-{
-	int		res;
-	char	real_path[PATH_MAX + 1];
+/*
+**	OPTIONS
+**		option -L : Force symbolic links to be followed (default behavior)
+**		option -P : Use the physical directory structure without following
+**					symbolic links
+**
+**	EXAMPLES
+**		cd link -> repo => link
+**		cd -L link -> repo => link
+**		cd -P link -> repo => repo
+**		cd -L -P link -> repo => repo
+**
+**	ERRORS
+**		if link name equal to itself -> too many levels of symbolic links
+**		if link/repo does not exist -> no such file or directory
+*/
 
-	if (!path)
+/*
+** add permissions: access denied
+*/
+
+char		sh_cd(t_shell *sh, char *value, char **options)
+{
+	if (!value)
 		return (-1);
-	if (path[0] == '/')
-		ft_strcpy(real_path, path);
-	else if (path[0] == '\0')
-		(env_search(sh->env, "HOME"))
-			? ft_strcpy(real_path, env_search(sh->env, "HOME"))
-			: 0;
-	else
-	{
-		ft_strcpy(real_path, sh->prompt.location);
-		ft_strcat(real_path, "/");
-		ft_strcat(real_path, path);
-	}
-	if ((res = chdir(real_path)) == -1)
-	{
-		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(real_path, 2);
-	}
-	return (res);
+	if (sh_cd_parse_options(options))
+		return (sh_cd_nofollow(sh, value, NULL));
+	return (sh_cd_follow(sh, value));
 }

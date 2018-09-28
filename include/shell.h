@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 16:41:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 01:08:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,18 @@ void					error_no_path_var(t_shell *sh);
 ** functions
 */
 void					sh_command_run(t_shell *sh);
-char					sh_cd(t_shell *sh, char *path);
+
+/*
+** functions - cd
+*/
+int						sh_cd_parse_options(char **options);
+int						sh_cd_remove_troll(char *s);
+char					sh_cd(t_shell *sh, char *path, char **options);
+char					sh_cd_error(char *value, char *path, int err_id);
+char					sh_cd_follow(t_shell *sh, char *value);
+char					sh_cd_nofollow(t_shell *sh, char *value, char *path);
+char					*sh_cd_parse_path(char *s);
+char					*sh_cd_remove_last_slash(char *param);
 
 /*
 ** structures - binaries

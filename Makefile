@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/28 16:39:09 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/09/29 00:50:48 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,11 @@ SRC			=	shell.c														\
 				errors/path.c												\
 				functions/redirect.c										\
 				functions/cd/cd.c											\
+				functions/cd/error.c										\
+				functions/cd/follow.c										\
+				functions/cd/follow_parser.c								\
+				functions/cd/nofollow.c										\
+				functions/cd/options.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
