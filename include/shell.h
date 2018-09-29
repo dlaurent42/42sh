@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 17:37:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 19:49:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ typedef struct			s_cursor
 	int					y;
 	int					abs_pos;
 	int					rel_pos;
-	int					scroll_y;
 }						t_cursor;
 
 typedef struct			s_buffer
