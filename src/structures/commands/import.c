@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 14:23:11 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:03:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static char	command_parse_and_add(t_shell *sh, char *content)
 	if ((id = ft_atoi(content)) == 0)
 		return (FALSE);
 	id_len = str_size_base(10, id);
+	if (ft_strlens(content + id_len + 1) > ARG_MAX)
+		return (FALSE);
 	if ((unsigned char)content[id_len] != ':'
 	|| (unsigned char)content[id_len + 1] == 0)
 		return (FALSE);
