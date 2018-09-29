@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 20:22:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 17:38:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static char	sh_command_dispatcher(t_shell *sh)
 	res = 0;
 	if (sh->buffer.content[0] == 'c' && sh->buffer.content[1] == 'd')
 		res = run_cd_cmd(sh);
+	else if (ft_strcmps(sh->buffer.content, "exit") == 0)
+		sh_exit(sh, sh->buffer.content + 5);
 	return (res);
 }
 
