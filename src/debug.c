@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 16:25:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/29 19:06:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 	int	fd;
 
 	i = 0;
-	fd = open("/dev/ttys000", O_RDWR);
+	fd = open("/dev/ttys001", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (str)
 		while (str[i])
@@ -52,6 +52,12 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putnbr_fd(sh->cursor.abs_pos, fd);
 		ft_putstr_fd("\trel_pos: ", fd);
 		ft_putnbr_fd(sh->cursor.rel_pos, fd);
+		ft_putstr_fd("\nselect\n\tstart rel: ", fd);
+		ft_putnbr_fd(sh->selection.start_rel, fd);
+		ft_putstr_fd("\tstart abs: ", fd);
+		ft_putnbr_fd(sh->selection.start_abs, fd);
+		ft_putstr_fd("\tstop: ", fd);
+		ft_putnbr_fd(sh->selection.stop, fd);
 		ft_putstr_fd("\nbuffer\n\tdisplay_len: ", fd);
 		ft_putnbr_fd(sh->buffer.display_len, fd);
 		ft_putstr_fd("\tunicode_len: ", fd);
