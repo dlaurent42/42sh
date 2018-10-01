@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 20:41:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/26 14:32:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void		signal_catching(void)
 {
 	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGWINCH\n");
+	if (signal(SIGINT, sig_handler) == SIG_ERR)
+		ft_printf("\ncan't catch SIGINT");
 }

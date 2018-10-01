@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/28 23:06:16 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 23:14:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+char	sh_cd_error(char *value, char *path, int err_id)
 {
-	t_shell		*sh;
-
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	if (err_id == 1)
+		ft_putstr_fd("cd: no such file or directory: ", 2);
+	if (err_id == 2)
+		ft_putstr_fd("cd: too many levels of symbolic links: ", 2);
+	if (err_id == 3)
+		ft_putstr_fd("cd: permission denied: ", 2);
+	ft_putendl_fd(value, 2);
+	ft_strdel(&path);
+	return (-1);
 }

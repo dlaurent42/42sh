@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   comparison.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/29 01:38:46 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/29 01:47:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+char		sh_browse_compare(char *command, char *buffer)
 {
-	t_shell		*sh;
+	int	i;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	i = 0;
+	while (command[i] && buffer[i] && command[i] == buffer[i])
+		i++;
+	return (buffer[i]);
 }

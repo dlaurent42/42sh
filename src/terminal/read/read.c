@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/01 09:47:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void		sh_read(t_shell *sh)
 {
-	t_shell		*sh;
-
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	sh_set_prompt(sh);
+	while (TRUE)
+	{
+		read(0, sh->read->line, 7);
+		if (sh->read->line[0] == 4)
+			break ;
+		sh_read_dispatcher(sh);
+		bzero(sh->read->line, 8);
+	}
 }

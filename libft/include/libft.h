@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:33:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 13:29:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ char				*ft_strleft(char *src, size_t len);
 char				*ft_strright(const char *src, size_t len);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlens(const char *s);
+size_t				ft_strlenu(const char *s);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strncat(char *s1, const char *s2, size_t n);

@@ -6,6 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/01 13:31:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +41,8 @@ static int	sh_add_char(t_shell *sh, char c)
 	int	i;
 
 	i = sh->buffer.unicode_len;
+	if (sh->buffer.unicode_len + 1 > ARG_MAX)
+		return (-1);
 	while (i > sh->cursor.rel_pos)
 	{
 		sh->buffer.content[i] = sh->buffer.content[i - 1];
@@ -57,6 +60,8 @@ static int	sh_add_wchar(t_shell *sh, unsigned char c)
 	static char	pointer = 0;
 	static char	counter = 0;
 
+	if (sh->buffer.unicode_len + 1 > ARG_MAX)
+		return (-1);
 	i = sh->buffer.unicode_len;
 	while (i > sh->cursor.rel_pos)
 	{
@@ -103,6 +108,7 @@ void		sh_fill_buffer(t_shell *sh)
 	i = 0;
 	while (sh->read->line[i])
 	{
+		res = -1;
 		c = sh->read->line[i];
 		if (c == 10)
 			sh_command_run(sh);

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   ft_strlenu.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/28 14:04:07 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 14:06:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "libft.h"
 
-int		main(int argc, char **argv, char **environ)
+size_t	ft_strlenu(const char *s)
 {
-	t_shell		*sh;
+	int		i;
+	size_t	len;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	i = 0;
+	len = 0;
+	if (!s)
+		return (len);
+	while (s[i])
+	{
+		if ((unsigned char)s[i] < 0b10000000
+		|| (unsigned char)s[i] >= 0b11000000)
+			len++;
+		i++;
+	}
+	return (len);
 }

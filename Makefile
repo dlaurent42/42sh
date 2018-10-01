@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/29 08:49:35 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/01 13:26:57 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,13 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				functions/redirect.c										\
+				functions/cd/cd.c											\
+				functions/cd/error.c										\
+				functions/cd/follow.c										\
+				functions/cd/follow_parser.c								\
+				functions/cd/nofollow.c										\
+				functions/cd/options.c										\
+				functions/exit/exit.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
@@ -30,6 +37,10 @@ SRC			=	shell.c														\
 				structures/binaries/insert.c								\
 				structures/binaries/new.c									\
 				structures/binaries/search.c								\
+				structures/commands/add.c									\
+				structures/commands/delete.c								\
+				structures/commands/export.c								\
+				structures/commands/import.c								\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
@@ -70,24 +81,51 @@ SRC			=	shell.c														\
 				terminal/autocompletion/auto_completion/get_args.c \
 				terminal/autocompletion/auto_completion/create_args.c \
 				terminal/autocompletion/auto_completion/free_args.c \
+				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
 				terminal/cursor/move_left.c									\
 				terminal/cursor/move_right.c								\
+				terminal/cursor/move_up.c									\
 				terminal/cursor/move_xy.c									\
 				terminal/cursor/move_prev_word.c							\
 				terminal/cursor/move_next_word.c							\
 				terminal/cursor/utils.c										\
-				terminal/printer/buffer.c									\
-				terminal/printer/prompt.c									\
-				terminal/reader/delete.c									\
-				terminal/reader/read.c										\
+				terminal/delete/delete_all.c								\
+				terminal/delete/delete_char.c								\
+				terminal/delete/delete_current_char.c						\
+				terminal/delete/delete_left_word.c							\
+				terminal/delete/delete_right_word.c							\
+				terminal/delete/delete_from_home.c							\
+				terminal/delete/delete_to_end.c								\
+				terminal/history/browse_next.c								\
+				terminal/history/browse_prev.c								\
+				terminal/history/comparison.c								\
+				terminal/history/freeze.c									\
+				terminal/print/buffer.c										\
+				terminal/print/command.c									\
+				terminal/print/prompt.c										\
+				terminal/print/selection.c									\
+				terminal/print/welcome.c									\
+				terminal/read/dispatcher.c									\
+				terminal/read/read.c										\
+				terminal/read/utils.c										\
+				terminal/select/cut.c										\
+				terminal/select/copy.c										\
+				terminal/select/paste.c										\
+				terminal/select/select_down.c								\
+				terminal/select/select_left.c								\
+				terminal/select/select_left_word.c							\
+				terminal/select/select_right.c								\
+				terminal/select/select_right_word.c							\
+				terminal/select/select_to_end.c								\
+				terminal/select/select_to_home.c							\
+				terminal/select/select_up.c									\
+				terminal/select/unselect.c									\
+				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c		
 
-				
-#				functions/redirect.c										\
-#				functions/cd/cd.c											\
 #				functions/echo/echo.c										\
 #				functions/env/env.c											\
 #				functions/exit/exit											\
@@ -140,8 +178,11 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/display
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/auto_completion
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
-				@mkdir -p $(OBJ_DIR)/terminal/printer
-				@mkdir -p $(OBJ_DIR)/terminal/reader
+				@mkdir -p $(OBJ_DIR)/terminal/delete
+				@mkdir -p $(OBJ_DIR)/terminal/history
+				@mkdir -p $(OBJ_DIR)/terminal/print
+				@mkdir -p $(OBJ_DIR)/terminal/read
+				@mkdir -p $(OBJ_DIR)/terminal/select
 				@mkdir -p $(OBJ_DIR)/terminal/signals
 
 clean:

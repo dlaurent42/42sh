@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/20 23:51:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:57:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static char	*sh_prompt_get_next_location(char *location)
 	unsigned char	j;
 
 	i = 0;
+	j = 0;
 	while (location[i])
 	{
 		if (location[i] == '/')
@@ -82,7 +83,8 @@ char		*sh_get_git_branch(char *location)
 				break ;
 			}
 		closedir(dir);
-		location = sh_prompt_get_next_location(location);
+		if (!git)
+			location = sh_prompt_get_next_location(location);
 	}
 	return (sh_prompt_format_git(git));
 }

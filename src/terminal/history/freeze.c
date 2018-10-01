@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   freeze.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/28 14:46:24 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/28 14:49:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void		sh_browse_freeze(t_shell *sh)
 {
-	t_shell		*sh;
-
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	sh->buffer.cmd = NULL;
+	ft_bzero(sh->buffer.stored, ARG_MAX + 1);
+	sh->modes.browse = FALSE;
 }

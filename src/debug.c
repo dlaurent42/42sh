@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:34:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 13:29:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putstr_fd(msg, fd);
 	if (sh)
 	{
+		ft_putstr_fd("\nmodes\n\tac: ", fd);
+		ft_putnbr_fd(sh->modes.auto_completion, fd);
+		ft_putstr_fd("\tesc: ", fd);
+		ft_putnbr_fd(sh->modes.esc, fd);
+		ft_putstr_fd("\tdisplay: ", fd);
+		ft_putnbr_fd(sh->modes.display, fd);
+		ft_putstr_fd("\tselect: ", fd);
+		ft_putnbr_fd(sh->modes.select, fd);
+		ft_putstr_fd("\tbrowse: ", fd);
+		ft_putnbr_fd(sh->modes.browse, fd);
 		ft_putstr_fd("\ncursor\n\tx: ", fd);
 		ft_putnbr_fd(sh->cursor.x, fd);
 		ft_putstr_fd("\ty: ", fd);
@@ -42,22 +52,30 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putnbr_fd(sh->cursor.abs_pos, fd);
 		ft_putstr_fd("\trel_pos: ", fd);
 		ft_putnbr_fd(sh->cursor.rel_pos, fd);
+		ft_putstr_fd("\nselect\n\tstart rel: ", fd);
+		ft_putnbr_fd(sh->selection.start_rel, fd);
+		ft_putstr_fd("\tstart abs: ", fd);
+		ft_putnbr_fd(sh->selection.start_abs, fd);
+		ft_putstr_fd("\tstop: ", fd);
+		ft_putnbr_fd(sh->selection.stop, fd);
 		ft_putstr_fd("\nbuffer\n\tdisplay_len: ", fd);
 		ft_putnbr_fd(sh->buffer.display_len, fd);
 		ft_putstr_fd("\tunicode_len: ", fd);
 		ft_putnbr_fd(sh->buffer.unicode_len, fd);
 		ft_putstr_fd("\tcontent: ", fd);
 		ft_putstr_fd((char *)sh->buffer.content, fd);
-		ft_putstr_fd("\tdisplay_len: ", fd);
+		ft_putstr_fd("\tstored: ", fd);
+		ft_putstr_fd((char *)sh->buffer.stored, fd);
+		ft_putstr_fd("\nprompt\n\tdisplay_len: ", fd);
 		ft_putnbr_fd(sh->prompt.len, fd);
 		ft_putstr_fd("\tdisplay_len_mod: ", fd);
 		ft_putnbr_fd(sh->prompt.len_mod, fd);
+		ft_putstr_fd("\tlocation: ", fd);
+		ft_putstr_fd(sh->prompt.location, fd);
 		ft_putstr_fd("\nwindow\n\twidth: ", fd);
 		ft_putnbr_fd(sh->window.width, fd);
 		ft_putstr_fd("\theight: ", fd);
 		ft_putnbr_fd(sh->window.height, fd);
-		ft_putstr_fd("\tscroll_y: ", fd);
-		ft_putnbr_fd(sh->cursor.scroll_y, fd);
 	}
 	ft_putstr_fd("\n-----------------", fd);
 	close(fd);

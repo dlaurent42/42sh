@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   select_down.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:13 by dhojt            ###   ########.fr       */
+/*   Created: 2018/09/25 16:02:37 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/09/25 16:07:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void	sh_select_down(t_shell *sh)
 {
-	t_shell		*sh;
+	int		cursor;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	cursor = sh->cursor.abs_pos + sh->window.width;
+	if (sh->cursor.abs_pos + sh->window.width > sh->buffer.display_len)
+		return (sh_select_end(sh));
+	while (sh->cursor.abs_pos != cursor)
+		sh_select_right_char(sh);
 }
