@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 15:26:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 13:43:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		sh_read_dispatcher(t_shell *sh)
 	else if (sh->read->line[0] == 27)
 		sh_arrows_dispatcher(sh);
 	else if (sh->read->line[0] == 9)
-		sh_read_autocompletion(sh);
+		auto_completion(sh);
 	else
 		sh_fill_buffer(sh);
 }

@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/30 18:26:38 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 13:42:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void			delete_str(t_frame *frame)
 
 	len = ft_strlen(frame->del_file_name);
 	while (len--)
-		sh_read_delete(frame->shell);
+		sh_delete_char(frame->shell);
 }
 
 static void			clear_selection_screen(t_frame *frame)
@@ -95,7 +95,7 @@ static void			auto_read_dispatcher(t_frame *frame)
 	else
 	{
 		if (line[0] == 127)
-			sh_read_delete(shell);
+			sh_delete_char(shell);
 		else if (line[0] == 10)
 			manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
 		else
