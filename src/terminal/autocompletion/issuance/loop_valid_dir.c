@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 13:42:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 13:47:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			delete_str(t_frame *frame)
 {
 	int				len;
 
-	len = ft_strlen(frame->del_file_name);
+	len = ft_strlenu(frame->del_file_name);
 	while (len--)
 		sh_delete_char(frame->shell);
 }
