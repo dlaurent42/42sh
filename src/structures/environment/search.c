@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 19:21:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:38:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ char	*env_search(t_env *env, const char *key)
 	int			i;
 	int			index;
 	t_env_item	*item;
-	t_env_item	deleted_item;
 
 	i = 1;
-	deleted_item.key = NULL;
-	deleted_item.value = NULL;
 	index = env_get_hash(key, env->size, 0);
 	item = env->items[index];
 	while (item)

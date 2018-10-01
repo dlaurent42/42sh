@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 23:30:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 23:45:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct			s_env
 	char				*environment[ENV_MAX_SIZE];
 	size_t				size;
 	size_t				count;
+	t_env_item			del;
 	t_env_item			**items;
 }						t_env;
 
@@ -361,9 +362,8 @@ void					sh_command_run(t_shell *sh);
 /*
 ** functions - cd
 */
-int						sh_cd_parse_options(char **options);
 int						sh_cd_remove_troll(char *s);
-char					sh_cd(t_shell *sh, char *path, char **options);
+char					sh_cd(t_shell *sh, char *args);
 char					sh_cd_error(char *value, char *path, int err_id);
 char					sh_cd_follow(t_shell *sh, char *value);
 char					sh_cd_nofollow(t_shell *sh, char *value, char *path);
@@ -373,7 +373,17 @@ char					*sh_cd_remove_last_slash(char *param);
 /*
 ** functions - exit
 */
-void					sh_exit(t_shell *sh, char *value);
+void					sh_exit(t_shell *sh, char *args);
+
+/*
+** functions - setenv
+*/
+char					sh_setenv(t_shell *sh, char *args);
+
+/*
+** functions - unsetenv
+*/
+char					sh_unsetenv(t_shell *sh, char *args);
 
 /*
 ** structures - binaries

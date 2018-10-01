@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 21:51:36 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/01 23:45:05 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ SRC			=	shell.c														\
 				functions/cd/follow.c										\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
-				functions/cd/options.c										\
 				functions/exit/exit.c										\
+				functions/setenv/setenv.c									\
+				functions/unsetenv/unsetenv.c								\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
@@ -121,16 +122,7 @@ SRC			=	shell.c														\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
-				terminal/signals/resize.c		
-
-#				functions/echo/echo.c										\
-#				functions/env/env.c											\
-#				functions/exit/exit											\
-#				functions/setenv/setenv										\
-#				functions/unsetenv/unsetenv									\
-#				structures/commands/										\
-
-
+				terminal/signals/resize.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

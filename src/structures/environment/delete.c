@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:10:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:38:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,17 @@ void		env_delete_item(t_env *env, const char *key)
 	int			i;
 	int			index;
 	t_env_item	*item;
-	t_env_item	deleleted_item;
 
 	i = 1;
-	deleleted_item.key = NULL;
-	deleleted_item.value = NULL;
 	env_delete_item_from_array(env, key);
 	index = env_get_hash(key, env->size, 0);
 	item = env->items[index];
 	while (item)
 	{
-		if (item != &deleleted_item && !ft_strcmps(item->key, key))
+		if (item != &env->del && !ft_strcmps(item->key, key))
 		{
 			env_delete_specified_item(item);
-			env->items[index] = &deleleted_item;
+			env->items[index] = &env->del;
 		}
 		index = env_get_hash(key, env->size, i++);
 		item = env->items[index];
@@ -84,7 +81,7 @@ void		env_delete(t_env *env)
 	while (i < env->size)
 	{
 		item = env->items[i];
-		if (item)
+		if (item && item != &env->del)
 			env_delete_specified_item(item);
 		i++;
 	}
