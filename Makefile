@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 14:21:57 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/01 15:54:31 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC			=	shell.c														\
 				functions/cd/follow.c										\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
-				functions/cd/options.c										\
 				functions/exit/exit.c										\
 				functions/setenv/setenv.c									\
 				functions/unsetenv/unsetenv.c								\

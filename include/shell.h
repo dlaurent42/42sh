@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 14:34:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:54:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,9 +223,8 @@ void					sh_command_run(t_shell *sh);
 /*
 ** functions - cd
 */
-int						sh_cd_parse_options(char **options);
 int						sh_cd_remove_troll(char *s);
-char					sh_cd(t_shell *sh, char *path, char **options);
+char					sh_cd(t_shell *sh, char *args);
 char					sh_cd_error(char *value, char *path, int err_id);
 char					sh_cd_follow(t_shell *sh, char *value);
 char					sh_cd_nofollow(t_shell *sh, char *value, char *path);
@@ -235,7 +234,7 @@ char					*sh_cd_remove_last_slash(char *param);
 /*
 ** functions - exit
 */
-void					sh_exit(t_shell *sh, char *value);
+void					sh_exit(t_shell *sh, char *args);
 
 /*
 ** functions - setenv

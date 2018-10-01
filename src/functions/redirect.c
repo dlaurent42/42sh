@@ -6,48 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 14:30:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:30:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static char	run_cd_cmd(t_shell *sh)
-{
-	int		i;
-	char	res;
-	char	**options;
-
-	i = 3;
-	options = ft_memalloc(sizeof(char *) * 3);
-	options[0] = NULL;
-	options[1] = NULL;
-	if (sh->buffer.content[3] == '-' && sh->buffer.content[4] == 'L')
-	{
-		i += 3;
-		options[0] = ft_strdups("-L");
-	}
-	if (sh->buffer.content[3] == '-' && sh->buffer.content[4] == 'P')
-	{
-		i += 3;
-		options[0] = ft_strdups("-P");
-	}
-	if (sh->buffer.content[6] == '-' && sh->buffer.content[7] == 'L')
-	{
-		i += 3;
-		options[1] = ft_strdups("-L");
-	}
-	if (sh->buffer.content[6] == '-' && sh->buffer.content[7] == 'P')
-	{
-		i += 3;
-		options[1] = ft_strdups("-P");
-	}
-	res = sh_cd(sh, sh->buffer.content + i, options);
-	ft_strdel(&options[0]);
-	ft_strdel(&options[1]);
-	ft_memdel((void **)&options);
-	return (res);
-}
 
 static char	sh_command_dispatcher(t_shell *sh)
 {
@@ -55,7 +18,7 @@ static char	sh_command_dispatcher(t_shell *sh)
 
 	res = 0;
 	if (sh->buffer.content[0] == 'c' && sh->buffer.content[1] == 'd')
-		res = run_cd_cmd(sh);
+		res = sh_cd(sh, sh->buffer.content + 3);
 	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x'
 	&& sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
 		sh_exit(sh, sh->buffer.content + 5);
