@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 19:40:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 09:46:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ static char	sh_command_dispatcher(t_shell *sh)
 
 static void	sh_reset_sh(t_shell *sh)
 {
-	ft_bzero(sh->buffer.content, sh->buffer.display_len);
+	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
 	sh->buffer.display_len = 0;
 	sh->buffer.unicode_len = 0;
 	sh->buffer.cmd = NULL;
-	ft_bzero((void *)sh->read, sizeof(t_read));
+	sh->read->unicode_bytes_left = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
+	sh_set_prompt(sh);
+	sh_print_prompt(sh);
 }
 
 void		sh_command_run(t_shell *sh)

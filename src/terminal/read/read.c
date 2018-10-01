@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 16:46:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 09:47:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void		sh_read(t_shell *sh)
 {
+	sh_set_prompt(sh);
 	while (TRUE)
 	{
-		(sh->modes.display) ? 0 : sh_set_prompt(sh);
-		(sh->modes.display) ? 0 : sh_print_prompt(sh);
 		read(0, sh->read->line, 7);
 		if (sh->read->line[0] == 4)
 			break ;
