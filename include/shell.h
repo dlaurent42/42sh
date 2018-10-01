@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 14:07:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:34:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct			s_env
 	char				*environment[ENV_MAX_SIZE];
 	size_t				size;
 	size_t				count;
+	t_env_item			del;
 	t_env_item			**items;
 }						t_env;
 
@@ -240,6 +241,11 @@ void					sh_exit(t_shell *sh, char *value);
 ** functions - setenv
 */
 char					sh_setenv(t_shell *sh, char *args);
+
+/*
+** functions - unsetenv
+*/
+char					sh_unsetenv(t_shell *sh, char *args);
 
 /*
 ** structures - binaries
