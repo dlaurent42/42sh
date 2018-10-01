@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 00:37:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 11:56:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,19 @@
 
 char		sh_cd(t_shell *sh, char *value, char **options)
 {
+	int		option_p;
+
+	option_p = sh_cd_parse_options(options);
 	if (!value)
 		return (-1);
-	if (sh_cd_parse_options(options))
+	if (value[0] == '-' && value[1] == '-' && !value[2])
+		return (sh_cd_nofollow(sh, env_search(sh->env, "HOME"), NULL));
+	else if (option_p && value[0] == '-' && !value[1])
+		return (sh_cd_nofollow(sh, env_search(sh->env, "OLDPWD"), NULL));
+	else if (option_p)
 		return (sh_cd_nofollow(sh, value, NULL));
-	return (sh_cd_follow(sh, value));
+	else if (value[0] == '-' && !value[1])
+		return (sh_cd_follow(sh, env_search(sh->env, "OLDPWD")));
+	else
+		return (sh_cd_follow(sh, value));
 }

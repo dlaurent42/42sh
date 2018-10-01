@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 09:47:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 13:23:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		sh_read(t_shell *sh)
 {
-	sh_set_prompt(sh);
+	sh_print_prompt(sh);
 	while (TRUE)
 	{
 		read(0, sh->read->line, 7);

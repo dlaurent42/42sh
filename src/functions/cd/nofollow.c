@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:11:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 01:02:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 13:20:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static char	*sh_cd_get_real_path(t_shell *sh, char *param)
 	char	*rpath;
 
 	path = NULL;
+	rpath = NULL;
+	
 	if (param[0] == '/')
-		return (ft_strdup(param));
+		return (realpath(param, NULL));
 	if (param[0] == '\0')
 		return (ft_strdup(env_search(sh->env, "HOME")));
 	if (!(path = ft_strjoins(sh->prompt.location, "/")))
