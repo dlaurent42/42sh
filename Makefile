@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/09/29 17:31:41 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/01 14:12:40 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC			=	shell.c														\
 				functions/cd/nofollow.c										\
 				functions/cd/options.c										\
 				functions/exit/exit.c										\
+				functions/setenv/setenv.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\

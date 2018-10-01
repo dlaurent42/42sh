@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 09:46:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:15:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ static char	sh_command_dispatcher(t_shell *sh)
 	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x'
 	&& sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
 		sh_exit(sh, sh->buffer.content + 5);
+	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e'
+	&& sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e'
+	&& sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
+		sh_setenv(sh, sh->buffer.content + 7);
 	return (res);
 }
 

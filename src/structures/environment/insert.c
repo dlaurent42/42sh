@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:10:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:05:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ static t_env_item	*env_new_item(t_shell *sh, t_env *env, char *k, char *v)
 		free(item);
 		error_malloc_env(sh, env, "t_env_item");
 	}
-	if (!(item->value = ft_strdups(v)))
-	{
-		ft_strdel(&item->key);
-		free(item);
-		error_malloc_env(sh, env, "t_env_item");
-	}
+	item->value = ft_strdups(v);
 	return (item);
 }
 
