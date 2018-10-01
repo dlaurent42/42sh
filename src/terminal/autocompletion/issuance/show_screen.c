@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_valid_dir.c                                   :+:      :+:    :+:   */
+/*   show_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 13:47:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 23:30:12 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void			do_loop(t_frame *frame, t_args *args, int *position_on_row)
 		frame->number_of_printed_rows = 1;
 	else
 		frame->number_of_printed_rows = 0;
-	while (args)
+	while (args && frame->number_of_printed_rows < (frame->height - frame->shell->cursor.y) - 1)
 	{
 		if (!args->data.no_file)
 		{
@@ -56,7 +56,7 @@ static void			clear_selection_screen(t_frame *frame)
 	ft_putstr(K_UP);
 }
 
-static void			manage_buffer(t_frame *frame, char *new_display_str)//Wide char fix
+static void			manage_buffer(t_frame *frame, char *new_display_str)
 {
 	while(*new_display_str)
 	{
@@ -79,7 +79,7 @@ static void			auto_arrows_dispatcher(t_frame *frame)
 		auto_move_down(frame);
 	else if (line[2] == 67 || line[0] == 9)
 		auto_move_right(frame);
-	else if (line[2] == 68)
+	else if (line[2] == 68 || line[2] == 90)
 		auto_move_left(frame);
 }
 
@@ -94,8 +94,8 @@ static void			auto_read_dispatcher(t_frame *frame)
 		auto_arrows_dispatcher(frame);
 	else
 	{
-		if (line[0] == 127)
-			sh_delete_char(shell);
+		if (sh_is_delete_combination(line))
+			sh_deletion_dispatcher(frame->shell);
 		else if (line[0] == 10)
 			manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
 		else
@@ -114,7 +114,22 @@ static void			move_up_to_prompt(t_frame *frame)
 		ft_putstr(K_UP);
 }
 
-void				auto_loop_valid_dir(t_frame *frame, t_args *head)//Rename
+static void			fill_buffer_with_wild(t_frame *frame, t_args *args)
+{
+	frame->del_file_name = frame->args->data.path;
+	delete_str(frame);
+	while (args)
+	{
+		if (!args->data.no_file && *args->data.str != '.')
+		{
+			manage_buffer(frame, args->data.path);
+			manage_buffer(frame, " ");
+		}
+		args = args->next;
+	}
+}
+
+void				auto_show_screen(t_frame *frame, t_args *head)//Rename
 {
 	t_args			*args;
 	int				position_on_row;
@@ -126,29 +141,34 @@ void				auto_loop_valid_dir(t_frame *frame, t_args *head)//Rename
 	if (frame->cmp_mode == MODE_NON)
 		return ;
 	frame->del_file_name = frame->file_name;
-	while (frame->shell->modes.auto_completion)
+	if (frame->auto_mode == AUTO_WILD)
+		fill_buffer_with_wild(frame, args);
+	else
 	{
-		position_on_row = 0;
-		auto_calculate_number_of_columns(frame);
-		args = head;
-		delete_str(frame);
-		manage_buffer(frame, frame->select->data.str);
-		if (frame->select->show_next == frame->select)
+		while (frame->shell->modes.auto_completion)
 		{
-			manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
-			break ;
+			position_on_row = 0;
+			auto_calculate_number_of_columns(frame);
+			args = head;
+			delete_str(frame);
+			manage_buffer(frame, frame->select->data.str);
+			if (frame->select->show_next == frame->select)
+			{
+				manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
+				break ;
+			}
+			x = frame->shell->cursor.x;
+			y = frame->shell->cursor.y;
+			clear_selection_screen(frame);
+			ft_putchar('\n');
+			do_loop(frame, args, &position_on_row);
+			move_up_to_prompt(frame);
+			sh_move_to_xy(frame->shell, x, y);
+			read(0, frame->shell->read->line, 4);
+			if (frame->shell->read->line[0] == 4)
+				break ;
+			auto_read_dispatcher(frame);
+			ft_bzero(frame->shell->read->line, LINE_SIZE);
 		}
-		x = frame->shell->cursor.x;
-		y = frame->shell->cursor.y;
-		clear_selection_screen(frame);
-		ft_putchar('\n');
-		do_loop(frame, args, &position_on_row);
-		move_up_to_prompt(frame);
-		sh_move_to_xy(frame->shell, x, y);
-		read(0, frame->shell->read->line, 4);
-		if (frame->shell->read->line[0] == 4)
-			break ;
-		auto_read_dispatcher(frame);
-		ft_bzero(frame->shell->read->line, 5);
 	}
 }

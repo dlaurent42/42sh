@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 08:59:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 22:52:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,18 @@ static bool			get_initial(t_frame *frame, t_args *args)
 		args->data.parent_path = (slash)
 			? ft_strndup(args->data.path, slash - args->data.path)
 			: ft_strdup(".");
-		if (ft_strcmp(args->data.str, "."))
+		if (ft_strcmps(args->data.str, "."))
 			frame->file_name = ft_strdup((slash) ? slash + 1 : args->data.str);
 		else
 			frame->file_name = ft_strdup((slash) ? slash + 1 : "");
 		if (!args->data.parent_path || !frame->file_name)
 			return (false);
 		frame->file_name_len = ft_strlen(frame->file_name);
+		if (!ft_strcmps(frame->file_name, "*"))
+		{
+			frame->auto_mode = AUTO_WILD;
+			*frame->file_name = '\0';
+		}
 		if (!lstat(args->data.parent_path, &f))
 			read_f(frame, args, &f);
 		else

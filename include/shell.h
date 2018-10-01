@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:28:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 23:30:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define BIN_PRIME_1	3
 # define BIN_PRIME_2	13
 
+# define LINE_SIZE		8
+
 # define K_UP			"\x1b\x5b\x41"
 # define K_DOWN			"\x1b\x5b\x42"
 # define K_RIGHT		"\x1b\x5b\x43"
@@ -62,6 +64,7 @@
 # define AUTO_NON	0
 # define AUTO_BIN	1
 # define AUTO_REG	2
+# define AUTO_WILD	3
 
 # define AT_FIRST	0
 # define AT_REST	1
@@ -207,7 +210,7 @@ typedef struct			s_prompt
 
 typedef struct			s_read
 {
-	char				line[8];
+	char				line[LINE_SIZE];
 	char				unicode_bytes_left;
 }						t_read;
 
@@ -316,6 +319,7 @@ typedef struct		s_frame
 	int				number_of_printed_rows;
 
 	int				width;
+	int				height;
 	int				number_of_columns;
 
 	t_args			*args;
@@ -471,6 +475,7 @@ void					sh_select_print(t_shell *sh);
 void					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_dispatcher(t_shell *sh);
+void					sh_deletion_dispatcher(t_shell *sh);
 char					sh_is_arrow_combination(char *s);
 char					sh_is_select_combination(char *s);
 char					sh_is_delete_combination(char *s);
@@ -510,8 +515,7 @@ t_args				*auto_create_args(void);
 
 void				auto_issuance(t_frame *frame);
 bool				auto_get_attributes(t_frame *frame);
-void				auto_loop_dirs(t_frame *frame);
-void				auto_loop_valid_dir(t_frame *frame, t_args *args);
+void				auto_show_screen(t_frame *frame, t_args *args);
 void				auto_do_ls(t_frame *frame, t_args *args);
 void				auto_do_file_admin(t_frame *frame, t_args *args);
 void				auto_calc_len_file_name(t_frame *frame, t_args *args);
@@ -521,7 +525,6 @@ void				auto_move_up(t_frame *frame);
 void				auto_move_down(t_frame *frame);
 void				auto_move_left(t_frame *frame);
 void				auto_move_right(t_frame *frame);
-void				auto_replace_buffer(t_shell *sh, char *str);
 bool				auto_is_executeable(t_args *args);
 
 void				auto_sort(t_frame *frame);
@@ -531,8 +534,6 @@ void				auto_display(t_frame *frame, t_args *args);
 void				auto_file_name(t_frame *frame, t_args *args);
 void				auto_print_spaces(int diff);
 int					auto_get_diff(t_frame *frame, char *str, long long num, int flag);
-
-void				auto_error_exit(t_frame *frame, char *error_str);
 void				auto_free_frame(t_frame *frame);
 
 /*

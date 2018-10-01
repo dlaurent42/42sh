@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 08:39:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 21:46:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void				auto_do_ls(t_frame *frame, t_args *args)
 	auto_get_attributes(frame);
 	auto_sort(frame);
 	head = frame->current_args;
-	auto_loop_valid_dir(frame, head);
+	auto_show_screen(frame, head);
 	auto_free_args(&head);
 }

@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 19:26:22 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 14:10:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 21:40:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void			do_sort(t_frame *frame)
 {
 	bool			sorted;
 
-	sorted = true;
-	while (!sorted)
+	while (true)
 	{
 		frame->track = frame->head;
 		sorted = true;
@@ -41,6 +40,8 @@ static void			do_sort(t_frame *frame)
 				sorted = false;
 			frame->track = frame->track->next;
 		}
+		if (sorted)
+			break ;
 	}
 }
 

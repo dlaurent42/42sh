@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/30 19:26:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 23:38:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static bool			parse_args(t_frame *frame, char **argv)
 	{
 		if (!(frame->args = auto_create_args()))
 			return (false);
-		if (!(frame->args->data.str = ft_strdup("."))
-				|| !(frame->args->data.path = ft_strdup(".")))
+		if (!(frame->args->data.str = ft_strdups("."))
+				|| !(frame->args->data.path = ft_strdups(".")))
 			return (false);
 	}
 	else
@@ -60,7 +60,7 @@ static bool			get_binaries(t_frame *frame, char **argv)
 	{
 		if (!(args = auto_create_args()))
 			return (false);
-		if (!(args->data.str = ft_strdup(bin_auto->name)))
+		if (!(args->data.str = ft_strdups(bin_auto->name)))
 		{
 			free(args);
 			return (false);

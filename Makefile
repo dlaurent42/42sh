@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 13:26:57 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/01 21:51:36 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,20 +64,17 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/get_attributes.c \
 				terminal/autocompletion/issuance/do_ls.c \
 				terminal/autocompletion/issuance/path.c \
-				terminal/autocompletion/issuance/loop_dirs.c \
-				terminal/autocompletion/issuance/loop_valid_dir.c \
+				terminal/autocompletion/issuance/show_screen.c \
 				terminal/autocompletion/issuance/calc_len_file_name.c \
 				terminal/autocompletion/issuance/is_executeable.c \
 				terminal/autocompletion/issuance/do_file_admin.c \
 				terminal/autocompletion/issuance/calculate_number_of_columns.c \
-				terminal/autocompletion/issuance/replace_buffer.c \
 				terminal/autocompletion/display/display.c \
 				terminal/autocompletion/display/get_diff.c \
 				terminal/autocompletion/display/file_name.c \
 				terminal/autocompletion/display/print_spaces.c \
 				terminal/autocompletion/auto_completion/auto_completion.c \
 				terminal/autocompletion/auto_completion/free_frame.c \
-				terminal/autocompletion/auto_completion/error_exit.c \
 				terminal/autocompletion/auto_completion/get_args.c \
 				terminal/autocompletion/auto_completion/create_args.c \
 				terminal/autocompletion/auto_completion/free_args.c \

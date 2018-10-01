@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/30 22:00:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 22:31:10 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static char			*get_auto_mode(t_frame *frame, char *content)//break out of main
 	}
 	else
 	{
-		str++;
 		frame->auto_mode = AUTO_REG;
+		str++;
 		if ((slash = ft_strrchr(str, '/')))
 			frame->pre_file_name = ft_strndup(content, (slash - content) + 1);
 		else
@@ -79,4 +79,5 @@ void				auto_completion(t_shell *shell)
 			&& auto_get_args(&frame))
 		auto_issuance(&frame);
 	auto_free_frame(&frame);
+	shell->modes.auto_completion = 0;
 }

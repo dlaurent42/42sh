@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:44:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 21:14:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void			lock_files(t_frame *frame, t_args *args)
 			if (!ft_strstr(args->data.str, frame->file_name))
 				args->data.no_file = 1;
 		}
+		if (!ft_strcmps(args->data.str, "."))
+			args->data.no_file = 1;
 		args = args->next;
 	}
 }
