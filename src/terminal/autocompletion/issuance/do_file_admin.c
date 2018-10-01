@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:44:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void			get_column_widths(t_frame *frame, t_args *args)
 	{
 		if (!head->data.no_file)
 		{
-			calc_len_file_name(frame, head);
+			auto_calc_len_file_name(frame, head);
 			head->data.file_number = frame->items_to_display;
 			frame->items_to_display++;
 		}
@@ -98,7 +98,7 @@ static void			issue_circular_pointers(t_frame *frame, t_args *head)
 	head->show_prev = args;
 }
 
-void				do_file_admin(t_frame *frame, t_args *args)
+void				auto_do_file_admin(t_frame *frame, t_args *args)
 {
 	get_mode(frame, args);
 	lock_files(frame, args);

@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:42 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:56:37 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static void			print_end_char(t_args *args)
 		ft_putchar('#');
 	else if (args->data.wht || args->data.chr)
 		ft_putchar('%');
-	else if (is_executeable(args))
+	else if (auto_is_executeable(args))
 		ft_putchar('*');
 }
 
 static void			print_colour(t_frame *frame, t_args *args)
 {
-	if (is_executeable(args))
+	if (auto_is_executeable(args))
 		ft_putstr(COL_EXE);
 	if (args->data.ifo)
 		ft_putstr(COL_IFO);
@@ -42,7 +42,7 @@ static void			print_colour(t_frame *frame, t_args *args)
 		ft_putstr(COL_DIR);
 	if (args->data.blk)
 		ft_putstr(COL_BLK);
-	if (args->data.reg && !is_executeable(args))
+	if (args->data.reg && !auto_is_executeable(args))
 		ft_putstr(COL_REG);
 	if (args->data.lnk)
 		ft_putstr(COL_LNK);
@@ -53,7 +53,7 @@ static void			print_colour(t_frame *frame, t_args *args)
 	ft_printf("%s", args->data.str);
 }
 
-void				file_name(t_frame *frame, t_args *args)
+void				auto_file_name(t_frame *frame, t_args *args)
 {
 	t_data			*data;
 	int				len;
@@ -65,6 +65,6 @@ void				file_name(t_frame *frame, t_args *args)
 		ft_putstr(COL_CLR);
 	print_end_char(args);
 	if (frame->number_of_columns)
-		print_spaces(get_diff(frame, data->str, len, LEN_NAME) + 1);
+		auto_print_spaces(auto_get_diff(frame, data->str, len, LEN_NAME) + 1);
 	ft_putstr(COL_CLR);
 }

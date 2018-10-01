@@ -6,13 +6,13 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 19:58:55 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 22:52:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:39:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int					get_diff(t_frame *frame, char *str, long long num, int flag)
+int					auto_get_diff(t_frame *frame, char *str, long long num, int flag)
 {
 	if (str)
 	{

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 22:33:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 08:38:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define K_COL_ROW_0	"\x1b\x5b\x48"
 # define K_DEL			"\x7f"
 # define K_DEL_ALL		"\x1b\x5b\x4a"
+# define CLEAR_TO_EOL	"\x1b[K"
+# define CLEAR_LINE		"\x1b[M"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
 
 # define OPTIONS	"-AFGNRSTUacdfgiloprtux1"
@@ -198,6 +200,7 @@ typedef struct			s_modes
 
 typedef struct			s_shell
 {
+	char				*argv; //DELETE USING FOR TESTING AUTO_COMP
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
@@ -259,8 +262,8 @@ typedef struct		s_frame
 {
 	char			**argv;
 
-	char			*malloc_failed;
-
+	char			*pre_file_name;
+	char			*del_file_name;
 	char			*file_name;
 	int				file_name_len;
 	char			cmp_mode;
@@ -272,6 +275,7 @@ typedef struct		s_frame
 	int				len_file_name;
 	int				items_to_display;
 	int				total_blocks;
+	int				number_of_printed_rows;
 
 	int				width;
 	int				number_of_columns;
@@ -354,11 +358,6 @@ char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);
 
 /*
-** terminal - autocompletion
-*/
-void					sh_read_autocompletion(t_shell *sh);
-
-/*
 ** terminal - cursor
 */
 void					sh_move_home(t_shell *sh);
@@ -394,36 +393,36 @@ void					sh_window_resize(t_shell *sh);
 ** terminal - auto_completion
 */
 void				auto_completion(t_shell *shell);
-void				get_args(t_frame *frame);
-void				free_args(t_frame *frame, t_args **args);
-t_args				*create_args(void);
+bool				auto_get_args(t_frame *frame);
+void				auto_free_args(t_args **args);
+t_args				*auto_create_args(void);
 
-void				issuance(t_frame *frame);
-void				get_attributes(t_frame *frame);
-void				loop_dirs(t_frame *frame);
-void				loop_valid_dir(t_frame *frame, t_args *args);
-void				do_ls(t_frame *frame, t_args *args);
-void				do_file_admin(t_frame *frame, t_args *args);
-void				calc_len_file_name(t_frame *frame, t_args *args);
-void				calculate_number_of_columns(t_frame *frame);
-void				path(t_frame *frame, t_args *args, char *path, char *name);
-void				move_up(t_frame *frame);
-void				move_down(t_frame *frame);
-void				move_left(t_frame *frame);
-void				move_right(t_frame *frame);
-void				sh_replace_buffer(t_shell *sh, char *str);//TODO Break out into own function
-bool				is_executeable(t_args *args);
+void				auto_issuance(t_frame *frame);
+bool				auto_get_attributes(t_frame *frame);
+void				auto_loop_dirs(t_frame *frame);
+void				auto_loop_valid_dir(t_frame *frame, t_args *args);
+void				auto_do_ls(t_frame *frame, t_args *args);
+void				auto_do_file_admin(t_frame *frame, t_args *args);
+void				auto_calc_len_file_name(t_frame *frame, t_args *args);
+void				auto_calculate_number_of_columns(t_frame *frame);
+bool				auto_path(t_args *args, char *path, char *name);
+void				auto_move_up(t_frame *frame);
+void				auto_move_down(t_frame *frame);
+void				auto_move_left(t_frame *frame);
+void				auto_move_right(t_frame *frame);
+void				auto_replace_buffer(t_shell *sh, char *str);
+bool				auto_is_executeable(t_args *args);
 
-void				sort(t_frame *frame);
-bool				sort_alpha(t_frame *frame);
+void				auto_sort(t_frame *frame);
+bool				auto_sort_alpha(t_frame *frame);
 
-void				display(t_frame *frame, t_args *args);
-void				file_name(t_frame *frame, t_args *args);
-void				print_spaces(int diff);
-int					get_diff(t_frame *frame, char *str, long long num, int flag);
+void				auto_display(t_frame *frame, t_args *args);
+void				auto_file_name(t_frame *frame, t_args *args);
+void				auto_print_spaces(int diff);
+int					auto_get_diff(t_frame *frame, char *str, long long num, int flag);
 
-void				error_exit(t_frame *frame, char *error_str);
-void				free_frame(t_frame *frame);
+void				auto_error_exit(t_frame *frame, char *error_str);
+void				auto_free_frame(t_frame *frame);
 
 /*
 ** terminal - auto_completion

@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 08:59:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void			read_f(t_frame *frame, t_args *args, struct stat *f)
 	get_type(args);
 }
 
-static void			get_initial(t_frame *frame, t_args *args)
+static bool			get_initial(t_frame *frame, t_args *args)
 {
 	char			*slash;
 	struct stat		f;
@@ -78,10 +78,8 @@ static void			get_initial(t_frame *frame, t_args *args)
 			frame->file_name = ft_strdup((slash) ? slash + 1 : args->data.str);
 		else
 			frame->file_name = ft_strdup((slash) ? slash + 1 : "");
-		if (!args->data.parent_path)
-			args->data.parent_path = frame->malloc_failed;
-		if (!frame->file_name)
-			frame->file_name = frame->malloc_failed;
+		if (!args->data.parent_path || !frame->file_name)
+			return (false);
 		frame->file_name_len = ft_strlen(frame->file_name);
 		if (!lstat(args->data.parent_path, &f))
 			read_f(frame, args, &f);
@@ -89,15 +87,19 @@ static void			get_initial(t_frame *frame, t_args *args)
 			args->data.no_file = 1;
 		args = args->next;
 	}
+	return (true);
 }
 
-void				get_attributes(t_frame *frame)
+bool				auto_get_attributes(t_frame *frame)
 {
 	t_args			*args;
 	struct stat		f;
 
 	if (frame->at_mode == AT_FIRST)
-		get_initial(frame, frame->current_args);
+	{
+		if(!get_initial(frame, frame->current_args))
+			return (false);
+	}
 	else
 	{
 		args = frame->current_args;
@@ -111,4 +113,5 @@ void				get_attributes(t_frame *frame)
 		}
 	}
 	frame->at_mode = AT_REST;
+	return (true);
 }

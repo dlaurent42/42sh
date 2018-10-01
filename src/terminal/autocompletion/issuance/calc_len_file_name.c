@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 13:47:37 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/23 16:26:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:57:36 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				calc_len_file_name(t_frame *frame, t_args *args)
+void				auto_calc_len_file_name(t_frame *frame, t_args *args)
 {
 	int				len;
 	char			*str;
@@ -38,7 +38,7 @@ void				calc_len_file_name(t_frame *frame, t_args *args)
 	}
 	data->len_of_str = len;
 	if (data->dir || data->lnk || data->sock || data->wht
-				|| data->ifo || is_executeable(args))
+				|| data->ifo || auto_is_executeable(args))
 		data->len_of_str++;
 	len++;
 	if (len > frame->len_file_name)

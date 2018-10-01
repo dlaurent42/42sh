@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 01:57:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/09/28 11:53:10 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	sh_read_dispatcher(t_shell *sh)
 	else if (sh->read->line[0] == 127)
 		sh_read_delete(sh);
 	else if (sh->read->line[0] == 9)
-		sh_read_autocompletion(sh);
+		auto_completion(sh);
 	else
 		sh_fill_buffer(sh);
 }

@@ -6,13 +6,13 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 15:58:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:48:04 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:40:36 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				move_right(t_frame *frame)
+void				auto_move_right(t_frame *frame)
 {
 	frame->select = frame->select->show_next;
 }

@@ -6,16 +6,17 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 22:44:38 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/01 08:40:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				free_frame(t_frame *frame)
+void				auto_free_frame(t_frame *frame)
 {
-	free_args(frame, &frame->args);
-	free(frame->malloc_failed);
+	//check all for double free with frame->malloc_fail
+	auto_free_args(&frame->args);
 	free(frame->argv);
 	free(frame->file_name);
+	free(frame->pre_file_name);
 }

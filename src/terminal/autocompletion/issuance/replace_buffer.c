@@ -6,20 +6,20 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 14:43:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/27 12:18:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:42:17 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	sh_add_char(t_shell *sh, char c)
+static void	sh_add_char(t_shell *sh, char c)//Change name
 {
 	sh->buffer.content[sh->buffer.unicode_len] = c;
 	sh->buffer.display_len++;
 	sh->buffer.unicode_len++;
 }
 
-static void	sh_add_wchar(t_shell *sh, unsigned char c)
+static void	sh_add_wchar(t_shell *sh, unsigned char c)//Change name
 {
 	static char	pointer = 0;
 	static char	counter = 0;
@@ -33,7 +33,7 @@ static void	sh_add_wchar(t_shell *sh, unsigned char c)
 	counter = (c < 0b11000000) ? counter - 1 : pointer;
 }
 
-void		sh_replace_buffer(t_shell *sh, char *str)
+void		auto_replace_buffer(t_shell *sh, char *str)
 {
 	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
 	sh->buffer.display_len = 0;

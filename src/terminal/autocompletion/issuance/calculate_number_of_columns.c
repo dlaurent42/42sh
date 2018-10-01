@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 13:29:46 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:39:46 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				calculate_number_of_columns(t_frame *frame)
+void				auto_calculate_number_of_columns(t_frame *frame)
 {
 	int				column_width;
 	struct winsize	window_size;

@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:54:18 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				display(t_frame *frame, t_args *args)
+void				auto_display(t_frame *frame, t_args *args)
 {
-	file_name(frame, args);
+	auto_file_name(frame, args);
 }

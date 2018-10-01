@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:24:15 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:38:40 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_args				*create_args(void)
+t_args				*auto_create_args(void)
 {
 	t_args			*args;
 

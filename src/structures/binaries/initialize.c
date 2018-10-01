@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/24 23:02:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 14:49:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,25 @@ static void			bin_sort_list_for_auto(t_bin *bin)
 	}
 }
 
+static void			bin_remove_duplicates_for_auto(t_bin *bin)
+{
+	t_bin_auto		*track;
+	t_bin_auto		*tmp;
+
+	track = bin->bin_auto;
+	while (track && track->next)
+	{
+		if (!ft_strcmp(track->name, track->next->name))
+		{
+			tmp = track->next->next;
+			free(track->next->name);
+			free(track->next);
+			track->next = tmp;
+		}
+		track = track->next;
+	}
+}
+
 static void		bin_parse_folder(t_shell *sh, t_bin *bin, char *path)
 {
 	DIR			*dir;
@@ -49,14 +68,15 @@ static void		bin_parse_folder(t_shell *sh, t_bin *bin, char *path)
 	while ((dirent = readdir(dir)))
 		if (lstat(path, &stats) == 0)
 			bin_insert(
-				sh,
-				bin,
-				bin_new_obj(
 					sh,
-					dirent->d_name,
-					path,
-					stats));
+					bin,
+					bin_new_obj(
+						sh,
+						dirent->d_name,
+						path,
+						stats));
 	bin_sort_list_for_auto(bin);
+	bin_remove_duplicates_for_auto(bin);
 	closedir(dir);
 }
 

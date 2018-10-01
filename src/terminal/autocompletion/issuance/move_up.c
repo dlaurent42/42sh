@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 19:58:35 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/27 12:21:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:40:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				move_up(t_frame *frame)
+void				auto_move_up(t_frame *frame)
 {
 	frame->select = frame->select->show_prev;
 }

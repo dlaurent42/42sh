@@ -6,13 +6,13 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 19:26:22 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:48:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 14:10:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int			swap(t_frame *frame)
+static bool			swap(t_frame *frame)
 {
 	t_data			tmp;
 
@@ -21,33 +21,32 @@ static int			swap(t_frame *frame)
 		tmp = frame->track->data;
 		frame->track->data = frame->track->next->data;
 		frame->track->next->data = tmp;
-		return (1);
+		return (true);
 	}
-	return (0);
+	return (false);
 }
 
 static void			do_sort(t_frame *frame)
 {
-	int				sorted;
+	bool			sorted;
 
-	while (1)
+	sorted = true;
+	while (!sorted)
 	{
 		frame->track = frame->head;
-		sorted = 1;
+		sorted = true;
 		while (frame->track && frame->track->next)
 		{
 			if (swap(frame))
-				sorted = 0;
+				sorted = false;
 			frame->track = frame->track->next;
 		}
-		if (sorted)
-			break ;
 	}
 }
 
-void				sort(t_frame *frame)
+void				auto_sort(t_frame *frame)
 {
-	frame->sort_function = &sort_alpha;
+	frame->sort_function = &auto_sort_alpha;
 	frame->head = frame->current_args;
 	do_sort(frame);
 	frame->current_args = frame->head;

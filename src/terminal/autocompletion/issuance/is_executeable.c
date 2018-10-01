@@ -6,13 +6,13 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 14:58:03 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/20 00:47:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/09/29 13:40:12 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool				is_executeable(t_args *args)
+bool				auto_is_executeable(t_args *args)
 {
 	int				type;
 
