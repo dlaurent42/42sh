@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 19:49:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/01 14:07:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,11 @@ char					*sh_cd_remove_last_slash(char *param);
 ** functions - exit
 */
 void					sh_exit(t_shell *sh, char *value);
+
+/*
+** functions - setenv
+*/
+char					sh_setenv(t_shell *sh, char *args);
 
 /*
 ** structures - binaries
