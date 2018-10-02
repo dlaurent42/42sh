@@ -6,14 +6,14 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 21:46:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/02 14:37:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include <sys/stat.h>
 
-static bool			read_directory(t_read_dir *read_dir)//get rid of frame in read_dir
+static bool			read_directory(t_read_dir *read_dir)
 {
 	if (((ft_strcmp(read_dir->file->d_name, ".")
 					&& ft_strcmp(read_dir->file->d_name, "..")))
@@ -25,7 +25,7 @@ static bool			read_directory(t_read_dir *read_dir)//get rid of frame in read_dir
 			auto_free_args(&read_dir->head);
 			return (false);
 		}
-		if(!auto_path(read_dir->tmp, read_dir->args->data.parent_path,
+		if (!auto_path(read_dir->tmp, read_dir->args->data.parent_path,
 				read_dir->file->d_name))
 		{
 			free(read_dir->tmp);
@@ -40,11 +40,10 @@ static bool			read_directory(t_read_dir *read_dir)//get rid of frame in read_dir
 	return (true);
 }
 
-static t_args		*get_directory_contents(t_frame *frame, t_args *args)
+static t_args		*get_directory_contents(t_args *args)
 {
 	t_read_dir		read_dir;
 
-	read_dir.frame = frame;
 	read_dir.args = args;
 	read_dir.head = NULL;
 	if (!(read_dir.directory = opendir(read_dir.args->data.parent_path)))
@@ -69,7 +68,7 @@ void				auto_do_ls(t_frame *frame, t_args *args)
 {
 	t_args			*head;
 
-	if (!(head = get_directory_contents(frame, args)))
+	if (!(head = get_directory_contents(args)))
 		return ;
 	frame->current_args = head;
 	auto_get_attributes(frame);

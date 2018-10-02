@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 23:45:05 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/02 17:28:45 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ SRC			=	shell.c														\
 				terminal/autocompletion/sort/sort.c \
 				terminal/autocompletion/sort/sort_alpha.c \
 				terminal/autocompletion/issuance/issuance.c \
+				terminal/autocompletion/issuance/read_dispatcher.c \
 				terminal/autocompletion/issuance/move_up.c \
+				terminal/autocompletion/issuance/manage_buffer.c \
 				terminal/autocompletion/issuance/move_down.c \
 				terminal/autocompletion/issuance/move_left.c \
 				terminal/autocompletion/issuance/move_right.c \
@@ -71,7 +73,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/do_file_admin.c \
 				terminal/autocompletion/issuance/calculate_number_of_columns.c \
 				terminal/autocompletion/display/display.c \
-				terminal/autocompletion/display/get_diff.c \
+				terminal/autocompletion/display/clear_selection_screen.c \
 				terminal/autocompletion/display/file_name.c \
 				terminal/autocompletion/display/print_spaces.c \
 				terminal/autocompletion/auto_completion/auto_completion.c \

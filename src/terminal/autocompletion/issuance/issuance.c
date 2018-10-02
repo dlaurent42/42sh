@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 11:55:05 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 21:48:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/02 14:31:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				auto_issuance(t_frame *frame)
 {
 	if (frame->auto_mode == AUTO_BIN)
 	{
-		if(!(frame->file_name = ft_strdup(frame->argv[1])))
+		if (!(frame->file_name = ft_strdup(frame->argv[1])))
 			return ;
 		frame->file_name_len = ft_strlen(frame->file_name);
 		auto_show_screen(frame, frame->args);

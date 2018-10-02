@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 22:31:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/02 10:05:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool			contains_printable_characters(char *str)
 	return (false);
 }
 
-static char			*get_auto_mode(t_frame *frame, char *content)//break out of main
+static char			*get_auto_mode(t_frame *frame, char *content)
 {
 	char			*str;
 	char			*slash;
@@ -58,7 +58,7 @@ static char			*get_auto_mode(t_frame *frame, char *content)//break out of main
 static bool			create_frame(t_frame *frame, t_shell *shell, char *str)
 {
 	frame->shell = shell;
-	if(!(frame->argv = (char **)malloc(sizeof(char *) * 3)))
+	if (!(frame->argv = (char **)malloc(sizeof(char *) * 3)))
 		return (false);
 	frame->argv[0] = str;
 	frame->argv[1] = str;
@@ -73,9 +73,9 @@ void				auto_completion(t_shell *shell)
 
 	ft_bzero(&frame, sizeof(frame));
 	shell->modes.auto_completion = 1;
-	if(!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
+	if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
 		return ;
-	if(create_frame(&frame, shell, parsed_buffer)
+	if (create_frame(&frame, shell, parsed_buffer)
 			&& auto_get_args(&frame))
 		auto_issuance(&frame);
 	auto_free_frame(&frame);

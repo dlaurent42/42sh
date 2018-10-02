@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 13:47:37 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:57:36 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/02 10:39:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,9 @@ void				auto_calc_len_file_name(t_frame *frame, t_args *args)
 	char			*str;
 	t_data			*data;
 
-	len = 0;
 	data = &args->data;
 	str = data->str;
-	while (str && *str)
-	{
-		if (((unsigned char)*str < 128))
-			len++;
-		else if ((*str & 0b11000000) == 0b11000000
-				&& (*str & 0b00100000) != 0b00100000)
-			len++;
-		else if ((*str & 0b11100000) == 0b11100000
-				&& (*str & 0b00010000) != 0b00010000)
-			len++;
-		else if ((*str & 0b11110000) == 0b11110000
-				&& (*str & 0b00001000) != 0b00001000)
-			len++;
-		str++;
-	}
+	len = ft_strlenu(str);
 	data->len_of_str = len;
 	if (data->dir || data->lnk || data->sock || data->wht
 				|| data->ifo || auto_is_executeable(args))

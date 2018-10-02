@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_diff.c                                         :+:      :+:    :+:   */
+/*   manage_buffer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/11 19:58:55 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:39:26 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/02 17:27:35 by dhojt             #+#    #+#             */
+/*   Updated: 2018/10/02 17:27:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int					auto_get_diff(t_frame *frame, char *str, long long num, int flag)
+void				auto_manage_buffer(t_frame *frame, char *new_display_str)
 {
-	if (str)
+	while (*new_display_str)
 	{
-		if (flag == LEN_NAME)
-			return (frame->len_file_name - num);
+		frame->shell->read->line[0] = *new_display_str;
+		sh_fill_buffer(frame->shell);
+		new_display_str++;
 	}
-	return (0);
+	ft_bzero(frame->shell->read->line, 5);
 }

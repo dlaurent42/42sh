@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_frame.c                                       :+:      :+:    :+:   */
+/*   clear_selection_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 22:44:38 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 10:05:57 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/02 17:18:27 by dhojt             #+#    #+#             */
+/*   Updated: 2018/10/02 17:18:44 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_free_frame(t_frame *frame)
+void				auto_clear_selection_screen(t_frame *frame)
 {
-	auto_free_args(&frame->args);
-	free(frame->argv);
-	free(frame->file_name);
-	free(frame->pre_file_name);
+	int				rows;
+
+	rows = frame->number_of_printed_rows;
+	ft_putstr(CLEAR_TO_EOL);
+	ft_putstr(K_DOWN);
+	while (rows--)
+		ft_putstr(CLEAR_LINE);
+	ft_putstr(K_UP);
 }
