@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 15:30:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 00:28:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char	sh_command_dispatcher(t_shell *sh)
 	&& sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e'
 	&& sh->buffer.content[6] == 'n' && sh->buffer.content[7] == 'v')
 		res = sh_unsetenv(sh, sh->buffer.content + 9);
+	else if (!ft_strcmps(sh->buffer.content, "history"))
+		sh_history(sh);
 	return (res);
 }
 

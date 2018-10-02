@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 00:19:28 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/03 00:19:57 by dhojt             #+#    #+#             */
+/*   Updated: 2018/10/03 00:22:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		main(int argc, char **argv, char **environ)
+void				sh_history(t_shell *sh)
 {
-	t_shell		*sh;
+	t_cmd			*cmd;
+	unsigned int	id;
+	int				len;
 
-	sh = NULL;
-	(void)argc;
-	(void)argv;
-	sh = sh_new(environ);
-	sh_welcome();
-	signal_catching();
-	sh_read(sh);
-	sh_delete(sh);
-	return (0);
+	len = 1;
+	id = sh->cmd->id;
+	while (id > 10)
+	{
+		id /= 10;
+		len++;
+	}
+	cmd = sh->cmd->last;
+	while (cmd)
+	{
+		ft_printf("%*u: %s\n", len, cmd->id, cmd->content);
+		cmd = cmd->prev;
+	}
 }

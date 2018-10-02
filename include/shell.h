@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:34:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 00:22:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,6 +359,11 @@ char					sh_cd_follow(t_shell *sh, char *value);
 char					sh_cd_nofollow(t_shell *sh, char *value, char *path);
 char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
+
+/*
+** functions - history
+*/
+void					sh_history(t_shell *sh);
 
 /*
 ** functions - exit

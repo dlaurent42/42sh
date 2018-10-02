@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/02 17:28:45 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/03 00:25:38 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC			=	shell.c														\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
 				functions/exit/exit.c										\
+				functions/history/history.c									\
 				functions/setenv/setenv.c									\
 				functions/unsetenv/unsetenv.c								\
 				structures/binaries/delete.c								\
@@ -153,6 +154,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/echo
 				@mkdir -p $(OBJ_DIR)/functions/env
 				@mkdir -p $(OBJ_DIR)/functions/exit
+				@mkdir -p $(OBJ_DIR)/functions/history
 				@mkdir -p $(OBJ_DIR)/functions/setenv
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
 				@mkdir -p $(OBJ_DIR)/structures
