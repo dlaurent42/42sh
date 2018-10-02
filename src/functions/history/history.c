@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 00:19:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/03 00:22:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 00:58:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void				sh_history(t_shell *sh)
 	unsigned int	id;
 	int				len;
 
+	if (!sh->cmd)
+	{
+		ft_putendl("no history to display");
+		return ;
+	}
 	len = 1;
 	id = sh->cmd->id;
 	while (id > 10)
