@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 00:28:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 15:12:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,36 @@
 
 static char	sh_command_dispatcher(t_shell *sh)
 {
+	// TESTING : remove env var used in other functions and check
 	char	res;
+	char	**strsplt;
 
 	res = 0;
+	strsplt = NULL;
 	if (sh->buffer.content[0] == 'c' && sh->buffer.content[1] == 'd')
-		res = sh_cd(sh, sh->buffer.content + 3);
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 3, ' ');
+		res = sh_cd(sh, strsplt);
+	}
 	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x'
 	&& sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
-		sh_exit(sh, sh->buffer.content + 5);
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 5, ' ');
+		sh_exit(sh, strsplt);
+	}
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'n'
+	&& sh->buffer.content[2] == 'v')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 4, ' ');
+		res = sh_env(sh, strsplt);
+	}
 	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e'
 	&& sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e'
 	&& sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
-		res = sh_setenv(sh, sh->buffer.content + 7);
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
+		res = sh_setenv(sh, strsplt);
+	}
 	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n'
 	&& sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e'
 	&& sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e'
@@ -33,6 +51,20 @@ static char	sh_command_dispatcher(t_shell *sh)
 		res = sh_unsetenv(sh, sh->buffer.content + 9);
 	else if (!ft_strcmps(sh->buffer.content, "history"))
 		sh_history(sh);
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 9, ' ');
+		res = sh_unsetenv(sh, strsplt);
+	}
+
+	int	i;
+
+	i = 0;
+	while (strsplt && strsplt[i])
+	{
+		ft_strdel(&strsplt[i]);
+		i++;
+	}
+	(strsplt) ? free(strsplt) : 0;
 	return (res);
 }
 

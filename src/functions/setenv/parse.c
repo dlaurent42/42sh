@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:06:59 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/01 17:15:09 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/02 18:20:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_setenv(t_shell *sh, char **argv)
+char	*sh_setenv_parse(char *arg)
 {
-	int		i;
-	char	res;
-	size_t	argc;
+	int	i;
+	int	j;
 
 	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_setenv_error(NULL, NULL, 1));
-	while (argv[i] && (res = sh_setenv_add(sh, sh->env, argv[i])) == 0)
-		i++;
-	return (res);
+	j = 0;
+	while (arg && arg[i])
+	{
+		if (arg[i] == '\'' || arg[i] == '"')
+		{
+			j = i;
+			while (arg[j])
+			{
+				arg[j] = arg[j + 1];
+				j++;
+			}
+		}
+		else
+			i++;
+	}
+	return (arg);
 }

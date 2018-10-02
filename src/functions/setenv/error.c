@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:06:59 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/02 09:01:31 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/02 20:21:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_setenv(t_shell *sh, char **argv)
+char	sh_setenv_error(char *key, char *val, int err_id)
 {
-	int		i;
-	char	res;
-	size_t	argc;
-
-	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_setenv_error(NULL, NULL, 1));
-	while (argv[i] && (res = sh_setenv_add(sh, sh->env, argv[i])) == 0)
-		i++;
-	return (res);
+	if (err_id == 1)
+		ft_putendl_fd("setenv: not enough arguments", 2);
+	if (err_id == 2)
+		ft_putendl_fd("setenv: invalid call", 2);
+	if (err_id == 3)
+	{
+		ft_putstr_fd("setenv: ", 2);
+		ft_putstr_fd(val, 2);
+		ft_putendl_fd(" not found", 2);
+	}
+	if (err_id == 4)
+		ft_putendl_fd("setenv: environment is full", 2);
+	ft_strdel(&key);
+	ft_strdel(&val);
+	return (1);
 }

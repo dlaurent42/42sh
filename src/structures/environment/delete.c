@@ -6,36 +6,40 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 14:38:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/02 20:45:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		env_delete_item_from_array(t_env *env, const char *key)
+char		env_delete_item_from_array(t_env *env, const char *key)
 {
+	char			del;
 	unsigned char	i;
 	unsigned char	j;
 
 	i = 0;
+	del = FALSE;
 	while (env->environment[i])
 	{
 		j = 0;
 		while (env->environment[i][j] && key[j]
 		&& env->environment[i][j] == key[j])
 			j++;
-		if (key[j] && key[j] == '=')
+		if (!key[j] && env->environment[i][j] == '=')
 		{
+			del = TRUE;
 			ft_strdel(&env->environment[i]);
 			break ;
 		}
 		i++;
 	}
-	while (env->environment[i])
+	while (i < env->count)
 	{
 		env->environment[i] = env->environment[i + 1];
 		i++;
 	}
+	return (del);
 }
 
 void		env_delete_specified_item(t_env_item *item)
@@ -78,7 +82,7 @@ void		env_delete(t_env *env)
 	i = 0;
 	if (!env)
 		return ;
-	while (i < env->size)
+	while (i < env->count)
 	{
 		item = env->items[i];
 		if (item && item != &env->del)

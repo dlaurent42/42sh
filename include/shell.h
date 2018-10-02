@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 00:22:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 15:12:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct			s_env_item
 
 typedef struct			s_env
 {
-	char				*environment[ENV_MAX_SIZE];
+	char				*environment[ENV_MAX_SIZE + 1];
 	size_t				size;
 	size_t				count;
 	t_env_item			del;
@@ -353,7 +353,7 @@ void					sh_command_run(t_shell *sh);
 ** functions - cd
 */
 int						sh_cd_remove_troll(char *s);
-char					sh_cd(t_shell *sh, char *args);
+char					sh_cd(t_shell *sh, char **argv);
 char					sh_cd_error(char *value, char *path, int err_id);
 char					sh_cd_follow(t_shell *sh, char *value);
 char					sh_cd_nofollow(t_shell *sh, char *value, char *path);
@@ -368,17 +368,34 @@ void					sh_history(t_shell *sh);
 /*
 ** functions - exit
 */
-void					sh_exit(t_shell *sh, char *args);
+char					sh_exit(t_shell *sh, char **argv);
+
+/*
+** functions - env
+*/
+char					sh_env(t_shell *sh, char **argv);
+char					sh_env_error(t_env *env, char *s1, char *s2, int err_id);
+char					sh_env_exec(t_env *env, char *path, char *string);
+char					sh_env_display(t_shell *sh, t_env *env, char *string);
+char					sh_env_parse(t_env *e, char **p, char **s, char **av);
 
 /*
 ** functions - setenv
 */
-char					sh_setenv(t_shell *sh, char *args);
+int						sh_setenv_isbin(char *arg);
+int						sh_setenv_equal(char *arg);
+char					sh_setenv(t_shell *sh, char **argv);
+char					sh_setenv_add(t_shell *sh, t_env *env, char *arg);
+char					sh_setenv_error(char *key, char *val, int err_id);
+char					*sh_setenv_parse(char *arg);
 
 /*
 ** functions - unsetenv
 */
-char					sh_unsetenv(t_shell *sh, char *args);
+char					sh_unsetenv(t_shell *sh, char **argv);
+char					sh_unsetenv_remove(t_shell *sh, char *arg);
+char					sh_unsetenv_error(char *key, int err_id);
+char					*sh_unsetenv_parse(char *arg);
 
 /*
 ** structures - binaries
@@ -389,7 +406,6 @@ void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
 void					bin_insert(t_shell *sh, t_bin *b, t_bin_obj *obj);
 void					bin_initialize(t_shell *sh, t_env *env, t_bin *bin);
-char					*bin_execute_fetch(t_shell *sh, char *path, char **av);
 t_bin					*bin_new(t_shell *sh);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
@@ -401,6 +417,7 @@ void					command_add(t_shell *sh);
 void					command_delete_all(t_shell *sh);
 void					command_import(t_shell *sh);
 void					command_export_all(t_shell *sh);
+char					*command_execute_fetch(t_env *env, char *path, char **av);
 
 /*
 ** structures - environment
@@ -412,7 +429,9 @@ void					env_delete(t_env *env);
 void					env_insert(t_shell *sh, t_env *e, char *k, char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
 char					*env_search(t_env *env, const char *key);
+char					env_delete_item_from_array(t_env *env, const char *key);
 t_env					*env_new(t_shell *sh, char **environ);
+t_env					*env_copy(t_shell *sh);
 
 /*
 ** structures - reader

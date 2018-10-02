@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 14:38:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/02 20:41:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ static void			env_insert_item_into_array(t_env *env, char *k, char *v)
 			return (ft_strdel(&var));
 		i++;
 	}
+	i -= (env_delete_item_from_array(env, k)) ? 1 : 0;
 	env->environment[i] = ft_strdupf(var);
 }
 
-void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
+void				env_insert(t_shell *sh, t_env *env, char *k, char *v)
 {
 	int			i;
 	int			index;
@@ -53,7 +54,7 @@ void				env_insert(t_shell *shell, t_env *env, char *k, char *v)
 
 	i = 1;
 	env_insert_item_into_array(env, k, v);
-	item = env_new_item(shell, env, k, v);
+	item = env_new_item(sh, env, k, v);
 	index = env_get_hash(item->key, env->size, 0);
 	curr_item = env->items[index];
 	while (curr_item)

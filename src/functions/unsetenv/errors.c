@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:06:59 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/02 10:15:17 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/02 20:09:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_setenv(t_shell *sh, char **argv)
+char	sh_unsetenv_error(char *key, int err_id)
 {
-	int		i;
-	char	res;
-	size_t	argc;
-
-	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_setenv_error(NULL, NULL, 1));
-	while (argv[i] && (res = sh_setenv_add(sh, sh->env, argv[i])) == 0)
-		i++;
-	return (res);
+	if (err_id == 1)
+		ft_putendl_fd("unsetenv: not enough arguments", 2);
+	if (err_id == 2)
+	{
+		ft_putstr_fd("unsetenv: ", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd(" not found", 2);
+	}
+	if (err_id == 3)
+	{
+		ft_putstr_fd("unsetenv: cannot unset", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd("", 2);
+	}
+	ft_strdel(&key);
+	return (1);
 }
