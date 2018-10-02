@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 13:28:50 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/03 15:13:45 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 SRC =	ft_atoi.c\
 		ft_bzero.c\
+		ft_count_argv.c\
 		ft_isalnum.c\
 		ft_isalpha.c\
 		ft_isascii.c\
