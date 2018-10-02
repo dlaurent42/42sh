@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 19:22:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 20:10:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/02 16:55:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*parent_handler(int *pipe_fd)
 	return (command_output);
 }
 
-char		*bin_execute_fetch(t_shell *sh, char *path, char **args)
+char		*command_execute_fetch(t_env *env, char *path, char **args)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -50,7 +50,7 @@ char		*bin_execute_fetch(t_shell *sh, char *path, char **args)
 	if ((pid = fork()) == -1)
 		return (NULL);
 	else if (pid == 0)
-		child_handler(pipe_fd, path, args, sh->env->environment);
+		child_handler(pipe_fd, path, args, env->environment);
 	else
 		command_output = parent_handler(pipe_fd);
 	return (command_output);

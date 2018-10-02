@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:06:59 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/02 09:00:04 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/02 09:00:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_setenv(t_shell *sh, char **argv)
+int	sh_setenv_isbin(char *arg)
 {
 	int		i;
-	char	res;
-	size_t	argc;
 
 	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_setenv_error(NULL, NULL, 1));
-	while (argv[i] && (res = sh_setenv_add(sh, sh->env, argv[i])) == 0)
+	while (arg[i])
+	{
+		if (arg[i] == '\'' || arg[i] == '"')
+			return (0);
+		if (i && arg[i] == '=' && arg[i + 1] && arg[i + 1] == '=' && arg[i + 2])
+			return (i + 2);
 		i++;
-	return (res);
+	}
+	return (0);
+}
+
+int	sh_setenv_equal(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (i);
+		i++;
+	}
+	return (0);
 }

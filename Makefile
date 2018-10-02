@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/01 15:54:31 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/02 18:09:49 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,22 @@ SRC			=	shell.c														\
 				functions/cd/follow.c										\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
+				functions/env/env.c											\
+				functions/env/error.c										\
+				functions/env/mode.display.c								\
+				functions/env/mode.exec.c									\
+				functions/env/parse.c										\
 				functions/exit/exit.c										\
+				functions/setenv/add.c										\
+				functions/setenv/error.c									\
+				functions/setenv/parse.c									\
 				functions/setenv/setenv.c									\
+				functions/setenv/utils.c									\
+				functions/unsetenv/errors.c									\
+				functions/unsetenv/parse.c									\
+				functions/unsetenv/remove.c									\
 				functions/unsetenv/unsetenv.c								\
 				structures/binaries/delete.c								\
-				structures/binaries/execute_fetch.c							\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
 				structures/binaries/insert.c								\
@@ -40,8 +51,10 @@ SRC			=	shell.c														\
 				structures/binaries/search.c								\
 				structures/commands/add.c									\
 				structures/commands/delete.c								\
+				structures/commands/execute_fetch.c							\
 				structures/commands/export.c								\
 				structures/commands/import.c								\
+				structures/environment/copy.c								\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\

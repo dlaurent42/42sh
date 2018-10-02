@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                           :+:      :+:    :+:   */
+/*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 17:06:59 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/02 10:16:59 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/02 20:46:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		sh_setenv(t_shell *sh, char **argv)
+char	sh_unsetenv_remove(t_shell *sh, char *arg)
 {
-	int		i;
-	char	res;
-	size_t	argc;
+	char	*arg_parsed;
 
-	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_setenv_error(NULL, NULL, 1));
-	while (argv[i] && (res = sh_setenv_add(sh, sh->env, argv[i])) == 0)
-		i++;
-	return (res);
+	arg_parsed = sh_unsetenv_parse(ft_strdup(arg));
+	if (!env_search(sh->env, arg_parsed))
+		return (sh_unsetenv_error(arg_parsed, 2));
+	env_delete_item(sh->env, arg_parsed);
+	if (env_search(sh->env, arg_parsed))
+		return (sh_unsetenv_error(arg_parsed, 3));
+	ft_strdel(&arg_parsed);
+	return (0);
 }
