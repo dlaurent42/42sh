@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/03 15:12:29 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/03 15:18:21 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,32 +69,32 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.c								\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
-				terminal/autocompletion/sort/sort.c \
-				terminal/autocompletion/sort/sort_alpha.c \
-				terminal/autocompletion/issuance/issuance.c \
-				terminal/autocompletion/issuance/read_dispatcher.c \
-				terminal/autocompletion/issuance/move_up.c \
-				terminal/autocompletion/issuance/manage_buffer.c \
-				terminal/autocompletion/issuance/move_down.c \
-				terminal/autocompletion/issuance/move_left.c \
-				terminal/autocompletion/issuance/move_right.c \
-				terminal/autocompletion/issuance/get_attributes.c \
-				terminal/autocompletion/issuance/do_ls.c \
-				terminal/autocompletion/issuance/path.c \
-				terminal/autocompletion/issuance/show_screen.c \
-				terminal/autocompletion/issuance/calc_len_file_name.c \
-				terminal/autocompletion/issuance/is_executeable.c \
-				terminal/autocompletion/issuance/do_file_admin.c \
-				terminal/autocompletion/issuance/calculate_number_of_columns.c \
-				terminal/autocompletion/display/display.c \
-				terminal/autocompletion/display/clear_selection_screen.c \
-				terminal/autocompletion/display/file_name.c \
-				terminal/autocompletion/display/print_spaces.c \
-				terminal/autocompletion/auto_completion/auto_completion.c \
-				terminal/autocompletion/auto_completion/free_frame.c \
-				terminal/autocompletion/auto_completion/get_args.c \
-				terminal/autocompletion/auto_completion/create_args.c \
-				terminal/autocompletion/auto_completion/free_args.c \
+				terminal/autocompletion/sort/sort.c							\
+				terminal/autocompletion/sort/sort_alpha.c					\
+				terminal/autocompletion/issuance/issuance.c					\
+				terminal/autocompletion/issuance/read_dispatcher.c			\
+				terminal/autocompletion/issuance/move_up.c					\
+				terminal/autocompletion/issuance/manage_buffer.c			\
+				terminal/autocompletion/issuance/move_down.c				\
+				terminal/autocompletion/issuance/move_left.c				\
+				terminal/autocompletion/issuance/move_right.c				\
+				terminal/autocompletion/issuance/get_attributes.c			\
+				terminal/autocompletion/issuance/do_ls.c					\
+				terminal/autocompletion/issuance/path.c						\
+				terminal/autocompletion/issuance/show_screen.c				\
+				terminal/autocompletion/issuance/calc_len_file_name.c		\
+				terminal/autocompletion/issuance/is_executeable.c			\
+				terminal/autocompletion/issuance/do_file_admin.c			\
+				terminal/autocompletion/issuance/calculate_number_of_columns.c\
+				terminal/autocompletion/display/display.c					\
+				terminal/autocompletion/display/clear_selection_screen.c	\
+				terminal/autocompletion/display/file_name.c					\
+				terminal/autocompletion/display/print_spaces.c				\
+				terminal/autocompletion/auto_completion/auto_completion.c	\
+				terminal/autocompletion/auto_completion/free_frame.c		\
+				terminal/autocompletion/auto_completion/get_args.c			\
+				terminal/autocompletion/auto_completion/create_args.c		\
+				terminal/autocompletion/auto_completion/free_args.c			\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 11:53:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 15:34:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static char	sh_cd_dispatch(t_shell *sh, int option_p, char **argv, int i)
 	char	res;
 
 	res = 0;
-	if (!argv[i] || (argv[i][0] == '~' && !argv[i][1])
+	if (ft_count_argv((void **)argv) > 1)
+		res = sh_cd_error(NULL, NULL, 7);
+	else if (!argv[i] || (argv[i][0] == '~' && !argv[i][1])
 	|| (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2]))
 		res = (env_search(sh->env, "HOME"))
 			? sh_cd_nofollow(sh, env_search(sh->env, "HOME"), NULL, FALSE)

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:06:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 11:20:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 15:33:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	sh_cd_error(char *value, char *path, int err_id)
 		ft_putendl_fd("cd: HOME not set", 2);
 	if (err_id == 6)
 		ft_putendl_fd("cd: OLDPWD not set", 2);
+	if (err_id == 7)
+		ft_putendl_fd("cd: too many arguments", 2);
 	ft_putendl_fd(value, 2);
 	ft_strdel(&path);
 	return (1);
