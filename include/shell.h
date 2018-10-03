@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 15:15:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 15:15:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,8 +375,8 @@ char					sh_exit(t_shell *sh, char **argv);
 */
 char					sh_env(t_shell *sh, char **argv);
 char					sh_env_error(t_env *env, char *s1, char *s2, int err_id);
-char					sh_env_exec(t_env *env, char *path, char *string);
-char					sh_env_display(t_shell *sh, t_env *env, char *string);
+char					sh_env_exec(t_env *env, char *path, char **arr);
+char					sh_env_display(t_shell *sh, t_env *env, char **arr);
 char					sh_env_parse(t_env *e, char **p, char **s, char **av);
 
 /*
