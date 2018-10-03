@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 01:47:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 12:46:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 21:53:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void		sh_select_char(t_shell *sh)
 	ft_putstr(K_DEL);
 	ft_putstr(K_LEFT);
 	sh_select_print(sh);
-	sh_select_set_pos(sh);
 }
 
 static void		sh_unselect_char(t_shell *sh)
@@ -30,7 +29,6 @@ static void		sh_unselect_char(t_shell *sh)
 	sh_move_left(sh);
 	sh->selection.stop = sh->cursor.abs_pos;
 	sh_select_print(sh);
-	sh_select_set_pos(sh);
 }
 
 void			sh_select_left_char(t_shell *sh)

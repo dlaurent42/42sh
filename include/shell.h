@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/04 11:23:02 by dhojt            ###   ########.fr       */
+=======
+/*   Updated: 2018/10/03 22:02:25 by dlaurent         ###   ########.fr       */
+>>>>>>> e84f28b... [feature] improve speed of selection
 /*                                                                            */
 /* ************************************************************************** */
 

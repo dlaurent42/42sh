@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 18:50:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 21:53:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void		sh_select_print(t_shell *sh)
 		i++;
 	}
 	(sh->cursor.rel_pos + i >= sh->selection.stop) ? ft_putstr("\033[0m") : 0;
+	sh_select_set_pos(sh);
 }
