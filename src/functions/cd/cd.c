@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:08:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 18:53:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	sh_cd_dispatch(t_shell *sh, int option_p, char **argv, int i)
 			: sh_cd_follow(sh, env_search(sh->env, "OLDPWD"), TRUE);
 	else if (argv[i][0] == '-' && !argv[i][1])
 		res = sh_cd_error(argv[i], NULL, 6);
-	else 
+	else
 		res = (option_p)
 			? sh_cd_nofollow(sh, argv[i], NULL, FALSE)
 			: sh_cd_follow(sh, argv[i], FALSE);
@@ -47,8 +47,8 @@ char		sh_cd(t_shell *sh, char **argv)
 	size_t	argc;
 
 	current = 0;
-	option_l = 0;
-	option_p = 0;
+	option_l = FALSE;
+	option_p = FALSE;
 	argc = ft_count_argv((void **)argv);
 	while (argv[current] && argv[current][0] == '-')
 	{
