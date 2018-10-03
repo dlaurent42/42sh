@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:08:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 18:52:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,14 +361,9 @@ char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
 
 /*
-** functions - history
+** functions - echo
 */
-void					sh_history(t_shell *sh);
-
-/*
-** functions - exit
-*/
-char					sh_exit(t_shell *sh, char **argv);
+char					sh_echo(t_shell *sh, char **argv);
 
 /*
 ** functions - env
@@ -378,6 +373,16 @@ char					sh_env_error(t_env *env, char *s1, char *s2, int err_id);
 char					sh_env_exec(t_env *env, char *path, char **arr);
 char					sh_env_display(t_shell *sh, t_env *env, char **arr);
 char					sh_env_parse(t_env *e, char **p, char **s, char **av);
+
+/*
+** functions - exit
+*/
+char					sh_exit(t_shell *sh, char **argv);
+
+/*
+** functions - history
+*/
+void					sh_history(t_shell *sh);
 
 /*
 ** functions - setenv

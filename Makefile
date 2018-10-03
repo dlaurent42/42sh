@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/03 18:09:12 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/03 19:09:00 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			=	shell.c														\
 				functions/cd/follow.c										\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
+				functions/echo/echo.c										\
 				functions/env/env.c											\
 				functions/env/error.c										\
 				functions/env/mode.display.c								\
