@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:08:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 19:23:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,7 @@ void					error_no_path_var(t_shell *sh);
 ** functions
 */
 void					sh_command_run(t_shell *sh);
+void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 
 /*
 ** functions - cd
@@ -406,6 +407,7 @@ void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
 void					bin_insert(t_shell *sh, t_bin *b, t_bin_obj *obj);
 void					bin_initialize(t_shell *sh, t_env *env, t_bin *bin);
+void					bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *s);
 t_bin					*bin_new(t_shell *sh);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
