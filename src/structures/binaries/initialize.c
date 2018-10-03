@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:08:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 20:21:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		bin_sort_list_for_auto(t_bin *bin)
 	}
 }
 
-static void			bin_remove_duplicates_for_auto(t_bin *bin)
+static void		bin_remove_duplicates_for_auto(t_bin *bin)
 {
 	t_bin_auto		*track;
 	t_bin_auto		*tmp;

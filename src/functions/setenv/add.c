@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 09:00:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 11:39:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 20:11:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	sh_setenv_add(t_shell *sh, t_env *env, char *arg)
 	char		*val;
 	t_bin_obj	*obj;
 
-	key = NULL;
-	val = NULL;
 	if (!arg || arg[0] == '=' || ft_strcountif(arg, '=') == 0)
 		return (sh_setenv_error(NULL, NULL, 2));
 	bin = sh_setenv_isbin(arg);

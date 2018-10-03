@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/23 23:14:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 20:14:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,16 @@ void		bin_delete_item(t_bin *bin, const char *key)
 	int			i;
 	int			index;
 	t_bin_item	*item;
-	t_bin_item	deleleted_item;
 
 	i = 1;
-	deleleted_item.key = NULL;
-	deleleted_item.value = NULL;
 	index = bin_get_hash(key, bin->size, 0);
 	item = bin->items[index];
 	while (item)
 	{
-		if (item != &deleleted_item && !ft_strcmps(item->key, key))
+		if (item != &bin->del && !ft_strcmps(item->key, key))
 		{
 			bin_delete_specified_item(item);
-			bin->items[index] = &deleleted_item;
+			bin->items[index] = &bin->del;
 		}
 		index = bin_get_hash(key, bin->size, i);
 		item = bin->items[index];

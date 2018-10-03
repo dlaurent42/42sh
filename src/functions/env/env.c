@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 14:55:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 20:11:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ char		**sh_env_get_string(char *string, char **argv)
 	int		j;
 	char	**arr;
 	char	**split;
-	
+
 	i = 0;
 	j = 0;
-	arr = NULL;
 	split = ft_strsplit(string, ' ');
 	ft_strdel(&string);
 	if (!(arr = (char **)ft_memalloc(sizeof(char *) * (
@@ -29,8 +28,7 @@ char		**sh_env_get_string(char *string, char **argv)
 		return (NULL);
 	while (split && split[i])
 	{
-		arr[i] = ft_strdups(split[i]);
-		ft_strdel(&split[i]);
+		arr[i] = ft_strdupf(split[i]);
 		i++;
 	}
 	(split) ? free(split) : 0;

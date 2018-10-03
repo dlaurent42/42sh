@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 19:32:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 20:23:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,43 @@
 # define CLEAR_LINE		"\x1b[M"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
 
-# define OPTIONS	"-AFGNRSTUacdfgiloprtux1"
-# define RL_BUFSIZE	1024
-# define NUM_FILES	"--------------\nFiles: %d\n"
-# define CHRSIZELEN	8
+# define OPTIONS		"-AFGNRSTUacdfgiloprtux1"
+# define RL_BUFSIZE		1024
+# define NUM_FILES		"--------------\nFiles: %d\n"
+# define CHRSIZELEN		8
 
-# define AUTO_NON	0
-# define AUTO_BIN	1
-# define AUTO_REG	2
-# define AUTO_WILD	3
+# define AUTO_NON		0
+# define AUTO_BIN		1
+# define AUTO_REG		2
+# define AUTO_WILD		3
 
-# define AT_FIRST	0
-# define AT_REST	1
+# define AT_FIRST		0
+# define AT_REST		1
 
-# define MODE_NON	0
-# define MODE_CMP	1
-# define MODE_STR	2
+# define MODE_NON		0
+# define MODE_CMP		1
+# define MODE_STR		2
 
-# define TYPE_IFO	010000
-# define TYPE_CHR	020000
-# define TYPE_DIR	040000
-# define TYPE_BLK	060000
-# define TYPE_REG	0100000
-# define TYPE_LNK	0120000
-# define TYPE_SOCK	0140000
-# define TYPE_WHT	0160000
+# define TYPE_IFO		010000
+# define TYPE_CHR		020000
+# define TYPE_DIR		040000
+# define TYPE_BLK		060000
+# define TYPE_REG		0100000
+# define TYPE_LNK		0120000
+# define TYPE_SOCK		0140000
+# define TYPE_WHT		0160000
 
-# define COL_IFO	"\x1b[33m"
-# define COL_CHR	"\x1b[1;33m"
-# define COL_DIR	"\x1b[1;31m"
-# define COL_BLK	"\x1b[1;33m"
-# define COL_REG	"\x1b[0m"
-# define COL_LNK	"\x1b[1;36m"
-# define COL_SOCK	"\x1b[32m"
-# define COL_WHT	"\x1b[31m"
-# define COL_EXE	"\x1b[1;32m"
-# define COL_BG		"\x1b[30;47m"
-# define COL_CLR	"\x1b[0m"
+# define COL_IFO		"\x1b[33m"
+# define COL_CHR		"\x1b[1;33m"
+# define COL_DIR		"\x1b[1;31m"
+# define COL_BLK		"\x1b[1;33m"
+# define COL_REG		"\x1b[0m"
+# define COL_LNK		"\x1b[1;36m"
+# define COL_SOCK		"\x1b[32m"
+# define COL_WHT		"\x1b[31m"
+# define COL_EXE		"\x1b[1;32m"
+# define COL_BG			"\x1b[30;47m"
+# define COL_CLR		"\x1b[0m"
 
 /*
 ** Move
@@ -144,6 +144,7 @@ typedef struct			s_bin
 {
 	size_t				size;
 	size_t				count;
+	t_bin_item			del;
 	t_bin_item			**items;
 	t_bin_auto			*bin_auto;
 }						t_bin;
@@ -254,86 +255,86 @@ void					sh_debug(t_shell *sh, char *msg, char *str);
 ** ------------------- auto_completion structs ---------------------
 */
 
-typedef struct		s_data
+typedef struct			s_data
 {
-	int				file_number;
+	int					file_number;
 
-	char			*str;
-	char			*parent_path;
-	char			*path;
+	char				*str;
+	char				*parent_path;
+	char				*path;
 
-	int				len_of_str;
+	int					len_of_str;
 
-	unsigned char	no_file	: 1;
-	unsigned char	fill	: 7;
+	unsigned char		no_file	: 1;
+	unsigned char		fill	: 7;
 
-	int				type;
-	mode_t			mode;
-	int				links;
-	int				rdev;
-	char			sym_path[RL_BUFSIZE + 1];
+	int					type;
+	mode_t				mode;
+	int					links;
+	int					rdev;
+	char				sym_path[RL_BUFSIZE + 1];
 
-	unsigned char	ifo		: 1;
-	unsigned char	chr		: 1;
-	unsigned char	dir		: 1;
-	unsigned char	blk		: 1;
-	unsigned char	reg		: 1;
-	unsigned char	lnk		: 1;
-	unsigned char	sock	: 1;
-	unsigned char	wht		: 1;
-}					t_data;
+	unsigned char		ifo		: 1;
+	unsigned char		chr		: 1;
+	unsigned char		dir		: 1;
+	unsigned char		blk		: 1;
+	unsigned char		reg		: 1;
+	unsigned char		lnk		: 1;
+	unsigned char		sock	: 1;
+	unsigned char		wht		: 1;
+}						t_data;
 
-typedef struct		s_args
+typedef struct			s_args
 {
-	t_data			data;
-	struct s_args	*next;
-	struct s_args	*show_next;
-	struct s_args	*show_prev;
-}					t_args;
+	t_data				data;
+	struct s_args		*next;
+	struct s_args		*show_next;
+	struct s_args		*show_prev;
+}						t_args;
 
-typedef struct		s_frame
+typedef struct			s_frame
 {
-	char			**argv;
+	char				**argv;
 
-	char			*pre_file_name;
-	char			*del_file_name;
-	char			*file_name;
-	int				file_name_len;
-	char			cmp_mode;
-	char			auto_mode;
+	char				*pre_file_name;
+	char				*del_file_name;
+	char				*file_name;
+	int					file_name_len;
+	char				cmp_mode;
+	char				auto_mode;
 
-	unsigned char	at_mode	: 1;
-	unsigned char	fill	: 7;
+	unsigned char		at_mode	: 1;
+	unsigned char		fill	: 7;
 
-	int				len_file_name;
-	int				items_to_display;
-	int				total_blocks;
-	int				number_of_printed_rows;
+	int					len_file_name;
+	int					items_to_display;
+	int					total_blocks;
+	int					number_of_printed_rows;
 
-	int				width;
-	int				height;
-	int				number_of_columns;
+	int					width;
+	int					height;
+	int					number_of_columns;
 
-	t_args			*args;
-	t_args			*current_args;
-	t_args			*head;
-	t_args			*track;
-	t_args			*select;
+	t_args				*args;
+	t_args				*current_args;
+	t_args				*head;
+	t_args				*track;
+	t_args				*select;
 
-	t_shell			*shell;
+	t_shell				*shell;
 
-	bool			(*sort_function)(struct s_frame *frame);
-}					t_frame;
+	bool				(*sort_function)(struct s_frame *frame);
+}						t_frame;
 
-typedef struct		s_read_dir
+typedef struct			s_read_dir
 {
-	t_args			*args;
-	t_args			*tmp;
-	t_args			*head;
-	t_args			*last_args;
-	DIR				*directory;
-	struct dirent	*file;
-}					t_read_dir;
+	t_args				*args;
+	t_args				*tmp;
+	t_args				*head;
+	t_args				*last_args;
+	DIR					*directory;
+	struct dirent		*file;
+}						t_read_dir;
 
 /*
 ** errors
@@ -357,7 +358,7 @@ int						sh_cd_remove_troll(char *s);
 char					sh_cd(t_shell *sh, char **argv);
 char					sh_cd_error(char *value, char *path, int err_id);
 char					sh_cd_follow(t_shell *sh, char *value, char dash);
-char					sh_cd_nofollow(t_shell *sh, char *value, char *path, char dash);
+char					sh_cd_nofollow(t_shell *sh, char *v, char *p, char d);
 char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
 
@@ -370,7 +371,7 @@ char					sh_echo(t_shell *sh, char **argv);
 ** functions - env
 */
 char					sh_env(t_shell *sh, char **argv);
-char					sh_env_error(t_env *env, char *s1, char *s2, int err_id);
+char					sh_env_error(t_env *env, char *s1, char *s2, int id);
 char					sh_env_exec(t_env *env, char *path, char **arr);
 char					sh_env_display(t_shell *sh, t_env *env, char **arr);
 char					sh_env_parse(t_env *e, char **p, char **s, char **av);
@@ -412,7 +413,10 @@ void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
 void					bin_insert(t_shell *sh, t_bin *b, t_bin_obj *obj);
 void					bin_initialize(t_shell *sh, t_env *env, t_bin *bin);
-void					bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *s);
+void					bin_gen_list_for_auto_comp(
+							t_shell *sh,
+							t_bin *bin,
+							char *s);
 t_bin					*bin_new(t_shell *sh);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
@@ -424,7 +428,7 @@ void					command_add(t_shell *sh);
 void					command_delete_all(t_shell *sh);
 void					command_import(t_shell *sh);
 void					command_export_all(t_shell *sh);
-char					*command_execute_fetch(t_env *env, char *path, char **av);
+char					*command_execute_fetch(t_env *e, char *p, char **av);
 
 /*
 ** structures - environment
@@ -539,34 +543,34 @@ void					sh_window_resize(t_shell *sh);
 /*
 ** terminal - auto_completion
 */
-void				auto_completion(t_shell *shell);
-bool				auto_get_args(t_frame *frame);
-void				auto_free_args(t_args **args);
-t_args				*auto_create_args(void);
+void					auto_completion(t_shell *shell);
+bool					auto_get_args(t_frame *frame);
+void					auto_free_args(t_args **args);
+t_args					*auto_create_args(void);
 
-void				auto_issuance(t_frame *frame);
-void				auto_read_dispatcher(t_frame *frame);
-void				auto_clear_selection_screen(t_frame *frame);
-void				auto_manage_buffer(t_frame *frame, char *new_display_str);
-bool				auto_get_attributes(t_frame *frame);
-void				auto_show_screen(t_frame *frame, t_args *args);
-void				auto_do_ls(t_frame *frame, t_args *args);
-void				auto_do_file_admin(t_frame *frame, t_args *args);
-void				auto_calc_len_file_name(t_frame *frame, t_args *args);
-bool				auto_calculate_number_of_columns(t_frame *frame);
-bool				auto_path(t_args *args, char *path, char *name);
-void				auto_move_up(t_frame *frame);
-void				auto_move_down(t_frame *frame);
-void				auto_move_left(t_frame *frame);
-void				auto_move_right(t_frame *frame);
-bool				auto_is_executeable(t_args *args);
+void					auto_issuance(t_frame *frame);
+void					auto_read_dispatcher(t_frame *frame);
+void					auto_clear_selection_screen(t_frame *frame);
+void					auto_manage_buffer(t_frame *frame, char *new_display);
+bool					auto_get_attributes(t_frame *frame);
+void					auto_show_screen(t_frame *frame, t_args *args);
+void					auto_do_ls(t_frame *frame, t_args *args);
+void					auto_do_file_admin(t_frame *frame, t_args *args);
+void					auto_calc_len_file_name(t_frame *frame, t_args *args);
+bool					auto_calculate_number_of_columns(t_frame *frame);
+bool					auto_path(t_args *args, char *path, char *name);
+void					auto_move_up(t_frame *frame);
+void					auto_move_down(t_frame *frame);
+void					auto_move_left(t_frame *frame);
+void					auto_move_right(t_frame *frame);
+bool					auto_is_executeable(t_args *args);
 
-void				auto_sort(t_frame *frame);
-bool				auto_sort_alpha(t_frame *frame);
+void					auto_sort(t_frame *frame);
+bool					auto_sort_alpha(t_frame *frame);
 
-void				auto_display(t_frame *frame, t_args *args);
-void				auto_file_name(t_frame *frame, t_args *args);
-void				auto_print_spaces(int diff);
-void				auto_free_frame(t_frame *frame);
+void					auto_display(t_frame *frame, t_args *args);
+void					auto_file_name(t_frame *frame, t_args *args);
+void					auto_print_spaces(int diff);
+void					auto_free_frame(t_frame *frame);
 
 #endif

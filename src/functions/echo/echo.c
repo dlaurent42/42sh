@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 19:05:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 19:38:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char		sh_echo(t_shell *sh, char **argv)
 	char	option_n;
 	char	*string;
 
+	(void)sh;
 	current = 0;
 	option_n = FALSE;
 	string = NULL;

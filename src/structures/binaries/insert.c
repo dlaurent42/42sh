@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:58:38 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 20:16:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,17 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	int			index;
 	t_bin_item	*item;
 	t_bin_item	*curr_item;
-	t_bin_item	del_item;
 
 	i = 1;
 	if (!bin->bin_auto)
 		sh_add_builtins_to_auto_comp(sh, bin);
 	bin_gen_list_for_auto_comp(sh, bin, obj->name);
-	del_item.key = NULL;
-	del_item.value = NULL;
 	item = bin_new_item(sh, bin, obj);
 	index = bin_get_hash(item->key, bin->size, 0);
 	curr_item = bin->items[index];
 	while (curr_item)
 	{
-		if (curr_item != &del_item && !ft_strcmps(curr_item->key, obj->name))
+		if (curr_item != &bin->del && !ft_strcmps(curr_item->key, obj->name))
 		{
 			bin->items[index] = item;
 			return (bin_delete_specified_item(curr_item));

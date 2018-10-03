@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 23:19:01 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 20:17:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 		? sh_select_left_word(sh) : 0;
 }
 
-void	sh_deletion_dispatcher(t_shell *sh)//Removed static. Make own function?
+void		sh_deletion_dispatcher(t_shell *sh)
 {
 	if (sh->read->line[0] == 1)
 		sh_delete_all(sh);

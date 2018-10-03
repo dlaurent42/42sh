@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 15:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 10:31:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 20:12:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char	sh_env_unset(t_env *env, char *arg)
 static char	sh_env_path(char *arg, char **path)
 {
 	size_t	len;
+
 	ft_strdel(path);
 	if (!(*path = ft_strdups(arg)))
 		return (-3);
@@ -80,7 +81,7 @@ char		sh_env_parse(t_env *env, char **path, char **string, char **argv)
 	res = 0;
 	while (argv[i] && res == 0)
 	{
-		if (argv[i][0] == '-' 
+		if (argv[i][0] == '-'
 		&& ((argv[i][1] == 'i' && !argv[i][2]) || !argv[i][1]))
 			sh_env_empty(env);
 		else if (argv[i][0] == '-' && argv[i][1] == 'u' && !argv[i][2])
