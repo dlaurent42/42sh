@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/03 18:09:12 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/03 19:28:02 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				functions/redirect.c										\
+				functions/list_of_builtins.c								\
 				functions/cd/cd.c											\
 				functions/cd/error.c										\
 				functions/cd/follow.c										\
@@ -50,6 +51,7 @@ SRC			=	shell.c														\
 				structures/binaries/insert.c								\
 				structures/binaries/new.c									\
 				structures/binaries/search.c								\
+				structures/binaries/gen_list_for_auto_comp.c				\
 				structures/commands/add.c									\
 				structures/commands/delete.c								\
 				structures/commands/execute_fetch.c							\
