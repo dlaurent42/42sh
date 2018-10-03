@@ -6,29 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 18:49:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 18:58:38 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static void			bin_gen_list_for_auto_comp(t_shell *sh, t_bin *bin, char *s)
-{
-	t_bin_auto		*new;
-
-	if (ft_strcmps(s, ".") && ft_strcmps(s, ".."))
-	{
-		if (!(new = (t_bin_auto *)ft_memalloc(sizeof(t_bin_auto))))
-			error_malloc_bin(sh, bin, "t_bin_auto structure");
-		if (!(new->name = ft_strdup(s)))
-		{
-			free(new);
-			error_malloc_bin(sh, bin, "t_bin_auto name string");
-		}
-		new->next = bin->bin_auto;
-		bin->bin_auto = new;
-	}
-}
 
 static t_bin_item	*bin_new_item(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 {
@@ -63,6 +45,8 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 	t_bin_item	del_item;
 
 	i = 1;
+	if (!bin->bin_auto)
+		sh_add_builtins_to_auto_comp(sh, bin);
 	bin_gen_list_for_auto_comp(sh, bin, obj->name);
 	del_item.key = NULL;
 	del_item.value = NULL;
