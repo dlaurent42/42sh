@@ -12,3 +12,7 @@ a.out
 
 # Valgrind folder
 shell.dSYM
+
+# Secure malloc tool residues
+.sym_logs
+*.infected
