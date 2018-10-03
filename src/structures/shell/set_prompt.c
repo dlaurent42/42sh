@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 20:08:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 10:03:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	sh_set_prompt_location(t_shell *sh, char flag)
 {
 	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
 	if (flag == 1)
-		if (!(sh->prompt.location = ft_strdup(env_search(sh->env, "PWD"))))
+		if (!(sh->prompt.location = ft_strdups(env_search(sh->env, "PWD"))))
 			sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX);
 	if (flag == 0)
 		sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX);

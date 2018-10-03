@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:11:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:20:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 13:49:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static char	*sh_cd_get_real_path(t_shell *sh, char *param)
 
 	path = NULL;
 	rpath = NULL;
-	
 	if (param[0] == '/')
 		return (realpath(param, NULL));
 	if (param[0] == '\0')
@@ -32,18 +31,19 @@ static char	*sh_cd_get_real_path(t_shell *sh, char *param)
 	return (rpath);
 }
 
-char		sh_cd_nofollow(t_shell *sh, char *value, char *given_path)
+char		sh_cd_nofollow(t_shell *sh, char *value, char *path, char dash)
 {
-	char	*path;
+	char	*rpath;
 	t_stat	lstats;
 
-	path = (given_path) ? given_path : sh_cd_get_real_path(sh, value);
-	if (lstat(path, &lstats) < 0)
-		return (sh_cd_error(value, path, 1));
-	if (chdir(path) == -1)
-		return (sh_cd_error(value, path, 3));
+	rpath = (path) ? path : sh_cd_get_real_path(sh, value);
+	if (lstat(rpath, &lstats) < 0)
+		return (sh_cd_error(value, rpath, 1));
+	if (chdir(rpath) == -1)
+		return (sh_cd_error(value, rpath, 3));
 	env_insert(sh, sh->env, "OLDPWD", env_search(sh->env, "PWD"));
-	env_insert(sh, sh->env, "PWD", path);
-	ft_strdel(&path);
+	env_insert(sh, sh->env, "PWD", rpath);
+	(dash) ? ft_putendl(rpath) : 0;
+	ft_strdel(&rpath);
 	return (0);
 }

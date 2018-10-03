@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:30:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/03 15:15:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static void		bin_parse_folder(t_shell *sh, t_bin *bin, char *path)
 	if (!(dir = opendir(path)))
 		return ;
 	while ((dirent = readdir(dir)))
-		if (lstat(path, &stats) == 0)
+		if (lstat(path, &stats) == 0
+		&& !(dirent->d_name[0] == '.' && (!dirent->d_name[1]
+		|| (dirent->d_name[1] == '.' && !dirent->d_name[2]))))
 			bin_insert(
 					sh,
 					bin,

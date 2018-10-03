@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 15:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 20:01:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 10:31:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ static void	sh_env_empty(t_env *env)
 	t_env_item	*item;
 
 	i = 0;
-	sh_debug(NULL, "... empty", NULL);
-	sh_debug(NULL, ft_itoa(env->count), NULL);
 	if (!env)
 		return ;
-	while (i < env->size)
+	while (i < env->count)
 	{
 		item = env->items[i];
 		if (item && item != &env->del)
+		{
 			env_delete_specified_item(item);
+			env->items[i] = &env->del;
+		}
 		i++;
 	}
 	i = 0;
@@ -42,7 +43,6 @@ static char	sh_env_unset(t_env *env, char *arg)
 {
 	char	*arg_parsed;
 
-	sh_debug(NULL, "... unset", NULL);
 	if (ft_strcountif(arg, '='))
 		return (-1);
 	if (!(arg_parsed = sh_unsetenv_parse(ft_strdups(arg))))
@@ -54,7 +54,6 @@ static char	sh_env_unset(t_env *env, char *arg)
 
 static char	sh_env_path(char *arg, char **path)
 {
-	sh_debug(NULL, "... path", NULL);
 	size_t	len;
 	ft_strdel(path);
 	if (!(*path = ft_strdups(arg)))
@@ -67,7 +66,6 @@ static char	sh_env_path(char *arg, char **path)
 
 static char	sh_env_string(char *arg, char **string)
 {
-	sh_debug(NULL, "... string", NULL);
 	if (!(*string = ft_strdups(arg)))
 		return (-4);
 	return (1);
@@ -80,7 +78,6 @@ char		sh_env_parse(t_env *env, char **path, char **string, char **argv)
 
 	i = 0;
 	res = 0;
-	sh_debug(NULL, "parsing", NULL);
 	while (argv[i] && res == 0)
 	{
 		if (argv[i][0] == '-' 

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 19:39:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 11:45:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char	sh_env_add_item(t_shell *sh, t_env *env, char *arg)
 
 	key = NULL;
 	val = NULL;
-	sh_debug(NULL, ft_strjoins(".. adding", arg), NULL);
 	if (!arg || arg[0] == '=' || ft_strcountif(arg, '=') == 0)
 		return (2);
 	key = sh_setenv_parse(ft_strdups(arg));
@@ -57,8 +56,7 @@ char		sh_env_display(t_shell *sh, t_env *env, char *string)
 	i = 0;
 	res = 0;
 	strsplt = ft_strsplit(string, ' ');
-	sh_debug(NULL, "display", NULL);
-	sh_debug(NULL, string, NULL);
+	ft_strdel(&string);
 	while (strsplt && strsplt[i] && res == 0)
 	{
 		res = sh_env_add_item(sh, env, strsplt[i]);

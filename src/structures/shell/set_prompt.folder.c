@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:07:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:46:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 10:09:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*sh_get_folder_name(t_env *env, char *location, size_t len)
 {
-	if (ft_strcmps(location, env_search(env, "HOME")) == 0)
+	if (env_search(env, "HOME")
+	&& ft_strcmps(location, env_search(env, "HOME")) == 0)
 		return (ft_strdup("\e[1;32;40m~"));
 	if (len == 1 && location[0] == '/')
 		return (ft_strdup("\e[1;32;40m/"));

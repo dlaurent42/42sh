@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 20:03:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 10:07:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ char		sh_env_exec(t_env *env, char *path, char *string)
 	char	*returned;
 	char	**strsplt;
 
-	sh_debug(NULL, "exec", NULL);
-	sh_debug(NULL, string, NULL);
 	strsplt = ft_strsplit(string, ' ');
 	function = (path)
 		? ft_strjoinf(path, strsplt[0], 3)

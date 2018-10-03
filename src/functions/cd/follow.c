@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 01:05:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 13:48:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static char	*sh_cd_get_real_path(t_shell *sh, char *param)
 	path = NULL;
 	new = param + sh_cd_remove_troll(param);
 	if (param[0] == '/')
-		return (ft_strdup(param));
-	if (param[0] == '\0')
-		return (ft_strdup(env_search(sh->env, "HOME")));
+		return (ft_strdups(param));
+	if (param[0] == '\0' && env_search(sh->env, "HOME"))
+		return (ft_strdups(env_search(sh->env, "HOME")));
 	if (new[0] == '\0')
-		return (ft_strdup(sh->prompt.location));
+		return (ft_strdups(sh->prompt.location));
 	if (!(path = ft_strjoins(sh->prompt.location, "/")))
 		return (NULL);
 	path = ft_strjoinf(path, new, 1);
@@ -37,7 +37,7 @@ static char	*sh_cd_get_real_path(t_shell *sh, char *param)
 	return (path);
 }
 
-char		sh_cd_follow(t_shell *sh, char *value)
+char		sh_cd_follow(t_shell *sh, char *value, char dash)
 {
 	char	*path;
 	char	*rpath;
@@ -47,7 +47,7 @@ char		sh_cd_follow(t_shell *sh, char *value)
 	if (lstat(path, &lstats) < 0)
 		return (sh_cd_error(value, path, 1));
 	if (!S_ISLNK(lstats.st_mode))
-		return (sh_cd_nofollow(sh, value, path));
+		return (sh_cd_nofollow(sh, value, path, dash));
 	rpath = realpath(path, NULL);
 	if (ft_strcmps(rpath, path) == 0)
 	{
@@ -57,8 +57,11 @@ char		sh_cd_follow(t_shell *sh, char *value)
 	ft_strdel(&rpath);
 	if (chdir(path) == -1)
 		return (sh_cd_error(value, path, 3));
-	env_insert(sh, sh->env, "OLDPWD", env_search(sh->env, "PWD"));
+	(env_search(sh->env, "PWD"))
+		? env_insert(sh, sh->env, "OLDPWD", env_search(sh->env, "PWD"))
+		: 0;
 	env_insert(sh, sh->env, "PWD", path);
+	(dash) ? ft_putendl(path) : 0;
 	ft_strdel(&path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 20:45:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 10:30:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ char		env_delete_item_from_array(t_env *env, const char *key)
 
 void		env_delete_specified_item(t_env_item *item)
 {
-	if (item->key)
-		ft_strdel(&item->key);
-	if (item->value)
-		ft_strdel(&item->value);
+	free(item->key);
+	free(item->value);
 	free(item);
 }
 
@@ -82,7 +80,7 @@ void		env_delete(t_env *env)
 	i = 0;
 	if (!env)
 		return ;
-	while (i < env->count)
+	while (i < env->size)
 	{
 		item = env->items[i];
 		if (item && item != &env->del)
