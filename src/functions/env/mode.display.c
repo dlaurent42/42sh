@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 11:45:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/03 14:50:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,29 +47,26 @@ static void	sh_env_print(t_env *env)
 	env_delete(env);
 }
 
-char		sh_env_display(t_shell *sh, t_env *env, char *string)
+char		sh_env_display(t_shell *sh, t_env *env, char **arr)
 {
 	int		i;
 	int		res;
-	char	**strsplt;
 
 	i = 0;
 	res = 0;
-	strsplt = ft_strsplit(string, ' ');
-	ft_strdel(&string);
-	while (strsplt && strsplt[i] && res == 0)
+	while (arr && arr[i] && res == 0)
 	{
-		res = sh_env_add_item(sh, env, strsplt[i]);
+		res = sh_env_add_item(sh, env, arr[i]);
 		i++;
 	}
 	i = 0;
-	if (strsplt)
-		while (strsplt[i])
+	if (arr)
+		while (arr[i])
 		{
-			ft_strdel(&strsplt[i]);
+			ft_strdel(&arr[i]);
 			i++;
 		}
-	(strsplt) ? free(strsplt) : 0;
+	(arr) ? free(arr) : 0;
 	(res == 0)
 		? sh_env_print(env)
 		: sh_env_error(env, NULL, NULL, res);
