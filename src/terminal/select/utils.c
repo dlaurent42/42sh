@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 14:04:11 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:52:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ int		sh_get_start_rel_from_abs(t_shell *sh)
 
 	abs_i = 0;
 	rel = 0;
-	while (abs_i < sh->selection.start_abs)
+	while (sh->buffer.content[rel] && abs_i <= sh->selection.start_abs)
 	{
 		if ((unsigned char)sh->buffer.content[rel] >= 0b11000000
 		|| (unsigned char)sh->buffer.content[rel] < 0b10000000)
 			abs_i++;
-		rel += ((unsigned char)sh->buffer.content[rel] >= 0b11110000) ? 1 : 0;
-		rel += ((unsigned char)sh->buffer.content[rel] >= 0b11100000) ? 1 : 0;
-		rel += ((unsigned char)sh->buffer.content[rel] >= 0b11000000) ? 2 : 0;
-		rel += ((unsigned char)sh->buffer.content[rel] < 0b10000000) ? 1 : 0;
+		rel++;
 	}
+	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11110000) ? 1 : 0;
+	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11100000) ? 1 : 0;
+	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11000000) ? 1 : 0;
 	return (rel);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:51:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 16:16:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:55:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,13 @@ void		sh_paste_selection(t_shell *sh)
 {
 	char	*rest;
 
-sh_debug(sh, "01", NULL);
 	if (!sh->selection.content)
 		return ;
 	sh->modes.browse = FALSE;
-sh_debug(NULL, "02", NULL);
 	rest = ft_strdups(sh->buffer.content + sh->cursor.rel_pos);
-sh_debug(NULL, rest, NULL);
-sh_debug(NULL, "03", NULL);
 	sh_copy_selection_to_buffer(sh);
-sh_debug(NULL, "04", NULL);
 	(rest) ? sh_copy_rest_to_buffer(sh, rest) : 0;
-sh_debug(NULL, "06", NULL);
 	ft_putstr(CLEAR_TO_EOL);
-sh_debug(NULL, "07", NULL);
 	ft_putstr(sh->buffer.content + sh->cursor.rel_pos);
-sh_debug(NULL, "08", NULL);
 	sh_move_cursor(sh);
-sh_debug(sh, "09", NULL);
 }

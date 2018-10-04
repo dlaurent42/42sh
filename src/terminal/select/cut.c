@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:43:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 16:13:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:55:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void		sh_cut_selection(t_shell *sh)
 
 	x = sh->cursor.x;
 	y = sh->cursor.y;
-	sh_debug(sh, "before cut", NULL);
 	if (!sh->modes.select)
 		return ;
 	sh->modes.browse = FALSE;
@@ -61,6 +60,5 @@ void		sh_cut_selection(t_shell *sh)
 	ft_putstr(K_DEL_ALL);
 	ft_putstr(sh->buffer.content);
 	sh_move_cursor(sh, x, y);
-	sh_debug(sh, "after cut", NULL);
 	sh->modes.select = FALSE;
 }
