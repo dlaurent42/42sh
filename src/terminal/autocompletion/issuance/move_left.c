@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:40:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 11:24:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void				auto_move_left(t_frame *frame)
 {
-	frame->select = frame->select->show_prev;
+	frame->select = frame->select->hor_prev;
 }

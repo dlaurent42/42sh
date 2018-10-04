@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 19:58:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:40:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 11:24:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void				auto_move_down(t_frame *frame)
 {
-	frame->select = frame->select->show_next;
+	frame->select = frame->select->ver_next;
 }

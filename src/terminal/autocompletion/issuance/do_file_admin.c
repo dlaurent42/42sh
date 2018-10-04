@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 21:14:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 11:27:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void			issue_circular_pointers(t_frame *frame, t_args *head)
 		head = head->next;
 	args = head;
 	frame->select = head;
+	frame->select->data.file_number = 0;
 	while (args && args->next)
 	{
 		track = args->next;
@@ -92,12 +93,13 @@ static void			issue_circular_pointers(t_frame *frame, t_args *head)
 			track = track->next;
 		if (!track)
 			break ;
-		track->show_prev = args;
-		args->show_next = track;
+		track->ver_prev = args;
+		args->ver_next = track;
+		track->data.file_number = args->data.file_number + 1;
 		args = track;
 	}
-	args->show_next = head;
-	head->show_prev = args;
+	args->ver_next = head;
+	head->ver_prev = args;
 }
 
 void				auto_do_file_admin(t_frame *frame, t_args *args)

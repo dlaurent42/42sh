@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 17:37:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 11:26:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void			do_loop(t_frame *frame, t_args *head)
 		args = head;
 		delete_str(frame);
 		auto_manage_buffer(frame, frame->select->data.str);
-		if (frame->select->show_next == frame->select)
+		if (frame->select->ver_next == frame->select)
 		{
 			auto_manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
 			break ;

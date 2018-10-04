@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:23:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 11:23:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,8 +288,10 @@ typedef struct			s_args
 {
 	t_data				data;
 	struct s_args		*next;
-	struct s_args		*show_next;
-	struct s_args		*show_prev;
+	struct s_args		*hor_next;
+	struct s_args		*hor_prev;
+	struct s_args		*ver_next;
+	struct s_args		*ver_prev;
 }						t_args;
 
 typedef struct			s_frame

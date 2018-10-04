@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 19:58:35 by dhojt             #+#    #+#             */
-/*   Updated: 2018/09/29 13:40:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 11:25:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void				auto_move_up(t_frame *frame)
 {
-	frame->select = frame->select->show_prev;
+	frame->select = frame->select->ver_prev;
 }
