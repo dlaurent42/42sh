@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 14:40:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 14:43:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,7 @@ static char			*ft_putstr_multi(char *old_str, int n_times)
 	{
 		ptr = old_str;
 		while (*ptr)
-		{
-			*new_str = *ptr;
-			new_str++;
-			ptr++;
-		}
+			*(new_str++) = *(ptr++);
 	}
 	*new_str = '\0';
 	ft_putstr(return_string);
