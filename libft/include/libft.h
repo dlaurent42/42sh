@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:08:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 14:47:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
+char				*ft_putstr_multi(char *old_str, int n_times);
 
 /*
 ** Memory
