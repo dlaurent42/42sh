@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 22:06:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 01:49:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:11:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		sh_browse_next(t_shell *sh)
 	t_cmd	*cmd;
 
 	cmd = NULL;
-	if (!sh->modes.browse)
+	if (!sh->modes.browse || sh->modes.multiline)
 		return ;
 	tmp = sh->buffer.cmd->prev;
 	while (tmp)

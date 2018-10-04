@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:38:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:22:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	sh_reset_sh(t_shell *sh)
 	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
 	sh->buffer.display_len = 0;
 	sh->buffer.unicode_len = 0;
+	sh->buffer.dshift = 0;
+	sh->buffer.ushift = 0;
 	sh->buffer.cmd = NULL;
 	sh->read->unicode_bytes_left = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
@@ -77,10 +79,30 @@ static void	sh_reset_sh(t_shell *sh)
 	sh_print_prompt(sh);
 }
 
+static char	sh_command_check(t_shell *sh)
+{
+	int	i;
+	int	count_dquote;
+	int	count_squote;
+
+	i = 0;
+	count_dquote = 0;
+	count_squote = 0;
+	while (sh->buffer.content[i])
+	{
+		count_dquote += (sh->buffer.content[i] == '"') ? 1 : 0;
+		count_squote += (sh->buffer.content[i] == '\'') ? 1 : 0;
+		i++;
+	}
+	return (!(count_dquote % 2 || count_squote % 2));
+}
+
 void		sh_command_run(t_shell *sh)
 {
 	sh_move_end(sh);
 	ft_putchar('\n');
+	if (sh_command_check(sh) == FALSE)
+		return (sh_multilines(sh));
 	sh->prompt.last_exec_succeed = (sh->buffer.display_len)
 		? sh_command_dispatcher(sh) : 0;
 	(sh->buffer.display_len) ? command_add(sh) : 0;

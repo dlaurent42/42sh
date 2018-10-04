@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:31:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:35:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,28 +98,6 @@
 # define COL_BG			"\x1b[30;47m"
 # define COL_CLR		"\x1b[0m"
 
-/*
-** Move
-**   ← .......... one char to left			|	\x1b\x5b\x44
-**   → .......... one char to right			|	\x1b\x5b\x43
-**   ↖ .......... to begining of line		|	\x1b\x5b\x48
-**   ↘ .......... to end of line			|	\x1b\x5b\x46
-**   ⌥ + ← ...... one word to left			|	\x1b\x1b\x5b\x44
-**   ⌥ + → ...... one word to right			|	\x1b\x1b\x5b\x43
-**   ⌥ + ↑ ...... one row up				|	\x1b\x1b\x5b\x41
-**   ⌥ + ↓ ...... one row down				|	\x1b\x1b\x5b\x42
-**
-** Select
-**   ⇧ + ← ...... left char					|	\x1b\x5b\x31\x3b\x32\x44
-**   ⇧ + → ...... right char				|	\x1b\x5b\x31\x3b\x32\x43
-**   ⇧ + ↖ ...... chars to begining of line	|	\x1b\x5b\x31\x3b\x32\x48
-**   ⇧ + ↘ ...... chars to end of line		|	\x1b\x5b\x31\x3b\x32\x46
-**   ⇧ + ⌥ + ← .. left word					|	\x1b\x5b\x31\x3b\x31\x30\x44
-**   ⇧ + ⌥ + → .. right word				|	\x1b\x5b\x31\x3b\x31\x30\x43
-**   ⇧ + ⌥ + ↑ .. row above					|	\x1b\x5b\x31\x3b\x31\x30\x41
-**   ⇧ + ⌥ + ↓ .. row below					|	\x1b\x5b\x31\x3b\x31\x30\x42
-*/
-
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
 typedef struct termios	t_termios;
@@ -191,6 +169,8 @@ typedef struct			s_buffer
 {
 	int					unicode_len;
 	int					display_len;
+	int					ushift;
+	int					dshift;
 	char				content[ARG_MAX + 1];
 	char				stored[ARG_MAX + 1];
 	t_cmd				*cmd;
@@ -226,6 +206,7 @@ typedef struct			s_modes
 	unsigned char		select			: 1;
 	unsigned char		browse			: 1;
 	unsigned char		others			: 3;
+	unsigned int		multiline;
 }						t_modes;
 
 typedef struct			s_select
@@ -499,6 +480,12 @@ void					sh_browse_next(t_shell *sh);
 void					sh_browse_prev(t_shell *sh);
 void					sh_browse_freeze(t_shell *sh);
 char					sh_browse_compare(char *command, char *buffer);
+
+/*
+** terminal - multilines
+*/
+void					sh_multilines(t_shell *sh);
+void					sh_multilines_close(t_shell *sh);
 
 /*
 ** terminal - print

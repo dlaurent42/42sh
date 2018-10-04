@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/21 00:20:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:14:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void		sh_window_resize(t_shell *sh)
 	sh->cursor.y = 0;
 	ft_putstr(CLEAR_SCREEN);
 	sh_print_prompt(sh);
-	ft_printf("%s %s", sh->buffer.content, K_COL_ROW_0);
+	ft_printf("%s %s", sh->buffer.content + sh->buffer.ushift, K_COL_ROW_0);
 	sh_reset_cursor_after_resize(sh, x, y);
 }

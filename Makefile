@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/03 19:32:05 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/04 20:35:58 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,8 @@ SRC			=	shell.c														\
 				terminal/history/browse_prev.c								\
 				terminal/history/comparison.c								\
 				terminal/history/freeze.c									\
+				terminal/multilines/initialize.c							\
+				terminal/multilines/close.c									\
 				terminal/print/buffer.c										\
 				terminal/print/command.c									\
 				terminal/print/prompt.c										\
@@ -189,6 +191,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
 				@mkdir -p $(OBJ_DIR)/terminal/delete
 				@mkdir -p $(OBJ_DIR)/terminal/history
+				@mkdir -p $(OBJ_DIR)/terminal/multilines
 				@mkdir -p $(OBJ_DIR)/terminal/print
 				@mkdir -p $(OBJ_DIR)/terminal/read
 				@mkdir -p $(OBJ_DIR)/terminal/select

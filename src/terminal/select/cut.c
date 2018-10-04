@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:43:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 16:55:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:15:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	sh_cut_delete(t_shell *sh, int start, int len)
 		sh->buffer.content[start] = '\0';
 		start++;
 	}
-	sh->buffer.display_len = ft_strlenu(sh->buffer.content);
-	sh->buffer.unicode_len = ft_strlens(sh->buffer.content);
+	sh->buffer.display_len = ft_strlenu(sh->buffer.content + sh->buffer.ushift);
+	sh->buffer.unicode_len = ft_strlens(sh->buffer.content + sh->buffer.ushift);
 }
 
 static void	sh_move_cursor(t_shell *sh, int x, int y)
@@ -55,10 +55,10 @@ void		sh_cut_selection(t_shell *sh)
 	len = sh_get_selection_len(sh);
 	start = sh->selection.start_rel;
 	sh_copy_selection(sh);
-	sh_cut_delete(sh, start, len);
+	sh_cut_delete(sh, sh->buffer.ushift + start, len);
 	sh_move_home(sh);
 	ft_putstr(K_DEL_ALL);
-	ft_putstr(sh->buffer.content);
+	ft_putstr(sh->buffer.content + sh->buffer.ushift);
 	sh_move_cursor(sh, x, y);
 	sh->modes.select = FALSE;
 }

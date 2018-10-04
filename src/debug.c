@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:36:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:25:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	sh_debug(t_shell *sh, char *msg, char *str)
 		ft_putnbr_fd(sh->modes.select, fd);
 		ft_putstr_fd("\tbrowse: ", fd);
 		ft_putnbr_fd(sh->modes.browse, fd);
+		ft_putstr_fd("\tmultilines: ", fd);
+		ft_putnbr_fd(sh->modes.multiline, fd);
 		ft_putstr_fd("\ncursor\n\tx: ", fd);
 		ft_putnbr_fd(sh->cursor.x, fd);
 		ft_putstr_fd("\ty: ", fd);

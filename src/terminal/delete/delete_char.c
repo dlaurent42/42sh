@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:32:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 14:28:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:05:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	sh_perform_deletion(t_shell *sh)
 	int	i;
 	int	size;
 
-	i = sh->cursor.rel_pos;
+	i = sh->buffer.ushift + sh->cursor.rel_pos;
 	size = 1;
 	while ((unsigned char)sh->buffer.content[i + size] >= 0b10000000
 	&& (unsigned char)sh->buffer.content[i + size] < 0b11000000)
@@ -68,7 +68,7 @@ void		sh_delete_char(t_shell *sh)
 	ft_putstr(K_DEL);
 	ft_putstr(K_LEFT);
 	ft_printf("%s",
-		sh->buffer.content
+		sh->buffer.content + sh->buffer.ushift
 		+ sh->cursor.rel_pos);
 	sh_move_cursor(sh, display_len);
 }

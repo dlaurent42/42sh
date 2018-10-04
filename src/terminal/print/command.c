@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 14:32:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/29 18:39:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:13:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	sh_print_cmd(t_shell *sh, t_cmd *cmd)
 {
 	sh->buffer.cmd = cmd;
 	sh_delete_all(sh);
-	ft_strcpy(sh->buffer.content, cmd->content);
-	ft_putstr(sh->buffer.content);
+	ft_strcpy(sh->buffer.content + sh->buffer.ushift, cmd->content);
+	ft_putstr(sh->buffer.content + sh->buffer.ushift);
 	sh->buffer.unicode_len = cmd->unicode_len;
 	sh->buffer.display_len = cmd->display_len;
 	sh->cursor.abs_pos = sh->buffer.display_len;

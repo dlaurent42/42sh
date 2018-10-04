@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/01 13:31:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 20:48:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static int	sh_add_char(t_shell *sh, char c)
 		return (-1);
 	while (i > sh->cursor.rel_pos)
 	{
-		sh->buffer.content[i] = sh->buffer.content[i - 1];
+		sh->buffer.content[sh->buffer.ushift + i] =
+		sh->buffer.content[sh->buffer.ushift + i - 1];
 		i--;
 	}
-	sh->buffer.content[i] = c;
+	sh->buffer.content[sh->buffer.ushift + i] = c;
 	sh->buffer.display_len++;
 	sh->buffer.unicode_len++;
 	return (sh->cursor.rel_pos);
@@ -65,10 +66,11 @@ static int	sh_add_wchar(t_shell *sh, unsigned char c)
 	i = sh->buffer.unicode_len;
 	while (i > sh->cursor.rel_pos)
 	{
-		sh->buffer.content[i] = sh->buffer.content[i - 1];
+		sh->buffer.content[sh->buffer.ushift + i] =
+		sh->buffer.content[sh->buffer.ushift + i - 1];
 		i--;
 	}
-	sh->buffer.content[i] = c;
+	sh->buffer.content[sh->buffer.ushift + i] = c;
 	sh->buffer.display_len += (c >= 0b11000000) ? 1 : 0;
 	sh->buffer.unicode_len++;
 	sh->cursor.rel_pos++;
@@ -93,7 +95,8 @@ void		sh_print_str(t_shell *sh, char *str)
 			res = sh_add_char(sh, str[i]);
 		else if ((unsigned char)str[i] >= 0b10000000)
 			res = sh_add_wchar(sh, (unsigned char)str[i]);
-		(res != -1) ? ft_printf("%s ", sh->buffer.content + res) : 0;
+		(res != -1) ? ft_printf("%s ",
+			sh->buffer.content + sh->buffer.ushift + res) : 0;
 		(res != -1) ? sh_move_cursor(sh) : 0;
 		i++;
 	}
@@ -118,7 +121,8 @@ void		sh_fill_buffer(t_shell *sh)
 				res = sh_add_char(sh, c);
 			else if ((unsigned char)c >= 0b10000000)
 				res = sh_add_wchar(sh, (unsigned char)c);
-			(res != -1) ? ft_printf("%s ", sh->buffer.content + res) : 0;
+			(res != -1) ? ft_printf("%s ",
+				sh->buffer.content + sh->buffer.ushift + res) : 0;
 			(res != -1) ? sh_move_cursor(sh) : 0;
 		}
 		i++;

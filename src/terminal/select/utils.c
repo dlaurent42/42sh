@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:33:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:53:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,27 @@ void		sh_select_set_pos(t_shell *sh)
 
 int			sh_get_selection_len(t_shell *sh)
 {
+	int	x;
 	int	len;
 	int	abs_i;
 	int	rel_i;
 
 	len = 0;
+	x = sh->buffer.ushift;
 	abs_i = sh->selection.start_abs;
 	rel_i = sh->selection.start_rel;
 	while (abs_i < sh->selection.stop)
 	{
-		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11110000) ? 1 : 0;
-		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11100000) ? 1 : 0;
-		len += ((unsigned char)sh->buffer.content[rel_i] >= 0b11000000) ? 2 : 0;
-		len += ((unsigned char)sh->buffer.content[rel_i] < 0b10000000) ? 1 : 0;
-		if ((unsigned char)sh->buffer.content[rel_i] >= 0b11000000
-		|| (unsigned char)sh->buffer.content[rel_i] < 0b10000000)
+		len += ((unsigned char)sh->buffer.content[x + rel_i] >= 0b11110000)
+			? 1 : 0;
+		len += ((unsigned char)sh->buffer.content[x + rel_i] >= 0b11100000)
+			? 1 : 0;
+		len += ((unsigned char)sh->buffer.content[x + rel_i] >= 0b11000000)
+			? 2 : 0;
+		len += ((unsigned char)sh->buffer.content[x + rel_i] < 0b10000000)
+			? 1 : 0;
+		if ((unsigned char)sh->buffer.content[x + rel_i] >= 0b11000000
+		|| (unsigned char)sh->buffer.content[x + rel_i] < 0b10000000)
 			abs_i++;
 		rel_i++;
 	}
@@ -53,20 +59,22 @@ int			sh_get_selection_len(t_shell *sh)
 
 int			sh_get_start_rel_from_abs(t_shell *sh)
 {
+	int	x;
 	int	abs_i;
 	int	rel;
 
 	abs_i = 0;
 	rel = 0;
-	while (sh->buffer.content[rel] && abs_i <= sh->selection.start_abs)
+	x = sh->buffer.ushift;
+	while (sh->buffer.content[x + rel] && abs_i <= sh->selection.start_abs)
 	{
-		if ((unsigned char)sh->buffer.content[rel] >= 0b11000000
-		|| (unsigned char)sh->buffer.content[rel] < 0b10000000)
+		if ((unsigned char)sh->buffer.content[x + rel] >= 0b11000000
+		|| (unsigned char)sh->buffer.content[x + rel] < 0b10000000)
 			abs_i++;
 		rel++;
 	}
-	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11110000) ? 1 : 0;
-	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11100000) ? 1 : 0;
-	rel += ((unsigned char)sh->buffer.content[rel] >= 0b11000000) ? 1 : 0;
+	rel += ((unsigned char)sh->buffer.content[x + rel] >= 0b11110000) ? 1 : 0;
+	rel += ((unsigned char)sh->buffer.content[x + rel] >= 0b11100000) ? 1 : 0;
+	rel += ((unsigned char)sh->buffer.content[x + rel] >= 0b11000000) ? 1 : 0;
 	return (rel);
 }

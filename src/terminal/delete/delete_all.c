@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:29:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 23:23:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:03:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sh_delete_all(t_shell *sh)
 		sh_move_home(sh);
 		ft_putstr(K_DEL_ALL);
 	}
-	bzero(sh->buffer.content, sh->buffer.unicode_len);
+	bzero(sh->buffer.content + sh->buffer.ushift, sh->buffer.unicode_len);
 	sh->buffer.unicode_len = 0;
 	sh->buffer.display_len = 0;
 }

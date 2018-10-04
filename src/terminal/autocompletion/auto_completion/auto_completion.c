@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_completion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 10:05:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 19:10:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void				auto_completion(t_shell *shell)
 	t_frame			frame;
 	char			*parsed_buffer;
 
+	if (shell->modes.multiline)
+		return ;
 	ft_bzero(&frame, sizeof(frame));
 	shell->modes.auto_completion = 1;
 	if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))

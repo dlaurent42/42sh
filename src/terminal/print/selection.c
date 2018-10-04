@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:38:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:13:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	sh_print_before_selection(t_shell *sh)
 	char	*substr;
 
 	if (!(substr = ft_strsub(
-	sh->buffer.content,
+	sh->buffer.content + sh->buffer.ushift,
 	sh->cursor.rel_pos,
 	sh->selection.start_rel - sh->cursor.rel_pos)))
 		return ;
@@ -30,7 +30,7 @@ static void	sh_print_current_selection(t_shell *sh, int len)
 	char	*substr;
 
 	if (!(substr = ft_strsub(
-	sh->buffer.content,
+	sh->buffer.content + sh->buffer.ushift,
 	sh->selection.start_rel,
 	len)))
 		return ;
@@ -42,7 +42,7 @@ static void	sh_print_current_selection(t_shell *sh, int len)
 
 static void	sh_print_after_selection(t_shell *sh, int len)
 {
-	ft_putstr(sh->buffer.content
+	ft_putstr(sh->buffer.content + sh->buffer.ushift
 		+ sh->selection.start_rel + len);
 	ft_putchar(' ');
 }
