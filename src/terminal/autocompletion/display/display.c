@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:49:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:55:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,15 @@ static bool			bottom_of_screen_is_not_reached(t_frame *frame)
 	return (false);
 }
 
-static void			print_display(t_frame *frame, t_args *head)
+static void			print_display(t_frame *frame, t_args *head, int len)
 {
 	int				i;
 	int				j;
-	int				len;
 	t_args			*args;
 	t_args			*last_args;
 
 	i = 0;
 	last_args = NULL;
-	len = calculate_offset(frame);
 	while (i++ < len)
 	{
 		j = 0;
@@ -96,7 +94,7 @@ void				auto_display(t_frame *frame, t_args *args)
 	auto_clear_selection_screen(frame);
 	ft_putchar('\n');
 	frame->number_of_printed_rows = 1;
-	print_display(frame, args);
+	print_display(frame, args, calculate_offset(frame));
 	rows = frame->number_of_printed_rows;
 	while (rows--)
 		ft_putstr(K_UP);
