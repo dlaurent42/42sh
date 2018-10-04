@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:55:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 14:01:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ static bool			bottom_of_screen_is_not_reached(t_frame *frame)
 
 static void			print_display(t_frame *frame, t_args *head, int len)
 {
-	int				i;
-	int				j;
+	int				prints;
+	int				line_len;
 	t_args			*args;
 	t_args			*last_args;
 
-	i = 0;
+	prints = -1;
 	last_args = NULL;
-	while (i++ < len)
+	while (++prints < len)
 	{
-		j = 0;
-		while (j++ < frame->number_of_columns)
+		line_len = -1;
+		while (++line_len < frame->number_of_columns)
 		{
-			if (!(args = get_file_number(head, (i - 1) + (j - 1) * (len))))
+			if (!(args = get_file_number(head, (prints) + (line_len) * (len))))
 				break ;
 			if (bottom_of_screen_is_not_reached(frame))
 				auto_file_name(frame, args);
