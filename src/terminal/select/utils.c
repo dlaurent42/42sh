@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 16:52:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:33:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			sh_get_selection_len(t_shell *sh)
 	return (len);
 }
 
-int		sh_get_start_rel_from_abs(t_shell *sh)
+int			sh_get_start_rel_from_abs(t_shell *sh)
 {
 	int	abs_i;
 	int	rel;

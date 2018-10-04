@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 14:44:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 17:33:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void				auto_display(t_frame *frame, t_args *args)
 	frame->number_of_printed_rows = 1;
 	print_display(frame, args, calculate_offset(frame));
 	rows = frame->number_of_printed_rows;
-	if(!(ft_putstr_multi(K_UP, rows)))
+	if (!(ft_putstr_multi(K_UP, rows)))
 	{
 		while (rows--)
 			ft_putstr(K_UP);

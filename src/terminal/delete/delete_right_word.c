@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:35:55 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 15:11:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:33:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	sh_delete_words(t_shell *sh, int rel_start, int rel_stop)
 	}
 }
 
-void	sh_delete_next_word(t_shell *sh)
+void		sh_delete_next_word(t_shell *sh)
 {
 	int		abs_start;
 	int		rel_start;

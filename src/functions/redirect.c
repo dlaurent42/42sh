@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 18:17:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:38:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	sh_command_dispatcher(t_shell *sh)
 {
-	// TESTING : remove env var used in other functions and check
+	int		i;
 	char	res;
 	char	**strsplt;
 
@@ -54,9 +54,6 @@ static char	sh_command_dispatcher(t_shell *sh)
 	}
 	else if (!ft_strcmps(sh->buffer.content, "history"))
 		sh_history(sh);
-
-	int	i;
-
 	i = 0;
 	while (strsplt && strsplt[i])
 	{

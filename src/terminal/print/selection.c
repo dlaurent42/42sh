@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 13:00:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:38:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	sh_print_before_selection(t_shell *sh)
 	ft_strdel(&substr);
 }
 
-static void	sh_print_selection(t_shell *sh, int len)
+static void	sh_print_current_selection(t_shell *sh, int len)
 {
 	char	*substr;
 
@@ -45,7 +45,7 @@ static void	sh_print_after_selection(t_shell *sh, int len)
 	ft_putstr(sh->buffer.content
 		+ sh->selection.start_rel + len);
 	ft_putchar(' ');
-};
+}
 
 void		sh_select_print(t_shell *sh)
 {
@@ -60,9 +60,10 @@ void		sh_select_print(t_shell *sh)
 	sh_move_home(sh);
 	ft_putstr(CLEAR_TO_EOL);
 	sh_print_before_selection(sh);
-	sh_print_selection(sh, len);
+	sh_print_current_selection(sh, len);
 	sh_print_after_selection(sh, len);
-	sh->cursor.y = (sh->buffer.display_len + sh->prompt.len_mod) / sh->window.width;
+	sh->cursor.y = (sh->buffer.display_len + sh->prompt.len_mod)
+		/ sh->window.width;
 	sh->cursor.x = (sh->cursor.y)
 		? (sh->buffer.display_len + sh->prompt.len_mod) % sh->window.width
 		: sh->buffer.display_len;
