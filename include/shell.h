@@ -6,11 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/04 11:23:02 by dhojt            ###   ########.fr       */
-=======
-/*   Updated: 2018/10/03 22:02:25 by dlaurent         ###   ########.fr       */
->>>>>>> e84f28b... [feature] improve speed of selection
+/*   Updated: 2018/10/04 17:31:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -539,6 +535,7 @@ void					sh_unselect(t_shell *sh);
 void					sh_unselect_delete(t_shell *sh, unsigned char c);
 void					sh_select_set_pos(t_shell *sh);
 int						sh_get_selection_len(t_shell *sh);
+int						sh_get_start_rel_from_abs(t_shell *sh);
 
 /*
 ** terminal - signals
