@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:39:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:42:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void			print_display(t_frame *frame, t_args *head)
 	t_args			*args;
 	t_args			*last_args;
 
+	i = 0;
 	last_args = NULL;
 	frame->number_of_printed_rows = 1;
-	i = 0;
-		len = calculate_offset(frame);
+	len = calculate_offset(frame);
 	while (i++ < len)
 	{
 		j = 0;
@@ -74,8 +74,6 @@ static void			print_display(t_frame *frame, t_args *head)
 				last_args->hor_next = args;
 				args->hor_prev = last_args;
 			}
-			if (args)
-				last_args = args;
 		}
 		if (bottom_of_screen_is_not_reached(frame))
 		{
