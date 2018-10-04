@@ -6,21 +6,26 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:33:26 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:39:48 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int			calculate_offset(float nbr)
+static int			calculate_offset(t_frame *frame)
 {
-	int				ret;
+	int				len;
+	float			nbr;
 	float			calc;
 
+	len = frame->items_to_display;
+	if (len == 1)
+		return (1);
+	nbr = (float)len / frame->number_of_columns;
 	calc = nbr - (int)nbr;
 	calc *= 10;
-	ret = (int)calc;
-	return (ret >= 1 ? (int)nbr + 1 : (int)nbr);
+	len = (int)calc;
+	return (len >= 1 ? (int)nbr + 1 : (int)nbr);
 }
 
 static t_args		*get_file_number(t_args *head, int file_number)
@@ -53,9 +58,7 @@ static void			print_display(t_frame *frame, t_args *head)
 	last_args = NULL;
 	frame->number_of_printed_rows = 1;
 	i = 0;
-	len = frame->items_to_display;
-	if (len != 1)
-		len = calculate_offset((float)len / frame->number_of_columns);
+		len = calculate_offset(frame);
 	while (i++ < len)
 	{
 		j = 0;
