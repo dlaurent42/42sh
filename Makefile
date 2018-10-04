@@ -6,7 +6,11 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/10/06 09:09:04 by dhojt            ###   ########.fr        #
+=======
+#    Updated: 2018/10/04 21:26:52 by dlaurent         ###   ########.fr        #
+>>>>>>> e0d9dba... [feature] history search Ctrl R
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,10 +120,10 @@ SRC			=	shell.c														\
 				terminal/delete/delete_right_word.c							\
 				terminal/delete/delete_from_home.c							\
 				terminal/delete/delete_to_end.c								\
-				terminal/history/browse_next.c								\
-				terminal/history/browse_prev.c								\
-				terminal/history/comparison.c								\
-				terminal/history/freeze.c									\
+				terminal/history/browse/next.c								\
+				terminal/history/browse/prev.c								\
+				terminal/history/browse/comparison.c						\
+				terminal/history/browse/freeze.c							\
 				terminal/multilines/initialize.c							\
 				terminal/multilines/close.c									\
 				terminal/print/buffer.c										\
@@ -193,6 +197,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal/cursor
 				@mkdir -p $(OBJ_DIR)/terminal/delete
 				@mkdir -p $(OBJ_DIR)/terminal/history
+				@mkdir -p $(OBJ_DIR)/terminal/history/browse
+				@mkdir -p $(OBJ_DIR)/terminal/history/search
 				@mkdir -p $(OBJ_DIR)/terminal/multilines
 				@mkdir -p $(OBJ_DIR)/terminal/print
 				@mkdir -p $(OBJ_DIR)/terminal/read

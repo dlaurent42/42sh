@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 17:56:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 19:20:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,8 @@ typedef struct			s_modes
 	unsigned char		display			: 1;
 	unsigned char		select			: 1;
 	unsigned char		browse			: 1;
-	unsigned char		others			: 3;
+	unsigned char		history			: 1;
+	unsigned char		others			: 2;
 	unsigned int		multiline;
 }						t_modes;
 
@@ -237,6 +238,11 @@ typedef struct			s_select
 	int					stop;
 	char				*content;
 }						t_select;
+
+typedef struct			s_history
+{
+	char				*content;
+}						t_history;
 
 typedef struct			s_shell
 {
@@ -495,12 +501,16 @@ void					sh_delete_previous_word(t_shell *sh);
 void					sh_delete_next_word(t_shell *sh);
 
 /*
-** terminal - history
+** terminal - history - browse
 */
 void					sh_browse_next(t_shell *sh);
 void					sh_browse_prev(t_shell *sh);
 void					sh_browse_freeze(t_shell *sh);
 char					sh_browse_compare(char *command, char *buffer);
+
+/*
+** terminal - history - search
+*/
 
 /*
 ** terminal - multilines
