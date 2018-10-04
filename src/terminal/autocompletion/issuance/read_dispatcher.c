@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 17:37:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:26:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void			auto_arrows_dispatcher(t_frame *frame)
 
 	line = frame->shell->read->line;
 	frame->del_file_name = frame->select->data.str;
-	if (line[2] == 65)
+	if (line[2] == 65 || line[2] == 90)
 		auto_move_up(frame);
-	else if (line[2] == 66)
+	else if (line[2] == 66 || line[0] == 9)
 		auto_move_down(frame);
-	else if (line[2] == 67 || line[0] == 9)
+	else if (line[2] == 67)
 		auto_move_right(frame);
-	else if (line[2] == 68 || line[2] == 90)
+	else if (line[2] == 68)
 		auto_move_left(frame);
 }
 
