@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:42:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:46:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ static void			print_display(t_frame *frame, t_args *head)
 		j = 0;
 		while (j++ < frame->number_of_columns)
 		{
-			args = get_file_number(head, (i - 1) + (j - 1) * (len));
-			if (!args)
+			if (!(args = get_file_number(head, (i - 1) + (j - 1) * (len))))
 				break ;
 			if (bottom_of_screen_is_not_reached(frame))
 				auto_file_name(frame, args);
@@ -74,6 +73,7 @@ static void			print_display(t_frame *frame, t_args *head)
 				last_args->hor_next = args;
 				args->hor_prev = last_args;
 			}
+			last_args = args;
 		}
 		if (bottom_of_screen_is_not_reached(frame))
 		{
