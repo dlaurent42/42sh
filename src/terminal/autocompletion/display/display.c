@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:14:33 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/04 13:33:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void			print_display(t_frame *frame, t_args *head)
 	int				i;
 	int				j;
 	int				len;
-	int				file_number;
 	t_args			*args;
 	t_args			*last_args;
 
@@ -62,8 +61,7 @@ static void			print_display(t_frame *frame, t_args *head)
 		j = 0;
 		while (j++ < frame->number_of_columns)
 		{
-			file_number = (i - 1) + (j - 1) * (len);
-			args = get_file_number(head, file_number);
+			args = get_file_number(head, (i - 1) + (j - 1) * (len));
 			if (!args)
 				break ;
 			if (bottom_of_screen_is_not_reached(frame))
