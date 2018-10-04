@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:17:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:20:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 	char	*s;
 
 	s = sh->read->line;
+	ft_putstr(CURSOR_HIDE);
 	(!ft_strcmps(s, "\x1b\x5b\x41")) ? sh_browse_prev(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x42")) ? sh_browse_next(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x43")) ? sh_move_right(sh) : 0;
@@ -37,10 +38,12 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 		? sh_select_right_word(sh) : 0;
 	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44"))
 		? sh_select_left_word(sh) : 0;
+	ft_putstr(CURSOR_SHOW);
 }
 
 void		sh_deletion_dispatcher(t_shell *sh)
 {
+	ft_putstr(CURSOR_HIDE);
 	if (sh->read->line[0] == 1)
 		sh_delete_all(sh);
 	else if (sh->read->line[0] == 2)
@@ -55,6 +58,7 @@ void		sh_deletion_dispatcher(t_shell *sh)
 		sh_delete_char(sh);
 	else
 		sh_delete_current_char(sh);
+	ft_putstr(CURSOR_SHOW);
 }
 
 void		sh_read_dispatcher(t_shell *sh)
@@ -77,5 +81,9 @@ void		sh_read_dispatcher(t_shell *sh)
 	else if (sh->read->line[0] == 9)
 		auto_completion(sh);
 	else
+	{
+		ft_putstr(CURSOR_HIDE);
 		sh_fill_buffer(sh);
+		ft_putstr(CURSOR_SHOW);
+	}
 }

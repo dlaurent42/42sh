@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:31:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:31:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@
 # define K_COL_ROW_0	"\x1b\x5b\x48"
 # define K_DEL			"\x7f"
 # define K_DEL_ALL		"\x1b\x5b\x4a"
+
 # define CLEAR_TO_EOL	"\x1b[K"
 # define CLEAR_LINE		"\x1b[M"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
+
+# define CURSOR_HIDE	"\x1b\x5b\x3f\x32\x35\x6c"
+# define CURSOR_SHOW	"\x1b\x5b\x3f\x31\x32\x6c\x1b\x5b\x3f\x32\x35\x68"
 
 # define OPTIONS		"-AFGNRSTUacdfgiloprtux1"
 # define RL_BUFSIZE		1024
