@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 15:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:12:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:23:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char		sh_env_parse(t_env *env, char **path, char **string, char **argv)
 			res = sh_env_path(*(argv + ++i), path);
 		else if (argv[i][0] == '-' && argv[i][1] == 'S' && !argv[i][2])
 			res = sh_env_string(*(argv + ++i), string);
+		else if (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
+			break ;
 		else
 			break ;
 		i += (argv[i]) ? 1 : 0;

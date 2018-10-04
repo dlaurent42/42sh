@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:50:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:22:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static char	sh_cd_dispatch(t_shell *sh, int option_p, char **argv, int i)
 	res = 0;
 	if (ft_count_argv((void **)argv + i) > 1)
 		res = sh_cd_error(NULL, NULL, 7);
-	else if (!argv[i] || (argv[i][0] == '~' && !argv[i][1])
-	|| (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2]))
+	else if (!argv[i] || (argv[i][0] == '~' && !argv[i][1]))
 		res = (env_search(sh->env, "HOME"))
 			? sh_cd_nofollow(sh, env_search(sh->env, "HOME"), NULL, FALSE)
 			: sh_cd_error(NULL, NULL, 5);
@@ -71,7 +70,9 @@ char		sh_cd(t_shell *sh, char **argv)
 	argc = ft_count_argv((void **)argv);
 	while (argv[current] && argv[current][0] == '-')
 	{
-		if (argv[current][1] == 'L' && !argv[current][2])
+		if (argv[current][1] == '-' && !argv[current][2])
+			break ;
+		else if (argv[current][1] == 'L' && !argv[current][2])
 			option_l = TRUE;
 		else if (argv[current][1] == 'P' && !argv[current][2])
 			option_p = TRUE;
