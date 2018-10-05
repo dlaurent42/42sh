@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 13:48:40 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/05 14:00:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool			is_auto_history(t_shell *shell)
 	char			*ptr_to_exc;
 
 	status = false;
-	if ((ptr_to_exc = ft_strstr(shell->buffer.content, "!!")))
+	while ((ptr_to_exc = ft_strstr(shell->buffer.content, "!!")))//Deal with !! hist
 	{
 		track = shell->buffer.content;
 		sh_move_home(shell);
@@ -36,9 +36,8 @@ static bool			is_auto_history(t_shell *shell)
 			sh_fill_buffer(shell);
 			status = true;
 		}
+		sh_move_end(shell);
 	}
-	sh_move_end(shell);
-	auto_manage_buffer(shell, " ");
 	return (status);
 }
 
