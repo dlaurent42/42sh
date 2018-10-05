@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   auto_completion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 19:10:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:21:38 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static bool			is_auto_history(t_shell *shell)
+{
+	if (!ft_strcmps(shell->buffer.content, "!!"))
+	{
+		sh_delete_char(shell);
+		sh_delete_char(shell);
+		auto_manage_buffer(shell, "PIGS MIGHT FLY");
+		sh_fill_buffer(shell);
+		return (true);
+	}
+	return (false);
+}
 
 static char			*move_past_leading_spaces(char *content)
 {
@@ -71,15 +84,17 @@ void				auto_completion(t_shell *shell)
 	t_frame			frame;
 	char			*parsed_buffer;
 
-	if (shell->modes.multiline)
-		return ;
-	ft_bzero(&frame, sizeof(frame));
 	shell->modes.auto_completion = 1;
-	if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
-		return ;
-	if (create_frame(&frame, shell, parsed_buffer)
-			&& auto_get_args(&frame))
-		auto_issuance(&frame);
-	auto_free_frame(&frame);
+	if (is_auto_history(shell))
+		;
+	else {
+		ft_bzero(&frame, sizeof(frame));
+		if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
+			return ;
+		if (create_frame(&frame, shell, parsed_buffer)
+				&& auto_get_args(&frame))
+			auto_issuance(&frame);
+		auto_free_frame(&frame);
+	}
 	shell->modes.auto_completion = 0;
 }
