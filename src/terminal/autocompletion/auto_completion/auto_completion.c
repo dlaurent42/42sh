@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 13:21:38 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/05 13:33:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static bool			is_auto_history(t_shell *shell)
 {
 	if (!ft_strcmps(shell->buffer.content, "!!"))
 	{
-		sh_delete_char(shell);
-		sh_delete_char(shell);
-		auto_manage_buffer(shell, "PIGS MIGHT FLY");
-		sh_fill_buffer(shell);
-		return (true);
+		if (shell->cmd)
+		{
+			sh_delete_char(shell);
+			sh_delete_char(shell);
+			auto_manage_buffer(shell, shell->cmd->content);
+			sh_fill_buffer(shell);
+			return (true);
+		}
 	}
 	return (false);
 }
