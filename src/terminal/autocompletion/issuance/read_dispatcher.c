@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 13:26:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/05 13:26:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void				auto_read_dispatcher(t_frame *frame)
 		if (sh_is_delete_combination(line))
 			sh_deletion_dispatcher(frame->shell);
 		else if (line[0] == 10)
-			auto_manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
+			auto_manage_buffer(frame->shell,
+					(frame->select->data.dir) ? "/" : " ");
 		else
 			sh_fill_buffer(shell);
 		auto_clear_selection_screen(frame);

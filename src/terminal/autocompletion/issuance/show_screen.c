@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 11:26:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/05 13:27:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void			fill_buffer_with_wild(t_frame *frame, t_args *args)
 	{
 		if (!args->data.no_file && *args->data.str != '.')
 		{
-			auto_manage_buffer(frame, args->data.path);
-			auto_manage_buffer(frame, " ");
+			auto_manage_buffer(frame->shell, args->data.path);
+			auto_manage_buffer(frame->shell, " ");
 		}
 		args = args->next;
 	}
@@ -47,10 +47,10 @@ static void			do_loop(t_frame *frame, t_args *head)
 			break ;
 		args = head;
 		delete_str(frame);
-		auto_manage_buffer(frame, frame->select->data.str);
+		auto_manage_buffer(frame->shell, frame->select->data.str);
 		if (frame->select->ver_next == frame->select)
 		{
-			auto_manage_buffer(frame, (frame->select->data.dir) ? "/" : " ");
+			auto_manage_buffer(frame->shell, (frame->select->data.dir) ? "/" : " ");
 			break ;
 		}
 		auto_display(frame, args);

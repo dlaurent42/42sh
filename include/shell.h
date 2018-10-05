@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:35:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:25:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -545,7 +545,7 @@ t_args					*auto_create_args(void);
 void					auto_issuance(t_frame *frame);
 void					auto_read_dispatcher(t_frame *frame);
 void					auto_clear_selection_screen(t_frame *frame);
-void					auto_manage_buffer(t_frame *frame, char *new_display);
+void					auto_manage_buffer(t_shell *sh, char *new_display);
 bool					auto_get_attributes(t_frame *frame);
 void					auto_show_screen(t_frame *frame, t_args *args);
 void					auto_do_ls(t_frame *frame, t_args *args);
