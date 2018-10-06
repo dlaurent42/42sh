@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 17:50:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:56:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		sh_fill_buffer(t_shell *sh)
 	{
 		res = -1;
 		c = sh->read->line[i];
-		if (c == 10)
+		if (c == 10 && !auto_completion(sh))
 			sh_command_run(sh);
 		else
 		{
