@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 12:09:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 12:11:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ static void			exc_double(t_shell *shell, bool *status)
 	{
 		track = shell->buffer.content;
 		sh_move_home(shell);
-		while (track != ptr_to_exc)
-		{
-			track++;
+		while (track++ != ptr_to_exc)
 			sh_move_right(shell);
-		}
 		if (shell->cmd)
 		{
 			sh_delete_current_char(shell);
@@ -91,11 +88,8 @@ static void			exc_number(t_shell *shell, bool *status)
 			{
 				track = shell->buffer.content;
 				sh_move_home(shell);
-				while (track != ptr_to_exc)
-				{
-					track++;
+				while (track++ != ptr_to_exc)
 					sh_move_right(shell);
-				}
 				while (number_of_digits--)
 					sh_delete_current_char(shell);
 				sh_delete_current_char(shell);
