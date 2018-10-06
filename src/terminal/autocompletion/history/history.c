@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 09:56:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 09:58:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void			exc_double(t_shell *shell, bool *status)
 	}
 }
 
-static bool			good_number_of_digits(char *str)
+static int			good_number_of_digits(char *str)
 {
 	int				number_of_digits;
 
@@ -48,8 +48,8 @@ static bool			good_number_of_digits(char *str)
 	while (ft_isdigit(*(str++)))
 		number_of_digits++;
 	if (number_of_digits && number_of_digits <= 6)
-		return (true);
-	return (false);
+		return (number_of_digits);
+	return (0);
 }
 
 static void			exc_number(t_shell *shell, bool *status)
