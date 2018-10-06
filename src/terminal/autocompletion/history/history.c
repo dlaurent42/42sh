@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 10:28:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 10:38:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ static void			exc_double(t_shell *shell, bool *status)
 	}
 }
 
+t_cmd				*get_cmd_by_id(t_shell *shell, int id)
+{
+	t_cmd			*cmd;
+
+	if (!shell->cmd || id > shell->cmd->id || id < !shell->cmd->last->id)
+		return NULL;
+	cmd = shell->cmd;
+	while (cmd && id != cmd->id)
+		cmd = cmd->prev;
+	return (cmd);
+}
+
 static int			good_number_of_digits(char *str)
 {
 	int				number_of_digits;
@@ -61,6 +73,7 @@ static void			exc_number(t_shell *shell, bool *status)
 	int				offset;
 	char			*track;
 	char			*ptr_to_exc;
+	t_cmd			*cmd;
 
 	offset = 0;
 	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!")))
@@ -70,7 +83,8 @@ static void			exc_number(t_shell *shell, bool *status)
 			id = ft_atoi(ptr_to_exc + 1);
 			if (id < 0 && shell->cmd)
 				id += shell->cmd->id + 1;
-			if (id > 0)
+			cmd = get_cmd_by_id(shell, id);
+			if (cmd)
 			{
 				sh_debug(NULL, ft_itoa(id), NULL);
 				track = shell->buffer.content;
@@ -87,8 +101,8 @@ static void			exc_number(t_shell *shell, bool *status)
 					auto_manage_buffer(shell, shell->cmd->content);
 					*status = true;
 				}
+				sh_move_end(shell);
 			}
-			sh_move_end(shell);
 		}
 		offset++;
 	}
