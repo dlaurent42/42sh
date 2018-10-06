@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 08:46:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 08:49:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static bool			is_auto_history(t_shell *shell)
 			sh_delete_current_char(shell);
 			sh_delete_current_char(shell);
 			auto_manage_buffer(shell, shell->cmd->content);
-			//sh_fill_buffer(shell);
 			status = true;
 		}
 		offset++;
