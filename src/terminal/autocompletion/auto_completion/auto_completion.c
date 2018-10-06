@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 14:00:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 08:39:23 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static bool			is_auto_history(t_shell *shell)
 {
+	int				offset_from_content;;
 	bool			status;
 	char			*track;
 	char			*ptr_to_exc;
 
+	sh_debug(NULL, "Enter History\n", NULL);//DEBUG
+	offset_from_content = 0;
 	status = false;
-	while ((ptr_to_exc = ft_strstr(shell->buffer.content, "!!")))//Deal with !! hist
+	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset_from_content, "!!")))//Deal with !! hist
 	{
 		track = shell->buffer.content;
 		sh_move_home(shell);
@@ -27,6 +30,7 @@ static bool			is_auto_history(t_shell *shell)
 		{
 			track++;
 			sh_move_right(shell);
+			sh_debug(NULL, "FIRST\n", shell->buffer.content);//DEBUG
 		}
 		if (shell->cmd)
 		{
@@ -36,6 +40,7 @@ static bool			is_auto_history(t_shell *shell)
 			sh_fill_buffer(shell);
 			status = true;
 		}
+		offset_from_content++;
 		sh_move_end(shell);
 	}
 	return (status);
