@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 10:38:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 11:06:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void			exc_double(t_shell *shell, bool *status)
 	}
 }
 
-t_cmd				*get_cmd_by_id(t_shell *shell, int id)
+t_cmd				*get_cmd_by_id(t_shell *shell, unsigned int id)
 {
 	t_cmd			*cmd;
 
@@ -48,7 +48,7 @@ t_cmd				*get_cmd_by_id(t_shell *shell, int id)
 		return NULL;
 	cmd = shell->cmd;
 	while (cmd && id != cmd->id)
-		cmd = cmd->prev;
+		cmd = cmd->next;
 	return (cmd);
 }
 
@@ -83,10 +83,11 @@ static void			exc_number(t_shell *shell, bool *status)
 			id = ft_atoi(ptr_to_exc + 1);
 			if (id < 0 && shell->cmd)
 				id += shell->cmd->id + 1;
+			sh_debug(NULL, ft_itoa(id), NULL);//DEBUG
 			cmd = get_cmd_by_id(shell, id);
 			if (cmd)
 			{
-				sh_debug(NULL, ft_itoa(id), NULL);
+				sh_debug(NULL, cmd->content, NULL);//DEBUG
 				track = shell->buffer.content;
 				sh_move_home(shell);
 				while (track != ptr_to_exc)
