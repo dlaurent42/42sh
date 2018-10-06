@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 10:14:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 10:28:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,23 @@ static void			exc_number(t_shell *shell, bool *status)
 			id = ft_atoi(ptr_to_exc + 1);
 			if (id < 0 && shell->cmd)
 				id += shell->cmd->id + 1;
-			sh_debug(NULL, ft_itoa(id), NULL);
-			track = shell->buffer.content;
-			sh_move_home(shell);
-			while (track != ptr_to_exc)
+			if (id > 0)
 			{
-				track++;
-				sh_move_right(shell);
-			}
-			if (shell->cmd)
-			{
-				sh_delete_current_char(shell);
-				sh_delete_current_char(shell);
-				auto_manage_buffer(shell, shell->cmd->content);
-				*status = true;
+				sh_debug(NULL, ft_itoa(id), NULL);
+				track = shell->buffer.content;
+				sh_move_home(shell);
+				while (track != ptr_to_exc)
+				{
+					track++;
+					sh_move_right(shell);
+				}
+				if (shell->cmd)
+				{
+					sh_delete_current_char(shell);
+					sh_delete_current_char(shell);
+					auto_manage_buffer(shell, shell->cmd->content);
+					*status = true;
+				}
 			}
 			sh_move_end(shell);
 		}
