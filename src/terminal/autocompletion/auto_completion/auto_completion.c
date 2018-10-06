@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 17:47:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:57:46 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,27 @@ static bool			create_frame(t_frame *frame, t_shell *shell, char *str)
 	return (true);
 }
 
-void				auto_completion(t_shell *shell)
+bool				auto_completion(t_shell *shell)
 {
 	t_frame			frame;
+	bool			performed_completion;
 	char			*parsed_buffer;
 
+	performed_completion = false;
 	shell->modes.auto_completion = 1;
 	if (auto_history(shell))
-		;
+		performed_completion = true;
 	else if (!ft_strcmps(shell->read->line, K_TAB))
 	{
 		ft_bzero(&frame, sizeof(frame));
 		if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
-			return ;
+			return (false);
 		if (create_frame(&frame, shell, parsed_buffer)
 				&& auto_get_args(&frame))
 			auto_issuance(&frame);
 		auto_free_frame(&frame);
+		performed_completion = true;
 	}
 	shell->modes.auto_completion = 0;
+	return (performed_completion);
 }
