@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:37:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/06 17:26:37 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,24 @@ static void	sh_arrows_dispatcher(t_shell *sh)
 
 	s = sh->read->line;
 	ft_putstr(CURSOR_HIDE);
-	(!ft_strcmps(s, "\x1b\x5b\x41")) ? sh_browse_prev(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x42")) ? sh_browse_next(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x43")) ? sh_move_right(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x44")) ? sh_move_left(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x46")) ? sh_move_end(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x48")) ? sh_move_home(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x1b\x5b\x41")) ? sh_move_up(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x1b\x5b\x42")) ? sh_move_down(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x1b\x5b\x43")) ? sh_move_next_word(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x1b\x5b\x44")) ? sh_move_previous_word(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x43")) ? sh_select_right_char(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x44")) ? sh_select_left_char(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x46")) ? sh_select_end(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x32\x48")) ? sh_select_home(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x41")) ? sh_select_up(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x42")) ? sh_select_down(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x43"))
-		? sh_select_right_word(sh) : 0;
-	(!ft_strcmps(s, "\x1b\x5b\x31\x3b\x31\x30\x44"))
-		? sh_select_left_word(sh) : 0;
+	(!ft_strcmps(s, K_UP)) ? sh_browse_prev(sh) : 0;
+	(!ft_strcmps(s, K_DOWN)) ? sh_browse_next(sh) : 0;
+	(!ft_strcmps(s, K_RIGHT)) ? sh_move_right(sh) : 0;
+	(!ft_strcmps(s, K_LEFT)) ? sh_move_left(sh) : 0;
+	(!ft_strcmps(s, K_END)) ? sh_move_end(sh) : 0;
+	(!ft_strcmps(s, K_HOME)) ? sh_move_home(sh) : 0;
+	(!ft_strcmps(s, K_O_UP)) ? sh_move_up(sh) : 0;
+	(!ft_strcmps(s, K_O_DOWN)) ? sh_move_down(sh) : 0;
+	(!ft_strcmps(s, K_O_RIGHT)) ? sh_move_next_word(sh) : 0;
+	(!ft_strcmps(s, K_O_LEFT)) ? sh_move_previous_word(sh) : 0;
+	(!ft_strcmps(s, K_S_RIGHT)) ? sh_select_right_char(sh) : 0;
+	(!ft_strcmps(s, K_S_LEFT)) ? sh_select_left_char(sh) : 0;
+	(!ft_strcmps(s, K_S_END)) ? sh_select_end(sh) : 0;
+	(!ft_strcmps(s, K_S_HOME)) ? sh_select_home(sh) : 0;
+	(!ft_strcmps(s, K_S_O_UP)) ? sh_select_up(sh) : 0;
+	(!ft_strcmps(s, K_S_O_DOWN)) ? sh_select_down(sh) : 0;
+	(!ft_strcmps(s, K_S_O_RIGHT)) ? sh_select_right_word(sh) : 0;
+	(!ft_strcmps(s, K_S_O_LEFT)) ? sh_select_left_word(sh) : 0;
 	ft_putstr(CURSOR_SHOW);
 }
 

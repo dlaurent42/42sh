@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 09:04:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:29:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@
 # define K_COL_ROW_0	"\x1b\x5b\x48"
 # define K_DEL			"\x7f"
 # define K_DEL_ALL		"\x1b\x5b\x4a"
+
+# define K_O_UP			"\x1b\x1b\x5b\x41"
+# define K_O_DOWN		"\x1b\x1b\x5b\x42"
+# define K_O_RIGHT		"\x1b\x1b\x5b\x43"
+# define K_O_LEFT		"\x1b\x1b\x5b\x44"
+
+# define K_S_O_UP		"\x1b\x5b\x31\x3b\x31\x30\x41"
+# define K_S_O_DOWN		"\x1b\x5b\x31\x3b\x31\x30\x42"
+# define K_S_O_RIGHT	"\x1b\x5b\x31\x3b\x31\x30\x43"
+# define K_S_O_LEFT		"\x1b\x5b\x31\x3b\x31\x30\x44"
+# define K_S_O_END		"\x1b\x5b\x31\x3b\x31\x30\x46"
+# define K_S_O_HOME		"\x1b\x5b\x31\x3b\x31\x30\x48"
+
+# define K_S_UP			"\x1b\x5b\x31\x3b\x32\x41"
+# define K_S_DOWN		"\x1b\x5b\x31\x3b\x32\x42"
+# define K_S_RIGHT		"\x1b\x5b\x31\x3b\x32\x43"
+# define K_S_LEFT		"\x1b\x5b\x31\x3b\x32\x44"
+# define K_S_END		"\x1b\x5b\x31\x3b\x32\x46"
+# define K_S_HOME		"\x1b\x5b\x31\x3b\x32\x48"
 
 # define CLEAR_TO_EOL	"\x1b[K"
 # define CLEAR_LINE		"\x1b[M"
