@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 11:59:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 12:09:17 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void			exc_double(t_shell *shell, bool *status)
 	char			*ptr_to_exc;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!!")))
+	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset++, "!!")))
 	{
 		track = shell->buffer.content;
 		sh_move_home(shell);
@@ -35,7 +35,6 @@ static void			exc_double(t_shell *shell, bool *status)
 			auto_manage_buffer(shell, shell->cmd->content);
 			*status = true;
 		}
-		offset++;
 		sh_move_end(shell);
 	}
 }
@@ -81,7 +80,7 @@ static void			exc_number(t_shell *shell, bool *status)
 	t_cmd			*cmd;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!")))
+	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset++, "!")))
 	{
 		if ((number_of_digits = good_number_of_digits(ptr_to_exc + 1)))
 		{
@@ -105,7 +104,6 @@ static void			exc_number(t_shell *shell, bool *status)
 				sh_move_end(shell);
 			}
 		}
-		offset++;
 	}
 }
 
