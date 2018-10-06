@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/05 13:25:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 09:04:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,6 +558,8 @@ void					auto_move_down(t_frame *frame);
 void					auto_move_left(t_frame *frame);
 void					auto_move_right(t_frame *frame);
 bool					auto_is_executeable(t_args *args);
+
+bool					auto_history(t_shell *shell);
 
 void					auto_sort(t_frame *frame);
 bool					auto_sort_alpha(t_frame *frame);

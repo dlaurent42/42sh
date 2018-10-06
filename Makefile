@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/04 20:35:58 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/06 09:09:04 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/auto_completion/get_args.c			\
 				terminal/autocompletion/auto_completion/create_args.c		\
 				terminal/autocompletion/auto_completion/free_args.c			\
+				terminal/autocompletion/history/history.c					\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -185,6 +186,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/sort
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/history
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/issuance
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/display
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/auto_completion
