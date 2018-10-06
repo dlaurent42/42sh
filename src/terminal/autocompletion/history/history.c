@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 11:06:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 11:46:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,10 @@ static void			exc_number(t_shell *shell, bool *status)
 					track++;
 					sh_move_right(shell);
 				}
-				if (shell->cmd)
-				{
-					sh_delete_current_char(shell);
-					sh_delete_current_char(shell);
-					auto_manage_buffer(shell, shell->cmd->content);
-					*status = true;
-				}
+				sh_delete_current_char(shell);
+				sh_delete_current_char(shell);
+				auto_manage_buffer(shell, cmd->content);
+				*status = true;
 				sh_move_end(shell);
 			}
 		}
