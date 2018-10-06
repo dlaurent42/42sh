@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 09:58:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 10:07:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int			good_number_of_digits(char *str)
 static void			exc_number(t_shell *shell, bool *status)
 {
 	int				id;
+	int				number_of_digits;
 	int				offset;
 	char			*track;
 	char			*ptr_to_exc;
@@ -62,9 +63,11 @@ static void			exc_number(t_shell *shell, bool *status)
 	offset = 0;
 	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!")))
 	{
-		if (good_number_of_digits(ptr_to_exc + 1))
+		if ((number_of_digits = good_number_of_digits(ptr_to_exc + 1)))
 		{
 			id = ft_atoi(ptr_to_exc + 1);
+			if (id < 0 && shell->cmd)
+				id += shell->cmd->id;
 			sh_debug(NULL, ft_itoa(id), NULL);
 			track = shell->buffer.content;
 			sh_move_home(shell);
