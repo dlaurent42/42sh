@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 10:07:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 10:14:04 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int			good_number_of_digits(char *str)
 	int				number_of_digits;
 
 	number_of_digits = 0;
+	if (*str == '-')
+		str++;
 	while (ft_isdigit(*(str++)))
 		number_of_digits++;
 	if (number_of_digits && number_of_digits <= 6)
