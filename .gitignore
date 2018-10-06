@@ -16,3 +16,6 @@ shell.dSYM
 # Secure malloc tool residues
 .sym_logs
 *.infected
+
+# VIM
+*.swp
