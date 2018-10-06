@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 09:09:51 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 09:11:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static void			exc_double(t_shell *shell, bool *status)
 	char			*track;
 	char			*ptr_to_exc;
 
-	sh_debug(NULL, "Enter History\n", NULL);//DEBUG
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!!")))//Deal with !! hist
+	while ((ptr_to_exc = ft_strstr(shell->buffer.content + offset, "!!")))
 	{
 		track = shell->buffer.content;
 		sh_move_home(shell);
@@ -28,7 +27,6 @@ static void			exc_double(t_shell *shell, bool *status)
 		{
 			track++;
 			sh_move_right(shell);
-			sh_debug(NULL, "FIRST\n", shell->buffer.content);//DEBUG
 		}
 		if (shell->cmd)
 		{
