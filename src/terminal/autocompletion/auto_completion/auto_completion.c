@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 09:05:38 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:47:20 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void				auto_completion(t_shell *shell)
 	shell->modes.auto_completion = 1;
 	if (auto_history(shell))
 		;
-	else {
+	else if (!ft_strcmps(shell->read->line, K_TAB))
+	{
 		ft_bzero(&frame, sizeof(frame));
 		if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
 			return ;
