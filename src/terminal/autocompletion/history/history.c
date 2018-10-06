@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 11:46:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 11:53:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,19 @@ t_cmd				*get_cmd_by_id(t_shell *shell, unsigned int id)
 static int			good_number_of_digits(char *str)
 {
 	int				number_of_digits;
+	int				minus;
 
+	minus = 0;
 	number_of_digits = 0;
 	if (*str == '-')
+	{
 		str++;
+		minus = 1;
+	}
 	while (ft_isdigit(*(str++)))
 		number_of_digits++;
 	if (number_of_digits && number_of_digits <= 6)
-		return (number_of_digits);
+		return (number_of_digits + minus);
 	return (0);
 }
 
@@ -95,7 +100,8 @@ static void			exc_number(t_shell *shell, bool *status)
 					track++;
 					sh_move_right(shell);
 				}
-				sh_delete_current_char(shell);
+				while (number_of_digits--)
+					sh_delete_current_char(shell);
 				sh_delete_current_char(shell);
 				auto_manage_buffer(shell, cmd->content);
 				*status = true;
