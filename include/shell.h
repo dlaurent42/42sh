@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 17:34:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:37:06 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define K_COL_0		"\x1b\x5b\x31\x47"
 # define K_COL_ROW_0	"\x1b\x5b\x48"
 # define K_TAB			"\x09"
+# define K_RETURN		"\x0a"
 # define K_DEL			"\x7f"
 # define K_DEL_ALL		"\x1b\x5b\x4a"
 

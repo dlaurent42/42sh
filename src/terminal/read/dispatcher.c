@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 17:33:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:38:35 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		sh_read_dispatcher(t_shell *sh)
 		sh_deletion_dispatcher(sh);
 	else if (sh->read->line[0] == 27)
 		sh_arrows_dispatcher(sh);
-	else if (sh->read->line[0] == K_TAB)
+	else if (sh->read->line[0] == 9)
 		auto_completion(sh);
 	else if (sh->read->line[0] == 3 && sh->modes.multiline)
 		sh_multilines_close(sh);
