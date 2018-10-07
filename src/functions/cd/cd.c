@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:22:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 20:10:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,14 @@ static char	sh_cd_dispatch(t_shell *sh, int option_p, char **argv, int i)
 char		sh_cd(t_shell *sh, char **argv)
 {
 	int		current;
-	char	option_p;
-	char	option_l;
+	bool	option_p;
+	bool	option_l;
 	size_t	argc;
 
 	current = 0;
 	option_l = FALSE;
 	option_p = FALSE;
 	argc = ft_count_argv((void **)argv);
-	while (argv[current] && argv[current][0] == '-')
-	{
-		if (argv[current][1] == '-' && !argv[current][2])
-			break ;
-		else if (argv[current][1] == 'L' && !argv[current][2])
-			option_l = TRUE;
-		else if (argv[current][1] == 'P' && !argv[current][2])
-			option_p = TRUE;
-		else
-			break ;
-		current++;
-	}
+	current = sh_cd_options(argv, &option_l, &option_p);
 	return (sh_cd_dispatch(sh, option_p, argv, current));
 }

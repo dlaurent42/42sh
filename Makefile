@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/07 19:22:48 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/07 21:12:01 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ SRC			=	shell.c														\
 				functions/cd/follow.c										\
 				functions/cd/follow_parser.c								\
 				functions/cd/nofollow.c										\
+				functions/cd/options.c										\
 				functions/echo/echo.c										\
 				functions/env/env.c											\
 				functions/env/error.c										\
 				functions/env/mode.display.c								\
 				functions/env/mode.exec.c									\
 				functions/env/parse.c										\
+				functions/env/parse.actions.c								\
 				functions/exit/exit.c										\
 				functions/history/history.c									\
 				functions/setenv/add.c										\
@@ -46,6 +48,7 @@ SRC			=	shell.c														\
 				functions/unsetenv/parse.c									\
 				functions/unsetenv/remove.c									\
 				functions/unsetenv/unsetenv.c								\
+				functions/utils/has_option.c								\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -183,6 +186,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/history
 				@mkdir -p $(OBJ_DIR)/functions/setenv
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
+				@mkdir -p $(OBJ_DIR)/functions/utils
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands

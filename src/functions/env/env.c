@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:11:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 22:21:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		**sh_env_get_string(char *string, char **argv)
 		i++;
 	}
 	(split) ? free(split) : 0;
-	while (argv[j])
+	while (argv && argv[j])
 	{
 		arr[i + j] = ft_strdups(argv[j]);
 		j++;
@@ -57,21 +57,23 @@ char		sh_env_is_exec_mode(char **arr)
 
 char		sh_env(t_shell *sh, char **argv)
 {
-	int		i;
+	int		res[2];
 	char	*path;
 	char	*string;
 	char	**arr;
 	t_env	*env;
 
-	i = 0;
+	res[0] = 0;
+	res[1] = 0;
 	path = NULL;
 	string = NULL;
 	env = env_copy(sh);
 	if (argv)
-		if ((i = sh_env_parse(env, &path, &string, argv)) < 0)
-			return (sh_env_error(env, path, string, i));
-	arr = sh_env_get_string(string, argv + i);
-	if (sh_env_is_exec_mode(arr) && arr && arr[0])
+		if ((res[0] = sh_env_parse(env, &path, &string, argv)) < 0)
+			return (sh_env_error(env, path, string, res[0]));
+	arr = sh_env_get_string(string, argv + res[0]);
+	ft_putstr(arr[0]);
+	if (arr && arr[0] && ft_strcountif(arr[0], '=') == 0)
 		return (sh_env_exec(env, path, arr));
 	ft_strdel(&path);
 	return (sh_env_display(sh, env, arr));

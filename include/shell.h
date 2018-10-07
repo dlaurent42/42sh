@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:21:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 22:14:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,6 +376,7 @@ void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 ** functions - cd
 */
 int						sh_cd_remove_troll(char *s);
+int						sh_cd_options(char **argv, bool *opt_l, bool *opt_p);
 char					sh_cd(t_shell *sh, char **argv);
 char					sh_cd_error(char *value, char *path, int err_id);
 char					sh_cd_follow(t_shell *sh, char *value, char dash);
@@ -392,6 +393,11 @@ char					sh_echo(t_shell *sh, char **argv);
 ** functions - env
 */
 char					sh_env(t_shell *sh, char **argv);
+char					sh_env_string(char *arg, char **string);
+char					sh_env_path(char *arg, char **path);
+char					sh_env_unset(t_env *env, char *arg);
+void					sh_env_empty(t_env *env);
+bool					sh_env_has_verbose(char **argv);
 char					sh_env_error(t_env *env, char *s1, char *s2, int id);
 char					sh_env_exec(t_env *env, char *path, char **arr);
 char					sh_env_display(t_shell *sh, t_env *env, char **arr);
@@ -424,6 +430,11 @@ char					sh_unsetenv(t_shell *sh, char **argv);
 char					sh_unsetenv_remove(t_shell *sh, char *arg);
 char					sh_unsetenv_error(char *key, int err_id);
 char					*sh_unsetenv_parse(char *arg);
+
+/*
+** functions - utils
+*/
+bool					is_option_string(char *s, char *opt);
 
 /*
 ** structures - binaries

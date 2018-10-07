@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 13:27:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 22:23:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void			do_loop(t_frame *frame, t_args *head)
 		auto_manage_buffer(frame->shell, frame->select->data.str);
 		if (frame->select->ver_next == frame->select)
 		{
-			auto_manage_buffer(frame->shell, (frame->select->data.dir) ? "/" : " ");
+			auto_manage_buffer(frame->shell, (frame->select->data.dir)
+				? "/" : " ");
 			break ;
 		}
 		auto_display(frame, args);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:19:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 22:16:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		env_delete_item_from_array(t_env *env, const char *key)
 		i++;
 	}
 	i--;
-	while (++i < env->count)
+	while (++i < (int)env->count)
 		env->environment[i] = env->environment[i + 1];
 	return (del);
 }

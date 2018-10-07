@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 12:22:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 22:23:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_cmd				*get_cmd_by_id(t_shell *shell, int id)
 	if (!shell->cmd
 			|| (unsigned)id > shell->cmd->id
 			|| (unsigned)id < !shell->cmd->last->id)
-		return NULL;
+		return (NULL);
 	cmd = shell->cmd;
 	while (cmd && (unsigned)id != cmd->id)
 		cmd = cmd->next;
@@ -84,7 +84,7 @@ static void			exc_number(t_shell *shell, bool *status)
 	{
 		if ((number_of_deletions = good_number_of_digits(ptr_to_exc + 1) + 1))
 		{
-			if((cmd = get_cmd_by_id(shell, ft_atoi(ptr_to_exc + 1))))
+			if ((cmd = get_cmd_by_id(shell, ft_atoi(ptr_to_exc + 1))))
 			{
 				track = shell->buffer.content;
 				sh_move_home(shell);

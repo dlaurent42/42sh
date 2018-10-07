@@ -6,97 +6,98 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 15:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 17:23:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 21:54:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	sh_env_empty(t_env *env)
+static char	sh_env_parse_return(char **argv, int i, int res)
 {
-	size_t		i;
-	t_env_item	*item;
+	i += (res >= 0 && argv[i]
+	&& argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
+		? 1 : 0;
+	if (res >= 0)
+		return (i + res);
+	return (res);
+}
 
-	i = 0;
-	if (!env)
-		return ;
-	while (i < env->count)
+static char	sh_env_prepare_u(t_env *env, int *j, int *i, char **argv)
+{
+	int	k;
+
+	k = *j + 1;
+	if (argv[*i][*j + 1] == '\0')
 	{
-		item = env->items[i];
-		if (item && item != &env->del)
-		{
-			env_delete_specified_item(item);
-			env->items[i] = &env->del;
-		}
-		i++;
+		*i = *i + 1;
+		*j = ft_strlens(argv[*i]) - 1;
+		if (argv[*i])
+			return (sh_env_unset(env, argv[*i]));
+		return (-5);
 	}
-	i = 0;
-	while (env->environment[i])
+	*j = ft_strlens(argv[*i]) - 1;
+	return (sh_env_unset(env, argv[*i] + k));
+}
+
+static char	sh_env_prepare_s(char **string, int *j, int *i, char **argv)
+{
+	int	k;
+
+	k = *j + 1;
+	if (argv[*i][*j + 1] == '\0')
 	{
-		ft_strdel(&env->environment[i]);
-		i++;
-	}
-	env->count = 0;
-}
-
-static char	sh_env_unset(t_env *env, char *arg)
-{
-	char	*arg_parsed;
-
-	if (ft_strcountif(arg, '='))
-		return (-1);
-	if (!(arg_parsed = sh_unsetenv_parse(ft_strdups(arg))))
-		return (-2);
-	env_delete_item(env, arg_parsed);
-	ft_strdel(&arg_parsed);
-	return (0);
-}
-
-static char	sh_env_path(char *arg, char **path)
-{
-	size_t	len;
-
-	ft_strdel(path);
-	if (!(*path = ft_strdups(arg)))
-		return (-3);
-	len = ft_strlens(*path);
-	if (*path[len - 1] != '/')
-		*path = ft_strjoinf(*path, "/", 1);
-	return (0);
-}
-
-static char	sh_env_string(char *arg, char **string)
-{
-	if (!(*string = ft_strdups(arg)))
+		*i = *i + 1;
+		*j = ft_strlens(argv[*i]) - 1;
+		if (argv[*i])
+			return (sh_env_string(argv[*i], string));
 		return (-4);
-	return (1);
+	}
+	*j = ft_strlens(argv[*i]) - 1;
+	return (sh_env_string(argv[*i] + k, string));
+}
+
+static char	sh_env_prepare_p(char **path, int *j, int *i, char **argv)
+{
+	int	k;
+
+	k = *j + 1;
+	if (argv[*i][*j + 1] == '\0')
+	{
+		*i = *i + 1;
+		*j = ft_strlens(argv[*i]) - 1;
+		if (argv[*i])
+			return (sh_env_path(argv[*i], path));
+		return (-3);
+	}
+	*j = ft_strlens(argv[*i]) - 1;
+	return (sh_env_path(argv[*i] + k, path));
 }
 
 char		sh_env_parse(t_env *env, char **path, char **string, char **argv)
 {
 	int		i;
-	char	res;
+	int		j;
+	int		res[2];
 
 	i = 0;
-	res = 0;
-	while (argv[i] && res == 0)
+	res[0] = 0;
+	res[1] = sh_env_has_verbose(argv);
+	while (argv[i] && res[0] == 0
+	&& argv[i][0] == '-' && !(argv[i][1] == '-' && !argv[i][2]))
 	{
-		if (argv[i][0] == '-'
-		&& ((argv[i][1] == 'i' && !argv[i][2]) || !argv[i][1]))
-			sh_env_empty(env);
-		else if (argv[i][0] == '-' && argv[i][1] == 'u' && !argv[i][2])
-			res = sh_env_unset(env, *(argv + ++i));
-		else if (argv[i][0] == '-' && argv[i][1] == 'P' && !argv[i][2])
-			res = sh_env_path(*(argv + ++i), path);
-		else if (argv[i][0] == '-' && argv[i][1] == 'S' && !argv[i][2])
-			res = sh_env_string(*(argv + ++i), string);
-		else if (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
-			break ;
-		else
-			break ;
-		i += (argv[i]) ? 1 : 0;
+		j = 0;
+		while (res[0] == 0 && argv[i][++j])
+			if (argv[i][j] == 'i')
+				sh_env_empty(env);
+			else if (argv[i][j] == 'u')
+				res[0] = sh_env_prepare_u(env, &j, &i, argv);
+			else if (argv[i][j] == 'P')
+				res[0] = sh_env_prepare_p(path, &j, &i, argv);
+			else if (argv[i][j] == 'S')
+				res[0] = sh_env_prepare_s(string, &j, &i, argv);
+			else if (argv[i][j] != 'v' && (res[0] = -99))
+				sh_env_error(NULL, NULL, ft_strdups(argv[i] + j), -6);
+		i += (argv[i] && res[0] == 0) ? 1 : 0;
 	}
-	if (res >= 0)
-		return (i + res);
-	return (res);
+	return (sh_env_parse_return(argv, i, res[0]));
 }
