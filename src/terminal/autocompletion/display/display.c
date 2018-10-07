@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:39:12 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:53:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void				auto_display(t_shell *shell, t_obj *obj)
 			ft_putstr(K_UP);
 	}
 	sh_move_to_xy(shell, x, y);
+	shell->ac->window_resize = obj;
 }

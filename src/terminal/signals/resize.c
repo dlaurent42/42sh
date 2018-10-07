@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:18:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 00:57:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void		sh_window_resize(t_shell *sh)
 	sh->cursor.y = 0;
 	ft_putstr(CLEAR_SCREEN);
 	sh_print_prompt(sh);
+	if (sh->modes.auto_completion)
+		auto_display(sh, sh->ac->window_resize);
 	(sh->modes.search)
 		? sh_resize_history_mode(sh)
 		: sh_resize_normal_mode(sh, x, y);

@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 00:31:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:51:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,7 @@ typedef struct			s_ac
 	t_obj				*head;
 	t_obj				*track;
 	t_obj				*select;
+	t_obj				*window_resize;
 }						t_ac;
 
 typedef struct			s_read_dir
