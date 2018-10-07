@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move_right.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 15:58:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 11:25:06 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_move_right(t_frame *frame)
+void				auto_move_right(t_ac *ac)
 {
-	frame->select = frame->select->hor_next;
+	ac->select = ac->select->hor_next;
 }

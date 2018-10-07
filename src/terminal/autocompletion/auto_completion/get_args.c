@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 14:26:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			parse_args(t_frame *frame, char **argv)
+static bool			parse_args(t_ac *ac, char **argv)
 {
 	t_args			*args;
 	t_args			*last_args;
@@ -26,22 +26,22 @@ static bool			parse_args(t_frame *frame, char **argv)
 		free(args);
 		return (false);
 	}
-	if (!frame->args)
-		frame->args = args;
+	if (!ac->args)
+		ac->args = args;
 	else if (last_args)
 		last_args->next = args;
 	last_args = args;
 	return (true);
 }
 
-static bool			get_binaries(t_frame *frame, char **argv)
+static bool			get_binaries(t_ac *ac, char **argv)
 {
 	t_args			*args;
 	t_args			*last_args;
 	t_bin_auto		*bin_auto;
 
 	last_args = NULL;
-	bin_auto = frame->shell->bin->bin_auto;
+	bin_auto = ac->shell->bin->bin_auto;
 	if (*argv)
 		argv++;
 	while (bin_auto)
@@ -53,8 +53,8 @@ static bool			get_binaries(t_frame *frame, char **argv)
 			free(args);
 			return (false);
 		}
-		if (!frame->args)
-			frame->args = args;
+		if (!ac->args)
+			ac->args = args;
 		else if (last_args)
 			last_args->next = args;
 		last_args = args;
@@ -63,16 +63,16 @@ static bool			get_binaries(t_frame *frame, char **argv)
 	return (true);
 }
 
-bool				auto_get_args(t_frame *frame)
+bool				auto_get_args(t_ac *ac)
 {
-	if (frame->auto_mode != AUTO_NON && frame->auto_mode != AUTO_BIN)
+	if (ac->auto_mode != AUTO_NON && ac->auto_mode != AUTO_BIN)
 	{
-		if (!(parse_args(frame, frame->argv)))
+		if (!(parse_args(ac, ac->argv)))
 			return (false);
 	}
-	else if (frame->auto_mode == AUTO_BIN)
+	else if (ac->auto_mode == AUTO_BIN)
 	{
-		if (!(get_binaries(frame, frame->argv)))
+		if (!(get_binaries(ac, ac->argv)))
 			return (false);
 	}
 	return (true);

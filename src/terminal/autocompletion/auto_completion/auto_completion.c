@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 17:57:46 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool			contains_printable_characters(char *str)
 	return (false);
 }
 
-static char			*get_auto_mode(t_frame *frame, char *content)
+static char			*get_auto_mode(t_ac *ac, char *content)
 {
 	char			*str;
 	char			*slash;
@@ -38,37 +38,37 @@ static char			*get_auto_mode(t_frame *frame, char *content)
 	if (!(str = ft_strrchr(move_past_leading_spaces(content), ' ')))
 	{
 		str = content;
-		frame->auto_mode = AUTO_BIN;
-		frame->pre_file_name = ft_strnew(0);
+		ac->auto_mode = AUTO_BIN;
+		ac->pre_file_name = ft_strnew(0);
 	}
 	else
 	{
-		frame->auto_mode = AUTO_REG;
+		ac->auto_mode = AUTO_REG;
 		str++;
 		if ((slash = ft_strrchr(str, '/')))
-			frame->pre_file_name = ft_strndup(content, (slash - content) + 1);
+			ac->pre_file_name = ft_strndup(content, (slash - content) + 1);
 		else
-			frame->pre_file_name = ft_strndup(content, (str - content));
+			ac->pre_file_name = ft_strndup(content, (str - content));
 	}
-	if (!contains_printable_characters(content) || !frame->pre_file_name)
+	if (!contains_printable_characters(content) || !ac->pre_file_name)
 		return (NULL);
 	return (str);
 }
 
-static bool			create_frame(t_frame *frame, t_shell *shell, char *str)
+static bool			create_ac(t_ac *ac, t_shell *shell, char *str)
 {
-	frame->shell = shell;
-	if (!(frame->argv = (char **)malloc(sizeof(char *) * 3)))
+	ac->shell = shell;
+	if (!(ac->argv = (char **)malloc(sizeof(char *) * 3)))
 		return (false);
-	frame->argv[0] = str;
-	frame->argv[1] = str;
-	frame->argv[2] = NULL;
+	ac->argv[0] = str;
+	ac->argv[1] = str;
+	ac->argv[2] = NULL;
 	return (true);
 }
 
 bool				auto_completion(t_shell *shell)
 {
-	t_frame			frame;
+	t_ac			ac;
 	bool			performed_completion;
 	char			*parsed_buffer;
 
@@ -78,13 +78,13 @@ bool				auto_completion(t_shell *shell)
 		performed_completion = true;
 	else if (!ft_strcmps(shell->read->line, K_TAB))
 	{
-		ft_bzero(&frame, sizeof(frame));
-		if (!(parsed_buffer = get_auto_mode(&frame, shell->buffer.content)))
+		ft_bzero(&ac, sizeof(ac));
+		if (!(parsed_buffer = get_auto_mode(&ac, shell->buffer.content)))
 			return (false);
-		if (create_frame(&frame, shell, parsed_buffer)
-				&& auto_get_args(&frame))
-			auto_issuance(&frame);
-		auto_free_frame(&frame);
+		if (create_ac(&ac, shell, parsed_buffer)
+				&& auto_get_args(&ac))
+			auto_issuance(&ac);
+		auto_free_ac(&ac);
 		performed_completion = true;
 	}
 	shell->modes.auto_completion = 0;

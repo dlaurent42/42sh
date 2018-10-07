@@ -3,51 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   do_file_admin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 11:27:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			get_mode(t_frame *frame, t_args *head)
+static void			get_mode(t_ac *ac, t_args *head)
 {
 	t_args			*args;
 
 	args = head;
-	while (frame->cmp_mode == MODE_NON && args)
+	while (ac->cmp_mode == MODE_NON && args)
 	{
 		if (!args->data.no_file)
-			if (!ft_strncmp(args->data.str, frame->file_name,
-						frame->file_name_len))
-				frame->cmp_mode = MODE_CMP;
+			if (!ft_strncmp(args->data.str, ac->file_name,
+						ac->file_name_len))
+				ac->cmp_mode = MODE_CMP;
 		args = args->next;
 	}
 	args = head;
-	while (frame->cmp_mode == MODE_NON && args)
+	while (ac->cmp_mode == MODE_NON && args)
 	{
 		if (!args->data.no_file)
-			if (ft_strstr(args->data.str, frame->file_name))
-				frame->cmp_mode = MODE_STR;
+			if (ft_strstr(args->data.str, ac->file_name))
+				ac->cmp_mode = MODE_STR;
 		args = args->next;
 	}
 }
 
-static void			lock_files(t_frame *frame, t_args *args)
+static void			lock_files(t_ac *ac, t_args *args)
 {
 	while (args)
 	{
-		if (frame->cmp_mode == MODE_CMP)
+		if (ac->cmp_mode == MODE_CMP)
 		{
-			if (ft_strncmp(args->data.str, frame->file_name,
-						frame->file_name_len))
+			if (ft_strncmp(args->data.str, ac->file_name,
+						ac->file_name_len))
 				args->data.no_file = 1;
 		}
-		if (frame->cmp_mode == MODE_STR)
+		if (ac->cmp_mode == MODE_STR)
 		{
-			if (!ft_strstr(args->data.str, frame->file_name))
+			if (!ft_strstr(args->data.str, ac->file_name))
 				args->data.no_file = 1;
 		}
 		if (!ft_strcmps(args->data.str, "."))
@@ -56,27 +56,27 @@ static void			lock_files(t_frame *frame, t_args *args)
 	}
 }
 
-static void			get_column_widths(t_frame *frame, t_args *args)
+static void			get_column_widths(t_ac *ac, t_args *args)
 {
 	t_args			*head;
 
-	frame->len_file_name = 0;
-	frame->items_to_display = 0;
-	frame->total_blocks = 0;
+	ac->len_file_name = 0;
+	ac->items_to_display = 0;
+	ac->total_blocks = 0;
 	head = args;
 	while (head)
 	{
 		if (!head->data.no_file)
 		{
-			auto_calc_len_file_name(frame, head);
-			head->data.file_number = frame->items_to_display;
-			frame->items_to_display++;
+			auto_calc_len_file_name(ac, head);
+			head->data.file_number = ac->items_to_display;
+			ac->items_to_display++;
 		}
 		head = head->next;
 	}
 }
 
-static void			issue_circular_pointers(t_frame *frame, t_args *head)
+static void			issue_circular_pointers(t_ac *ac, t_args *head)
 {
 	t_args			*args;
 	t_args			*track;
@@ -84,8 +84,8 @@ static void			issue_circular_pointers(t_frame *frame, t_args *head)
 	while (head->next && head->data.no_file)
 		head = head->next;
 	args = head;
-	frame->select = head;
-	frame->select->data.file_number = 0;
+	ac->select = head;
+	ac->select->data.file_number = 0;
 	while (args && args->next)
 	{
 		track = args->next;
@@ -102,10 +102,10 @@ static void			issue_circular_pointers(t_frame *frame, t_args *head)
 	head->ver_prev = args;
 }
 
-void				auto_do_file_admin(t_frame *frame, t_args *args)
+void				auto_do_file_admin(t_ac *ac, t_args *args)
 {
-	get_mode(frame, args);
-	lock_files(frame, args);
-	get_column_widths(frame, args);
-	issue_circular_pointers(frame, args);
+	get_mode(ac, args);
+	lock_files(ac, args);
+	get_column_widths(ac, args);
+	issue_circular_pointers(ac, args);
 }

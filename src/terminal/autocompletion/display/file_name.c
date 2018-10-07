@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 10:16:36 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void			print_end_char(t_args *args)
 		ft_putchar('*');
 }
 
-static void			print_colour(t_frame *frame, t_args *args)
+static void			print_colour(t_ac *ac, t_args *args)
 {
 	if (auto_is_executeable(args))
 		ft_putstr(COL_EXE);
@@ -48,18 +48,18 @@ static void			print_colour(t_frame *frame, t_args *args)
 		ft_putstr(COL_LNK);
 	if (args->data.sock)
 		ft_putstr(COL_SOCK);
-	if (args == frame->select)
+	if (args == ac->select)
 		ft_printf(COL_BG);
 	ft_printf("%s", args->data.str);
 }
 
-void				auto_file_name(t_frame *frame, t_args *args)
+void				auto_file_name(t_ac *ac, t_args *args)
 {
-	print_colour(frame, args);
-	if (args != frame->select)
+	print_colour(ac, args);
+	if (args != ac->select)
 		ft_putstr(COL_CLR);
 	print_end_char(args);
-	if (frame->number_of_columns)
-		auto_print_spaces(frame->len_file_name - args->data.len_of_str + 1);
+	if (ac->number_of_columns)
+		auto_print_spaces(ac->len_file_name - args->data.len_of_str + 1);
 	ft_putstr(COL_CLR);
 }

@@ -3,52 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 19:26:22 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/01 21:40:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			swap(t_frame *frame)
+static bool			swap(t_ac *ac)
 {
 	t_data			tmp;
 
-	if (frame->sort_function(frame))
+	if (ac->sort_function(ac))
 	{
-		tmp = frame->track->data;
-		frame->track->data = frame->track->next->data;
-		frame->track->next->data = tmp;
+		tmp = ac->track->data;
+		ac->track->data = ac->track->next->data;
+		ac->track->next->data = tmp;
 		return (true);
 	}
 	return (false);
 }
 
-static void			do_sort(t_frame *frame)
+static void			do_sort(t_ac *ac)
 {
 	bool			sorted;
 
 	while (true)
 	{
-		frame->track = frame->head;
+		ac->track = ac->head;
 		sorted = true;
-		while (frame->track && frame->track->next)
+		while (ac->track && ac->track->next)
 		{
-			if (swap(frame))
+			if (swap(ac))
 				sorted = false;
-			frame->track = frame->track->next;
+			ac->track = ac->track->next;
 		}
 		if (sorted)
 			break ;
 	}
 }
 
-void				auto_sort(t_frame *frame)
+void				auto_sort(t_ac *ac)
 {
-	frame->sort_function = &auto_sort_alpha;
-	frame->head = frame->current_args;
-	do_sort(frame);
-	frame->current_args = frame->head;
+	ac->sort_function = &auto_sort_alpha;
+	ac->head = ac->current_args;
+	do_sort(ac);
+	ac->current_args = ac->head;
 }

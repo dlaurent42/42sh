@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 14:37:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ static t_args		*get_directory_contents(t_args *args)
 	return (read_dir.head);
 }
 
-void				auto_do_ls(t_frame *frame, t_args *args)
+void				auto_do_ls(t_ac *ac, t_args *args)
 {
 	t_args			*head;
 
 	if (!(head = get_directory_contents(args)))
 		return ;
-	frame->current_args = head;
-	auto_get_attributes(frame);
-	auto_sort(frame);
-	head = frame->current_args;
-	auto_show_screen(frame, head);
+	ac->current_args = head;
+	auto_get_attributes(ac);
+	auto_sort(ac);
+	head = ac->current_args;
+	auto_show_screen(ac, head);
 	auto_free_args(&head);
 }

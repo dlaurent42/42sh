@@ -6,28 +6,28 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 11:55:05 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 14:31:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_issuance(t_frame *frame)
+void				auto_issuance(t_ac *ac)
 {
-	if (frame->auto_mode == AUTO_BIN)
+	if (ac->auto_mode == AUTO_BIN)
 	{
-		if (!(frame->file_name = ft_strdup(frame->argv[1])))
+		if (!(ac->file_name = ft_strdup(ac->argv[1])))
 			return ;
-		frame->file_name_len = ft_strlen(frame->file_name);
-		auto_show_screen(frame, frame->args);
+		ac->file_name_len = ft_strlen(ac->file_name);
+		auto_show_screen(ac, ac->args);
 	}
 	else
 	{
-		frame->current_args = frame->args;
-		if (!auto_get_attributes(frame))
+		ac->current_args = ac->args;
+		if (!auto_get_attributes(ac))
 			return ;
-		frame->args = frame->current_args;
-		if (frame->args->data.dir && !frame->args->data.no_file)
-			auto_do_ls(frame, frame->args);
+		ac->args = ac->current_args;
+		if (ac->args->data.dir && !ac->args->data.no_file)
+			auto_do_ls(ac, ac->args);
 	}
 }

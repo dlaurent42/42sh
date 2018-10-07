@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 17:33:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int			calculate_offset(t_frame *frame)
+static int			calculate_offset(t_ac *ac)
 {
 	int				len;
 	float			nbr;
 	float			calc;
 
-	len = frame->items_to_display;
+	len = ac->items_to_display;
 	if (len == 1)
 		return (1);
-	nbr = (float)len / frame->number_of_columns;
+	nbr = (float)len / ac->number_of_columns;
 	calc = nbr - (int)nbr;
 	calc *= 10;
 	len = (int)calc;
@@ -39,15 +39,15 @@ static t_args		*get_file_number(t_args *head, int file_number)
 	return (NULL);
 }
 
-static bool			bottom_of_screen_is_not_reached(t_frame *frame)
+static bool			bottom_of_screen_is_not_reached(t_ac *ac)
 {
-	if (frame->number_of_printed_rows
-			< (frame->height - frame->shell->cursor.y) - 1)
+	if (ac->number_of_printed_rows
+			< (ac->height - ac->shell->cursor.y) - 1)
 		return (true);
 	return (false);
 }
 
-static void			print_display(t_frame *frame, t_args *head, int len)
+static void			print_display(t_ac *ac, t_args *head, int len)
 {
 	int				prints;
 	int				line_len;
@@ -59,12 +59,12 @@ static void			print_display(t_frame *frame, t_args *head, int len)
 	while (++prints < len)
 	{
 		line_len = -1;
-		while (++line_len < frame->number_of_columns)
+		while (++line_len < ac->number_of_columns)
 		{
 			if (!(args = get_file_number(head, (prints) + (line_len) * (len))))
 				break ;
-			if (bottom_of_screen_is_not_reached(frame))
-				auto_file_name(frame, args);
+			if (bottom_of_screen_is_not_reached(ac))
+				auto_file_name(ac, args);
 			if (last_args)
 			{
 				last_args->hor_next = args;
@@ -72,10 +72,10 @@ static void			print_display(t_frame *frame, t_args *head, int len)
 			}
 			last_args = args;
 		}
-		if (bottom_of_screen_is_not_reached(frame))
+		if (bottom_of_screen_is_not_reached(ac))
 		{
 			ft_putchar('\n');
-			frame->number_of_printed_rows++;
+			ac->number_of_printed_rows++;
 		}
 	}
 	args = get_file_number(head, 0);
@@ -83,23 +83,23 @@ static void			print_display(t_frame *frame, t_args *head, int len)
 	args->hor_prev = last_args;
 }
 
-void				auto_display(t_frame *frame, t_args *args)
+void				auto_display(t_ac *ac, t_args *args)
 {
 	int				x;
 	int				y;
 	int				rows;
 
-	x = frame->shell->cursor.x;
-	y = frame->shell->cursor.y;
-	auto_clear_selection_screen(frame);
+	x = ac->shell->cursor.x;
+	y = ac->shell->cursor.y;
+	auto_clear_selection_screen(ac);
 	ft_putchar('\n');
-	frame->number_of_printed_rows = 1;
-	print_display(frame, args, calculate_offset(frame));
-	rows = frame->number_of_printed_rows;
+	ac->number_of_printed_rows = 1;
+	print_display(ac, args, calculate_offset(ac));
+	rows = ac->number_of_printed_rows;
 	if (!(ft_putstr_multi(K_UP, rows)))
 	{
 		while (rows--)
 			ft_putstr(K_UP);
 	}
-	sh_move_to_xy(frame->shell, x, y);
+	sh_move_to_xy(ac->shell, x, y);
 }

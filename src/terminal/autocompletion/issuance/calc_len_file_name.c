@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 13:47:37 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 10:39:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_calc_len_file_name(t_frame *frame, t_args *args)
+void				auto_calc_len_file_name(t_ac *ac, t_args *args)
 {
 	int				len;
 	char			*str;
@@ -26,6 +26,6 @@ void				auto_calc_len_file_name(t_frame *frame, t_args *args)
 				|| data->ifo || auto_is_executeable(args))
 		data->len_of_str++;
 	len++;
-	if (len > frame->len_file_name)
-		frame->len_file_name = len;
+	if (len > ac->len_file_name)
+		ac->len_file_name = len;
 }

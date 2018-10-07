@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:21:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,7 +313,7 @@ typedef struct			s_args
 	struct s_args		*ver_prev;
 }						t_args;
 
-typedef struct			s_frame
+typedef struct			s_ac
 {
 	char				**argv;
 
@@ -344,8 +344,8 @@ typedef struct			s_frame
 
 	t_shell				*shell;
 
-	bool				(*sort_function)(struct s_frame *frame);
-}						t_frame;
+	bool				(*sort_function)(struct s_ac *ac);
+}						t_ac;
 
 typedef struct			s_read_dir
 {
@@ -583,35 +583,35 @@ void					sh_window_resize(t_shell *sh);
 ** terminal - auto_completion
 */
 bool					auto_completion(t_shell *shell);
-bool					auto_get_args(t_frame *frame);
+bool					auto_get_args(t_ac *ac);
 void					auto_free_args(t_args **args);
 t_args					*auto_create_args(void);
 
-void					auto_issuance(t_frame *frame);
-void					auto_read_dispatcher(t_frame *frame);
-void					auto_clear_selection_screen(t_frame *frame);
+void					auto_issuance(t_ac *ac);
+void					auto_read_dispatcher(t_ac *ac);
+void					auto_clear_selection_screen(t_ac *ac);
 void					auto_manage_buffer(t_shell *sh, char *new_display);
-bool					auto_get_attributes(t_frame *frame);
-void					auto_show_screen(t_frame *frame, t_args *args);
-void					auto_do_ls(t_frame *frame, t_args *args);
-void					auto_do_file_admin(t_frame *frame, t_args *args);
-void					auto_calc_len_file_name(t_frame *frame, t_args *args);
-bool					auto_calculate_number_of_columns(t_frame *frame);
+bool					auto_get_attributes(t_ac *ac);
+void					auto_show_screen(t_ac *ac, t_args *args);
+void					auto_do_ls(t_ac *ac, t_args *args);
+void					auto_do_file_admin(t_ac *ac, t_args *args);
+void					auto_calc_len_file_name(t_ac *ac, t_args *args);
+bool					auto_calculate_number_of_columns(t_ac *ac);
 bool					auto_path(t_args *args, char *path, char *name);
-void					auto_move_up(t_frame *frame);
-void					auto_move_down(t_frame *frame);
-void					auto_move_left(t_frame *frame);
-void					auto_move_right(t_frame *frame);
+void					auto_move_up(t_ac *ac);
+void					auto_move_down(t_ac *ac);
+void					auto_move_left(t_ac *ac);
+void					auto_move_right(t_ac *ac);
 bool					auto_is_executeable(t_args *args);
 
 bool					auto_history(t_shell *shell);
 
-void					auto_sort(t_frame *frame);
-bool					auto_sort_alpha(t_frame *frame);
+void					auto_sort(t_ac *ac);
+bool					auto_sort_alpha(t_ac *ac);
 
-void					auto_display(t_frame *frame, t_args *args);
-void					auto_file_name(t_frame *frame, t_args *args);
+void					auto_display(t_ac *ac, t_args *args);
+void					auto_file_name(t_ac *ac, t_args *args);
 void					auto_print_spaces(int diff);
-void					auto_free_frame(t_frame *frame);
+void					auto_free_ac(t_ac *ac);
 
 #endif

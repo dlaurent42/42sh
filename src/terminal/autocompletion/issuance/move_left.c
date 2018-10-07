@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move_left.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/04 11:24:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_move_left(t_frame *frame)
+void				auto_move_left(t_ac *ac)
 {
-	frame->select = frame->select->hor_prev;
+	ac->select = ac->select->hor_prev;
 }

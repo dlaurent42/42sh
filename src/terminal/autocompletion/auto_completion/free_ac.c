@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_frame.c                                       :+:      :+:    :+:   */
+/*   free_ac.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "shell.h"
 
-void				auto_free_frame(t_frame *frame)
+void				auto_free_ac(t_ac *ac)
 {
-	auto_free_args(&frame->args);
-	free(frame->argv);
-	free(frame->file_name);
-	free(frame->pre_file_name);
+	auto_free_args(&ac->args);
+	free(ac->argv);
+	free(ac->file_name);
+	free(ac->pre_file_name);
 }

@@ -6,70 +6,70 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 13:27:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			delete_str(t_frame *frame)
+static void			delete_str(t_ac *ac)
 {
 	int				len;
 
-	len = ft_strlenu(frame->del_file_name);
+	len = ft_strlenu(ac->del_file_name);
 	while (len--)
-		sh_delete_char(frame->shell);
+		sh_delete_char(ac->shell);
 }
 
-static void			fill_buffer_with_wild(t_frame *frame, t_args *args)
+static void			fill_buffer_with_wild(t_ac *ac, t_args *args)
 {
-	frame->del_file_name = frame->args->data.path;
-	delete_str(frame);
+	ac->del_file_name = ac->args->data.path;
+	delete_str(ac);
 	while (args)
 	{
 		if (!args->data.no_file && *args->data.str != '.')
 		{
-			auto_manage_buffer(frame->shell, args->data.path);
-			auto_manage_buffer(frame->shell, " ");
+			auto_manage_buffer(ac->shell, args->data.path);
+			auto_manage_buffer(ac->shell, " ");
 		}
 		args = args->next;
 	}
 }
 
-static void			do_loop(t_frame *frame, t_args *head)
+static void			do_loop(t_ac *ac, t_args *head)
 {
 	t_args			*args;
 
 	args = head;
-	while (frame->shell->modes.auto_completion)
+	while (ac->shell->modes.auto_completion)
 	{
-		if (!auto_calculate_number_of_columns(frame))
+		if (!auto_calculate_number_of_columns(ac))
 			break ;
 		args = head;
-		delete_str(frame);
-		auto_manage_buffer(frame->shell, frame->select->data.str);
-		if (frame->select->ver_next == frame->select)
+		delete_str(ac);
+		auto_manage_buffer(ac->shell, ac->select->data.str);
+		if (ac->select->ver_next == ac->select)
 		{
-			auto_manage_buffer(frame->shell, (frame->select->data.dir) ? "/" : " ");
+			auto_manage_buffer(ac->shell, (ac->select->data.dir) ? "/" : " ");
 			break ;
 		}
-		auto_display(frame, args);
-		read(0, frame->shell->read->line, 4);
-		if (frame->shell->read->line[0] == 4)
+		auto_display(ac, args);
+		read(0, ac->shell->read->line, 4);
+		if (ac->shell->read->line[0] == 4)
 			break ;
-		auto_read_dispatcher(frame);
-		ft_bzero(frame->shell->read->line, LINE_SIZE);
+		auto_read_dispatcher(ac);
+		ft_bzero(ac->shell->read->line, LINE_SIZE);
 	}
 }
 
-void				auto_show_screen(t_frame *frame, t_args *args)
+void				auto_show_screen(t_ac *ac, t_args *args)
 {
-	auto_do_file_admin(frame, args);
-	if (frame->cmp_mode == MODE_NON)
+	auto_do_file_admin(ac, args);
+	if (ac->cmp_mode == MODE_NON)
 		return ;
-	frame->del_file_name = frame->file_name;
-	if (frame->auto_mode == AUTO_WILD)
-		fill_buffer_with_wild(frame, args);
+	ac->del_file_name = ac->file_name;
+	if (ac->auto_mode == AUTO_WILD)
+		fill_buffer_with_wild(ac, args);
 	else
-		do_loop(frame, args);
+		do_loop(ac, args);
 }
