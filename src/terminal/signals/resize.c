@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 19:14:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 19:18:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,28 @@ static void	sh_reset_cursor_after_resize(t_shell *sh, int x, int y)
 	}
 }
 
+static void	sh_resize_history_mode(t_shell *sh)
+{
+	ft_putstr(sh->buffer.content + sh->buffer.ushift);
+	ft_putchar(' ');
+	ft_putstr(SEARCH_PROMPT);
+	ft_putstr(sh->search.content);
+	ft_putchar('_');
+}
+
+static void	sh_resize_normal_mode(t_shell *sh, int x, int y)
+{
+	ft_printf("%s %s", sh->buffer.content + sh->buffer.ushift, K_COL_ROW_0);
+	sh_reset_cursor_after_resize(sh, x, y);
+}
+
 void		sh_window_resize(t_shell *sh)
 {
 	int			x;
 	int			y;
 	t_winsize	window;
 
+	sh_debug(sh, "resize", NULL);
 	ioctl(0, TIOCGWINSZ, &window);
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
@@ -58,6 +74,7 @@ void		sh_window_resize(t_shell *sh)
 	sh->cursor.y = 0;
 	ft_putstr(CLEAR_SCREEN);
 	sh_print_prompt(sh);
-	ft_printf("%s %s", sh->buffer.content + sh->buffer.ushift, K_COL_ROW_0);
-	sh_reset_cursor_after_resize(sh, x, y);
+	(sh->modes.search)
+		? sh_resize_history_mode(sh)
+		: sh_resize_normal_mode(sh, x, y);
 }

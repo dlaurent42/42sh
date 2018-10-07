@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 22:06:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 21:27:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 16:14:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	sh_browse_prev(t_shell *sh)
 	t_cmd	*cmd;
 
 	cmd = NULL;
-	if (sh->modes.multiline)
-		return ;
-	(!sh->modes.browse) ? ft_strcpy(sh->buffer.stored, sh->buffer.content) : 0;
+	(!sh->modes.browse)
+		? ft_strcpy(sh->buffer.stored, sh->buffer.content + sh->buffer.ushift)
+		: 0;
 	tmp = (!sh->modes.browse) ? sh->cmd : sh->buffer.cmd->next;
 	while (tmp)
 	{

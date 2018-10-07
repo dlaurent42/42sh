@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 17:29:22 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 17:41:39 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/07 19:00:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_read(t_shell *sh)
+void	sh_history_move_cursor(t_shell *sh)
 {
-	sh_print_prompt(sh);
-	while (TRUE)
+	int	x;
+	int	y;
+
+	y = (sh->prompt.len_mod + sh->buffer.display_len) / sh->window.width;
+	y += ((sh->prompt.len_mod + sh->buffer.display_len) % sh->window.width)
+		? 1 : 0;
+	y = y + (sh->search.old_len + SEARCH_LEN + 1) / sh->window.width;
+	x = (sh->search.old_len + SEARCH_LEN + 1) % sh->window.width;
+	while (y)
 	{
-		read(0, sh->read->line, 7);
-		if (sh->read->line[0] == 4
-		&& !sh->modes.multiline)
-			break ;
-		sh_read_dispatcher(sh);
-		ft_bzero(sh->read->line, 8);
+		ft_putstr(K_UP);
+		y--;
+	}
+	while (x)
+	{
+		ft_putstr(K_LEFT);
+		x--;
 	}
 }

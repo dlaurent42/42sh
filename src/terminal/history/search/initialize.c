@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freeze.c                                           :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/28 14:46:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 16:32:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 16:19:19 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/07 19:02:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_browse_freeze(t_shell *sh)
+void	sh_search_init(t_shell *sh)
 {
-	if (sh->modes.browse == FALSE)
-		return ;
-	sh->buffer.cmd = NULL;
-	ft_bzero(sh->buffer.stored, ARG_MAX + 1);
-	sh->modes.browse = FALSE;
+	sh_debug(sh, "start", NULL);
+	sh_move_end(sh);
+	sh_browse_freeze(sh);
+	sh->modes.search = TRUE;
+	ft_strcpy(sh->buffer.stored, sh->buffer.content + sh->buffer.ushift);
+	ft_putstr(SEARCH_PROMPT);
+	ft_putchar('_');
+	ft_putstr(CURSOR_HIDE);
 }

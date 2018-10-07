@@ -6,11 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/10/06 09:09:04 by dhojt            ###   ########.fr        #
-=======
-#    Updated: 2018/10/04 21:26:52 by dlaurent         ###   ########.fr        #
->>>>>>> e0d9dba... [feature] history search Ctrl R
+#    Updated: 2018/10/07 19:22:48 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,6 +120,13 @@ SRC			=	shell.c														\
 				terminal/history/browse/prev.c								\
 				terminal/history/browse/comparison.c						\
 				terminal/history/browse/freeze.c							\
+				terminal/history/search/bufferize.c							\
+				terminal/history/search/cursor.c							\
+				terminal/history/search/freeze.c							\
+				terminal/history/search/initialize.c						\
+				terminal/history/search/print.c								\
+				terminal/history/search/read.c								\
+				terminal/history/search/search.c							\
 				terminal/multilines/initialize.c							\
 				terminal/multilines/close.c									\
 				terminal/print/buffer.c										\

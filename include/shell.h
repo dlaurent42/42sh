@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:20:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 19:21:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@
 
 # define CURSOR_HIDE	"\x1b\x5b\x3f\x32\x35\x6c"
 # define CURSOR_SHOW	"\x1b\x5b\x3f\x31\x32\x6c\x1b\x5b\x3f\x32\x35\x68"
+
+# define SEARCH_PROMPT	"\n\xf0\x9f\x94\x8d  "
+# define SEARCH_LEN		3
 
 # define OPTIONS		"-AFGNRSTUacdfgiloprtux1"
 # define RL_BUFSIZE		1024
@@ -226,7 +229,7 @@ typedef struct			s_modes
 	unsigned char		display			: 1;
 	unsigned char		select			: 1;
 	unsigned char		browse			: 1;
-	unsigned char		history			: 1;
+	unsigned char		search			: 1;
 	unsigned char		others			: 2;
 	unsigned int		multiline;
 }						t_modes;
@@ -239,10 +242,13 @@ typedef struct			s_select
 	char				*content;
 }						t_select;
 
-typedef struct			s_history
+typedef struct			s_search
 {
-	char				*content;
-}						t_history;
+	int					len;
+	int					old_len;
+	char				content[ARG_MAX + 1];
+	t_cmd				*match;
+}						t_search;
 
 typedef struct			s_shell
 {
@@ -255,6 +261,7 @@ typedef struct			s_shell
 	t_prompt			prompt;
 	t_window			window;
 	t_buffer			buffer;
+	t_search			search;
 	t_select			selection;
 	t_termios			*termios;
 }						t_shell;
@@ -511,6 +518,13 @@ char					sh_browse_compare(char *command, char *buffer);
 /*
 ** terminal - history - search
 */
+void					sh_search_freeze(t_shell *sh);
+void					sh_history_search(t_shell *sh);
+void					sh_history_bufferize(t_shell *sh, char *line);
+void					sh_history_move_cursor(t_shell *sh);
+void					sh_history_print_result(t_shell *sh);
+void					sh_history_perform_search(t_shell *sh);
+void					sh_search_init(t_shell *sh);
 
 /*
 ** terminal - multilines

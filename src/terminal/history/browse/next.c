@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 22:06:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 21:26:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 16:14:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	sh_reset_history(t_shell *sh)
 {
 	sh->buffer.cmd = NULL;
-	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
+	ft_bzero(sh->buffer.content + sh->buffer.ushift, sh->buffer.unicode_len);
 	sh_delete_all(sh);
 	sh_print_str(sh, sh->buffer.stored);
 	ft_bzero(sh->buffer.stored, ARG_MAX + 1);
@@ -28,7 +28,7 @@ void		sh_browse_next(t_shell *sh)
 	t_cmd	*cmd;
 
 	cmd = NULL;
-	if (!sh->modes.browse || sh->modes.multiline)
+	if (!sh->modes.browse)
 		return ;
 	tmp = sh->buffer.cmd->prev;
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/06 17:38:35 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 19:21:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void		sh_read_dispatcher(t_shell *sh)
 		auto_completion(sh);
 	else if (sh->read->line[0] == 3 && sh->modes.multiline)
 		sh_multilines_close(sh);
+	else if (sh->read->line[0] == 18)
+		sh_history_search(sh);
 	else
 		sh_fill_buffer(sh);
 }
