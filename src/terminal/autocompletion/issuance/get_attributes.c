@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:36:48 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void			get_type(t_obj *obj)
 		obj->data.blk = 1;
 }
 
-static void			read_f(t_ac *ac, t_obj *obj, struct stat *f)
+static void			read_f(t_shell *shell, t_obj *obj, struct stat *f)
 {
-	ac->total_blocks += f->st_blocks;
+	shell->ac->total_blocks += f->st_blocks;
 	obj->data.mode = f->st_mode;
 	obj->data.type = f->st_mode;
 	obj->data.links = f->st_nlink;
@@ -63,7 +63,7 @@ static void			read_f(t_ac *ac, t_obj *obj, struct stat *f)
 	get_type(obj);
 }
 
-static bool			get_initial(t_ac *ac, t_obj *obj)
+static bool			get_initial(t_shell *shell, t_obj *obj)
 {
 	char			*slash;
 	struct stat		f;
@@ -73,46 +73,46 @@ static bool			get_initial(t_ac *ac, t_obj *obj)
 		? ft_strndup(obj->data.path, slash - obj->data.path)
 		: ft_strdup(".");
 	if (ft_strcmps(obj->data.str, "."))
-		ac->file_name = ft_strdup((slash) ? slash + 1 : obj->data.str);
+		shell->ac->file_name = ft_strdup((slash) ? slash + 1 : obj->data.str);
 	else
-		ac->file_name = ft_strdup((slash) ? slash + 1 : "");
-	if (!obj->data.parent_path || !ac->file_name)
+		shell->ac->file_name = ft_strdup((slash) ? slash + 1 : "");
+	if (!obj->data.parent_path || !shell->ac->file_name)
 		return (false);
-	ac->file_name_len = ft_strlen(ac->file_name);
-	if (!ft_strcmps(ac->file_name, "*"))
+	shell->ac->file_name_len = ft_strlen(shell->ac->file_name);
+	if (!ft_strcmps(shell->ac->file_name, "*"))
 	{
-		ac->auto_mode = AUTO_WILD;
-		*ac->file_name = '\0';
+		shell->ac->auto_mode = AUTO_WILD;
+		*shell->ac->file_name = '\0';
 	}
 	if (!lstat(obj->data.parent_path, &f))
-		read_f(ac, obj, &f);
+		read_f(shell, obj, &f);
 	else
 		obj->data.no_file = 1;
 	return (true);
 }
 
-bool				auto_get_attributes(t_ac *ac)
+bool				auto_get_attributes(t_shell *shell)
 {
 	t_obj			*obj;
 	struct stat		f;
 
-	if (ac->at_mode == AT_FIRST)
+	if (shell->ac->at_mode == AT_FIRST)
 	{
-		if (!get_initial(ac, ac->current_obj))
+		if (!get_initial(shell, shell->ac->current_obj))
 			return (false);
 	}
 	else
 	{
-		obj = ac->current_obj;
+		obj = shell->ac->current_obj;
 		while (obj)
 		{
 			if (!lstat(obj->data.path, &f))
-				read_f(ac, obj, &f);
+				read_f(shell, obj, &f);
 			else
 				obj->data.no_file = 1;
 			obj = obj->next;
 		}
 	}
-	ac->at_mode = AT_REST;
+	shell->ac->at_mode = AT_REST;
 	return (true);
 }

@@ -12,7 +12,7 @@
 
 #include "shell.h"
 
-static bool			parse_obj(t_ac *ac, char **argv)
+static bool			parse_obj(t_shell *shell, char **argv)
 {
 	t_obj			*obj;
 	t_obj			*last_obj;
@@ -26,22 +26,22 @@ static bool			parse_obj(t_ac *ac, char **argv)
 		free(obj);
 		return (false);
 	}
-	if (!ac->obj)
-		ac->obj = obj;
+	if (!shell->ac->obj)
+		shell->ac->obj = obj;
 	else if (last_obj)
 		last_obj->next = obj;
 	last_obj = obj;
 	return (true);
 }
 
-static bool			get_binaries(t_ac *ac, char **argv)
+static bool			get_binaries(t_shell *shell, char **argv)
 {
 	t_obj			*obj;
 	t_obj			*last_obj;
 	t_bin_auto		*bin_auto;
 
 	last_obj = NULL;
-	bin_auto = ac->shell->bin->bin_auto;
+	bin_auto = shell->bin->bin_auto;
 	if (*argv)
 		argv++;
 	while (bin_auto)
@@ -53,8 +53,8 @@ static bool			get_binaries(t_ac *ac, char **argv)
 			free(obj);
 			return (false);
 		}
-		if (!ac->obj)
-			ac->obj = obj;
+		if (!shell->ac->obj)
+			shell->ac->obj = obj;
 		else if (last_obj)
 			last_obj->next = obj;
 		last_obj = obj;
@@ -63,16 +63,16 @@ static bool			get_binaries(t_ac *ac, char **argv)
 	return (true);
 }
 
-bool				auto_get_obj(t_ac *ac)
+bool				auto_get_obj(t_shell *shell)
 {
-	if (ac->auto_mode != AUTO_NON && ac->auto_mode != AUTO_BIN)
+	if (shell->ac->auto_mode != AUTO_NON && shell->ac->auto_mode != AUTO_BIN)
 	{
-		if (!(parse_obj(ac, ac->argv)))
+		if (!(parse_obj(shell, shell->ac->argv)))
 			return (false);
 	}
-	else if (ac->auto_mode == AUTO_BIN)
+	else if (shell->ac->auto_mode == AUTO_BIN)
 	{
-		if (!(get_binaries(ac, ac->argv)))
+		if (!(get_binaries(shell, shell->ac->argv)))
 			return (false);
 	}
 	return (true);

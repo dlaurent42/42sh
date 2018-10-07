@@ -6,49 +6,48 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 19:26:22 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:31:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			swap(t_ac *ac)
+static bool			swap(t_shell *shell)
 {
 	t_data			tmp;
 
-	if (ac->sort_function(ac))
+	if (auto_sort_alpha(shell))
 	{
-		tmp = ac->track->data;
-		ac->track->data = ac->track->next->data;
-		ac->track->next->data = tmp;
+		tmp = shell->ac->track->data;
+		shell->ac->track->data = shell->ac->track->next->data;
+		shell->ac->track->next->data = tmp;
 		return (true);
 	}
 	return (false);
 }
 
-static void			do_sort(t_ac *ac)
+static void			do_sort(t_shell *shell)
 {
 	bool			sorted;
 
 	while (true)
 	{
-		ac->track = ac->head;
+		shell->ac->track = shell->ac->head;
 		sorted = true;
-		while (ac->track && ac->track->next)
+		while (shell->ac->track && shell->ac->track->next)
 		{
-			if (swap(ac))
+			if (swap(shell))
 				sorted = false;
-			ac->track = ac->track->next;
+			shell->ac->track = shell->ac->track->next;
 		}
 		if (sorted)
 			break ;
 	}
 }
 
-void				auto_sort(t_ac *ac)
+void				auto_sort(t_shell *shell)
 {
-	ac->sort_function = &auto_sort_alpha;
-	ac->head = ac->current_obj;
-	do_sort(ac);
-	ac->current_obj = ac->head;
+	shell->ac->head = shell->ac->current_obj;
+	do_sort(shell);
+	shell->ac->current_obj = shell->ac->head;
 }

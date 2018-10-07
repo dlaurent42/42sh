@@ -6,28 +6,28 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 11:55:05 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:34:29 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_issuance(t_ac *ac)
+void				auto_issuance(t_shell *shell)
 {
-	if (ac->auto_mode == AUTO_BIN)
+	if (shell->ac->auto_mode == AUTO_BIN)
 	{
-		if (!(ac->file_name = ft_strdup(ac->argv[1])))
+		if (!(shell->ac->file_name = ft_strdup(shell->ac->argv[1])))
 			return ;
-		ac->file_name_len = ft_strlen(ac->file_name);
-		auto_show_screen(ac, ac->obj);
+		shell->ac->file_name_len = ft_strlen(shell->ac->file_name);
+		auto_show_screen(shell, shell->ac->obj);
 	}
 	else
 	{
-		ac->current_obj = ac->obj;
-		if (!auto_get_attributes(ac))
+		shell->ac->current_obj = shell->ac->obj;
+		if (!auto_get_attributes(shell))
 			return ;
-		ac->obj = ac->current_obj;
-		if (ac->obj->data.dir && !ac->obj->data.no_file)
-			auto_do_ls(ac, ac->obj);
+		shell->ac->obj = shell->ac->current_obj;
+		if (shell->ac->obj->data.dir && !shell->ac->obj->data.no_file)
+			auto_do_ls(shell, shell->ac->obj);
 	}
 }

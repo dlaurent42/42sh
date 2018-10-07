@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:31:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,26 +250,6 @@ typedef struct			s_search
 	t_cmd				*match;
 }						t_search;
 
-typedef struct			s_shell
-{
-	t_bin				*bin;
-	t_cmd				*cmd;
-	t_env				*env;
-	t_read				*read;
-	t_modes				modes;
-	t_cursor			cursor;
-	t_prompt			prompt;
-	t_window			window;
-	t_buffer			buffer;
-	t_search			search;
-	t_select			selection;
-	t_termios			*termios;
-}						t_shell;
-
-t_shell					*g_sh;
-
-void					sh_debug(t_shell *sh, char *msg, char *str);
-
 /*
 ** ------------------- auto_completion structs ---------------------
 */
@@ -341,10 +321,6 @@ typedef struct			s_ac
 	t_obj				*head;
 	t_obj				*track;
 	t_obj				*select;
-
-	t_shell				*shell;
-
-	bool				(*sort_function)(struct s_ac *ac);
 }						t_ac;
 
 typedef struct			s_read_dir
@@ -356,6 +332,27 @@ typedef struct			s_read_dir
 	DIR					*directory;
 	struct dirent		*file;
 }						t_read_dir;
+
+typedef struct			s_shell
+{
+	t_ac				*ac;
+	t_bin				*bin;
+	t_cmd				*cmd;
+	t_env				*env;
+	t_read				*read;
+	t_modes				modes;
+	t_cursor			cursor;
+	t_prompt			prompt;
+	t_window			window;
+	t_buffer			buffer;
+	t_search			search;
+	t_select			selection;
+	t_termios			*termios;
+}						t_shell;
+
+t_shell					*g_sh;
+
+void					sh_debug(t_shell *sh, char *msg, char *str);
 
 /*
 ** errors
@@ -583,35 +580,35 @@ void					sh_window_resize(t_shell *sh);
 ** terminal - auto_completion
 */
 bool					auto_completion(t_shell *shell);
-bool					auto_get_obj(t_ac *ac);
+bool					auto_get_obj(t_shell *shell);
 void					auto_free_obj(t_obj **obj);
 t_obj					*auto_create_obj(void);
 
-void					auto_issuance(t_ac *ac);
-void					auto_read_dispatcher(t_ac *ac);
-void					auto_clear_selection_screen(t_ac *ac);
+void					auto_issuance(t_shell *shell);
+void					auto_read_dispatcher(t_shell *shell);
+void					auto_clear_selection_screen(t_shell *shell);
 void					auto_manage_buffer(t_shell *sh, char *new_display);
-bool					auto_get_attributes(t_ac *ac);
-void					auto_show_screen(t_ac *ac, t_obj *obj);
-void					auto_do_ls(t_ac *ac, t_obj *obj);
-void					auto_do_file_admin(t_ac *ac, t_obj *obj);
-void					auto_calc_len_file_name(t_ac *ac, t_obj *obj);
-bool					auto_calculate_number_of_columns(t_ac *ac);
+bool					auto_get_attributes(t_shell *shell);
+void					auto_show_screen(t_shell *shell, t_obj *obj);
+void					auto_do_ls(t_shell *shell, t_obj *obj);
+void					auto_do_file_admin(t_shell *shell, t_obj *obj);
+void					auto_calc_len_file_name(t_shell *shell, t_obj *obj);
+bool					auto_calculate_number_of_columns(t_shell *shell);
 bool					auto_path(t_obj *obj, char *path, char *name);
-void					auto_move_up(t_ac *ac);
-void					auto_move_down(t_ac *ac);
-void					auto_move_left(t_ac *ac);
-void					auto_move_right(t_ac *ac);
+void					auto_move_up(t_shell *shell);
+void					auto_move_down(t_shell *shell);
+void					auto_move_left(t_shell *shell);
+void					auto_move_right(t_shell *shell);
 bool					auto_is_executeable(t_obj *obj);
 
 bool					auto_history(t_shell *shell);
 
-void					auto_sort(t_ac *ac);
-bool					auto_sort_alpha(t_ac *ac);
+void					auto_sort(t_shell *shell);
+bool					auto_sort_alpha(t_shell *shell);
 
-void					auto_display(t_ac *ac, t_obj *obj);
-void					auto_file_name(t_ac *ac, t_obj *obj);
+void					auto_display(t_shell *shell, t_obj *obj);
+void					auto_file_name(t_shell *shell, t_obj *obj);
 void					auto_print_spaces(int diff);
-void					auto_free_ac(t_ac *ac);
+void					auto_free_ac(t_shell *shell);
 
 #endif

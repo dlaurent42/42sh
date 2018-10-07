@@ -7,7 +7,7 @@ int		main(int ac, char **av)
 	int	i;
 
 	i = 0;
-	if (ac == 1)
+	if (shell->ac == 1)
 		return (1);
 	while (++i < ac)
 		printf("\\x%x", atoi(av[i]));

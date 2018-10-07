@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 00:22:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_move_left(t_ac *ac)
+void				auto_move_left(t_shell *shell)
 {
-	ac->select = ac->select->hor_prev;
+	shell->ac->select = shell->ac->select->hor_prev;
 }
