@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 19:26:22 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void			do_sort(t_ac *ac)
 void				auto_sort(t_ac *ac)
 {
 	ac->sort_function = &auto_sort_alpha;
-	ac->head = ac->current_args;
+	ac->head = ac->current_obj;
 	do_sort(ac);
-	ac->current_args = ac->head;
+	ac->current_obj = ac->head;
 }

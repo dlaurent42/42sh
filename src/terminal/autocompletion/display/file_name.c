@@ -6,60 +6,60 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			print_end_char(t_args *args)
+static void			print_end_char(t_obj *obj)
 {
-	if (args->data.ifo)
+	if (obj->data.ifo)
 		ft_putchar('|');
-	else if (args->data.dir)
+	else if (obj->data.dir)
 		ft_putchar('/');
-	else if (args->data.lnk)
+	else if (obj->data.lnk)
 		ft_putchar('@');
-	else if (args->data.sock)
+	else if (obj->data.sock)
 		ft_putchar('=');
-	else if (args->data.blk)
+	else if (obj->data.blk)
 		ft_putchar('#');
-	else if (args->data.wht || args->data.chr)
+	else if (obj->data.wht || obj->data.chr)
 		ft_putchar('%');
-	else if (auto_is_executeable(args))
+	else if (auto_is_executeable(obj))
 		ft_putchar('*');
 }
 
-static void			print_colour(t_ac *ac, t_args *args)
+static void			print_colour(t_ac *ac, t_obj *obj)
 {
-	if (auto_is_executeable(args))
+	if (auto_is_executeable(obj))
 		ft_putstr(COL_EXE);
-	if (args->data.ifo)
+	if (obj->data.ifo)
 		ft_putstr(COL_IFO);
-	if (args->data.chr)
+	if (obj->data.chr)
 		ft_putstr(COL_CHR);
-	if (args->data.dir)
+	if (obj->data.dir)
 		ft_putstr(COL_DIR);
-	if (args->data.blk)
+	if (obj->data.blk)
 		ft_putstr(COL_BLK);
-	if (args->data.reg && !auto_is_executeable(args))
+	if (obj->data.reg && !auto_is_executeable(obj))
 		ft_putstr(COL_REG);
-	if (args->data.lnk)
+	if (obj->data.lnk)
 		ft_putstr(COL_LNK);
-	if (args->data.sock)
+	if (obj->data.sock)
 		ft_putstr(COL_SOCK);
-	if (args == ac->select)
+	if (obj == ac->select)
 		ft_printf(COL_BG);
-	ft_printf("%s", args->data.str);
+	ft_printf("%s", obj->data.str);
 }
 
-void				auto_file_name(t_ac *ac, t_args *args)
+void				auto_file_name(t_ac *ac, t_obj *obj)
 {
-	print_colour(ac, args);
-	if (args != ac->select)
+	print_colour(ac, obj);
+	if (obj != ac->select)
 		ft_putstr(COL_CLR);
-	print_end_char(args);
+	print_end_char(obj);
 	if (ac->number_of_columns)
-		auto_print_spaces(ac->len_file_name - args->data.len_of_str + 1);
+		auto_print_spaces(ac->len_file_name - obj->data.len_of_str + 1);
 	ft_putstr(COL_CLR);
 }

@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,15 +303,15 @@ typedef struct			s_data
 	unsigned char		wht		: 1;
 }						t_data;
 
-typedef struct			s_args
+typedef struct			s_obj
 {
 	t_data				data;
-	struct s_args		*next;
-	struct s_args		*hor_next;
-	struct s_args		*hor_prev;
-	struct s_args		*ver_next;
-	struct s_args		*ver_prev;
-}						t_args;
+	struct s_obj		*next;
+	struct s_obj		*hor_next;
+	struct s_obj		*hor_prev;
+	struct s_obj		*ver_next;
+	struct s_obj		*ver_prev;
+}						t_obj;
 
 typedef struct			s_ac
 {
@@ -336,11 +336,11 @@ typedef struct			s_ac
 	int					height;
 	int					number_of_columns;
 
-	t_args				*args;
-	t_args				*current_args;
-	t_args				*head;
-	t_args				*track;
-	t_args				*select;
+	t_obj				*obj;
+	t_obj				*current_obj;
+	t_obj				*head;
+	t_obj				*track;
+	t_obj				*select;
 
 	t_shell				*shell;
 
@@ -349,10 +349,10 @@ typedef struct			s_ac
 
 typedef struct			s_read_dir
 {
-	t_args				*args;
-	t_args				*tmp;
-	t_args				*head;
-	t_args				*last_args;
+	t_obj				*obj;
+	t_obj				*tmp;
+	t_obj				*head;
+	t_obj				*last_obj;
 	DIR					*directory;
 	struct dirent		*file;
 }						t_read_dir;
@@ -583,34 +583,34 @@ void					sh_window_resize(t_shell *sh);
 ** terminal - auto_completion
 */
 bool					auto_completion(t_shell *shell);
-bool					auto_get_args(t_ac *ac);
-void					auto_free_args(t_args **args);
-t_args					*auto_create_args(void);
+bool					auto_get_obj(t_ac *ac);
+void					auto_free_obj(t_obj **obj);
+t_obj					*auto_create_obj(void);
 
 void					auto_issuance(t_ac *ac);
 void					auto_read_dispatcher(t_ac *ac);
 void					auto_clear_selection_screen(t_ac *ac);
 void					auto_manage_buffer(t_shell *sh, char *new_display);
 bool					auto_get_attributes(t_ac *ac);
-void					auto_show_screen(t_ac *ac, t_args *args);
-void					auto_do_ls(t_ac *ac, t_args *args);
-void					auto_do_file_admin(t_ac *ac, t_args *args);
-void					auto_calc_len_file_name(t_ac *ac, t_args *args);
+void					auto_show_screen(t_ac *ac, t_obj *obj);
+void					auto_do_ls(t_ac *ac, t_obj *obj);
+void					auto_do_file_admin(t_ac *ac, t_obj *obj);
+void					auto_calc_len_file_name(t_ac *ac, t_obj *obj);
 bool					auto_calculate_number_of_columns(t_ac *ac);
-bool					auto_path(t_args *args, char *path, char *name);
+bool					auto_path(t_obj *obj, char *path, char *name);
 void					auto_move_up(t_ac *ac);
 void					auto_move_down(t_ac *ac);
 void					auto_move_left(t_ac *ac);
 void					auto_move_right(t_ac *ac);
-bool					auto_is_executeable(t_args *args);
+bool					auto_is_executeable(t_obj *obj);
 
 bool					auto_history(t_shell *shell);
 
 void					auto_sort(t_ac *ac);
 bool					auto_sort_alpha(t_ac *ac);
 
-void					auto_display(t_ac *ac, t_args *args);
-void					auto_file_name(t_ac *ac, t_args *args);
+void					auto_display(t_ac *ac, t_obj *obj);
+void					auto_file_name(t_ac *ac, t_obj *obj);
 void					auto_print_spaces(int diff);
 void					auto_free_ac(t_ac *ac);
 

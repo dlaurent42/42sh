@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_args.c                                         :+:      :+:    :+:   */
+/*   get_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,62 +12,62 @@
 
 #include "shell.h"
 
-static bool			parse_args(t_ac *ac, char **argv)
+static bool			parse_obj(t_ac *ac, char **argv)
 {
-	t_args			*args;
-	t_args			*last_args;
+	t_obj			*obj;
+	t_obj			*last_obj;
 
-	last_args = NULL;
+	last_obj = NULL;
 	argv++;
-	if (!(args = auto_create_args()))
+	if (!(obj = auto_create_obj()))
 		return (false);
-	if (!(auto_path(args, ".", *argv)))
+	if (!(auto_path(obj, ".", *argv)))
 	{
-		free(args);
+		free(obj);
 		return (false);
 	}
-	if (!ac->args)
-		ac->args = args;
-	else if (last_args)
-		last_args->next = args;
-	last_args = args;
+	if (!ac->obj)
+		ac->obj = obj;
+	else if (last_obj)
+		last_obj->next = obj;
+	last_obj = obj;
 	return (true);
 }
 
 static bool			get_binaries(t_ac *ac, char **argv)
 {
-	t_args			*args;
-	t_args			*last_args;
+	t_obj			*obj;
+	t_obj			*last_obj;
 	t_bin_auto		*bin_auto;
 
-	last_args = NULL;
+	last_obj = NULL;
 	bin_auto = ac->shell->bin->bin_auto;
 	if (*argv)
 		argv++;
 	while (bin_auto)
 	{
-		if (!(args = auto_create_args()))
+		if (!(obj = auto_create_obj()))
 			return (false);
-		if (!(args->data.str = ft_strdups(bin_auto->name)))
+		if (!(obj->data.str = ft_strdups(bin_auto->name)))
 		{
-			free(args);
+			free(obj);
 			return (false);
 		}
-		if (!ac->args)
-			ac->args = args;
-		else if (last_args)
-			last_args->next = args;
-		last_args = args;
+		if (!ac->obj)
+			ac->obj = obj;
+		else if (last_obj)
+			last_obj->next = obj;
+		last_obj = obj;
 		bin_auto = bin_auto->next;
 	}
 	return (true);
 }
 
-bool				auto_get_args(t_ac *ac)
+bool				auto_get_obj(t_ac *ac)
 {
 	if (ac->auto_mode != AUTO_NON && ac->auto_mode != AUTO_BIN)
 	{
-		if (!(parse_args(ac, ac->argv)))
+		if (!(parse_obj(ac, ac->argv)))
 			return (false);
 	}
 	else if (ac->auto_mode == AUTO_BIN)

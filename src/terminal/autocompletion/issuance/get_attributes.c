@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,66 +17,66 @@
 #include <grp.h>
 #include <uuid/uuid.h>
 
-static void			get_sym_path(t_args *args)
+static void			get_sym_path(t_obj *obj)
 {
 	int				len;
 	t_data			*data;
 
-	data = &args->data;
+	data = &obj->data;
 	if ((len = readlink(data->path, data->sym_path, RL_BUFSIZE)) != -1)
 		data->sym_path[len] = '\0';
 }
 
-static void			get_type(t_args *args)
+static void			get_type(t_obj *obj)
 {
 	int				type;
 
-	type = args->data.type;
+	type = obj->data.type;
 	if ((TYPE_LNK & type) == TYPE_LNK)
 	{
-		args->data.lnk = 1;
-		get_sym_path(args);
+		obj->data.lnk = 1;
+		get_sym_path(obj);
 	}
 	else if ((TYPE_SOCK & type) == TYPE_SOCK)
-		args->data.sock = 1;
+		obj->data.sock = 1;
 	else if ((TYPE_REG & type) == TYPE_REG)
-		args->data.reg = 1;
+		obj->data.reg = 1;
 	else if ((TYPE_WHT & type) == TYPE_WHT)
-		args->data.wht = 1;
+		obj->data.wht = 1;
 	else if ((TYPE_IFO & type) == TYPE_IFO)
-		args->data.ifo = 1;
+		obj->data.ifo = 1;
 	else if ((TYPE_CHR & type) == TYPE_CHR)
-		args->data.chr = 1;
+		obj->data.chr = 1;
 	else if ((TYPE_DIR & type) == TYPE_DIR)
-		args->data.dir = 1;
+		obj->data.dir = 1;
 	if ((TYPE_BLK & type) == TYPE_BLK)
-		args->data.blk = 1;
+		obj->data.blk = 1;
 }
 
-static void			read_f(t_ac *ac, t_args *args, struct stat *f)
+static void			read_f(t_ac *ac, t_obj *obj, struct stat *f)
 {
 	ac->total_blocks += f->st_blocks;
-	args->data.mode = f->st_mode;
-	args->data.type = f->st_mode;
-	args->data.links = f->st_nlink;
-	args->data.rdev = f->st_rdev;
-	get_type(args);
+	obj->data.mode = f->st_mode;
+	obj->data.type = f->st_mode;
+	obj->data.links = f->st_nlink;
+	obj->data.rdev = f->st_rdev;
+	get_type(obj);
 }
 
-static bool			get_initial(t_ac *ac, t_args *args)
+static bool			get_initial(t_ac *ac, t_obj *obj)
 {
 	char			*slash;
 	struct stat		f;
 
-	slash = ft_strrchr(args->data.path, '/');
-	args->data.parent_path = (slash)
-		? ft_strndup(args->data.path, slash - args->data.path)
+	slash = ft_strrchr(obj->data.path, '/');
+	obj->data.parent_path = (slash)
+		? ft_strndup(obj->data.path, slash - obj->data.path)
 		: ft_strdup(".");
-	if (ft_strcmps(args->data.str, "."))
-		ac->file_name = ft_strdup((slash) ? slash + 1 : args->data.str);
+	if (ft_strcmps(obj->data.str, "."))
+		ac->file_name = ft_strdup((slash) ? slash + 1 : obj->data.str);
 	else
 		ac->file_name = ft_strdup((slash) ? slash + 1 : "");
-	if (!args->data.parent_path || !ac->file_name)
+	if (!obj->data.parent_path || !ac->file_name)
 		return (false);
 	ac->file_name_len = ft_strlen(ac->file_name);
 	if (!ft_strcmps(ac->file_name, "*"))
@@ -84,33 +84,33 @@ static bool			get_initial(t_ac *ac, t_args *args)
 		ac->auto_mode = AUTO_WILD;
 		*ac->file_name = '\0';
 	}
-	if (!lstat(args->data.parent_path, &f))
-		read_f(ac, args, &f);
+	if (!lstat(obj->data.parent_path, &f))
+		read_f(ac, obj, &f);
 	else
-		args->data.no_file = 1;
+		obj->data.no_file = 1;
 	return (true);
 }
 
 bool				auto_get_attributes(t_ac *ac)
 {
-	t_args			*args;
+	t_obj			*obj;
 	struct stat		f;
 
 	if (ac->at_mode == AT_FIRST)
 	{
-		if (!get_initial(ac, ac->current_args))
+		if (!get_initial(ac, ac->current_obj))
 			return (false);
 	}
 	else
 	{
-		args = ac->current_args;
-		while (args)
+		obj = ac->current_obj;
+		while (obj)
 		{
-			if (!lstat(args->data.path, &f))
-				read_f(ac, args, &f);
+			if (!lstat(obj->data.path, &f))
+				read_f(ac, obj, &f);
 			else
-				args->data.no_file = 1;
-			args = args->next;
+				obj->data.no_file = 1;
+			obj = obj->next;
 		}
 	}
 	ac->at_mode = AT_REST;

@@ -14,7 +14,7 @@
 
 void				auto_free_ac(t_ac *ac)
 {
-	auto_free_args(&ac->args);
+	auto_free_obj(&ac->obj);
 	free(ac->argv);
 	free(ac->file_name);
 	free(ac->pre_file_name);

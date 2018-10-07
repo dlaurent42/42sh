@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool				auto_completion(t_shell *shell)
 		if (!(parsed_buffer = get_auto_mode(&ac, shell->buffer.content)))
 			return (false);
 		if (create_ac(&ac, shell, parsed_buffer)
-				&& auto_get_args(&ac))
+				&& auto_get_obj(&ac))
 			auto_issuance(&ac);
 		auto_free_ac(&ac);
 		performed_completion = true;

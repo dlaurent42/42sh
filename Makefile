@@ -6,7 +6,7 @@
 #    By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/07 23:27:16 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,9 +95,9 @@ SRC			=	shell.c														\
 				terminal/autocompletion/display/print_spaces.c				\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c		\
-				terminal/autocompletion/auto_completion/get_args.c			\
-				terminal/autocompletion/auto_completion/create_args.c		\
-				terminal/autocompletion/auto_completion/free_args.c			\
+				terminal/autocompletion/auto_completion/get_obj.c			\
+				terminal/autocompletion/auto_completion/create_obj.c		\
+				terminal/autocompletion/auto_completion/free_obj.c			\
 				terminal/autocompletion/history/history.c					\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\

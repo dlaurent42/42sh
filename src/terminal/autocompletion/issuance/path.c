@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 17:18:49 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/02 14:38:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 23:58:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool				auto_path(t_args *args, char *path, char *name)
+bool				auto_path(t_obj *obj, char *path, char *name)
 {
 	char			*new_path;
 	char			*tmp;
 
-	if ((args->data.str = ft_strdup(name)))
+	if ((obj->data.str = ft_strdup(name)))
 		if ((new_path = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1)))
 		{
 			tmp = new_path;
@@ -29,9 +29,9 @@ bool				auto_path(t_args *args, char *path, char *name)
 			}
 			while (name && *name)
 				*(tmp++) = *(name++);
-			args->data.path = new_path;
+			obj->data.path = new_path;
 		}
-	if (!args->data.str || !args->data.path)
+	if (!obj->data.str || !obj->data.path)
 		return (false);
 	return (true);
 }
