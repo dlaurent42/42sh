@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:21:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/07 22:45:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void		sh_read_dispatcher(t_shell *sh)
 	if (sh->modes.browse && !(sh_is_select_combination(sh->read->line)
 	|| sh_is_arrow_combination(sh->read->line)))
 		sh_browse_freeze(sh);
+	if (sh->read->line[0] == ' ')
+		auto_completion(sh);
 	if (sh->read->line[0] == 11)
 		sh_copy_selection(sh);
 	else if (sh->read->line[0] == 22)
