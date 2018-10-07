@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/06 12:22:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/07 20:03:27 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void			exc_double(t_shell *shell, bool *status)
+static void			auto_hist_double(t_shell *shell, bool *status)
 {
 	int				offset;
 	char			*track;
@@ -71,7 +71,7 @@ static int			good_number_of_digits(char *str)
 	return (0);
 }
 
-static void			exc_number(t_shell *shell, bool *status)
+static void			auto_hist_number(t_shell *shell, bool *status)
 {
 	int				number_of_deletions;
 	int				offset;
@@ -105,7 +105,7 @@ bool				auto_history(t_shell *shell)
 	bool			status;
 
 	status = false;
-	exc_double(shell, &status);
-	exc_number(shell, &status);
+	auto_hist_double(shell, &status);
+	auto_hist_number(shell, &status);
 	return (status);
 }
