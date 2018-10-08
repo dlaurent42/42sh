@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:39:12 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 02:22:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void			print_colour(t_shell *shell, t_obj *obj)
 		ft_putstr(COL_SOCK);
 	if (obj == shell->ac->select)
 		ft_printf(COL_BG);
-	ft_printf("%s", obj->data.str);
+	ft_printf("%.*s", shell->window.width - 1, obj->data.str);
 }
 
 void				auto_file_name(t_shell *shell, t_obj *obj)
