@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 16:38:44 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ static t_obj		*get_file_number(t_obj *head, int file_number)
 	return (NULL);
 }
 
-static bool			bottom_of_screen_is_not_reached(t_shell *sh)
+static bool			bottom_of_screen_is_not_reached(t_shell *sh, bool new_row)
 {
 	if (sh->ac->number_of_printed_rows
 			< (sh->ac->height - sh->cursor.y) - 1)
+	{
+		if (new_row)
+		{
+			ft_putchar('\n');
+			sh->ac->number_of_printed_rows++;
+		}
 		return (true);
+	}
 	return (false);
 }
 
@@ -65,20 +72,13 @@ static void			print_display(t_shell *sh, t_obj *head, int len)
 		{
 			if (!(obj = get_file_number(head, (prints) + (line_len) * (len))))
 				break ;
-			if (bottom_of_screen_is_not_reached(sh))
+			if (bottom_of_screen_is_not_reached(sh, false))
 				auto_file_name(sh, obj);
-			if (last_obj)
-			{
-				last_obj->hor_next = obj;
-				obj->hor_prev = last_obj;
-			}
+			(last_obj) ? last_obj->hor_next = obj : 0;
+			obj->hor_prev = last_obj;
 			last_obj = obj;
 		}
-		if (bottom_of_screen_is_not_reached(sh))
-		{
-			ft_putchar('\n');
-			sh->ac->number_of_printed_rows++;
-		}
+		bottom_of_screen_is_not_reached(sh, true);
 	}
 	obj = get_file_number(head, 0);
 	last_obj->hor_next = obj;

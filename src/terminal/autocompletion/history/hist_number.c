@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:16:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 15:41:37 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd				*get_cmd_by_id(t_shell *sh, int id)
 	if (!sh->cmd
 			|| (unsigned)id > sh->cmd->id
 			|| (unsigned)id < !sh->cmd->last->id)
-		return NULL;
+		return (NULL);
 	cmd = sh->cmd;
 	while (cmd && (unsigned)id != cmd->id)
 		cmd = cmd->next;
@@ -62,7 +62,7 @@ void				auto_hist_number(t_shell *sh, bool *status)
 	{
 		if ((number_of_deletions = good_number_of_digits(ptr_to_exc + 1) + 1))
 		{
-			if((cmd = get_cmd_by_id(sh, ft_atoi(ptr_to_exc + 1))))
+			if ((cmd = get_cmd_by_id(sh, ft_atoi(ptr_to_exc + 1))))
 			{
 				track = sh->buffer.content;
 				sh_move_home(sh);

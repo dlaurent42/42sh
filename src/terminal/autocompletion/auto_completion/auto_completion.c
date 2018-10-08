@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 15:33:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ bool				auto_completion(t_shell *sh)
 		performed_completion = true;
 	}
 	sh->modes.auto_completion = 0;
-	if (space)
-		auto_manage_buffer(sh, " ");
+	(space) ? auto_manage_buffer(sh, " ") : 0;
 	return (performed_completion);
 }
