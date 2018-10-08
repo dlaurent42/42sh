@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 06:35:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 07:07:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHELL_H
 
 # include "../libft/include/libft.h"
+# include "auto_completion.h"
 # include <curses.h>
 # include <dirent.h>
 # include <signal.h>
@@ -454,5 +455,11 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 */
 void					signal_catching(void);
 void					sh_window_resize(t_shell *sh);
+
+/*
+** terminal - auto_cmopletion
+*/
+bool					auto_completion(t_shell *shell);
+void					auto_display(t_shell *shell, t_obj *obj);
 
 #endif

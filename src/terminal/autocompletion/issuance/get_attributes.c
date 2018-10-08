@@ -6,12 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 07:04:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 # include "auto_completion.h"
+# include "auto_completion_prot.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <pwd.h>
