@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:00:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:02:18 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_cmd				*get_cmd_by_content(t_shell *shell, char *content)
 
 	len = ft_strlens(content);
 	cmd = shell->cmd;
-	while (cmd && ft_strcmps(content, cmd->content))
+	while (cmd && ft_strncmp(content, cmd->content, len))
 		cmd = cmd->next;
 	return (cmd);
 }
