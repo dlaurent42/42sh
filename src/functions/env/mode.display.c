@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 22:16:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 10:52:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	sh_env_print(t_env *env)
 	env_delete(env);
 }
 
-char		sh_env_display(t_shell *sh, t_env *env, char **arr)
+char		sh_env_display(t_shell *sh, t_env *env, char **arr, bool verbose)
 {
 	int		i;
 	int		res;
@@ -56,6 +56,7 @@ char		sh_env_display(t_shell *sh, t_env *env, char **arr)
 	res = 0;
 	while (arr && arr[i] && res == 0)
 	{
+		(verbose) ? ft_printf("#env setenv:    %s\n", arr[i]) : 0;
 		res = sh_env_add_item(sh, env, arr[i]);
 		i++;
 	}

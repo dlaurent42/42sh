@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 22:14:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 09:52:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,13 +395,16 @@ char					sh_echo(t_shell *sh, char **argv);
 char					sh_env(t_shell *sh, char **argv);
 char					sh_env_string(char *arg, char **string);
 char					sh_env_path(char *arg, char **path);
-char					sh_env_unset(t_env *env, char *arg);
-void					sh_env_empty(t_env *env);
+char					sh_env_unset(t_env *env, char *arg, bool verbose);
+char					sh_env_empty(t_env *env, bool verbose);
 bool					sh_env_has_verbose(char **argv);
 char					sh_env_error(t_env *env, char *s1, char *s2, int id);
-char					sh_env_exec(t_env *env, char *path, char **arr);
-char					sh_env_display(t_shell *sh, t_env *env, char **arr);
+char					sh_env_exec(t_env *env, char *path, char **arr, bool verbose);
+char					sh_env_display(t_shell *sh, t_env *env, char **arr, bool verbose);
 char					sh_env_parse(t_env *e, char **p, char **s, char **av);
+char					*sh_env_prepare_u(int *j, int *i, char **argv);
+char					sh_env_prepare_s(char **string, int *j, int *i, char **argv);
+char					sh_env_prepare_p(char **path, int *j, int *i, char **argv);
 
 /*
 ** functions - exit

@@ -6,20 +6,20 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 20:11:48 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 21:51:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 10:53:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_env_empty(t_env *env)
+char	sh_env_empty(t_env *env, bool verbose)
 {
 	size_t		i;
 	t_env_item	*item;
 
 	i = 0;
 	if (!env)
-		return ;
+		return (0);
 	while (i < env->count)
 	{
 		item = env->items[i];
@@ -36,10 +36,11 @@ void	sh_env_empty(t_env *env)
 		ft_strdel(&env->environment[i]);
 		i++;
 	}
-	env->count = 0;
+	(verbose) ? ft_putendl("#env clearing environ") : 0;
+	return ((env->count = 0));
 }
 
-char	sh_env_unset(t_env *env, char *arg)
+char	sh_env_unset(t_env *env, char *arg, bool verbose)
 {
 	char	*arg_parsed;
 
@@ -47,6 +48,11 @@ char	sh_env_unset(t_env *env, char *arg)
 		return (-1);
 	if (!(arg_parsed = sh_unsetenv_parse(ft_strdups(arg))))
 		return (-5);
+	if (verbose)
+	{
+		ft_putstr("#env unset:     ");
+		ft_putendl(arg_parsed);
+	}
 	env_delete_item(env, arg_parsed);
 	ft_strdel(&arg_parsed);
 	return (0);

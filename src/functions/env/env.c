@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 22:21:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 09:52:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,23 @@ char		sh_env_is_exec_mode(char **arr)
 
 char		sh_env(t_shell *sh, char **argv)
 {
-	int		res[2];
+	int		res;
 	char	*path;
 	char	*string;
 	char	**arr;
 	t_env	*env;
 
-	res[0] = 0;
-	res[1] = 0;
+	res = 0;
 	path = NULL;
 	string = NULL;
 	env = env_copy(sh);
 	if (argv)
-		if ((res[0] = sh_env_parse(env, &path, &string, argv)) < 0)
-			return (sh_env_error(env, path, string, res[0]));
-	arr = sh_env_get_string(string, argv + res[0]);
+		if ((res = sh_env_parse(env, &path, &string, argv)) < 0)
+			return (sh_env_error(env, path, string, res));
+	arr = sh_env_get_string(string, argv + res);
 	ft_putstr(arr[0]);
 	if (arr && arr[0] && ft_strcountif(arr[0], '=') == 0)
-		return (sh_env_exec(env, path, arr));
+		return (sh_env_exec(env, path, arr, sh_env_has_verbose(argv)));
 	ft_strdel(&path);
-	return (sh_env_display(sh, env, arr));
+	return (sh_env_display(sh, env, arr, sh_env_has_verbose(argv)));
 }
