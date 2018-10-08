@@ -6,7 +6,7 @@
 #    By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/08 00:54:15 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/08 08:21:08 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,9 @@ SRC			=	shell.c														\
 				terminal/autocompletion/auto_completion/create_obj.c		\
 				terminal/autocompletion/auto_completion/free_obj.c			\
 				terminal/autocompletion/history/history.c					\
+				terminal/autocompletion/history/hist_double.c				\
+				terminal/autocompletion/history/hist_name.c					\
+				terminal/autocompletion/history/hist_number.c				\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\

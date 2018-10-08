@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:33 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:24:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void					auto_move_right(t_shell *shell);
 bool					auto_is_executeable(t_obj *obj);
 
 bool					auto_history(t_shell *shell);
+void					auto_hist_double(t_shell *shell, bool *status);
+void					auto_hist_number(t_shell *shell, bool *status);
+void					auto_hist_name(t_shell *shell, bool *status);
 
 void					auto_sort(t_shell *shell);
 bool					auto_sort_alpha(t_shell *shell);
