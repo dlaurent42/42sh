@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 15:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 10:51:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 12:39:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ char		sh_env_parse(t_env *env, char **path, char **str, char **argv)
 	int		i;
 	int		j;
 	int		res;
-	bool	verbose;
+	bool	verb;
 
 	i = 0;
 	res = 0;
-	verbose = sh_env_has_verbose(argv);
+	verb = sh_env_has_verbose(argv);
 	while ((j = 0) == 0 && argv[i] && res == 0
 	&& argv[i][0] == '-' && !(argv[i][1] == '-' && !argv[i][2]))
 	{
 		while (res == 0 && argv[i][++j])
 			if (argv[i][j] == 'i' || argv[i][j] == '-')
-				sh_env_empty(env, verbose);
+				sh_env_empty(env, verb);
 			else if (argv[i][j] == 'u')
-				res = sh_env_unset(env,
-					sh_env_prepare_u(&j, &i, argv), verbose);
+				res = sh_env_unset(env, sh_env_prepare_u(&j, &i, argv), verb);
 			else if (argv[i][j] == 'P')
 				res = sh_env_prepare_p(path, &j, &i, argv);
 			else if (argv[i][j] == 'S')
