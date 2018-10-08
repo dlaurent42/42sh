@@ -3,37 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 00:19:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/03 00:58:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 17:34:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				sh_history(t_shell *sh)
+char	sh_history(t_shell *sh, char **argv)
 {
-	t_cmd			*cmd;
-	unsigned int	id;
-	int				len;
+	int		i;
 
-	if (!sh->cmd)
+	i = 0;
+	if (!argv || !argv[0])
+		return (sh_history_print(sh));
+	if (argv[0] && !is_option_string(argv[0], "cdpsnrwx"))
 	{
-		ft_putendl("no history to display");
-		return ;
+		i += (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
+			? 1 : 0;
+		if (!argv[i])
+			return (sh_history_print(sh));
+		if (argv[i + 1])
+			return (sh_history_error(2));
+		if (!ft_isint(argv[i]) || (i = ft_atoi(argv[i]) == INT32_MIN))
+			return (sh_history_error(1));
+		if (i < 0)
+			i *= (-1);
+		return (sh_history_print_shift(sh, i));
 	}
-	len = 1;
-	id = sh->cmd->id;
-	while (id > 10)
-	{
-		id /= 10;
-		len++;
-	}
-	cmd = sh->cmd->last;
-	while (cmd)
-	{
-		ft_printf("%*u: %s\n", len, cmd->id, cmd->content);
-		cmd = cmd->prev;
-	}
+	return (sh_history_options(sh, argv));
 }

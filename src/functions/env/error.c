@@ -6,13 +6,19 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 09:01:31 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 21:19:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 12:58:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	sh_env_error(t_env *env, char *s1, char *s2, int err_id)
+static void	sh_env_usage(void)
+{
+	ft_putendl_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]", 2);
+	ft_putendl_fd("       [name=value ...] [utility [argument ...]]", 2);
+}
+
+char		sh_env_error(t_env *env, char *s1, char *s2, int err_id)
 {
 	if (env)
 		env_delete(env);
@@ -33,6 +39,7 @@ char	sh_env_error(t_env *env, char *s1, char *s2, int err_id)
 	}
 	if (err_id == 2)
 		ft_putendl_fd("env: setenv: wrong argument", 2);
+	sh_env_usage();
 	ft_strdel(&s1);
 	ft_strdel(&s2);
 	return (1);

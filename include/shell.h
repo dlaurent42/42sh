@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 12:38:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 17:41:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ typedef struct			s_search
 
 typedef struct			s_shell
 {
+	char				*hist;
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
@@ -414,7 +415,28 @@ char					sh_exit(t_shell *sh, char **argv);
 /*
 ** functions - history
 */
-void					sh_history(t_shell *sh);
+char					sh_history(t_shell *sh, char **argv);
+char					sh_history_error(int err_id);
+char					sh_history_print(t_shell *sh);
+char					sh_history_print_shift(t_shell *sh, int shift);
+char					sh_history_options(t_shell *sh, char **argv);
+char					sh_history_options(t_shell *sh, char **argv);
+char					sh_history_option_c(t_shell *sh);
+char					sh_history_option_d(
+							t_shell *sh,
+							int *i,
+							int *j,
+							char **argv);
+char					sh_history_option_sp(
+							t_shell *sh,
+							int *i,
+							int *j,
+							char **argv);
+char					sh_history_option_warn(
+							t_shell *sh,
+							int *i,
+							int *j,
+							char **argv);
 
 /*
 ** functions - setenv
@@ -460,7 +482,9 @@ t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 ** structures - commands
 */
 void					command_add(t_shell *sh);
+void					command_add_str_based(t_shell *sh, char *str);
 void					command_delete_all(t_shell *sh);
+void					command_delete_by_id(t_shell *sh, unsigned int id);
 void					command_import(t_shell *sh);
 void					command_export_all(t_shell *sh);
 char					*command_execute_fetch(t_env *e, char *p, char **av);

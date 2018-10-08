@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/07 22:53:00 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/08 17:37:50 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,14 @@ SRC			=	shell.c														\
 				functions/env/parse.actions.c								\
 				functions/env/parse.prepare.c								\
 				functions/exit/exit.c										\
+				functions/history/error.c									\
 				functions/history/history.c									\
+				functions/history/options.c									\
+				functions/history/options.c.c								\
+				functions/history/options.d.c								\
+				functions/history/options.sp.c								\
+				functions/history/options.warn.c							\
+				functions/history/print.c									\
 				functions/setenv/add.c										\
 				functions/setenv/error.c									\
 				functions/setenv/parse.c									\
