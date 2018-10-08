@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 23:59:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 01:19:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 01:24:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 
 static bool			gcc_check(char *str)
 {
-	if (!str
-			|| !ft_strcmp(str, ".h")
-			|| !ft_strcmp(str, ".c")
-			|| !ft_strcmp(str, ".i")
-			|| !ft_strcmp(str, ".ii")
-			|| !ft_strcmp(str, ".cp")
-			|| !ft_strcmp(str, ".cc")
-			|| !ft_strcmp(str, ".cxx")
-			|| !ft_strcmp(str, ".cpp")
-			|| !ft_strcmp(str, ".c++")
-			|| !ft_strcmp(str, ".C")
-			|| !ft_strcmp(str, ".f")
-			|| !ft_strcmp(str, ".for")
-			|| !ft_strcmp(str, ".FOR")
-			|| !ft_strcmp(str, ".F")
-			|| !ft_strcmp(str, ".fpp")
-			|| !ft_strcmp(str, ".FPP")
-			|| !ft_strcmp(str, ".r")
-			|| !ft_strcmp(str, ".s")
-			|| !ft_strcmp(str, ".S"))
+	if (str
+		&&	( !ft_strcmps(str, ".h")
+			|| !ft_strcmps(str, ".c")
+			|| !ft_strcmps(str, ".i")
+			|| !ft_strcmps(str, ".ii")
+			|| !ft_strcmps(str, ".cp")
+			|| !ft_strcmps(str, ".cc")
+			|| !ft_strcmps(str, ".cxx")
+			|| !ft_strcmps(str, ".cpp")
+			|| !ft_strcmps(str, ".c++")
+			|| !ft_strcmps(str, ".C")
+			|| !ft_strcmps(str, ".f")
+			|| !ft_strcmps(str, ".for")
+			|| !ft_strcmps(str, ".FOR")
+			|| !ft_strcmps(str, ".F")
+			|| !ft_strcmps(str, ".fpp")
+			|| !ft_strcmps(str, ".FPP")
+			|| !ft_strcmps(str, ".r")
+			|| !ft_strcmps(str, ".s")
+			|| !ft_strcmps(str, ".S")))
 		return (true);
 	return (false);
 }
