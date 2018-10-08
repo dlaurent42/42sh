@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 02:41:07 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 07:05:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 16:41:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,5 @@ typedef struct			s_read_dir
 	DIR					*directory;
 	struct dirent		*file;
 }						t_read_dir;
-
 
 #endif

@@ -6,15 +6,15 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 16:42:09 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AUTO_COMPLETION_PROT_H
-# define  AUTO_COMPLETION_PROT_H
+# define AUTO_COMPLETION_PROT_H
 
-#include "shell.h"
-#include "auto_completion.h"
+# include "shell.h"
+# include "auto_completion.h"
 
 bool					auto_get_obj(t_shell *sh);
 void					auto_free_obj(t_obj **obj);
