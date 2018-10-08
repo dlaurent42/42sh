@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:53:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 01:02:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void				auto_display(t_shell *shell, t_obj *obj)
 	int				y;
 	int				rows;
 
+	auto_calculate_number_of_columns(shell);
 	x = shell->cursor.x;
 	y = shell->cursor.y;
 	auto_clear_selection_screen(shell);

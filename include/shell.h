@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 00:51:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 01:05:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -594,7 +594,7 @@ void					auto_show_screen(t_shell *shell, t_obj *obj);
 void					auto_do_ls(t_shell *shell, t_obj *obj);
 void					auto_do_file_admin(t_shell *shell, t_obj *obj);
 void					auto_calc_len_file_name(t_shell *shell, t_obj *obj);
-bool					auto_calculate_number_of_columns(t_shell *shell);
+void					auto_calculate_number_of_columns(t_shell *shell);
 bool					auto_path(t_obj *obj, char *path, char *name);
 void					auto_move_up(t_shell *shell);
 void					auto_move_down(t_shell *shell);

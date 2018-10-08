@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:39:12 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 01:02:07 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void			do_loop(t_shell *shell, t_obj *head)
 	obj = head;
 	while (shell->modes.auto_completion)
 	{
-		if (!auto_calculate_number_of_columns(shell))
-			break ;
 		obj = head;
 		delete_str(shell);
 		auto_manage_buffer(shell, shell->ac->select->data.str);
