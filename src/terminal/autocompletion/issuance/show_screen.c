@@ -6,11 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 01:02:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 static void			delete_str(t_shell *shell)
 {

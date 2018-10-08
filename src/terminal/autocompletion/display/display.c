@@ -6,11 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 01:02:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 static int			calculate_offset(t_shell *shell)
 {

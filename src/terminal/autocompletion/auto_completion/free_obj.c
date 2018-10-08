@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 static void		free_individual_arg(t_obj *obj)
 {

@@ -6,11 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 13:47:37 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:22:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 void				auto_calc_len_file_name(t_shell *shell, t_obj *obj)
 {

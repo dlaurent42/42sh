@@ -6,11 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:37:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 #include <sys/stat.h>
 
 static bool			read_directory(t_read_dir *read_dir)

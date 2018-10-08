@@ -6,11 +6,12 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 22:44:38 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 00:47:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 void				auto_free_ac(t_shell *shell)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   manage_buffer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:27:35 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/05 13:24:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:33:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 void				auto_manage_buffer(t_shell *sh, char *new_display_str)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+# include "auto_completion.h"
 
 static bool			parse_obj(t_shell *shell, char **argv)
 {

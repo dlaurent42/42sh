@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 02:55:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 06:35:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SHELL_H
 
 # include "../libft/include/libft.h"
-# include "auto_completion.h"
 # include <curses.h>
 # include <dirent.h>
 # include <signal.h>
