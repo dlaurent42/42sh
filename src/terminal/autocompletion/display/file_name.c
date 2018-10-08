@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 02:22:22 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 02:33:46 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void				auto_file_name(t_shell *shell, t_obj *obj)
 	if (obj != shell->ac->select)
 		ft_putstr(COL_CLR);
 	print_end_char(obj);
-	if (shell->ac->number_of_columns)
+	if (shell->ac->number_of_columns > 1)
 		auto_print_spaces(shell->ac->len_file_name - obj->data.len_of_str + 1);
 	ft_putstr(COL_CLR);
 }
