@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 02:41:07 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 16:41:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 00:47:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define MODE_NON		0
 # define MODE_CMP		1
 # define MODE_STR		2
+
+# define FILT_CD		1
+# define FILT_GCC		2
 
 # define TYPE_IFO		010000
 # define TYPE_CHR		020000
