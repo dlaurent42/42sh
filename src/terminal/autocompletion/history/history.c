@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:02:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-# include "auto_completion.h"
-# include "auto_completion_prot.h"
+#include "auto_completion.h"
+#include "auto_completion_prot.h"
 
 static void			auto_hist_double(t_shell *shell, bool *status)
 {

@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "shell.h"
-# include "auto_completion.h"
-# include "auto_completion_prot.h"
+#include "auto_completion.h"
+#include "auto_completion_prot.h"
 
 t_obj				*auto_create_obj(void)
 {

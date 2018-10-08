@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 07:07:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:14:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "shell.h"
 #include "auto_completion.h"
-# include "auto_completion_prot.h"
 
 bool					auto_get_obj(t_shell *shell);
 void					auto_free_obj(t_obj **obj);

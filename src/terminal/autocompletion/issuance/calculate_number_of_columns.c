@@ -6,13 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 13:29:46 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 07:04:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-# include "auto_completion.h"
-# include "auto_completion_prot.h"
+#include "auto_completion.h"
+#include "auto_completion_prot.h"
 
 void				auto_calculate_number_of_columns(t_shell *shell)
 {
