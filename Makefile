@@ -6,7 +6,7 @@
 #    By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/08 08:21:08 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/09 00:25:33 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/calc_len_file_name.c		\
 				terminal/autocompletion/issuance/is_executeable.c			\
 				terminal/autocompletion/issuance/do_file_admin.c			\
+				terminal/autocompletion/issuance/do_special_modes.c			\
 				terminal/autocompletion/issuance/calculate_number_of_columns.c\
 				terminal/autocompletion/display/display.c					\
 				terminal/autocompletion/display/clear_selection_screen.c	\

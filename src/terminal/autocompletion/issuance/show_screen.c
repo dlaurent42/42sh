@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 00:28:35 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void			do_loop(t_shell *sh, t_obj *head)
 
 void				auto_show_screen(t_shell *sh, t_obj *obj)
 {
+	auto_do_special_modes(sh, obj);
 	auto_do_file_admin(sh, obj);
 	if (sh->ac->cmp_mode == MODE_NON)
 		return ;
