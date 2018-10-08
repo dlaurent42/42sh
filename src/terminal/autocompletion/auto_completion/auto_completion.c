@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:40:03 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ static bool			create_ac(t_shell *shell, char *str)
 bool				auto_completion(t_shell *shell)
 {
 	bool			performed_completion;
+	bool			space;
 	char			*parsed_buffer;
 
 	performed_completion = false;
+	space = (shell->read->line[0] == ' ') ? true : false;
 	shell->modes.auto_completion = 1;
 	if (auto_history(shell))
 		performed_completion = true;
@@ -86,9 +88,11 @@ bool				auto_completion(t_shell *shell)
 		if (create_ac(shell, parsed_buffer)
 				&& auto_get_obj(shell))
 			auto_issuance(shell);
-		auto_free_ac(shell);//FREE IT PROPERLY ONCE WORKING
+		auto_free_ac(shell);
 		performed_completion = true;
 	}
 	shell->modes.auto_completion = 0;
+	if (space)
+		auto_manage_buffer(shell, " ");
 	return (performed_completion);
 }
