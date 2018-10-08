@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 11:55:05 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
 
-void				auto_issuance(t_shell *shell)
+void				auto_issuance(t_shell *sh)
 {
-	if (shell->ac->auto_mode == AUTO_BIN)
+	if (sh->ac->auto_mode == AUTO_BIN)
 	{
-		if (!(shell->ac->file_name = ft_strdup(shell->ac->argv[1])))
+		if (!(sh->ac->file_name = ft_strdup(sh->ac->argv[1])))
 			return ;
-		shell->ac->file_name_len = ft_strlen(shell->ac->file_name);
-		auto_show_screen(shell, shell->ac->obj);
+		sh->ac->file_name_len = ft_strlen(sh->ac->file_name);
+		auto_show_screen(sh, sh->ac->obj);
 	}
 	else
 	{
-		shell->ac->current_obj = shell->ac->obj;
-		if (!auto_get_attributes(shell))
+		sh->ac->current_obj = sh->ac->obj;
+		if (!auto_get_attributes(sh))
 			return ;
-		shell->ac->obj = shell->ac->current_obj;
-		if (shell->ac->obj->data.dir && !shell->ac->obj->data.no_file)
-			auto_do_ls(shell, shell->ac->obj);
+		sh->ac->obj = sh->ac->current_obj;
+		if (sh->ac->obj->data.dir && !sh->ac->obj->data.no_file)
+			auto_do_ls(sh, sh->ac->obj);
 	}
 }

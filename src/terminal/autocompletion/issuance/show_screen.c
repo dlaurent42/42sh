@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,62 @@
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
 
-static void			delete_str(t_shell *shell)
+static void			delete_str(t_shell *sh)
 {
 	int				len;
 
-	len = ft_strlenu(shell->ac->del_file_name);
+	len = ft_strlenu(sh->ac->del_file_name);
 	while (len--)
-		sh_delete_char(shell);
+		sh_delete_char(sh);
 }
 
-static void			fill_buffer_with_wild(t_shell *shell, t_obj *obj)
+static void			fill_buffer_with_wild(t_shell *sh, t_obj *obj)
 {
-	shell->ac->del_file_name = shell->ac->obj->data.path;
-	delete_str(shell);
+	sh->ac->del_file_name = sh->ac->obj->data.path;
+	delete_str(sh);
 	while (obj)
 	{
 		if (!obj->data.no_file && *obj->data.str != '.')
 		{
-			auto_manage_buffer(shell, obj->data.path);
-			auto_manage_buffer(shell, " ");
+			auto_manage_buffer(sh, obj->data.path);
+			auto_manage_buffer(sh, " ");
 		}
 		obj = obj->next;
 	}
 }
 
-static void			do_loop(t_shell *shell, t_obj *head)
+static void			do_loop(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
 
 	obj = head;
-	while (shell->modes.auto_completion)
+	while (sh->modes.auto_completion)
 	{
 		obj = head;
-		delete_str(shell);
-		auto_manage_buffer(shell, shell->ac->select->data.str);
-		if (shell->ac->select->ver_next == shell->ac->select)
+		delete_str(sh);
+		auto_manage_buffer(sh, sh->ac->select->data.str);
+		if (sh->ac->select->ver_next == sh->ac->select)
 		{
-			auto_manage_buffer(shell, (shell->ac->select->data.dir) ? "/" : " ");
+			auto_manage_buffer(sh, (sh->ac->select->data.dir) ? "/" : " ");
 			break ;
 		}
-		auto_display(shell, obj);
-		read(0, shell->read->line, 4);
-		if (shell->read->line[0] == 4)
+		auto_display(sh, obj);
+		read(0, sh->read->line, 4);
+		if (sh->read->line[0] == 4)
 			break ;
-		auto_read_dispatcher(shell);
-		ft_bzero(shell->read->line, LINE_SIZE);
+		auto_read_dispatcher(sh);
+		ft_bzero(sh->read->line, LINE_SIZE);
 	}
 }
 
-void				auto_show_screen(t_shell *shell, t_obj *obj)
+void				auto_show_screen(t_shell *sh, t_obj *obj)
 {
-	auto_do_file_admin(shell, obj);
-	if (shell->ac->cmp_mode == MODE_NON)
+	auto_do_file_admin(sh, obj);
+	if (sh->ac->cmp_mode == MODE_NON)
 		return ;
-	shell->ac->del_file_name = shell->ac->file_name;
-	if (shell->ac->auto_mode == AUTO_WILD)
-		fill_buffer_with_wild(shell, obj);
+	sh->ac->del_file_name = sh->ac->file_name;
+	if (sh->ac->auto_mode == AUTO_WILD)
+		fill_buffer_with_wild(sh, obj);
 	else
-		do_loop(shell, obj);
+		do_loop(sh, obj);
 }

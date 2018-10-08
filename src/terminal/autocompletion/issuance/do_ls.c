@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ static t_obj		*get_directory_contents(t_obj *obj)
 	return (read_dir.head);
 }
 
-void				auto_do_ls(t_shell *shell, t_obj *obj)
+void				auto_do_ls(t_shell *sh, t_obj *obj)
 {
 	t_obj			*head;
 
 	if (!(head = get_directory_contents(obj)))
 		return ;
-	shell->ac->current_obj = head;
-	auto_get_attributes(shell);
-	auto_sort(shell);
-	head = shell->ac->current_obj;
-	auto_show_screen(shell, head);
+	sh->ac->current_obj = head;
+	auto_get_attributes(sh);
+	auto_sort(sh);
+	head = sh->ac->current_obj;
+	auto_show_screen(sh, head);
 	auto_free_obj(&head);
 }

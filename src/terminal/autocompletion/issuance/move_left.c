@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:47:34 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
 
-void				auto_move_left(t_shell *shell)
+void				auto_move_left(t_shell *sh)
 {
-	shell->ac->select = shell->ac->select->hor_prev;
+	sh->ac->select = sh->ac->select->hor_prev;
 }

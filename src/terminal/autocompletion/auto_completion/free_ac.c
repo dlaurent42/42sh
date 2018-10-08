@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 22:44:38 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
 
-void				auto_free_ac(t_shell *shell)
+void				auto_free_ac(t_shell *sh)
 {
-	auto_free_obj(&shell->ac->obj);
-	free(shell->ac->argv);
-	free(shell->ac->file_name);
-	free(shell->ac->pre_file_name);
-	free(shell->ac);
-	shell->ac = NULL;
+	auto_free_obj(&sh->ac->obj);
+	free(sh->ac->argv);
+	free(sh->ac->file_name);
+	free(sh->ac->pre_file_name);
+	free(sh->ac);
+	sh->ac = NULL;
 }

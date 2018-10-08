@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
 
-static void			get_mode(t_shell *shell, t_obj *head)
+static void			get_mode(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
 
 	obj = head;
-	while (shell->ac->cmp_mode == MODE_NON && obj)
+	while (sh->ac->cmp_mode == MODE_NON && obj)
 	{
 		if (!obj->data.no_file)
-			if (!ft_strncmp(obj->data.str, shell->ac->file_name,
-						shell->ac->file_name_len))
-				shell->ac->cmp_mode = MODE_CMP;
+			if (!ft_strncmp(obj->data.str, sh->ac->file_name,
+						sh->ac->file_name_len))
+				sh->ac->cmp_mode = MODE_CMP;
 		obj = obj->next;
 	}
 	obj = head;
-	while (shell->ac->cmp_mode == MODE_NON && obj)
+	while (sh->ac->cmp_mode == MODE_NON && obj)
 	{
 		if (!obj->data.no_file)
-			if (ft_strstr(obj->data.str, shell->ac->file_name))
-				shell->ac->cmp_mode = MODE_STR;
+			if (ft_strstr(obj->data.str, sh->ac->file_name))
+				sh->ac->cmp_mode = MODE_STR;
 		obj = obj->next;
 	}
 }
 
-static void			lock_files(t_shell *shell, t_obj *obj)
+static void			lock_files(t_shell *sh, t_obj *obj)
 {
 	while (obj)
 	{
-		if (shell->ac->cmp_mode == MODE_CMP)
+		if (sh->ac->cmp_mode == MODE_CMP)
 		{
-			if (ft_strncmp(obj->data.str, shell->ac->file_name,
-						shell->ac->file_name_len))
+			if (ft_strncmp(obj->data.str, sh->ac->file_name,
+						sh->ac->file_name_len))
 				obj->data.no_file = 1;
 		}
-		if (shell->ac->cmp_mode == MODE_STR)
+		if (sh->ac->cmp_mode == MODE_STR)
 		{
-			if (!ft_strstr(obj->data.str, shell->ac->file_name))
+			if (!ft_strstr(obj->data.str, sh->ac->file_name))
 				obj->data.no_file = 1;
 		}
 		if (!ft_strcmps(obj->data.str, "."))
@@ -58,27 +58,27 @@ static void			lock_files(t_shell *shell, t_obj *obj)
 	}
 }
 
-static void			get_column_widths(t_shell *shell, t_obj *obj)
+static void			get_column_widths(t_shell *sh, t_obj *obj)
 {
 	t_obj			*head;
 
-	shell->ac->len_file_name = 0;
-	shell->ac->items_to_display = 0;
-	shell->ac->total_blocks = 0;
+	sh->ac->len_file_name = 0;
+	sh->ac->items_to_display = 0;
+	sh->ac->total_blocks = 0;
 	head = obj;
 	while (head)
 	{
 		if (!head->data.no_file)
 		{
-			auto_calc_len_file_name(shell, head);
-			head->data.file_number = shell->ac->items_to_display;
-			shell->ac->items_to_display++;
+			auto_calc_len_file_name(sh, head);
+			head->data.file_number = sh->ac->items_to_display;
+			sh->ac->items_to_display++;
 		}
 		head = head->next;
 	}
 }
 
-static void			issue_circular_pointers(t_shell *shell, t_obj *head)
+static void			issue_circular_pointers(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
 	t_obj			*track;
@@ -86,8 +86,8 @@ static void			issue_circular_pointers(t_shell *shell, t_obj *head)
 	while (head->next && head->data.no_file)
 		head = head->next;
 	obj = head;
-	shell->ac->select = head;
-	shell->ac->select->data.file_number = 0;
+	sh->ac->select = head;
+	sh->ac->select->data.file_number = 0;
 	while (obj && obj->next)
 	{
 		track = obj->next;
@@ -104,10 +104,10 @@ static void			issue_circular_pointers(t_shell *shell, t_obj *head)
 	head->ver_prev = obj;
 }
 
-void				auto_do_file_admin(t_shell *shell, t_obj *obj)
+void				auto_do_file_admin(t_shell *sh, t_obj *obj)
 {
-	get_mode(shell, obj);
-	lock_files(shell, obj);
-	get_column_widths(shell, obj);
-	issue_circular_pointers(shell, obj);
+	get_mode(sh, obj);
+	lock_files(sh, obj);
+	get_column_widths(sh, obj);
+	issue_circular_pointers(sh, obj);
 }

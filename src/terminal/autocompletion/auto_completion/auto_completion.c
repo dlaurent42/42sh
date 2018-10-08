@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:40:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool			contains_printable_characters(char *str)
 	return (false);
 }
 
-static char			*get_auto_mode(t_shell *shell, char *content)
+static char			*get_auto_mode(t_shell *sh, char *content)
 {
 	char			*str;
 	char			*slash;
@@ -40,59 +40,59 @@ static char			*get_auto_mode(t_shell *shell, char *content)
 	if (!(str = ft_strrchr(move_past_leading_spaces(content), ' ')))
 	{
 		str = content;
-		shell->ac->auto_mode = AUTO_BIN;
-		shell->ac->pre_file_name = ft_strnew(0);
+		sh->ac->auto_mode = AUTO_BIN;
+		sh->ac->pre_file_name = ft_strnew(0);
 	}
 	else
 	{
-		shell->ac->auto_mode = AUTO_REG;
+		sh->ac->auto_mode = AUTO_REG;
 		str++;
 		if ((slash = ft_strrchr(str, '/')))
-			shell->ac->pre_file_name = ft_strndup(content, (slash - content) + 1);
+			sh->ac->pre_file_name = ft_strndup(content, (slash - content) + 1);
 		else
-			shell->ac->pre_file_name = ft_strndup(content, (str - content));
+			sh->ac->pre_file_name = ft_strndup(content, (str - content));
 	}
-	if (!contains_printable_characters(content) || !shell->ac->pre_file_name)
+	if (!contains_printable_characters(content) || !sh->ac->pre_file_name)
 		return (NULL);
 	return (str);
 }
 
-static bool			create_ac(t_shell *shell, char *str)
+static bool			create_ac(t_shell *sh, char *str)
 {
-	if (!(shell->ac->argv = (char **)malloc(sizeof(char *) * 3)))
+	if (!(sh->ac->argv = (char **)malloc(sizeof(char *) * 3)))
 		return (false);
-	shell->ac->argv[0] = str;
-	shell->ac->argv[1] = str;
-	shell->ac->argv[2] = NULL;
+	sh->ac->argv[0] = str;
+	sh->ac->argv[1] = str;
+	sh->ac->argv[2] = NULL;
 	return (true);
 }
 
-bool				auto_completion(t_shell *shell)
+bool				auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
 	bool			space;
 	char			*parsed_buffer;
 
 	performed_completion = false;
-	space = (shell->read->line[0] == ' ') ? true : false;
-	shell->modes.auto_completion = 1;
-	if (auto_history(shell))
+	space = (sh->read->line[0] == ' ') ? true : false;
+	sh->modes.auto_completion = 1;
+	if (auto_history(sh))
 		performed_completion = true;
-	else if (!ft_strcmps(shell->read->line, K_TAB))
+	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
-		if (!(shell->ac = (t_ac *)malloc(sizeof(t_ac))))
+		if (!(sh->ac = (t_ac *)malloc(sizeof(t_ac))))
 			return (false);
-		ft_bzero(shell->ac, sizeof(t_ac));
-		if (!(parsed_buffer = get_auto_mode(shell, shell->buffer.content)))
+		ft_bzero(sh->ac, sizeof(t_ac));
+		if (!(parsed_buffer = get_auto_mode(sh, sh->buffer.content)))
 			return (false);
-		if (create_ac(shell, parsed_buffer)
-				&& auto_get_obj(shell))
-			auto_issuance(shell);
-		auto_free_ac(shell);
+		if (create_ac(sh, parsed_buffer)
+				&& auto_get_obj(sh))
+			auto_issuance(sh);
+		auto_free_ac(sh);
 		performed_completion = true;
 	}
-	shell->modes.auto_completion = 0;
+	sh->modes.auto_completion = 0;
 	if (space)
-		auto_manage_buffer(shell, " ");
+		auto_manage_buffer(sh, " ");
 	return (performed_completion);
 }

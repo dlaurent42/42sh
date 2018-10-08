@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 07:16:35 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:49:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -420,7 +420,7 @@ void					sh_window_resize(t_shell *sh);
 /*
 ** terminal - auto_cmopletion
 */
-bool					auto_completion(t_shell *shell);
-void					auto_display(t_shell *shell, t_obj *obj);
+bool					auto_completion(t_shell *sh);
+void					auto_display(t_shell *sh, t_obj *obj);
 
 #endif

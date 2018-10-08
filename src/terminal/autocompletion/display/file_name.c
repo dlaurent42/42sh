@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void			print_end_char(t_obj *obj)
 		ft_putchar('*');
 }
 
-static void			print_colour(t_shell *shell, t_obj *obj)
+static void			print_colour(t_shell *sh, t_obj *obj)
 {
 	if (auto_is_executeable(obj))
 		ft_putstr(COL_EXE);
@@ -50,18 +50,18 @@ static void			print_colour(t_shell *shell, t_obj *obj)
 		ft_putstr(COL_LNK);
 	if (obj->data.sock)
 		ft_putstr(COL_SOCK);
-	if (obj == shell->ac->select)
+	if (obj == sh->ac->select)
 		ft_printf(COL_BG);
-	ft_printf("%.*s", shell->window.width - 1, obj->data.str);
+	ft_printf("%.*s", sh->window.width - 1, obj->data.str);
 }
 
-void				auto_file_name(t_shell *shell, t_obj *obj)
+void				auto_file_name(t_shell *sh, t_obj *obj)
 {
-	print_colour(shell, obj);
-	if (obj != shell->ac->select)
+	print_colour(sh, obj);
+	if (obj != sh->ac->select)
 		ft_putstr(COL_CLR);
 	print_end_char(obj);
-	if (shell->ac->number_of_columns > 1)
-		auto_print_spaces(shell->ac->len_file_name - obj->data.len_of_str + 1);
+	if (sh->ac->number_of_columns > 1)
+		auto_print_spaces(sh->ac->len_file_name - obj->data.len_of_str + 1);
 	ft_putstr(COL_CLR);
 }
