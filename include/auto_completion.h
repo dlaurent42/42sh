@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 02:41:07 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 18:45:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 19:13:07 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct			s_ac
 	int					number_of_columns;
 
 	t_obj				*obj;
+	t_obj				*bin;
+	t_obj				*env;
 	t_obj				*current_obj;
 	t_obj				*head;
 	t_obj				*track;
