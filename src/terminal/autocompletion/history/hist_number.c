@@ -70,7 +70,7 @@ void				auto_hist_number(t_shell *sh, bool *status)
 					sh_move_right(sh);
 				while (number_of_deletions--)
 					sh_delete_current_char(sh);
-				auto_manage_buffer(sh, cmd->content);
+				sh_print_str(sh, cmd->content);
 				*status = true;
 				sh_move_end(sh);
 			}

@@ -31,7 +31,7 @@ void				auto_hist_double(t_shell *sh, bool *status)
 		{
 			sh_delete_current_char(sh);
 			sh_delete_current_char(sh);
-			auto_manage_buffer(sh, sh->cmd->content);
+			sh_print_str(sh, sh->cmd->content);
 			*status = true;
 		}
 		sh_move_end(sh);

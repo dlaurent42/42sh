@@ -31,8 +31,8 @@ static void			fill_buffer_with_wild(t_shell *sh, t_obj *obj)
 	{
 		if (!obj->data.no_file && *obj->data.str != '.')
 		{
-			auto_manage_buffer(sh, obj->data.path);
-			auto_manage_buffer(sh, " ");
+			sh_print_str(sh, obj->data.path);
+			sh_print_str(sh, " ");
 		}
 		obj = obj->next;
 	}
@@ -47,10 +47,10 @@ static void			do_loop(t_shell *sh, t_obj *head)
 	{
 		obj = head;
 		delete_str(sh);
-		auto_manage_buffer(sh, sh->ac->select->data.str);
+		sh_print_str(sh, sh->ac->select->data.str);
 		if (sh->ac->select->ver_next == sh->ac->select)
 		{
-			auto_manage_buffer(sh, (sh->ac->select->data.dir) ? "/" : " ");
+			sh_print_str(sh, (sh->ac->select->data.dir) ? "/" : " ");
 			break ;
 		}
 		auto_display(sh, obj);
