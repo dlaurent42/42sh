@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 23:59:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 13:46:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 13:47:27 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				auto_do_special_modes(t_shell *sh, t_obj *obj)
 {
 	if (!ft_strncmp(sh->buffer.content, "cd ", 3))
 		filter_obj(obj, FILT_CD);
-	else if (!ft_strncmp(sh->buffer.content, "gcc ", 4))
+	else if (!ft_strncmp(sh->buffer.content, "gcc ", 4)
+			|| !ft_strncmp(sh->buffer.content, "cc ", 3))
 		filter_obj(obj, FILT_GCC);
 }
