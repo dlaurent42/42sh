@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 15:32:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 18:47:43 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static bool			get_binaries(t_shell *sh, char **argv)
 	{
 		if (!(obj = auto_create_obj()))
 			return (false);
+		obj->data.bin = 1;
 		if (!(obj->data.str = ft_strdups(bin_auto->name)))
 		{
 			free(obj);
