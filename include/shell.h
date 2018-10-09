@@ -6,11 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/09 10:29:22 by dlaurent         ###   ########.fr       */
-=======
-/*   Updated: 2018/10/09 15:04:35 by dlaurent         ###   ########.fr       */
->>>>>>> 4098daf... [feature] builtins implementation
+/*   Updated: 2018/10/11 16:55:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +33,7 @@
 # endif
 
 # define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
+# define VERIF_KEY_LEN	32
 
 # define ENV_MAX_SIZE	999
 # define ENV_PRIME_1	3
@@ -103,6 +100,7 @@ typedef struct			s_cmd
 	char				content[ARG_MAX + 1];
 	int					unicode_len;
 	int					display_len;
+	bool				is_new;
 	unsigned int		id;
 	struct s_cmd		*last;
 	struct s_cmd		*prev;
@@ -303,6 +301,7 @@ char					*sh_unsetenv_parse(char *arg);
 ** functions - utils
 */
 bool					is_option_string(char *s, char *opt);
+char					*sh_get_path_from_filename(char *filename);
 
 /*
 ** structures - binaries
@@ -324,12 +323,16 @@ t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 /*
 ** structures - commands
 */
-void					command_add(t_shell *sh);
-void					command_add_str_based(t_shell *sh, char *str);
+void					command_add(t_shell *sh, bool is_new);
+void					command_add_str_based(t_shell *sh, char *s, bool isnew);
+void					command_append_from(t_shell *sh, char *file);
+void					command_append_to(t_shell *sh, char *file);
 void					command_delete_all(t_shell *sh);
 void					command_delete_by_id(t_shell *sh, unsigned int id);
 void					command_import(t_shell *sh);
+void					command_import_from(t_shell *sh, char *file);
 void					command_export_all(t_shell *sh);
+void					command_export_to(t_shell *sh, char *file);
 char					*command_execute_fetch(t_env *e, char *p, char **av);
 
 /*

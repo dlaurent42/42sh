@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:47:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:33:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:35:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static char	sh_history_sp(t_shell *sh, char **argv, bool opt_s, bool opt_p)
 		return (0);
 	while (argv[i])
 	{
-		s = ft_strjoinf(s, " ", 1);
+		s = (s) ? ft_strjoinf(s, " ", 1) : NULL;
 		s = ft_strjoinf(s, argv[i], 1);
 		i++;
 	}
 	if (!s)
 		return (0);
 	if (opt_s)
-		command_add_str_based(sh, s);
+		command_add_str_based(sh, s, true);
 	if (opt_p)
 		ft_putendl(s);
 	ft_strdel(&s);

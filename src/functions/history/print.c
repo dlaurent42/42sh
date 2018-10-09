@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:05:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:41:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:35:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	sh_history_print(t_shell *sh)
 	cmd = cmd->last;
 	while (cmd)
 	{
-		ft_printf("%*d\t%s\n", len, cmd->id, cmd->content);
-		cmd = cmd->next;
+		(cmd->is_new)
+			? ft_printf("%*d* %s\n", len, cmd->id, cmd->content)
+			: ft_printf("%*d  %s\n", len, cmd->id, cmd->content);
+		cmd = cmd->prev;
 	}
 	return (0);
 }
@@ -37,12 +39,14 @@ char	sh_history_print_shift(t_shell *sh, int shift)
 	if (!(cmd = sh->cmd))
 		return (0);
 	len = str_size_base(10, cmd->id);
-	while (cmd->prev && cmd->id > sh->cmd->id - shift)
-		cmd = cmd->prev;
+	while (cmd->next && --shift)
+		cmd = cmd->next;
 	while (cmd)
 	{
-		ft_printf("%*d\t%s\n", len, cmd->id, cmd->content);
-		cmd = cmd->next;
+		(cmd->is_new)
+			? ft_printf("%*d* %s\n", len, cmd->id, cmd->content)
+			: ft_printf("%*d  %s\n", len, cmd->id, cmd->content);
+		cmd = cmd->prev;
 	}
 	return (0);
 }

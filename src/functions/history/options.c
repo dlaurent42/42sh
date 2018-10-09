@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:04:22 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 13:43:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 22:08:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** -r   Read the current history file and append its contents to the history
 **      list.
 ** -n   Append the history lines not already read from the history file
-**      to the current history list. These are lines appended to the
+**      to the current history list. These lines are appended to the
 **      history file since the beginning of the current Bash session.
 ** -p   Perform history substitution on the args and display the result
 **      on the standard output, without storing the results in the history list.
@@ -43,17 +43,18 @@ char		sh_history_options(t_shell *sh, char **argv)
 	while (argv[i] && res == 0 && argv[i][0] == '-'
 	&& !(argv[i][1] == '-' && !argv[i][2]))
 	{
+		j = 0;
 		while (res == 0 && argv[i][++j] && (c = argv[i][j]))
 			if (c == 'c')
 				return (sh_history_option_c(sh));
 			else if (c == 'd')
-				res = sh_history_option_d(sh, &i, &j, argv);
+				return (sh_history_option_d(sh, &i, &j, argv));
 			else if (c == 'w' || c == 'a' || c == 'r' || c == 'n')
-				res = sh_history_option_warn(sh, &i, &j, argv);
+				return (sh_history_option_warn(sh, &i, &j, argv));
 			else if (c == 's' || c == 'p')
 				return (sh_history_option_sp(sh, &i, &j, argv));
 			else
-				res = sh_history_error(3);
+				return (sh_history_error(3));
 		i += (argv[i] && res == 0) ? 1 : 0;
 	}
 	return (res);

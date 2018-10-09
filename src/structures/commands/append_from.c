@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   import.c                                           :+:      :+:    :+:   */
+/*   append_from.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 19:30:52 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/09 20:08:50 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/09 21:49:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static void	command_import_error(int fd, char *path)
-{
-	(path) ? remove(path) : 0;
-	(path) ? ft_strdel(&path) : 0;
-	(fd != -1) ? close(fd) : 0;
-}
 
 static char	command_key_verified(int fd)
 {
@@ -31,10 +24,12 @@ static char	command_key_verified(int fd)
 	return (TRUE);
 }
 
-static char	command_parse_and_add(t_shell *sh, char *content)
+static char	command_parse_and_add(t_shell *sh, char *content, int id, int row)
 {
-	t_cmd		*new;
+	t_cmd	*new;
 
+	if (id >= row)
+		return (TRUE);
 	if (!(new = (t_cmd *)ft_memalloc(sizeof(t_cmd))))
 		return (FALSE);
 	new->id = (sh->cmd) ? sh->cmd->id + 1 : 1;
@@ -48,23 +43,26 @@ static char	command_parse_and_add(t_shell *sh, char *content)
 	return (TRUE);
 }
 
-void		command_import(t_shell *sh)
+void	command_append_from(t_shell *sh, char *path)
 {
+	int		id;
+	int		row;
 	int		fd;
-	char	*path;
 	char	*buffer;
 
+	row = 0;
 	buffer = NULL;
-	if (!(path = env_search(sh->local_env, "HISTFILE")))
+	id = (sh->cmd) ? sh->cmd->id : 1;
+	if (!path && !(path = env_search(sh->local_env, "HISTFILE")))
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
-		return (command_import_error(fd, path));
+		return ;
 	while (get_next_line(fd, &buffer) == 1)
 	{
-		if (command_parse_and_add(sh, buffer) == 0)
+		if (command_parse_and_add(sh, buffer, id, ++row) == 0)
 		{
 			ft_strdel(&buffer);
-			return (command_import_error(fd, path));
+			return ;
 		}
 		ft_strdel(&buffer);
 	}

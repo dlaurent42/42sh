@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 19:11:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:41:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 21:26:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		command_delete_by_id(t_shell *sh, unsigned int id)
 {
+	t_cmd	*last;
 	t_cmd	*tmp;
 	t_cmd	*cmd;
 
@@ -24,17 +25,19 @@ void		command_delete_by_id(t_shell *sh, unsigned int id)
 		cmd = cmd->prev;
 	if (!cmd)
 		return ;
-	(cmd == cmd->last) ? cmd->last = cmd->next : 0;
-	(cmd == sh->cmd) ? sh->cmd = cmd->prev : 0;
+	(cmd == cmd->last) ? cmd->last = cmd->prev : 0;
+	last = cmd->last;
+	(cmd == sh->cmd) ? sh->cmd = cmd->next : 0;
 	(cmd->next) ? cmd->next->prev = cmd->prev : 0;
 	(cmd->prev) ? cmd->prev->next = cmd->next : 0;
-	tmp = cmd->next;
+	tmp = cmd->prev;
 	ft_memdel((void **)&cmd);
 	cmd = tmp;
 	while (cmd)
 	{
+		cmd->last = last;
 		cmd->id--;
-		cmd = cmd->next;
+		cmd = cmd->prev;
 	}
 }
 

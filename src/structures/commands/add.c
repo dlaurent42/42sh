@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 21:35:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:19:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 18:49:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_add_str_based(t_shell *sh, char *str)
+void		command_add_str_based(t_shell *sh, char *str, bool is_new)
 {
 	t_cmd	*new;
 
@@ -26,13 +26,14 @@ void		command_add_str_based(t_shell *sh, char *str)
 	ft_strcpy(new->content, str);
 	new->display_len = ft_strlenu(str);
 	new->unicode_len = ft_strlens(str);
+	new->is_new = is_new;
 	new->next = (sh->cmd) ? sh->cmd : NULL;
 	new->last = (sh->cmd) ? sh->cmd->last : new;
 	(sh->cmd) ? sh->cmd->prev = new : 0;
 	sh->cmd = new;
 }
 
-void		command_add(t_shell *sh)
+void		command_add(t_shell *sh, bool is_new)
 {
 	t_cmd	*new;
 
@@ -44,6 +45,7 @@ void		command_add(t_shell *sh)
 	ft_strcpy(new->content, sh->buffer.content);
 	new->display_len = sh->buffer.display_len + sh->buffer.dshift;
 	new->unicode_len = sh->buffer.unicode_len + sh->buffer.ushift;
+	new->is_new = is_new;
 	new->next = (sh->cmd) ? sh->cmd : NULL;
 	new->last = (sh->cmd) ? sh->cmd->last : new;
 	(sh->cmd) ? sh->cmd->prev = new : 0;

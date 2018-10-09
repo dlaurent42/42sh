@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export_to.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 18:57:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 20:20:43 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/09 18:56:02 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/09 22:14:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	command_export_error(int fd, char *path)
+void		command_export_to(t_shell *sh, char *path)
 {
-	(path) ? remove(path) : 0;
-	(path) ? ft_strdel(&path) : 0;
-	(fd != -1) ? close(fd) : 0;
-}
-
-void		command_export_all(t_shell *sh)
-{
-	int		fd;;
-	char	*path;
+	int		fd;
 	t_cmd	*cmd;
 
-	if (!sh->cmd
-	|| !(path = env_search(sh->local_env, "HISTFILE")))
+	if (!path && !(path = env_search(sh->local_env, "HISTFILE")))
 		return ;
 	remove(path);
 	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)
-		return (command_export_error(fd, path));
-	cmd = sh->cmd->last;
+		return ;
 	ft_putendl_fd(VERIF_KEY, fd);
+	if (!sh->cmd)
+		return ((void)close(fd));
+	cmd = sh->cmd->last;
 	while (cmd)
 	{
 		ft_putendl_fd(cmd->content, fd);

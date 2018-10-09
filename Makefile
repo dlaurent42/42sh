@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/10 08:18:06 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/11 16:55:32 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC			=	shell.c														\
 				functions/unsetenv/remove.c									\
 				functions/unsetenv/unsetenv.c								\
 				functions/utils/has_option.c								\
+				functions/utils/path_from_filename.c						\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -65,9 +66,13 @@ SRC			=	shell.c														\
 				structures/binaries/search.c								\
 				structures/binaries/gen_list_for_auto_comp.c				\
 				structures/commands/add.c									\
+				structures/commands/append_from.c							\
+				structures/commands/append_to.c								\
 				structures/commands/delete.c								\
 				structures/commands/execute_fetch.c							\
+				structures/commands/export_to.c								\
 				structures/commands/export.c								\
+				structures/commands/import_from.c							\
 				structures/commands/import.c								\
 				structures/environment/copy.c								\
 				structures/environment/delete.c								\
