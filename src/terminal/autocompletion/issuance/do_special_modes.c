@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 23:59:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 13:47:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 13:49:38 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static bool			gcc_check(char *str)
 {
 	if (str
-		&& ( !ft_strcmps(str, ".h")
+		&& (!ft_strcmps(str, ".h")
 			|| !ft_strcmps(str, ".c")
 			|| !ft_strcmps(str, ".i")
 			|| !ft_strcmps(str, ".ii")
@@ -47,7 +47,7 @@ static void			filter_obj(t_obj *obj, int filter)
 		if (filter == FILT_CD && !obj->data.dir)
 			obj->data.no_file = 1;
 		if (filter == FILT_GCC
-				&& (!obj->data.dir && !gcc_check(ft_strrchr(obj->data.str, '.'))))
+				&& !obj->data.dir && !gcc_check(ft_strrchr(obj->data.str, '.')))
 			obj->data.no_file = 1;
 		obj = obj->next;
 	}
