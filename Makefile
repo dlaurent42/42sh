@@ -6,7 +6,7 @@
 #    By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/09 00:25:33 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/09 13:35:07 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,6 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/issuance.c					\
 				terminal/autocompletion/issuance/read_dispatcher.c			\
 				terminal/autocompletion/issuance/move_up.c					\
-				terminal/autocompletion/issuance/manage_buffer.c			\
 				terminal/autocompletion/issuance/move_down.c				\
 				terminal/autocompletion/issuance/move_left.c				\
 				terminal/autocompletion/issuance/move_right.c				\

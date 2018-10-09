@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 00:24:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 13:35:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_obj					*auto_create_obj(void);
 void					auto_issuance(t_shell *sh);
 void					auto_read_dispatcher(t_shell *sh);
 void					auto_clear_selection_screen(t_shell *sh);
-void					auto_manage_buffer(t_shell *sh, char *new_display);
 bool					auto_get_attributes(t_shell *sh);
 void					auto_show_screen(t_shell *sh, t_obj *obj);
 void					auto_do_ls(t_shell *sh, t_obj *obj);
