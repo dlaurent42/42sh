@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:39:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 18:58:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void		sh_command_run(t_shell *sh)
 		return (sh_multilines(sh));
 	sh->prompt.last_exec_succeed = (sh->buffer.display_len)
 		? sh_command_dispatcher(sh) : 0;
-	(sh->buffer.display_len) ? command_add(sh) : 0;
+	(sh->buffer.display_len) ? command_add(sh, true) : 0;
 	sh_reset_sh(sh);
 }
