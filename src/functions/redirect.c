@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 19:22:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/08 17:39:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ static char	sh_command_dispatcher(t_shell *sh)
 		strsplt = ft_strsplit(sh->buffer.content + 9, ' ');
 		res = sh_unsetenv(sh, strsplt);
 	}
-	else if (!ft_strcmps(sh->buffer.content, "history"))
-		sh_history(sh);
+	else if (sh->buffer.content[0] == 'h' && sh->buffer.content[1] == 'i'
+	&& sh->buffer.content[2] == 's' && sh->buffer.content[3] == 't'
+	&& sh->buffer.content[4] == 'o' && sh->buffer.content[5] == 'r'
+	&& sh->buffer.content[6] == 'y')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 8, ' ');
+		res = sh_history(sh, strsplt);
+	}
 	i = 0;
 	while (strsplt && strsplt[i])
 	{
@@ -62,21 +68,6 @@ static char	sh_command_dispatcher(t_shell *sh)
 	}
 	(strsplt) ? free(strsplt) : 0;
 	return (res);
-}
-
-static void	sh_reset_sh(t_shell *sh)
-{
-	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
-	sh->buffer.display_len = 0;
-	sh->buffer.unicode_len = 0;
-	sh->buffer.dshift = 0;
-	sh->buffer.ushift = 0;
-	sh->buffer.cmd = NULL;
-	sh->read->unicode_bytes_left = 0;
-	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
-	ft_bzero((void *)&sh->modes, sizeof(t_modes));
-	sh_set_prompt(sh);
-	sh_print_prompt(sh);
 }
 
 static char	sh_command_check(t_shell *sh)
@@ -95,6 +86,21 @@ static char	sh_command_check(t_shell *sh)
 		i++;
 	}
 	return (!(count_dquote % 2 || count_squote % 2));
+}
+
+static void	sh_reset_sh(t_shell *sh)
+{
+	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
+	sh->buffer.display_len = 0;
+	sh->buffer.unicode_len = 0;
+	sh->buffer.dshift = 0;
+	sh->buffer.ushift = 0;
+	sh->buffer.cmd = NULL;
+	sh->read->unicode_bytes_left = 0;
+	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
+	ft_bzero((void *)&sh->modes, sizeof(t_modes));
+	sh_set_prompt(sh);
+	sh_print_prompt(sh);
 }
 
 void		sh_command_run(t_shell *sh)

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   has_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 10:31:02 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 20:21:32 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/07 21:13:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
-bool				auto_history(t_shell *sh)
+bool	is_option_string(char *s, char *opt)
 {
-	bool			status;
+	int		i;
+	int		j;
 
-	status = false;
-	auto_hist_double(sh, &status);
-	auto_hist_number(sh, &status);
-	auto_hist_name(sh, &status);
-	return (status);
+	i = 1;
+	if (s[0] != '-' || (s[0] == '-' && !s[1]))
+		return (FALSE);
+	while (s[i])
+	{
+		j = 0;
+		while (opt[j] && opt[j] != s[i])
+			j++;
+		if (opt[j] == '\0')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

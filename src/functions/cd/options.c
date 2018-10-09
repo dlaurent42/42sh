@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 10:31:02 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 20:10:20 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/07 21:15:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
-bool				auto_history(t_shell *sh)
+int			sh_cd_options(char **argv, bool *opt_l, bool *opt_p)
 {
-	bool			status;
+	int		i;
+	int		j;
 
-	status = false;
-	auto_hist_double(sh, &status);
-	auto_hist_number(sh, &status);
-	auto_hist_name(sh, &status);
-	return (status);
+	i = 0;
+	while (argv[i] && argv[i][0] == '-' && is_option_string(argv[i], "LP"))
+	{
+		j = 1;
+		while (argv[i][j])
+		{
+			if (argv[i][j] == 'L')
+				*opt_l = TRUE;
+			else if (argv[i][j] == 'P')
+				*opt_p = TRUE;
+			j++;
+		}
+		i++;
+	}
+	if (argv[i] && argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
+		return (i + 1);
+	return (i);
 }
