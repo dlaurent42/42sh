@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 23:59:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 01:24:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 13:46:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static bool			gcc_check(char *str)
 {
 	if (str
-		&&	( !ft_strcmps(str, ".h")
+		&& ( !ft_strcmps(str, ".h")
 			|| !ft_strcmps(str, ".c")
 			|| !ft_strcmps(str, ".i")
 			|| !ft_strcmps(str, ".ii")
@@ -55,12 +55,8 @@ static void			filter_obj(t_obj *obj, int filter)
 
 void				auto_do_special_modes(t_shell *sh, t_obj *obj)
 {
-	char			*space;
-
-	if (!(space = ft_strchr(sh->buffer.content, ' ')))
-		return ;
-	if (!ft_strncmp(sh->buffer.content, "cd", space - sh->buffer.content))
+	if (!ft_strncmp(sh->buffer.content, "cd ", 3))
 		filter_obj(obj, FILT_CD);
-	else if (!ft_strncmp(sh->buffer.content, "gcc", space - sh->buffer.content))
+	else if (!ft_strncmp(sh->buffer.content, "gcc ", 4))
 		filter_obj(obj, FILT_GCC);
 }
