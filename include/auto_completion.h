@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 02:41:07 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 00:47:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 18:45:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ typedef struct			s_data
 
 	int					len_of_str;
 
-	unsigned char		no_file	: 1;
-	unsigned char		fill	: 7;
-
 	int					type;
 	mode_t				mode;
 	int					links;
@@ -81,6 +78,10 @@ typedef struct			s_data
 	unsigned char		lnk		: 1;
 	unsigned char		sock	: 1;
 	unsigned char		wht		: 1;
+	unsigned char		bin		: 1;
+	unsigned char		env		: 1;
+	unsigned char		no_file	: 1;
+	unsigned char		fill	: 5;
 }						t_data;
 
 typedef struct			s_obj
