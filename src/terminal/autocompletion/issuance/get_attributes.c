@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 22:21:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static bool			get_initial(t_shell *sh, t_obj *obj)
 		sh->ac->file_name = ft_strdup((slash) ? slash + 1 : "");
 	if (!obj->data.parent_path || !sh->ac->file_name)
 		return (false);
-	sh->ac->file_name_len = ft_strlen(sh->ac->file_name);
 	if (!ft_strcmps(sh->ac->file_name, "*"))
 	{
 		sh->ac->auto_mode = AUTO_WILD;

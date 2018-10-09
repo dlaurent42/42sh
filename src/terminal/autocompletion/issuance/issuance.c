@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 11:55:05 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 22:20:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void				auto_issuance(t_shell *sh)
 	{
 		if (!(sh->ac->file_name = ft_strdup(sh->ac->argv[1])))
 			return ;
-		sh->ac->file_name_len = ft_strlen(sh->ac->file_name);
-		auto_show_screen(sh, sh->ac->obj);
+		auto_show_screen(sh, sh->ac->obj);//Swap out
 	}
 	else
 	{

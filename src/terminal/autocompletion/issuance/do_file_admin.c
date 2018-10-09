@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 22:20:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static void			issue_circular_pointers(t_shell *sh, t_obj *head)
 
 void				auto_do_file_admin(t_shell *sh, t_obj *obj)
 {
+	sh->ac->file_name_len = ft_strlen(sh->ac->file_name);
 	get_mode(sh, obj);
 	lock_files(sh, obj);
 	get_column_widths(sh, obj);
