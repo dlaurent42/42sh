@@ -42,7 +42,7 @@ void				auto_read_dispatcher(t_shell *sh)
 		if (sh_is_delete_combination(line))
 			sh_deletion_dispatcher(sh);
 		else if (line[0] == 10)
-			auto_manage_buffer(sh,
+			sh_print_str(sh,
 					(sh->ac->select->data.dir) ? "/" : " ");
 		else
 			sh_fill_buffer(sh);
