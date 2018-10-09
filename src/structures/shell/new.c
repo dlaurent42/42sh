@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/27 20:27:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 15:01:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	sh_set_termios(t_shell *sh)
 {
+	t_winsize	window;
+
 	if (!(sh->termios = (t_termios *)ft_memalloc(sizeof(t_termios))))
 		error_malloc_sh(sh);
 	(tcgetattr(0, sh->termios) == -1) ? error_malloc_sh(sh) : 0;
@@ -23,6 +25,11 @@ static void	sh_set_termios(t_shell *sh)
 	sh->termios->c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, sh->termios) == -1)
 		error_malloc_sh(sh);
+	ioctl(0, TIOCGWINSZ, &window);
+	sh->window.width = window.ws_col;
+	sh->window.height = window.ws_row;
+	ft_putstr(CLEAR_SCREEN);
+	ft_putstr("\e[3J");
 }
 
 static void	sh_init_prompt(t_shell *sh)
@@ -36,19 +43,15 @@ t_shell		*sh_new(char **environ)
 {
 	char		*name;
 	t_shell		*sh;
-	t_winsize	window;
 
 	if (!(sh = (t_shell *)ft_memalloc(sizeof(t_shell))))
 		error_malloc_sh(sh);
 	(!(name = getenv("TERM"))) ? error_malloc_sh(sh) : 0;
 	(tgetent(NULL, name) == ERR) ? error_malloc_sh(sh) : 0;
 	sh_set_termios(sh);
-	ft_putstr(CLEAR_SCREEN);
-	ft_putstr("\e[3J");
-	ioctl(0, TIOCGWINSZ, &window);
-	sh->window.width = window.ws_col;
-	sh->window.height = window.ws_row;
 	sh->env = env_new(sh, environ);
+	sh->local_env = env_new(sh, NULL);
+	env_initialize_local(sh);
 	sh->bin = bin_new(sh);
 	sh->read = read_new(sh);
 	command_import(sh);

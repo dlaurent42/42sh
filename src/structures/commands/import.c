@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 15:57:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 15:05:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ void		command_import(t_shell *sh)
 	char	*buffer;
 
 	buffer = NULL;
-	if (!(path = env_search(sh->env, "HOME")))
-		return ;
-	if (!(path = ft_strjoins(path, "/.cmd_history")))
+	if (!(path = env_search(sh->local_env, "HISTFILE")))
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
 		return (command_import_error(fd, path));
@@ -81,6 +79,5 @@ void		command_import(t_shell *sh)
 		sh->hist = ft_strjoinf(sh->hist, buffer, 3);
 		sh->hist = ft_strjoinf(sh->hist, "\n", 1);
 	}
-	ft_strdel(&path);
 	close(fd);
 }

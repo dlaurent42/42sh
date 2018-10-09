@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:04:22 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 17:27:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/09 13:43:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 ** -d offset
 **      Delete the history entry at position offset.
 **      offset should be specified as it appears when the history is displayed.
+** -w   Write out the current history to the history file.
 ** -a   Append the new history lines (history lines entered since
 **      the beginning of the current Bash session) to the history file.
+** -r   Read the current history file and append its contents to the history
+**      list.
 ** -n   Append the history lines not already read from the history file
 **      to the current history list. These are lines appended to the
 **      history file since the beginning of the current Bash session.
-** -r   Read the current history file and append its contents to the history
-**      list.
-** -w   Write out the current history to the history file.
 ** -p   Perform history substitution on the args and display the result
 **      on the standard output, without storing the results in the history list.
 ** -s   The args are added to the end of the history list as a single entry.

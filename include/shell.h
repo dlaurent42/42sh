@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/09 10:29:22 by dlaurent         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/09 15:04:35 by dlaurent         ###   ########.fr       */
+>>>>>>> 4098daf... [feature] builtins implementation
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +185,7 @@ typedef struct			s_shell
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
+	t_env				*local_env;
 	t_read				*read;
 	t_modes				modes;
 	t_cursor			cursor;
@@ -334,8 +339,9 @@ int						env_get_hash(const char *sh, const int b, const int a);
 void					env_delete_specified_item(t_env_item *item);
 void					env_delete_item(t_env *env, const char *key);
 void					env_delete(t_env *env);
-void					env_insert(t_shell *sh, t_env *e, char *k, char *v);
+void					env_insert(t_shell *sh, t_env *env, char *k, char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
+void					env_initialize_local(t_shell *sh);
 char					*env_search(t_env *env, const char *key);
 char					env_delete_item_from_array(t_env *env, const char *key);
 t_env					*env_new(t_shell *sh, char **environ);
