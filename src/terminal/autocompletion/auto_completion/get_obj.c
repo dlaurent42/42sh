@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 18:47:43 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/09 23:33:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool			parse_obj(t_shell *sh, char **argv)
 	}
 	if (!sh->ac->obj)
 		sh->ac->obj = obj;
-	else if (last_obj)
+	else if (last_obj)//
 		last_obj->next = obj;
 	last_obj = obj;
 	return (true);
@@ -56,8 +56,8 @@ static bool			get_binaries(t_shell *sh, char **argv)
 			free(obj);
 			return (false);
 		}
-		if (!sh->ac->obj)
-			sh->ac->obj = obj;
+		if (!sh->ac->bin)
+			sh->ac->bin = obj;
 		else if (last_obj)
 			last_obj->next = obj;
 		last_obj = obj;
@@ -68,12 +68,12 @@ static bool			get_binaries(t_shell *sh, char **argv)
 
 bool				auto_get_obj(t_shell *sh)
 {
-	if (sh->ac->auto_mode != AUTO_NON && sh->ac->auto_mode != AUTO_BIN)
+	if (sh->ac->auto_mode != AUTO_NON)
 	{
 		if (!(parse_obj(sh, sh->ac->argv)))
 			return (false);
 	}
-	else if (sh->ac->auto_mode == AUTO_BIN)
+	if (sh->ac->auto_mode == AUTO_BIN && sh->ac->auto_mode != AUTO_NON)
 	{
 		if (!(get_binaries(sh, sh->ac->argv)))
 			return (false);
