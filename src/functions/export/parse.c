@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 23:13:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:35:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 13:09:57 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/10 13:28:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char			sh_unset(t_shell *sh, char **argv)
+char	*sh_export_parse(char *arg)
 {
-	int		i;
-	char	res;
-	size_t	argc;
+	int	i;
+	int	j;
 
 	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_unset_error(NULL, 1));
-	while (argv[i] && (res = sh_unset_remove(sh, argv[i])) == 0)
-		i++;
-	return (res);
+	j = 0;
+	while (arg && arg[i])
+	{
+		if (arg[i] == '\'' || arg[i] == '"')
+		{
+			j = i;
+			while (arg[j])
+			{
+				arg[j] = arg[j + 1];
+				j++;
+			}
+		}
+		else
+			i++;
+	}
+	return (arg);
 }

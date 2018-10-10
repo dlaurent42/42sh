@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 23:13:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:35:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 14:35:36 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/10 14:36:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char			sh_unset(t_shell *sh, char **argv)
+char	sh_unset_error(char *key, int err_id)
 {
-	int		i;
-	char	res;
-	size_t	argc;
-
-	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_unset_error(NULL, 1));
-	while (argv[i] && (res = sh_unset_remove(sh, argv[i])) == 0)
-		i++;
-	return (res);
+	if (err_id == 1)
+		ft_putendl_fd("unset: not enough arguments", 2);
+	if (err_id == 2)
+	{
+		ft_putstr_fd("unset: ", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd(" not found", 2);
+	}
+	if (err_id == 3)
+	{
+		ft_putstr_fd("unset: cannot unset", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd("", 2);
+	}
+	ft_strdel(&key);
+	return (1);
 }

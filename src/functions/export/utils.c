@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 23:13:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:35:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 13:09:54 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/10 13:56:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char			sh_unset(t_shell *sh, char **argv)
+int	sh_export_isbin(char *arg)
 {
 	int		i;
-	char	res;
-	size_t	argc;
 
 	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_unset_error(NULL, 1));
-	while (argv[i] && (res = sh_unset_remove(sh, argv[i])) == 0)
+	while (arg[i])
+	{
+		if (arg[i] == '\'' || arg[i] == '"')
+			return (0);
+		if (i && arg[i] == '=' && arg[i + 1] && arg[i + 1] == '=' && arg[i + 2])
+			return (i + 2);
 		i++;
-	return (res);
+	}
+	return (0);
+}
+
+int	sh_export_equal(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (i);
+		i++;
+	}
+	return (0);
 }

@@ -6,22 +6,29 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 10:52:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/10 14:39:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	sh_env_add_item(t_shell *sh, t_env *env, char *arg)
+static char	sh_env_add_item_noequal(t_shell *sh, t_env *env, char *key)
+{
+	char		*val;
+
+	val = env_search(sh->local_env, key);
+	if (!env_search(env, key) && env->count + 1 >= env->size)
+		return (sh_setenv_error(key, val, 4));
+	env_insert(sh, env, key, val);
+	return (0);
+}
+
+static char	sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
 {
 	int			eq_sym;
 	char		*key;
 	char		*val;
 
-	key = NULL;
-	val = NULL;
-	if (!arg || arg[0] == '=' || ft_strcountif(arg, '=') == 0)
-		return (2);
 	key = sh_setenv_parse(ft_strdups(arg));
 	eq_sym = sh_setenv_equal(key);
 	val = ft_strdups(ft_strchrsp(key, '='));
@@ -32,6 +39,15 @@ static char	sh_env_add_item(t_shell *sh, t_env *env, char *arg)
 	ft_strdel(&key);
 	ft_strdel(&val);
 	return (0);
+}
+
+static char	sh_env_add_item(t_shell *sh, t_env *env, char *arg)
+{
+	if (!arg || arg[0] == '=')
+		return (2);
+	if (ft_strcountif(arg, '=') == 0)
+		return (sh_env_add_item_noequal(sh, env, arg));
+	return (sh_env_add_item_equal(sh, env, arg));
 }
 
 static void	sh_env_print(t_env *env)

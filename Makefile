@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/11 16:55:48 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/11 16:56:25 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,11 @@ SRC			=	shell.c														\
 				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
+				functions/alias/add.c										\
+				functions/alias/alias.c										\
+				functions/alias/error.c										\
+				functions/alias/parse.c										\
+				functions/alias/utils.c										\
 				functions/redirect.c										\
 				functions/list_of_builtins.c								\
 				functions/cd/cd.c											\
@@ -39,6 +44,12 @@ SRC			=	shell.c														\
 				functions/env/parse.actions.c								\
 				functions/env/parse.prepare.c								\
 				functions/exit/exit.c										\
+				functions/export/add.c										\
+				functions/export/display.c									\
+				functions/export/error.c									\
+				functions/export/export.c									\
+				functions/export/parse.c									\
+				functions/export/utils.c									\
 				functions/history/error.c									\
 				functions/history/history.c									\
 				functions/history/options.c									\
@@ -52,7 +63,11 @@ SRC			=	shell.c														\
 				functions/setenv/parse.c									\
 				functions/setenv/setenv.c									\
 				functions/setenv/utils.c									\
-				functions/unsetenv/errors.c									\
+				functions/unset/error.c										\
+				functions/unset/parse.c										\
+				functions/unset/remove.c									\
+				functions/unset/unset.c										\
+				functions/unsetenv/error.c									\
 				functions/unsetenv/parse.c									\
 				functions/unsetenv/remove.c									\
 				functions/unsetenv/unsetenv.c								\
@@ -195,6 +210,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
+				@mkdir -p $(OBJ_DIR)/functions/alias
 				@mkdir -p $(OBJ_DIR)/functions/cd
 				@mkdir -p $(OBJ_DIR)/functions/echo
 				@mkdir -p $(OBJ_DIR)/functions/env

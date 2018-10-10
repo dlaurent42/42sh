@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 23:13:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:35:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 14:37:02 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/10 14:37:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char			sh_unset(t_shell *sh, char **argv)
+char	sh_unset_remove(t_shell *sh, char *arg)
 {
-	int		i;
-	char	res;
-	size_t	argc;
+	char	*arg_parsed;
 
-	i = 0;
-	res = 0;
-	argc = ft_count_argv((void **)argv);
-	if (argc == 0)
-		return (sh_unset_error(NULL, 1));
-	while (argv[i] && (res = sh_unset_remove(sh, argv[i])) == 0)
-		i++;
-	return (res);
+	arg_parsed = sh_unset_parse(ft_strdup(arg));
+	if (!env_search(sh->local_env, arg_parsed))
+		return (sh_unset_error(arg_parsed, 2));
+	env_delete_item(sh->local_env, arg_parsed);
+	if (env_search(sh->local_env, arg_parsed))
+		return (sh_unset_error(arg_parsed, 3));
+	ft_strdel(&arg_parsed);
+	return (0);
 }

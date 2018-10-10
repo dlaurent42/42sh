@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 18:58:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/10 16:48:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,43 @@ static char	sh_command_dispatcher(t_shell *sh)
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 3, ' ');
 		res = sh_cd(sh, strsplt);
-	}
-	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x'
-	&& sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
+	} // exit
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 5, ' ');
 		sh_exit(sh, strsplt);
-	}
-	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'n'
-	&& sh->buffer.content[2] == 'v')
+	} // env
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 'v')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 4, ' ');
 		res = sh_env(sh, strsplt);
-	}
-	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e'
-	&& sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e'
-	&& sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
+	} // setenv
+	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e' && sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
 		res = sh_setenv(sh, strsplt);
-	}
-	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n'
-	&& sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e'
-	&& sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e'
-	&& sh->buffer.content[6] == 'n' && sh->buffer.content[7] == 'v')
+	} // export
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x' && sh->buffer.content[2] == 'p' && sh->buffer.content[3] == 'o' && sh->buffer.content[4] == 'r' && sh->buffer.content[5] == 't')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
+		res = sh_export(sh, strsplt);
+	} // unsetenv
+	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e' && sh->buffer.content[6] == 'n' && sh->buffer.content[7] == 'v')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 9, ' ');
 		res = sh_unsetenv(sh, strsplt);
-	}
-	else if (sh->buffer.content[0] == 'h' && sh->buffer.content[1] == 'i'
-	&& sh->buffer.content[2] == 's' && sh->buffer.content[3] == 't'
-	&& sh->buffer.content[4] == 'o' && sh->buffer.content[5] == 'r'
-	&& sh->buffer.content[6] == 'y')
+	} // unset
+	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
+		res = sh_unset(sh, strsplt);
+	} // alias
+	else if (sh->buffer.content[0] == 'a' && sh->buffer.content[1] == 'l' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 'a' && sh->buffer.content[4] == 's')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
+		res = sh_alias(sh, strsplt);
+	} //history
+	else if (sh->buffer.content[0] == 'h' && sh->buffer.content[1] == 'i' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 't' && sh->buffer.content[4] == 'o' && sh->buffer.content[5] == 'r' && sh->buffer.content[6] == 'y')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 8, ' ');
 		res = sh_history(sh, strsplt);

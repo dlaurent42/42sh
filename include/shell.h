@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:55:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:56:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,16 @@ void					sh_command_run(t_shell *sh);
 void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 
 /*
+** functions - alias
+*/
+int						sh_alias_isbin(char *arg);
+int						sh_alias_equal(char *arg);
+char					sh_alias(t_shell *sh, char **argv);
+char					sh_alias_add(t_shell *sh, t_env *env, char *arg);
+char					sh_alias_error(char *key, char *val, int err_id);
+char					*sh_alias_parse(char *arg);
+
+/*
 ** functions - cd
 */
 int						sh_cd_remove_troll(char *s);
@@ -256,7 +266,13 @@ char					sh_exit(t_shell *sh, char **argv);
 /*
 ** functions - export
 */
-char					sh_export(t_shell $sh, char **argv);
+char					sh_export(t_shell *sh, char **argv);
+char					sh_export_add(t_shell *sh, t_env *env, char *arg);
+char					sh_export_display(t_shell *sh, bool exportable);
+char					sh_export_error(char *k, char *v, int id, char *msg);
+char					*sh_export_parse(char *arg);
+int						sh_export_isbin(char *arg);
+int						sh_export_equal(char *arg);
 
 /*
 ** functions - history
@@ -297,7 +313,10 @@ char					*sh_setenv_parse(char *arg);
 /*
 ** functions - unset
 */
-char					sh_unset(t_shell $sh, char **argv);
+char					sh_unset(t_shell *sh, char **argv);
+char					sh_unset_remove(t_shell *sh, char *arg);
+char					sh_unset_error(char *key, int err_id);
+char					*sh_unset_parse(char *arg);
 
 /*
 ** functions - unsetenv
