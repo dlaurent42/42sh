@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 23:38:30 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 07:51:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 08:00:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void				auto_merge_objs(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
 
-	if (sh->ac->cmp_mode != AUTO_BIN)
+	if (sh->ac->auto_mode != AUTO_BIN)
 		return ;
 	obj = head;
 	while (obj && obj->next)
