@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 00:53:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:54:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 			sh->ac->auto_mode = AUTO_ENV;
 			str++;
 		}
+		else
+			sh->ac->auto_mode = AUTO_REG;
 		if ((slash = ft_strrchr(str, '/')))
 			sh->ac->pre_file_name = ft_strndup(content, (slash - content) + 1);
 		else
