@@ -6,37 +6,13 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 22:33:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 22:42:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "auto_completion.h"
 #include "auto_completion_prot.h"
-
-static int 			ft_strncasecmp(const char *s1, const char *s2, size_t len)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-
-	if (!s1 || !s2)
-		return (1);
-	if (!len)
-		return (0);
-	while (len--)
-	{
-		c1 = ft_tolower(*s1++);
-		c2 = ft_tolower(*s2++);
-		if (c1 != c2 || !c1)
-			break ;
-	}
-	return ((int)c1 - (int)c2);
-}
-
-//static int 			ft_strcasecmp(const char *s1, const char *s2)
-//{
-//	return(ft_strncasecmp(s1, s2, ft_strlen(s1) + 1));
-//}
 
 static void			get_mode(t_shell *sh, t_obj *head)
 {
