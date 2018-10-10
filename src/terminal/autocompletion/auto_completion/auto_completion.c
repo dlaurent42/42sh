@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 00:37:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:53:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 		else
 			sh->ac->pre_file_name = ft_strndup(content, (str - content));
 	}
-	if (!contains_printable_characters(content) || !sh->ac->pre_file_name)
+	if (!contains_printable_characters(content) || !sh->ac->pre_file_name
+			|| sh->ac->auto_mode == AUTO_NON)
 		return (NULL);
 	return (str);
 }
