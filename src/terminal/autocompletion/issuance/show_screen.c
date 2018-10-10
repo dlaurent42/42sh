@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 22:51:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:56:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void			do_loop(t_shell *sh, t_obj *head)
 		{
 			if (sh->ac->select->data.dir)
 				sh_print_str(sh, "/");
-			else if (sh->ac->select->data.env)
+			else if (sh->ac->select->data.env && sh->ac->auto_mode != AUTO_ENV)
 				sh_print_str(sh, "=");
 			else
 				sh_print_str(sh, " ");

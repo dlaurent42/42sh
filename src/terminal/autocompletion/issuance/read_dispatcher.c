@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 11:28:39 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:55:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				auto_read_dispatcher(t_shell *sh)
 		{
 			if (sh->ac->select->data.dir)
 				sh_print_str(sh, "/");
-			else if (sh->ac->select->data.env)
+			else if (sh->ac->select->data.env && sh->ac->auto_mode != AUTO_ENV)
 				sh_print_str(sh, "=");
 			else
 				sh_print_str(sh, " ");
