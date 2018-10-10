@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/09 13:55:45 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/10 07:49:20 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,20 +85,21 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/sort/sort.c							\
 				terminal/autocompletion/sort/sort_alpha.c					\
-				terminal/autocompletion/issuance/issuance.c					\
-				terminal/autocompletion/issuance/read_dispatcher.c			\
+				terminal/autocompletion/issuance/path.c						\
+				terminal/autocompletion/issuance/do_ls.c					\
 				terminal/autocompletion/issuance/move_up.c					\
+				terminal/autocompletion/issuance/issuance.c					\
 				terminal/autocompletion/issuance/move_down.c				\
 				terminal/autocompletion/issuance/move_left.c				\
 				terminal/autocompletion/issuance/move_right.c				\
-				terminal/autocompletion/issuance/get_attributes.c			\
-				terminal/autocompletion/issuance/do_ls.c					\
-				terminal/autocompletion/issuance/path.c						\
+				terminal/autocompletion/issuance/merge_objs.c				\
 				terminal/autocompletion/issuance/show_screen.c				\
-				terminal/autocompletion/issuance/calc_len_file_name.c		\
-				terminal/autocompletion/issuance/is_executeable.c			\
 				terminal/autocompletion/issuance/do_file_admin.c			\
+				terminal/autocompletion/issuance/get_attributes.c			\
+				terminal/autocompletion/issuance/is_executeable.c			\
+				terminal/autocompletion/issuance/read_dispatcher.c			\
 				terminal/autocompletion/issuance/do_special_modes.c			\
+				terminal/autocompletion/issuance/calc_len_file_name.c		\
 				terminal/autocompletion/issuance/calculate_number_of_columns.c\
 				terminal/autocompletion/display/display.c					\
 				terminal/autocompletion/display/clear_selection_screen.c	\
