@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 11:03:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 11:08:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool			parse_obj(t_shell *sh, char **argv)
 	return (true);
 }
 
-static bool			get_binaries(t_shell *sh, char **argv)
+static bool			get_binaries(t_shell *sh)
 {
 	t_obj			*obj;
 	t_obj			*last_obj;
@@ -40,8 +40,6 @@ static bool			get_binaries(t_shell *sh, char **argv)
 
 	last_obj = NULL;
 	bin_auto = sh->bin->bin_auto;
-	if (*argv)
-		argv++;
 	while (bin_auto)
 	{
 		if (!(obj = auto_create_obj()))
@@ -62,7 +60,7 @@ static bool			get_binaries(t_shell *sh, char **argv)
 	return (true);
 }
 
-static bool			get_env(t_shell *sh, char **argv)
+static bool			get_env(t_shell *sh)
 {
 	t_obj			*obj;
 	t_obj			*last_obj;
@@ -71,8 +69,6 @@ static bool			get_env(t_shell *sh, char **argv)
 
 	last_obj = NULL;
 	environment = sh->env->environment;
-	if (*argv)
-		argv++;
 	while (*environment)
 	{
 		if ((equals = ft_strchr(*environment, '=')))
@@ -80,7 +76,7 @@ static bool			get_env(t_shell *sh, char **argv)
 			if (!(obj = auto_create_obj()))
 				return (false);
 			obj->data.env = 1;
-			if (!(obj->data.str = ft_strdups(*environment)))
+			if (!(obj->data.str = ft_strndup(*environment, equals - *environment)))
 			{
 				free(obj);
 				return (false);
@@ -105,9 +101,9 @@ bool				auto_get_obj(t_shell *sh)
 	}
 	if (sh->ac->auto_mode == AUTO_BIN && sh->ac->auto_mode != AUTO_NON)
 	{
-		if (!(get_binaries(sh, sh->ac->argv)))
+		if (!(get_binaries(sh)))
 			return (false);
-		if (!(get_env(sh, sh->ac->argv)))
+		if (!(get_env(sh)))
 			return (false);
 	}
 	return (true);
