@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 11:13:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 11:20:20 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,31 @@ static bool			get_binaries(t_shell *sh)
 	return (true);
 }
 
-static bool			get_env(t_shell *sh)
+static bool			get_env(t_shell *sh, char **env)
 {
 	t_obj			*obj;
 	t_obj			*last_obj;
 	char			*equals;
-	char			**env;
 
 	last_obj = NULL;
-	env = sh->env->environment;
 	while (*env)
 	{
-		if ((equals = ft_strchr(*env, '=')))
+		if (!(equals = ft_strchr(*env, '=')))
+			break ;
+		if (!(obj = auto_create_obj()))
+			return (false);
+		obj->data.env = 1;
+		if (!(obj->data.str = ft_strndup(*env, equals - *env)))
 		{
-			if (!(obj = auto_create_obj()))
-				return (false);
-			obj->data.env = 1;
-			if (!(obj->data.str = ft_strndup(*env, equals - *env)))
-			{
-				free(obj);
-				return (false);
-			}
-			if (!sh->ac->env)
-				sh->ac->env = obj;
-			else if (last_obj)
-				last_obj->next = obj;
-			last_obj = obj;
-			env++;
+			free(obj);
+			return (false);
 		}
+		if (!sh->ac->env)
+			sh->ac->env = obj;
+		else if (last_obj)
+			last_obj->next = obj;
+		last_obj = obj;
+		env++;
 	}
 	return (true);
 }
@@ -103,7 +100,7 @@ bool				auto_get_obj(t_shell *sh)
 	{
 		if (!(get_binaries(sh)))
 			return (false);
-		if (!(get_env(sh)))
+		if (!(get_env(sh, sh->env->environment)))
 			return (false);
 	}
 	return (true);
