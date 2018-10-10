@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 10:45:56 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 11:03:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,40 @@ static bool			get_binaries(t_shell *sh, char **argv)
 	return (true);
 }
 
+static bool			get_env(t_shell *sh, char **argv)
+{
+	t_obj			*obj;
+	t_obj			*last_obj;
+	char			*equals;
+	char			**environment;
+
+	last_obj = NULL;
+	environment = sh->env->environment;
+	if (*argv)
+		argv++;
+	while (*environment)
+	{
+		if ((equals = ft_strchr(*environment, '=')))
+		{
+			if (!(obj = auto_create_obj()))
+				return (false);
+			obj->data.env = 1;
+			if (!(obj->data.str = ft_strdups(*environment)))
+			{
+				free(obj);
+				return (false);
+			}
+			if (!sh->ac->env)
+				sh->ac->env = obj;
+			else if (last_obj)
+				last_obj->next = obj;
+			last_obj = obj;
+			environment++;
+		}
+	}
+	return (true);
+}
+
 bool				auto_get_obj(t_shell *sh)
 {
 	if (sh->ac->auto_mode != AUTO_NON)
@@ -72,6 +106,8 @@ bool				auto_get_obj(t_shell *sh)
 	if (sh->ac->auto_mode == AUTO_BIN && sh->ac->auto_mode != AUTO_NON)
 	{
 		if (!(get_binaries(sh, sh->ac->argv)))
+			return (false);
+		if (!(get_env(sh, sh->ac->argv)))
 			return (false);
 	}
 	return (true);
