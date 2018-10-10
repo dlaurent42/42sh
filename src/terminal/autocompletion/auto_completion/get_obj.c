@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 11:08:47 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 11:13:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,18 @@ static bool			get_env(t_shell *sh)
 	t_obj			*obj;
 	t_obj			*last_obj;
 	char			*equals;
-	char			**environment;
+	char			**env;
 
 	last_obj = NULL;
-	environment = sh->env->environment;
-	while (*environment)
+	env = sh->env->environment;
+	while (*env)
 	{
-		if ((equals = ft_strchr(*environment, '=')))
+		if ((equals = ft_strchr(*env, '=')))
 		{
 			if (!(obj = auto_create_obj()))
 				return (false);
 			obj->data.env = 1;
-			if (!(obj->data.str = ft_strndup(*environment, equals - *environment)))
+			if (!(obj->data.str = ft_strndup(*env, equals - *env)))
 			{
 				free(obj);
 				return (false);
@@ -86,7 +86,7 @@ static bool			get_env(t_shell *sh)
 			else if (last_obj)
 				last_obj->next = obj;
 			last_obj = obj;
-			environment++;
+			env++;
 		}
 	}
 	return (true);
