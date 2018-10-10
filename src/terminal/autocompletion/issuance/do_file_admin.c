@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 22:42:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:30:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static void			lock_files(t_shell *sh, t_obj *obj)
 			if (!ft_strstr(obj->data.str, sh->ac->file_name))
 				obj->data.no_file = 1;
 		}
+		if (sh->ac->auto_mode == AUTO_ENV && !obj->data.env)
+				obj->data.no_file = 1;
 		if (!ft_strcmps(obj->data.str, "."))
 			obj->data.no_file = 1;
 		obj = obj->next;

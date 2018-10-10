@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 11:20:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:07:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,13 @@ bool				auto_get_obj(t_shell *sh)
 		if (!(parse_obj(sh, sh->ac->argv)))
 			return (false);
 	}
-	if (sh->ac->auto_mode == AUTO_BIN && sh->ac->auto_mode != AUTO_NON)
+	if (sh->ac->auto_mode == AUTO_BIN)
 	{
 		if (!(get_binaries(sh)))
 			return (false);
+	}
+	if (sh->ac->auto_mode == AUTO_BIN || sh->ac->auto_mode == AUTO_ENV)
+	{
 		if (!(get_env(sh, sh->env->environment)))
 			return (false);
 	}
