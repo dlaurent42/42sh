@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:55:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:55:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,11 @@ char					sh_env_prepare_p(char **p, int *j, int *i, char **argv);
 char					sh_exit(t_shell *sh, char **argv);
 
 /*
+** functions - export
+*/
+char					sh_export(t_shell $sh, char **argv);
+
+/*
 ** functions - history
 */
 char					sh_history(t_shell *sh, char **argv);
@@ -288,6 +293,11 @@ char					sh_setenv(t_shell *sh, char **argv);
 char					sh_setenv_add(t_shell *sh, t_env *env, char *arg);
 char					sh_setenv_error(char *key, char *val, int err_id);
 char					*sh_setenv_parse(char *arg);
+
+/*
+** functions - unset
+*/
+char					sh_unset(t_shell $sh, char **argv);
 
 /*
 ** functions - unsetenv

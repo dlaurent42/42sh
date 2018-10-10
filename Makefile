@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/11 16:55:32 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/11 16:55:48 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -199,8 +199,10 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/echo
 				@mkdir -p $(OBJ_DIR)/functions/env
 				@mkdir -p $(OBJ_DIR)/functions/exit
+				@mkdir -p $(OBJ_DIR)/functions/export
 				@mkdir -p $(OBJ_DIR)/functions/history
 				@mkdir -p $(OBJ_DIR)/functions/setenv
+				@mkdir -p $(OBJ_DIR)/functions/unset
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/utils
 				@mkdir -p $(OBJ_DIR)/structures
