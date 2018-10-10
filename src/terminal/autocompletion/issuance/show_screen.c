@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 08:29:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 08:33:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ static void			do_loop(t_shell *sh, t_obj *head)
 
 void				auto_show_screen(t_shell *sh, t_obj *obj)
 {
-	auto_do_special_modes(sh, obj);
-	auto_merge_objs(sh, obj);
 	auto_do_file_admin(sh, obj);
-	auto_sort(obj);
 	if (sh->ac->cmp_mode == MODE_NON)
 		return ;
 	sh->ac->del_file_name = sh->ac->file_name;
