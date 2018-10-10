@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 08:28:46 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void				auto_do_ls(t_shell *sh, t_obj *obj)
 		return ;
 	sh->ac->current_obj = head;
 	auto_get_attributes(sh);
-	auto_sort(sh);
 	head = sh->ac->current_obj;
 	auto_show_screen(sh, head);
 	auto_free_obj(&head);
