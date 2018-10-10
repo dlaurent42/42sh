@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 00:54:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 01:40:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,34 @@ static bool			create_ac(t_shell *sh, char *str)
 	return (true);
 }
 
+//static bool				auto_env(t_shell *sh)
+//{
+//	int				number_of_deletions;
+//	int				offset;
+//	char			*track;
+//	char			*ptr_to_exc;
+//	t_cmd			*cmd;
+//
+//	offset = 0;
+//	while ((ptr_to_exc = ft_strstr(sh->buffer.content + offset++, "!")))
+//	{
+//		if (!ft_isdigit(*(ptr_to_exc + 1))
+//				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
+//		{
+//			number_of_deletions = ft_strlens(ptr_to_exc);
+//			track = sh->buffer.content;
+//			sh_move_home(sh);
+//			while (track++ != ptr_to_exc)
+//				sh_move_right(sh);
+//			while (number_of_deletions--)
+//				sh_delete_current_char(sh);
+//			sh_print_str(sh, cmd->content);
+//			*status = true;
+//			sh_move_end(sh);
+//		}
+//	}
+//}
+
 bool				auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
@@ -90,6 +118,7 @@ bool				auto_completion(t_shell *sh)
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
+		sh_move_end(sh);
 		if (!(sh->ac = (t_ac *)malloc(sizeof(t_ac))))
 			return (false);
 		ft_bzero(sh->ac, sizeof(t_ac));
