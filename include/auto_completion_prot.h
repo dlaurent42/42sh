@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 08:18:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 08:28:04 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void					auto_hist_number(t_shell *sh, bool *status);
 void					auto_hist_name(t_shell *sh, bool *status);
 
 void					auto_sort(t_obj *obj);
-bool					auto_sort_alpha(t_shell *sh);
 
 void					auto_file_name(t_shell *sh, t_obj *obj);
 void					auto_print_spaces(int diff);

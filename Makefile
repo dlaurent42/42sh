@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/10 07:49:20 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/10 08:18:06 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,6 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				terminal/autocompletion/sort/sort.c							\
-				terminal/autocompletion/sort/sort_alpha.c					\
 				terminal/autocompletion/issuance/path.c						\
 				terminal/autocompletion/issuance/do_ls.c					\
 				terminal/autocompletion/issuance/move_up.c					\
