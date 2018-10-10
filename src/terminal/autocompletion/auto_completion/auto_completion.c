@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 20:43:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 20:55:18 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 	if (!(str = ft_strrchr(move_past_leading_spaces(content), ' ')))
 	{
 		str = content;
-		sh->ac->auto_mode = AUTO_BIN;
+		sh->ac->auto_mode = (*str != '.') ? AUTO_BIN : AUTO_REG;
 		sh->ac->pre_file_name = ft_strnew(0);
 	}
 	else
