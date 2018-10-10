@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 02:41:07 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 08:25:44 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 00:04:47 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define AUTO_BIN		1
 # define AUTO_REG		2
 # define AUTO_WILD		3
+# define AUTO_ENV		4
 
 # define AT_FIRST		0
 # define AT_REST		1
