@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:52 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 11:28:39 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@ void				auto_read_dispatcher(t_shell *sh)
 		if (sh_is_delete_combination(line))
 			sh_deletion_dispatcher(sh);
 		else if (line[0] == 10)
-			sh_print_str(sh,
-					(sh->ac->select->data.dir) ? "/" : " ");
+		{
+			if (sh->ac->select->data.dir)
+				sh_print_str(sh, "/");
+			else if (sh->ac->select->data.env)
+				sh_print_str(sh, "=");
+			else
+				sh_print_str(sh, " ");
+		}
 		else
 			sh_fill_buffer(sh);
 		auto_clear_selection_screen(sh);
