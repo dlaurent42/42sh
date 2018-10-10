@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 23:33:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 10:45:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ static bool			parse_obj(t_shell *sh, char **argv)
 		free(obj);
 		return (false);
 	}
-	if (!sh->ac->obj)
-		sh->ac->obj = obj;
-	else if (last_obj)//
-		last_obj->next = obj;
-	last_obj = obj;
+	sh->ac->obj = obj;
 	return (true);
 }
 
