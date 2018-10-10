@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 13:32:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/10 20:43:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool			contains_printable_characters(char *str)
 {
 	while (str && *str)
 	{
-		if (ft_isalnum(*str))
+		if (ft_isprint(*str))
 			return (true);
 		str++;
 	}
