@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 02:56:42 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 03:02:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,8 @@ static bool				auto_env(t_shell *sh)
 		ptr_to_dollar = sh->buffer.content;
 	if (*ptr_to_dollar != '$')
 		return (false);
-
 	len = ft_strlen(ptr_to_dollar + 1) + 1;
-	if(!(env = get_env_var(sh, ptr_to_dollar, len)))
-		return (false);
-	if (!env
-			|| !ft_strchr(env, '=')
+	if(!(env = get_env_var(sh, ptr_to_dollar, len)) || !ft_strchr(env, '=')
 			|| ft_strncmp(env, ptr_to_dollar + 1, ft_strchr(env, '=') - env)
 			|| !(env = ft_strchr(env, '=') + 1))
 		return (false);
