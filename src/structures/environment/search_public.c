@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_to.c                                        :+:      :+:    :+:   */
+/*   search_public.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 18:56:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:19:29 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/11 14:52:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_export_to(t_shell *sh, t_env *env, char *path)
+char	*env_search_public(t_env *env, const char *key)
 {
-	int		fd;
-	t_cmd	*cmd;
+	int			i;
+	int			index;
+	t_env_item	*item;
 
-	if (!path && !(path = env_search(env, "HISTFILE")))
-		return ;
-	remove(path);
-	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)
-		return ;
-	ft_putendl_fd(VERIF_KEY, fd);
-	if (!sh->cmd)
-		return ((void)close(fd));
-	cmd = sh->cmd->last;
-	while (cmd)
+	i = 1;
+	index = env_get_hash(key, env->size, 0);
+	item = env->items[index];
+	while (item)
 	{
-		ft_putendl_fd(cmd->content, fd);
-		cmd = cmd->prev;
+		if (item->key && item->value && !item->local
+		&& !ft_strcmps(item->key, key))
+			return (item->value);
+		index = env_get_hash(key, env->size, i);
+		item = env->items[index];
+		i++;
 	}
-	close(fd);
+	return (NULL);
 }

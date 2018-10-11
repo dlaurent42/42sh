@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 19:30:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 12:55:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		command_import(t_shell *sh)
 	char	*buffer;
 
 	buffer = NULL;
-	if (!(path = env_search(sh->local_env, "HISTFILE")))
+	if (!(path = env_search(sh->env, "HISTFILE")))
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
 		return (command_import_error(fd, path));

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_to.c                                        :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 18:56:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:19:29 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/11 13:18:54 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/11 16:48:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_export_to(t_shell *sh, t_env *env, char *path)
+char	sh_alias_display(t_env *env, bool exportable)
 {
-	int		fd;
-	t_cmd	*cmd;
+	int		i;
 
-	if (!path && !(path = env_search(env, "HISTFILE")))
-		return ;
-	remove(path);
-	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)
-		return ;
-	ft_putendl_fd(VERIF_KEY, fd);
-	if (!sh->cmd)
-		return ((void)close(fd));
-	cmd = sh->cmd->last;
-	while (cmd)
+	i = 0;
+	if (!env->environment[0])
+		return (0);
+	while (env->environment[i])
 	{
-		ft_putendl_fd(cmd->content, fd);
-		cmd = cmd->prev;
+		(exportable) ? ft_putstr("alias ") : 0;
+		ft_putendl(env->environment[i]);
+		i++;
 	}
-	close(fd);
+	return (0);
 }

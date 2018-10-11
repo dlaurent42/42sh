@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   unalias.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 01:11:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:48:00 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/09 23:13:15 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/11 14:48:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** unsetenv behavior is like comparable to unset behavior,
-** except it not possible to communicate with local variables.
-**
-** -> unsetenv remove non-local variables from env
+** unalias behavior is like comparable to unset behavior,
+** but with aliases.
 **
 ** -----------------------------------------------------------------------------
 **
 ** Syntax
-**       unset name [...]
+**       unalias name [...]
 */
 
-char	sh_unsetenv(t_shell *sh, t_env *env, char **argv)
+char			sh_unalias(t_shell *sh, t_env *env, char **argv)
 {
 	int		i;
 	char	res;
@@ -33,10 +31,10 @@ char	sh_unsetenv(t_shell *sh, t_env *env, char **argv)
 	i = 0;
 	res = 0;
 	argc = ft_count_argv((void **)argv);
-	(void)sh;
+	(void)env;
 	if (argc == 0)
-		return (sh_unsetenv_error(NULL, 1));
-	while (argv[i] && (res = sh_unsetenv_remove(env, argv[i])) == 0)
+		return (sh_unalias_error(NULL, 1));
+	while (argv[i] && (res = sh_unalias_remove(sh->alias, argv[i])) == 0)
 		i++;
 	return (res);
 }

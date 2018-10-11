@@ -6,26 +6,22 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:50:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 17:37:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 14:48:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** Source : https://ss64.com/bash/read.html
+** Read one line from the standard input, (or from a file) and assign the
+** word(s) to variable name(s).
+**
 ** -----------------------------------------------------------------------------
-** read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]
-** -----------------------------------------------------------------------------
+**
 ** Syntax
-**       read [-ers] [-a aname] [-p prompt] [-t timeout]
-**               [-n nchars] [-d delim] [name...]
+**       read [-ers] [-p prompt] [-t timeout] [-n nchars] [-d delim] [name...]
+**
 ** Key
-**    -a aname
-**              The words are assigned to sequential indices of the array
-**				variable aname, starting at 0.
-**              aname is unset before any new values are assigned.
-**				Other name arguments are ignored.
 **
 **    -d delim
 **              The first character of delim is used to terminate the input
@@ -77,3 +73,10 @@
 ** If no names are supplied, the line read is assigned to the variable REPLY.
 ** The return code is zero, unless end-of-file is encountered or read times out.
 */
+
+char		sh_read(t_shell *sh, t_env *env, char **argv)
+{
+	(void)sh;
+	(void)env;
+	(void)argv;
+}

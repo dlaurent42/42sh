@@ -6,11 +6,26 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 19:38:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:32:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+/*
+** Display message on screen, writes each given STRING to standard output,
+** with a space between each and a newline after the last one.
+**
+** -----------------------------------------------------------------------------
+**
+** Syntax
+**      echo [options]... [string]...
+**
+** Options
+**
+**  -n
+**      Do not output the trailing newline.
+*/
 
 static char	*sh_echo_parse_string(char *s)
 {
@@ -51,13 +66,14 @@ static char	*sh_echo_concat_args(char **argv)
 	return (s);
 }
 
-char		sh_echo(t_shell *sh, char **argv)
+char		sh_echo(t_shell *sh, t_env *env, char **argv)
 {
 	int		current;
 	char	option_n;
 	char	*string;
 
 	(void)sh;
+	(void)env;
 	current = 0;
 	option_n = FALSE;
 	string = NULL;
@@ -70,5 +86,8 @@ char		sh_echo(t_shell *sh, char **argv)
 	string = sh_echo_concat_args(argv + current);
 	string = sh_echo_parse_string(string);
 	ft_putstr(string);
+	if (!option_n)
+		ft_putchar('\n');
+	ft_strdel(&string);
 	return (0);
 }

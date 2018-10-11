@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 16:33:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:05:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:48:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void		sh_search_freeze(t_shell *sh)
 	sh_reset_buffer(sh);
 	sh_reset_cursor(sh);
 	ft_putstr(CURSOR_SHOW);
-	sh_debug(sh, "end", NULL);
 }

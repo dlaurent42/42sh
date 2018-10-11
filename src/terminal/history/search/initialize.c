@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 16:19:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 19:02:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:48:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	sh_search_init(t_shell *sh)
 {
-	sh_debug(sh, "start", NULL);
 	sh_move_end(sh);
 	sh_browse_freeze(sh);
 	sh->modes.search = TRUE;

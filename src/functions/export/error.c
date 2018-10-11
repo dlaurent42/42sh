@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:10:00 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:19:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:00:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,17 @@ char	sh_export_error(char *key, char *val, int err_id, char *msg)
 	if (err_id == 3)
 	{
 		ft_putstr_fd("export: ", 2);
-		ft_putstr_fd(val, 2);
+		ft_putstr_fd(msg, 2);
 		ft_putendl_fd(" not found", 2);
 	}
 	if (err_id == 4)
 		ft_putendl_fd("export: environment is full", 2);
+	if (err_id == 5)
+	{
+		ft_putstr_fd("export: ", 2);
+		ft_putstr_fd(msg, 2);
+		ft_putendl_fd(" is already public", 2);
+	}
 	ft_strdel(&key);
 	ft_strdel(&val);
 	return (1);

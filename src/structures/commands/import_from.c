@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 19:17:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 20:09:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 12:20:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static char	command_parse_and_add(t_shell *sh, char *content)
 	return (TRUE);
 }
 
-void		command_import_from(t_shell *sh, char *path)
+void		command_import_from(t_shell *sh, t_env *env, char *path)
 {
 	int		fd;
 	char	*buffer;
 
 	buffer = NULL;
-	if (!path && !(path = env_search(sh->local_env, "HISTFILE")))
+	if (!path && !(path = env_search(env, "HISTFILE")))
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
 		return ;

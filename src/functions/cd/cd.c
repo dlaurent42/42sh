@@ -6,58 +6,114 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 20:10:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 13:05:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	sh_cd_tilde_handler(t_shell *sh, char *s, int option_p)
+/*
+** Change Directory - change the current working directory to a specific Folder.
+**
+** -----------------------------------------------------------------------------
+**
+** Syntax
+**       cd [Options] [Directory]
+**
+** Options
+**     -P    Do not follow symbolic links
+**     -L    Follow symbolic links (default)
+**
+** If directory is given, changes the shell's working directory todirectory.
+** If not, changes to HOME (shell variable).
+**
+** If the shell variable CDPATH exists, it is used as a search path.
+** If directory begins with a slash, CDPATH is not used.
+**
+** If directory is `-', this will change to the previous directory location
+** (equivalent to $OLDPWD ).
+**
+** ./ or just . is shorthand for the current directory.
+**
+** The return status is zero if the directory is successfully changed,
+** non-zero otherwise.
+*/
+
+static char	sh_cd_tilde_handler(t_shell *sh, t_env *env, char *s)
 {
 	char	res;
 	char	*home;
 	char	*path;
 
-	if (!(home = env_search(sh->env, "HOME")))
+	if (!(home = env_search(env, "HOME")))
 		return (sh_cd_error(NULL, NULL, 5));
 	if (!(path = ft_strjoins(home, s + 1)))
 		return (sh_cd_error(NULL, NULL, 5));
-	res = (option_p)
-		? sh_cd_nofollow(sh, path, NULL, FALSE)
-		: sh_cd_follow(sh, path, FALSE);
+	res = sh_cd_follow(sh, env, path, FALSE);
 	ft_strdel(&path);
 	return (res);
 }
 
-static char	sh_cd_dispatch(t_shell *sh, int option_p, char **argv, int i)
+static char	sh_cd_dispatch(t_shell *sh, t_env *env, char **argv, int i)
 {
 	char	res;
 
 	res = 0;
-	if (ft_count_argv((void **)argv + i) > 1)
-		res = sh_cd_error(NULL, NULL, 7);
-	else if (!argv[i] || (argv[i][0] == '~' && !argv[i][1]))
-		res = (env_search(sh->env, "HOME"))
-			? sh_cd_nofollow(sh, env_search(sh->env, "HOME"), NULL, FALSE)
+	if (!argv[i] || (argv[i][0] == '~' && !argv[i][1]))
+		res = (env_search(env, "HOME"))
+			? sh_cd_nofollow(sh, env, env_search(env, "HOME"), NULL)
 			: sh_cd_error(NULL, NULL, 5);
 	else if (argv[i][0] == '~')
-		res = sh_cd_tilde_handler(sh, argv[i], option_p);
-	else if (argv[i][0] == '-' && !argv[i][1] && env_search(sh->env, "OLDPWD"))
-		res = (option_p)
-			? sh_cd_nofollow(sh, env_search(sh->env, "OLDPWD"), NULL, TRUE)
-			: sh_cd_follow(sh, env_search(sh->env, "OLDPWD"), TRUE);
+		res = sh_cd_tilde_handler(sh, env, argv[i]);
+	else if (argv[i][0] == '-' && !argv[i][1] && env_search(env, "OLDPWD"))
+		res = sh_cd_follow(sh, env, env_search(env, "OLDPWD"), TRUE);
 	else if (argv[i][0] == '-' && !argv[i][1])
 		res = sh_cd_error(NULL, NULL, 6);
 	else if (argv[i] && argv[i + 1])
 		res = sh_cd_error(argv[i], NULL, 7);
 	else
-		res = (option_p)
-			? sh_cd_nofollow(sh, argv[i], NULL, FALSE)
-			: sh_cd_follow(sh, argv[i], FALSE);
+		res = sh_cd_follow(sh, env, argv[i], FALSE);
 	return (res);
 }
 
-char		sh_cd(t_shell *sh, char **argv)
+static char	sh_cd_tilde_handler_p(t_shell *sh, t_env *env, char *s)
+{
+	char	res;
+	char	*home;
+	char	*path;
+
+	if (!(home = env_search(env, "HOME")))
+		return (sh_cd_error(NULL, NULL, 5));
+	if (!(path = ft_strjoins(home, s + 1)))
+		return (sh_cd_error(NULL, NULL, 5));
+	res = sh_cd_nofollow(sh, env, path, NULL);
+	ft_strdel(&path);
+	return (res);
+}
+
+static char	sh_cd_dispatch_p(t_shell *sh, t_env *env, char **argv, int i)
+{
+	char	res;
+
+	res = 0;
+	if (!argv[i] || (argv[i][0] == '~' && !argv[i][1]))
+		res = (env_search(env, "HOME"))
+			? sh_cd_nofollow(sh, env, env_search(env, "HOME"), NULL)
+			: sh_cd_error(NULL, NULL, 5);
+	else if (argv[i][0] == '~')
+		res = sh_cd_tilde_handler_p(sh, env, argv[i]);
+	else if (argv[i][0] == '-' && !argv[i][1] && env_search(env, "OLDPWD"))
+		res = sh_cd_nofollow_dash(sh, env, env_search(env, "OLDPWD"), NULL);
+	else if (argv[i][0] == '-' && !argv[i][1])
+		res = sh_cd_error(NULL, NULL, 6);
+	else if (argv[i] && argv[i + 1])
+		res = sh_cd_error(argv[i], NULL, 7);
+	else
+		res = sh_cd_nofollow(sh, env, argv[i], NULL);
+	return (res);
+}
+
+char		sh_cd(t_shell *sh, t_env *env, char **argv)
 {
 	int		current;
 	bool	option_p;
@@ -69,5 +125,9 @@ char		sh_cd(t_shell *sh, char **argv)
 	option_p = FALSE;
 	argc = ft_count_argv((void **)argv);
 	current = sh_cd_options(argv, &option_l, &option_p);
-	return (sh_cd_dispatch(sh, option_p, argv, current));
+	if (ft_count_argv((void **)argv + current) > 1)
+		return (sh_cd_error(NULL, NULL, 7));
+	if (option_p)
+		return (sh_cd_dispatch_p(sh, env, argv, current));
+	return (sh_cd_dispatch(sh, env, argv, current));
 }

@@ -6,13 +6,50 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 11:33:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 14:24:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		**sh_env_get_string(char *string, char **argv)
+/*
+** Display, set, or remove environment variables, Run a command in a modified
+** environment.
+**
+** -----------------------------------------------------------------------------
+**
+** Syntax
+**       env [OPTION]... [NAME=VALUE]... [COMMAND [ARGS]...]
+**
+** Options
+**
+**    -u NAME   Remove variable NAME from the environment, if it was in the
+**              environment.
+**
+**   -/-i       Start with an empty environment, ignoring the inherited
+**        		environment.
+**
+** Arguments of the form `VARIABLE=VALUE' set the environment variable VARIABLE
+** to value VALUE.
+**
+** VALUE can be empty (`VARIABLE='). Setting a variable to an empty value is
+** different from unsetting it.
+**
+** The first remaining argument specifies the program name to invoke; it is
+** searched for according to the `PATH' environment variable. Any remaining
+** arguments are passed as arguments to that program.
+**
+** If no command name is specified following the environment specifications,
+** the resulting environment is printed. This is like specifying a command name
+** of `printenv'.
+**
+** Options added :
+**   -v        		verbose
+**   -P utilpath    specify path for exec
+**	 -S string		stringsplit
+*/
+
+static char	**sh_env_get_string(char *string, char **argv)
 {
 	int		i;
 	int		j;
@@ -41,21 +78,20 @@ char		**sh_env_get_string(char *string, char **argv)
 	return (arr);
 }
 
-char		sh_env_is_exec_mode(char **arr)
+static void	sh_env_del_arr(char **arr)
 {
 	int	i;
 
 	i = 0;
 	while (arr[i])
 	{
-		if (ft_strcountif(arr[i], '='))
-			return (FALSE);
+		ft_strdel(&arr[i]);
 		i++;
 	}
-	return (TRUE);
+	(arr) ? free(arr) : 0;
 }
 
-char		sh_env(t_shell *sh, char **argv)
+char		sh_env(t_shell *sh, t_env *src, char **argv)
 {
 	int		res;
 	char	*path;
@@ -66,13 +102,17 @@ char		sh_env(t_shell *sh, char **argv)
 	res = 0;
 	path = NULL;
 	string = NULL;
-	env = env_copy(sh);
+	env = env_copy(sh, src);
 	if (argv)
 		if ((res = sh_env_parse(env, &path, &string, argv)) < 0)
 			return (sh_env_error(env, path, string, res));
 	arr = sh_env_get_string(string, argv + res);
-	if (arr && arr[0] && ft_strcountif(arr[0], '=') == 0)
-		return (sh_env_exec(env, path, arr, sh_env_has_verbose(argv)));
+	res = sh_env_display(sh, env, arr, sh_env_has_verbose(argv));
+	if (res < 0)
+	{
+		res = sh_env_exec(env, path, arr - res, sh_env_has_verbose(argv));
+		sh_env_del_arr(arr);
+	}
 	ft_strdel(&path);
-	return (sh_env_display(sh, env, arr, sh_env_has_verbose(argv)));
+	return (res);
 }

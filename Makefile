@@ -6,7 +6,11 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/10/11 16:56:25 by dlaurent         ###   ########.fr        #
+=======
+#    Updated: 2018/10/11 15:03:39 by dlaurent         ###   ########.fr        #
+>>>>>>> bc02550... [feature] builtins implementation
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +28,7 @@ SRC			=	shell.c														\
 				errors/path.c												\
 				functions/alias/add.c										\
 				functions/alias/alias.c										\
+				functions/alias/display.c									\
 				functions/alias/error.c										\
 				functions/alias/parse.c										\
 				functions/alias/utils.c										\
@@ -63,6 +68,10 @@ SRC			=	shell.c														\
 				functions/setenv/parse.c									\
 				functions/setenv/setenv.c									\
 				functions/setenv/utils.c									\
+				functions/unalias/error.c									\
+				functions/unalias/parse.c									\
+				functions/unalias/remove.c									\
+				functions/unalias/unalias.c									\
 				functions/unset/error.c										\
 				functions/unset/parse.c										\
 				functions/unset/remove.c									\
@@ -94,8 +103,12 @@ SRC			=	shell.c														\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
 				structures/environment/insert.c								\
+				structures/environment/local_to_public.c					\
 				structures/environment/new.c								\
 				structures/environment/search.c								\
+				structures/environment/search_local.c						\
+				structures/environment/search_public.c						\
+				structures/environment/utils.c								\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
@@ -218,6 +231,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/export
 				@mkdir -p $(OBJ_DIR)/functions/history
 				@mkdir -p $(OBJ_DIR)/functions/setenv
+				@mkdir -p $(OBJ_DIR)/functions/unalias
 				@mkdir -p $(OBJ_DIR)/functions/unset
 				@mkdir -p $(OBJ_DIR)/functions/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/utils

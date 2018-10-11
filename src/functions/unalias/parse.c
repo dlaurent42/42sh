@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_to.c                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 18:56:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:19:29 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 14:36:30 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/11 14:58:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_export_to(t_shell *sh, t_env *env, char *path)
+char	*sh_unalias_parse(char *arg)
 {
-	int		fd;
-	t_cmd	*cmd;
+	int	i;
+	int	j;
 
-	if (!path && !(path = env_search(env, "HISTFILE")))
-		return ;
-	remove(path);
-	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)
-		return ;
-	ft_putendl_fd(VERIF_KEY, fd);
-	if (!sh->cmd)
-		return ((void)close(fd));
-	cmd = sh->cmd->last;
-	while (cmd)
+	i = 0;
+	j = 0;
+	while (arg && arg[i])
 	{
-		ft_putendl_fd(cmd->content, fd);
-		cmd = cmd->prev;
+		if (arg[i] == '\'' || arg[i] == '"')
+		{
+			j = i;
+			while (arg[j])
+			{
+				arg[j] = arg[j + 1];
+				j++;
+			}
+		}
+		else
+			i++;
 	}
-	close(fd);
+	return (arg);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 16:48:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 16:29:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,75 @@ static char	sh_command_dispatcher(t_shell *sh)
 
 	res = 0;
 	strsplt = NULL;
-	if (sh->buffer.content[0] == 'c' && sh->buffer.content[1] == 'd')
+
+	// ALIAS
+	if (sh->buffer.content[0] == 'a' && sh->buffer.content[1] == 'l' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 'a' && sh->buffer.content[4] == 's')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
+		res = sh_alias(sh, sh->env, strsplt);
+	}
+
+	// CD
+	else if (sh->buffer.content[0] == 'c' && sh->buffer.content[1] == 'd')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 3, ' ');
-		res = sh_cd(sh, strsplt);
-	} // exit
-	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
+		res = sh_cd(sh, sh->env, strsplt);
+	}
+	// ECHO
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'c' && sh->buffer.content[2] == 'h' && sh->buffer.content[3] == 'o')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 5, ' ');
-		sh_exit(sh, strsplt);
-	} // env
+		sh_echo(sh, sh->env, strsplt);
+	}
+	// ENV
 	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 'v')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 4, ' ');
-		res = sh_env(sh, strsplt);
-	} // setenv
-	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e' && sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
+		res = sh_env(sh, sh->env, strsplt);
+	}
+	// EXIT
+	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 't')
 	{
-		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
-		res = sh_setenv(sh, strsplt);
-	} // export
+		strsplt = ft_strsplit(sh->buffer.content + 5, ' ');
+		sh_exit(sh, sh->env, strsplt);
+	}
+	// EXPORT
 	else if (sh->buffer.content[0] == 'e' && sh->buffer.content[1] == 'x' && sh->buffer.content[2] == 'p' && sh->buffer.content[3] == 'o' && sh->buffer.content[4] == 'r' && sh->buffer.content[5] == 't')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
-		res = sh_export(sh, strsplt);
-	} // unsetenv
-	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e' && sh->buffer.content[6] == 'n' && sh->buffer.content[7] == 'v')
-	{
-		strsplt = ft_strsplit(sh->buffer.content + 9, ' ');
-		res = sh_unsetenv(sh, strsplt);
-	} // unset
-	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't')
-	{
-		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
-		res = sh_unset(sh, strsplt);
-	} // alias
-	else if (sh->buffer.content[0] == 'a' && sh->buffer.content[1] == 'l' && sh->buffer.content[2] == 'i' && sh->buffer.content[3] == 'a' && sh->buffer.content[4] == 's')
-	{
-		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
-		res = sh_alias(sh, strsplt);
-	} //history
+		sh_export(sh, sh->env, strsplt);
+	}
+	// HISTORY
 	else if (sh->buffer.content[0] == 'h' && sh->buffer.content[1] == 'i' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 't' && sh->buffer.content[4] == 'o' && sh->buffer.content[5] == 'r' && sh->buffer.content[6] == 'y')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 8, ' ');
-		res = sh_history(sh, strsplt);
+		res = sh_history(sh, sh->env, strsplt);
 	}
+	// SETENV
+	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e' && sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 7, ' ');
+		res = sh_setenv(sh, sh->env, strsplt);
+	}
+	// UNALIAS
+	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 'a' && sh->buffer.content[3] == 'l' && sh->buffer.content[4] == 'i' && sh->buffer.content[5] == 'a' && sh->buffer.content[6] == 's')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 8, ' ');
+		res = sh_unalias(sh, sh->env, strsplt);
+	}
+	// UNSETENV
+	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't' && sh->buffer.content[5] == 'e' && sh->buffer.content[6] == 'n' && sh->buffer.content[7] == 'v')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 9, ' ');
+		res = sh_unsetenv(sh, sh->env, strsplt);
+	}
+	// UNSET
+	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
+		res = sh_unsetenv(sh, sh->env, strsplt);
+	}
+
 	i = 0;
 	while (strsplt && strsplt[i])
 	{

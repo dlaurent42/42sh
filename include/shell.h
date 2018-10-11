@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/11 16:56:31 by dlaurent         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/11 15:52:33 by dlaurent         ###   ########.fr       */
+>>>>>>> bc02550... [feature] builtins implementation
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +88,7 @@ typedef struct			s_env_item
 {
 	char				*key;
 	char				*value;
+	bool				local;
 }						t_env_item;
 
 typedef struct			s_env
@@ -183,7 +188,7 @@ typedef struct			s_shell
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
-	t_env				*local_env;
+	t_env				*alias;
 	t_read				*read;
 	t_modes				modes;
 	t_cursor			cursor;
@@ -219,9 +224,10 @@ void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 */
 int						sh_alias_isbin(char *arg);
 int						sh_alias_equal(char *arg);
-char					sh_alias(t_shell *sh, char **argv);
+char					sh_alias_display(t_env *env, bool exportable);
+char					sh_alias(t_shell *sh, t_env *env, char **argv);
 char					sh_alias_add(t_shell *sh, t_env *env, char *arg);
-char					sh_alias_error(char *key, char *val, int err_id);
+char					sh_alias_error(char *key, char *val, int id, char *msg);
 char					*sh_alias_parse(char *arg);
 
 /*
@@ -229,22 +235,27 @@ char					*sh_alias_parse(char *arg);
 */
 int						sh_cd_remove_troll(char *s);
 int						sh_cd_options(char **argv, bool *opt_l, bool *opt_p);
-char					sh_cd(t_shell *sh, char **argv);
+char					sh_cd(t_shell *sh, t_env *env, char **argv);
 char					sh_cd_error(char *value, char *path, int err_id);
-char					sh_cd_follow(t_shell *sh, char *value, char dash);
-char					sh_cd_nofollow(t_shell *sh, char *v, char *p, char d);
+char					sh_cd_follow(t_shell *sh, t_env *e, char *v, char d);
+char					sh_cd_nofollow(t_shell *sh, t_env *e, char *v, char *p);
+char					sh_cd_nofollow_dash(
+							t_shell *sh,
+							t_env *env,
+							char *value,
+							char *path);
 char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
 
 /*
 ** functions - echo
 */
-char					sh_echo(t_shell *sh, char **argv);
+char					sh_echo(t_shell *sh, t_env *env, char **argv);
 
 /*
 ** functions - env
 */
-char					sh_env(t_shell *sh, char **argv);
+char					sh_env(t_shell *sh, t_env *src, char **argv);
 char					sh_env_string(char *arg, char **string);
 char					sh_env_path(char *arg, char **path);
 char					sh_env_unset(t_env *env, char *arg, bool verbose);
@@ -261,14 +272,14 @@ char					sh_env_prepare_p(char **p, int *j, int *i, char **argv);
 /*
 ** functions - exit
 */
-char					sh_exit(t_shell *sh, char **argv);
+char					sh_exit(t_shell *sh, t_env *env, char **argv);
 
 /*
 ** functions - export
 */
-char					sh_export(t_shell *sh, char **argv);
+char					sh_export(t_shell *sh, t_env *env, char **argv);
 char					sh_export_add(t_shell *sh, t_env *env, char *arg);
-char					sh_export_display(t_shell *sh, bool exportable);
+char					sh_export_display(t_env *env, bool exportable);
 char					sh_export_error(char *k, char *v, int id, char *msg);
 char					*sh_export_parse(char *arg);
 int						sh_export_isbin(char *arg);
@@ -277,13 +288,12 @@ int						sh_export_equal(char *arg);
 /*
 ** functions - history
 */
-char					sh_history(t_shell *sh, char **argv);
+char					sh_history(t_shell *sh, t_env *env, char **argv);
 char					sh_history_error(int err_id);
 char					sh_history_print(t_shell *sh);
 char					sh_history_print_shift(t_shell *sh, int shift);
-char					sh_history_options(t_shell *sh, char **argv);
-char					sh_history_options(t_shell *sh, char **argv);
-char					sh_history_option_c(t_shell *sh);
+char					sh_history_options(t_shell *sh, t_env *e, char **argv);
+char					sh_history_option_c(t_shell *sh, t_env *env);
 char					sh_history_option_d(
 							t_shell *sh,
 							int *i,
@@ -296,33 +306,41 @@ char					sh_history_option_sp(
 							char **argv);
 char					sh_history_option_warn(
 							t_shell *sh,
-							int *i,
-							int *j,
-							char **argv);
+							t_env *env,
+							char *path,
+							char c);
 
 /*
 ** functions - setenv
 */
 int						sh_setenv_isbin(char *arg);
 int						sh_setenv_equal(char *arg);
-char					sh_setenv(t_shell *sh, char **argv);
+char					sh_setenv(t_shell *sh, t_env *env, char **argv);
 char					sh_setenv_add(t_shell *sh, t_env *env, char *arg);
 char					sh_setenv_error(char *key, char *val, int err_id);
 char					*sh_setenv_parse(char *arg);
 
 /*
+** functions - unalias
+*/
+char					sh_unalias(t_shell *sh, t_env *env, char **argv);
+char					sh_unalias_remove(t_env *env, char *arg);
+char					sh_unalias_error(char *key, int err_id);
+char					*sh_unalias_parse(char *arg);
+
+/*
 ** functions - unset
 */
-char					sh_unset(t_shell *sh, char **argv);
-char					sh_unset_remove(t_shell *sh, char *arg);
+char					sh_unset(t_shell *sh, t_env *env, char **argv);
+char					sh_unset_remove(t_env *env, char *arg);
 char					sh_unset_error(char *key, int err_id);
 char					*sh_unset_parse(char *arg);
 
 /*
 ** functions - unsetenv
 */
-char					sh_unsetenv(t_shell *sh, char **argv);
-char					sh_unsetenv_remove(t_shell *sh, char *arg);
+char					sh_unsetenv(t_shell *sh, t_env *env, char **argv);
+char					sh_unsetenv_remove(t_env *env, char *arg);
 char					sh_unsetenv_error(char *key, int err_id);
 char					*sh_unsetenv_parse(char *arg);
 
@@ -354,14 +372,14 @@ t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 */
 void					command_add(t_shell *sh, bool is_new);
 void					command_add_str_based(t_shell *sh, char *s, bool isnew);
-void					command_append_from(t_shell *sh, char *file);
-void					command_append_to(t_shell *sh, char *file);
+void					command_append_from(t_shell *sh, t_env *env, char *p);
+void					command_append_to(t_shell *sh, t_env *env, char *p);
 void					command_delete_all(t_shell *sh);
 void					command_delete_by_id(t_shell *sh, unsigned int id);
 void					command_import(t_shell *sh);
-void					command_import_from(t_shell *sh, char *file);
+void					command_import_from(t_shell *sh, t_env *env, char *p);
 void					command_export_all(t_shell *sh);
-void					command_export_to(t_shell *sh, char *file);
+void					command_export_to(t_shell *sh, t_env *env, char *file);
 char					*command_execute_fetch(t_env *e, char *p, char **av);
 
 /*
@@ -372,12 +390,22 @@ void					env_delete_specified_item(t_env_item *item);
 void					env_delete_item(t_env *env, const char *key);
 void					env_delete(t_env *env);
 void					env_insert(t_shell *sh, t_env *env, char *k, char *v);
+void					env_insert_local(
+							t_shell *sh,
+							t_env *e,
+							char *k,
+							char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
 void					env_initialize_local(t_shell *sh);
+void					env_local_to_public(t_env *env, char *key);
+void					env_insert_item_into_array(t_env *e, char *k, char *v);
 char					*env_search(t_env *env, const char *key);
+char					*env_search_public(t_env *env, const char *key);
+char					*env_search_local(t_env *env, const char *key);
 char					env_delete_item_from_array(t_env *env, const char *key);
 t_env					*env_new(t_shell *sh, char **environ);
-t_env					*env_copy(t_shell *sh);
+t_env					*env_copy(t_shell *sh, t_env *src);
+t_env_item				*env_new_item(t_shell *sh, t_env *e, char *k, char *v);
 
 /*
 ** structures - reader

@@ -6,20 +6,19 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:41:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 14:58:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	sh_export_add_noequal(t_shell *sh, t_env *env, char *key)
+static char	sh_export_add_noequal(t_env *env, char *key)
 {
-	char		*val;
-
-	val = env_search(sh->local_env, key);
-	if (!env_search(env, key) && env->count + 1 >= env->size)
-		return (sh_export_error(NULL, NULL, 4, NULL));
-	env_insert(sh, env, key, val);
+	if (env_search_public(env, key))
+		return (sh_export_error(NULL, NULL, 5, key));
+	if (!env_search_local(env, key))
+		return (sh_export_error(NULL, NULL, 3, key));
+	env_local_to_public(env, key);
 	return (0);
 }
 
@@ -44,8 +43,7 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 	(bin)
 		? env_insert(sh, env, key, obj->path)
 		: env_insert(sh, env, key, val);
-	if (env_search(sh->local_env, key))
-		env_insert(sh, sh->local_env, key, val);
+	env_local_to_public(env, key);
 	ft_strdel(&key);
 	ft_strdel(&val);
 	return (0);
@@ -56,6 +54,6 @@ char	sh_export_add(t_shell *sh, t_env *env, char *arg)
 	if (!arg || arg[0] == '=')
 		return (sh_export_error(NULL, NULL, 2, NULL));
 	if (ft_strcountif(arg, '=') == 0)
-		return (sh_export_add_noequal(sh, env, arg));
+		return (sh_export_add_noequal(env, arg));
 	return (sh_export_add_equal(sh, env, arg));
 }

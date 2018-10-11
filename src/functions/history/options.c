@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:04:22 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 22:08:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 13:05:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,30 @@
 ** -s   The args are added to the end of the history list as a single entry.
 */
 
-char		sh_history_options(t_shell *sh, char **argv)
+char		sh_history_options(t_shell *sh, t_env *env, char **argv)
 {
 	int		i;
 	int		j;
 	char	c;
-	char	res;
 
 	i = 0;
-	res = 0;
-	while (argv[i] && res == 0 && argv[i][0] == '-'
-	&& !(argv[i][1] == '-' && !argv[i][2]))
+	while (argv[i] && argv[i][0] == '-'
+	&& !(argv[i][1] == '-' && !argv[i][2]) && (j = 0) == 0)
 	{
-		j = 0;
-		while (res == 0 && argv[i][++j] && (c = argv[i][j]))
+		while (argv[i][++j] && (c = argv[i][j]))
 			if (c == 'c')
-				return (sh_history_option_c(sh));
+				return (sh_history_option_c(sh, env));
 			else if (c == 'd')
 				return (sh_history_option_d(sh, &i, &j, argv));
-			else if (c == 'w' || c == 'a' || c == 'r' || c == 'n')
-				return (sh_history_option_warn(sh, &i, &j, argv));
+			else if (argv[i][j + 1] == 0
+			&& (c == 'w' || c == 'a' || c == 'r' || c == 'n'))
+				return (sh_history_option_warn(sh, env,
+					argv[i + 1], argv[i][j]));
 			else if (c == 's' || c == 'p')
 				return (sh_history_option_sp(sh, &i, &j, argv));
 			else
 				return (sh_history_error(3));
-		i += (argv[i] && res == 0) ? 1 : 0;
+		i += (argv[i]) ? 1 : 0;
 	}
-	return (res);
+	return (0);
 }

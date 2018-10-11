@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 18:57:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 20:20:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 12:55:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	command_export_error(int fd, char *path)
 
 void		command_export_all(t_shell *sh)
 {
-	int		fd;;
+	int		fd;
 	char	*path;
 	t_cmd	*cmd;
 
 	if (!sh->cmd
-	|| !(path = env_search(sh->local_env, "HISTFILE")))
+	|| !(path = env_search(sh->env, "HISTFILE")))
 		return ;
 	remove(path);
 	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)

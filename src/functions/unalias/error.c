@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_to.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/09 18:56:02 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:19:29 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/10 14:35:36 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/11 14:58:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		command_export_to(t_shell *sh, t_env *env, char *path)
+char	sh_unalias_error(char *key, int err_id)
 {
-	int		fd;
-	t_cmd	*cmd;
-
-	if (!path && !(path = env_search(env, "HISTFILE")))
-		return ;
-	remove(path);
-	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWRITE)) == -1)
-		return ;
-	ft_putendl_fd(VERIF_KEY, fd);
-	if (!sh->cmd)
-		return ((void)close(fd));
-	cmd = sh->cmd->last;
-	while (cmd)
+	if (err_id == 1)
+		ft_putendl_fd("unalias: not enough arguments", 2);
+	if (err_id == 2)
 	{
-		ft_putendl_fd(cmd->content, fd);
-		cmd = cmd->prev;
+		ft_putstr_fd("unalias: ", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd(" not found locally", 2);
 	}
-	close(fd);
+	if (err_id == 3)
+	{
+		ft_putstr_fd("unalias: cannot unalias", 2);
+		ft_putstr_fd(key, 2);
+		ft_putendl_fd("", 2);
+	}
+	ft_strdel(&key);
+	return (1);
 }

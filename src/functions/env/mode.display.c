@@ -6,22 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:39:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 15:50:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static char	sh_env_add_item_noequal(t_shell *sh, t_env *env, char *key)
-{
-	char		*val;
-
-	val = env_search(sh->local_env, key);
-	if (!env_search(env, key) && env->count + 1 >= env->size)
-		return (sh_setenv_error(key, val, 4));
-	env_insert(sh, env, key, val);
-	return (0);
-}
 
 static char	sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
 {
@@ -46,18 +35,30 @@ static char	sh_env_add_item(t_shell *sh, t_env *env, char *arg)
 	if (!arg || arg[0] == '=')
 		return (2);
 	if (ft_strcountif(arg, '=') == 0)
-		return (sh_env_add_item_noequal(sh, env, arg));
+		return (-1);
 	return (sh_env_add_item_equal(sh, env, arg));
 }
 
 static void	sh_env_print(t_env *env)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	*key;
 
 	i = 0;
 	while (env->environment[i])
 	{
-		ft_putendl(env->environment[i]);
+		j = 0;
+		key = ft_strdups(env->environment[i]);
+		while (key[j])
+		{
+			if (key[j] == '=')
+				key[j] = '\0';
+			j++;
+		}
+		if (env_search_public(env, key))
+			ft_putendl(env->environment[i]);
+		ft_strdel(&key);
 		i++;
 	}
 	env_delete(env);
@@ -72,8 +73,9 @@ char		sh_env_display(t_shell *sh, t_env *env, char **arr, bool verbose)
 	res = 0;
 	while (arr && arr[i] && res == 0)
 	{
+		if ((res = sh_env_add_item(sh, env, arr[i])) == -1)
+			return (i * (-1));
 		(verbose) ? ft_printf("#env setenv:    %s\n", arr[i]) : 0;
-		res = sh_env_add_item(sh, env, arr[i]);
 		i++;
 	}
 	i = 0;

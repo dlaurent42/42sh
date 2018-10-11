@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/08 00:57:47 by dhojt            ###   ########.fr       */
+=======
+/*   Updated: 2018/10/11 16:48:11 by dlaurent         ###   ########.fr       */
+>>>>>>> bc02550... [feature] builtins implementation
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +64,6 @@ void		sh_window_resize(t_shell *sh)
 	int			y;
 	t_winsize	window;
 
-	sh_debug(sh, "resize", NULL);
 	ioctl(0, TIOCGWINSZ, &window);
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
