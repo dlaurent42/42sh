@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 17:15:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:37:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ static char	sh_command_dispatcher(t_shell *sh)
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 8, ' ');
 		res = sh_history(sh, sh->env, strsplt);
+	}
+	// READ
+	else if (sh->buffer.content[0] == 'r' && sh->buffer.content[1] == 'e' && sh->buffer.content[2] == 'a' && sh->buffer.content[3] == 'd')
+	{
+		strsplt = ft_strsplit(sh->buffer.content + 5, ' ');
+		res = sh_read_builtin(sh, sh->env, strsplt);
 	}
 	// SETENV
 	else if (sh->buffer.content[0] == 's' && sh->buffer.content[1] == 'e' && sh->buffer.content[2] == 't' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 'n' && sh->buffer.content[5] == 'v')

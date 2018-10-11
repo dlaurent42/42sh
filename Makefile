@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/11 16:57:23 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/11 18:07:58 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,62 +22,63 @@ SRC			=	shell.c														\
 				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
-				functions/alias/add.c										\
-				functions/alias/alias.c										\
-				functions/alias/display.c									\
-				functions/alias/error.c										\
-				functions/alias/parse.c										\
-				functions/alias/utils.c										\
 				functions/redirect.c										\
-				functions/list_of_builtins.c								\
-				functions/cd/cd.c											\
-				functions/cd/error.c										\
-				functions/cd/follow.c										\
-				functions/cd/follow_parser.c								\
-				functions/cd/nofollow.c										\
-				functions/cd/options.c										\
-				functions/echo/echo.c										\
-				functions/env/env.c											\
-				functions/env/error.c										\
-				functions/env/mode.display.c								\
-				functions/env/mode.exec.c									\
-				functions/env/parse.c										\
-				functions/env/parse.actions.c								\
-				functions/env/parse.prepare.c								\
-				functions/exit/exit.c										\
-				functions/export/add.c										\
-				functions/export/display.c									\
-				functions/export/error.c									\
-				functions/export/export.c									\
-				functions/export/parse.c									\
-				functions/export/utils.c									\
-				functions/history/error.c									\
-				functions/history/history.c									\
-				functions/history/options.c									\
-				functions/history/options.c.c								\
-				functions/history/options.d.c								\
-				functions/history/options.sp.c								\
-				functions/history/options.warn.c							\
-				functions/history/print.c									\
-				functions/setenv/add.c										\
-				functions/setenv/error.c									\
-				functions/setenv/parse.c									\
-				functions/setenv/setenv.c									\
-				functions/setenv/utils.c									\
-				functions/unalias/error.c									\
-				functions/unalias/parse.c									\
-				functions/unalias/remove.c									\
-				functions/unalias/unalias.c									\
-				functions/unset/error.c										\
-				functions/unset/parse.c										\
-				functions/unset/remove.c									\
-				functions/unset/unset.c										\
-				functions/unsetenv/error.c									\
-				functions/unsetenv/parse.c									\
-				functions/unsetenv/remove.c									\
-				functions/unsetenv/unsetenv.c								\
-				functions/utils/has_option.c								\
-				functions/utils/path_from_filename.c						\
+				functions/builtins/list_of_builtins.c						\
+				functions/builtins/alias/add.c								\
+				functions/builtins/alias/alias.c							\
+				functions/builtins/alias/display.c							\
+				functions/builtins/alias/error.c							\
+				functions/builtins/alias/parse.c							\
+				functions/builtins/alias/utils.c							\
+				functions/builtins/cd/cd.c									\
+				functions/builtins/cd/error.c								\
+				functions/builtins/cd/follow.c								\
+				functions/builtins/cd/follow_parser.c						\
+				functions/builtins/cd/nofollow.c							\
+				functions/builtins/cd/options.c								\
+				functions/builtins/echo/echo.c								\
+				functions/builtins/env/env.c								\
+				functions/builtins/env/error.c								\
+				functions/builtins/env/mode.display.c						\
+				functions/builtins/env/mode.exec.c							\
+				functions/builtins/env/parse.c								\
+				functions/builtins/env/parse.actions.c						\
+				functions/builtins/env/parse.prepare.c						\
+				functions/builtins/exit/exit.c								\
+				functions/builtins/export/add.c								\
+				functions/builtins/export/display.c							\
+				functions/builtins/export/error.c							\
+				functions/builtins/export/export.c							\
+				functions/builtins/export/parse.c							\
+				functions/builtins/export/utils.c							\
+				functions/builtins/history/error.c							\
+				functions/builtins/history/history.c						\
+				functions/builtins/history/options.c						\
+				functions/builtins/history/options.c.c						\
+				functions/builtins/history/options.d.c						\
+				functions/builtins/history/options.sp.c						\
+				functions/builtins/history/options.warn.c					\
+				functions/builtins/history/print.c							\
+				functions/builtins/read/read.c								\
+				functions/builtins/setenv/add.c								\
+				functions/builtins/setenv/error.c							\
+				functions/builtins/setenv/parse.c							\
+				functions/builtins/setenv/setenv.c							\
+				functions/builtins/setenv/utils.c							\
+				functions/builtins/unalias/error.c							\
+				functions/builtins/unalias/parse.c							\
+				functions/builtins/unalias/remove.c							\
+				functions/builtins/unalias/unalias.c						\
+				functions/builtins/unset/error.c							\
+				functions/builtins/unset/parse.c							\
+				functions/builtins/unset/remove.c							\
+				functions/builtins/unset/unset.c							\
+				functions/builtins/unsetenv/error.c							\
+				functions/builtins/unsetenv/parse.c							\
+				functions/builtins/unsetenv/remove.c						\
+				functions/builtins/unsetenv/unsetenv.c						\
+				functions/builtins/utils/has_option.c						\
+				functions/builtins/utils/path_from_filename.c				\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -219,18 +220,20 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
-				@mkdir -p $(OBJ_DIR)/functions/alias
-				@mkdir -p $(OBJ_DIR)/functions/cd
-				@mkdir -p $(OBJ_DIR)/functions/echo
-				@mkdir -p $(OBJ_DIR)/functions/env
-				@mkdir -p $(OBJ_DIR)/functions/exit
-				@mkdir -p $(OBJ_DIR)/functions/export
-				@mkdir -p $(OBJ_DIR)/functions/history
-				@mkdir -p $(OBJ_DIR)/functions/setenv
-				@mkdir -p $(OBJ_DIR)/functions/unalias
-				@mkdir -p $(OBJ_DIR)/functions/unset
-				@mkdir -p $(OBJ_DIR)/functions/unsetenv
-				@mkdir -p $(OBJ_DIR)/functions/utils
+				@mkdir -p $(OBJ_DIR)/functions/builtins
+				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
+				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
+				@mkdir -p $(OBJ_DIR)/functions/builtins/echo
+				@mkdir -p $(OBJ_DIR)/functions/builtins/env
+				@mkdir -p $(OBJ_DIR)/functions/builtins/exit
+				@mkdir -p $(OBJ_DIR)/functions/builtins/export
+				@mkdir -p $(OBJ_DIR)/functions/builtins/history
+				@mkdir -p $(OBJ_DIR)/functions/builtins/read
+				@mkdir -p $(OBJ_DIR)/functions/builtins/setenv
+				@mkdir -p $(OBJ_DIR)/functions/builtins/unalias
+				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
+				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
+				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands

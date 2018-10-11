@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:58:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:37:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,11 @@ char					sh_history_option_warn(
 							t_env *env,
 							char *path,
 							char c);
+
+/*
+** functions - read
+*/
+char					sh_read_builtin(t_shell *sh, t_env *env, char **argv);
 
 /*
 ** functions - setenv

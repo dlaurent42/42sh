@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:50:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:48:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:36:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@
 ** The return code is zero, unless end-of-file is encountered or read times out.
 */
 
-char		sh_read(t_shell *sh, t_env *env, char **argv)
+char		sh_read_builtin(t_shell *sh, t_env *env, char **argv)
 {
 	(void)sh;
 	(void)env;
 	(void)argv;
+	return (0);
 }
