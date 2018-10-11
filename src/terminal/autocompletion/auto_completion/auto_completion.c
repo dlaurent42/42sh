@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 02:47:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 02:56:42 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,33 @@ static bool			create_ac(t_shell *sh, char *str)
 	return (true);
 }
 
+static char			*get_env_var(t_shell *sh, char *ptr_to_dollar, int len)
+{
+	char			**environment;
+	char			*env;
+	int				total;
+
+	total = 0;
+	env = NULL;
+	environment = sh->env->environment;
+	while (*environment)
+	{
+		if (!ft_strncmp(*environment, ptr_to_dollar + 1, len - 1))
+		{
+			env = *environment;
+			if (++total > 1)
+				return (NULL);
+		}
+		environment++;
+	}
+	return (env);
+}
+
 static bool				auto_env(t_shell *sh)
 {
 	int				len;
-	int				total;
 	char			*env;
 	char			*track;
-	char			**environment;
 	char			*ptr_to_dollar;
 
 	if ((ptr_to_dollar = ft_strrchr(sh->buffer.content, ' ')))
@@ -96,19 +116,8 @@ static bool				auto_env(t_shell *sh)
 		return (false);
 
 	len = ft_strlen(ptr_to_dollar + 1) + 1;
-	total = 0;
-	env = NULL;
-	environment = sh->env->environment;
-	while (*environment)
-	{
-		if (!ft_strncmp(*environment, ptr_to_dollar + 1, len - 1))
-		{
-			env = *environment;
-			if (++total > 1)
-				return (false);
-		}
-		environment++;
-	}
+	if(!(env = get_env_var(sh, ptr_to_dollar, len)))
+		return (false);
 	if (!env
 			|| !ft_strchr(env, '=')
 			|| ft_strncmp(env, ptr_to_dollar + 1, ft_strchr(env, '=') - env)
