@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 17:37:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 20:37:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct			s_buffer
 	int					ushift;
 	int					dshift;
 	char				content[ARG_MAX + 1];
+	char				parsed[ARG_MAX + 1];
 	char				stored[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
