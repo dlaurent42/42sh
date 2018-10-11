@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 01:40:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 02:47:17 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,33 +79,51 @@ static bool			create_ac(t_shell *sh, char *str)
 	return (true);
 }
 
-//static bool				auto_env(t_shell *sh)
-//{
-//	int				number_of_deletions;
-//	int				offset;
-//	char			*track;
-//	char			*ptr_to_exc;
-//	t_cmd			*cmd;
-//
-//	offset = 0;
-//	while ((ptr_to_exc = ft_strstr(sh->buffer.content + offset++, "!")))
-//	{
-//		if (!ft_isdigit(*(ptr_to_exc + 1))
-//				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
-//		{
-//			number_of_deletions = ft_strlens(ptr_to_exc);
-//			track = sh->buffer.content;
-//			sh_move_home(sh);
-//			while (track++ != ptr_to_exc)
-//				sh_move_right(sh);
-//			while (number_of_deletions--)
-//				sh_delete_current_char(sh);
-//			sh_print_str(sh, cmd->content);
-//			*status = true;
-//			sh_move_end(sh);
-//		}
-//	}
-//}
+static bool				auto_env(t_shell *sh)
+{
+	int				len;
+	int				total;
+	char			*env;
+	char			*track;
+	char			**environment;
+	char			*ptr_to_dollar;
+
+	if ((ptr_to_dollar = ft_strrchr(sh->buffer.content, ' ')))
+		ptr_to_dollar++;
+	else
+		ptr_to_dollar = sh->buffer.content;
+	if (*ptr_to_dollar != '$')
+		return (false);
+
+	len = ft_strlen(ptr_to_dollar + 1) + 1;
+	total = 0;
+	env = NULL;
+	environment = sh->env->environment;
+	while (*environment)
+	{
+		if (!ft_strncmp(*environment, ptr_to_dollar + 1, len - 1))
+		{
+			env = *environment;
+			if (++total > 1)
+				return (false);
+		}
+		environment++;
+	}
+	if (!env
+			|| !ft_strchr(env, '=')
+			|| ft_strncmp(env, ptr_to_dollar + 1, ft_strchr(env, '=') - env)
+			|| !(env = ft_strchr(env, '=') + 1))
+		return (false);
+	track = sh->buffer.content;
+	sh_move_home(sh);
+	while (track++ != ptr_to_dollar)
+		sh_move_right(sh);
+	while (len--)
+		sh_delete_current_char(sh);
+	sh_print_str(sh, env);
+	sh_move_end(sh);
+	return (true);
+}
 
 bool				auto_completion(t_shell *sh)
 {
@@ -114,7 +132,7 @@ bool				auto_completion(t_shell *sh)
 
 	performed_completion = false;
 	sh->modes.auto_completion = 1;
-	if (auto_history(sh))
+	if (auto_history(sh) || auto_env(sh))
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
