@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:58:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:25:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 	return (0);
 }
 
-char	sh_export_add(t_shell *sh, t_env *env, char *arg)
+char		sh_export_add(t_shell *sh, t_env *env, char *arg)
 {
 	if (!arg || arg[0] == '=')
 		return (sh_export_error(NULL, NULL, 2, NULL));

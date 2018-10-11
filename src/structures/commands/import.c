@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:55:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:07:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	command_import_error(int fd, char *path)
 {
 	(path) ? remove(path) : 0;
-	(path) ? ft_strdel(&path) : 0;
 	(fd != -1) ? close(fd) : 0;
 }
 

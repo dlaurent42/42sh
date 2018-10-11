@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 19:20:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 13:52:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:10:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	env_initialize_local(t_shell *sh)
 		return ;
 	if (!(tmp = env_search(sh->env, "HOME")))
 		return ;
-	if (!(tmp = ft_strjoins(tmp, "/")))
-		return ;
-	if (!(tmp = ft_strjoinf(tmp, HISTFILE, 1)))
+	if (!(tmp = ft_strjoins(tmp, HISTFILE)))
 		return ;
 	env_insert_local(sh, sh->env, "HISTFILE", tmp);
 	ft_strdel(&tmp);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 15:50:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:22:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	sh_env_print(t_env *env)
 				key[j] = '\0';
 			j++;
 		}
+		sh_debug(NULL, key, NULL);
 		if (env_search_public(env, key))
 			ft_putendl(env->environment[i]);
 		ft_strdel(&key);

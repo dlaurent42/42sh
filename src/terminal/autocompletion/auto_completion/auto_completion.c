@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_completion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 03:02:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 17:26:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static char			*get_env_var(t_shell *sh, char *ptr_to_dollar, int len)
 	return (env);
 }
 
-static bool				auto_env(t_shell *sh)
+static bool			auto_env(t_shell *sh)
 {
 	int				len;
 	char			*env;
@@ -115,7 +115,7 @@ static bool				auto_env(t_shell *sh)
 	if (*ptr_to_dollar != '$')
 		return (false);
 	len = ft_strlen(ptr_to_dollar + 1) + 1;
-	if(!(env = get_env_var(sh, ptr_to_dollar, len)) || !ft_strchr(env, '=')
+	if (!(env = get_env_var(sh, ptr_to_dollar, len)) || !ft_strchr(env, '=')
 			|| ft_strncmp(env, ptr_to_dollar + 1, ft_strchr(env, '=') - env)
 			|| !(env = ft_strchr(env, '=') + 1))
 		return (false);

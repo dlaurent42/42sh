@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_completion_prot.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 06:54:11 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 08:28:04 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 17:20:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void					auto_show_screen(t_shell *sh, t_obj *obj);
 void					auto_merge_objs(t_shell *sh, t_obj *obj);
 void					auto_do_ls(t_shell *sh, t_obj *obj);
 void					auto_do_file_admin(t_shell *sh, t_obj *obj);
-void                    auto_do_special_modes(t_shell *sh, t_obj *obj);
+void					auto_do_special_modes(t_shell *sh, t_obj *obj);
 void					auto_calc_len_file_name(t_shell *sh, t_obj *obj);
 void					auto_calculate_number_of_columns(t_shell *sh);
 bool					auto_path(t_obj *obj, char *path, char *name);

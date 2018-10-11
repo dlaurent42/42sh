@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 20:08:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:19:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:25:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	command_parse_and_add(t_shell *sh, char *content, int id, int row)
 	return (TRUE);
 }
 
-void	command_append_from(t_shell *sh, t_env *env, char *path)
+void		command_append_from(t_shell *sh, t_env *env, char *path)
 {
 	int		id;
 	int		row;

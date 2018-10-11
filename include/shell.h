@@ -6,11 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/11 16:56:31 by dlaurent         ###   ########.fr       */
-=======
-/*   Updated: 2018/10/11 15:52:33 by dlaurent         ###   ########.fr       */
->>>>>>> bc02550... [feature] builtins implementation
+/*   Updated: 2018/10/11 16:58:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +34,8 @@
 
 # define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
 # define VERIF_KEY_LEN	32
+
+# define HISTFILE		"/.cmd_history"
 
 # define ENV_MAX_SIZE	999
 # define ENV_PRIME_1	3

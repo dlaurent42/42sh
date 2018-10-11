@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncasecmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 22:37:12 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 22:37:50 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/11 17:27:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		 			ft_strncasecmp(const char *s1, const char *s2, size_t len)
+int	ft_strncasecmp(const char *s1, const char *s2, size_t len)
 {
 	unsigned char	c1;
 	unsigned char	c2;

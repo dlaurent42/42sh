@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:29:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 17:15:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	sh_command_dispatcher(t_shell *sh)
 	else if (sh->buffer.content[0] == 'u' && sh->buffer.content[1] == 'n' && sh->buffer.content[2] == 's' && sh->buffer.content[3] == 'e' && sh->buffer.content[4] == 't')
 	{
 		strsplt = ft_strsplit(sh->buffer.content + 6, ' ');
-		res = sh_unsetenv(sh, sh->env, strsplt);
+		res = sh_unset(sh, sh->env, strsplt);
 	}
 
 	i = 0;

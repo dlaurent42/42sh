@@ -6,11 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/10/11 16:56:25 by dlaurent         ###   ########.fr        #
-=======
-#    Updated: 2018/10/11 15:03:39 by dlaurent         ###   ########.fr        #
->>>>>>> bc02550... [feature] builtins implementation
+#    Updated: 2018/10/11 16:57:23 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
