@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:40:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 21:07:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/11 21:12:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ bool		sh_command_parse_backslash(t_shell *sh)
 		if (sh->buffer.parsed[i] == '\'')
 			in_squote = (in_squote) ? FALSE : TRUE;
 		if (sh->buffer.parsed[i] == '\\')
+			
 	}
 }
