@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 17:18:49 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 08:43:34 by dhojt            ###   ########.fr       */
+/*   Created: 2018/08/12 17:18:49 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 bool				auto_path(t_obj *obj, char *path, char *name)
 {

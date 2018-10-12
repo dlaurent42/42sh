@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:24:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 21:38:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,77 +42,116 @@
 ** If no command name is specified following the environment specifications,
 ** the resulting environment is printed. This is like specifying a command name
 ** of `printenv'.
-**
-** Options added :
-**   -v        		verbose
-**   -P utilpath    specify path for exec
-**	 -S string		stringsplit
 */
 
-static char	**sh_env_get_string(char *string, char **argv)
+static char	sh_env_empty(t_env *env)
 {
-	int		i;
-	int		j;
-	char	**arr;
-	char	**split;
+	size_t		i;
+	t_env_item	*item;
 
 	i = 0;
-	j = 0;
-	split = ft_strsplit(string, ' ');
-	ft_strdel(&string);
-	if (!(arr = (char **)ft_memalloc(sizeof(char *) * (
-	ft_count_argv((void **)argv) + ft_count_argv((void **)split) + 1))))
-		return (NULL);
-	while (split && split[i])
+	if (!env)
+		return (0);
+	while (i < env->count)
 	{
-		arr[i] = ft_strdupf(split[i]);
+		item = env->items[i];
+		if (item && item != &env->del)
+		{
+			env_delete_specified_item(item);
+			env->items[i] = &env->del;
+		}
 		i++;
 	}
-	(split) ? free(split) : 0;
-	while (argv && argv[j])
+	i = 0;
+	while (env->environment[i])
 	{
-		arr[i + j] = ft_strdups(argv[j]);
-		j++;
+		ft_strdel(&env->environment[i]);
+		i++;
 	}
-	arr[i + j] = 0;
-	return (arr);
+	env->count = 0;
+	return (0);
 }
 
-static void	sh_env_del_arr(char **arr)
+static char	sh_env_unset(t_env *env, char *arg)
 {
-	int	i;
+	char	*arg_parsed;
 
-	i = 0;
-	while (arr[i])
+	if (!arg)
+		return (sh_env_error(env, NULL, 0, 1));
+	if (ft_strcountif(arg, '='))
+		return (sh_env_error(env, NULL, 0, 2));
+	if (!(arg_parsed = sh_unsetenv_parse(ft_strdups(arg))))
+		return (sh_env_error(env, NULL, 0, 3));
+	env_delete_item(env, arg_parsed);
+	ft_strdel(&arg_parsed);
+	return (0);
+}
+
+static char	sh_env_options(t_env *env, char **argv, int *i)
+{
+	char	res;
+
+	res = 0;
+	while (argv && argv[*i] && argv[*i][0] == '-' && res == 0)
 	{
-		ft_strdel(&arr[i]);
-		i++;
+		if (!argv[*i][1] || (argv[*i][1] == 'i' && !argv[*i][2]))
+			res = sh_env_empty(env);
+		else if (argv[*i][1] == 'u' && !argv[*i][2])
+		{
+			res = sh_env_unset(env, argv[*i + 1]);
+			*i = *i + 1;
+		}
+		else if (argv[*i][1] == '-' && !argv[*i][2])
+			break ;
+		else
+			return (sh_env_error(env, NULL, argv[*i][1], 4));
+		if (argv[*i])
+			*i = *i + 1;
 	}
-	(arr) ? free(arr) : 0;
+	return (res);
+}
+
+static char	sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
+{
+	int			eq_sym;
+	char		*key;
+	char		*val;
+
+	key = sh_setenv_parse(ft_strdups(arg));
+	eq_sym = sh_setenv_equal(key);
+	val = (ft_strchrsp(key, '='))
+		? ft_strdups(ft_strchrsp(key, '=')) : ft_strdup("");
+	key[eq_sym] = '\0';
+	if (!env_search(env, key) && env->count + 1 >= env->size)
+	{
+		sh_setenv_error(key, val, 4);
+		return (sh_env_error(env, NULL, 0, 0));
+	}
+	env_insert(sh, env, key, val);
+	ft_strdel(&key);
+	ft_strdel(&val);
+	return (0);
 }
 
 char		sh_env(t_shell *sh, t_env *src, char **argv)
 {
+	int		i;
 	int		res;
-	char	*path;
-	char	*string;
-	char	**arr;
 	t_env	*env;
 
-	res = 0;
-	path = NULL;
-	string = NULL;
+	i = 0;
 	env = env_copy(sh, src);
-	if (argv)
-		if ((res = sh_env_parse(env, &path, &string, argv)) < 0)
-			return (sh_env_error(env, path, string, res));
-	arr = sh_env_get_string(string, argv + res);
-	res = sh_env_display(sh, env, arr, sh_env_has_verbose(argv));
-	if (res < 0)
+	if ((res = sh_env_options(env, argv, &i)) != 0)
+		return (res);
+	while (argv[i] && ft_strcountif(argv[i], '='))
 	{
-		res = sh_env_exec(env, path, arr - res, sh_env_has_verbose(argv));
-		sh_env_del_arr(arr);
+		ft_printf("Working on %s\n", argv[i]);
+		if (argv[i][0] == '=')
+			return (sh_env_error(env, NULL, 0, 5));
+		sh_env_add_item_equal(sh, env, argv[i]);
+		i++;
 	}
-	ft_strdel(&path);
-	return (res);
+	if (!argv[i])
+		return (sh_env_print(env));
+	return (sh_env_exec(sh, env, bin_new(sh, env), argv + i));
 }

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   do_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/20 12:47:00 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/10 08:28:46 by dhojt            ###   ########.fr       */
+/*   Created: 2018/07/20 12:47:00 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
-#include <sys/stat.h>
 
 static bool			read_directory(t_read_dir *read_dir)
 {

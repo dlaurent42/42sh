@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hist_number.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 08:16:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 15:41:37 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/08 08:16:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 t_cmd				*get_cmd_by_id(t_shell *sh, int id)
 {

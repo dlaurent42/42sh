@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:10 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:15:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 17:05:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_bin	*bin_new(t_shell *sh)
+t_bin	*bin_new(t_shell *sh, t_env *env)
 {
 	t_bin	*bin;
 
@@ -25,6 +25,6 @@ t_bin	*bin_new(t_shell *sh)
 	if (!(bin->items = (t_bin_item **)ft_memalloc(sizeof(t_bin_item *)
 	* bin->size)))
 		error_malloc_bin(sh, bin, "t_bin_items");
-	bin_initialize(sh, sh->env, bin);
+	bin_initialize(sh, env, bin);
 	return (bin);
 }

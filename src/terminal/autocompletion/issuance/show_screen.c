@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/22 20:03:57 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 00:56:31 by dhojt            ###   ########.fr       */
+/*   Created: 2018/07/22 20:03:57 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 static void			delete_str(t_shell *sh)
 {

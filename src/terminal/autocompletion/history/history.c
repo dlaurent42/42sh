@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 09:05:58 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 10:31:02 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/06 09:05:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 bool				auto_history(t_shell *sh)
 {

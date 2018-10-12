@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:56:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 21:55:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void		sh_read_dispatcher(t_shell *sh)
 	if (sh->modes.browse && !(sh_is_select_combination(sh->read->line)
 	|| sh_is_arrow_combination(sh->read->line)))
 		sh_browse_freeze(sh);
-	if (sh->read->line[0] == ' ')
-		auto_completion(sh);
 	if (sh->read->line[0] == 11)
 		sh_copy_selection(sh);
 	else if (sh->read->line[0] == 22)
@@ -78,12 +76,12 @@ void		sh_read_dispatcher(t_shell *sh)
 		sh_deletion_dispatcher(sh);
 	else if (sh->read->line[0] == 27)
 		sh_arrows_dispatcher(sh);
-	else if (sh->read->line[0] == 9)
-		auto_completion(sh);
 	else if (sh->read->line[0] == 3 && sh->modes.multiline)
 		sh_multilines_close(sh);
 	else if (sh->read->line[0] == 18)
 		sh_history_search(sh);
+	else if (sh->read->line[0] == 9)
+		auto_completion(sh);
 	else
 		sh_fill_buffer(sh);
 }

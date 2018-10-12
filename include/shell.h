@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 20:37:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 22:13:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,29 @@
 # include "key_strokes.h"
 # include <curses.h>
 # include <dirent.h>
-# include <signal.h>
-# include <term.h>
-# include <termios.h>
-# include <time.h>
 # include <limits.h>
+# include <pwd.h>
+# include <signal.h>
 # include <stdbool.h>
 # include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <sys/types.h>
-
-# ifndef ARG_MAX
-#  define ARG_MAX 		262144
-# endif
-
-# define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
-# define VERIF_KEY_LEN	32
-
-# define HISTFILE		"/.cmd_history"
-
-# define ENV_MAX_SIZE	999
-# define ENV_PRIME_1	3
-# define ENV_PRIME_2	13
-
-# define BIN_MAX_SIZE	9999
-# define BIN_PRIME_1	3
-# define BIN_PRIME_2	13
-
-# define LINE_SIZE		8
-
-# define SEARCH_LEN		3
+# include <term.h>
+# include <termios.h>
+# include <time.h>
+# include <uuid/uuid.h>
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
 typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
+typedef struct passwd	t_passwd;
+
+typedef struct			s_cmd_attr
+{
+	char				*cmd;
+	char				**options;
+}						t_cmd_attr;
 
 typedef struct			s_bin_obj
 {
@@ -180,10 +168,92 @@ typedef struct			s_search
 	t_cmd				*match;
 }						t_search;
 
+typedef struct			s_data
+{
+	int					file_number;
+
+	char				*str;
+	char				*parent_path;
+	char				*path;
+
+	int					len_of_str;
+
+	int					type;
+	mode_t				mode;
+	int					links;
+	int					rdev;
+	char				sym_path[RL_BUFSIZE + 1];
+
+	unsigned char		ifo		: 1;
+	unsigned char		chr		: 1;
+	unsigned char		dir		: 1;
+	unsigned char		blk		: 1;
+	unsigned char		reg		: 1;
+	unsigned char		lnk		: 1;
+	unsigned char		sock	: 1;
+	unsigned char		wht		: 1;
+	unsigned char		bin		: 1;
+	unsigned char		env		: 1;
+	unsigned char		no_file	: 1;
+	unsigned char		fill	: 5;
+}						t_data;
+
+typedef struct			s_obj
+{
+	t_data				data;
+	struct s_obj		*next;
+	struct s_obj		*hor_next;
+	struct s_obj		*hor_prev;
+	struct s_obj		*ver_next;
+	struct s_obj		*ver_prev;
+}						t_obj;
+
+typedef struct			s_ac
+{
+	char				**argv;
+
+	char				*pre_file_name;
+	char				*del_file_name;
+	char				*file_name;
+	int					file_name_len;
+	char				cmp_mode;
+	char				auto_mode;
+
+	unsigned char		at_mode	: 1;
+	unsigned char		fill	: 7;
+
+	int					len_file_name;
+	int					items_to_display;
+	int					total_blocks;
+	int					number_of_printed_rows;
+
+	int					width;
+	int					height;
+	int					number_of_columns;
+
+	t_obj				*obj;
+	t_obj				*bin;
+	t_obj				*env;
+	t_obj				*current_obj;
+	t_obj				*select;
+	t_obj				*window_resize;
+}						t_ac;
+
+typedef struct			s_read_dir
+{
+	t_obj				*obj;
+	t_obj				*tmp;
+	t_obj				*head;
+	t_obj				*last_obj;
+	DIR					*directory;
+	struct dirent		*file;
+}						t_read_dir;
+
 typedef struct			s_shell
 {
 	t_ac				*ac;
 	char				*hist;
+	pid_t				pid;
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
@@ -201,8 +271,6 @@ typedef struct			s_shell
 
 t_shell					*g_sh;
 
-void					sh_debug(t_shell *sh, char *msg, char *str);
-
 /*
 ** errors
 */
@@ -216,10 +284,14 @@ void					error_no_path_var(t_shell *sh);
 ** functions
 */
 void					sh_command_run(t_shell *sh);
+
+/*
+** functions - builtins
+*/
 void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 
 /*
-** functions - alias
+** functions - builtins - alias
 */
 int						sh_alias_isbin(char *arg);
 int						sh_alias_equal(char *arg);
@@ -230,7 +302,7 @@ char					sh_alias_error(char *key, char *val, int id, char *msg);
 char					*sh_alias_parse(char *arg);
 
 /*
-** functions - cd
+** functions - builtins - cd
 */
 int						sh_cd_remove_troll(char *s);
 int						sh_cd_options(char **argv, bool *opt_l, bool *opt_p);
@@ -247,34 +319,33 @@ char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
 
 /*
-** functions - echo
+** functions - builtins - echo
 */
 char					sh_echo(t_shell *sh, t_env *env, char **argv);
 
 /*
-** functions - env
+** functions - builtins - env
 */
 char					sh_env(t_shell *sh, t_env *src, char **argv);
-char					sh_env_string(char *arg, char **string);
-char					sh_env_path(char *arg, char **path);
-char					sh_env_unset(t_env *env, char *arg, bool verbose);
-char					sh_env_empty(t_env *env, bool verbose);
-bool					sh_env_has_verbose(char **argv);
-char					sh_env_error(t_env *env, char *s1, char *s2, int id);
-char					sh_env_exec(t_env *env, char *path, char **arr, bool v);
-char					sh_env_display(t_shell *s, t_env *e, char **a, bool v);
-char					sh_env_parse(t_env *e, char **p, char **s, char **av);
-char					*sh_env_prepare_u(int *j, int *i, char **argv);
-char					sh_env_prepare_s(char **s, int *j, int *i, char **argv);
-char					sh_env_prepare_p(char **p, int *j, int *i, char **argv);
+char					sh_env_print(t_env *env);
+char					sh_env_error(
+							t_env *env,
+							t_bin *bin,
+							char c,
+							int err_id);
+char					sh_env_exec(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char **arr);
 
 /*
-** functions - exit
+** functions - builtins - exit
 */
 char					sh_exit(t_shell *sh, t_env *env, char **argv);
 
 /*
-** functions - export
+** functions - builtins - export
 */
 char					sh_export(t_shell *sh, t_env *env, char **argv);
 char					sh_export_add(t_shell *sh, t_env *env, char *arg);
@@ -285,7 +356,7 @@ int						sh_export_isbin(char *arg);
 int						sh_export_equal(char *arg);
 
 /*
-** functions - history
+** functions - builtins - history
 */
 char					sh_history(t_shell *sh, t_env *env, char **argv);
 char					sh_history_error(int err_id);
@@ -310,12 +381,7 @@ char					sh_history_option_warn(
 							char c);
 
 /*
-** functions - read
-*/
-char					sh_read_builtin(t_shell *sh, t_env *env, char **argv);
-
-/*
-** functions - setenv
+** functions - builtins - setenv
 */
 int						sh_setenv_isbin(char *arg);
 int						sh_setenv_equal(char *arg);
@@ -325,7 +391,7 @@ char					sh_setenv_error(char *key, char *val, int err_id);
 char					*sh_setenv_parse(char *arg);
 
 /*
-** functions - unalias
+** functions - builtins - unalias
 */
 char					sh_unalias(t_shell *sh, t_env *env, char **argv);
 char					sh_unalias_remove(t_env *env, char *arg);
@@ -333,7 +399,7 @@ char					sh_unalias_error(char *key, int err_id);
 char					*sh_unalias_parse(char *arg);
 
 /*
-** functions - unset
+** functions - builtins - unset
 */
 char					sh_unset(t_shell *sh, t_env *env, char **argv);
 char					sh_unset_remove(t_env *env, char *arg);
@@ -341,7 +407,7 @@ char					sh_unset_error(char *key, int err_id);
 char					*sh_unset_parse(char *arg);
 
 /*
-** functions - unsetenv
+** functions - builtins - unsetenv
 */
 char					sh_unsetenv(t_shell *sh, t_env *env, char **argv);
 char					sh_unsetenv_remove(t_env *env, char *arg);
@@ -349,10 +415,60 @@ char					sh_unsetenv_error(char *key, int err_id);
 char					*sh_unsetenv_parse(char *arg);
 
 /*
-** functions - utils
+** functions - builtins - utils
 */
 bool					is_option_string(char *s, char *opt);
 char					*sh_get_path_from_filename(char *filename);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(
+							t_shell *sh,
+							t_env *env,
+							char **argv);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
+char					sh_command_exec(t_shell *sh, char **cmd, char **env);
+
+/*
+** functions - lexer
+*/
+bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
+
+/*
+** functions - lexer - handlers
+*/
+bool					sh_command_parse_backslash(char *str);
+bool					sh_command_empty(char *str);
+bool					sh_command_quotes_check(char *str);
+void					sh_command_trim(char *str);
+void					sh_remove_useless_quotes(char *str);
+void					sh_command_expand_tile(t_shell *sh, t_env *e, char *s);
+void					sh_command_expand_dollars(
+							t_shell *sh,
+							t_env *env,
+							char *str);
+
+/*
+** functions - lexer - utils
+*/
+void					sh_command_inject(char *str, char *injection, int i);
+void					sh_command_repatriate(char *str, int i, int len);
+
+/*
+** functions - parser
+*/
+char					**sh_command_build(char *str);
+bool					sh_is_not_builtin(char *str);
+void					sh_command_parser(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char *str);
 
 /*
 ** structures - binaries
@@ -367,7 +483,8 @@ void					bin_gen_list_for_auto_comp(
 							t_shell *sh,
 							t_bin *bin,
 							char *s);
-t_bin					*bin_new(t_shell *sh);
+t_bin					*bin_update(t_shell *sh, t_env *env, t_bin *bin);
+t_bin					*bin_new(t_shell *sh, t_env *env);
 t_bin_obj				*bin_search(t_bin *bin, const char *key);
 t_bin_obj				*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st);
 
@@ -384,7 +501,6 @@ void					command_import(t_shell *sh);
 void					command_import_from(t_shell *sh, t_env *env, char *p);
 void					command_export_all(t_shell *sh);
 void					command_export_to(t_shell *sh, t_env *env, char *file);
-char					*command_execute_fetch(t_env *e, char *p, char **av);
 
 /*
 ** structures - environment
@@ -425,6 +541,45 @@ void					sh_set_prompt(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);
+
+/*
+** terminal - auto_completion
+*/
+bool					auto_completion(t_shell *sh);
+void					auto_display(t_shell *sh, t_obj *obj);
+bool					auto_get_obj(t_shell *sh);
+void					auto_free_obj(t_obj **obj);
+t_obj					*auto_create_obj(void);
+
+void					auto_issuance(t_shell *sh);
+void					auto_read_dispatcher(t_shell *sh);
+void					auto_clear_selection_screen(t_shell *sh);
+bool					auto_get_attributes(t_shell *sh);
+void					auto_show_screen(t_shell *sh, t_obj *obj);
+void					auto_merge_objs(t_shell *sh, t_obj *obj);
+void					auto_do_ls(t_shell *sh, t_obj *obj);
+void					auto_do_file_admin(t_shell *sh, t_obj *obj);
+void					auto_do_special_modes(t_shell *sh, t_obj *obj);
+void					auto_calc_len_file_name(t_shell *sh, t_obj *obj);
+void					auto_calculate_number_of_columns(t_shell *sh);
+bool					auto_path(t_obj *obj, char *path, char *name);
+void					auto_move_up(t_shell *sh);
+void					auto_move_down(t_shell *sh);
+void					auto_move_left(t_shell *sh);
+void					auto_move_right(t_shell *sh);
+bool					auto_is_executeable(t_obj *obj);
+bool					contains_printable_characters(char *str);
+char					*move_past_leading_spaces(char *content);
+bool					auto_history(t_shell *sh);
+void					auto_hist_double(t_shell *sh, bool *status);
+void					auto_hist_number(t_shell *sh, bool *status);
+void					auto_hist_name(t_shell *sh, bool *status);
+
+void					auto_sort(t_obj *obj);
+
+void					auto_file_name(t_shell *sh, t_obj *obj);
+void					auto_print_spaces(int diff);
+void					auto_free_ac(t_shell *sh);
 
 /*
 ** terminal - cursor
@@ -524,11 +679,5 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 */
 void					signal_catching(void);
 void					sh_window_resize(t_shell *sh);
-
-/*
-** terminal - auto_cmopletion
-*/
-bool					auto_completion(t_shell *sh);
-void					auto_display(t_shell *sh, t_obj *obj);
 
 #endif

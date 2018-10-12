@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   do_special_modes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 23:59:47 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/09 13:49:38 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/08 23:59:47 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 static bool			gcc_check(char *str)
 {

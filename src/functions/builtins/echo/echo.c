@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:32:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 19:41:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,6 @@
 **  -n
 **      Do not output the trailing newline.
 */
-
-static char	*sh_echo_parse_string(char *s)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s && s[i])
-	{
-		if (s[i] == '\'' || s[i] == '"')
-		{
-			j = i;
-			while (s[j])
-			{
-				s[j] = s[j + 1];
-				j++;
-			}
-		}
-		else
-			i++;
-	}
-	return (s);
-}
 
 static char	*sh_echo_concat_args(char **argv)
 {
@@ -84,7 +60,6 @@ char		sh_echo(t_shell *sh, t_env *env, char **argv)
 		current++;
 	}
 	string = sh_echo_concat_args(argv + current);
-	string = sh_echo_parse_string(string);
 	ft_putstr(string);
 	if (!option_n)
 		ft_putchar('\n');

@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.check.c                                     :+:      :+:    :+:   */
+/*   useless_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 20:32:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 20:37:58 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 19:41:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool	sh_command_quotes_check(t_shell *sh)
+void		sh_remove_useless_quotes(char *str)
 {
-	int		i;
-	int		n_dquote;
-	int		n_squote;
-	bool	in_dquote;
-	bool	in_squote;
+	int	i;
 
 	i = 0;
-	n_dquote = 0;
-	n_squote = 0;
-	in_dquote = FALSE;
-	in_squote = FALSE;
-	while (sh->buffer.parsed[i])
+	while (str[i])
 	{
+		if ((str[i] == '"' && str[i + 1] == '"')
+		|| (str[i] == '\'' && str[i + 1] == '\''))
+		{
+			sh_command_repatriate(str, i, 2);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	if (str[0] == '\'' || str[0] == '"')
+	{
+		sh_command_repatriate(str, 0, 1);
+		str[ft_strlens(str) - 1] = '\0';
 	}
 }

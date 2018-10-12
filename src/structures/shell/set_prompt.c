@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 10:03:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 18:42:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ static void	sh_set_prompt_properties(t_shell *sh, unsigned char has_git)
 	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;
 }
 
-static void	sh_set_prompt_location(t_shell *sh, char flag)
+static void	sh_set_prompt_location(t_shell *sh)
 {
 	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
-	if (flag == 1)
-		if (!(sh->prompt.location = ft_strdups(env_search(sh->env, "PWD"))))
-			sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX);
-	if (flag == 0)
-		sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX);
+	sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX);
 }
 
 void		sh_set_prompt(t_shell *sh)
@@ -47,11 +43,11 @@ void		sh_set_prompt(t_shell *sh)
 
 	git = NULL;
 	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
-	sh_set_prompt_location(sh, 1);
+	sh_set_prompt_location(sh);
 	if ((len = ft_strlens(sh->prompt.location)) == 0)
 		return ;
 	sh->prompt.content = sh_get_folder_name(sh->env, sh->prompt.location, len);
-	sh_set_prompt_location(sh, 0);
+	sh_set_prompt_location(sh);
 	if ((git = sh_get_git_branch(sh->prompt.location)))
 		sh->prompt.content = ft_strjoinf(sh->prompt.content, git, 3);
 	sh->prompt.content = (sh->prompt.last_exec_succeed == 0)
@@ -60,5 +56,5 @@ void		sh_set_prompt(t_shell *sh)
 	(git)
 		? sh_set_prompt_properties(sh, 1)
 		: sh_set_prompt_properties(sh, 0);
-	sh_set_prompt_location(sh, 1);
+	sh_set_prompt_location(sh);
 }

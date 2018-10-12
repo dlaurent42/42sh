@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/11 18:07:58 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/12 22:06:29 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,10 @@
 NAME 		= 	shell
 
 CC 			=	gcc
-CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS		= 	-Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
-				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				functions/redirect.c										\
@@ -41,9 +40,6 @@ SRC			=	shell.c														\
 				functions/builtins/env/error.c								\
 				functions/builtins/env/mode.display.c						\
 				functions/builtins/env/mode.exec.c							\
-				functions/builtins/env/parse.c								\
-				functions/builtins/env/parse.actions.c						\
-				functions/builtins/env/parse.prepare.c						\
 				functions/builtins/exit/exit.c								\
 				functions/builtins/export/add.c								\
 				functions/builtins/export/display.c							\
@@ -59,7 +55,6 @@ SRC			=	shell.c														\
 				functions/builtins/history/options.sp.c						\
 				functions/builtins/history/options.warn.c					\
 				functions/builtins/history/print.c							\
-				functions/builtins/read/read.c								\
 				functions/builtins/setenv/add.c								\
 				functions/builtins/setenv/error.c							\
 				functions/builtins/setenv/parse.c							\
@@ -79,18 +74,33 @@ SRC			=	shell.c														\
 				functions/builtins/unsetenv/unsetenv.c						\
 				functions/builtins/utils/has_option.c						\
 				functions/builtins/utils/path_from_filename.c				\
+				functions/exec/dispatcher.c									\
+				functions/exec/run.c										\
+				functions/lexer/lexer.c										\
+				functions/lexer/handlers/backslash.c						\
+				functions/lexer/handlers/empty.c							\
+				functions/lexer/handlers/expansions.c						\
+				functions/lexer/handlers/quotes.c							\
+				functions/lexer/handlers/useless_quotes.c					\
+				functions/lexer/handlers/tilde.c							\
+				functions/lexer/handlers/trim.c								\
+				functions/lexer/utils/inject.c								\
+				functions/lexer/utils/repatriate.c							\
+				functions/parser/build.c									\
+				functions/parser/is_not_builtin.c							\
+				functions/parser/parser.c									\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
 				structures/binaries/insert.c								\
 				structures/binaries/new.c									\
+				structures/binaries/update.c								\
 				structures/binaries/search.c								\
 				structures/binaries/gen_list_for_auto_comp.c				\
 				structures/commands/add.c									\
 				structures/commands/append_from.c							\
 				structures/commands/append_to.c								\
 				structures/commands/delete.c								\
-				structures/commands/execute_fetch.c							\
 				structures/commands/export_to.c								\
 				structures/commands/export.c								\
 				structures/commands/import_from.c							\
@@ -113,7 +123,16 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.c								\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
-				terminal/autocompletion/sort/sort.c							\
+				terminal/autocompletion/auto_completion/auto_completion.c	\
+				terminal/autocompletion/auto_completion/free_ac.c			\
+				terminal/autocompletion/auto_completion/get_obj.c			\
+				terminal/autocompletion/auto_completion/create_obj.c		\
+				terminal/autocompletion/auto_completion/free_obj.c			\
+				terminal/autocompletion/auto_completion/utils.c				\
+				terminal/autocompletion/display/display.c					\
+				terminal/autocompletion/display/clear_selection_screen.c	\
+				terminal/autocompletion/display/file_name.c					\
+				terminal/autocompletion/display/print_spaces.c				\
 				terminal/autocompletion/issuance/path.c						\
 				terminal/autocompletion/issuance/do_ls.c					\
 				terminal/autocompletion/issuance/move_up.c					\
@@ -130,19 +149,11 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/do_special_modes.c			\
 				terminal/autocompletion/issuance/calc_len_file_name.c		\
 				terminal/autocompletion/issuance/calculate_number_of_columns.c\
-				terminal/autocompletion/display/display.c					\
-				terminal/autocompletion/display/clear_selection_screen.c	\
-				terminal/autocompletion/display/file_name.c					\
-				terminal/autocompletion/display/print_spaces.c				\
-				terminal/autocompletion/auto_completion/auto_completion.c	\
-				terminal/autocompletion/auto_completion/free_ac.c			\
-				terminal/autocompletion/auto_completion/get_obj.c			\
-				terminal/autocompletion/auto_completion/create_obj.c		\
-				terminal/autocompletion/auto_completion/free_obj.c			\
 				terminal/autocompletion/history/history.c					\
 				terminal/autocompletion/history/hist_double.c				\
 				terminal/autocompletion/history/hist_name.c					\
 				terminal/autocompletion/history/hist_number.c				\
+				terminal/autocompletion/sort/sort.c							\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -228,12 +239,16 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/exit
 				@mkdir -p $(OBJ_DIR)/functions/builtins/export
 				@mkdir -p $(OBJ_DIR)/functions/builtins/history
-				@mkdir -p $(OBJ_DIR)/functions/builtins/read
 				@mkdir -p $(OBJ_DIR)/functions/builtins/setenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unalias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
+				@mkdir -p $(OBJ_DIR)/functions/exec
+				@mkdir -p $(OBJ_DIR)/functions/lexer
+				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
+				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
+				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands

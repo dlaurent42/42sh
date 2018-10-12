@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 15:46:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 17:06:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	sh_set_termios(t_shell *sh)
 	ioctl(0, TIOCGWINSZ, &window);
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
+	ft_putstr(CLEAR_SCREEN);
+	ft_putstr("\e[3J");
 }
 
 static void	sh_init_prompt(t_shell *sh)
@@ -47,18 +49,12 @@ t_shell		*sh_new(char **environ)
 	(!(name = getenv("TERM"))) ? error_malloc_sh(sh) : 0;
 	(tgetent(NULL, name) == ERR) ? error_malloc_sh(sh) : 0;
 	sh_set_termios(sh);
-	ft_putendl("Building environment");
 	sh->env = env_new(sh, environ);
-	ft_putendl("Building aliases");
 	sh->alias = env_new(sh, NULL);
-	ft_putendl("Local variables initialization");
 	env_initialize_local(sh);
-	ft_putendl("Importing binaries from PATH");
-	sh->bin = bin_new(sh);
+	sh->bin = bin_new(sh, sh->env);
 	sh->read = read_new(sh);
-	ft_putendl("Importing command history");
 	command_import(sh);
-	ft_putendl("Prompt initialization");
 	sh_init_prompt(sh);
 	g_sh = sh;
 	return (sh);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_strokes.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 07:09:03 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 07:22:10 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,72 @@
 # define CURSOR_SHOW	"\x1b\x5b\x3f\x31\x32\x6c\x1b\x5b\x3f\x32\x35\x68"
 
 # define SEARCH_PROMPT	"\n\xf0\x9f\x94\x8d  "
+
+/*
+** autocompletion
+*/
+# define RL_BUFSIZE		1024
+# define CHRSIZELEN		8
+
+# define AUTO_NON		0
+# define AUTO_BIN		1
+# define AUTO_REG		2
+# define AUTO_WILD		3
+# define AUTO_ENV		4
+
+# define AT_FIRST		0
+# define AT_REST		1
+
+# define MODE_NON		0
+# define MODE_CMP		1
+# define MODE_STR		2
+
+# define FILT_CD		1
+# define FILT_GCC		2
+
+# define TYPE_IFO		010000
+# define TYPE_CHR		020000
+# define TYPE_DIR		040000
+# define TYPE_BLK		060000
+# define TYPE_REG		0100000
+# define TYPE_LNK		0120000
+# define TYPE_SOCK		0140000
+# define TYPE_WHT		0160000
+
+# define COL_IFO		"\x1b[33m"
+# define COL_CHR		"\x1b[1;33m"
+# define COL_DIR		"\x1b[1;31m"
+# define COL_BLK		"\x1b[1;33m"
+# define COL_REG		"\x1b[0m"
+# define COL_LNK		"\x1b[1;36m"
+# define COL_SOCK		"\x1b[32m"
+# define COL_WHT		"\x1b[31m"
+# define COL_EXE		"\x1b[1;32m"
+# define COL_BG			"\x1b[30;47m"
+# define COL_CLR		"\x1b[0m"
+
+/*
+** others
+*/
+# ifndef ARG_MAX
+#  define ARG_MAX 		262144
+# endif
+
+# define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
+# define VERIF_KEY_LEN	32
+
+# define HISTFILE		"/.cmd_history"
+
+# define ENV_MAX_SIZE	999
+# define ENV_PRIME_1	3
+# define ENV_PRIME_2	13
+
+# define BIN_MAX_SIZE	9999
+# define BIN_PRIME_1	3
+# define BIN_PRIME_2	13
+
+# define LINE_SIZE		8
+
+# define SEARCH_LEN		3
 
 #endif

@@ -5,63 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 01:28:20 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 17:26:18 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
-
-static char			*move_past_leading_spaces(char *content)
-{
-	while (content && *content == ' ')
-		content++;
-	return (content);
-}
-
-static bool			contains_printable_characters(char *str)
-{
-	while (str && *str)
-	{
-		if (ft_isprint(*str))
-			return (true);
-		str++;
-	}
-	return (false);
-}
 
 static char			*get_auto_mode(t_shell *sh, char *content)
 {
 	char			*str;
-	char			*slash;
 
 	if (!(str = ft_strrchr(move_past_leading_spaces(content), ' ')))
 	{
 		str = content;
 		sh->ac->auto_mode = (*str != '.') ? AUTO_BIN : AUTO_REG;
-		if (*str == '$')
-		{
-			sh->ac->auto_mode = AUTO_ENV;
+		if (*str == '$' && (sh->ac->auto_mode = AUTO_ENV) == AUTO_ENV)
 			str++;
-		}
 		sh->ac->pre_file_name = ft_strnew(0);
 	}
 	else
 	{
 		str++;
-		if (*str == '$')
-		{
-			sh->ac->auto_mode = AUTO_ENV;
+		if (*str == '$' && (sh->ac->auto_mode = AUTO_ENV) == AUTO_ENV)
 			str++;
-		}
 		else
 			sh->ac->auto_mode = AUTO_REG;
-		if ((slash = ft_strrchr(str, '/')))
-			sh->ac->pre_file_name = ft_strndup(content, (slash - content) + 1);
-		else
-			sh->ac->pre_file_name = ft_strndup(content, (str - content));
+		sh->ac->pre_file_name = (ft_strrchr(str, '/'))
+			? ft_strndup(content, (ft_strrchr(str, '/') - content) + 1)
+			: ft_strndup(content, (str - content));
 	}
 	if (!contains_printable_characters(content) || !sh->ac->pre_file_name
 			|| sh->ac->auto_mode == AUTO_NON)

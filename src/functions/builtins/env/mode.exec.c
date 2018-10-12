@@ -6,60 +6,42 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/08 10:53:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 18:39:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-// static char	sh_env_exec_free(char *p, char *f, char **arr)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	ft_strdel(&p);
-// 	ft_strdel(&f);
-// 	if (arr)
-// 	{
-// 		while (arr[i])
-// 		{
-// 			ft_strdel(&arr[i]);
-// 			i++;
-// 		}
-// 		ft_memdel((void **)&arr);
-// 	}
-// 	return (0);
-// }
-
-static void	sh_env_exec_verbose(char *path, char **arr)
+static char	*sh_env_exec_get_str(t_shell *sh, t_env *env, char **arr)
 {
-	int	i;
+	int		i;
+	char	*str;
 
-	i = 1;
-	ft_putstr("#env executing: ");
-	ft_putendl(path);
-	ft_putstr("#env    arg[0]= 'ls'");
-	ft_putendl(path);
+	i = 0;
+	str = NULL;
 	while (arr[i])
 	{
-		ft_printf("#env    arg[%d]= '%s'\n", i, arr[i]);
+		str = (str) ? ft_strjoinf(str, " ", 1) : 0;
+		str = ft_strjoinf(str, arr[i], 1);
 		i++;
 	}
+	if (!sh_command_lexer(sh, env, str))
+	{
+		ft_strdel(&str);
+		return (NULL);
+	}
+	return (str);
 }
 
-char		sh_env_exec(t_env *env, char *path, char **arr, bool verbose)
+char		sh_env_exec(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 {
-	char	*function;
-	char	*returned;
+	char	*str;
 
-	function = (path)
-		? ft_strjoinf(path, arr[0], 2)
-		: ft_strdups(arr[0]);
-	if (verbose)
-		sh_env_exec_verbose(path, arr);
-	returned = command_execute_fetch(env, function, arr + 1);
-	ft_printf(returned);
+	if (!(str = sh_env_exec_get_str(sh, env, arr)))
+		return (sh_env_error(env, bin, 0, 6));
+	sh_command_parser(sh, env, bin, str);
+	ft_strdel(&str);
 	env_delete(env);
-	//return (sh_env_exec_free(path, function, arr));
-	return (0);
+	bin_delete(bin);
+	return (sh->prompt.last_exec_succeed);
 }

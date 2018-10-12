@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_dispatcher.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/02 17:23:53 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/11 00:55:53 by dhojt            ###   ########.fr       */
+/*   Created: 2018/10/02 17:23:53 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 static void			auto_arrows_dispatcher(t_shell *sh)
 {

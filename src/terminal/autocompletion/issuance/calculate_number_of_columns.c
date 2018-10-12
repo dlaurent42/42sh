@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_number_of_columns.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/11 13:29:46 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/08 15:40:08 by dhojt            ###   ########.fr       */
+/*   Created: 2018/08/11 13:29:46 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "auto_completion.h"
-#include "auto_completion_prot.h"
 
 void				auto_calculate_number_of_columns(t_shell *sh)
 {
