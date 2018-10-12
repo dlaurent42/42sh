@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:39:05 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:13:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 22:20:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SHELL_H
 
 # include "../libft/include/libft.h"
-# include "auto_completion.h"
 # include "key_strokes.h"
 # include <curses.h>
 # include <dirent.h>

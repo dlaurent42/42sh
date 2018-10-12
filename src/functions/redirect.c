@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 20:40:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 00:09:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	sh_reset_sh(t_shell *sh)
 {
-	ft_bzero(sh->buffer.content, sh->buffer.unicode_len);
+	ft_bzero(sh->buffer.content, sh->buffer.unicode_len + sh->buffer.ushift);
 	sh->buffer.display_len = 0;
 	sh->buffer.unicode_len = 0;
 	sh->buffer.dshift = 0;

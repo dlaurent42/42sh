@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 09:01:31 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 18:29:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 00:39:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char		sh_env_error(t_env *env, t_bin *bin, char c, int err_id)
 	{
 		ft_putstr_fd("env: illegal option or use of option -- ", 2);
 		ft_putchar_fd(c, 2);
+		ft_putchar_fd('\n', 2);
 	}
 	if (err_id == 5)
 		ft_putendl_fd("env: setenv: wrong argument", 2);

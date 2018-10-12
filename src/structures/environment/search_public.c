@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:52:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:01:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*env_search_public(t_env *env, const char *key)
 	item = env->items[index];
 	while (item)
 	{
-		if (item->key && item->value && !item->local
+		if (item && item != &env->del && !item->local
 		&& !ft_strcmps(item->key, key))
 			return (item->value);
 		index = env_get_hash(key, env->size, i);

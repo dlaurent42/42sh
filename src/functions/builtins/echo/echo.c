@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 19:41:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 00:37:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	*sh_echo_concat_args(char **argv)
 	s = NULL;
 	while (argv && argv[i])
 	{
+		s = (s) ? ft_strjoins(s, " ") : 0;
 		s = ft_strjoinf(s, argv[i], 1);
 		i++;
 	}
@@ -53,11 +54,15 @@ char		sh_echo(t_shell *sh, t_env *env, char **argv)
 	current = 0;
 	option_n = FALSE;
 	string = NULL;
-	while (argv[current] && argv[current] && argv[current][0] == '-')
+	while (argv[current] && argv[current][0] == '-'
+	&& (argv[current][1] == 'n' || argv[current][1] == '-')
+	&& !argv[current][2])
 	{
-		if (argv[current][1] == 'n' && !argv[current][2])
-			option_n = TRUE;
 		current++;
+		if (argv[current - 1][1] == 'n')
+			option_n = TRUE;
+		else
+			break ;
 	}
 	string = sh_echo_concat_args(argv + current);
 	ft_putstr(string);

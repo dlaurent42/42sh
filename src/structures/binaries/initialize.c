@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:21:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 22:53:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			bin_initialize(t_shell *sh, t_env *env, t_bin *bin)
 
 	i = 0;
 	if (!(path = env_search(env, "PATH")))
-		error_no_path_var(sh);
+		return ;
 	if (!(path_list = ft_strsplit(path, ':')))
 		error_no_path_var(sh);
 	while (path_list[i])

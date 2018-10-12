@@ -6,13 +6,13 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/12 22:06:29 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/13 00:43:50 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: 		all clean fclean re
 
-NAME 		= 	shell
+NAME 		= 	minishell
 
 CC 			=	gcc
 CFLAGS		= 	-Wall -Wextra -Werror -I$(INC_DIR)

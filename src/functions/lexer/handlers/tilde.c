@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:58:11 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 20:25:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:35:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void		sh_command_expand_tile(t_shell *sh, t_env *env, char *str)
 	{
 		sh_command_get_isquote(str, i, &in_dquote, &in_squote);
 		if (!in_dquote && !in_squote && str[i] == '~'
-		&& (str[i + 1] == '\0' || str[i + 1] == '/')
 		&& (i == 0 || (i && (str[i - 1] == ' ' || str[i - 1] == '\t'))))
 			sh_command_tilde_replace(sh, env, str, i);
 		i++;

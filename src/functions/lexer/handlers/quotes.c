@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:32:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 14:28:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:52:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool		sh_command_quotes_check(char *str)
 			sh_check_dquote(&n_dquote, &in_squote, &in_dquote);
 		else if (str[i] == '\'')
 			sh_check_squote(&n_squote, &in_squote, &in_dquote);
-		else if (str[i] == ';')
+		else if (str[i] == ';' && !in_squote && !in_dquote)
 		{
 			if (n_dquote % 2 || n_squote % 2)
 				return (FALSE);

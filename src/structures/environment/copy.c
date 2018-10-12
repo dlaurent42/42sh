@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 11:39:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:53:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/12 23:07:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ t_env			*env_copy(t_shell *sh, t_env *src)
 	if (!(env->items = (t_env_item **)ft_memalloc(sizeof(t_env_item *)
 	* env->size)))
 		error_malloc_env(sh, env, "env_items");
+	env->count = src->count;
 	return (env_copy_items(sh, src, env));
 }
