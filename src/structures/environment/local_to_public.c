@@ -6,19 +6,20 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 14:30:54 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:57:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:40:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		env_local_to_public(t_env *env, char *key)
+void		env_local_to_public(t_env *env, char *key, char *value)
 {
 	int			i;
 	int			index;
 	t_env_item	*item;
 
 	i = 1;
+	env_insert_item_into_array(env, key, value);
 	index = env_get_hash(key, env->size, 0);
 	item = env->items[index];
 	while (item)

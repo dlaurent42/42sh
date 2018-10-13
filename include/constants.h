@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_strokes.h                                      :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 19:57:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_STROKES_H
-# define KEY_STROKES_H
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
 /*
 ** key stroke
@@ -114,6 +114,18 @@
 # define COL_EXE		"\x1b[1;32m"
 # define COL_BG			"\x1b[30;47m"
 # define COL_CLR		"\x1b[0m"
+
+/*
+** read builtin
+*/
+#define READ_D	0
+#define READ_E	1
+#define READ_N	2
+#define READ_P	3
+#define READ_R	4
+#define READ_S	5
+#define READ_T	6
+#define READ_U	7
 
 /*
 ** others

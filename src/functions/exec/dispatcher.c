@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 13:52:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 20:58:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:50:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 
 	if (!argv || !argv[0])
 		return (1);
+	env_insert(sh, env, "_", argv[0]);
 	if (!sh_is_not_builtin(argv[0]))
 		return (sh_command_dispatch_builtins(sh, env, argv));
 	res = sh_command_exec(sh, argv, env->environment);

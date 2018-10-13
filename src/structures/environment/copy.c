@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 11:39:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 23:07:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 18:43:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static t_env	*env_copy_items(t_shell *sh, t_env *src, t_env *env)
 		value = ft_strchrsp(src->environment[i], '=');
 		key = ft_strsub(src->environment[i], 0,
 			ft_strlens(src->environment[i]) - ft_strlens(value) - 1);
-		(env_search_public(src, key))
-			? env_insert(sh, env, key, value)
-			: env_insert_local(sh, env, key, value);
+		env_insert(sh, env, key, value);
 		(key) ? ft_strdel(&key) : 0;
 		i++;
 	}

@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_local.c                                     :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 23:01:12 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/13 19:44:07 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/13 19:58:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*env_search_local(t_env *env, const char *key)
+char		sh_read_options(char **argv, int *i, int **options)
 {
-	int			i;
-	int			index;
-	t_env_item	*item;
+	int		j;
+	char	res;
 
-	i = 1;
-	index = env_get_hash(key, env->size, 0);
-	item = env->items[index];
-	while (item)
+	res = 0;
+	while (argv && argv[*i] && argv[*i][0] == '-' && (j = 1) == 1)
 	{
-		if (item && item != &env->del && item->local
-		&& !ft_strcmps(item->key, key))
-			return (item->value);
-		index = env_get_hash(key, env->size, i);
-		item = env->items[index];
-		i++;
+		if (res != 0)
+			return (res);
+		if (ft_strcmps(argv[*i], "--") == 0)
+			return ((*i += 1) == 0);
+		while (argv[*i][j])
+		{
+			if (argv[*i][j] == 's')
+				*options[READ_S] = 0;
+		}
+		*i += (argv[*i]) ? 1 : 0;
 	}
-	return (NULL);
+	return (0);
 }

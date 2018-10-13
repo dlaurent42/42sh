@@ -5,42 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 13:50:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 13:50:54 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/13 18:37:26 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/13 18:37:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_env_item	*env_new_item(t_shell *sh, t_env *env, char *k, char *v)
+bool		env_is_public(t_env *env, char *str)
 {
-	t_env_item	*item;
+	bool	public;
+	char	*key;
+	size_t	len;
 
-	if (!(item = (t_env_item *)ft_memalloc(sizeof(t_env_item))))
-		error_malloc_env(sh, env, "t_env_item");
-	if (!(item->key = ft_strdups(k)))
+	key = ft_strdups(str);
+	if (ft_strcountif(str, '='))
 	{
-		free(item);
-		error_malloc_env(sh, env, "t_env_item");
+		len = ft_strlens(str) - ft_strlens(ft_strchrs(str, '='));
+		key[len] = '\0';
 	}
-	item->value = ft_strdups(v);
-	return (item);
+	ft_printf("Received str is [%s] so key is [%s]\n", str, key);
+	public = (env_search_public(env, key) == NULL) ? FALSE : TRUE;
+	ft_strdel(&key);
+	return (public);
 }
 
-void		env_insert_item_into_array(t_env *env, char *k, char *v)
+bool		env_is_local(t_env *env, char *str)
 {
-	char			*var;
-	unsigned char	i;
-
-	i = 0;
-	var = ft_strjoins(k, "=");
-	var = ft_strjoinf(var, v, 1);
-	while (env->environment[i])
-	{
-		if (ft_strcmps(env->environment[i], var) == 0)
-			return (ft_strdel(&var));
-		i++;
-	}
-	i -= (env_delete_item_from_array(env, k)) ? 1 : 0;
-	env->environment[i] = ft_strdupf(var);
+	return (!env_is_public(env, str));
 }

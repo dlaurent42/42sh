@@ -6,16 +6,16 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/13 00:43:50 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/13 18:37:22 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: 		all clean fclean re
 
-NAME 		= 	minishell
+NAME 		= 	shell
 
 CC 			=	gcc
-CFLAGS		= 	-Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -113,8 +113,6 @@ SRC			=	shell.c														\
 				structures/environment/local_to_public.c					\
 				structures/environment/new.c								\
 				structures/environment/search.c								\
-				structures/environment/search_local.c						\
-				structures/environment/search_public.c						\
 				structures/environment/utils.c								\
 				structures/read/delete.c									\
 				structures/read/new.c										\

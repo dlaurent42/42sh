@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 14:05:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/13 19:02:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	sh_delete(t_shell *sh)
 {
 	if (!sh)
 		return ;
+	(sh->ac) ? auto_free_ac(sh) : 0;
 	(sh->cmd) ? command_export_all(sh) : 0;
 	(sh->cmd) ? command_delete_all(sh) : 0;
 	(sh->env) ? env_delete(sh->env) : 0;
