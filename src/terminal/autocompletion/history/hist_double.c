@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:10 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 13:21:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void				auto_hist_double(t_shell *sh, bool *status)
 	char			*ptr_to_exc;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(sh->buffer.content + offset++, "!!")))
+	while ((ptr_to_exc = ft_strstr(
+		sh->buffer.content + sh->buffer.ushift + offset++,
+		"!!")))
 	{
-		track = sh->buffer.content;
+		track = sh->buffer.content + sh->buffer.ushift;
 		sh_move_home(sh);
 		while (track++ != ptr_to_exc)
 			sh_move_right(sh);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:16:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 13:22:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void				auto_hist_number(t_shell *sh, bool *status)
 	t_cmd			*cmd;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(sh->buffer.content + offset++, "!")))
-	{
+	while ((ptr_to_exc = ft_strstr(
+			sh->buffer.content + sh->buffer.ushift + offset++,
+			"!")))
 		if ((number_of_deletions = good_number_of_digits(ptr_to_exc + 1) + 1))
-		{
 			if ((cmd = get_cmd_by_id(sh, ft_atoi(ptr_to_exc + 1))))
 			{
-				track = sh->buffer.content;
+				track = sh->buffer.content + sh->buffer.ushift;
 				sh_move_home(sh);
 				while (track++ != ptr_to_exc)
 					sh_move_right(sh);
@@ -72,6 +72,4 @@ void				auto_hist_number(t_shell *sh, bool *status)
 				*status = true;
 				sh_move_end(sh);
 			}
-		}
-	}
 }

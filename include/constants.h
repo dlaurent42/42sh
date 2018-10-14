@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 19:57:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 13:47:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,17 @@
 /*
 ** read builtin
 */
-#define READ_D	0
-#define READ_E	1
-#define READ_N	2
-#define READ_P	3
-#define READ_R	4
-#define READ_S	5
-#define READ_T	6
-#define READ_U	7
+#define READ_MAX_VAR	25
+#define READ_D			0
+#define READ_E			1
+#define READ_N			2
+#define READ_P			3
+#define READ_R			4
+#define READ_S			5
+#define READ_T			6
+#define READ_U			7
+#define READ_N_OPTIONS	8
+#define READ_SIZE		1
 
 /*
 ** others

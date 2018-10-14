@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:50:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 19:57:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 18:45:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,66 @@
 ** The return code is zero, unless end-of-file is encountered or read times out.
 */
 
+static char	sh_read_free(int *opt, char *prompt, char **vars, char res)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("01\n");
+	ft_strdel(&prompt);
+	ft_printf("02\n");
+	while (vars && i < READ_MAX_VAR)
+	{
+		ft_strdel(&vars[i]);
+		i++;
+	}
+	ft_printf("03\n");
+	(vars) ? free(vars) : 0;
+	ft_printf("04\n");
+	(opt) ? free(opt) : 0;
+	ft_printf("05\n");
+	return (res);
+}
+
 char		sh__read(t_shell *sh, t_env *env, char **argv)
 {
 	int		i;
-	int		options[8];
+	int		*opt;
 	char	res;
-	char	*vars[25];
+	char	**vars;
+	char	*prompt;
 
 	i = 0;
-	ft_memset((void *)options, -1, sizeof(int) * 8);
-	ft_bzero((void *)vars, sizeof(char *) * 25);
-	if ((res = sh_read_options(argv, &i, &options)) != 0)
-		return (sh_read_error(res));
-	return (0);
+	prompt = NULL;
+	if (!(opt = ft_memalloc(sizeof(int) * (READ_N_OPTIONS + 1))))
+		return (1);
+	ft_memset((void *)opt, -1, sizeof(int) * (READ_N_OPTIONS + 1));
+	if (!(vars = ft_memalloc(sizeof(char *) * (READ_MAX_VAR + 1))))
+		return (sh_read_free(opt, NULL, NULL, 1));
+	ft_bzero((void *)vars, sizeof(char *) * (READ_MAX_VAR + 1));
+	ft_printf("Read has started\n");
+	if ((res = sh_read_options(argv, &i, &opt, &prompt)) != 0)
+		return (sh_read_free(opt, prompt, vars, res));
+	ft_printf("Read options have been catched (res = %d)\n", res);
+	opt[READ_U] = (opt[READ_U] <= 2) ? 0 : opt[READ_U];
+	opt[READ_D] = (opt[READ_D] == -1 || opt[READ_U] > 2) ? '\n' : opt[READ_D];
+	opt[READ_E] = (opt[READ_E] != -1 && opt[READ_U] == 0) ? 0 : -1;
+	(opt[READ_U] > 2 || sh->pid) ? opt[READ_T] = -1 : 0;
+	if ((res = sh_read_variables(argv, &i, &vars)) != 0)
+		return (sh_read_free(opt, prompt, vars, res));
+	ft_printf("Read variables have been catched (res = %d)\n", res);
+	(opt[READ_U] == 0) ? ft_putstr_fd(prompt, 2) : 0;
+	
+	
+	i = -1;
+	while (++i < READ_N_OPTIONS)
+		ft_printf("OPTION[%d]: %d\n", i + 1, opt[i]);
+	i = -1;
+	while (++i < READ_MAX_VAR)
+		ft_printf("VAR[%d]: %s\n", i + 1, vars[i]);
+	
+	res = sh_read_assign(sh, env, opt, vars);
+	(opt[READ_U] == 0 && prompt) ? ft_putchar('\n') : 0;
+	ft_printf("Read assignment has been performed\n");
+	return (sh_read_free(opt, prompt, vars, res));
 }

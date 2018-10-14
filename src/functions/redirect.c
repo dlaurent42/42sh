@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 00:09:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 14:41:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	sh_reset_sh(t_shell *sh)
 	sh->buffer.ushift = 0;
 	sh->buffer.cmd = NULL;
 	sh->read->unicode_bytes_left = 0;
+	sh->pid = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
 	sh_set_prompt(sh);

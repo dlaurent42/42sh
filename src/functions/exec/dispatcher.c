@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 13:52:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:50:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 16:29:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static char	sh_command_dispatch_builtins(t_shell *sh, t_env *env, char **argv)
 		return (sh_export(sh, env, argv + 1));
 	if (ft_strcmps(argv[0], "history") == 0)
 		return (sh_history(sh, env, argv + 1));
+	if (ft_strcmps(argv[0], "read") == 0)
+		return (sh__read(sh, env, argv + 1));
 	if (ft_strcmps(argv[0], "setenv") == 0)
 		return (sh_setenv(sh, env, argv + 1));
 	if (ft_strcmps(argv[0], "unalias") == 0)

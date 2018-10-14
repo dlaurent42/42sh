@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 13:20:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,22 @@ static bool			auto_env(t_shell *sh)
 	int				len;
 	char			*env;
 	char			*track;
-	char			*ptr_to_dollar;
+	char			*ptr_dollar;
 
-	if ((ptr_to_dollar = ft_strrchr(sh->buffer.content, ' ')))
-		ptr_to_dollar++;
+	if ((ptr_dollar = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ')))
+		ptr_dollar++;
 	else
-		ptr_to_dollar = sh->buffer.content;
-	if (*ptr_to_dollar != '$')
+		ptr_dollar = sh->buffer.content + sh->buffer.ushift;
+	if (*ptr_dollar != '$')
 		return (false);
-	len = ft_strlen(ptr_to_dollar + 1) + 1;
-	if (!(env = get_env_var(sh, ptr_to_dollar, len)) || !ft_strchr(env, '=')
-			|| ft_strncmp(env, ptr_to_dollar + 1, ft_strchr(env, '=') - env)
+	len = ft_strlen(ptr_dollar + 1) + 1;
+	if (!(env = get_env_var(sh, ptr_dollar, len)) || !ft_strchr(env, '=')
+			|| ft_strncmp(env, ptr_dollar + 1, ft_strchr(env, '=') - env)
 			|| !(env = ft_strchr(env, '=') + 1))
 		return (false);
-	track = sh->buffer.content;
+	track = sh->buffer.content + sh->buffer.ushift;
 	sh_move_home(sh);
-	while (track++ != ptr_to_dollar)
+	while (track++ != ptr_dollar)
 		sh_move_right(sh);
 	while (len--)
 		sh_delete_current_char(sh);
@@ -117,7 +117,9 @@ bool				auto_completion(t_shell *sh)
 		if (!(sh->ac = (t_ac *)malloc(sizeof(t_ac))))
 			return (false);
 		ft_bzero(sh->ac, sizeof(t_ac));
-		if (!(parsed_buffer = get_auto_mode(sh, sh->buffer.content)))
+		if (!(parsed_buffer = get_auto_mode(
+			sh,
+			sh->buffer.content + sh->buffer.ushift)))
 			return (false);
 		if (create_ac(sh, parsed_buffer)
 				&& auto_get_obj(sh))

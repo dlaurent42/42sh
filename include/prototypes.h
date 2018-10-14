@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:40:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 15:47:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,25 @@ char					sh_history_option_warn(
 							t_env *env,
 							char *path,
 							char c);
+
+/*
+** functions - builtins - read
+*/
+char					sh__read(t_shell *sh, t_env *env, char **argv);
+char					sh_read_assign(
+							t_shell *sh,
+							t_env *env,
+							int *opt,
+							char **vars);
+char					sh_read_error_msg(char *s, char err_id);
+char					sh_read_error(char c, char err_id);
+char					sh_read_options(char **av, int *i, int **opt, char **p);
+char					sh_read_option_d(char **av, int *i, int *j, int **opt);
+char					sh_read_option_n(char **av, int *i, int *j, int **opt);
+char					sh_read_option_p(char **av, int *i, int *j, char **p);
+char					sh_read_option_t(char **av, int *i, int *j, int **opt);
+char					sh_read_option_u(char **av, int *i, int *j, int **opt);
+char					sh_read_variables(char **av, int *i, char ***vars);
 
 /*
 ** functions - builtins - setenv

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:46:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 15:47:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/14 16:57:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool	sh_is_not_builtin(char *str)
 	|| ft_strcmps(str, "exit") == 0
 	|| ft_strcmps(str, "export") == 0
 	|| ft_strcmps(str, "history") == 0
+	|| ft_strcmps(str, "read") == 0
 	|| ft_strcmps(str, "setenv") == 0
 	|| ft_strcmps(str, "unalias") == 0
 	|| ft_strcmps(str, "unset") == 0

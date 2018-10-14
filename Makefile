@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/13 18:37:22 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/14 15:43:57 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,12 @@ SRC			=	shell.c														\
 				functions/builtins/history/options.sp.c						\
 				functions/builtins/history/options.warn.c					\
 				functions/builtins/history/print.c							\
+				functions/builtins/read/assign.c							\
+				functions/builtins/read/error.c								\
+				functions/builtins/read/options.arguments.c					\
+				functions/builtins/read/options.c							\
+				functions/builtins/read/read.c								\
+				functions/builtins/read/variables.c							\
 				functions/builtins/setenv/add.c								\
 				functions/builtins/setenv/error.c							\
 				functions/builtins/setenv/parse.c							\
@@ -237,6 +243,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/exit
 				@mkdir -p $(OBJ_DIR)/functions/builtins/export
 				@mkdir -p $(OBJ_DIR)/functions/builtins/history
+				@mkdir -p $(OBJ_DIR)/functions/builtins/read
 				@mkdir -p $(OBJ_DIR)/functions/builtins/setenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unalias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
