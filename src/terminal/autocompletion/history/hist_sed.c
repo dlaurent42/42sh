@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/15 20:35:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/15 20:37:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void			do_error(t_shell *sh, bool *status)
 {
 	if (sh)
 		;
+	if (*status)
+		ft_putendl("ERROR");/////////////////////////////////
 	*status = false;
-	ft_putendl("ERROR");/////////////////////////////////
 }
 
 static bool			content_is_hist_sed(t_shell *sh, char *content)
