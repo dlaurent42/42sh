@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 23:59:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 13:22:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 19:05:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ static void			filter_obj(t_obj *obj, int filter)
 
 void				auto_do_special_modes(t_shell *sh, t_obj *obj)
 {
-	if (!ft_strncmp(sh->buffer.content + sh->buffer.ushift, "cd ", 3))
+	char			*content;
+
+	content = sh->buffer.content + sh->buffer.ushift;
+	if (!ft_strncmp(move_past_leading_spaces(content), "cd ", 3))
 		filter_obj(obj, FILT_CD);
-	else if (!ft_strncmp(sh->buffer.content + sh->buffer.ushift, "gcc ", 4)
-			|| !ft_strncmp(sh->buffer.content + sh->buffer.ushift, "cc ", 3))
+	else if (!ft_strncmp(move_past_leading_spaces(content), "gcc ", 4)
+			|| !ft_strncmp(move_past_leading_spaces(content), "cc ", 3))
 		filter_obj(obj, FILT_GCC);
 }
