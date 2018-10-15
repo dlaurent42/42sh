@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/15 19:43:51 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/15 19:55:48 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
 	return (cmd);
 }
 
+static bool			content_is_hist_sed(char *content)
+{
+	int				number_of_chevrons;
+
+	number_of_chevrons = 0;
+	if (*content && *content != '^')
+		return (false);
+	while (*content && number_of_chevrons < 3)
+	{
+		if (*content == '^' && *(content + 1) == '^')
+			return (false);
+		if (*content == '^')
+			number_of_chevrons++;
+	}
+	return ((number_of_chevrons == 3));
+}
+
+
 void				auto_hist_sed(t_shell *sh, bool *status)
 {
 	int				number_of_deletions;
@@ -33,6 +51,8 @@ void				auto_hist_sed(t_shell *sh, bool *status)
 	t_cmd			*cmd;
 
 	offset = 0;
+	if (!content_is_hist_sed(sh->buffer.content + sh->buffer.ushift))
+		return ;
 	while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift + offset++, "!")))
 	{
 		if (!ft_isdigit(*(ptr_to_exc + 1))
