@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/15 19:55:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/15 20:35:03 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,50 @@ static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
 	return (cmd);
 }
 
-static bool			content_is_hist_sed(char *content)
+static void			do_error(t_shell *sh, bool *status)
 {
-	int				number_of_chevrons;
-
-	number_of_chevrons = 0;
-	if (*content && *content != '^')
-		return (false);
-	while (*content && number_of_chevrons < 3)
-	{
-		if (*content == '^' && *(content + 1) == '^')
-			return (false);
-		if (*content == '^')
-			number_of_chevrons++;
-	}
-	return ((number_of_chevrons == 3));
+	if (sh)
+		;
+	*status = false;
+	ft_putendl("ERROR");/////////////////////////////////
 }
 
+static bool			content_is_hist_sed(t_shell *sh, char *content)
+{
+	int				number_of_chevrons;
+	bool			status;
+	char			*chevron;
+
+	status = true;
+	if (*content && *content == '^')
+	{
+		if (status && (chevron = ft_strrchr(content, '^')) && *(chevron + 1))
+			do_error(sh, &status);
+		number_of_chevrons = 0;
+		while (status && *content && number_of_chevrons < 4)
+		{
+			if (*content == '^' && *(content + 1) == '^')
+				do_error(sh, &status);
+			if (*content == '^')
+				number_of_chevrons++;
+			content++;
+		}
+		if (number_of_chevrons != 3)
+			do_error(sh, &status);
+	}
+	return (status);
+}
 
 void				auto_hist_sed(t_shell *sh, bool *status)
 {
 	int				number_of_deletions;
-	int				offset;
 	char			*track;
 	char			*ptr_to_exc;
 	t_cmd			*cmd;
 
-	offset = 0;
-	if (!content_is_hist_sed(sh->buffer.content + sh->buffer.ushift))
+	if (!content_is_hist_sed(sh, sh->buffer.content + sh->buffer.ushift))
 		return ;
-	while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift + offset++, "!")))
+	while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift, "!")))
 	{
 		if (!ft_isdigit(*(ptr_to_exc + 1))
 				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
