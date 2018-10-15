@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hist_name.c                                        :+:      :+:    :+:   */
+/*   hist_sed.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/16 14:16:19 by dlaurent         ###   ########.fr       */
-=======
-/*   Updated: 2018/10/15 19:44:09 by dhojt            ###   ########.fr       */
->>>>>>> Added hist_sed.c
+/*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
+/*   Updated: 2018/10/15 19:43:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +24,7 @@ static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
 	return (cmd);
 }
 
-void				auto_hist_name(t_shell *sh, bool *status)
+void				auto_hist_sed(t_shell *sh, bool *status)
 {
 	int				number_of_deletions;
 	int				offset;
@@ -37,8 +33,7 @@ void				auto_hist_name(t_shell *sh, bool *status)
 	t_cmd			*cmd;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(
-		sh->buffer.content + sh->buffer.ushift + offset++, "!")))
+	while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift + offset++, "!")))
 	{
 		if (!ft_isdigit(*(ptr_to_exc + 1))
 				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
