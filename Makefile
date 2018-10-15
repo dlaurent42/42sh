@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/14 15:43:57 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/15 12:54:41 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC			=	shell.c														\
 				functions/builtins/read/options.arguments.c					\
 				functions/builtins/read/options.c							\
 				functions/builtins/read/read.c								\
+				functions/builtins/read/reading_loop.c						\
 				functions/builtins/read/variables.c							\
 				functions/builtins/setenv/add.c								\
 				functions/builtins/setenv/error.c							\

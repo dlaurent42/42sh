@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 15:47:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 14:19:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ char					sh_read_option_p(char **av, int *i, int *j, char **p);
 char					sh_read_option_t(char **av, int *i, int *j, int **opt);
 char					sh_read_option_u(char **av, int *i, int *j, int **opt);
 char					sh_read_variables(char **av, int *i, char ***vars);
+char					*sh_read_parse_line(char *line, int read_r);
+char					sh_read_set(t_env *env, char **vars, char *line);
+char					sh_read_loop(t_env *env, int *opt, char **vars);
+char					sh_read_timeout_loop(t_env *env, int *opt, char **vars);
 
 /*
 ** functions - builtins - setenv

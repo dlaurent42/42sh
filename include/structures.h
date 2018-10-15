@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:04:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:53:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct stat		t_stat;
 typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 typedef struct passwd	t_passwd;
+typedef struct timeval	t_timeval;
 
 typedef struct			s_cmd_attr
 {

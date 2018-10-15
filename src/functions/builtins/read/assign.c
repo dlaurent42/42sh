@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 00:19:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 18:25:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 14:30:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	*sh_read_parse_line(char *line, int read_r)
+char	*sh_read_parse_line(char *line, int read_r)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ static void	sh_delete_strings(char **split, char *str)
 	free(split);
 }
 
-static void	sh_read_set_concat(t_shell *sh, t_env *env, char *key, char **split)
+static void	sh_read_set_concat(t_env *env, char *key, char **split)
 {
 	int		i;
 	char	*value;
@@ -67,11 +67,11 @@ static void	sh_read_set_concat(t_shell *sh, t_env *env, char *key, char **split)
 		value = ft_strjoinf(value, split[i], 1);
 		i++;
 	}
-	env_insert_local(sh, env, key, value);
+	env_insert_local(NULL, env, key, value);
 	ft_strdel(&value);
 }
 
-static char	sh_read_set(t_shell *sh, t_env *env, char **vars, char *line)
+char	sh_read_set(t_env *env, char **vars, char *line)
 {
 	int		i;
 	char	**split;
@@ -83,44 +83,23 @@ static char	sh_read_set(t_shell *sh, t_env *env, char **vars, char *line)
 		return (sh_read_error_msg("read: cannot split line", 2));
 	}
 	if (!vars[0])
-		env_insert_local(sh, env, "REPLY", line);
+		env_insert_local(NULL, env, "REPLY", line);
 	else
 		while (++i < READ_MAX_VAR - 1)
 			if (vars[i + 1] && split[i])
-				env_insert_local(sh, env, vars[i], split[i]);
+				env_insert_local(NULL, env, vars[i], split[i]);
 			else if (vars[i + 1] == NULL && split[i])
 			{
-				sh_read_set_concat(sh, env, vars[i], split + i);
+				sh_read_set_concat(env, vars[i], split + i);
 				break ;
 			}
+			else
+				while (i < READ_MAX_VAR - 1)
+				{
+					if (vars[i])
+						env_insert_local(NULL, env, vars[i], "");
+					i++;
+				}
 	sh_delete_strings(split, line);
-	return (0);
-}
-
-char		sh_read_assign(t_shell *sh, t_env *env, int *opt, char **vars)
-{
-	char			*line;
-	char			buffer[2];
-	unsigned long	timer;
-
-	line = NULL;
-	timer = (unsigned long)time(NULL) + opt[READ_T];
-	ft_bzero((void *)buffer, sizeof(char) * 2);
-	while ((opt[READ_T] == -1 || timer < (unsigned long)time(NULL))
-	&& (read(opt[READ_U], (void *)buffer, READ_SIZE)) == READ_SIZE)
-	{
-		(buffer[0] == 3) ? ft_strdel(&line) : 0;
-		if (buffer[0] == 3)
-			return (sh_read_error_msg("^C", 2));
-		if (buffer[0] == opt[READ_D] || (opt[READ_N] != -1 && --opt[READ_N]))
-		{
-			(opt[READ_E]) ? ft_putstr(line) : 0;
-			return (sh_read_set(sh, env, vars,
-			sh_read_parse_line(line, opt[READ_R])));
-		}
-		line = ft_strjoinf(line, buffer, 1);
-		(opt[READ_S] != -1) ? ft_putchar_fd(buffer[0], 2) : 0;
-		ft_bzero((void *)buffer, sizeof(char) * 2);
-	}
-	return (1);
+	return (-99);
 }

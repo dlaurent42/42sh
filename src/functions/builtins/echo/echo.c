@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 00:37:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 10:41:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*sh_echo_concat_args(char **argv)
 	s = NULL;
 	while (argv && argv[i])
 	{
-		s = (s) ? ft_strjoins(s, " ") : 0;
+		s = (s) ? ft_strjoinf(s, " ", 1) : 0;
 		s = ft_strjoinf(s, argv[i], 1);
 		i++;
 	}
