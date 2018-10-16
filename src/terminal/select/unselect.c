@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:11:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:49:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:32:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		sh_unselect_delete(t_shell *sh, unsigned char c)
 	start = sh->selection.start_abs;
 	if (sh->modes.select == FALSE)
 		return ;
-	if ((!ft_isprint(c) && c != 22 && c < 0b10000000)
+	if ((!ft_isprint(c) && c != 16 && c < 0b10000000)
 	|| (c >= 0b10000000 && c < 0b11000000)
 	|| c == 11)
 		return (sh_unselect(sh));

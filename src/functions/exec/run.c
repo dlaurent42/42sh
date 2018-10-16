@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:17:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:29:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 		return (sh_echo(sh, env, cmd + 1));
 	if (ft_strcmps(cmd[0], "env") == 0)
 		return (sh_env(sh, env, cmd + 1));
-	if (ft_strcmps(cmd[0], "exit ") == 0)
+	if (ft_strcmps(cmd[0], "exit") == 0)
 		return (sh_exit(sh, env, cmd + 1));
 	if (ft_strcmps(cmd[0], "export") == 0)
 		return (sh_export(sh, env, cmd + 1));
@@ -66,19 +66,13 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (!argv || !argv[0])
 		return (1);
 	env_insert(sh, env, "_", argv[0]);
-	sh_unset_termios(sh);
-	if (!sh_is_not_builtin(argv[0]))
+	if (sh_is_not_builtin(argv[0]))
 	{
-		tcgetattr(STDIN_FILENO, &(sh->termios));
-		sh->termios.c_lflag &= ~(ICANON);
-		sh->termios.c_lflag &= ~(ECHO);
-		sh->termios.c_cc[VMIN] = 1;
-		sh->termios.c_cc[VTIME] = 0;
-		tcsetattr(STDIN_FILENO, TCSADRAIN, &(sh->termios));
-		res = sh_command_dispatch_builtinsr(sh, env, argv);
+		sh_unset_termios(sh);
+		res = sh_command_exec(sh, argv, env->environment);
+		sh_set_termios(sh);
 	}
 	else
-		res = sh_command_exec(sh, argv, env->environment);
-	sh_set_termios(sh);
+		res = sh_command_dispatch_builtinsr(sh, env, argv);
 	return (res);
 }

@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 11:01:05 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 17:58:07 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
+				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				functions/redirect.c										\
@@ -220,7 +221,11 @@ OBJ		 	=	$(SRC:.c=.o)
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
 INC_DIR 	=	./include/
-INC 		=	shell.h
+INC 		=	shell.h														\
+				constants.h													\
+				prototypes.h												\
+				structures.h
+
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
 all:	 		shell

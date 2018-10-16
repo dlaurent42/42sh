@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:08:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 15:25:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:31:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	sh_is_select_combination(char *s)
 {
-	if (s[0] == 11 || s[0] == 22 || s[0] == 24
+	if (s[0] == 11 || s[0] == 16 || s[0] == 24
 	|| ft_strcmps(s, K_S_RIGHT) == 0
 	|| ft_strcmps(s, K_S_LEFT) == 0
 	|| ft_strcmps(s, K_S_END) == 0

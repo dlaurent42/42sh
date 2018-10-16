@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:43:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:15:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 15:59:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sh_set_termios(t_shell *sh)
 {
 	char		*name;
 
-	name = (getenv("TERM")) ? getenv("TERM") : "xterm-256color";
+	name = (getenv("TERM")) ? getenv("TERM") : TERM_DEFAULT;
 	if (tgetent(NULL, name) == ERR)
 		return (error_malloc_sh(sh));
 	if (tcgetattr(STDIN_FILENO, &(sh->termios)) == -1)

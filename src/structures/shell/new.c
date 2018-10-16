@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:15:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:09:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	sh_set_window(t_shell *sh)
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
 	ft_putstr(CLEAR_SCREEN);
-	ft_putstr("\e[3J");
+	ft_putstr(CLEAR_HIST);
 }
 
 t_shell		*sh_new(char **environ)

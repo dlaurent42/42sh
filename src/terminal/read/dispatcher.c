@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:34:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 18:00:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		sh_read_dispatcher(t_shell *sh)
 		sh_browse_freeze(sh);
 	if (sh->read->line[0] == 11)
 		sh_copy_selection(sh);
-	else if (sh->read->line[0] == 22)
+	else if (sh->read->line[0] == 16)
 		sh_paste_selection(sh);
 	else if (sh->read->line[0] == 24)
 		sh_cut_selection(sh);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 13:38:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:49:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:34:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	sh_welcome_select(void)
 	ft_putendl("  ⇧ + ⌥ + ↓ ...... select row below");
 	ft_putendl("  Ctrl + K ....... copy");
 	ft_putendl("  Ctrl + X ....... cut");
-	ft_putendl("  Ctrl + V ....... paste");
+	ft_putendl("  Ctrl + P ....... paste");
 }
 
 static void	sh_welcome_delete(void)
@@ -53,10 +53,19 @@ static void	sh_welcome_delete(void)
 	ft_putendl("  Ctrl + F ....... delete next word");
 }
 
+static void	sh_welcome_history(void)
+{
+	ft_putendl("\nHistory");
+	ft_putendl("  ↑ .............. previous command");
+	ft_putendl("  ↓ .............. next command");
+	ft_putendl("  Ctrl + R ....... search command");
+}
+
 void		sh_welcome(void)
 {
 	ft_putendl("Welcome");
 	sh_welcome_move();
 	sh_welcome_select();
 	sh_welcome_delete();
+	sh_welcome_history();
 }

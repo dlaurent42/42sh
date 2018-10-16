@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 23:17:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:13:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:29:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	sh_read_option_t(char **argv, int *i, int *j, int **opt)
 		return (sh_read_error('t', 2));
 	if ((n = ft_atoi(argv[*i])) < 0 || !ft_isint(argv[*i]))
 		return (sh_read_error(n, 5));
-	ft_printf("n equal %d\n", n);
 	if (n == 0)
 		return (1);
 	(*opt)[READ_T] = n;

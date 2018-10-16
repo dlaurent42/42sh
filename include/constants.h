@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 15:24:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:58:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,14 @@
 # define K_S_O_HOME		"\x1b\x5b\x31\x3b\x31\x30\x48"
 
 /*
+** fn + key stroke
+*/
+# define K_F_DEL		"\x1b\x5b\x33\x7e"
+
+/*
 ** escape sequences - clear
 */
+# define CLEAR_HIST		"\x1b[3J"
 # define CLEAR_TO_EOL	"\x1b[K"
 # define CLEAR_LINE		"\x1b[M"
 # define CLEAR_SCREEN	"\x1b\x5b\x48\x1b\x5b\x32\x4a"
@@ -74,6 +80,23 @@
 ** escape sequences - prompt (search)
 */
 # define SEARCH_PROMPT	"\n\xf0\x9f\x94\x8d  "
+
+/*
+** escape sequences - colors
+*/
+# define COL_IFO		"\x1b[33m"
+# define COL_CHR		"\x1b[1;33m"
+# define COL_DIR		"\x1b[1;31m"
+# define COL_BLK		"\x1b[1;33m"
+# define COL_REG		"\x1b[0m"
+# define COL_LNK		"\x1b[1;36m"
+# define COL_SOCK		"\x1b[32m"
+# define COL_WHT		"\x1b[31m"
+# define COL_EXE		"\x1b[1;32m"
+# define COL_BG			"\x1b[30;47m"
+# define COL_CLR		"\x1b[0m"
+# define COL_SELCT		"\x1b[7;37;40m"
+# define COL_FOLDER		"\x1b[1;32;40m"
 
 /*
 ** autocompletion
@@ -105,18 +128,6 @@
 # define TYPE_LNK		0120000
 # define TYPE_SOCK		0140000
 # define TYPE_WHT		0160000
-
-# define COL_IFO		"\x1b[33m"
-# define COL_CHR		"\x1b[1;33m"
-# define COL_DIR		"\x1b[1;31m"
-# define COL_BLK		"\x1b[1;33m"
-# define COL_REG		"\x1b[0m"
-# define COL_LNK		"\x1b[1;36m"
-# define COL_SOCK		"\x1b[32m"
-# define COL_WHT		"\x1b[31m"
-# define COL_EXE		"\x1b[1;32m"
-# define COL_BG			"\x1b[30;47m"
-# define COL_CLR		"\x1b[0m"
 
 /*
 ** builtins - read
@@ -155,6 +166,18 @@
 # define ENV_MAX_SIZE	999
 # define ENV_PRIME_1	3
 # define ENV_PRIME_2	13
+# define TERM_DEFAULT	"xterm-256color"
+
+/*
+** prompt
+*/
+# define GIT_EXT		".git"
+# define GIT_HEAD		"/.git/HEAD"
+# define GIT_NAME_L		" \x1b[1;34;40mgit[\x1b[1;31;40m"
+# define GIT_NAME_R		"\x1b[1;34;40m]"
+# define MULT_PROMPT	"\x1b[1;31;40m▸\x1b[0m "
+# define ERR_PROMPT		" \x1b[1;31;40m▸\x1b[0m "
+# define VALID_PROMPT	" \x1b[1;32;40m▸\x1b[0m "
 
 /*
 ** binaries

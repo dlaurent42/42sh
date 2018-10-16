@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:31:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:32:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,7 @@ typedef struct			s_modes
 	unsigned char		browse			: 1;
 	unsigned char		search			: 1;
 	unsigned char		multiline		: 1;
-	unsigned char		execution		: 1;
-	unsigned char		others			: 2;
+	unsigned char		others			: 3;
 }						t_modes;
 
 typedef struct			s_select

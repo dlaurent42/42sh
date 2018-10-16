@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 19:20:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 19:40:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:10:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		env_initialize_local(t_shell *sh)
 
 	path = NULL;
 	if (!(env_search(sh->env, "TERM")))
-		env_insert(sh, sh->env, "TERM", "xterm-256color");
+		env_insert(sh, sh->env, "TERM", TERM_DEFAULT);
 	if (!env_search(sh->env, "HOME"))
 	{
 		pw = getpwuid(getuid());

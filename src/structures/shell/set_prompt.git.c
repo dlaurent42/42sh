@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/28 18:57:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:04:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*sh_get_git_branch_name(char *location)
 	char	*line;
 
 	line = NULL;
-	if (!(location = ft_strcat(location, "/.git/HEAD")))
+	if (!(location = ft_strcat(location, GIT_HEAD)))
 		return (NULL);
 	if ((fd = open(location, O_RDONLY)) == -1)
 		return (NULL);
@@ -56,9 +56,9 @@ static char	*sh_prompt_format_git(char *git)
 	if (!git)
 		return (NULL);
 	formatted = (ft_strchrs(git, '/'))
-		? ft_strjoins(" \e[1;34;40mgit[\e[1;31;40m", git + 16)
-		: ft_strjoins(" \e[1;34;40mgit[\e[1;31;40m", ft_strleft(git, 7));
-	formatted = ft_strjoinf(formatted, "\e[1;34;40m]", 1);
+		? ft_strjoins(GIT_NAME_L, git + 16)
+		: ft_strjoins(GIT_NAME_L, ft_strleft(git, 7));
+	formatted = ft_strjoinf(formatted, GIT_NAME_R, 1);
 	ft_strdel(&git);
 	return (formatted);
 }
@@ -77,7 +77,7 @@ char		*sh_get_git_branch(char *location)
 			return (NULL);
 		while ((dirent = readdir(dir)))
 			if (dirent->d_namlen == 4
-			&& ft_strcmps(dirent->d_name, ".git") == 0)
+			&& ft_strcmps(dirent->d_name, GIT_EXT) == 0)
 			{
 				git = sh_get_git_branch_name(location);
 				break ;
