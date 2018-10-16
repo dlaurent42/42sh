@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 00:39:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:20:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char		sh_env_unset(t_env *env, char *arg)
 		return (sh_env_error(env, NULL, 0, 1));
 	if (ft_strcountif(arg, '='))
 		return (sh_env_error(env, NULL, 0, 2));
-	if (!(arg_parsed = sh_unsetenv_parse(ft_strdups(arg))))
+	if (!(arg_parsed = sh_parse_quotes(ft_strdups(arg))))
 		return (sh_env_error(env, NULL, 0, 3));
 	env_delete_item(env, arg_parsed);
 	ft_strdel(&arg_parsed);
@@ -95,14 +95,14 @@ static char		sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
 	char		*key;
 	char		*val;
 
-	key = sh_setenv_parse(ft_strdups(arg));
-	eq_sym = sh_setenv_equal(key);
+	key = sh_parse_quotes(ft_strdups(arg));
+	eq_sym = sh_get_equal_position(key);
 	val = (ft_strchrsp(key, '='))
 		? ft_strdups(ft_strchrsp(key, '=')) : ft_strdup("");
 	key[eq_sym] = '\0';
 	if (!env_search(env, key) && env->count + 1 >= env->size)
 	{
-		sh_setenv_error(key, val, 4);
+		sh_setenv_error(key, val, 4, NULL);
 		return (sh_env_error(env, NULL, 0, 0));
 	}
 	env_insert(sh, env, key, val);

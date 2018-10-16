@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/02 10:34:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 18:20:44 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/16 20:46:01 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/16 20:46:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*sh_unsetenv_parse(char *arg)
+char	*sh_parse_quotes(char *arg)
 {
 	int	i;
 	int	j;

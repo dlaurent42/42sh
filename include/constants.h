@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 17:58:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 19:24:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@
 # ifndef ARG_MAX
 #  define ARG_MAX 		262144
 # endif
-# define LINE_SIZE		8
+# define LINE_SIZE		9
 
 /*
 ** history
@@ -158,6 +158,7 @@
 # define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
 # define VERIF_KEY_LEN	32
 # define HISTFILE		"/.cmd_history"
+# define ALIASFILE		"/.cmdrc"
 # define SEARCH_LEN		3
 
 /*

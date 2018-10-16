@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strstartsby.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/02 09:00:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/02 09:00:40 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/16 19:57:05 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/16 19:58:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "libft.h"
 
-int	sh_setenv_isbin(char *arg)
-{
-	int		i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '\'' || arg[i] == '"')
-			return (0);
-		if (i && arg[i] == '=' && arg[i + 1] && arg[i + 1] == '=' && arg[i + 2])
-			return (i + 2);
-		i++;
-	}
-	return (0);
-}
-
-int	sh_setenv_equal(char *arg)
+char	ft_strstartsby(char *origin, char *seek)
 {
 	int	i;
 
 	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '=')
-			return (i);
+	if (!origin || !seek)
+		return (FALSE);
+	while (origin[i] && seek[i] && origin[i] == seek[i])
 		i++;
-	}
-	return (0);
+	if (seek[i])
+		return (FALSE);
+	return (TRUE);
 }

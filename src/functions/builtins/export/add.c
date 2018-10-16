@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:42:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:18:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 	char		*val;
 	t_bin_obj	*obj;
 
-	bin = sh_export_isbin(arg);
-	key = sh_export_parse(ft_strdups(arg));
-	eq_sym = sh_setenv_equal(key);
+	bin = sh_is_binary(arg);
+	key = sh_parse_quotes(ft_strdups(arg));
+	eq_sym = sh_get_equal_position(key);
 	val = (bin)
 		? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
 	key[eq_sym] = '\0';

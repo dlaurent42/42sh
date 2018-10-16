@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 17:58:07 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 21:19:08 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,12 @@ SRC			=	shell.c														\
 				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
+				errors/import_export.c										\
 				functions/redirect.c										\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
-				functions/builtins/alias/display.c							\
 				functions/builtins/alias/error.c							\
-				functions/builtins/alias/parse.c							\
-				functions/builtins/alias/utils.c							\
 				functions/builtins/cd/cd.c									\
 				functions/builtins/cd/error.c								\
 				functions/builtins/cd/follow.c								\
@@ -43,11 +41,8 @@ SRC			=	shell.c														\
 				functions/builtins/env/mode.exec.c							\
 				functions/builtins/exit/exit.c								\
 				functions/builtins/export/add.c								\
-				functions/builtins/export/display.c							\
 				functions/builtins/export/error.c							\
 				functions/builtins/export/export.c							\
-				functions/builtins/export/parse.c							\
-				functions/builtins/export/utils.c							\
 				functions/builtins/history/error.c							\
 				functions/builtins/history/history.c						\
 				functions/builtins/history/options.c						\
@@ -65,22 +60,21 @@ SRC			=	shell.c														\
 				functions/builtins/read/variables.c							\
 				functions/builtins/setenv/add.c								\
 				functions/builtins/setenv/error.c							\
-				functions/builtins/setenv/parse.c							\
 				functions/builtins/setenv/setenv.c							\
-				functions/builtins/setenv/utils.c							\
 				functions/builtins/unalias/error.c							\
-				functions/builtins/unalias/parse.c							\
 				functions/builtins/unalias/remove.c							\
 				functions/builtins/unalias/unalias.c						\
 				functions/builtins/unset/error.c							\
-				functions/builtins/unset/parse.c							\
 				functions/builtins/unset/remove.c							\
 				functions/builtins/unset/unset.c							\
 				functions/builtins/unsetenv/error.c							\
-				functions/builtins/unsetenv/parse.c							\
 				functions/builtins/unsetenv/remove.c						\
 				functions/builtins/unsetenv/unsetenv.c						\
-				functions/builtins/utils/has_option.c						\
+				functions/builtins/utils/display_env.c						\
+				functions/builtins/utils/equal_position.c					\
+				functions/builtins/utils/is_option_str.c					\
+				functions/builtins/utils/is_binary.c						\
+				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/exec/run.c										\
 				functions/lexer/lexer.c										\
@@ -96,6 +90,7 @@ SRC			=	shell.c														\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
+				structures/aliases/import.c									\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -116,6 +111,7 @@ SRC			=	shell.c														\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
+				structures/environment/initialize_local.c					\
 				structures/environment/insert.c								\
 				structures/environment/local_to_public.c					\
 				structures/environment/new.c								\
@@ -261,6 +257,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures
+				@mkdir -p $(OBJ_DIR)/structures/aliases
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment

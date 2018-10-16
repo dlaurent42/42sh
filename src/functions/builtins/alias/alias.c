@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:42:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 16:48:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:22:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ char		sh_alias(t_shell *sh, t_env *env, char **argv)
 	res = 0;
 	(void)env;
 	if (!argv || !argv[0])
-		return (sh_alias_display(sh->alias, false));
+		return (sh_env_display(sh->alias, ""));
 	if (ft_strcmps(argv[0], "-p") == 0)
-		return (sh_alias_display(sh->alias, true));
+		return (sh_env_display(sh->alias, "alias "));
 	i = (ft_strcmps(argv[0], "--") == 0) ? 1 : 0;
-	if (i == 0 && argv[0][0] == '-' && !is_option_string(argv[0], "p"))
+	if (i == 0 && argv[0][0] == '-' && !sh_is_option_string(argv[0], "p"))
 		return (sh_alias_error(NULL, NULL, 1, &argv[0][0]));
 	while (argv[i] && (res = sh_alias_add(sh, sh->alias, argv[i])) == 0)
 		i++;

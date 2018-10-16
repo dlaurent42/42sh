@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 20:10:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 21:15:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:16:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			sh_cd_options(char **argv, bool *opt_l, bool *opt_p)
 	int		j;
 
 	i = 0;
-	while (argv[i] && argv[i][0] == '-' && is_option_string(argv[i], "LP"))
+	while (argv[i] && argv[i][0] == '-' && sh_is_option_string(argv[i], "LP"))
 	{
 		j = 1;
 		while (argv[i][j])

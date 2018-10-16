@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:49:52 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/16 20:14:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	command_key_verified(int fd)
+static bool	alias_key_verified(int fd)
 {
 	char	line[VERIF_KEY_LEN + 1];
 
@@ -24,37 +24,49 @@ static char	command_key_verified(int fd)
 	return (TRUE);
 }
 
-static char	command_parse_and_add(t_shell *sh, char *content)
+static bool	alias_parse_and_add(t_shell *sh, char *content)
 {
-	t_cmd		*new;
+	char	*str;
+	char	*key;
+	char	*value;
+	bool	is_alias;
+	size_t	len;
 
-	if (!(new = (t_cmd *)ft_memalloc(sizeof(t_cmd))))
+	is_alias = FALSE;
+	if (!content || content[0] == '#')
+		return (TRUE);
+	if (ft_strstartsby(content, "alias") && (is_alias == TRUE))
+		str = content + 6;
+	else if (ft_strstartsby(content, "export"))
+		str = content + 7;
+	else
 		return (FALSE);
-	new->id = (sh->cmd) ? sh->cmd->id + 1 : 1;
-	ft_strcpy(new->content, content);
-	new->display_len = ft_strlenu(new->content);
-	new->unicode_len = ft_strlens(new->content);
-	new->next = (sh->cmd) ? sh->cmd : NULL;
-	new->last = (sh->cmd) ? sh->cmd->last : new;
-	(sh->cmd) ? sh->cmd->prev = new : 0;
-	sh->cmd = new;
+	len = ft_strlens(str);
+	key = ft_strdups(ft_strchrsp(content, '='));
+	value = ft_strdups(content);
+	value[len - ft_strlens(key)] = '\0';
+	(is_alias)
+		? env_insert(sh, sh->alias, key, value)
+		: env_insert_local(sh, sh->env, key, value);
+	ft_strdel(&key);
+	ft_strdel(&value);
 	return (TRUE);
 }
 
-void		command_import(t_shell *sh)
+void		alias_import(t_shell *sh)
 {
 	int		fd;
 	char	*path;
 	char	*buffer;
 
 	buffer = NULL;
-	if (!(path = env_search(sh->env, "HISTFILE")))
+	if (!(path = env_search(sh->env, "ALIASES")))
 		return ;
-	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
+	if ((fd = open(path, O_RDONLY)) == -1 || !alias_key_verified(fd))
 		return (error_import_export(fd, path));
 	while (get_next_line(fd, &buffer) == 1)
 	{
-		if (command_parse_and_add(sh, buffer) == 0)
+		if (alias_parse_and_add(sh, buffer) == FALSE)
 		{
 			ft_strdel(&buffer);
 			return (error_import_export(fd, path));

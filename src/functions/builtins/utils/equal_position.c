@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   equal_position.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/10 14:36:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 14:36:36 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/16 21:11:15 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/16 21:12:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*sh_unset_parse(char *arg)
+int	sh_get_equal_position(char *arg)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (arg && arg[i])
+	while (arg[i])
 	{
-		if (arg[i] == '\'' || arg[i] == '"')
-		{
-			j = i;
-			while (arg[j])
-			{
-				arg[j] = arg[j + 1];
-				j++;
-			}
-		}
-		else
-			i++;
+		if (arg[i] == '=')
+			return (i);
+		i++;
 	}
-	return (arg);
+	return (0);
 }

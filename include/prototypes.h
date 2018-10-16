@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 18:01:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:17:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void					error_malloc_env(t_shell *sh, t_env *e, char *name);
 void					error_malloc_bin(t_shell *sh, t_bin *b, char *name);
 void					error_malloc_reader(t_shell *sh, char *name);
 void					error_no_path_var(t_shell *sh);
+void					error_import_export(int fd, char *path);
 
 /*
 ** functions
@@ -45,7 +46,6 @@ char					sh_alias_display(t_env *env, bool exportable);
 char					sh_alias(t_shell *sh, t_env *env, char **argv);
 char					sh_alias_add(t_shell *sh, t_env *env, char *arg);
 char					sh_alias_error(char *key, char *val, int id, char *msg);
-char					*sh_alias_parse(char *arg);
 
 /*
 ** functions - builtins - cd
@@ -95,11 +95,7 @@ char					sh_exit(t_shell *sh, t_env *env, char **argv);
 */
 char					sh_export(t_shell *sh, t_env *env, char **argv);
 char					sh_export_add(t_shell *sh, t_env *env, char *arg);
-char					sh_export_display(t_env *env, bool exportable);
 char					sh_export_error(char *k, char *v, int id, char *msg);
-char					*sh_export_parse(char *arg);
-int						sh_export_isbin(char *arg);
-int						sh_export_equal(char *arg);
 
 /*
 ** functions - builtins - history
@@ -156,12 +152,9 @@ char					sh_read_timeout_loop(
 /*
 ** functions - builtins - setenv
 */
-int						sh_setenv_isbin(char *arg);
-int						sh_setenv_equal(char *arg);
 char					sh_setenv(t_shell *sh, t_env *env, char **argv);
 char					sh_setenv_add(t_shell *sh, t_env *env, char *arg);
-char					sh_setenv_error(char *key, char *val, int err_id);
-char					*sh_setenv_parse(char *arg);
+char					sh_setenv_error(char *k, char *v, int id, char *msg);
 
 /*
 ** functions - builtins - unalias
@@ -169,7 +162,6 @@ char					*sh_setenv_parse(char *arg);
 char					sh_unalias(t_shell *sh, t_env *env, char **argv);
 char					sh_unalias_remove(t_env *env, char *arg);
 char					sh_unalias_error(char *key, int err_id);
-char					*sh_unalias_parse(char *arg);
 
 /*
 ** functions - builtins - unset
@@ -177,7 +169,6 @@ char					*sh_unalias_parse(char *arg);
 char					sh_unset(t_shell *sh, t_env *env, char **argv);
 char					sh_unset_remove(t_env *env, char *arg);
 char					sh_unset_error(char *key, int err_id);
-char					*sh_unset_parse(char *arg);
 
 /*
 ** functions - builtins - unsetenv
@@ -185,13 +176,16 @@ char					*sh_unset_parse(char *arg);
 char					sh_unsetenv(t_shell *sh, t_env *env, char **argv);
 char					sh_unsetenv_remove(t_env *env, char *arg);
 char					sh_unsetenv_error(char *key, int err_id);
-char					*sh_unsetenv_parse(char *arg);
 
 /*
 ** functions - builtins - utils
 */
-bool					is_option_string(char *s, char *opt);
+int						sh_get_equal_position(char *arg);
+int						sh_is_binary(char *arg);
+bool					sh_is_option_string(char *s, char *opt);
+char					sh_env_display(t_env *env, char *keyword);
 char					*sh_get_path_from_filename(char *filename);
+char					*sh_parse_quotes(char *arg);
 
 /*
 ** functions - exec
@@ -241,6 +235,11 @@ void					sh_command_parser(
 							t_env *env,
 							t_bin *bin,
 							char *str);
+
+/*
+** structures - aliases
+*/
+void					alias_import(t_shell *sh);
 
 /*
 ** structures - binaries

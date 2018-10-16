@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 00:19:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:16:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ char	sh_history(t_shell *sh, t_env *env, char **argv)
 	i = 0;
 	if (!argv || !argv[0])
 		return (sh_history_print(sh));
-	if (argv[0] && !is_option_string(argv[0], "cdspwarn"))
+	if (argv[0] && !sh_is_option_string(argv[0], "cdspwarn"))
 	{
 		i += (argv[i][0] == '-' && argv[i][1] == '-' && !argv[i][2])
 			? 1 : 0;

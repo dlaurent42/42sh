@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   has_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/10 16:43:33 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/10 16:44:52 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 20:21:32 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/16 21:14:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*sh_alias_parse(char *arg)
+bool	sh_is_option_string(char *s, char *opt)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	i = 0;
-	j = 0;
-	while (arg && arg[i])
+	i = 1;
+	if (s[0] != '-' || (s[0] == '-' && !s[1]))
+		return (FALSE);
+	while (s[i])
 	{
-		if (arg[i] == '\'' || arg[i] == '"')
-		{
-			j = i;
-			while (arg[j])
-			{
-				arg[j] = arg[j + 1];
-				j++;
-			}
-		}
-		else
-			i++;
+		j = 0;
+		while (opt[j] && opt[j] != s[i])
+			j++;
+		if (opt[j] == '\0')
+			return (FALSE);
+		i++;
 	}
-	return (arg);
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 19:57:36 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRC =	ft_atoi.c\
 		ft_strrchr.c\
 		ft_strrev.c\
 		ft_strsplit.c\
+		ft_strstartsby.c\
 		ft_strstr.c\
 		ft_strsub.c\
 		ft_strtrim.c\

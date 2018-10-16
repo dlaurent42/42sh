@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:09:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 19:38:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ t_shell		*sh_new(char **environ)
 	sh_set_termios(sh);
 	sh_set_window(sh);
 	sh->env = env_new(sh, environ);
-	sh->alias = env_new(sh, NULL);
 	env_initialize_local(sh);
+	sh->alias = env_new(sh, NULL);
+	alias_import(sh);
 	sh->bin = bin_new(sh, sh->env);
 	sh->read = read_new(sh);
 	command_import(sh);
