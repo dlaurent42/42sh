@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:28:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 15:30:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	sh_multilines_prompt(t_shell *sh)
 {
 	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
-	sh->prompt.content = ft_strdups("\e[1;31;40m▸\033[0m ");
+	sh->prompt.content = ft_strdups(MULT_PROMPT);
 	sh->prompt.len = 2;
 	sh->prompt.len_mod = sh->prompt.len % sh->window.width;
 	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;

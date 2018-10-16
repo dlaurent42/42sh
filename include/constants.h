@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:08:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 15:24:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@
 # define CURSOR_HIDE	"\x1b\x5b\x3f\x32\x35\x6c"
 # define CURSOR_SHOW	"\x1b\x5b\x3f\x31\x32\x6c\x1b\x5b\x3f\x32\x35\x68"
 
+/*
+** escape sequences - prompt (search)
+*/
 # define SEARCH_PROMPT	"\n\xf0\x9f\x94\x8d  "
 
 /*
@@ -116,7 +119,7 @@
 # define COL_CLR		"\x1b[0m"
 
 /*
-** read builtin
+** builtins - read
 */
 # define READ_MAX_VAR	25
 # define READ_D			0
@@ -131,27 +134,33 @@
 # define READ_SIZE		1
 
 /*
-** others
+** terminal
 */
 # ifndef ARG_MAX
 #  define ARG_MAX 		262144
 # endif
+# define LINE_SIZE		8
 
+/*
+** history
+*/
 # define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
 # define VERIF_KEY_LEN	32
-
 # define HISTFILE		"/.cmd_history"
+# define SEARCH_LEN		3
 
+/*
+** environment
+*/
 # define ENV_MAX_SIZE	999
 # define ENV_PRIME_1	3
 # define ENV_PRIME_2	13
 
+/*
+** binaries
+*/
 # define BIN_MAX_SIZE	9999
 # define BIN_PRIME_1	3
 # define BIN_PRIME_2	13
-
-# define LINE_SIZE		8
-
-# define SEARCH_LEN		3
 
 #endif

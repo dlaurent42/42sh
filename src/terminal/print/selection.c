@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 03:47:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 19:13:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 15:28:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	sh_print_current_selection(t_shell *sh, int len)
 	sh->selection.start_rel,
 	len)))
 		return ;
-	ft_putstr("\e[7;37;40m");
+	ft_putstr(COL_SELCT);
 	ft_putstr(substr);
-	ft_putstr("\033[0m");
+	ft_putstr(COL_CLR);
 	ft_strdel(&substr);
 }
 
