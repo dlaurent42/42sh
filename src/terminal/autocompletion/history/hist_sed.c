@@ -6,23 +6,11 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/16 08:21:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/16 08:48:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
-{
-	int				len;
-	t_cmd			*cmd;
-
-	len = ft_strlens(content);
-	cmd = sh->cmd;
-	while (cmd && ft_strncmp(content, cmd->content, len))
-		cmd = cmd->next;
-	return (cmd);
-}
 
 static void			do_error(t_shell *sh, bool *status)
 {
@@ -61,6 +49,20 @@ char				*content(t_shell *sh)
 	return (sh->buffer.content + sh->buffer.ushift);
 }
 
+char				*get_substitution(t_shell *sh)
+{
+	char			*needle;
+
+	needle = ft_strchr(content(sh), '^');
+	if (needle && *needle)
+		needle++;
+	if (needle && *needle)
+		needle = ft_strchr(needle, '^');
+	needle++;
+	needle = ft_strndup(needle, ft_strlens(needle) - 1);
+	return (needle);
+}
+
 char				*get_pointer_to_needle_in_cmd(t_shell *sh)
 {
 	char			*needle;
@@ -77,18 +79,22 @@ char				*get_pointer_to_needle_in_cmd(t_shell *sh)
 
 void				auto_hist_sed(t_shell *sh, bool *status)//make bool
 {
-	int				number_of_deletions;
-	char			*track;
-	char			*ptr_to_exc;
-	t_cmd			*cmd;
+	//int				number_of_deletions;
+	//char			*track;
+	char			*needle_in_content;
+	char			*substitution;
 
 	if (*content(sh) && *content(sh) == '^')
 	{
 		*status = true;
 		if (!content_is_hist_sed(sh, content(sh)))
 			return ;
-		if (!(ft_printf("%s\n", get_pointer_to_needle_in_cmd(sh))))
+		if (!(needle_in_content = get_pointer_to_needle_in_cmd(sh)))
 			return ;
+		if (!(substitution = get_substitution(sh)))
+			return ;
+		ft_putendl(substitution);
+		/*
 			while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift, "!")))
 			{
 				if (!ft_isdigit(*(ptr_to_exc + 1))
@@ -106,5 +112,6 @@ void				auto_hist_sed(t_shell *sh, bool *status)//make bool
 					sh_move_end(sh);
 				}
 			}
+			*/
 	}
 }
