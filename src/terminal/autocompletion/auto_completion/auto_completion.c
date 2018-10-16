@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 13:20:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:32:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ bool				auto_completion(t_shell *sh)
 	char			*parsed_buffer;
 
 	performed_completion = false;
-	sh->modes.auto_completion = 1;
+	sh->modes.auto_completion = TRUE;
 	if (auto_history(sh) || auto_env(sh))
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
@@ -127,6 +127,6 @@ bool				auto_completion(t_shell *sh)
 		auto_free_ac(sh);
 		performed_completion = true;
 	}
-	sh->modes.auto_completion = 0;
+	sh->modes.auto_completion = FALSE;
 	return (performed_completion);
 }

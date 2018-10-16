@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 00:19:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 14:30:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 22:27:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*sh_read_parse_line(char *line, int read_r)
 	int	j;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (line[i] == '\\' && read_r != -1)
 		{
@@ -40,18 +40,17 @@ char	*sh_read_parse_line(char *line, int read_r)
 	return (line);
 }
 
-static void	sh_delete_strings(char **split, char *str)
+static void	sh_delete_split(char **split)
 {
 	int	i;
 
 	i = 0;
-	ft_strdel(&str);
-	while (split[i])
+	while (split && split[i])
 	{
 		ft_strdel(&split[i]);
 		i++;
 	}
-	free(split);
+	(split) ? free(split) : 0;
 }
 
 static void	sh_read_set_concat(t_env *env, char *key, char **split)
@@ -77,18 +76,14 @@ char	sh_read_set(t_env *env, char **vars, char *line)
 	char	**split;
 
 	i = -1;
-	if (!(split = ft_strsplit(line, ' ')))
-	{
-		ft_strdel(&line);
-		return (sh_read_error_msg("read: cannot split line", 2));
-	}
+	split = ft_strsplit(line, ' ');
 	if (!vars[0])
 		env_insert_local(NULL, env, "REPLY", line);
 	else
 		while (++i < READ_MAX_VAR - 1)
-			if (vars[i + 1] && split[i])
+			if (vars[i + 1] && split && split[i])
 				env_insert_local(NULL, env, vars[i], split[i]);
-			else if (vars[i + 1] == NULL && split[i])
+			else if (vars[i + 1] == NULL && split && split[i])
 			{
 				sh_read_set_concat(env, vars[i], split + i);
 				break ;
@@ -100,6 +95,6 @@ char	sh_read_set(t_env *env, char **vars, char *line)
 						env_insert_local(NULL, env, vars[i], "");
 					i++;
 				}
-	sh_delete_strings(split, line);
+	sh_delete_split(split);
 	return (-99);
 }

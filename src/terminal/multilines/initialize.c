@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 16:23:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:28:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	sh_multilines_prompt(t_shell *sh)
 
 void		sh_multilines(t_shell *sh)
 {
-	sh->modes.multiline++;
+	sh->modes.multiline = TRUE;
 	sh_multilines_prompt(sh);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	sh->buffer.display_len += sh->buffer.dshift;

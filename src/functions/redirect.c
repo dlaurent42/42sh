@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 14:41:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:39:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		sh_command_run(t_shell *sh)
 		ft_strcpy(sh->buffer.parsed, sh->buffer.content);
 		if (sh_command_lexer(sh, sh->env, sh->buffer.parsed) == FALSE)
 			return (sh_multilines(sh));
+		sh->modes.multiline = FALSE;
 		if (!sh_command_empty(sh->buffer.parsed))
 		{
 			sh->bin = bin_update(sh, sh->env, sh->bin);

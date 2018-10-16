@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:32:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void				auto_read_dispatcher(t_shell *sh)
 		else
 			sh_fill_buffer(sh);
 		auto_clear_selection_screen(sh);
-		sh->modes.auto_completion = 0;
+		sh->modes.auto_completion = FALSE;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 12:53:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:31:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,12 @@ typedef struct			s_window
 typedef struct			s_modes
 {
 	unsigned char		auto_completion	: 1;
-	unsigned char		esc				: 1;
-	unsigned char		display			: 1;
 	unsigned char		select			: 1;
 	unsigned char		browse			: 1;
 	unsigned char		search			: 1;
+	unsigned char		multiline		: 1;
+	unsigned char		execution		: 1;
 	unsigned char		others			: 2;
-	unsigned int		multiline;
 }						t_modes;
 
 typedef struct			s_select
@@ -252,7 +251,7 @@ typedef struct			s_shell
 	t_buffer			buffer;
 	t_search			search;
 	t_select			selection;
-	t_termios			*termios;
+	t_termios			termios;
 }						t_shell;
 
 t_shell					*g_sh;

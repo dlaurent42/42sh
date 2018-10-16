@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 21:55:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:34:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void		sh_read_dispatcher(t_shell *sh)
 		sh_deletion_dispatcher(sh);
 	else if (sh->read->line[0] == 27)
 		sh_arrows_dispatcher(sh);
-	else if (sh->read->line[0] == 3 && sh->modes.multiline)
-		sh_multilines_close(sh);
 	else if (sh->read->line[0] == 18)
 		sh_history_search(sh);
 	else if (sh->read->line[0] == 9)

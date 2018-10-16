@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:50:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 14:19:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 10:40:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char		sh__read(t_shell *sh, t_env *env, char **argv)
 	i = -1;
 	while (++i < READ_N_OPTIONS)
 		ft_printf("OPT[%d]: %d\n", i + 1, opt[i]);
-	res = (opt[READ_T] > 0) ? sh_read_timeout_loop(env, opt, vars) : sh_read_loop(env, opt, vars);
+	res = (opt[READ_T] > 0) ? sh_read_timeout_loop(sh, env, opt, vars) : sh_read_loop(sh, env, opt, vars);
 	ft_printf("Read assignment has been performed\n");
 	return (sh_read_free(opt, prompt, vars, res));
 }

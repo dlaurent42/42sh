@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 14:19:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 11:01:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ char					sh_read_option_u(char **av, int *i, int *j, int **opt);
 char					sh_read_variables(char **av, int *i, char ***vars);
 char					*sh_read_parse_line(char *line, int read_r);
 char					sh_read_set(t_env *env, char **vars, char *line);
-char					sh_read_loop(t_env *env, int *opt, char **vars);
-char					sh_read_timeout_loop(t_env *env, int *opt, char **vars);
+char					sh_read_loop(t_shell *sh, t_env *env, int *opt, char **vars);
+char					sh_read_timeout_loop(t_shell *sh, t_env *env, int *opt, char **vars);
 
 /*
 ** functions - builtins - setenv
@@ -199,7 +199,6 @@ char					sh_command_dispatch(
 ** functions - exec
 */
 char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
-char					sh_command_exec(t_shell *sh, char **cmd, char **env);
 
 /*
 ** functions - lexer
@@ -307,6 +306,8 @@ t_read					*read_new(t_shell *sh);
 */
 void					sh_delete(t_shell *sh);
 void					sh_set_prompt(t_shell *sh);
+void					sh_set_termios(t_shell *sh);
+void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);

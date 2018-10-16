@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/15 12:54:41 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 11:01:05 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,6 @@ SRC			=	shell.c														\
 				functions/builtins/unsetenv/unsetenv.c						\
 				functions/builtins/utils/has_option.c						\
 				functions/builtins/utils/path_from_filename.c				\
-				functions/exec/dispatcher.c									\
 				functions/exec/run.c										\
 				functions/lexer/lexer.c										\
 				functions/lexer/handlers/backslash.c						\
@@ -128,6 +127,7 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.c								\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
+				structures/shell/termios.c									\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
