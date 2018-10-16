@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:33:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 23:56:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ char					sh_alias_error(char *key, char *val, int id, char *msg);
 ** functions - builtins - cd
 */
 int						sh_cd_remove_troll(char *s);
-int						sh_cd_options(char **argv, bool *opt_l, bool *opt_p);
+int						sh_cd_options(char **argv, bool *opt_e, bool *opt_l, bool *opt_p);
 char					sh_cd(t_shell *sh, t_env *env, char **argv);
 char					sh_cd_error(char *value, char *path, int err_id);
+char					sh_cd_dispatch_p(t_shell *sh, t_env *env, char **argv, int i);
+char					sh_cd_dispatch(t_shell *sh, t_env *env, char **argv, int i);
 char					sh_cd_follow(t_shell *sh, t_env *e, char *v, char d);
 char					sh_cd_nofollow(t_shell *sh, t_env *e, char *v, char *p);
 char					sh_cd_nofollow_dash(
@@ -63,6 +65,7 @@ char					sh_cd_nofollow_dash(
 							char *path);
 char					*sh_cd_parse_path(char *s);
 char					*sh_cd_remove_last_slash(char *param);
+char					*sh_cd_handle_cdpath(t_env *env, char *rel_path);
 
 /*
 ** functions - builtins - echo

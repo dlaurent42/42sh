@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:11:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 13:04:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 23:11:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 {
 	char	*path;
 	char	*rpath;
+	char	*cdpath;
 
 	path = NULL;
 	rpath = NULL;
@@ -23,7 +24,11 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 		return (realpath(param, NULL));
 	if (param[0] == '\0')
 		return (ft_strdup(env_search(env, "HOME")));
+	if ((cdpath = env_search(env, "CDPATH")) && cdpath[0] && param[0] != '.')
+		return (sh_cd_handle_cdpath(env, param));
 	if (!(path = ft_strjoins(sh->prompt.location, "/")))
+		return (NULL);
+	if (!path)
 		return (NULL);
 	path = ft_strjoinf(path, param, 1);
 	rpath = realpath(path, NULL);
@@ -37,7 +42,7 @@ char		sh_cd_nofollow(t_shell *sh, t_env *env, char *value, char *path)
 	t_stat	lstats;
 
 	rpath = (path) ? path : sh_cd_get_real_path(sh, env, value);
-	if (lstat(rpath, &lstats) < 0)
+	if (access(rpath, F_OK) == -1 || lstat(rpath, &lstats) == -1)
 		return (sh_cd_error(value, rpath, 1));
 	if (chdir(rpath) == -1)
 		return (sh_cd_error(value, rpath, 3));
@@ -53,7 +58,7 @@ char		sh_cd_nofollow_dash(t_shell *sh, t_env *env, char *val, char *path)
 	t_stat	lstats;
 
 	rpath = (path) ? path : sh_cd_get_real_path(sh, env, val);
-	if (lstat(rpath, &lstats) < 0)
+	if (!rpath || access(rpath, F_OK) == -1 || lstat(rpath, &lstats) == -1)
 		return (sh_cd_error(val, rpath, 1));
 	if (chdir(rpath) == -1)
 		return (sh_cd_error(val, rpath, 3));

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/11 12:08:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 23:11:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 {
 	char	*path;
 	char	*new;
+	char	*cdpath;
 
 	path = NULL;
 	new = param + sh_cd_remove_troll(param);
-	if (param[0] == '/')
+	if (new[0] == '/')
 		return (ft_strdups(param));
-	if (param[0] == '\0' && env_search(env, "HOME"))
+	if (new[0] == '\0' && env_search(env, "HOME"))
 		return (ft_strdups(env_search(env, "HOME")));
 	if (new[0] == '\0')
 		return (ft_strdups(sh->prompt.location));
+	if ((cdpath = env_search(env, "CDPATH")) && cdpath[0] && new[0] != '.')
+		return (sh_cd_handle_cdpath(env, new));
 	if (!(path = ft_strjoins(sh->prompt.location, "/")))
 		return (NULL);
 	path = ft_strjoinf(path, new, 1);
@@ -44,7 +47,7 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 	t_stat	lstats;
 
 	path = sh_cd_get_real_path(sh, env, sh_cd_remove_last_slash(value));
-	if (lstat(path, &lstats) < 0)
+	if (!path || access(path, F_OK) == -1 || lstat(path, &lstats) == -1)
 		return (sh_cd_error(value, path, 1));
 	if (!S_ISLNK(lstats.st_mode) && !dash)
 		return (sh_cd_nofollow(sh, env, value, path));

@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 21:31:39 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 23:56:25 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,13 @@ SRC			=	shell.c														\
 				functions/builtins/alias/alias.c							\
 				functions/builtins/alias/error.c							\
 				functions/builtins/cd/cd.c									\
+				functions/builtins/cd/dispatch.c							\
 				functions/builtins/cd/error.c								\
 				functions/builtins/cd/follow.c								\
 				functions/builtins/cd/follow_parser.c						\
 				functions/builtins/cd/nofollow.c							\
 				functions/builtins/cd/options.c								\
+				functions/builtins/cd/utils.c								\
 				functions/builtins/echo/echo.c								\
 				functions/builtins/env/env.c								\
 				functions/builtins/env/error.c								\
@@ -238,6 +240,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
 				@mkdir -p $(OBJ_DIR)/functions/builtins
+				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
 				@mkdir -p $(OBJ_DIR)/functions/builtins/echo
 				@mkdir -p $(OBJ_DIR)/functions/builtins/env
