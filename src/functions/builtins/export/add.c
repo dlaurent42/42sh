@@ -6,22 +6,22 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:18:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:29:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	sh_export_add_noequal(t_env *env, char *key)
+static char	sh_export_add_noequal(t_shell *sh, t_env *env, char *key)
 {
 	char	*value;
 
 	value = env_search_local(env, key);
 	if (env_search_public(env, key))
 		return (sh_export_error(NULL, NULL, 5, key));
-	if (!value)
-		return (sh_export_error(NULL, NULL, 3, key));
-	env_local_to_public(env, key, value);
+	(value)
+		? env_local_to_public(env, key, value)
+		: env_insert(sh, env, key, "");
 	return (0);
 }
 
@@ -57,6 +57,6 @@ char		sh_export_add(t_shell *sh, t_env *env, char *arg)
 	if (!arg || arg[0] == '=')
 		return (sh_export_error(NULL, NULL, 2, NULL));
 	if (ft_strcountif(arg, '=') == 0)
-		return (sh_export_add_noequal(env, arg));
+		return (sh_export_add_noequal(sh, env, arg));
 	return (sh_export_add_equal(sh, env, arg));
 }
