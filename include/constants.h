@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:24:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:32:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@
 # define VERIF_KEY		"j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt"
 # define VERIF_KEY_LEN	32
 # define HISTFILE		"/.cmd_history"
-# define ALIASFILE		"/.cmdrc"
+# define CONFIGFILE		"/.cmdrc"
 # define SEARCH_LEN		3
 
 /*

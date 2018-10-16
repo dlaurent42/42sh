@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:17:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:33:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,11 +237,6 @@ void					sh_command_parser(
 							char *str);
 
 /*
-** structures - aliases
-*/
-void					alias_import(t_shell *sh);
-
-/*
 ** structures - binaries
 */
 int						bin_get_hash(const char *sh, const int b, const int a);
@@ -309,6 +304,7 @@ t_read					*read_new(t_shell *sh);
 /*
 ** structures - shell
 */
+void					sh_config_import(t_shell *sh);
 void					sh_delete(t_shell *sh);
 void					sh_set_prompt(t_shell *sh);
 void					sh_set_termios(t_shell *sh);

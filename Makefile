@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 21:19:08 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/16 21:31:39 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ SRC			=	shell.c														\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
-				structures/aliases/import.c									\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -120,6 +119,7 @@ SRC			=	shell.c														\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
+				structures/shell/import_config.c							\
 				structures/shell/new.c										\
 				structures/shell/set_prompt.c								\
 				structures/shell/set_prompt.folder.c						\
@@ -238,7 +238,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
 				@mkdir -p $(OBJ_DIR)/functions/builtins
-				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
 				@mkdir -p $(OBJ_DIR)/functions/builtins/echo
 				@mkdir -p $(OBJ_DIR)/functions/builtins/env

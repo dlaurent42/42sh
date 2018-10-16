@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:31:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:36:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:32:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	env_initialize_localfiles(t_shell *sh)
 		return ;
 	env_insert_local(sh, sh->env, "HISTFILE", f);
 	ft_strdel(&f);
-	if (!(f = ft_strjoins(env_search(sh->env, "HOME"), ALIASFILE)))
+	if (!(f = ft_strjoins(env_search(sh->env, "HOME"), CONFIGFILE)))
 		return ;
-	env_insert_local(sh, sh->env, "ALIASES", f);
+	env_insert_local(sh, sh->env, "CONFIG", f);
 	ft_strdel(&f);
 }
 

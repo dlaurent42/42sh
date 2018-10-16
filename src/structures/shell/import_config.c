@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   import.c                                           :+:      :+:    :+:   */
+/*   import_config.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 20:14:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 21:37:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool	alias_key_verified(int fd)
+static bool	sh_config_key_verified(int fd)
 {
 	char	line[VERIF_KEY_LEN + 1];
 
@@ -24,53 +24,53 @@ static bool	alias_key_verified(int fd)
 	return (TRUE);
 }
 
-static bool	alias_parse_and_add(t_shell *sh, char *content)
+static bool	sh_config_parse_and_add(t_shell *sh, char *content)
 {
 	char	*str;
 	char	*key;
 	char	*value;
-	bool	is_alias;
+	char	is_alias;
 	size_t	len;
 
 	is_alias = FALSE;
-	if (!content || content[0] == '#')
-		return (TRUE);
 	if (ft_strstartsby(content, "alias") && (is_alias == TRUE))
 		str = content + 6;
-	else if (ft_strstartsby(content, "export"))
+	else if (ft_strstartsby(content, "export")
+	|| ft_strstartsby(content, "setenv"))
 		str = content + 7;
 	else
 		return (FALSE);
 	len = ft_strlens(str);
-	key = ft_strdups(ft_strchrsp(content, '='));
-	value = ft_strdups(content);
+	key = ft_strdups(ft_strchrsp(str, '='));
+	value = ft_strdups(str);
 	value[len - ft_strlens(key)] = '\0';
 	(is_alias)
 		? env_insert(sh, sh->alias, key, value)
-		: env_insert_local(sh, sh->env, key, value);
+		: env_insert(sh, sh->env, key, value);
 	ft_strdel(&key);
 	ft_strdel(&value);
 	return (TRUE);
 }
 
-void		alias_import(t_shell *sh)
+void		sh_config_import(t_shell *sh)
 {
 	int		fd;
 	char	*path;
 	char	*buffer;
 
 	buffer = NULL;
-	if (!(path = env_search(sh->env, "ALIASES")))
+	if (!(path = env_search(sh->env, "CONFIG")))
 		return ;
-	if ((fd = open(path, O_RDONLY)) == -1 || !alias_key_verified(fd))
+	if ((fd = open(path, O_RDONLY)) == -1 || !sh_config_key_verified(fd))
 		return (error_import_export(fd, path));
 	while (get_next_line(fd, &buffer) == 1)
 	{
-		if (alias_parse_and_add(sh, buffer) == FALSE)
-		{
-			ft_strdel(&buffer);
-			return (error_import_export(fd, path));
-		}
+		if (buffer && buffer[0] != '#')
+			if (sh_config_parse_and_add(sh, buffer) == FALSE)
+			{
+				ft_strdel(&buffer);
+				return (error_import_export(fd, path));
+			}
 		ft_strdel(&buffer);
 	}
 	close(fd);
