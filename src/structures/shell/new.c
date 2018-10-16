@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 19:45:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:15:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void sh_set_window(t_shell *sh)
+static void	sh_set_window(t_shell *sh)
 {
 	t_winsize	window;
 
@@ -25,7 +25,6 @@ static void sh_set_window(t_shell *sh)
 
 t_shell		*sh_new(char **environ)
 {
-	
 	t_shell		*sh;
 
 	if (!(sh = (t_shell *)ft_memalloc(sizeof(t_shell))))

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/14 13:20:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:16:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void				auto_hist_name(t_shell *sh, bool *status)
 	t_cmd			*cmd;
 
 	offset = 0;
-	while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift + offset++, "!")))
+	while ((ptr_to_exc = ft_strstr(
+		sh->buffer.content + sh->buffer.ushift + offset++, "!")))
 	{
 		if (!ft_isdigit(*(ptr_to_exc + 1))
 				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))

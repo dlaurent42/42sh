@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 11:27:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 13:12:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:11:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ char		sh_read_loop(t_shell *sh, t_env *env, int *opt, char **vars)
 {
 	char	res;
 	char	*line;
-	fd_set	read_fds;
-	
+	fd_set	r_fd;
+
 	(void)sh;
-	FD_ZERO(&read_fds);
-	FD_SET(opt[READ_U], &read_fds);
+	FD_ZERO(&r_fd);
+	FD_SET(opt[READ_U], &r_fd);
 	res = 0;
 	line = NULL;
 	while (TRUE)
-		if ((res = select(opt[READ_U] + 1, &read_fds, NULL, NULL, NULL)) > 0)
+		if ((res = select(opt[READ_U] + 1, &r_fd, NULL, NULL, NULL)) > 0)
 		{
 			if ((res = sh_read_processing(env, opt, vars, &line)) != 0)
 				return (sh_read_del_return(line, res));
@@ -63,23 +63,23 @@ char		sh_read_loop(t_shell *sh, t_env *env, int *opt, char **vars)
 	return (sh_read_del_return(line, res));
 }
 
-char	sh_read_timeout_loop(t_shell *sh, t_env *env, int *opt, char **vars)
+char		sh_read_timeout_loop(t_shell *sh, t_env *env, int *opt, char **vars)
 {
 	char			res;
 	char			*line;
 	unsigned long	timer;
-	fd_set			read_fds;
+	fd_set			r_fd;
 	t_timeval		timeout;
 
 	(void)sh;
-	FD_ZERO(&read_fds);
-	FD_SET(opt[READ_U], &read_fds);
+	FD_ZERO(&r_fd);
+	FD_SET(opt[READ_U], &r_fd);
 	res = 0;
 	line = NULL;
 	timer = (unsigned long)time(NULL) + opt[READ_T];
 	timeout.tv_usec = 0;
 	while ((timeout.tv_sec = timer - (unsigned long)time(NULL)) > 0)
-		if ((res = select(opt[READ_U] + 1, &read_fds, NULL, NULL, &timeout)) > 0)
+		if ((res = select(opt[READ_U] + 1, &r_fd, NULL, NULL, &timeout)) > 0)
 		{
 			if ((res = sh_read_processing(env, opt, vars, &line)) != 0)
 				return (sh_read_del_return(line, res));

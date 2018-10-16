@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 00:19:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 22:27:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:10:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*sh_read_parse_line(char *line, int read_r)
+char		*sh_read_parse_line(char *line, int read_r)
 {
 	int	i;
 	int	j;
@@ -70,7 +70,7 @@ static void	sh_read_set_concat(t_env *env, char *key, char **split)
 	ft_strdel(&value);
 }
 
-char	sh_read_set(t_env *env, char **vars, char *line)
+char		sh_read_set(t_env *env, char **vars, char *line)
 {
 	int		i;
 	char	**split;

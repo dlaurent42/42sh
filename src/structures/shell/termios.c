@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:43:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 22:43:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:15:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	sh_set_termios(t_shell *sh)
 	sh->termios.c_lflag &= ~(ECHO);
 	sh->termios.c_cc[VMIN] = 1;
 	sh->termios.c_cc[VTIME] = 0;
-	if (tcsetattr(STDIN_FILENO, TCSADRAIN,  &(sh->termios)) == -1)
+	if (tcsetattr(STDIN_FILENO, TCSADRAIN, &(sh->termios)) == -1)
 		error_malloc_sh(sh);
 }

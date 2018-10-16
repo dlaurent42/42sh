@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:50:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:40:47 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:10:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,13 @@ char		sh__read(t_shell *sh, t_env *env, char **argv)
 	ft_memset((void *)opt, -1, sizeof(int) * (READ_N_OPTIONS + 1));
 	if (!(vars = ft_memalloc(sizeof(char *) * (READ_MAX_VAR + 1))))
 		return (sh_read_free(opt, NULL, NULL, 1));
-	ft_printf("Read has started\n");
 	if ((res = sh_read_options(argv, &i, &opt, &prompt)) != 0)
 		return (sh_read_free(opt, prompt, vars, res));
 	(opt[READ_U] > 2 || sh->pid) ? opt[READ_T] = -1 : 0;
-	ft_printf("Read options have been catched (res = %d)\n", res);
 	if ((res = sh_read_variables(argv, &i, &vars)) != 0)
 		return (sh_read_free(opt, prompt, vars, res));
-	ft_printf("Read variables have been catched (res = %d)\n", res);
-	i = -1;
-	while (++i < READ_N_OPTIONS)
-		ft_printf("OPT[%d]: %d\n", i + 1, opt[i]);
-	res = (opt[READ_T] > 0) ? sh_read_timeout_loop(sh, env, opt, vars) : sh_read_loop(sh, env, opt, vars);
-	ft_printf("Read assignment has been performed\n");
+	res = (opt[READ_T] > 0)
+		? sh_read_timeout_loop(sh, env, opt, vars)
+		: sh_read_loop(sh, env, opt, vars);
 	return (sh_read_free(opt, prompt, vars, res));
 }
