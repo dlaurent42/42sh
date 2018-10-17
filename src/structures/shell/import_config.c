@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 16:26:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 21:03:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	sh_config_add_checks(t_shell *sh, t_env *env, char *key, char *val)
 {
 	if (!env_search(env, key) && env->count + 1 >= env->size)
 		return ;
-	env_insert(sh, env, key, val);
+	env_insert(sh, env, key, sh_parse_quotes(val));
 }
 
 static bool	sh_config_parse_and_add(t_shell *sh, char *content)
@@ -40,7 +40,7 @@ static bool	sh_config_parse_and_add(t_shell *sh, char *content)
 	size_t	len;
 
 	is_alias = FALSE;
-	if (ft_strstartsby(content, "alias") && (is_alias == TRUE))
+	if (ft_strstartsby(content, "alias") && (is_alias = TRUE))
 		str = content + 6;
 	else if (ft_strstartsby(content, "export")
 	|| ft_strstartsby(content, "setenv"))
@@ -48,9 +48,9 @@ static bool	sh_config_parse_and_add(t_shell *sh, char *content)
 	else
 		return (FALSE);
 	len = ft_strlens(str);
-	key = ft_strdups(ft_strchrsp(str, '='));
-	value = ft_strdups(str);
-	value[len - ft_strlens(key)] = '\0';
+	value = ft_strdups(ft_strchrsp(str, '='));
+	key = ft_strdups(str);
+	key[sh_get_equal_position(str)] = '\0';
 	(is_alias)
 		? sh_config_add_checks(sh, sh->alias, key, value)
 		: sh_config_add_checks(sh, sh->env, key, value);
