@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/17 23:16:22 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/17 23:18:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static char				*get_substitution(t_shell *sh)
 	return (needle);
 }
 
-static void				get_needles(t_shell *sh, char **needle, char **needle_in_content)
+static void				get_needles(t_shell *sh, char **needle,
+		char **needle_in_content)
 {
 	char			*content;
 
