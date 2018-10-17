@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 15:31:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 21:32:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 	return (path);
 }
 
+static void	sh_cd_follow_insert_env(t_shell *sh, t_env *env, char *path)
+{
+	if ((env_search(env, "OLDPWD") || env->count + 1 < env->size)
+	&& env_search(env, "PWD"))
+		env_insert(sh, env, "OLDPWD", env_search(env, "PWD"));
+	if (env_search(env, "PWD") || env->count + 1 < env->size)
+		env_insert(sh, env, "PWD", path);
+}
+
 char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 {
 	char	*path;
@@ -61,11 +70,7 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 	ft_strdel(&rpath);
 	if (chdir(path) == -1)
 		return (sh_cd_error(value, path, 3));
-	if ((env_search(env, "OLDPWD") || env->count + 1 < env->size)
-	&& env_search(env, "PWD"))
-		env_insert(sh, env, "OLDPWD", env_search(env, "PWD"));
-	if (env_search(env, "PWD") || env->count + 1 < env->size)
-		env_insert(sh, env, "PWD", path);
+	sh_cd_follow_insert_env(sh, env, path);
 	(dash) ? ft_putendl(path) : 0;
 	ft_strdel(&path);
 	return (0);
