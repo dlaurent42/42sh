@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/16 08:48:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/17 22:00:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void			do_error(t_shell *sh, bool *status)
 {
 	if (sh)
 		;
-	if (*status)
-		ft_putendl("ERROR");/////////////////////////////////
+	//if (*status)
+	//	ft_putendl("ERROR");/////////////////////////////////
 	*status = false;
 }
 
@@ -63,24 +63,20 @@ char				*get_substitution(t_shell *sh)
 	return (needle);
 }
 
-char				*get_pointer_to_needle_in_cmd(t_shell *sh)
+static void				get_needles(t_shell *sh, char **needle, char **needle_in_content)
 {
-	char			*needle;
-	char			*ptr_to_matched_char_in_cmd;
-
-	needle = NULL;
-	ptr_to_matched_char_in_cmd = NULL;
-	if (sh->cmd && (needle = ft_strndup((content(sh) + 1),
+	*needle = NULL;
+	*needle_in_content = NULL;
+	if (sh->cmd && (*needle = ft_strndup((content(sh) + 1),
 					ft_strchr((content(sh) + 1), '^') - (content(sh) + 1))))
-		ptr_to_matched_char_in_cmd = ft_strstr(sh->cmd->content, needle);
-	free(needle);
-	return (ptr_to_matched_char_in_cmd);
+		*needle_in_content = ft_strstr(sh->cmd->content, *needle);
 }
 
 void				auto_hist_sed(t_shell *sh, bool *status)//make bool
 {
-	//int				number_of_deletions;
-	//char			*track;
+	int				number_of_deletions;
+	char			*track;
+	char			*needle;//free it
 	char			*needle_in_content;
 	char			*substitution;
 
@@ -89,16 +85,24 @@ void				auto_hist_sed(t_shell *sh, bool *status)//make bool
 		*status = true;
 		if (!content_is_hist_sed(sh, content(sh)))
 			return ;
-		if (!(needle_in_content = get_pointer_to_needle_in_cmd(sh)))
+		get_needles(sh, &needle, &needle_in_content);
+		if (!needle || !needle_in_content)//free both
 			return ;
 		if (!(substitution = get_substitution(sh)))
 			return ;
-		ft_putendl(substitution);
+		sh_delete_all(sh);
+		sh_print_str(sh, sh->cmd->content);
+		sh_move_home(sh);
+		track = sh->cmd->content;
+		while (track++ != needle_in_content)
+			sh_move_right(sh);
+		number_of_deletions = ft_strlens(needle);
+		while (number_of_deletions--)
+			sh_delete_current_char(sh);
+		sh_print_str(sh, substitution);
 		/*
 			while ((ptr_to_exc = ft_strstr(sh->buffer.content + sh->buffer.ushift, "!")))
 			{
-				if (!ft_isdigit(*(ptr_to_exc + 1))
-						&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
 				{
 					number_of_deletions = ft_strlens(ptr_to_exc);
 					track = sh->buffer.content + sh->buffer.ushift;
