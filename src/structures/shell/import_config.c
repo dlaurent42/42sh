@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 21:30:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 21:36:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,11 @@ void		sh_config_import(t_shell *sh)
 	while (get_next_line(fd, &buffer) == 1)
 	{
 		if (buffer && buffer[0] != '#' && sh_config_not_empty_line(buffer))
-		{
-			ft_printf("add [%s]\n", buffer);
 			if (sh_config_parse_and_add(sh, buffer) == FALSE)
 			{
 				ft_strdel(&buffer);
 				return (error_import_export(fd, path));
 			}
-		}
-		else
-			ft_printf("skip [%s]\n", buffer);
 		ft_strdel(&buffer);
 	}
 	close(fd);
