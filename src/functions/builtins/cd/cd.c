@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 00:01:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:11:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	sh_cd_check_result(bool e, bool p, char res)
 	if (!(path = getcwd(path, PATH_MAX)))
 		return (1);
 	ft_strdel(&path);
-	return (res);	
+	return (res);
 }
 
 char		sh_cd(t_shell *sh, t_env *env, char **argv)

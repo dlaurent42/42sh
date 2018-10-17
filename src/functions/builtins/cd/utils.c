@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 22:47:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 23:41:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:14:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,21 @@ char		*sh_cd_handle_cdpath(t_env *env, char *rel_path)
 	char	*path;
 	char	**split;
 
-	i = 0;
+	i = -1;
 	path = NULL;
 	if (!(split = ft_strsplit(env_search(env, "CDPATH"), ':')))
 		return (rel_path);
-	while (split[i])
+	while (split[++i])
 	{
 		if (split[i][0] == '~')
 			split[i] = sh_cd_replace_tilde(env, split[i]);
-		path = ft_strjoins(split[i], "/");
-		path = ft_strjoinf(path, rel_path, 1);
+		path = ft_strjoinf(ft_strjoins(split[i], "/"), rel_path, 1);
 		if (access(path, F_OK) != -1)
 		{
 			ft_putendl(sh_cd_replace_dbl_slash(path));
 			break ;
 		}
 		ft_strdel(&path);
-		i++;
 	}
 	i = -1;
 	while (split[++i])
