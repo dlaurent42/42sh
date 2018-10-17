@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 13:30:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 23:06:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@
 ** of `printenv'.
 */
 
-static t_env	*sh_env_empty(t_shell *sh, t_env *env)
+static void		sh_env_init_env_before_exec(t_shell *sh, t_env *env)
 {
-	env_delete(env);
-	return (env_new(sh, NULL));
+	if (!env_search(env, "PATH") && env->count + 1 < env->size)
+		env_insert(sh, env, "PATH", "/usr/bin/:/bin/");
 }
 
 static char		sh_env_unset(t_env *env, char *arg)
@@ -73,7 +73,10 @@ static char		sh_env_options(t_shell *sh, t_env **env, char **argv, int *i)
 	while (argv && argv[*i] && argv[*i][0] == '-' && res == 0)
 	{
 		if (!argv[*i][1] || (argv[*i][1] == 'i' && !argv[*i][2]))
-			*env = sh_env_empty(sh, *env);
+		{
+			env_delete(*env);
+			*env = env_new(sh, NULL);
+		}
 		else if (argv[*i][1] == 'u' && !argv[*i][2])
 		{
 			res = sh_env_unset(*env, argv[*i + 1]);
@@ -120,10 +123,12 @@ char			sh_env(t_shell *sh, t_env *src, char **argv)
 {
 	int		i;
 	int		res;
+	bool	preset;
 	t_env	*env;
 	t_bin	*bin;
 
 	i = 0;
+	preset = FALSE;
 	env = env_new(sh, src->environment);
 	if ((res = sh_env_options(sh, &env, argv, &i)) != 0)
 		return (res);
@@ -136,8 +141,9 @@ char			sh_env(t_shell *sh, t_env *src, char **argv)
 	}
 	if (!argv[i])
 		return (sh_env_print(env));
-	if (!env_search(env, "PATH"))
-		sh_env_add_item_equal(sh, env, "PATH=/bin");
+	preset = (env_search(env, "PATH")) ? FALSE : TRUE;
+	(preset) ? sh_env_init_env_before_exec(sh, env) : 0;
 	bin = bin_new(sh, env);
+	(preset) ? sh_env_unset(env, "PATH") : 0;
 	return (sh_env_exec(sh, env, bin, argv + i));
 }

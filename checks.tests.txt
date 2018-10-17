@@ -1,3 +1,5 @@
+Verify shell behavior when using unicode
+
 Verify correct implementation of local/global variables
 
 		> b=32			| set b=42 as local

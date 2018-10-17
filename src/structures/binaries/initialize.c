@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:19:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:53:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 23:15:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,22 @@ static void		bin_parse_folder(t_shell *sh, t_bin *bin, char *path)
 	closedir(dir);
 }
 
+static bool		bin_path_is_duplicate(char **list, int i)
+{
+	int		j;
+
+	j = i + 1;
+	if (!list[j])
+		return (FALSE);
+	while (list[j])
+	{
+		if (ft_strcmps(list[i], list[j]) == 0)
+			return (TRUE);
+		j++;
+	}
+	return (FALSE);
+}
+
 void			bin_initialize(t_shell *sh, t_env *env, t_bin *bin)
 {
 	int			i;
@@ -95,7 +111,8 @@ void			bin_initialize(t_shell *sh, t_env *env, t_bin *bin)
 		error_no_path_var(sh);
 	while (path_list[i])
 	{
-		bin_parse_folder(sh, bin, path_list[i]);
+		if (!bin_path_is_duplicate(path_list, i))
+			bin_parse_folder(sh, bin, path_list[i]);
 		ft_strdel(&path_list[i]);
 		i++;
 	}
