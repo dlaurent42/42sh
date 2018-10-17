@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:20:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:31:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char		sh_env_unset(t_env *env, char *arg)
 
 	if (!arg)
 		return (sh_env_error(env, NULL, 0, 1));
-	if (ft_strcountif(arg, '='))
+	if (ft_strcountif(arg, '=') || !env_key_is_ok(arg))
 		return (sh_env_error(env, NULL, 0, 2));
 	if (!(arg_parsed = sh_parse_quotes(ft_strdups(arg))))
 		return (sh_env_error(env, NULL, 0, 3));
@@ -100,6 +100,8 @@ static char		sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
 	val = (ft_strchrsp(key, '='))
 		? ft_strdups(ft_strchrsp(key, '=')) : ft_strdup("");
 	key[eq_sym] = '\0';
+	if (!env_key_is_ok(key))
+		return (sh_env_error(env, NULL, 0, 2));
 	if (!env_search(env, key) && env->count + 1 >= env->size)
 	{
 		sh_setenv_error(key, val, 4, NULL);

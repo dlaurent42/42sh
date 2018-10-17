@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:16:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:21:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char		sh_setenv(t_shell *sh, t_env *env, char **argv)
 
 	res = 0;
 	if (!argv || !argv[0])
-		return (sh_env_display(env, ""));
+		return (env_display(env, ""));
 	if (ft_strcmps(argv[0], "-p") == 0)
-		return (sh_env_display(env, "setenv "));
+		return (env_display(env, "setenv "));
 	i = (ft_strcmps(argv[0], "--") == 0) ? 1 : 0;
 	if (i == 0 && argv[0][0] == '-' && !sh_is_option_string(argv[0], "p"))
 		return (sh_export_error(NULL, NULL, 1, &argv[0][0]));

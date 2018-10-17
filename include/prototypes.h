@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:11:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:35:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void					sh_add_builtins_to_auto_comp(t_shell *sh, t_bin *bin);
 /*
 ** functions - builtins - alias
 */
-int						sh_alias_isbin(char *arg);
-int						sh_alias_equal(char *arg);
-char					sh_alias_display(t_env *env, bool exportable);
 char					sh_alias(t_shell *sh, t_env *env, char **argv);
 char					sh_alias_add(t_shell *sh, t_env *env, char *arg);
 char					sh_alias_error(char *key, char *val, int id, char *msg);
@@ -198,7 +195,6 @@ char					sh_unsetenv_error(char *key, int err_id);
 int						sh_get_equal_position(char *arg);
 int						sh_is_binary(char *arg);
 bool					sh_is_option_string(char *s, char *opt);
-char					sh_env_display(t_env *env, char *keyword);
 char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
@@ -287,8 +283,10 @@ void					command_export_to(t_shell *sh, t_env *env, char *file);
 ** structures - environment
 */
 int						env_get_hash(const char *sh, const int b, const int a);
+bool					env_key_is_ok(char *name);
 bool					env_is_public(t_env *env, char *str);
 bool					env_is_local(t_env *env, char *str);
+bool					env_display(t_env *env, char *keyword);
 void					env_delete_specified_item(t_env_item *item);
 void					env_delete_item(t_env *env, const char *key);
 void					env_delete(t_env *env);
@@ -308,7 +306,6 @@ char					*env_search_local(t_env *env, const char *key);
 char					env_delete_item_from_array(t_env *env, const char *key);
 t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
-t_env_item				*env_new_item(t_shell *sh, t_env *e, char *k, char *v);
 
 /*
 ** structures - reader

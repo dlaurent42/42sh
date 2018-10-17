@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 23:56:25 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/17 11:36:36 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ SRC			=	shell.c														\
 				functions/builtins/unsetenv/error.c							\
 				functions/builtins/unsetenv/remove.c						\
 				functions/builtins/unsetenv/unsetenv.c						\
-				functions/builtins/utils/display_env.c						\
 				functions/builtins/utils/equal_position.c					\
 				functions/builtins/utils/is_option_str.c					\
 				functions/builtins/utils/is_binary.c						\
@@ -109,11 +108,13 @@ SRC			=	shell.c														\
 				structures/commands/import_from.c							\
 				structures/commands/import.c								\
 				structures/environment/copy.c								\
+				structures/environment/display.c							\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
 				structures/environment/initialize_local.c					\
 				structures/environment/insert.c								\
+				structures/environment/key_check.c							\
 				structures/environment/local_to_public.c					\
 				structures/environment/new.c								\
 				structures/environment/search.c								\
@@ -259,7 +260,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures
-				@mkdir -p $(OBJ_DIR)/structures/aliases
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment

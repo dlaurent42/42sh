@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:29:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:36:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	sh_export_add_noequal(t_shell *sh, t_env *env, char *key)
 {
 	char	*value;
 
+	if (!env_key_is_ok(key))
+		return (sh_export_error(key, NULL, 2, NULL));
 	value = env_search_local(env, key);
 	if (env_search_public(env, key))
 		return (sh_export_error(NULL, NULL, 5, key));
@@ -39,6 +41,8 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 	val = (bin)
 		? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
 	key[eq_sym] = '\0';
+	if (!env_key_is_ok(key))
+		return (sh_export_error(key, val, 2, NULL));
 	if (bin && !(obj = bin_search(sh->bin, val)))
 		return (sh_export_error(key, val, 3, NULL));
 	if (!env_search(env, key) && env->count + 1 >= env->size)

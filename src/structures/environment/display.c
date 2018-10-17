@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_env.c                                      :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 21:06:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:07:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:20:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	sh_env_display(t_env *env, char *keyword)
+bool	env_display(t_env *env, char *keyword)
 {
 	int		i;
 
 	i = 0;
 	if (!env->environment[0])
-		return (0);
+		return (TRUE);
 	while (env->environment[i])
 	{
 		ft_putstr(keyword);
 		ft_putendl(env->environment[i]);
 		i++;
 	}
-	return (0);
+	return (TRUE);
 }

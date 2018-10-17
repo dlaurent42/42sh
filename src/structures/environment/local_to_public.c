@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 14:30:54 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:40:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 11:35:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void		env_local_to_public(t_env *env, char *key, char *value)
 	t_env_item	*item;
 
 	i = 1;
+	if (!env_key_is_ok(key))
+		return ;
 	env_insert_item_into_array(env, key, value);
 	index = env_get_hash(key, env->size, 0);
 	item = env->items[index];
