@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:58:11 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 23:35:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 22:27:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	sh_command_get_isquote(char *s, int i, char *dq, char *sq)
 {
+	if (!s)
+		return ;
 	if (s[i] == '"' && i && s[i - 1] == '=' && !(*dq || *sq))
 		*dq = 2;
 	else if (s[i] == '\'' && i && s[i - 1] == '=' && !(*dq || *sq))

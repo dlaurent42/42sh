@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 01:11:14 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 16:35:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 22:28:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ char		sh_setenv(t_shell *sh, t_env *env, char **argv)
 		return (sh_export_error(NULL, NULL, 1, &argv[0][0]));
 	while (argv[i] && (res = sh_setenv_add(sh, env, argv[i])) == 0)
 		i++;
-	ft_printf("Count is now %d/%d\n", env->count, env->size);
 	return (res);
 }
