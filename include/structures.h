@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:32:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 18:55:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct			s_env_item
 typedef struct			s_env
 {
 	char				*environment[ENV_MAX_SIZE + 1];
+	char				*full_env[ENV_MAX_SIZE + 1];
 	size_t				size;
 	size_t				count;
 	t_env_item			del;

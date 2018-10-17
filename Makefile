@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/17 11:36:36 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/17 19:33:17 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ SRC			=	shell.c														\
 				structures/commands/export.c								\
 				structures/commands/import_from.c							\
 				structures/commands/import.c								\
+				structures/environment/autocompletion.c						\
 				structures/environment/copy.c								\
 				structures/environment/display.c							\
 				structures/environment/delete.c								\

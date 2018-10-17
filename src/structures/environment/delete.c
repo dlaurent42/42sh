@@ -6,11 +6,23 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 14:52:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 19:34:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+void		env_delete_autocompletion_array(t_env *env)
+{
+	int		i;
+
+	i = 0;
+	while (env->full_env[i])
+	{
+		ft_strdel(&env->full_env[i]);
+		i++;
+	}
+}
 
 char		env_delete_item_from_array(t_env *env, const char *key)
 {
@@ -91,6 +103,7 @@ void		env_delete(t_env *env)
 		ft_strdel(&env->environment[i]);
 		i++;
 	}
+	env_delete_autocompletion_array(env);
 	free(env->items);
 	free(env);
 }

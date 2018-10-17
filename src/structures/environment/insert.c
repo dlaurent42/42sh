@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 14:53:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 19:05:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void				env_insert(t_shell *sh, t_env *env, char *k, char *v)
 		return ;
 	item = env_new_item(sh, env, k, v);
 	index = env_get_hash(item->key, env->size, 0);
-	curr_item = env->items[index];
-	while (curr_item)
+	while ((curr_item = env->items[index]))
 	{
 		if (curr_item != &env->del && !ft_strcmps(curr_item->key, k))
 		{
@@ -67,7 +66,6 @@ void				env_insert(t_shell *sh, t_env *env, char *k, char *v)
 			return (env_delete_specified_item(curr_item));
 		}
 		index = env_get_hash(item->key, env->size, i++);
-		curr_item = env->items[index];
 	}
 	if (env->count + 1 >= env->size)
 		return (env_delete_specified_item(item));
@@ -89,8 +87,7 @@ void				env_insert_local(t_shell *sh, t_env *env, char *k, char *v)
 	item = env_new_item(sh, env, k, v);
 	item->local = TRUE;
 	index = env_get_hash(item->key, env->size, 0);
-	curr_item = env->items[index];
-	while (curr_item)
+	while ((curr_item = env->items[index]))
 	{
 		if (curr_item != &env->del && !ft_strcmps(curr_item->key, k))
 		{
@@ -98,7 +95,6 @@ void				env_insert_local(t_shell *sh, t_env *env, char *k, char *v)
 			return (env_delete_specified_item(curr_item));
 		}
 		index = env_get_hash(item->key, env->size, i++);
-		curr_item = env->items[index];
 	}
 	if (env->count + 1 >= env->size)
 		return (env_delete_specified_item(item));

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 14:50:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 19:34:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,8 @@ void					env_initialize(t_shell *sh, t_env *env, char **e);
 void					env_initialize_local(t_shell *sh);
 void					env_local_to_public(t_env *env, char *key, char *value);
 void					env_insert_item_into_array(t_env *e, char *k, char *v);
+void					env_delete_autocompletion_array(t_env *env);
+void					env_search_autocompletion(t_shell *sh, char *key);
 char					*env_search(t_env *env, const char *key);
 char					*env_search_public(t_env *env, const char *key);
 char					*env_search_local(t_env *env, const char *key);
