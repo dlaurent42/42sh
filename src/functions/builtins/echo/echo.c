@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 10:41:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 20:17:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,23 @@ static char	*sh_echo_concat_args(char **argv)
 	return (s);
 }
 
+static char	*sh_echo_backslash_c(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\\' && s[i + 1] == 'c')
+		{
+			s[i] = '\0';
+			break ;
+		}
+		i++;
+	}
+	return (s);
+}
+
 char		sh_echo(t_shell *sh, t_env *env, char **argv)
 {
 	int		current;
@@ -65,9 +82,9 @@ char		sh_echo(t_shell *sh, t_env *env, char **argv)
 			break ;
 	}
 	string = sh_echo_concat_args(argv + current);
-	ft_putstr(string);
 	if (!option_n)
-		ft_putchar('\n');
+		string = ft_strjoinf(string, "\n", 1);
+	ft_putstr(sh_echo_backslash_c(string));
 	ft_strdel(&string);
 	return (0);
 }

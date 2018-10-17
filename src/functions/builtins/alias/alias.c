@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:42:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:21:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 20:11:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 **
 ** The value cannot contain any positional parameters ($1 etc), if you need to
 ** do that use a shell function instead.
-**
-** The name can not be 'alias' or 'unalias'.
 */
 
 char		sh_alias(t_shell *sh, t_env *env, char **argv)
