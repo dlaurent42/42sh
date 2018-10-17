@@ -6,23 +6,23 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:55:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/04/03 14:55:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:46:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_pow(int nb, int power)
+long		ft_pow(long x, long n)
 {
-	int total;
+	long pow;
 
-	if (power >= 0)
+	pow = 1;
+	while (n)
 	{
-		total = 1;
-		if (power > 0)
-			total = nb * ft_pow(nb, power - 1);
+		if (n & 1)
+			pow *= x;
+		n = n >> 1;
+		x = x * x;
 	}
-	else
-		total = 0;
-	return (total);
+	return (pow);
 }

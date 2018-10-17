@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:32:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 16:37:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,9 @@
 /*
 ** environment
 */
-# define ENV_MAX_SIZE	999
-# define ENV_PRIME_1	3
-# define ENV_PRIME_2	13
+# define ENV_MAX_SIZE	98317
+# define ENV_PRIME_1	53
+# define ENV_PRIME_2	97
 # define TERM_DEFAULT	"xterm-256color"
 
 /*
@@ -183,8 +183,8 @@
 /*
 ** binaries
 */
-# define BIN_MAX_SIZE	9999
-# define BIN_PRIME_1	3
-# define BIN_PRIME_2	13
+# define BIN_MAX_SIZE	98317
+# define BIN_PRIME_1	53
+# define BIN_PRIME_2	97
 
 #endif

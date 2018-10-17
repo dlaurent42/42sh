@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:57:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:42:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ float				ft_float_min(float a, float b);
 long				ft_long_min(long a, long b);
 double				ft_double_min(double a, double b);
 int					ft_fact(int nb);
-int					ft_pow(int nb, int power);
+long				ft_pow(long nb, long power);
 int					ft_sqrt(int nb);
 int					ft_isnumber(char *str);
 

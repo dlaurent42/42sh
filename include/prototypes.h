@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:35:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:50:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ void					sh_command_parser(
 /*
 ** structures - binaries
 */
-int						bin_get_hash(const char *sh, const int b, const int a);
+long					bin_get_hash(const char *sh, const int b, const int a);
 void					bin_delete_specified_item(t_bin_item *item);
 void					bin_delete_item(t_bin *bin, const char *key);
 void					bin_delete(t_bin *bin);
@@ -282,7 +282,7 @@ void					command_export_to(t_shell *sh, t_env *env, char *file);
 /*
 ** structures - environment
 */
-int						env_get_hash(const char *sh, const int b, const int a);
+long					env_get_hash(const char *sh, const int b, const int a);
 bool					env_key_is_ok(char *name);
 bool					env_is_public(t_env *env, char *str);
 bool					env_is_local(t_env *env, char *str);

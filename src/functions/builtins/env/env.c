@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:31:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 13:30:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ static char		sh_env_add_item_equal(t_shell *sh, t_env *env, char *arg)
 		? ft_strdups(ft_strchrsp(key, '=')) : ft_strdup("");
 	key[eq_sym] = '\0';
 	if (!env_key_is_ok(key))
+	{
+		ft_strdel(&key);
 		return (sh_env_error(env, NULL, 0, 2));
+	}
 	if (!env_search(env, key) && env->count + 1 >= env->size)
 	{
 		sh_setenv_error(key, val, 4, NULL);

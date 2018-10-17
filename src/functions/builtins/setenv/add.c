@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 09:00:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:28:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:37:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static char	sh_setenv_add_noequal(t_shell *sh, t_env *env, char *key)
 {
 	if (!env_key_is_ok(key))
-		return (sh_setenv_error(key, NULL, 2, NULL));
+		return (sh_setenv_error(NULL, NULL, 2, NULL));
+	if (!env_search(env, key) && env->count + 1 >= env->size)
+		return (sh_setenv_error(NULL, NULL, 4, NULL));
 	env_insert(sh, env, key, "");
 	return (0);
 }

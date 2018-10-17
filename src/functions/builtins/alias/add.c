@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:43:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 11:27:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:38:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static char	sh_alias_add_noequal(t_shell *sh, t_env *env, char *key)
 {
 	if (!env_key_is_ok(key))
-		return (sh_alias_error(key, NULL, 2, NULL));
+		return (sh_alias_error(NULL, NULL, 2, NULL));
+	if (!env_search(env, key) && env->count + 1 >= env->size)
+		return (sh_alias_error(NULL, NULL, 4, NULL));
 	env_insert(sh, env, key, "");
 	return (0);
 }

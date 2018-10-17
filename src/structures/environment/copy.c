@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 11:39:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:43:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:38:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_env	*env_copy_items(t_shell *sh, t_env *src, t_env *env)
 	i = 0;
 	key = NULL;
 	value = NULL;
-	while (src->environment[i])
+	while (src->environment[i] && i < env->size)
 	{
 		value = ft_strchrsp(src->environment[i], '=');
 		key = ft_strsub(src->environment[i], 0,

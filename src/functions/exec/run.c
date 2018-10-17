@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:29:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:56:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 
 	if (!argv || !argv[0])
 		return (1);
-	env_insert(sh, env, "_", argv[0]);
+	if (env_search(env, "_") || env->count + 1 < env->size)
+		env_insert(sh, env, "_", argv[0]);
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);

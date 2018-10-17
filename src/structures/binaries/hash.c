@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:10:46 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:46:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:54:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	bin_hash(const char *s, const int a, const int m)
 	return ((int)hash);
 }
 
-int			bin_get_hash(const char *s, const int buckets, const int attempt)
+long		bin_get_hash(const char *s, const int buckets, const int attempt)
 {
 	int	hash_a;
 	int	hash_b;

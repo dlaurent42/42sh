@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:01:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 23:03:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:52:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		env_delete_specified_item(t_env_item *item)
 void		env_delete_item(t_env *env, const char *key)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_env_item	*item;
 
 	i = 1;

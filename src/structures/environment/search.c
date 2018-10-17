@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 18:31:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:53:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*env_search_public(t_env *env, const char *key)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_env_item	*item;
 
 	i = 1;
@@ -36,7 +36,7 @@ char	*env_search_public(t_env *env, const char *key)
 char	*env_search_local(t_env *env, const char *key)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_env_item	*item;
 
 	i = 1;
@@ -57,7 +57,7 @@ char	*env_search_local(t_env *env, const char *key)
 char	*env_search(t_env *env, const char *key)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_env_item	*item;
 
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 00:19:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:10:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:35:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ static void	sh_delete_split(char **split)
 	(split) ? free(split) : 0;
 }
 
+static void	sh_read_check_for_insert(t_env *env, char *key, char *value)
+{
+	if (env_search(env, key) || env->count + 1 < env->size)
+		env_insert_local(NULL, env, key, value);
+}
+
 static void	sh_read_set_concat(t_env *env, char *key, char **split)
 {
 	int		i;
@@ -66,7 +72,7 @@ static void	sh_read_set_concat(t_env *env, char *key, char **split)
 		value = ft_strjoinf(value, split[i], 1);
 		i++;
 	}
-	env_insert_local(NULL, env, key, value);
+	sh_read_check_for_insert(env, key, value);
 	ft_strdel(&value);
 }
 
@@ -78,11 +84,11 @@ char		sh_read_set(t_env *env, char **vars, char *line)
 	i = -1;
 	split = ft_strsplit(line, ' ');
 	if (!vars[0])
-		env_insert_local(NULL, env, "REPLY", line);
+		sh_read_check_for_insert(env, "REPLY", line);
 	else
 		while (++i < READ_MAX_VAR - 1)
 			if (vars[i + 1] && split && split[i])
-				env_insert_local(NULL, env, vars[i], split[i]);
+				sh_read_check_for_insert(env, vars[i], split[i]);
 			else if (vars[i + 1] == NULL && split && split[i])
 			{
 				sh_read_set_concat(env, vars[i], split + i);
@@ -92,7 +98,7 @@ char		sh_read_set(t_env *env, char **vars, char *line)
 				while (i < READ_MAX_VAR - 1)
 				{
 					if (vars[i])
-						env_insert_local(NULL, env, vars[i], "");
+						sh_read_check_for_insert(env, vars[i], "");
 					i++;
 				}
 	sh_delete_split(split);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/03 20:16:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:52:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_bin_obj	*bin_search(t_bin *bin, const char *key)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_bin_item	*item;
 
 	i = 1;

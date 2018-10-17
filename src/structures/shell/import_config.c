@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:37:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 16:26:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ static bool	sh_config_key_verified(int fd)
 	if (ft_strcmps(line, VERIF_KEY))
 		return (FALSE);
 	return (TRUE);
+}
+
+static void	sh_config_add_checks(t_shell *sh, t_env *env, char *key, char *val)
+{
+	if (!env_search(env, key) && env->count + 1 >= env->size)
+		return ;
+	env_insert(sh, env, key, val);
 }
 
 static bool	sh_config_parse_and_add(t_shell *sh, char *content)
@@ -45,8 +52,8 @@ static bool	sh_config_parse_and_add(t_shell *sh, char *content)
 	value = ft_strdups(str);
 	value[len - ft_strlens(key)] = '\0';
 	(is_alias)
-		? env_insert(sh, sh->alias, key, value)
-		: env_insert(sh, sh->env, key, value);
+		? sh_config_add_checks(sh, sh->alias, key, value)
+		: sh_config_add_checks(sh, sh->env, key, value);
 	ft_strdel(&key);
 	ft_strdel(&value);
 	return (TRUE);

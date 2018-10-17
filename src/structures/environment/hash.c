@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:18:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/19 21:46:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 16:34:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	env_hash(const char *s, const int a, const int m)
 	return ((int)hash);
 }
 
-int			env_get_hash(const char *s, const int buckets, const int attempt)
+long		env_get_hash(const char *s, const int buckets, const int attempt)
 {
 	int	hash_a;
 	int	hash_b;

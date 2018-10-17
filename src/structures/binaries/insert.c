@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:11:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 21:57:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:52:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,21 @@ t_bin_obj			*bin_new_obj(t_shell *sh, char *n, char *p, t_stat st)
 	return (obj);
 }
 
+static void			bin_insert_ready(t_shell *sh, t_bin *bin, t_bin_obj *obj)
+{
+	if (!bin->bin_auto)
+		sh_add_builtins_to_auto_comp(sh, bin);
+	bin_gen_list_for_auto_comp(sh, bin, obj->name);
+}
+
 void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 {
 	int			i;
-	int			index;
+	long		index;
 	t_bin_item	*item;
 	t_bin_item	*curr_item;
 
 	i = 1;
-	if (!bin->bin_auto)
-		sh_add_builtins_to_auto_comp(sh, bin);
-	bin_gen_list_for_auto_comp(sh, bin, obj->name);
 	item = bin_new_item(sh, bin, obj);
 	index = bin_get_hash(item->key, bin->size, 0);
 	curr_item = bin->items[index];
@@ -55,11 +59,15 @@ void				bin_insert(t_shell *sh, t_bin *bin, t_bin_obj *obj)
 		if (curr_item != &bin->del && !ft_strcmps(curr_item->key, obj->name))
 		{
 			bin->items[index] = item;
+			bin_insert_ready(sh, bin, obj);
 			return (bin_delete_specified_item(curr_item));
 		}
 		index = bin_get_hash(item->key, bin->size, i++);
 		curr_item = bin->items[index];
 	}
+	if (bin->count + 1 >= bin->size)
+		return (bin_delete_specified_item(item));
+	bin_insert_ready(sh, bin, obj);
 	bin->items[index] = item;
 	bin->count++;
 }
