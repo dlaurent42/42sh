@@ -5,6 +5,24 @@ Verify correct implementation of local/global variables
 		> b=52			| modify b in local and global
 		> unset b		| delete b from local and global
 
+Verify correct execution of functions which use env vars when those vars are unset/mis-set
+
+	$HOME
+		env -i shell
+		cd builtin
+		tilde in lexer
+		set prompt
+	$PWD, $OLDPWD, $CDPATH
+		cd builtin
+	$HISTFILE
+		history builtin when using file options without specifying filepath
+	$CONFIG
+		config import at shell init
+	$TERM
+		nowhere
+	$SHLVL
+		nowhere
+
 Verify parsing of builtins including options
 
 		> export PATH=/local/bin:$PATH
