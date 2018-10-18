@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:51:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:37:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 19:11:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sh_copy_selection_to_buffer(t_shell *sh)
 
 	i = sh->buffer.ushift + sh->cursor.rel_pos;
 	j = 0;
-	while (sh->selection.content[j])
+	while (sh->selection.content[j] && i + 1 < ARG_MAX)
 	{
 		sh->buffer.content[i] = sh->selection.content[j];
 		i++;
@@ -36,7 +36,7 @@ static void	sh_copy_rest_to_buffer(t_shell *sh, char *rest)
 		+ sh->cursor.rel_pos
 		+ ft_strlens(sh->selection.content);
 	j = 0;
-	while (rest[j])
+	while (rest[j] && i + j + 1 < ARG_MAX)
 	{
 		sh->buffer.content[i + j] = rest[j];
 		j++;
@@ -69,6 +69,7 @@ static void	sh_move_cursor(t_shell *sh, int delta)
 
 void		sh_paste_selection(t_shell *sh)
 {
+	int		delta;
 	char	*rest;
 
 	if (!sh->selection.content)
@@ -82,5 +83,9 @@ void		sh_paste_selection(t_shell *sh)
 	(rest) ? sh_copy_rest_to_buffer(sh, rest) : 0;
 	ft_putstr(CLEAR_TO_EOL);
 	ft_putstr(sh->buffer.content + sh->buffer.ushift + sh->cursor.rel_pos);
-	sh_move_cursor(sh, ft_strlenu(sh->selection.content));
+	delta = (sh->buffer.unicode_len
+		+ ft_strlens(sh->selection.content) >= ARG_MAX)
+		? ARG_MAX - sh->buffer.unicode_len
+		: ft_strlenu(sh->selection.content);
+	sh_move_cursor(sh, delta);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 16:51:22 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/07 18:58:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:29:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		sh_history_bufferize(t_shell *sh, char *line)
 	{
 		if (line[i] == 127)
 			sh_history_del_char(sh);
-		else if (sh->search.len <= ARG_MAX
+		else if (sh->search.len < ARG_MAX
 		&& (((unsigned char)line[i] < 0b10000000 && ft_isprint(line[i]))
 		|| (unsigned char)line[i] >= 0b10000000))
 		{
