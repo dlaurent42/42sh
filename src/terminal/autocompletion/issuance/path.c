@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 17:18:49 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 22:09:06 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,9 @@ bool				auto_path(t_obj *obj, char *path, char *name)
 		if ((new_path = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1)))
 		{
 			tmp = new_path;
-			if (ft_strcmp(path, "."))
-			{
-				while (path && *path)
-					*(tmp++) = *(path++);
-				*(tmp++) = '/';
-			}
+			while (path && *path)
+				*(tmp++) = *(path++);
+			*(tmp++) = '/';
 			while (name && *name)
 				*(tmp++) = *(name++);
 			obj->data.path = new_path;
