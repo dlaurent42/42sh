@@ -112,7 +112,6 @@ typedef struct			s_prompt
 	int					len_mod;
 	char				*content;
 	char				*location;
-	char				last_exec_succeed;
 }						t_prompt;
 
 typedef struct			s_read
@@ -134,7 +133,8 @@ typedef struct			s_modes
 	unsigned char		browse			: 1;
 	unsigned char		search			: 1;
 	unsigned char		multiline		: 1;
-	unsigned char		others			: 3;
+	unsigned char		exec			: 1;
+	unsigned char		others			: 2;
 }						t_modes;
 
 typedef struct			s_select

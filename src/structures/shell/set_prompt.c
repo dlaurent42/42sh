@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:08:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:22:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		sh_set_prompt(t_shell *sh)
 	sh_set_prompt_location(sh);
 	if ((git = sh_get_git_branch(sh->prompt.location)))
 		sh->prompt.content = ft_strjoinf(sh->prompt.content, git, 3);
-	sh->prompt.content = (sh->prompt.last_exec_succeed == 0)
+	sh->prompt.content = (ft_atoi(env_search(sh->env, "?")) == 0)
 		? ft_strjoinf(sh->prompt.content, VALID_PROMPT, 1)
 		: ft_strjoinf(sh->prompt.content, ERR_PROMPT, 1);
 	(git)

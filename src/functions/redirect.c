@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:39:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:19:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		sh_command_run(t_shell *sh)
 		{
 			sh->bin = bin_update(sh, sh->env, sh->bin);
 			command_add(sh, true);
+			sh->modes.exec = TRUE;
 			sh_command_parser(
 				sh,
 				sh->env,

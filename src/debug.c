@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:19:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:37:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	sh_debug3(t_shell *sh, int fd)
 {
-	ft_putstr_fd("\tcontent: ", fd);
-	ft_putstr_fd((char *)sh->buffer.content, fd);
+	//ft_putstr_fd("\tcontent: ", fd);
+	//ft_putstr_fd((char *)sh->buffer.content, fd);
 	ft_putstr_fd("\tstored: ", fd);
 	ft_putstr_fd((char *)sh->buffer.stored, fd);
 	ft_putstr_fd("\nprompt\n\tdisplay_len: ", fd);
@@ -57,7 +57,7 @@ void		sh_debug(t_shell *sh, char *msg, char *str)
 	int	fd;
 
 	i = 0;
-	fd = open("/dev/ttys001", O_RDWR);
+	fd = open("/dev/ttys002", O_RDWR);
 	ft_putendl_fd("", fd);
 	if (str)
 		while (str[i])

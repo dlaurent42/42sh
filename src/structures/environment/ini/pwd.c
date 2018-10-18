@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 23:48:55 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/18 11:07:16 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/18 11:10:36 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_read(t_shell *sh)
+void		sh_env_init_pwd(t_shell *sh)
 {
-	sh_print_prompt(sh);
-	while (TRUE)
-	{
-		if (read(0, sh->read->line, LINE_SIZE - 1) == -1)
-			break ;
-		if (sh->read->line[0] == 4 && !sh->modes.multiline
-		&& sh->buffer.display_len + sh->buffer.dshift)
-			sh_delete_current_char(sh);
-		else if (sh->read->line[0] == 4 && !sh->modes.multiline)
-			break ;
-		sh_read_dispatcher(sh);
-		ft_bzero(sh->read->line, LINE_SIZE);
-	}
+	char		*path;
+
+	path = NULL;
+	if (!(env_search(sh->env, "PWD")) && sh->env->count + 1 < sh->env->size
+	&& (path = getcwd(path, PATH_MAX)))
+		env_insert(sh, sh->env, "PWD", path);
+	ft_strdel(&path);
 }

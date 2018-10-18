@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 00:19:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:56:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 		ft_strdel(&arg[0]);
 		arg[0] = tmp;
 	}
-	sh->prompt.last_exec_succeed = sh_command_found(sh, env, bin, &arg[0]);
+	ft_strdel(&str);
+	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
+	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
+		env_insert_protected(sh, sh->env, "?", str);
 	if (arg)
 		while (arg[i])
 		{

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 10:16:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/13 00:20:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:24:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	sh_command_expansion_len(t_shell *sh, char *str, int i)
 	char	delim;
 
 	if (str[i] == '?')
-		return (str_size_base(10, sh->prompt.last_exec_succeed) + 1);
+		return (str_size_base(10, ft_atoi(env_search(sh->env, "0"))) + 1);
 	else if (str[i] == '{' && str[i + 1] == '?' && str[i + 2] == '}')
-		return (str_size_base(10, sh->prompt.last_exec_succeed) + 2);
+		return (str_size_base(10, ft_atoi(env_search(sh->env, "0"))) + 2);
 	delim = (str[i] == '{') ? '}' : 0;
 	len = (delim) ? 2 : 1;
 	i += (delim) ? 1 : 0;
@@ -43,12 +43,7 @@ static char	*sh_command_expansion_val(t_shell *sh, t_env *env, char *str)
 	char *tmp;
 
 	tmp = NULL;
-	if (ft_strcmps(str, "?") == 0)
-	{
-		ft_strdel(&str);
-		return (ft_strjoinf(ft_strjoinf("\"",
-		ft_itoa(sh->prompt.last_exec_succeed), 2), "\"", 1));
-	}
+	(void)sh;
 	tmp = (env_search(env, str))
 		? ft_strdups(env_search(env, str))
 		: ft_strdup("");

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   ini.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 23:48:55 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/18 11:59:07 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/18 12:31:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_read(t_shell *sh)
+void		env_initialize_local(t_shell *sh)
 {
-	sh_print_prompt(sh);
-	while (TRUE)
-	{
-		if (read(0, sh->read->line, LINE_SIZE - 1) == -1)
-			break ;
-		if (sh->read->line[0] == 4 && !sh->modes.multiline
-		&& sh->buffer.display_len + sh->buffer.dshift)
-			sh_delete_current_char(sh);
-		else if (sh->read->line[0] == 4 && !sh->modes.multiline)
-			break ;
-		sh_read_dispatcher(sh);
-		ft_bzero(sh->read->line, LINE_SIZE);
-	}
+	sh_env_init_home(sh);
+	sh_env_init_config(sh);
+	sh_env_init_histfile(sh);
+	sh_env_init_ppid(sh);
+	sh_env_init_ps(sh);
+	sh_env_init_pwd(sh);
+	sh_env_init_shlvl(sh);
+	sh_env_init_specials(sh);
+	sh_env_init_term(sh);
 }
