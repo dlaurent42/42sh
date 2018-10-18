@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/17 19:33:17 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/18 12:34:23 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,13 +113,22 @@ SRC			=	shell.c														\
 				structures/environment/delete.c								\
 				structures/environment/hash.c								\
 				structures/environment/initialize.c							\
-				structures/environment/initialize_local.c					\
 				structures/environment/insert.c								\
 				structures/environment/key_check.c							\
 				structures/environment/local_to_public.c					\
 				structures/environment/new.c								\
 				structures/environment/search.c								\
 				structures/environment/utils.c								\
+				structures/environment/ini/config.c							\
+				structures/environment/ini/histfile.c						\
+				structures/environment/ini/home.c							\
+				structures/environment/ini/ini.c							\
+				structures/environment/ini/ppid.c							\
+				structures/environment/ini/ps.c								\
+				structures/environment/ini/pwd.c							\
+				structures/environment/ini/shlvl.c							\
+				structures/environment/ini/specials.c						\
+				structures/environment/ini/term.c							\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
@@ -264,6 +273,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
+				@mkdir -p $(OBJ_DIR)/structures/environment/ini
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term

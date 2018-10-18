@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 11:17:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 13:33:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:52:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,23 @@ bool	env_key_is_ok(char *name)
 		i++;
 	}
 	return (TRUE);
+}
+
+bool	env_key_is_protected(char *name)
+{
+	int	i;
+
+	i = 0;
+	if (!name || !name[0] || name[1])
+		return (FALSE);
+	if (name[0] == '@' ||
+		name[0] == '*' ||
+		name[0] == '#' ||
+		name[0] == '?' ||
+		name[0] == '-' ||
+		name[0] == '$' ||
+		name[0] == '!' ||
+		name[0] == '0')
+		return (TRUE);
+	return (FALSE);
 }

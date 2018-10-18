@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 16:43:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 15:38:47 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:03:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static char	sh_alias_add_noequal(t_shell *sh, t_env *env, char *key)
 {
+	if (env_key_is_protected(key))
+		return (sh_alias_error(NULL, NULL, 6, key));
 	if (!env_key_is_ok(key))
 		return (sh_alias_error(NULL, NULL, 2, NULL));
 	if (!env_search(env, key) && env->count + 1 >= env->size)
@@ -33,9 +35,10 @@ static char	sh_alias_add_equal(t_shell *sh, t_env *env, char *arg)
 	bin = sh_is_binary(arg);
 	key = ft_strdups(arg);
 	eq_sym = sh_get_equal_position(key);
-	val = (bin)
-		? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
+	val = (bin) ? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
 	key[eq_sym] = '\0';
+	if (env_key_is_protected(key))
+		return (sh_alias_error(key, val, 7, NULL));
 	if (!env_key_is_ok(key))
 		return (sh_alias_error(key, val, 2, NULL));
 	if (bin && !(obj = bin_search(sh->bin, val)))
