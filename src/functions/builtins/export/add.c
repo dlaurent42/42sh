@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 14:03:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:13:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 		return (sh_export_error(key, val, 3, NULL));
 	if (!env_search(env, key) && env->count + 1 >= env->size)
 		return (sh_export_error(key, val, 4, NULL));
-	(bin)
-		? env_insert(sh, env, key, obj->path)
+	(bin) ? env_insert(sh, env, key, obj->path)
 		: env_insert(sh, env, key, val);
 	env_local_to_public(env, key, val);
 	ft_strdel(&key);
