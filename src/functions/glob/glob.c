@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 23:43:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 00:07:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 */
 
 #include "shell.h"
-{}
+
 char		*sh_glob(char *str)
 {
 	bool	res;

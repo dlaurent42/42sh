@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 23:43:56 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 23:53:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 00:07:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ static bool	sh_glob_cbraces_start_stop(t_cbraces *cbraces)
 	int		i;
 
 	i = -1;
-	while (glob->str[++i] && !(start != -1 && stop != -1))
-		if (((start != -1 || stop != -1) && glob->str[i] == '{')
-		|| (start == -1 && glob->str[i] == '}'))
+	while (cbraces->str[++i] && !(start != -1 && stop != -1))
+		if (((start != -1 || stop != -1) && cbraces->str[i] == '{')
+		|| (start == -1 && cbraces->str[i] == '}'))
 			return (FALSE);
-		else if (glob->str[i] == '{')
+		else if (cbraces->str[i] == '{')
 			start = i;
-		else if (glob->str[i] == '}')
+		else if (cbraces->str[i] == '}')
 			stop = i;
 	if (start != -1 && stop != -1
-	&& sh_glob_brackets_left_right(glob, start + 1, stop - 1))
+	&& sh_glob_brackets_left_right(cbraces, start + 1, stop - 1))
 	{
-		glob->before = ft_strdups(glob->str);
+		glob->before = ft_strdups(cbraces->str);
 		glob->before[start - 1] = '\0';
-		glob->after = ft_strdups(glob->str + stop + 1);
+		glob->after = ft_strdups(cbraces->str + stop + 1);
 		return ((ft_isint(glob->left))
-		? sh_glob_brackets_rp_num(glob) : sh_glob_brackets_rp_alpha(glob));
+		? sh_glob_brackets_rp_num(glob) : sh_glob_brackets_rp_alpha(cbraces));
 	}
 	return (FALSE);
 }
