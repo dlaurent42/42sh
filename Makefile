@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/18 12:34:23 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/18 15:18:05 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -221,7 +221,8 @@ SRC			=	shell.c														\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
-				terminal/signals/resize.c
+				terminal/signals/resize.c									\
+				terminal/signals/stop_acquisition.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

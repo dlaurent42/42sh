@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 17:56:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:24:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	sig_handler(int signo)
 		kill(g_sh->pid, SIGKILL);
 	else if (signo == SIGINT && g_sh->modes.multiline)
 		sh_multilines_close(g_sh);
+	else if (signo == SIGINT && !g_sh->modes.exec)
+		sh_sigint_reset(g_sh);
 }
 
 void		signal_catching(void)

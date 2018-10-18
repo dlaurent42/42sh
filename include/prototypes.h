@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 14:12:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:17:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -478,6 +478,7 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 ** terminal - signals
 */
 void					signal_catching(void);
+void					sh_sigint_reset(t_shell *sh);
 void					sh_window_resize(t_shell *sh);
 
 #endif
