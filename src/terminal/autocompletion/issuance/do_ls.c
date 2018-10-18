@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:47:00 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:10:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ static t_obj		*get_directory_contents(t_obj *obj)
 	read_dir.obj = obj;
 	read_dir.head = NULL;
 	if (!(read_dir.directory = opendir(read_dir.obj->data.parent_path)))
-	{
-		ft_printf("ft_ls: %s: Permission denied\n", read_dir.obj->data.str);
 		return (NULL);
-	}
 	while ((read_dir.file = readdir(read_dir.directory)))
 	{
 		if (!read_directory(&read_dir))
