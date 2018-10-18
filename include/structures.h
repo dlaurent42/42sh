@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 18:55:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:10:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef struct			s_prompt
 	int					len_mod;
 	char				*content;
 	char				*location;
-	char				last_exec_succeed;
 }						t_prompt;
 
 typedef struct			s_read

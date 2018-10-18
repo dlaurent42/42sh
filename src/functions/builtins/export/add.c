@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 13:09:59 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 15:41:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:03:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	sh_export_add_noequal(t_shell *sh, t_env *env, char *key)
 {
 	char	*value;
 
+	if (env_key_is_protected(key))
+		return (sh_export_error(NULL, NULL, 6, key));
 	if (!env_key_is_ok(key))
 		return (sh_export_error(NULL, NULL, 2, NULL));
 	if (env_search_public(env, key))
@@ -38,9 +40,10 @@ static char	sh_export_add_equal(t_shell *sh, t_env *env, char *arg)
 	bin = sh_is_binary(arg);
 	key = sh_parse_quotes(ft_strdups(arg));
 	eq_sym = sh_get_equal_position(key);
-	val = (bin)
-		? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
+	val = (bin) ? ft_strdups(arg + bin) : ft_strdups(ft_strchrsp(key, '='));
 	key[eq_sym] = '\0';
+	if (env_key_is_protected(key))
+		return (sh_export_error(key, val, 7, NULL));
 	if (!env_key_is_ok(key))
 		return (sh_export_error(key, val, 2, NULL));
 	if (bin && !(obj = bin_search(sh->bin, val)))

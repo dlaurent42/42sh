@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 23:43:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/18 13:52:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ void					command_export_to(t_shell *sh, t_env *env, char *file);
 */
 long					env_get_hash(const char *sh, const int b, const int a);
 bool					env_key_is_ok(char *name);
+bool					env_key_is_protected(char *name);
 bool					env_is_public(t_env *env, char *str);
 bool					env_is_local(t_env *env, char *str);
 bool					env_display(t_env *env, char *keyword);
@@ -298,6 +299,15 @@ void					env_insert_local(
 							char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
 void					env_initialize_local(t_shell *sh);
+void		            sh_env_init_config(t_shell *sh);
+void		            sh_env_init_histfile(t_shell *sh);
+void		            sh_env_init_home(t_shell *sh);
+void		            sh_env_init_ppid(t_shell *sh);
+void		            sh_env_init_ps(t_shell *sh);
+void		            sh_env_init_pwd(t_shell *sh);
+void		            sh_env_init_shlvl(t_shell *sh);
+void		            sh_env_init_specials(t_shell *sh);
+void		            sh_env_init_term(t_shell *sh);
 void					env_local_to_public(t_env *env, char *key, char *value);
 void					env_insert_item_into_array(t_env *e, char *k, char *v);
 void					env_delete_autocompletion_array(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:11:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 22:52:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:23:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ char		sh_env_exec(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	ft_strdel(&str);
 	env_delete(env);
 	bin_delete(bin);
-	return (sh->prompt.last_exec_succeed);
+	return (ft_atoi(env_search(sh->env, "?")));
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:55 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/04/04 12:40:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:46:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_atoi(const char *str)
 
 	sign = 1;
 	result = 0;
+	if (!str)
+		return (0);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '+')
