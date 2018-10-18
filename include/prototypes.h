@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 13:52:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:12:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,11 @@ void					env_insert(t_shell *sh, t_env *env, char *k, char *v);
 void					env_insert_local(
 							t_shell *sh,
 							t_env *e,
+							char *k,
+							char *v);
+void					env_insert_protected(
+							t_shell *sh,
+							t_env *env,
 							char *k,
 							char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
