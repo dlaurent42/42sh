@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/17 23:18:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/18 14:55:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool			content_is_hist_sed(char *content)
 	return (is_sed);
 }
 
-static char				*get_substitution(t_shell *sh)
+static char			*get_substitution(t_shell *sh)
 {
 	char			*needle;
 	char			*content;
@@ -51,7 +51,7 @@ static char				*get_substitution(t_shell *sh)
 	return (needle);
 }
 
-static void				get_needles(t_shell *sh, char **needle,
+static void			get_needles(t_shell *sh, char **needle,
 		char **needle_in_content)
 {
 	char			*content;
@@ -88,8 +88,7 @@ static void			exchange_cmd(t_shell *sh, char **strings)
 	sh_move_end(sh);
 }
 
-
-void				auto_hist_sed(t_shell *sh, bool *status)//make bool
+void				auto_hist_sed(t_shell *sh, bool *status)
 {
 	char			**strings;
 	char			*content;
