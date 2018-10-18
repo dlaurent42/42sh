@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 18:55:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 20:53:30 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,6 @@ typedef struct			s_ac
 {
 	char				**argv;
 
-	char				*pre_file_name;
 	char				*del_file_name;
 	char				*file_name;
 	int					file_name_len;

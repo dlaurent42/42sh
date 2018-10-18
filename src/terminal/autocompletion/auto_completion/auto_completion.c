@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/15 18:49:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/18 20:52:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 		sh->ac->auto_mode = (*str != '.') ? AUTO_BIN : AUTO_REG;
 		if (*str == '$' && (sh->ac->auto_mode = AUTO_ENV) == AUTO_ENV)
 			str++;
-		sh->ac->pre_file_name = ft_strnew(0);
 	}
 	else
 	{
@@ -31,11 +30,8 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 			str++;
 		else
 			sh->ac->auto_mode = AUTO_REG;
-		sh->ac->pre_file_name = (ft_strrchr(str, '/'))
-			? ft_strndup(content, (ft_strrchr(str, '/') - content) + 1)
-			: ft_strndup(content, (str - content));
 	}
-	if (!contains_printable_characters(content) || !sh->ac->pre_file_name
+	if (!contains_printable_characters(content)
 			|| sh->ac->auto_mode == AUTO_NON)
 		return (NULL);
 	return (str);
