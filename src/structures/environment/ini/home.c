@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_local.c                                 :+:      :+:    :+:   */
+/*   home.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/16 19:31:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 11:19:18 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/18 11:07:03 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/18 11:12:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	env_initialize_shlvl(t_shell *sh)
+void		sh_env_init_home(t_shell *sh)
 {
-	char		*shlvl;
+	t_passwd	*pw;
 
-	shlvl = (env_search(sh->env, "SHLVL"))
-		? ft_itoa(ft_atoi(env_search(sh->env, "SHLVL")) + 1)
-		: ft_strdup("1");
-	env_insert(sh, sh->env, "SHLVL", shlvl);
-	ft_strdel(&shlvl);
-}
-
-void		env_initialize_local(t_shell *sh)
-{
-	env_initialize_localfiles(sh);
-	env_initialize_paths(sh);
-	env_initialize_term(sh);
-	env_initialize_shlvl(sh);
+	if (env_search(sh->env, "HOME") || sh->env->count + 1 >= sh->env->size)
+		return ;
+	pw = getpwuid(getuid());
+	env_insert(sh, sh->env, "HOME", pw->pw_dir);
 }
