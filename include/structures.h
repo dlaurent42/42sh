@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 23:29:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/20 18:55:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,18 @@ typedef struct			s_search
 	char				content[ARG_MAX + 1];
 	t_cmd				*match;
 }						t_search;
+
+typedef struct			s_cbraces
+{
+	int					start;
+	int					stop;
+	char				*str;
+	char				*before;
+	char				*after;
+	char				*left;
+	char				*right;
+
+}						t_cbraces;
 
 typedef struct			s_data
 {

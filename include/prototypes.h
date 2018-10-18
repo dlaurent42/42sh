@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 15:17:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 22:15:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,12 @@ int						sh_is_binary(char *arg);
 bool					sh_is_option_string(char *s, char *opt);
 char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
+
+/*
+** functions - glob
+*/
+char					*sh_glob(char *str);
+bool					sh_glob_brackets(t_glob *glob);
 
 /*
 ** functions - exec
