@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 10:16:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 12:49:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 14:24:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ static char	*sh_command_expansion_val(t_shell *sh, t_env *env, char *str)
 
 	tmp = NULL;
 	(void)sh;
-	if (ft_strcmps(str, "?") == 0)
-	{
-		ft_strdel(&str);
-		return (ft_strjoinf(ft_strjoins("\"", env_search(env, "0")), "\"", 1));
-	}
 	tmp = (env_search(env, str))
 		? ft_strdups(env_search(env, str))
 		: ft_strdup("");
