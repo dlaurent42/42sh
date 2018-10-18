@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 20:53:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/18 22:28:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,8 @@ typedef struct			s_ac
 	char				auto_mode;
 
 	unsigned char		at_mode	: 1;
-	unsigned char		fill	: 7;
+	unsigned char		hidden	: 1;
+	unsigned char		fill	: 6;
 
 	int					len_file_name;
 	int					items_to_display;
