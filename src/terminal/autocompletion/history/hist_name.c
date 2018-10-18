@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 14:16:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 19:44:09 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_cmd				*get_cmd_by_content(t_shell *sh, char *content)
+static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
 {
 	int				len;
 	t_cmd			*cmd;

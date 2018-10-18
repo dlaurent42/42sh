@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:32:00 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/15 18:49:07 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 
 	if (!(str = ft_strrchr(move_past_leading_spaces(content), ' ')))
 	{
-		str = content;
+		str = move_past_leading_spaces(content);
 		sh->ac->auto_mode = (*str != '.') ? AUTO_BIN : AUTO_REG;
 		if (*str == '$' && (sh->ac->auto_mode = AUTO_ENV) == AUTO_ENV)
 			str++;

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:51:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void				auto_display(t_shell *sh, t_obj *obj)
 	x = sh->cursor.x;
 	y = sh->cursor.y;
 	auto_clear_selection_screen(sh);
-	ft_putchar('\n');
+	if (sh->cursor.x != 0)
+		ft_putchar('\n');
 	sh->ac->number_of_printed_rows = 1;
 	print_display(sh, obj, calculate_offset(sh));
 	rows = sh->ac->number_of_printed_rows;

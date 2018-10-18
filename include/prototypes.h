@@ -374,6 +374,7 @@ bool					auto_history(t_shell *sh);
 void					auto_hist_double(t_shell *sh, bool *status);
 void					auto_hist_number(t_shell *sh, bool *status);
 void					auto_hist_name(t_shell *sh, bool *status);
+void					auto_hist_sed(t_shell *sh, bool *status);
 
 void					auto_sort(t_obj *obj);
 

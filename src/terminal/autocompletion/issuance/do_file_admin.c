@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/18 11:41:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void			lock_files(t_shell *sh, t_obj *obj)
 		}
 		if (sh->ac->auto_mode == AUTO_ENV && !obj->data.env)
 			obj->data.no_file = 1;
-		if (!ft_strcmps(obj->data.str, "."))
+		if (!ft_strcmps(obj->data.str, ".") || !ft_strcmps(obj->data.str, ".."))
 			obj->data.no_file = 1;
 		obj = obj->next;
 	}

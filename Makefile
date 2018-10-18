@@ -167,6 +167,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/history/history.c					\
 				terminal/autocompletion/history/hist_double.c				\
 				terminal/autocompletion/history/hist_name.c					\
+				terminal/autocompletion/history/hist_sed.c					\
 				terminal/autocompletion/history/hist_number.c				\
 				terminal/autocompletion/sort/sort.c							\
 				terminal/cursor/move_down.c									\
