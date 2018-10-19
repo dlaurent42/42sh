@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 00:07:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 10:49:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@
 
 char		*sh_glob(char *str)
 {
-	bool	res;
-	t_glob	*glob;
-
-	ft_printf("Entering glob with [%s]\n", str);
-	if (!str || !(glob = (t_glob *)ft_memalloc(sizeof(t_glob))))
-		return (str);
-	glob->ini = str;
-	glob->new = ft_strdups(str);
-	res = true;
-	sh_glob_brackets(glob);
-	ft_printf("Exiting glob with [%s]\n", glob->new);
-	return (glob->new);
+	str = sh_glob_cbraces(str);
+	return (str);
 }

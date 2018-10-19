@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 22:15:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 00:42:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ char					*sh_parse_quotes(char *arg);
 ** functions - glob
 */
 char					*sh_glob(char *str);
-bool					sh_glob_brackets(t_glob *glob);
+char					*sh_glob_cbraces(char *str);
 
 /*
 ** functions - exec

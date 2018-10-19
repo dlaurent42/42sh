@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/18 22:16:06 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/19 10:46:34 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ SRC			=	shell.c														\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/exec/run.c										\
 				functions/glob/glob.c										\
-				functions/glob/brackets.c									\
+				functions/glob/cbraces.c									\
 				functions/lexer/lexer.c										\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\
