@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/20 18:55:54 by dlaurent         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/19 13:25:17 by dlaurent         ###   ########.fr       */
+>>>>>>> 2deb506... [feature] globing curly braces handling {a,b}
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +166,7 @@ typedef struct			s_cbraces
 	char				*after;
 	char				*left;
 	char				*right;
+	char				**split;
 
 }						t_cbraces;
 
