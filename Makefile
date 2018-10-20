@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/19 10:46:34 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/19 15:58:21 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,13 @@ SRC			=	shell.c														\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/exec/run.c										\
 				functions/glob/glob.c										\
-				functions/glob/cbraces.c									\
+				functions/glob/cbraces/cbraces.c							\
+				functions/glob/cbraces/dot.c								\
+				functions/glob/cbraces/list.c								\
+				functions/glob/utils/escape.c								\
+				functions/glob/utils/inject.c								\
+				functions/glob/utils/repatriate.c							\
+				functions/glob/utils/strsplit.c								\
 				functions/lexer/lexer.c										\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\
@@ -270,6 +276,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
 				@mkdir -p $(OBJ_DIR)/functions/exec
 				@mkdir -p $(OBJ_DIR)/functions/glob
+				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
+				@mkdir -p $(OBJ_DIR)/functions/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils

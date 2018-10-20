@@ -6,23 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:04:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 14:23:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/20 17:25:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static void	sh_glob_cbraces_rp_alpha_join(t_cbraces *cb, char min, int pos)
-{
-	if (cb->str)
-		cb->str = ft_strjoinf(cb->str, " ", 1);
-	cb->str = ft_strjoinf(cb->str, cb->before + pos, 1);
-	cb->str = (min > 90 && min < 97)
-		? ft_strjoinf(cb->str, ft_strjoins("\\", &min), 3)
-		: ft_strjoinf(cb->str, &(min), 1);
-	cb->str = ft_strjoinf(cb->str, cb->after, 1);
-	cb->str = sh_glob_cbraces(cb->str);
-}
 
 static bool	sh_glob_cbraces_rp_alpha(t_cbraces *cb)
 {
@@ -42,7 +30,15 @@ static bool	sh_glob_cbraces_rp_alpha(t_cbraces *cb)
 	ft_strdel(&cb->str);
 	while (min <= max)
 	{
-		sh_glob_cbraces_rp_alpha_join(cb, min, pos);
+		if (cb->str)
+			cb->str = ft_strjoinf(cb->str, " ", 1);
+		cb->str = ft_strjoinf(cb->str, cb->before + pos, 1);
+		cb->str = (min > 90 && min < 97)
+			? ft_strjoinf(cb->str, ft_strjoins("\\", &min), 3)
+			: ft_strjoinf(cb->str, &(min), 1);
+		cb->str = ft_strjoinf(cb->str, cb->after, 1);
+		ft_printf("... expanded: [%s]\n", cb->str);
+		cb->str = sh_glob_cbraces(cb->str);
 		min++;
 	}
 	cb->str = ft_strjoinf(ft_strsub(cb->before, 0, pos), cb->str, 3);
@@ -82,12 +78,24 @@ void		sh_glob_cbraces_dots_expand(t_cbraces *cb)
 {
 	cb->before = ft_strsub(cb->str, 0, cb->start);
 	cb->after = ft_strdups(cb->str + cb->stop + 1);
+	ft_printf("... before: [%s]\n... after: [%s]\n", cb->before, cb->after);
 	(ft_isint(cb->left)
 		? sh_glob_cbraces_rp_num(cb)
 		: sh_glob_cbraces_rp_alpha(cb));
 }
 
-bool		sh_glob_cbraces_dots(t_cbraces *cb)
+static char	sh_glob_cbraces_dots_particular(t_cbraces *cb, char *substr)
+{
+	char	*str;
+
+	str = sh_glob_cbraces(substr);
+	ft_printf("new str: %s\n", str);
+	cb->before = ft_strsub(cb->str, 0, cb->start);
+	cb->after = ft_strdups(cb->str + cb->stop + 1);
+	return (-1);
+}		
+
+char		sh_glob_cbraces_dots(t_cbraces *cb)
 {
 	int		i;
 	char	*substr;
@@ -100,14 +108,19 @@ bool		sh_glob_cbraces_dots(t_cbraces *cb)
 	{
 		if (substr[i] == '.' && substr[i + 1] == '.' && substr[i + 2])
 		{
-			if (cb->left)
-				cb->left[i] = '\0';
+			(cb->left) ? cb->left[i] = '\0' : 0;
 			cb->right = ft_strdups(substr + i + 2);
+			if (sh_glob_cbraces_check(cb->left) || sh_glob_cbraces_check(cb->right))
+			{
+				ft_printf("particular case\n");
+				return (sh_glob_cbraces_dots_particular(cb, substr));
+			}
 			break ;
 		}
 		i++;
 	}
 	ft_strdel(&substr);
+	ft_printf("... DOTS: left: [%s]\n... right: [%s]\n", cb->left, cb->right);
 	return (cb->left && cb->right
 	&& ((ft_isint(cb->left) && ft_isint(cb->right))
 	|| (ft_isalpha(cb->left[0]) && !cb->left[1]

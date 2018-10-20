@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 14:00:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 19:24:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@
 **			[a-d]	can match a, b, c or d
 **			[!a-d]	cannot match a, b, c or d
 **			[^a-d]	??????????????????????
-**		{1..9}	List expand '1 2 3 4 5 6 7 8 9'
-**		{a,b}	List expand 'a b'
+**		{}	Curly braces
+**			ok-{1..9}	   -> 1 2 3 4 5 6 7 8 9
+**			ok-{a,b}	   -> a b
+**			{{A,b}..2} -> \{A..2\} \{b..2\}
+**			ok-{{A..b},2} -> A B C D E F G H I J K L M NO P Q R S T U V W X Y
+**						  Z \[ \\ \] \^ _ \` a b 2
+**			ok-{{A,b},c} -> A b c
 */
 
 /*
@@ -63,26 +68,11 @@
 
 #include "shell.h"
 
-static char	sh_glob_parse(char	*str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\\')
-		{
-
-		}
-	}
-}
-
 char		*sh_glob(char *str)
 {
 	char	*initial_string;
 
 	initial_string = ft_strdups(str);
-	str = sh_glob_parse(str);
 	str = sh_glob_cbraces(str);
 	// if (sh_glob_has_pattern(str) == TRUE)
 	// {

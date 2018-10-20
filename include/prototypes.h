@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 00:42:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/20 16:47:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,26 @@ char					*sh_parse_quotes(char *arg);
 ** functions - glob
 */
 char					*sh_glob(char *str);
+
+/*
+** functions - glob - cbraces
+*/
 char					*sh_glob_cbraces(char *str);
+bool					sh_glob_cbraces_check(char *str);
+char					sh_glob_cbraces_dots(t_cbraces *cb);
+void					sh_glob_cbraces_dots_expand(t_cbraces *cb);
+bool					sh_glob_cbraces_list(t_cbraces *cb);
+void					sh_glob_cbraces_expand(t_cbraces *cb);
+
+/*
+** functions - glob - utils
+*/
+int						glob_strcountif(char *str, char c);
+char					**glob_strsplit(char *s, char c);
+bool					glob_is_esc(char *str, int i);
+bool					glob_need_esc(char c);
+char					*sh_glob_inject(char *str, char *injection, int i);
+void					sh_glob_repatriate(char *str, int i, int len);
 
 /*
 ** functions - exec

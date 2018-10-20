@@ -6,80 +6,104 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:02:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 15:04:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/19 19:20:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char		let_n_char(char const *s, char c, size_t id_w, size_t id_c)
+static bool		in_cbrace(char *s, int position)
 {
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (s[i] && i < position)
+	{
+		if (s[i] == '{')
+			count++;
+		else if (s[i] == '}')
+			count--;
+		i++;
+	}
+	return (count > 0);
+}
+
+static char		let_n_char(char *s, char c, size_t id_w, size_t id_c)
+{
+	int		i;
 	size_t	n_words;
 	size_t	n_chars;
 
+	i = 0;
 	n_words = 0;
 	n_chars = 0;
-	while (*s)
+	while (s[i])
 	{
-		while (*s == c)
-			s++;
-		if (*s)
+		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+			i++;
+		if (s[i])
 			n_words++;
-		while (*s != c && *s)
+		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
 		{
 			if (id_w == n_words)
 			{
 				n_chars++;
 				if (n_chars == id_c)
-					return (*s);
+					return (s[i]);
 			}
-			s++;
+			i++;
 		}
 	}
 	return (0);
 }
 
-static size_t	get_n_chars(char const *s, char c, size_t id_word)
+static size_t	get_n_chars(char *s, char c, size_t id_word)
 {
+	int		i;
 	size_t	n_words;
 	size_t	n_chars;
 
+	i = 0;
 	n_words = 0;
 	n_chars = 0;
-	while (*s)
+	while (s[i])
 	{
-		while (*s == c)
-			s++;
-		if (*s)
+		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+			i++;
+		if (s[i])
 			n_words++;
-		while (*s != c && *s)
+		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
 		{
 			if (id_word == n_words)
 				n_chars++;
-			s++;
+			i++;
 		}
 	}
 	return (n_chars);
 }
 
-static size_t	get_n_words(char const *s, char c)
+static size_t	get_n_words(char *s, char c)
 {
+	int		i;
 	size_t	n;
 
+	i = 0;
 	n = 0;
-	while (*s)
+	while (s[i])
 	{
-		while (*s == c)
-			s++;
-		if (*s)
+		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+			i++;
+		if (s[i])
 			n++;
-		while (*s && *s != c)
-			s++;
+		while (s[i] && (s[i] != c || glob_is_esc(s, i) ||  in_cbrace(s, i)))
+			i++;
 	}
 	return (n);
 }
 
-char			**glob_strsplit(char const *s, char c)
+char			**glob_strsplit(char *s, char c)
 {
 	char	**ptr;
 	size_t	i;
