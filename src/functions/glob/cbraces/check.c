@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cbraces.c                                          :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/18 23:43:56 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 18:12:57 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/20 18:08:55 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/20 18:37:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	*sh_glob_cbraces_del(t_cbraces *cb, char *str)
+bool		sh_glob_cbraces_check(char *str)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	bool		res;
+	t_cbraces	*cb;
 
 	i = 0;
-	tmp = ft_strdups(cb->str);
-	ft_strdel(&str);
+	res = FALSE;
+	if (glob_strcountif(str, '{') == 0 || glob_strcountif(str, '}') == 0
+	|| !(cb = (t_cbraces *)ft_memalloc(sizeof(t_cbraces))))
+		return (0);
+	cb->start = -1;
+	cb->stop = -1;
+	if ((!(cb->str = ft_strdups(str)) || sh_glob_cbraces_start_stop(cb)))
+	{
+		if (sh_glob_cbraces_dots(cb))
+			res = TRUE;
+		else if (sh_glob_cbraces_list(cb))
+			res = TRUE;
+	}
 	ft_strdel(&cb->str);
 	ft_strdel(&cb->left);
 	ft_strdel(&cb->right);
@@ -33,24 +45,5 @@ static char	*sh_glob_cbraces_del(t_cbraces *cb, char *str)
 		}
 	(cb->split) ? free(cb->split) : 0;
 	(cb) ? free(cb) : 0;
-	return (tmp);
-}
-
-char		*sh_glob_cbraces(char *str)
-{
-	t_cbraces	*cb;
-
-	if (glob_strcountif(str, '{') == 0 || glob_strcountif(str, '}') == 0
-	|| !(cb = (t_cbraces *)ft_memalloc(sizeof(t_cbraces))))
-		return (str);
-	cb->start = -1;
-	cb->stop = -1;
-	if ((!(cb->str = ft_strdups(str)) || sh_glob_cbraces_start_stop(cb)))
-	{
-		if (sh_glob_cbraces_list(cb) > 0)
-			sh_glob_cbraces_expand(cb);
-		else if (sh_glob_cbraces_dots(cb) > 0)
-			sh_glob_cbraces_dots_expand(cb);
-	}
-	return (sh_glob_cbraces_del(cb, str));
+	return (res);
 }

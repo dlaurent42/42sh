@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/19 15:58:21 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/20 18:13:27 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,10 @@ SRC			=	shell.c														\
 				functions/exec/run.c										\
 				functions/glob/glob.c										\
 				functions/glob/cbraces/cbraces.c							\
+				functions/glob/cbraces/check.c								\
 				functions/glob/cbraces/dot.c								\
 				functions/glob/cbraces/list.c								\
+				functions/glob/cbraces/start_and_stop.c						\
 				functions/glob/utils/escape.c								\
 				functions/glob/utils/inject.c								\
 				functions/glob/utils/repatriate.c							\

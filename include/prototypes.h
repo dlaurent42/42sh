@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 16:47:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/20 18:35:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ char					*sh_glob(char *str);
 */
 char					*sh_glob_cbraces(char *str);
 bool					sh_glob_cbraces_check(char *str);
+bool					sh_glob_cbraces_start_stop(t_cbraces *cb);
 char					sh_glob_cbraces_dots(t_cbraces *cb);
 void					sh_glob_cbraces_dots_expand(t_cbraces *cb);
 bool					sh_glob_cbraces_list(t_cbraces *cb);

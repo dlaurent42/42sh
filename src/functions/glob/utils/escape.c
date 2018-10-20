@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:10:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 17:33:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/20 17:51:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool		glob_is_esc(char *str, int i)
 	i = tmp;
 	while (--i >= 0 && str[i] == '\\')
 		count++;
-	ft_printf("........ count esc : %d\n", count);
 	return (count % 2);
 }
 
