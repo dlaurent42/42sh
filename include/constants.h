@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 12:10:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 17:25:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,11 @@
 # define BIN_MAX_SIZE	98317
 # define BIN_PRIME_1	53
 # define BIN_PRIME_2	97
+
+/*
+** globbing
+*/
+# define GLOB_MAX_PATHS	125
+# define GLOB_ASCII_MAX	96
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 10:59:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 17:51:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 19:20:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*sh_glob_inject(char *str, char *injection, int i)
 	char	*right;
 
 	j = 0;
+	if (!str)
+		return (ft_strdups(injection));
 	right = ft_strdups(str + i);
 	left = ft_strsub(str, 0, i);
 	ft_strdel(&str);

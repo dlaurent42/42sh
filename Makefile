@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 15:57:37 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/10/22 16:58:10 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,8 +84,13 @@ SRC			=	shell.c														\
 				functions/glob/cbraces/dot.c								\
 				functions/glob/cbraces/list.c								\
 				functions/glob/cbraces/start_and_stop.c						\
+				functions/glob/pattern/pattern.c							\
+				functions/glob/pattern/parse/expand_ranges.c				\
+				functions/glob/pattern/parse/remove_wildcards.c				\
 				functions/glob/utils/escape.c								\
 				functions/glob/utils/inject.c								\
+				functions/glob/utils/match.c								\
+				functions/glob/utils/range.c								\
 				functions/glob/utils/repatriate.c							\
 				functions/glob/utils/strsplit.c								\
 				functions/lexer/lexer.c										\
@@ -291,6 +296,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/exec
 				@mkdir -p $(OBJ_DIR)/functions/glob
 				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
+				@mkdir -p $(OBJ_DIR)/functions/glob/pattern
+				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/parse
 				@mkdir -p $(OBJ_DIR)/functions/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:02:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 19:20:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 16:04:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static size_t	get_n_words(char *s, char c)
 			i++;
 		if (s[i])
 			n++;
-		while (s[i] && (s[i] != c || glob_is_esc(s, i) ||  in_cbrace(s, i)))
+		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
 			i++;
 	}
 	return (n);

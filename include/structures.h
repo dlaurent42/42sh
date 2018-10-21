@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 14:39:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 18:31:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,31 @@ typedef struct			s_cbraces
 	char				*left;
 	char				*right;
 	char				**split;
-
 }						t_cbraces;
+
+typedef struct			s_path
+{
+	char				path[PATH_MAX + 1];
+	struct s_path		*next;
+	struct s_path		*head;
+}						t_path;
+
+typedef struct			s_filesystem
+{
+	t_path				*paths;
+	char				**strsplit;
+	char				*lst[GLOB_ASCII_MAX];
+	int					*lst_idx;
+}						t_filesystem;
+
+typedef struct			s_glob
+{
+	bool				last_is_path;
+	char				*initial_str;
+	char				*parsed_str;
+	char				**strsplit;
+	t_filesystem		*fs;
+}						t_glob;
 
 typedef struct			s_data
 {

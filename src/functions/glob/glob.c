@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 19:24:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 19:19:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,12 @@
 
 char		*sh_glob(char *str)
 {
-	char	*initial_string;
+	int		i;
+	char	*cbraces;
+	char	*expansion;
 
-	initial_string = ft_strdups(str);
-	str = sh_glob_cbraces(str);
-	// if (sh_glob_has_pattern(str) == TRUE)
-	// {
-	// 	ft_strdel(&initial_string);
-	// 	return (str);
-	// }
-	// else
-	// {
-	// 	ft_strdel(&str);
-	// 	return (initial_string);
-	// }
-	ft_strdel(&initial_string);
-	return (str);
+	i = 0;
+	cbraces = sh_glob_cbraces(str);
+	expansion = sh_glob_pattern(str);
+	return (expansion);
 }

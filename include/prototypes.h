@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 15:33:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/22 16:58:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,13 +215,22 @@ bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
 
 /*
+** functions - glob - patterns
+*/
+char					*sh_glob_pattern(char *str);
+char					*sh_glob_expand_ranges(char *str);
+char					*glob_remove_wildcars(char *str);
+
+/*
 ** functions - glob - utils
 */
 int						glob_strcountif(char *str, char c);
-char					**glob_strsplit(char *s, char c);
+int						glob_match(char *s1, char *s2);
 bool					glob_is_esc(char *str, int i);
 bool					glob_need_esc(char c);
+bool					glob_is_in_range(char *str, int pos);
 char					*sh_glob_inject(char *str, char *injection, int i);
+char					**glob_strsplit(char *s, char c);
 void					sh_glob_repatriate(char *str, int i, int len);
 
 /*
