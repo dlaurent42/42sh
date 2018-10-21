@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 17:10:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 18:41:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,31 @@ static t_cmd		*get_cmd_by_content(t_shell *sh, char *content)
 	return (cmd);
 }
 
-void				auto_hist_name(t_shell *sh, bool *status)
+void				swap_content(t_shell *sh, char *ptr_to_exc, t_cmd *cmd)
 {
 	int				number_of_deletions;
-	int				offset;
 	char			*track;
+
+	number_of_deletions = ft_strlens(ptr_to_exc);
+	track = sh->buffer.content + sh->buffer.ushift;
+	sh_move_home(sh);
+	while (track++ != ptr_to_exc)
+		sh_move_right(sh);
+	while (number_of_deletions--)
+		sh_delete_current_char(sh);
+	sh_print_str(sh, cmd->content);
+	sh_move_end(sh);
+}
+
+void				auto_hist_name(t_shell *sh, bool *status)
+{
+	int				offset;
 	char			*ptr_to_exc;
 	t_cmd			*cmd;
 
 	offset = 0;
 	while ((ptr_to_exc = ft_strstr(
-		sh->buffer.content + sh->buffer.ushift + offset++, "!")))
+					sh->buffer.content + sh->buffer.ushift + offset++, "!")))
 	{
 		if (!*(ptr_to_exc + 1))
 			return ;
@@ -42,15 +56,7 @@ void				auto_hist_name(t_shell *sh, bool *status)
 				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
 		{
 			auto_hist_new_prompt(sh, status);
-			number_of_deletions = ft_strlens(ptr_to_exc);
-			track = sh->buffer.content + sh->buffer.ushift;
-			sh_move_home(sh);
-			while (track++ != ptr_to_exc)
-				sh_move_right(sh);
-			while (number_of_deletions--)
-				sh_delete_current_char(sh);
-			sh_print_str(sh, cmd->content);
-			sh_move_end(sh);
+			swap_content(sh, ptr_to_exc, cmd);
 		}
 	}
 }

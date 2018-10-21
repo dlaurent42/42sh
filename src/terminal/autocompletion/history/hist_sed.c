@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/21 17:47:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 18:35:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void			exchange_cmd(t_shell *sh, char **strings, bool *status)
 
 bool				auto_hist_sed(t_shell *sh, bool *status)
 {
-	char			**strings;
+	char			**strs;
 	char			*content;
 	bool			success;
 
@@ -99,28 +99,20 @@ bool				auto_hist_sed(t_shell *sh, bool *status)
 	content = sh->buffer.content + sh->buffer.ushift;
 	if (*content && *content == '^')
 	{
-		if (!content_is_hist_sed(content))
-		{
-			*status = true;
+		if (!content_is_hist_sed(content) && (*status = true))
 			return (success);
-		}
-		if (!(strings = (char **)malloc(sizeof(char *) * 3)))
-		{
-			*status = true;
+		if (!(strs = (char **)malloc(sizeof(char *) * 3))
+				&& (*status = true))
 			return (success);
-		}
-		get_needles(sh, &strings[0], &strings[1]);
-		strings[2] = get_substitution(sh);
-		if (strings[0] && strings[1] && strings[2])
-		{
-			exchange_cmd(sh, strings, status);
-			success = true;
-		}
+		get_needles(sh, &strs[0], &strs[1]);
+		strs[2] = get_substitution(sh);
+		if (strs[0] && strs[1] && strs[2] && (success = true))
+			exchange_cmd(sh, strs, status);
 		else
 			*status = true;
-		free(strings[0]);
-		free(strings[2]);
-		free(strings);
+		free(strs[0]);
+		free(strs[2]);
+		free(strs);
 	}
 	return (success);
 }
