@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 15:16:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 15:22:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 16:27:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_sigint_reset(t_shell *sh)
+void		sh_sigint_reset(t_shell *sh, char *last_return)
 {
 	sh_move_end(sh);
 	ft_putchar('\n');
@@ -27,7 +27,7 @@ void		sh_sigint_reset(t_shell *sh)
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
 	if (env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size)
-		env_insert_protected(sh, sh->env, "?", "1");
+		env_insert_protected(sh, sh->env, "?", last_return);
 	sh_set_prompt(sh);
 	sh_print_prompt(sh);
 }
