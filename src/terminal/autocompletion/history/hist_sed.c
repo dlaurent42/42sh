@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/18 14:55:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:19:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,12 @@ static void			get_needles(t_shell *sh, char **needle,
 ** strings[3] == substitution
 */
 
-static void			exchange_cmd(t_shell *sh, char **strings)
+static void			exchange_cmd(t_shell *sh, char **strings, bool *status)
 {
 	char			*track;
 	int				number_of_deletions;
 
+	auto_hist_new_prompt(sh, status);
 	sh_delete_all(sh);
 	sh_print_str(sh, sh->cmd->content);
 	sh_move_home(sh);
@@ -88,7 +89,7 @@ static void			exchange_cmd(t_shell *sh, char **strings)
 	sh_move_end(sh);
 }
 
-void				auto_hist_sed(t_shell *sh, bool *status)
+bool				auto_hist_sed(t_shell *sh, bool *status)
 {
 	char			**strings;
 	char			*content;
@@ -96,15 +97,20 @@ void				auto_hist_sed(t_shell *sh, bool *status)
 	content = sh->buffer.content + sh->buffer.ushift;
 	if (*content && *content == '^')
 	{
-		*status = true;
 		if (!content_is_hist_sed(content))
+		{
+			*status = true;
 			return ;
+		}
 		if (!(strings = (char **)malloc(sizeof(char *) * 3)))
+		{
+			*status = true;
 			return ;
+		}
 		get_needles(sh, &strings[0], &strings[1]);
 		strings[2] = get_substitution(sh);
 		if (strings[0] && strings[1] && strings[2])
-			exchange_cmd(sh, strings);
+			exchange_cmd(sh, strings, status);
 		free(strings[0]);
 		free(strings[2]);
 		free(strings);

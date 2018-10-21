@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 20:13:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:10:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void				auto_hist_name(t_shell *sh, bool *status)
 		if (!ft_isdigit(*(ptr_to_exc + 1))
 				&& ((cmd = get_cmd_by_content(sh, ptr_to_exc + 1))))
 		{
+			auto_hist_new_prompt(sh, status);
 			number_of_deletions = ft_strlens(ptr_to_exc);
 			track = sh->buffer.content + sh->buffer.ushift;
 			sh_move_home(sh);
@@ -49,7 +50,6 @@ void				auto_hist_name(t_shell *sh, bool *status)
 			while (number_of_deletions--)
 				sh_delete_current_char(sh);
 			sh_print_str(sh, cmd->content);
-			*status = true;
 			sh_move_end(sh);
 		}
 	}
