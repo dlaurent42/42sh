@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/21 16:57:46 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/21 17:05:17 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,7 +179,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/history/hist_name.c					\
 				terminal/autocompletion/history/hist_sed.c					\
 				terminal/autocompletion/history/hist_number.c				\
-				terminal/autocompletion/history/hist_new_promp.c			\
+				terminal/autocompletion/history/hist_new_prompt.c			\
 				terminal/autocompletion/sort/sort.c							\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
