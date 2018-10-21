@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 19:34:33 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/21 17:19:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:47:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,34 @@ bool				auto_hist_sed(t_shell *sh, bool *status)
 {
 	char			**strings;
 	char			*content;
+	bool			success;
 
+	success = false;
 	content = sh->buffer.content + sh->buffer.ushift;
 	if (*content && *content == '^')
 	{
 		if (!content_is_hist_sed(content))
 		{
 			*status = true;
-			return ;
+			return (success);
 		}
 		if (!(strings = (char **)malloc(sizeof(char *) * 3)))
 		{
 			*status = true;
-			return ;
+			return (success);
 		}
 		get_needles(sh, &strings[0], &strings[1]);
 		strings[2] = get_substitution(sh);
 		if (strings[0] && strings[1] && strings[2])
+		{
 			exchange_cmd(sh, strings, status);
+			success = true;
+		}
+		else
+			*status = true;
 		free(strings[0]);
 		free(strings[2]);
 		free(strings);
 	}
+	return (success);
 }

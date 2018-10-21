@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:56:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:20:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,7 +400,7 @@ bool					auto_history(t_shell *sh);
 void					auto_hist_double(t_shell *sh, bool *status);
 void					auto_hist_number(t_shell *sh, bool *status);
 void					auto_hist_name(t_shell *sh, bool *status);
-void					auto_hist_sed(t_shell *sh, bool *status);
+bool					auto_hist_sed(t_shell *sh, bool *status);
 void					auto_hist_new_prompt(t_shell *sh, bool *status);
 
 void					auto_sort(t_obj *obj);
