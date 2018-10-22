@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:59:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:11:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,19 @@ char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 ** functions - lexer
 */
 bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
+void					lexer_entry(char *cmd);
+void					lexer_fill(t_lexer *lexer, const char *cmd);
+void					lexer_token_add(
+							t_lexer *lexer,
+							const char *src,
+							size_t size,
+							t_token_type type);
+void					lexer_delete(t_lexer *lexer);
+void					lexer_token_singlequote(t_lexer *l, const char **cmd);
+void					lexer_token_doublequote(t_lexer *l, const char **cmd);
+void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+t_token					*lexer_token_search(const char *cmd);
+const t_token			*lexer_lexic_singletone(void);
 
 /*
 ** functions - lexer - handlers

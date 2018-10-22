@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 14:31:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:12:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,41 @@ typedef struct			s_shell
 	t_select			selection;
 	t_termios			termios;
 }						t_shell;
+
+/*
+** Lexer
+*/
+typedef enum			e_token_type
+{
+	TOKEN_NULL = 0,
+	TOKEN_ANDIF = 1,
+	TOKEN_ORIF = 2,
+	TOKEN_REDIR = 3,
+	TOKEN_SEMICOLON = 4,
+	TOKEN_PIPE = 5,
+	TOKEN_BLANK = 6,
+	TOKEN_SINGLEQUOTE = 7,
+	TOKEN_DOUBLEQUOTE = 8,
+	TOKEN_BACKQUOTE = 9,
+	TOKEN_AGGREG = 10,
+	TOKEN_MERGE = 11,
+	TOKEN_WORD = 12
+}						t_token_type;
+
+typedef struct			s_token
+{
+	char				*id;
+	int					size;
+	t_token_type		type;
+}						t_token;
+
+typedef struct			s_lexer
+{
+	t_token				*tokens;
+	size_t				capacity;
+	size_t				size;
+	char				*cmd;
+}						t_lexer;
 
 t_shell					*g_sh;
 
