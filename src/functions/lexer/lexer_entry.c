@@ -6,13 +6,13 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 11:53:10 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 15:56:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/22 16:04:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void    lexer_entry(char *cmd)
+void	lexer_entry(char *cmd)
 {
 	t_lexer lexer;
 
