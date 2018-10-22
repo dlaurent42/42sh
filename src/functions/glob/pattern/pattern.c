@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 15:35:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:25:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:30:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static t_glob	*sh_glob_init(t_glob *glob, char *str)
 	glob->starts_by_path = (str[0] == '/') ? TRUE : FALSE;
 	glob->ends_by_path = (str[ft_strlens(str) - 1] == '/') ? TRUE : FALSE;
 	glob->strsplit = pattern_strsplit(str, '/');
-	sh_glob_fs_init(glob);
 	while (glob->strsplit[count])
 		count++;
 	if (!(glob->fs = (t_filesystem **)ft_memalloc(
 			sizeof(t_filesystem *) * (count + 1))))
-		return ;
+		return (NULL);
 	while (i < count)
 	{
 		glob->fs[i] = (t_filesystem *)ft_memalloc(sizeof(t_filesystem));
@@ -89,7 +88,7 @@ char			*sh_glob_pattern(char *str)
 	if (!str)
 		return (NULL);
 	glob = sh_glob_init(NULL, str);
-	while (glob->strsplit[i])
+	while (glob && glob->strsplit[i])
 	{
 		glob->strsplit[i] = glob_remove_wildcars(glob->strsplit[i]);
 		glob->strsplit[i] = sh_glob_expand_ranges(
