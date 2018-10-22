@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/21 17:05:17 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/22 15:57:37 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME 		= 	shell
 
 CC 			=	gcc
-CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -234,7 +234,16 @@ SRC			=	shell.c														\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c									\
-				terminal/signals/stop_acquisition.c
+				terminal/signals/stop_acquisition.c							\
+				functions/lexer/lexer_delete.c								\
+				functions/lexer/lexer_entry.c								\
+				functions/lexer/lexer_fill.c								\
+				functions/lexer/lexer_lexic_singletone.c					\
+				functions/lexer/lexer_token_add.c							\
+				functions/lexer/lexer_token_backquote.c						\
+				functions/lexer/lexer_token_doublequote.c					\
+				functions/lexer/lexer_token_search.c						\
+				functions/lexer/lexer_token_singlequote.c					\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
@@ -246,15 +255,17 @@ INC_DIR 	=	./include/
 INC 		=	shell.h														\
 				constants.h													\
 				prototypes.h												\
-				structures.h
+				structures.h												\
+				lexer.h														\
 
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
 all:	 		shell
 
 shell:			$(OBJ_DIR) $(OBJS)
+				@make -C libdyn/
 				@make -C libft/
-				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L libft/ -lft -lcurses
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L libft/ -L libdyn/ -lft -ldyn -lcurses
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c $(INCS)
 				$(CC) $(CFLAGS) -c $< -o $@
@@ -313,11 +324,13 @@ $(OBJ_DIR):
 
 clean:
 				@make clean -C libft/
+				@make clean -C libdyn/
 				@rm -f $(OBJS)
 				@rm -rf $(OBJ_DIR)
 
 fclean: 		clean
 				@make fclean -C libft/
+				@make fclean -C libdyn/
 				@rm -f $(NAME)
 
 re: 			fclean all

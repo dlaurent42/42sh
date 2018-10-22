@@ -1,0 +1,8 @@
+*.dSYM
+*.DS_Store
+*.out
+*.vscode
+*obj
+*.o
+*unit.test*
+*main*

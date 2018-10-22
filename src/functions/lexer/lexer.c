@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 19:58:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 15:44:16 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ bool	sh_command_lexer(t_shell *sh, t_env *env, char *str)
 	sh_command_expand_dollars(sh, env, str);
 	sh_command_expand_tile(sh, env, str);
 	sh_command_trim(str);
+	lexer_entry(str);
 	return (TRUE);
 }
