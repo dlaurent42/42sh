@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 19:19:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 14:42:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,8 @@ char		*sh_glob(char *str)
 	i = 0;
 	cbraces = sh_glob_cbraces(str);
 	expansion = sh_glob_pattern(str);
+	if (!expansion)
+		return (cbraces);
+	ft_strdel(&cbraces);
 	return (expansion);
 }

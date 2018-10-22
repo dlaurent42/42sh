@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 16:58:33 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/22 16:58:54 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,8 @@ SRC			=	shell.c														\
 				functions/glob/pattern/pattern.c							\
 				functions/glob/pattern/parse/expand_ranges.c				\
 				functions/glob/pattern/parse/remove_wildcards.c				\
+				functions/glob/pattern/paths/add.c							\
+				functions/glob/pattern/paths/check.c						\
 				functions/glob/utils/escape.c								\
 				functions/glob/utils/inject.c								\
 				functions/glob/utils/match.c								\
@@ -299,6 +301,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
 				@mkdir -p $(OBJ_DIR)/functions/glob/pattern
 				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/parse
+				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/paths
 				@mkdir -p $(OBJ_DIR)/functions/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers

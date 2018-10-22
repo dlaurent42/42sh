@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:43:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 19:26:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 11:00:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,16 @@ static char	*sh_glob_joinchar(char *str, char c)
 	return (new);
 }
 
-static char	*sh_glob_expand_ranges_rp(char *str, char *new, int start, int stop)
+static char	*sh_glob_expand_ranges_rp(t_filesystem *fs, char *str, int start, int stop)
 {
-	ft_printf("...... sh_glob_expand_ranges_rp received: [%s] and [%s]\n", str, new);
 	sh_glob_repatriate(str, start, stop - start + 1);
-	ft_printf("...... sh_glob_expand_ranges_rp after repatriate: [%s] and [%s]\n", str, new);
-	str = sh_glob_inject(str, new, start);
-	ft_printf("...... sh_glob_expand_ranges_rp after injection: [%s] and [%s]\n", str, new);
-	ft_strdel(&new);
+	str = sh_glob_inject(str, &fs->curr_idx, start);
 	ft_printf("...... sh_glob_expand_ranges_rp returned: [%s]\n", str);
 	ft_printf("...... sh_glob_expand_range returned: [%s]\n", str);
 	return (str);
 }
 
-static char	*sh_glob_expand_reverse_range(char *str)
-{
-	int		i;
-	char	c;
-	char	*new_str;
-
-	i = 0;
-	c = 32;
-	new_str = NULL;
-	ft_printf("...... sh_glob_reverse_range received: [%s]\n", str);
-	while (c < 127)
-	{
-		if (c != '/' && ft_strcountif(str, c) == 0)
-			new_str = sh_glob_joinchar(new_str, c);
-		c++;
-	}
-	ft_strdel(&str);
-	ft_printf("...... sh_glob_reverse_range returned: [%s]\n", new_str);
-	return (new_str);
-}
-
-static char	*sh_glob_expand_range(char *str, int start, int stop)
+static char	*sh_glob_expand_range(t_filesystem *fs, char *str, int start, int stop)
 {
 	int		i;
 	char	c;
@@ -90,12 +65,11 @@ static char	*sh_glob_expand_range(char *str, int start, int stop)
 		ft_strdel(&new_str);
 		return (str);
 	}
-	if (new_str && new_str[0] == '!')
-		return (sh_glob_expand_ranges_rp(str, sh_glob_expand_reverse_range(new_str), start, stop));
-	return (sh_glob_expand_ranges_rp(str, new_str, start, stop));
+	(fs->curr_idx < GLOB_ASCII_MAX) ? fs->lst[(int)fs->curr_idx++] = new_str : 0;
+	return (sh_glob_expand_ranges_rp(fs, str, start - 1, stop + 1));
 }
 
-char		*sh_glob_expand_ranges(char *str)
+char		*sh_glob_expand_ranges(t_filesystem *fs, char *str)
 {
 	int		i;
 	int		j;
@@ -112,7 +86,7 @@ char		*sh_glob_expand_ranges(char *str)
 				if (str[j] == ']' && !glob_is_esc(str, i)
 				&& (str[j - 1] != '[' || glob_is_esc(str, i - 1)))
 				{
-					str = sh_glob_expand_range(str, i + 1, j - 1);
+					str = sh_glob_expand_range(fs, str, i + 1, j - 1);
 					break ;
 				}
 				j++;

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:07:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 18:31:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 13:23:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ bool		sh_glob_cbraces_list(t_cbraces *cb)
 		ft_strdel(&substr);
 		return (FALSE);
 	}
-	cb->split = glob_strsplit(substr, ',');
+	cb->split = cbraces_strsplit(substr, ',');
 	ft_strdel(&substr);
 	if (!cb->split)
 		return (FALSE);

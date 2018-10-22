@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:58:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:58:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,14 +218,20 @@ void					sh_glob_cbraces_expand(t_cbraces *cb);
 ** functions - glob - patterns
 */
 char					*sh_glob_pattern(char *str);
-char					*sh_glob_expand_ranges(char *str);
+char					*sh_glob_expand_ranges(t_filesystem *fs, char *str);
 char					*glob_remove_wildcars(char *str);
+void					sh_glob_add_initial_path(t_glob *glob);
+void					sh_glob_add_path(t_filesystem *fs, char *path, char *name);
+void					sh_glob_add_result(t_glob *glob, char *path, char *name);
+void					sh_glob_check_final_paths(t_glob *glob, t_filesystem *fs1, char *str);
+void					sh_glob_check_paths(t_glob *glob, t_filesystem *fs1, char *str, t_filesystem *fs2);
+void					sh_glob_check_all_paths(t_glob *glob, t_filesystem *fs1, t_filesystem *fs2);
 
 /*
 ** functions - glob - utils
 */
 int						glob_strcountif(char *str, char c);
-int						glob_match(char *s1, char *s2);
+bool					glob_match(char *s1, char *s2, char **lst);
 bool					glob_is_esc(char *str, int i);
 bool					glob_need_esc(char c);
 bool					glob_is_in_range(char *str, int pos);

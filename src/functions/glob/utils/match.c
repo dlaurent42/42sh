@@ -6,41 +6,73 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:16:13 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 17:18:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 14:33:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int		check_combinaisons(int i, int j, char *s1, char *s2)
+static bool		check_list(char c, char idx, char **lst)
 {
-	if (s1[i] != '\0')
+	int		i;
+	int		lst_len;
+	bool	neg;
+
+	i = 0;
+	lst_len = 0;
+	while (lst[lst_len])
+		lst_len++;
+	if (idx > lst_len)
+		return (FALSE);
+	neg = (lst[(int)idx - 1][0] == '!') ? TRUE : FALSE;
+	while (lst[(int)idx - 1][i])
 	{
-		if (s2[j] == '\0')
-			return (0);
-		else if (s2[j] == '*' && !glob_is_esc(s2, j))
-			if (check_combinaisons(i, j + 1, s1, s2) == 0)
-				return (check_combinaisons(i + 1, j, s1, s2));
-			else
-				return (check_combinaisons(i, j + 1, s1, s2));
-		else if (s1[i] == s2[j] || (s2[j] == '?' && !glob_is_esc(s2, j)))
-			return (check_combinaisons(i + 1, j + 1, s1, s2));
-		else
-			return (0);
+		if (lst[(int)idx - 1][i] == c && neg == FALSE)
+			return (TRUE);
+		else if (lst[(int)idx - 1][i] == c && neg == TRUE)
+			return (FALSE);
+		i++;
 	}
-	else if (s1[i] == '\0')
-	{
-		if (s2[j] == '\0')
-			return (1);
-		else if (s2[j] == '*')
-			return (check_combinaisons(i, j + 1, s1, s2));
-		else
-			return (0);
-	}
-	return (0);
+	if (neg)
+		return (TRUE);
+	return (FALSE);
 }
 
-int				glob_match(char *s1, char *s2)
+static bool		check_combinaisons(int i, int j, char **s, char **lst)
 {
-	return (check_combinaisons(0, 0, s1, s2));
+	if (s[0][i] != '\0')
+	{
+		if (s[1][j] == '\0')
+			return (FALSE);
+		else if (s[1][j] == '*' && !glob_is_esc(s[1], j) && check_combinaisons(i, j + 1, s, lst) == 0)
+				return (check_combinaisons(i + 1, j, s, lst));
+		else if (s[1][j] == '*' && !glob_is_esc(s[1], j))
+				return (check_combinaisons(i, j + 1, s, lst));
+		else if (s[0][i] == s[1][j] || (s[1][j] == '?' && !glob_is_esc(s[1], j)) || (s[1][j] < 32 && check_list(s[0][i], s[1][j], lst)))
+			return (check_combinaisons(i + 1, j + 1, s, lst));
+		return (FALSE);
+	}
+	else if (s[0][i] == '\0')
+	{
+		if (s[1][j] == '\0')
+			return (TRUE);
+		else if (s[1][j] == '*')
+			return (check_combinaisons(i, j + 1, s, lst));
+		return (FALSE);
+	}
+	return (FALSE);
+}
+
+bool				glob_match(char *s1, char *s2, char **lst)
+{
+	char	res;
+	char	**s;
+
+	if (!(s = (char **)ft_memalloc(sizeof(char *) * 2)))
+		return (FALSE);
+	s[0] = s1;
+	s[1] = s2;
+	res = check_combinaisons(0, 0, s, lst);
+	free(s);
+	return (res);
 }
