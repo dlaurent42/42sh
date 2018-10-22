@@ -40,13 +40,15 @@ bool				auto_glob(t_shell *sh)
 	str = NULL;
 	glob = NULL;
 	status = false;
+	if (ft_strcmps(sh->read->line, K_TAB))
+		return (false);
 	if(!(ptr_to_content = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ')))
 		ptr_to_content = sh->buffer.content + sh->buffer.ushift;
 	str = ft_strdups(ptr_to_content);
-	glob = sh_glob(str);
+	glob = sh_glob(ft_strdup(str));
 	if (str && glob)
 		status = replace_buffer_content(sh, str, glob, ptr_to_content);
-	//free(str);
+	free(str);
 	free(glob);
 	return (status);
 }
