@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 15:25:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 15:01:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@ int		main(int argc, char **argv, char **environ)
 	char	*str = ft_strdups(argv[1]);
 	ft_printf("initial: %s\n", str);
 	str = sh_glob(str);
-	ft_printf("final  : %s\n", str);
+	int		i = 0;
+	ft_printf("final  : [");
+	while (str[i])
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+	ft_printf("]\n");
 	ft_strdel(&str);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:02:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 14:28:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 14:53:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	sh_glob_recursive_all_paths(t_glob *glob, char *path, t_filesystem *
 		while ((dirent = readdir(dir)))
 		{
 			if ((dirent->d_type == DT_DIR || dirent->d_type == DT_LNK)
-			&& ft_strcmps(dirent->d_name, ".") & ft_strcmps(dirent->d_name, ".."))
+			&& dirent->d_name[0] != '.')
 			{
 				next_path = ft_strjoins(path, "/");
 				next_path = ft_strjoinf(next_path, dirent->d_name, 1);
