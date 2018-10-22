@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:02:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 14:53:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:10:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 static bool	sh_glob_check_existence(
 	char *name, char *str, t_filesystem *fs1)
 {
-	if (name[0] == '.' && (str[0] != '.' || ft_strcmps(name, ".") == 0 || ft_strcmps(name, "..") == 0))
+	if (name[0] == '.' && (str[0] != '.'
+	|| ft_strcmps(name, ".") == 0 || ft_strcmps(name, "..") == 0))
 		return (FALSE);
-	if (glob_match(name, str, fs1->lst))
-	{
-		ft_printf("......... sh_glob_check_existence : TRUE\n");
-		return (TRUE);
-	}
-	ft_printf("......... sh_glob_check_existence : FALSE\n");
-	return (FALSE);
+	return (glob_match(name, str, fs1->lst));
 }
 
 void		sh_glob_check_paths(
@@ -37,21 +32,18 @@ void		sh_glob_check_paths(
 	path = fs1->paths;
 	while (path)
 	{
-		ft_printf(".... sh_glob_check_paths checking path : %s\n", path->path);
 		if ((dir = opendir(path->path)))
 			while ((dirent = readdir(dir)))
-			{
-				ft_printf("...... sh_glob_check_paths %s\n", dirent->d_name);
 				if ((dirent->d_type == DT_DIR || dirent->d_type == DT_LNK)
 				&& sh_glob_check_existence(dirent->d_name, str, fs1))
 					sh_glob_add_path(fs2, path->path, dirent->d_name);
-			}
 		(dir) ? closedir(dir) : 0;
 		path = path->next;
 	}
 }
 
-void		sh_glob_check_final_paths(t_glob *glob, t_filesystem *fs1, char *str)
+void		sh_glob_check_final_paths(
+	t_glob *glob, t_filesystem *fs1, char *str)
 {
 	t_path		*path;
 	DIR			*dir;
@@ -60,23 +52,17 @@ void		sh_glob_check_final_paths(t_glob *glob, t_filesystem *fs1, char *str)
 	path = fs1->paths;
 	while (path)
 	{
-		ft_printf(".... sh_glob_check_final_path checking path : %s\n", path->path);
 		if ((dir = opendir(path->path)))
 			while ((dirent = readdir(dir)))
-			{
-				ft_printf("...... sh_glob_check_final_paths %s\n", dirent->d_name);
 				if (sh_glob_check_existence(dirent->d_name, str, fs1))
-				{
 					sh_glob_add_result(glob, path->path, dirent->d_name);
-					ft_printf("...... sh_glob_check_final_paths add as result %s\n", dirent->d_name);
-				}
-			}
 		(dir) ? closedir(dir) : 0;
 		path = path->next;
 	}
 }
 
-static void	sh_glob_recursive_all_paths(t_glob *glob, char *path, t_filesystem *fs2)
+static void	sh_glob_recursive_all_paths(
+	t_glob *glob, char *path, t_filesystem *fs2)
 {
 	DIR			*dir;
 	t_dirent	*dirent;
@@ -101,7 +87,8 @@ static void	sh_glob_recursive_all_paths(t_glob *glob, char *path, t_filesystem *
 	ft_strdel(&path);
 }
 
-void		sh_glob_check_all_paths(t_glob *glob, t_filesystem *fs1, t_filesystem *fs2)
+void		sh_glob_check_all_paths(
+	t_glob *glob, t_filesystem *fs1, t_filesystem *fs2)
 {
 	t_path		*path;
 
@@ -109,7 +96,6 @@ void		sh_glob_check_all_paths(t_glob *glob, t_filesystem *fs1, t_filesystem *fs2
 	path = fs1->paths;
 	while (path)
 	{
-		ft_printf(".... sh_glob_check_all_paths checking path : %s\n", path->path);
 		sh_glob_recursive_all_paths(glob, ft_strdups(path->path), fs2);
 		path = path->next;
 	}

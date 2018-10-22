@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:33:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 17:37:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:14:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool	glob_is_in_range(char *str, int pos)
+bool	glob_in_range(char *str, int pos)
 {
 	int		i;
 	bool	in_range;

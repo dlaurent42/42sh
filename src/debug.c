@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:31:29 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 18:37:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:05:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	sh_debug3(t_shell *sh, int fd)
 {
-	//ft_putstr_fd("\tcontent: ", fd);
-	//ft_putstr_fd((char *)sh->buffer.content, fd);
+	ft_putstr_fd("\tcontent: ", fd);
+	ft_putstr_fd((char *)sh->buffer.content, fd);
 	ft_putstr_fd("\tstored: ", fd);
 	ft_putstr_fd((char *)sh->buffer.stored, fd);
 	ft_putstr_fd("\nprompt\n\tdisplay_len: ", fd);

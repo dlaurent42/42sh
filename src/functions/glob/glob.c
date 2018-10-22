@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 14:42:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:07:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,6 @@
 **			ok-{{A..b},2} -> A B C D E F G H I J K L M NO P Q R S T U V W X Y
 **						  Z \[ \\ \] \^ _ \` a b 2
 **			ok-{{A,b},c} -> A b c
-*/
-
-/*
-** ! — history expansion.
-** " — shell syntax.
-** # — comment start when preceded by whitespace; zsh wildcards.
-** $ — shell syntax.
-** & — shell syntax.
-** ' — shell syntax.
-** ( — even in the middle of a word: ksh extended globs (also available in bash and zsh); zsh wildcards.
-** ) (see ()
-** * — sh wildcard.
-** , — only inside brace expansion.
-** ; — shell syntax.
-** < — shell syntax.
-** = — in zsh, when it's at the beginning of a file name (filename expansion with PATH lookup).
-** > — shell syntax.
-** ? — sh wildcard.
-** [ — sh wildcard.
-** \ — shell syntax.
-** ] — you may get away with leaving it unquoted.
-** ^ — history expansion; zsh wildcard.
-** ` — shell syntax.
-** { — brace expansion.
-** | — shell syntax.
-** } — needs to be escaped in zsh, other shells are more lenient when there's no matching opening brace.
-** ~ — home directory expansion when it's at the beginning of a file name; zsh wildcard; always safe when it's the last character.
-**
-** |  &  ;  <  >  (  )  $  `  \  "  '  <space>  <tab>  <newline>
-** *   ?   [   #   ˜   =   %
 */
 
 #include "shell.h"

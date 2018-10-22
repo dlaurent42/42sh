@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 10:32:48 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 15:15:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:08:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		sh_glob_add_path(t_filesystem *fs, char *path, char *name)
 		? ft_strjoins(path, "/")
 		: ft_strdups(path);
 	new->path = ft_strjoinf(new->path, name, 1);
-	ft_printf("......... sh_glob_add_path %s\n", new->path);
 	new->next = (fs && fs->paths) ? fs->paths : NULL;
 	fs->paths = new;
 }
@@ -89,5 +88,6 @@ void		sh_glob_add_result(t_glob *glob, char *path, char *name)
 		ft_strdel(&result);
 	}
 	else
-		glob->result = ft_strjoinf(glob->result, sh_glob_check_result(result), 3);
+		glob->result = ft_strjoinf(glob->result,
+		sh_glob_check_result(result), 3);
 }

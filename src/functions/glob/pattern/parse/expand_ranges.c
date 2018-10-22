@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:43:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 11:00:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:18:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,41 @@ static char	*sh_glob_joinchar(char *str, char c)
 	return (new);
 }
 
-static char	*sh_glob_expand_ranges_rp(t_filesystem *fs, char *str, int start, int stop)
+static char	*sh_glob_expand_ranges_rp(
+	t_filesystem *fs, char *str, int start, int stop)
 {
 	sh_glob_repatriate(str, start, stop - start + 1);
 	str = sh_glob_inject(str, &fs->curr_idx, start);
-	ft_printf("...... sh_glob_expand_ranges_rp returned: [%s]\n", str);
-	ft_printf("...... sh_glob_expand_range returned: [%s]\n", str);
 	return (str);
 }
 
-static char	*sh_glob_expand_range(t_filesystem *fs, char *str, int start, int stop)
+static char	*sh_glob_expand_range(
+	t_filesystem *fs, char *str, int start, int stop)
 {
 	int		i;
 	char	c;
 	char	*new_str;
 
-	i = start;
+	i = start - 1;
 	new_str = NULL;
 	c = 0;
-	ft_printf("...... sh_glob_expand_range received: [%s] (start = %d and stop = %d)\n", str, start, stop);
-	while (i <= stop)
-	{
+	while (++i <= stop)
 		if (i + 2 <= stop && str[i + 1] == '-'
-		&& str[i] < str[i + 2] && (c = str[i]))
+		&& str[i] < str[i + 2] && (c = str[i] - 1))
 		{
-			while (c <= str[i + 2])
-			{
+			while (++c <= str[i + 2])
 				(c != '/') ? new_str = sh_glob_joinchar(new_str, c) : 0;
-				c++;
-			}
 			i += 2;
 		}
 		else
 			new_str = sh_glob_joinchar(new_str, str[i]);
-		i++;
-	}
 	if (ft_strcountif(new_str, '/'))
 	{
-		ft_printf("...... sh_glob_expand_range returned error '/' (%s)\n", new_str);
 		ft_strdel(&new_str);
 		return (str);
 	}
-	(fs->curr_idx < GLOB_ASCII_MAX) ? fs->lst[(int)fs->curr_idx++] = new_str : 0;
+	(fs->curr_idx < GLOB_ASCII_MAX)
+		? fs->lst[(int)fs->curr_idx++] = new_str : 0;
 	return (sh_glob_expand_ranges_rp(fs, str, start - 1, stop + 1));
 }
 
@@ -75,7 +68,6 @@ char		*sh_glob_expand_ranges(t_filesystem *fs, char *str)
 	int		j;
 
 	i = 0;
-	ft_printf("... sh_glob_expand_ranges received: [%s]\n", str);
 	while (str[i])
 	{
 		if (str[i] == '[' && !glob_is_esc(str, i))
@@ -94,6 +86,5 @@ char		*sh_glob_expand_ranges(t_filesystem *fs, char *str)
 		}
 		i++;
 	}
-	ft_printf("... sh_glob_expand_ranges returned: [%s]\n", str);
 	return (str);
 }

@@ -6,32 +6,17 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 18:08:55 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 18:57:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:06:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool		sh_glob_cbraces_check(char *str)
+static void	sh_glob_cbraces_check_del(t_cbraces *cb)
 {
-	int			i;
-	bool		res;
-	t_cbraces	*cb;
+	int		i;
 
 	i = 0;
-	res = FALSE;
-	if (glob_strcountif(str, '{') == 0 || glob_strcountif(str, '}') == 0
-	|| !(cb = (t_cbraces *)ft_memalloc(sizeof(t_cbraces))))
-		return (0);
-	cb->start = -1;
-	cb->stop = -1;
-	if ((!(cb->str = ft_strdups(str)) || sh_glob_cbraces_start_stop(cb)))
-	{
-		if (sh_glob_cbraces_dots(cb))
-			res = TRUE;
-		else if (sh_glob_cbraces_list(cb))
-			res = TRUE;
-	}
 	ft_strdel(&cb->str);
 	ft_strdel(&cb->left);
 	ft_strdel(&cb->right);
@@ -45,5 +30,26 @@ bool		sh_glob_cbraces_check(char *str)
 		}
 	(cb->split) ? free(cb->split) : 0;
 	(cb) ? free(cb) : 0;
+}
+
+bool		sh_glob_cbraces_check(char *str)
+{
+	bool		res;
+	t_cbraces	*cb;
+
+	res = FALSE;
+	if (glob_strcountif(str, '{') == 0 || glob_strcountif(str, '}') == 0
+	|| !(cb = (t_cbraces *)ft_memalloc(sizeof(t_cbraces))))
+		return (0);
+	cb->start = -1;
+	cb->stop = -1;
+	if ((!(cb->str = ft_strdups(str)) || sh_glob_cbraces_start_stop(cb)))
+	{
+		if (sh_glob_cbraces_dots(cb))
+			res = TRUE;
+		else if (sh_glob_cbraces_list(cb))
+			res = TRUE;
+	}
+	sh_glob_cbraces_check_del(cb);
 	return (res);
 }

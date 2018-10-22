@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:58:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:59:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,11 +221,27 @@ char					*sh_glob_pattern(char *str);
 char					*sh_glob_expand_ranges(t_filesystem *fs, char *str);
 char					*glob_remove_wildcars(char *str);
 void					sh_glob_add_initial_path(t_glob *glob);
-void					sh_glob_add_path(t_filesystem *fs, char *path, char *name);
-void					sh_glob_add_result(t_glob *glob, char *path, char *name);
-void					sh_glob_check_final_paths(t_glob *glob, t_filesystem *fs1, char *str);
-void					sh_glob_check_paths(t_glob *glob, t_filesystem *fs1, char *str, t_filesystem *fs2);
-void					sh_glob_check_all_paths(t_glob *glob, t_filesystem *fs1, t_filesystem *fs2);
+void					sh_glob_add_path(
+							t_filesystem *fs,
+							char *path,
+							char *name);
+void					sh_glob_add_result(
+								t_glob *glob,
+								char *path,
+								char *name);
+void					sh_glob_check_final_paths(
+								t_glob *glob,
+								t_filesystem *fs1,
+								char *str);
+void					sh_glob_check_paths(
+								t_glob *glob,
+								t_filesystem *fs1,
+								char *str,
+								t_filesystem *fs2);
+void					sh_glob_check_all_paths(
+								t_glob *glob,
+								t_filesystem *fs1,
+								t_filesystem *fs2);
 
 /*
 ** functions - glob - utils
@@ -234,7 +250,7 @@ int						glob_strcountif(char *str, char c);
 bool					glob_match(char *s1, char *s2, char **lst);
 bool					glob_is_esc(char *str, int i);
 bool					glob_need_esc(char c);
-bool					glob_is_in_range(char *str, int pos);
+bool					glob_in_range(char *str, int pos);
 char					*sh_glob_inject(char *str, char *injection, int i);
 char					**cbraces_strsplit(char *s, char c);
 char					**pattern_strsplit(char *s, char c);
@@ -346,15 +362,15 @@ void					env_insert_protected(
 							char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
 void					env_initialize_local(t_shell *sh);
-void		            sh_env_init_config(t_shell *sh);
-void		            sh_env_init_histfile(t_shell *sh);
-void		            sh_env_init_home(t_shell *sh);
-void		            sh_env_init_ppid(t_shell *sh);
-void		            sh_env_init_ps(t_shell *sh);
-void		            sh_env_init_pwd(t_shell *sh);
-void		            sh_env_init_shlvl(t_shell *sh);
-void		            sh_env_init_specials(t_shell *sh);
-void		            sh_env_init_term(t_shell *sh);
+void					sh_env_init_config(t_shell *sh);
+void					sh_env_init_histfile(t_shell *sh);
+void					sh_env_init_home(t_shell *sh);
+void					sh_env_init_ppid(t_shell *sh);
+void					sh_env_init_ps(t_shell *sh);
+void					sh_env_init_pwd(t_shell *sh);
+void					sh_env_init_shlvl(t_shell *sh);
+void					sh_env_init_specials(t_shell *sh);
+void					sh_env_init_term(t_shell *sh);
 void					env_local_to_public(t_env *env, char *key, char *value);
 void					env_insert_item_into_array(t_env *e, char *k, char *v);
 void					env_delete_autocompletion_array(t_env *env);

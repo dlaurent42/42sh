@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:07:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 13:23:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:07:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static bool	sh_glob_cbraces_list_check(t_cbraces *cb)
 		else
 			while (cb->split[i][j])
 			{
-				if (glob_need_esc(cb->split[i][j]) && !glob_is_esc(cb->split[i], j))
+				if (glob_need_esc(cb->split[i][j])
+				&& !glob_is_esc(cb->split[i], j))
 					return (FALSE);
 				else if (glob_is_esc(cb->split[i], j)
 				&& !glob_need_esc(cb->split[i][j]))
