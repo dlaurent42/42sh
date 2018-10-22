@@ -12,16 +12,27 @@
 
 #include "shell.h"
 
-bool				replace_buffer_content(t_shell *shell, char *str, char *glob, char *ptr_to_content)
+bool				replace_buffer_content(t_shell *sh, char *str, char *glob, char *ptr_to_content)
 {
+	char			*content;
+	int				number_of_deletions;
+
 	if (!ft_strcmps(str, glob))
 		return (false);
+	number_of_deletions = ft_strlens(glob);
+	content = sh->buffer.content + sh->buffer.ushift;
+	sh_move_home(sh);
+	while (content++ != ptr_to_content)
+		sh_move_right(sh);
+	while (number_of_deletions--)
+		sh_delete_current_char(sh);
+	sh_print_str(sh, glob);
+	return (true);
 }
 
 bool				auto_glob(t_shell *sh)
 {
 	bool			status;
-	bool			sed_status;
 	char			*ptr_to_content;
 	char			*str;
 	char			*glob;
@@ -33,9 +44,9 @@ bool				auto_glob(t_shell *sh)
 		ptr_to_content = sh->buffer.content + sh->buffer.ushift;
 	str = ft_strdups(ptr_to_content);
 	glob = sh_glob(str);
-	if (str && !glob)
+	if (str && glob)
 		status = replace_buffer_content(sh, str, glob, ptr_to_content);
-	free(str);
+	//free(str);
 	free(glob);
 	return (status);
 }

@@ -105,7 +105,7 @@ bool				auto_completion(t_shell *sh)
 
 	performed_completion = false;
 	sh->modes.auto_completion = TRUE;
-	if (auto_history(sh) || auto_env(sh))
+	if (auto_glob(sh) || auto_history(sh) || auto_env(sh))
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
