@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 16:58:54 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/22 23:08:46 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -263,8 +263,7 @@ INC_DIR 	=	./include/
 INC 		=	shell.h														\
 				constants.h													\
 				prototypes.h												\
-				structures.h												\
-				lexer.h														\
+				structures.h
 
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
