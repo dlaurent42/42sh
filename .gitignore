@@ -1,10 +1,10 @@
 # Pollution
-.DS_Store
-.vscode
+*.DS_Store
+*.vscode
 
 # Executable && lib
 *.a
-a.out
+*a.out
 /shell
 
 # Compiled sources
@@ -12,7 +12,7 @@ a.out
 *.o
 
 # Valgrind folder
-shell.dSYM
+*.dSYM
 
 # Secure malloc tool residues
 .sym_logs
