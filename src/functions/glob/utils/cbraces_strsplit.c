@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strsplit.c                                         :+:      :+:    :+:   */
+/*   cbraces_strsplit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:02:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:04:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 20:16:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static size_t	get_n_words(char *s, char c)
 	return (n);
 }
 
-char			**glob_strsplit(char *s, char c)
+char			**cbraces_strsplit(char *s, char c)
 {
 	char	**ptr;
 	size_t	i;

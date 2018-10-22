@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 16:58:10 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/22 16:58:33 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,8 @@ SRC			=	shell.c														\
 				functions/glob/utils/match.c								\
 				functions/glob/utils/range.c								\
 				functions/glob/utils/repatriate.c							\
-				functions/glob/utils/strsplit.c								\
+				functions/glob/utils/cbraces_strsplit.c						\
+				functions/glob/utils/pattern_strsplit.c						\
 				functions/lexer/lexer.c										\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\

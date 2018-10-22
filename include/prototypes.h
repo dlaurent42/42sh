@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:58:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:58:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,8 @@ bool					glob_is_esc(char *str, int i);
 bool					glob_need_esc(char c);
 bool					glob_is_in_range(char *str, int pos);
 char					*sh_glob_inject(char *str, char *injection, int i);
-char					**glob_strsplit(char *s, char c);
+char					**cbraces_strsplit(char *s, char c);
+char					**pattern_strsplit(char *s, char c);
 void					sh_glob_repatriate(char *str, int i, int len);
 
 /*

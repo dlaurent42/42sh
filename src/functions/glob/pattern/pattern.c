@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 15:35:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 19:36:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/21 20:20:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	*sh_glob_pattern(char *str)
 	ft_printf("sh_glob_patten received: [%s]\n", str);
 	glob->initial_str = ft_strdups(str);
 	glob->parsed_str = ft_strdups(str);
+	glob->last_is_path = (str[ft_strlens(str) - 1] == '/') ? TRUE : FALSE;
+	glob->strsplit = pattern_strsplit(str, '/');
 	glob->parsed_str = glob_remove_wildcars(glob->parsed_str);
 	glob->parsed_str = sh_glob_expand_ranges(glob->parsed_str);
 	ft_printf("sh_glob_pattern returned: [%s]\n", glob->parsed_str);
