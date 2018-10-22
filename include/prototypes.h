@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 17:11:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/22 23:55:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,12 +441,15 @@ void					auto_move_right(t_shell *sh);
 bool					auto_is_executeable(t_obj *obj);
 bool					contains_printable_characters(char *str);
 char					*move_past_leading_spaces(char *content);
+
 bool					auto_history(t_shell *sh);
 void					auto_hist_double(t_shell *sh, bool *status);
 void					auto_hist_number(t_shell *sh, bool *status);
 void					auto_hist_name(t_shell *sh, bool *status);
 bool					auto_hist_sed(t_shell *sh, bool *status);
 void					auto_hist_new_prompt(t_shell *sh, bool *status);
+
+bool					auto_glob(t_shell *sh);
 
 void					auto_sort(t_obj *obj);
 

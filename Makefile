@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 23:08:46 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/22 23:53:49 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,6 +189,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/history/hist_number.c				\
 				terminal/autocompletion/history/hist_new_prompt.c			\
 				terminal/autocompletion/sort/sort.c							\
+				terminal/autocompletion/glob/glob.c							\
 				terminal/cursor/move_down.c									\
 				terminal/cursor/move_end.c									\
 				terminal/cursor/move_home.c									\
@@ -316,6 +317,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
+				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/glob
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/sort
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/history
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/issuance
