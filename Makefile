@@ -6,7 +6,11 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/10/23 20:05:38 by rpinoit          ###   ########.fr        #
+=======
+#    Updated: 2018/10/23 20:14:45 by dlaurent         ###   ########.fr        #
+>>>>>>> 0b825d6... [feature] expansion of dollar sign
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +19,7 @@
 NAME 		= 	shell
 
 CC 			=	gcc
-CFLAGS		= 	-fsanitize=address -g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
+CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -77,6 +81,7 @@ SRC			=	shell.c														\
 				functions/builtins/utils/is_binary.c						\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
+				functions/dollar/dollar.c									\
 				functions/exec/run.c										\
 				functions/glob/glob.c										\
 				functions/glob/cbraces/cbraces.c							\
@@ -295,6 +300,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
+				@mkdir -p $(OBJ_DIR)/functions/dollar
 				@mkdir -p $(OBJ_DIR)/functions/exec
 				@mkdir -p $(OBJ_DIR)/functions/glob
 				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
