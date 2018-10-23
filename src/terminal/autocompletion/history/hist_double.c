@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:10 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:58:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/23 11:49:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void				auto_hist_double(t_shell *sh, bool *status)
 {
+
 	int				offset;
 	char			*track;
 	char			*ptr_to_exc;

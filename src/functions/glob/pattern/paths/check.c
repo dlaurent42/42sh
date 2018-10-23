@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:02:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:33:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:27:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ void		sh_glob_check_all_paths(
 	path = fs1->paths;
 	while (path)
 	{
+		(fs2)
+			? sh_glob_add_path(fs2, path->path, NULL)
+			: sh_glob_add_result(glob, path->path, NULL);
 		sh_glob_recursive_all_paths(glob, ft_strdups(path->path), fs2);
 		path = path->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 10:32:48 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:08:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:33:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ static char	*sh_glob_check_result(char *str)
 	return (new);
 }
 
+static char	*sh_glob_remove_dbl_slash(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '/' && str[i + 1] == '/')
+			sh_glob_repatriate(str, i, 1);
+		i++;
+	}
+	return (str);
+}
+
 void		sh_glob_add_result(t_glob *glob, char *path, char *name)
 {
 	char	*result;
@@ -74,6 +88,7 @@ void		sh_glob_add_result(t_glob *glob, char *path, char *name)
 	curr_path = NULL;
 	result = ft_strjoins(path, "/");
 	result = ft_strjoinf(result, name, 1);
+	result = sh_glob_remove_dbl_slash(result);
 	if (glob->ends_by_path)
 		result = ft_strjoinf(result, "/", 1);
 	(glob->result) ? glob->result = ft_strjoinf(glob->result, " ", 1) : 0;
@@ -83,7 +98,7 @@ void		sh_glob_add_result(t_glob *glob, char *path, char *name)
 		glob->result = ft_strjoinf(
 			glob->result,
 			sh_glob_check_result(
-				ft_strdups(result + ft_strlens(curr_path) + 2)), 3);
+				ft_strdups(result + ft_strlens(curr_path) + 1)), 3);
 		ft_strdel(&curr_path);
 		ft_strdel(&result);
 	}

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 17:25:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:14:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,6 @@
 ** globbing
 */
 # define GLOB_MAX_PATHS	125
-# define GLOB_ASCII_MAX	96
+# define GLOB_ASCII_MAX	30
 
 #endif
