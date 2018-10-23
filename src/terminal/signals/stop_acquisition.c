@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 15:16:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 13:07:11 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:41:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void		sh_sigint_reset(t_shell *sh, char *last_return)
 	sh->pid = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
-	if (sh->env && (env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
+	if (sh->env
+	&& (env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
 		env_insert_protected(sh, sh->env, "?", last_return);
 	(sh) ? sh_set_prompt(sh) : 0;
 	(sh) ? sh_print_prompt(sh) : 0;

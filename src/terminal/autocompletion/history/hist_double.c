@@ -6,18 +6,17 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:10 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 11:49:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:41:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				auto_hist_double(t_shell *sh, bool *status)
+void		auto_hist_double(t_shell *sh, bool *status)
 {
-
-	int				offset;
-	char			*track;
-	char			*ptr_to_exc;
+	int		offset;
+	char	*track;
+	char	*ptr_to_exc;
 
 	offset = 0;
 	while ((ptr_to_exc = ft_strstr(
