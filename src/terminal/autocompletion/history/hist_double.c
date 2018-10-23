@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:10 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:58:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/23 11:15:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void				auto_hist_double(t_shell *sh, bool *status)
 {
+	int				i;
 	int				offset;
 	char			*track;
 	char			*ptr_to_exc;
@@ -30,7 +31,15 @@ void				auto_hist_double(t_shell *sh, bool *status)
 			sh_move_right(sh);
 		sh_delete_current_char(sh);
 		sh_delete_current_char(sh);
-		sh_print_str(sh, sh->cmd->content);
+		i = 0;
+		while (sh->cmd->content[i])
+		{
+			ft_bzero(sh->read->line, LINE_SIZE);
+			sh->read->line[0] = sh->cmd->content[i];
+			sh_fill_buffer(sh);
+			i++;
+		}
+		ft_bzero(sh->read->line, LINE_SIZE);
 		sh_move_end(sh);
 	}
 }
