@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 13:00:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:29:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,6 @@
 
 #include "shell.h"
 
-static char	*sh_glob_pattern_sort(char *str)
-{
-	int		i;
-	char	*res;
-	char	**arr;
-
-	i = 0;
-	res = NULL;
-	arr = pattern_strsplit(str, ' ');
-	ft_sort_wordtab(arr);
-	while (arr[i])
-	{
-		(res) ? res = ft_strjoinf(res, " ", 1) : 0;
-		res = ft_strjoinf(res, arr[i], 3);
-		i++;
-	}
-	(arr) ? free(arr) : 0;
-	ft_strdel(&str);
-	return (res);
-}
-
 char		*sh_glob(char *str)
 {
 	int		i;
@@ -73,8 +52,9 @@ char		*sh_glob(char *str)
 	cbracessplit = cbraces_strsplit(cbraces, ' ');
 	while (cbracessplit && cbracessplit[i])
 	{
+		ft_printf("Running on %s\n", cbracessplit[i]);
 		(expansion) ? expansion = ft_strjoinf(expansion, " ", 1): 0;
-		expansion = ft_strjoinf(expansion, sh_glob_pattern_sort(sh_glob_pattern(cbracessplit[i])), 3);
+		expansion = ft_strjoinf(expansion, sh_glob_pattern(cbracessplit[i]), 3);
 		ft_strdel(&cbracessplit[i]);
 		i++;
 	}
