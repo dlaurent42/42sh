@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 23:52:08 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/23 08:44:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 00:46:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool				auto_glob(t_shell *sh)
 	char			*str;
 	char			*glob;
 
+	return (false);//REMOVE WHEN ISSUE #70 is resolved.
 	str = NULL;
 	glob = NULL;
 	status = false;
