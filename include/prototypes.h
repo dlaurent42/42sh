@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 23:55:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/23 20:10:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,11 @@ char					sh_glob_cbraces_dots(t_cbraces *cb);
 void					sh_glob_cbraces_dots_expand(t_cbraces *cb);
 bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
+
+/*
+** functions - dollar
+*/
+char					*sh_dollar_expansion(char *str, t_env *env);
 
 /*
 ** functions - glob - patterns
