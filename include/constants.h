@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 11:14:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:03:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,10 @@
 */
 # define GLOB_MAX_PATHS	125
 # define GLOB_ASCII_MAX	30
+
+/*
+** heredoc
+*/
+# define HD_ASCII_MAX	30
 
 #endif

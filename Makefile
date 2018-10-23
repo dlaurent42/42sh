@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 23:52:33 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/25 12:11:12 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -306,6 +306,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/parse
 				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/paths
 				@mkdir -p $(OBJ_DIR)/functions/glob/utils
+				@mkdir -p $(OBJ_DIR)/functions/heredoc
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils

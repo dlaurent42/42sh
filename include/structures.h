@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 17:12:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:16:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ typedef struct			s_modes
 	unsigned char		search			: 1;
 	unsigned char		multiline		: 1;
 	unsigned char		exec			: 1;
-	unsigned char		others			: 2;
+	unsigned char		heredoc			: 1;
+	unsigned char		others			: 1;
 }						t_modes;
 
 typedef struct			s_select
@@ -267,6 +268,25 @@ typedef struct			s_read_dir
 	DIR					*directory;
 	struct dirent		*file;
 }						t_read_dir;
+
+/*
+** heredoc:
+** 		pos parameter corresponds to last relative
+**	position in buffer after injection of index
+** 		idx contains a list of EOF separators
+*/
+typedef struct			s_heredoc
+{
+	char				*keyword;
+	char				*value;
+	bool				open;
+}						t_heredoc;
+
+typedef struct			s_heredocs
+{
+	size_t				pos;
+	t_heredoc			hd[HD_ASCII_MAX + 1];
+}						t_heredocs;
 
 typedef struct			s_shell
 {
