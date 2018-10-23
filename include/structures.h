@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 17:12:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:13:41 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,15 @@ typedef struct			s_lexer
 	size_t				size;
 	char				*cmd;
 }						t_lexer;
+
+typedef struct			s_token_tree
+{
+	t_token				*tokens;
+	size_t				size;
+	int					type;
+	struct s_token_tree	*prev;
+	struct s_token_tree	*next;
+}						t_token_tree;
 
 t_shell					*g_sh;
 

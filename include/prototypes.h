@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 17:11:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 21:44:42 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,8 @@ char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 ** functions - lexer
 */
 bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-void					lexer_entry(char *cmd);
+// void					lexer_entry(char *cmd);
+t_lexer					lexer_entry(char *cmd);
 void					lexer_fill(t_lexer *lexer, const char *cmd);
 void					lexer_token_add(
 							t_lexer *lexer,
@@ -553,5 +554,12 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 void					signal_catching(void);
 void					sh_sigint_reset(t_shell *sh, char *last_return);
 void					sh_window_resize(t_shell *sh);
+
+/*
+** structures - ast
+*/
+t_token_tree			*new_tree_node(void);
+void					add_tree_node(t_token_tree **head, t_token_tree **last,
+						t_token_tree *new);
 
 #endif
