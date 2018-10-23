@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 23:08:46 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/23 13:21:06 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME 		= 	shell
 
 CC 			=	gcc
-CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
+CFLAGS		= 	-fsanitize=address -g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -104,6 +104,15 @@ SRC			=	shell.c														\
 				functions/lexer/handlers/useless_quotes.c					\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
+				functions/lexer/lexer_delete.c								\
+				functions/lexer/lexer_entry.c								\
+				functions/lexer/lexer_fill.c								\
+				functions/lexer/lexer_lexic_singletone.c					\
+				functions/lexer/lexer_token_add.c							\
+				functions/lexer/lexer_token_backquote.c						\
+				functions/lexer/lexer_token_doublequote.c					\
+				functions/lexer/lexer_token_search.c						\
+				functions/lexer/lexer_token_singlequote.c					\
 				functions/lexer/utils/inject.c								\
 				functions/lexer/utils/repatriate.c							\
 				functions/parser/build.c									\
@@ -243,15 +252,6 @@ SRC			=	shell.c														\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c									\
 				terminal/signals/stop_acquisition.c							\
-				functions/lexer/lexer_delete.c								\
-				functions/lexer/lexer_entry.c								\
-				functions/lexer/lexer_fill.c								\
-				functions/lexer/lexer_lexic_singletone.c					\
-				functions/lexer/lexer_token_add.c							\
-				functions/lexer/lexer_token_backquote.c						\
-				functions/lexer/lexer_token_doublequote.c					\
-				functions/lexer/lexer_token_search.c						\
-				functions/lexer/lexer_token_singlequote.c					\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
