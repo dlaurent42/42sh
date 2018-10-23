@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
+#    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/10/23 20:05:38 by rpinoit          ###   ########.fr        #
-=======
-#    Updated: 2018/10/23 20:14:45 by dlaurent         ###   ########.fr        #
->>>>>>> 0b825d6... [feature] expansion of dollar sign
+#    Updated: 2018/10/23 20:28:01 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
