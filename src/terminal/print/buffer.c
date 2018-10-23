@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:47:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:21:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/23 11:49:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,6 @@ static int	sh_add_wchar(t_shell *sh, unsigned char c)
 	return (-1);
 }
 
-void		sh_print_str(t_shell *sh, char *str)
-{
-	int				res;
-	unsigned char	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((unsigned char)str[i] < 0b10000000 && ft_isprint(str[i]))
-			res = sh_add_char(sh, str[i]);
-		else if ((unsigned char)str[i] >= 0b10000000)
-			res = sh_add_wchar(sh, (unsigned char)str[i]);
-		(res != -1) ? ft_printf("%s ",
-			sh->buffer.content + sh->buffer.ushift + res) : 0;
-		(res != -1) ? sh_move_cursor(sh) : 0;
-		i++;
-	}
-}
-
 void		sh_fill_buffer(t_shell *sh)
 {
 	int				res;
@@ -127,4 +108,19 @@ void		sh_fill_buffer(t_shell *sh)
 		}
 		i++;
 	}
+}
+
+void		sh_print_str(t_shell *sh, char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_bzero(sh->read->line, LINE_SIZE);
+		sh->read->line[0] = str[i];
+		sh_fill_buffer(sh);
+		i++;
+	}
+	ft_bzero(sh->read->line, LINE_SIZE);
 }
