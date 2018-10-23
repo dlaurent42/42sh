@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 11:58:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:00:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char		*sh_glob(char *str)
 	expansion = NULL;
 	cbraces = sh_glob_cbraces(str);
 	cbracessplit = cbraces_strsplit(cbraces, ' ');
-	while (cbracessplit[i])
+	while (cbracessplit && cbracessplit[i])
 	{
 		(expansion) ? expansion = ft_strjoinf(expansion, " ", 1): 0;
 		expansion = ft_strjoinf(expansion, sh_glob_pattern_sort(sh_glob_pattern(cbracessplit[i])), 3);
