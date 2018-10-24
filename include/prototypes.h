@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/24 23:52:11 by dhojt            ###   ########.fr       */
+=======
+/*   Updated: 2018/10/23 22:15:11 by dlaurent         ###   ########.fr       */
+>>>>>>> d00c490... [feature] moving glob and dollard to lexer folder, starting heredoc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,12 +203,37 @@ char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
 /*
-** functions - glob
+** functions - lexer
+*/
+bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
+void					lexer_entry(char *cmd);
+void					lexer_fill(t_lexer *lexer, const char *cmd);
+void					lexer_token_add(
+							t_lexer *lexer,
+							const char *src,
+							size_t size,
+							t_token_type type);
+void					lexer_delete(t_lexer *lexer);
+void					lexer_token_singlequote(t_lexer *l, const char **cmd);
+void					lexer_token_doublequote(t_lexer *l, const char **cmd);
+void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+t_token					*lexer_token_search(const char *cmd);
+const t_token			*lexer_lexic_singletone(void);
+void					sh_command_repatriate(char *str, int i, int len);
+
+/*
+** functions - lexer - dollar
+*/
+char					*sh_dollar_expansion(char *str, t_env *env);
+
+
+/*
+** functions - lexer - glob
 */
 char					*sh_glob(char *str);
 
 /*
-** functions - glob - cbraces
+** functions - lexer - glob - cbraces
 */
 char					*sh_glob_cbraces(char *str);
 bool					sh_glob_cbraces_check(char *str);
@@ -215,12 +244,7 @@ bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
 
 /*
-** functions - dollar
-*/
-char					*sh_dollar_expansion(char *str, t_env *env);
-
-/*
-** functions - glob - patterns
+** functions - lexer - glob - patterns
 */
 char					*sh_glob_pattern(char *str);
 char					*sh_glob_expand_ranges(t_filesystem *fs, char *str);
@@ -249,7 +273,7 @@ void					sh_glob_check_all_paths(
 								t_filesystem *fs2);
 
 /*
-** functions - glob - utils
+** functions - lexer - glob - utils
 */
 int						glob_strcountif(char *str, char c);
 bool					glob_match(char *s1, char *s2, char **lst);
@@ -260,37 +284,6 @@ char					*sh_glob_inject(char *str, char *injection, int i);
 char					**cbraces_strsplit(char *s, char c);
 char					**pattern_strsplit(char *s, char c);
 void					sh_glob_repatriate(char *str, int i, int len);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(
-							t_shell *sh,
-							t_env *env,
-							char **argv);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
-
-/*
-** functions - lexer
-*/
-bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-void					lexer_entry(char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
-void					lexer_token_add(
-							t_lexer *lexer,
-							const char *src,
-							size_t size,
-							t_token_type type);
-void					lexer_delete(t_lexer *lexer);
-void					lexer_token_singlequote(t_lexer *l, const char **cmd);
-void					lexer_token_doublequote(t_lexer *l, const char **cmd);
-void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
-t_token					*lexer_token_search(const char *cmd);
-const t_token			*lexer_lexic_singletone(void);
 
 /*
 ** functions - lexer - handlers
@@ -307,10 +300,27 @@ void					sh_command_expand_dollars(
 							char *str);
 
 /*
+** functions - lexer - heredoc
+*/
+bool					sh_heredoc(t_shell *sh);
+
+/*
 ** functions - lexer - utils
 */
 void					sh_command_inject(char *str, char *injection, int i);
-void					sh_command_repatriate(char *str, int i, int len);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(
+							t_shell *sh,
+							t_env *env,
+							char **argv);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 
 /*
 ** functions - parser

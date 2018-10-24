@@ -6,7 +6,11 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/10/25 12:11:12 by dlaurent         ###   ########.fr        #
+=======
+#    Updated: 2018/10/23 22:11:39 by dlaurent         ###   ########.fr        #
+>>>>>>> d00c490... [feature] moving glob and dollard to lexer folder, starting heredoc
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,27 +81,27 @@ SRC			=	shell.c														\
 				functions/builtins/utils/is_binary.c						\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
-				functions/dollar/dollar.c									\
 				functions/exec/run.c										\
-				functions/glob/glob.c										\
-				functions/glob/cbraces/cbraces.c							\
-				functions/glob/cbraces/check.c								\
-				functions/glob/cbraces/dot.c								\
-				functions/glob/cbraces/list.c								\
-				functions/glob/cbraces/start_and_stop.c						\
-				functions/glob/pattern/pattern.c							\
-				functions/glob/pattern/parse/expand_ranges.c				\
-				functions/glob/pattern/parse/remove_wildcards.c				\
-				functions/glob/pattern/paths/add.c							\
-				functions/glob/pattern/paths/check.c						\
-				functions/glob/utils/escape.c								\
-				functions/glob/utils/inject.c								\
-				functions/glob/utils/match.c								\
-				functions/glob/utils/range.c								\
-				functions/glob/utils/repatriate.c							\
-				functions/glob/utils/cbraces_strsplit.c						\
-				functions/glob/utils/pattern_strsplit.c						\
 				functions/lexer/lexer.c										\
+				functions/lexer/dollar/dollar.c								\
+				functions/lexer/glob/glob.c									\
+				functions/lexer/glob/cbraces/cbraces.c						\
+				functions/lexer/glob/cbraces/check.c						\
+				functions/lexer/glob/cbraces/dot.c							\
+				functions/lexer/glob/cbraces/list.c							\
+				functions/lexer/glob/cbraces/start_and_stop.c				\
+				functions/lexer/glob/pattern/pattern.c						\
+				functions/lexer/glob/pattern/parse/expand_ranges.c			\
+				functions/lexer/glob/pattern/parse/remove_wildcards.c		\
+				functions/lexer/glob/pattern/paths/add.c					\
+				functions/lexer/glob/pattern/paths/check.c					\
+				functions/lexer/glob/utils/escape.c							\
+				functions/lexer/glob/utils/inject.c							\
+				functions/lexer/glob/utils/match.c							\
+				functions/lexer/glob/utils/range.c							\
+				functions/lexer/glob/utils/repatriate.c						\
+				functions/lexer/glob/utils/cbraces_strsplit.c				\
+				functions/lexer/glob/utils/pattern_strsplit.c				\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\
 				functions/lexer/handlers/expansions.c						\
@@ -105,6 +109,7 @@ SRC			=	shell.c														\
 				functions/lexer/handlers/useless_quotes.c					\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
+				functions/lexer/heredoc/heredoc.c							\
 				functions/lexer/lexer_delete.c								\
 				functions/lexer/lexer_entry.c								\
 				functions/lexer/lexer_fill.c								\
@@ -298,17 +303,17 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
-				@mkdir -p $(OBJ_DIR)/functions/dollar
 				@mkdir -p $(OBJ_DIR)/functions/exec
-				@mkdir -p $(OBJ_DIR)/functions/glob
-				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/parse
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/paths
-				@mkdir -p $(OBJ_DIR)/functions/glob/utils
-				@mkdir -p $(OBJ_DIR)/functions/heredoc
 				@mkdir -p $(OBJ_DIR)/functions/lexer
+				@mkdir -p $(OBJ_DIR)/functions/lexer/dollar
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/cbraces
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/parse
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/paths
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
+				@mkdir -p $(OBJ_DIR)/functions/lexer/heredoc
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures
