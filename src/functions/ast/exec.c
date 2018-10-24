@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 16:06:03 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:18:27 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
 	// 	ret = execute_left_cursor(tree);
 	// else if (tree->type == 3)
 	// 	ret = execute_fd_aggr(tree);
-	// else if (tree->type == 4)
-	// 	ret = execute_pipe(tree);
+	else if (tree->type == 4)
+		ret = execute_pipe(sh, env, bin, tree);
 	else if (tree->type == 5)
 		ret = execute_conditions(sh, env, bin, tree);
 	else if (tree->type == 6)
