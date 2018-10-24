@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:29:35 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:49:22 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void					error_malloc_bin(t_shell *sh, t_bin *b, char *name);
 void					error_malloc_reader(t_shell *sh, char *name);
 void					error_no_path_var(t_shell *sh);
 void					error_import_export(int fd, char *path);
-int					error_pipe(void);
-int					error_fork(void);
+int						error_pipe(void);
+int						error_fork(void);
 
 /*
 ** functions
@@ -569,20 +569,15 @@ void					clean_tree(t_token_tree *tree);
 /*
 ** functions - ast
 */
-void					sh_build_tree(t_shell *sh, t_env *env, t_bin *bin,
-										char *cmd);
+void					sh_build_tree(t_shell *sh, char *cmd);
 t_token_tree			*build_list(t_lexer lexer);
 size_t					get_tree_token_type(t_token token);
 t_token_tree			*build_token_tree(t_token_tree *list);
-int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
-										t_token_tree *tree);
+int						execute_tree(t_shell *sh, t_token_tree *tree);
 char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
 
-char					execute_semicolon(t_shell *sh, t_env *env, t_bin *bin,
-										t_token_tree *tree);
-char					execute_conditions(t_shell *sh, t_env *env, t_bin *bin,
-										t_token_tree *tree);
-char		execute_pipe(t_shell *sh, t_env *env, t_bin *bin,
-										t_token_tree *tree);
+char					execute_semicolon(t_shell *sh, t_token_tree *tree);
+char					execute_conditions(t_shell *sh, t_token_tree *tree);
+char					execute_pipe(t_shell *sh, t_token_tree *tree);
 
 #endif
