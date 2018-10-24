@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 16:46:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:44:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int						execute_tree(t_shell *sh, t_token_tree *tree)
 		ret = sh_test_command_found(sh, sh->env, sh->bin, tree->tokens);
 	// else if (tree->type == 1)
 	// 	ret = execute_right_cursor(tree);
-	// else if (tree->type == 2)
-	// 	ret = execute_left_cursor(tree);
+	else if (tree->type == 2)
+		ret = execute_left_redirection(sh, tree);
 	// else if (tree->type == 3)
 	// 	ret = execute_fd_aggr(tree);
 	else if (tree->type == 4)
