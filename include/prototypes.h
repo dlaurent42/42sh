@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 14:10:44 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 15:53:21 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -572,5 +572,11 @@ void					sh_build_tree(t_shell *sh, t_env *env, t_bin *bin,
 t_token_tree			*build_list(t_lexer lexer);
 size_t					get_tree_token_type(t_token token);
 t_token_tree			*build_token_tree(t_token_tree *list);
+int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
+										t_token_tree *tree);
+char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
+
+char					execute_semicolon(t_shell *sh, t_env *env, t_bin *bin,
+										t_token_tree *tree);
 
 #endif
