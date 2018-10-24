@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 13:56:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 15:45:41 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,38 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	while (arr[++i])
 		sh_remove_useless_quotes(arr[i]);
 	return (sh_command_dispatch(sh, env, arr));
+}
+
+
+/*
+** IDEA: Only for testing purposes.
+*/
+char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin,
+	char **arg)
+{
+	int		i;
+	char	*tmp;
+	char	*str;
+
+	i = 0;
+	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
+	{
+		tmp = realpath(arg[0], NULL);
+		ft_strdel(&arg[0]);
+		arg[0] = tmp;
+	}
+	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
+	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
+		env_insert_protected(sh, sh->env, "?", str);
+	// if (arg)
+	// 	while (arg[i])
+	// 	{
+	// 		ft_strdel(&arg[i]);
+	// 		i++;
+	// 	}
+	// (arg) ? free(arg) : 0;
+	ft_strdel(&str);
+	return (1);
 }
 
 static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
