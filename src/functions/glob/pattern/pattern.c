@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 15:35:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:30:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 10:30:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static t_glob	*sh_glob_init(t_glob *glob, char *str)
 	glob->strsplit = pattern_strsplit(str, '/');
 	while (glob->strsplit[count])
 		count++;
+	if (count == 0 && glob->starts_by_path)
+		count = 1;
 	if (!(glob->fs = (t_filesystem **)ft_memalloc(
 			sizeof(t_filesystem *) * (count + 1))))
 		return (NULL);
