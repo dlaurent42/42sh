@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 07:56:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 14:30:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static bool			parse_obj(t_shell *sh, char *argv)
 	char			*path;
 	char			*ptr_to_last_word;
 	t_obj			*obj;
-	t_obj			*last_obj;
 
-	last_obj = NULL;
 	if (!(obj = auto_create_obj()))
 		return (false);
 	ptr_to_last_word = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ');

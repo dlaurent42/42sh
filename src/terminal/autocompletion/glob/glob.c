@@ -6,13 +6,14 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 23:52:08 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/24 11:02:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 14:45:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool				replace_buffer_content(t_shell *sh, char *str, char *glob, char *ptr_to_content)
+bool				replace_buffer_content(
+		t_shell *sh, char *str, char *glob, char *ptr_to_cont)
 {
 	char			*track;
 	int				number_of_deletions;
@@ -22,7 +23,7 @@ bool				replace_buffer_content(t_shell *sh, char *str, char *glob, char *ptr_to_
 	number_of_deletions = ft_strlens(str);
 	track = sh->buffer.content + sh->buffer.ushift;
 	sh_move_home(sh);
-	while (track++ != ptr_to_content)
+	while (track++ != ptr_to_cont)
 		sh_move_right(sh);
 	while (number_of_deletions--)
 		sh_delete_current_char(sh);
@@ -35,7 +36,7 @@ bool				replace_buffer_content(t_shell *sh, char *str, char *glob, char *ptr_to_
 bool				auto_glob(t_shell *sh)
 {
 	bool			status;
-	char			*ptr_to_content;
+	char			*ptr_to_cont;
 	char			*str;
 	char			*glob;
 
@@ -44,14 +45,14 @@ bool				auto_glob(t_shell *sh)
 	status = false;
 	if (ft_strcmps(sh->read->line, K_TAB))
 		return (status);
-	if((ptr_to_content = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ')))
-		ptr_to_content++;
+	if ((ptr_to_cont = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ')))
+		ptr_to_cont++;
 	else
-		ptr_to_content = sh->buffer.content + sh->buffer.ushift;
-	str = ft_strdups(ptr_to_content);
+		ptr_to_cont = sh->buffer.content + sh->buffer.ushift;
+	str = ft_strdups(ptr_to_cont);
 	glob = sh_glob(ft_strdup(str));
 	if (str && glob)
-		status = replace_buffer_content(sh, str, glob, ptr_to_content);
+		status = replace_buffer_content(sh, str, glob, ptr_to_cont);
 	free(str);
 	free(glob);
 	return (status);
