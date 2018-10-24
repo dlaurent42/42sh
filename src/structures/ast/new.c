@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:46:06 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/23 21:23:59 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 13:45:02 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token_tree		*new_tree_node(void)
 	ret->tokens = NULL;
 	ret->size = 0;
 	ret->type = 0;
-	ret->prev = NULL;
-	ret->next = NULL;
+	ret->left = NULL;
+	ret->right = NULL;
 	return (ret);
 }
