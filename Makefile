@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 12:13:58 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 12:14:25 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/import_export.c										\
-				functions/redirect.c										\
+				functions/prepare.c											\
+				functions/run.c												\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
@@ -78,7 +79,6 @@ SRC			=	shell.c														\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/exec/run.c										\
-				functions/lexer/lexer.c										\
 				functions/lexer/dollar/dollar.c								\
 				functions/lexer/glob/glob.c									\
 				functions/lexer/glob/cbraces/cbraces.c						\
@@ -108,7 +108,6 @@ SRC			=	shell.c														\
 				functions/lexer/heredoc/init.c								\
 				functions/lexer/heredoc/update.c							\
 				functions/lexer/tokenize/delete.c							\
-				functions/lexer/tokenize/entry.c							\
 				functions/lexer/tokenize/fill.c								\
 				functions/lexer/tokenize/lexic_singletone.c					\
 				functions/lexer/tokenize/token_add.c						\

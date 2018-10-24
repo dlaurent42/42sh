@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 12:54:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:13:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 static int	sh_multilines_assess_status_len(char status)
 {
-	if (status == LEXER_STATUS_DQUOTE
-	|| status == LEXER_STATUS_SQUOTE
-	|| status == LEXER_STATUS_BQUOTE)
+	if (status == STATUS_DQUOTE
+	|| status == STATUS_SQUOTE
+	|| status == STATUS_BQUOTE)
 		return (6);
-	if (status == LEXER_STATUS_HEREDOC)
+	if (status == STATUS_HEREDOC)
 		return (7);
-	if (status == LEXER_STATUS_PIPE)
+	if (status == STATUS_PIPE)
 		return (4);
 	return (1);
 }
 
 static char	*sh_multiline_assess_status(char status)
 {
-	if (status == LEXER_STATUS_DQUOTE)
+	if (status == STATUS_DQUOTE)
 		return ("dquote");
-	if (status == LEXER_STATUS_SQUOTE)
+	if (status == STATUS_SQUOTE)
 		return ("squote");
-	if (status == LEXER_STATUS_BQUOTE)
+	if (status == STATUS_BQUOTE)
 		return ("bquote");
-	if (status == LEXER_STATUS_HEREDOC)
+	if (status == STATUS_HEREDOC)
 		return ("heredoc");
-	if (status == LEXER_STATUS_PIPE)
+	if (status == STATUS_PIPE)
 		return ("pipe");
 	return ("?");
 }

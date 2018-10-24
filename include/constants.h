@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 14:08:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 21:07:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,13 +191,14 @@
 /*
 ** lexer status codes
 */
-# define LEXER_PARSE_ERR        -1
-# define LEXER_STATUS_OK        0
-# define LEXER_STATUS_DQUOTE    1
-# define LEXER_STATUS_SQUOTE    2
-# define LEXER_STATUS_BQUOTE    3
-# define LEXER_STATUS_HEREDOC   4
-# define LEXER_STATUS_PIPE      5
+# define STATUS_EMPTY	-2
+# define STATUS_ERR		-1
+# define STATUS_OK		0
+# define STATUS_DQUOTE	1
+# define STATUS_SQUOTE	2
+# define STATUS_BQUOTE	3
+# define STATUS_HEREDOC	4
+# define STATUS_PIPE	5
 
 /*
 ** globbing

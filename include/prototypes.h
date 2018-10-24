@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:14:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:14:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void					error_import_export(int fd, char *path);
 /*
 ** functions
 */
-void					sh_command_run(t_shell *sh);
+void					sh_command_prepare(t_shell *sh);
 
 /*
 ** functions - builtins
@@ -201,7 +201,7 @@ char					*sh_parse_quotes(char *arg);
 /*
 ** functions - lexer
 */
-char					sh_command_lexer(t_shell *sh, t_env *env, char *str);
+char					sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char *str);
 
 /*
 ** functions - lexer - dollar
