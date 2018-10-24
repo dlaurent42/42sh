@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 11:47:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 12:54:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	sh_multilines_assess_status_len(char status)
 		return (7);
 	if (status == LEXER_STATUS_PIPE)
 		return (4);
+	return (1);
 }
 
 static char	*sh_multiline_assess_status(char status)
@@ -42,8 +43,10 @@ static char	*sh_multiline_assess_status(char status)
 static void	sh_multilines_prompt(t_shell *sh, char status)
 {
 	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
-	sh->prompt.content = ft_strjoin(sh_multiline_assess_status, MULT_PROMPT);
-	sh->prompt.content = ft_strdups(MULT_PROMPT);
+	sh->prompt.content = ft_strjoins(
+							sh_multiline_assess_status(status),
+							MULT_PROMPT);
+	sh->prompt.content = ft_strjoinf(sh->prompt.content, MULT_PROMPT, 1);
 	sh->prompt.len = 3 + sh_multilines_assess_status_len(status);
 	sh->prompt.len_mod = sh->prompt.len % sh->window.width;
 	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;

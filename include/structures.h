@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 11:55:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 12:46:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct			s_buffer
 	int					ushift;
 	int					dshift;
 	char				content[ARG_MAX + 1];
-	char				parsed[ARG_MAX + 1];
+	char				*parsed;
 	char				stored[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
@@ -288,28 +288,6 @@ typedef struct			s_heredocs
 	t_heredoc			hd[HD_ASCII_MAX + 1];
 }						t_heredocs;
 
-typedef struct			s_shell
-{
-	t_ac				*ac;
-	char				*hist;
-	pid_t				pid;
-	t_bin				*bin;
-	t_cmd				*cmd;
-	t_env				*env;
-	t_env				*alias;
-	t_read				*read;
-	t_modes				modes;
-	t_lexer				lexer;
-	t_cursor			cursor;
-	t_prompt			prompt;
-	t_window			window;
-	t_buffer			buffer;
-	t_search			search;
-	t_select			selection;
-	t_termios			termios;
-	t_heredocs			heredocs;
-}						t_shell;
-
 /*
 ** Lexer
 */
@@ -344,6 +322,28 @@ typedef struct			s_lexer
 	size_t				size;
 	char				*cmd;
 }						t_lexer;
+
+typedef struct			s_shell
+{
+	t_ac				*ac;
+	char				*hist;
+	pid_t				pid;
+	t_bin				*bin;
+	t_cmd				*cmd;
+	t_env				*env;
+	t_env				*alias;
+	t_read				*read;
+	t_modes				modes;
+	t_lexer				lexer;
+	t_cursor			cursor;
+	t_prompt			prompt;
+	t_window			window;
+	t_buffer			buffer;
+	t_search			search;
+	t_select			selection;
+	t_termios			termios;
+	t_heredocs			heredocs;
+}						t_shell;
 
 t_shell					*g_sh;
 
