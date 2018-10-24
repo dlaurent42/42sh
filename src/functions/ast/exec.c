@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 16:18:27 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:46:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 ** 2 - < or <<
 ** 1 - > or >>
 */
-int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
-										t_token_tree *tree)
+int						execute_tree(t_shell *sh, t_token_tree *tree)
 {
 	int		ret;
 
@@ -30,7 +29,7 @@ int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
 	if (!tree)
 		return (0);
 	if (tree->type == 0)
-		ret = sh_test_command_found(sh, env, bin, tree->tokens);
+		ret = sh_test_command_found(sh, sh->env, sh->bin, tree->tokens);
 	// else if (tree->type == 1)
 	// 	ret = execute_right_cursor(tree);
 	// else if (tree->type == 2)
@@ -38,10 +37,10 @@ int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
 	// else if (tree->type == 3)
 	// 	ret = execute_fd_aggr(tree);
 	else if (tree->type == 4)
-		ret = execute_pipe(sh, env, bin, tree);
+		ret = execute_pipe(sh, tree);
 	else if (tree->type == 5)
-		ret = execute_conditions(sh, env, bin, tree);
+		ret = execute_conditions(sh, tree);
 	else if (tree->type == 6)
-		ret = execute_semicolon(sh, env, bin, tree);
+		ret = execute_semicolon(sh, tree);
 	return (ret);
 }
