@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:40:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 12:44:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:59:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	sh_command_replace_backslash_octal(char *s, int i)
 	if (val > 127)
 		return ;
 	s[i] = val;
-	sh_command_repatriate(s, i + 1, j - i);
+	lexer_repatriate(s, i + 1, j - i);
 }
 
 static bool	sh_command_replace_backslah(char *s, int i)
@@ -56,7 +56,7 @@ static bool	sh_command_replace_backslah(char *s, int i)
 	else if (s[i + 1] == 'v' && (is_escaped = TRUE))
 		s[i] = '\v';
 	(is_escaped)
-		? sh_command_repatriate(s, i + 1, 1)
+		? lexer_repatriate(s, i + 1, 1)
 		: sh_command_replace_backslash_octal(s, i);
 	return (TRUE);
 }
@@ -97,7 +97,7 @@ bool		sh_command_parse_backslash(char *s)
 		else if (s[i] == '\\' && !s[i + 1] && !in_squote && !in_dquote)
 			return (FALSE);
 		else if (s[i] == '\\' && !in_squote && !in_dquote && (s[i] = s[i + 1]))
-			sh_command_repatriate(s, i + 1, 1);
+			lexer_repatriate(s, i + 1, 1);
 		i += (s[i]) ? 1 : 0;
 	}
 	return (TRUE);

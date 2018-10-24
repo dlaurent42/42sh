@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entry.c                                            :+:      :+:    :+:   */
+/*   is_escape.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/07 11:53:10 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/24 12:52:56 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 16:48:28 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 16:48:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	lexer_entry(t_shell *sh, t_env *env, char *cmd)
+bool		lexer_is_esc(char *str, int i)
 {
-	char	status;
-	t_lexer lexer;
+	int	tmp;
+	int	count;
 
-	(void)env;
-	status = 0;
-	ft_bzero((void *)&lexer, sizeof(t_lexer));
-	lexer_fill(&lexer, cmd); // A remplacer par ce qu'il y a ci-dessous
-//	if ((status = lexer_fill(&lexer, cmd)) != 0)
-//		lexer_delete(&lexer);
-	sh->lexer = lexer;
-	return (status);
+	tmp = i;
+	count = 0;
+	if (str[i] == '\\')
+		while (++i && str[i] == '\\')
+			count++;
+	i = tmp;
+	while (--i >= 0 && str[i] == '\\')
+		count++;
+	return (count % 2);
 }

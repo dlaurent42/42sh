@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_delete.c                                     :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 14:19:56 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 16:05:07 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 17:36:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	lexer_delete(t_lexer *lexer)
+char	lexer_delete(t_lexer *lexer, char status)
 {
 	t_token	*token_tmp;
 	size_t	index;
@@ -25,4 +25,5 @@ void	lexer_delete(t_lexer *lexer)
 		++index;
 	}
 	ft_memdel((void **)&lexer->tokens);
+	return (status);
 }

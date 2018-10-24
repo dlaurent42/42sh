@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:13:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:14:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,6 @@ char					sh_command_lexer(t_shell *sh, t_env *env, char *str);
 */
 char					*sh_dollar_expansion(char *str, t_env *env);
 
-
 /*
 ** functions - lexer - glob
 */
@@ -257,15 +256,10 @@ void					sh_glob_check_all_paths(
 /*
 ** functions - lexer - glob - utils
 */
-int						glob_strcountif(char *str, char c);
 bool					glob_match(char *s1, char *s2, char **lst);
-bool					glob_is_esc(char *str, int i);
-bool					glob_need_esc(char c);
 bool					glob_in_range(char *str, int pos);
-char					*sh_glob_inject(char *str, char *injection, int i);
 char					**cbraces_strsplit(char *s, char c);
 char					**pattern_strsplit(char *s, char c);
-void					sh_glob_repatriate(char *str, int i, int len);
 
 /*
 ** functions - lexer - handlers
@@ -293,14 +287,14 @@ char					sh_heredoc_update(t_shell *sh);
 /*
 ** functions - lexer - tokenize
 */
-char					lexer_entry(t_shell *sh, t_env *env, char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
+char					lexer_entry(t_lexer *lexer, char *cmd);
+char					lexer_fill(t_lexer *lexer, const char *cmd);
 void					lexer_token_add(
 							t_lexer *lexer,
 							const char *src,
 							size_t size,
 							t_token_type type);
-void					lexer_delete(t_lexer *lexer);
+char					lexer_delete(t_lexer *lexer, char status);
 void					lexer_token_singlequote(t_lexer *l, const char **cmd);
 void					lexer_token_doublequote(t_lexer *l, const char **cmd);
 void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
@@ -310,8 +304,13 @@ const t_token			*lexer_lexic_singletone(void);
 /*
 ** functions - lexer - utils
 */
-void					sh_command_inject(char *str, char *injection, int i);
-void					sh_command_repatriate(char *str, int i, int len);
+void					lexer_inject_cpy(char *str, char *injection, int i);
+char					*lexer_inject_dup(char *str, char *injection, int i);
+bool					lexer_is_empty(char *str);
+bool					lexer_is_esc(char *str, int i);
+bool					lexer_need_esc(char c);
+void					lexer_repatriate(char *str, int i, int len);
+int						lexer_strcountif(char *str, char c);
 
 /*
 ** functions - exec

@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 12:13:46 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 12:13:58 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,11 +91,8 @@ SRC			=	shell.c														\
 				functions/lexer/glob/pattern/parse/remove_wildcards.c		\
 				functions/lexer/glob/pattern/paths/add.c					\
 				functions/lexer/glob/pattern/paths/check.c					\
-				functions/lexer/glob/utils/escape.c							\
-				functions/lexer/glob/utils/inject.c							\
 				functions/lexer/glob/utils/match.c							\
 				functions/lexer/glob/utils/range.c							\
-				functions/lexer/glob/utils/repatriate.c						\
 				functions/lexer/glob/utils/cbraces_strsplit.c				\
 				functions/lexer/glob/utils/pattern_strsplit.c				\
 				functions/lexer/handlers/backslash.c						\
@@ -120,7 +117,11 @@ SRC			=	shell.c														\
 				functions/lexer/tokenize/token_search.c						\
 				functions/lexer/tokenize/token_singlequote.c				\
 				functions/lexer/utils/inject.c								\
+				functions/lexer/utils/is_empty.c							\
+				functions/lexer/utils/is_escape.c							\
+				functions/lexer/utils/need_escape.c							\
 				functions/lexer/utils/repatriate.c							\
+				functions/lexer/utils/strcountif_esc.c						\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\

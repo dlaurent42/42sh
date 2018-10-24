@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:16:13 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:25:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:11:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static bool		check_combinaisons(int i, int j, char **s, char **lst)
 	{
 		if (s[1][j] == '\0')
 			return (FALSE);
-		else if (s[1][j] == '*' && !glob_is_esc(s[1], j)
+		else if (s[1][j] == '*' && !lexer_is_esc(s[1], j)
 		&& check_combinaisons(i, j + 1, s, lst) == 0)
 			return (check_combinaisons(i + 1, j, s, lst));
-		else if (s[1][j] == '*' && !glob_is_esc(s[1], j))
+		else if (s[1][j] == '*' && !lexer_is_esc(s[1], j))
 			return (check_combinaisons(i, j + 1, s, lst));
-		else if (s[0][i] == s[1][j] || (s[1][j] == '?' && !glob_is_esc(s[1], j))
+		else if (s[0][i] == s[1][j] || (s[1][j] == '?'
+		&& !lexer_is_esc(s[1], j))
 		|| (s[1][j] < 32 && check_list(s[0][i], s[1][j], lst)))
 			return (check_combinaisons(i + 1, j + 1, s, lst));
 		return (FALSE);

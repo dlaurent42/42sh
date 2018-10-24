@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:43:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:18:06 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:57:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static char	*sh_glob_joinchar(char *str, char c)
 static char	*sh_glob_expand_ranges_rp(
 	t_filesystem *fs, char *str, int start, int stop)
 {
-	sh_glob_repatriate(str, start, stop - start + 1);
-	str = sh_glob_inject(str, &fs->curr_idx, start);
+	lexer_repatriate(str, start, stop - start + 1);
+	str = lexer_inject_dup(str, &fs->curr_idx, start);
 	return (str);
 }
 
@@ -70,13 +70,13 @@ char		*sh_glob_expand_ranges(t_filesystem *fs, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '[' && !glob_is_esc(str, i))
+		if (str[i] == '[' && !lexer_is_esc(str, i))
 		{
 			j = i + 1;
 			while (str[j])
 			{
-				if (str[j] == ']' && !glob_is_esc(str, i)
-				&& (str[j - 1] != '[' || glob_is_esc(str, i - 1)))
+				if (str[j] == ']' && !lexer_is_esc(str, i)
+				&& (str[j - 1] != '[' || lexer_is_esc(str, i - 1)))
 				{
 					str = sh_glob_expand_range(fs, str, i + 1, j - 1);
 					break ;

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 23:43:56 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/20 18:12:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:55:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*sh_glob_cbraces(char *str)
 {
 	t_cbraces	*cb;
 
-	if (glob_strcountif(str, '{') == 0 || glob_strcountif(str, '}') == 0
+	if (lexer_strcountif(str, '{') == 0 || lexer_strcountif(str, '}') == 0
 	|| !(cb = (t_cbraces *)ft_memalloc(sizeof(t_cbraces))))
 		return (str);
 	cb->start = -1;

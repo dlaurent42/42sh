@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 10:16:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 14:24:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:00:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void		sh_command_expand_dollars(t_shell *sh, t_env *env, char *str)
 			expansion = (str[i + 1] == '{')
 			? sh_command_expansion_val(sh, env, ft_strsub(str, i + 2, len - 2))
 			: sh_command_expansion_val(sh, env, ft_strsub(str, i + 1, len - 1));
-			sh_command_repatriate(str, i, len + 1);
-			sh_command_inject(str, expansion, i);
+			lexer_repatriate(str, i, len + 1);
+			lexer_inject_dup(str, expansion, i);
 			ft_strdel(&expansion);
 		}
 }

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   repatriate.c                                       :+:      :+:    :+:   */
+/*   is_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 20:38:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/19 13:54:30 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 14:53:18 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 14:55:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	sh_glob_repatriate(char *str, int i, int len)
+bool		lexer_is_empty(char *str)
 {
-	while (str[i + len])
+	int		i;
+
+	i = 0;
+	while (str && str[i])
 	{
-		str[i] = str[i + len];
+		if (str[i] != ' ' && str[i] != '\t')
+			return (FALSE);
 		i++;
 	}
-	while (str[i])
-	{
-		str[i] = '\0';
-		i++;
-	}
+	return (TRUE);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_fill.c                                       :+:      :+:    :+:   */
+/*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 16:23:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 18:22:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static int	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 {
 	if (**cmd == '\"')
 	{
@@ -38,14 +38,14 @@ int		handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 	return (0);
 }
 
-void	lexer_fill(t_lexer *lexer, const char *cmd)
+char		lexer_fill(t_lexer *lexer, const char *cmd)
 {
 	t_token		*match;
 	const char	*prev;
 
 	prev = cmd;
-	if (cmd == NULL)
-		return ;
+	if (lexer_is_empty((char *)cmd))
+		return (-1);
 	while (*cmd != '\0')
 	{
 		match = lexer_token_search(cmd);
@@ -63,6 +63,6 @@ void	lexer_fill(t_lexer *lexer, const char *cmd)
 		else
 			++cmd;
 	}
-	if (prev != cmd)
-		lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
+	(prev != cmd) ? lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD) : 0;
+	return (0);
 }

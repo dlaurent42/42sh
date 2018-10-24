@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:33:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:14:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:58:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ bool	glob_in_range(char *str, int pos)
 		return (FALSE);
 	while (str[i] && i < pos)
 	{
-		if (str[i] == '[' && !glob_is_esc(str, i))
+		if (str[i] == '[' && !lexer_is_esc(str, i))
 			in_range = TRUE;
-		else if (str[i] == ']' && !glob_is_esc(str, i)
+		else if (str[i] == ']' && !lexer_is_esc(str, i)
 		&& in_range && i && str[i - 1] != '[')
 			in_range = FALSE;
 		i++;

@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inject.c                                           :+:      :+:    :+:   */
+/*   strcountif_esc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 10:59:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 19:20:45 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 16:49:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 16:58:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	*sh_glob_inject(char *str, char *injection, int i)
+int			lexer_strcountif(char *str, char c)
 {
-	int		j;
-	char	*left;
-	char	*right;
+	int		i;
+	int		count;
 
-	j = 0;
+	i = 0;
+	count = 0;
 	if (!str)
-		return (ft_strdups(injection));
-	right = ft_strdups(str + i);
-	left = ft_strsub(str, 0, i);
-	ft_strdel(&str);
-	str = ft_strjoinf(left, injection, 1);
-	str = ft_strjoinf(str, right, 3);
-	return (str);
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c && !lexer_is_esc(str, i))
+			count++;
+		i++;
+	}
+	return (count);
 }

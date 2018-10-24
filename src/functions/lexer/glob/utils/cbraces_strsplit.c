@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:02:47 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 20:16:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:58:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static char		let_n_char(char *s, char c, size_t id_w, size_t id_c)
 	n_chars = 0;
 	while (s[i])
 	{
-		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+		while (s[i] == c && !lexer_is_esc(s, i) && !in_cbrace(s, i))
 			i++;
 		if (s[i])
 			n_words++;
-		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
+		while (s[i] && (s[i] != c || lexer_is_esc(s, i) || in_cbrace(s, i)))
 		{
 			if (id_w == n_words)
 			{
@@ -70,11 +70,11 @@ static size_t	get_n_chars(char *s, char c, size_t id_word)
 	n_chars = 0;
 	while (s[i])
 	{
-		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+		while (s[i] == c && !lexer_is_esc(s, i) && !in_cbrace(s, i))
 			i++;
 		if (s[i])
 			n_words++;
-		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
+		while (s[i] && (s[i] != c || lexer_is_esc(s, i) || in_cbrace(s, i)))
 		{
 			if (id_word == n_words)
 				n_chars++;
@@ -93,11 +93,11 @@ static size_t	get_n_words(char *s, char c)
 	n = 0;
 	while (s[i])
 	{
-		while (s[i] == c && !glob_is_esc(s, i) && !in_cbrace(s, i))
+		while (s[i] == c && !lexer_is_esc(s, i) && !in_cbrace(s, i))
 			i++;
 		if (s[i])
 			n++;
-		while (s[i] && (s[i] != c || glob_is_esc(s, i) || in_cbrace(s, i)))
+		while (s[i] && (s[i] != c || lexer_is_esc(s, i) || in_cbrace(s, i)))
 			i++;
 	}
 	return (n);

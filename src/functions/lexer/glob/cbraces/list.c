@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 13:07:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 16:07:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:58:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	sh_glob_cbraces_list_rearrange(t_cbraces *cb, int i)
 
 	str = NULL;
 	cb->split[i] = sh_glob_cbraces(cb->split[i]);
-	count = glob_strcountif(cb->split[i], ' ');
+	count = lexer_strcountif(cb->split[i], ' ');
 	i = 0;
 	while (cb->split[i])
 	{
@@ -73,12 +73,12 @@ static bool	sh_glob_cbraces_list_check(t_cbraces *cb)
 		else
 			while (cb->split[i][j])
 			{
-				if (glob_need_esc(cb->split[i][j])
-				&& !glob_is_esc(cb->split[i], j))
+				if (lexer_need_esc(cb->split[i][j])
+				&& !lexer_is_esc(cb->split[i], j))
 					return (FALSE);
-				else if (glob_is_esc(cb->split[i], j)
-				&& !glob_need_esc(cb->split[i][j]))
-					sh_glob_repatriate(cb->split[i], j, 1);
+				else if (lexer_is_esc(cb->split[i], j)
+				&& !lexer_need_esc(cb->split[i][j]))
+					lexer_repatriate(cb->split[i], j, 1);
 				j++;
 			}
 		i++;
@@ -94,7 +94,7 @@ bool		sh_glob_cbraces_list(t_cbraces *cb)
 	i = 0;
 	if (!(substr = ft_strsub(cb->str, cb->start + 1, cb->stop - cb->start - 1)))
 		return (FALSE);
-	if (glob_strcountif(substr, ',') == 0 || glob_strcountif(substr, ' '))
+	if (lexer_strcountif(substr, ',') == 0 || lexer_strcountif(substr, ' '))
 	{
 		ft_strdel(&substr);
 		return (FALSE);

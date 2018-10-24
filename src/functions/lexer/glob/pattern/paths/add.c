@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 10:32:48 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 11:33:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:58:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*sh_glob_check_result(char *str)
 	new = ft_strdupf(str);
 	while (new[i])
 	{
-		if (glob_need_esc(new[i]) && !glob_is_esc(new, i))
+		if (lexer_need_esc(new[i]) && !lexer_is_esc(new, i))
 		{
 			left = ft_strsub(new, 0, i);
 			right = ft_strdups(new + i);
@@ -74,7 +74,7 @@ static char	*sh_glob_remove_dbl_slash(char *str)
 	while (str[i])
 	{
 		if (str[i] == '/' && str[i + 1] == '/')
-			sh_glob_repatriate(str, i, 1);
+			lexer_repatriate(str, i, 1);
 		i++;
 	}
 	return (str);
