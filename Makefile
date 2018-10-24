@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/22 23:08:46 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/24 08:17:11 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,6 +156,8 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				structures/shell/termios.c									\
+				structures/ast/add.c										\
+				structures/ast/new.c										\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -252,6 +254,8 @@ SRC			=	shell.c														\
 				functions/lexer/lexer_token_doublequote.c					\
 				functions/lexer/lexer_token_search.c						\
 				functions/lexer/lexer_token_singlequote.c					\
+				functions/ast/build_list.c									\
+				functions/ast/tree.c										\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
@@ -306,6 +310,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
+				@mkdir -p $(OBJ_DIR)/functions/ast
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
@@ -314,6 +319,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term
+				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/sort
