@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 21:44:42 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 11:32:18 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -561,5 +561,11 @@ void					sh_window_resize(t_shell *sh);
 t_token_tree			*new_tree_node(void);
 void					add_tree_node(t_token_tree **head, t_token_tree **last,
 						t_token_tree *new);
+void 					add_tree_to_back(t_token_tree **head, t_token_tree *new);
 
+/*
+** functions - ast
+*/
+void					sh_build_tree(char *cmd);
+t_token_tree			*build_list(t_lexer lexer);
 #endif
