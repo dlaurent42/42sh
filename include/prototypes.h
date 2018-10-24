@@ -6,11 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/24 23:52:11 by dhojt            ###   ########.fr       */
-=======
-/*   Updated: 2018/10/23 22:15:11 by dlaurent         ###   ########.fr       */
->>>>>>> d00c490... [feature] moving glob and dollard to lexer folder, starting heredoc
+/*   Updated: 2018/10/25 12:12:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,21 +201,7 @@ char					*sh_parse_quotes(char *arg);
 /*
 ** functions - lexer
 */
-bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-void					lexer_entry(char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
-void					lexer_token_add(
-							t_lexer *lexer,
-							const char *src,
-							size_t size,
-							t_token_type type);
-void					lexer_delete(t_lexer *lexer);
-void					lexer_token_singlequote(t_lexer *l, const char **cmd);
-void					lexer_token_doublequote(t_lexer *l, const char **cmd);
-void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
-t_token					*lexer_token_search(const char *cmd);
-const t_token			*lexer_lexic_singletone(void);
-void					sh_command_repatriate(char *str, int i, int len);
+char					sh_command_lexer(t_shell *sh);
 
 /*
 ** functions - lexer - dollar
@@ -302,12 +284,30 @@ void					sh_command_expand_dollars(
 /*
 ** functions - lexer - heredoc
 */
-bool					sh_heredoc(t_shell *sh);
+bool					sh_heredoc(t_shell *sh, char *str);
+
+/*
+** functions - lexer - tokenize
+*/
+char					lexer_entry(t_shell *sh, char *cmd);
+void					lexer_fill(t_lexer *lexer, const char *cmd);
+void					lexer_token_add(
+							t_lexer *lexer,
+							const char *src,
+							size_t size,
+							t_token_type type);
+void					lexer_delete(t_lexer *lexer);
+void					lexer_token_singlequote(t_lexer *l, const char **cmd);
+void					lexer_token_doublequote(t_lexer *l, const char **cmd);
+void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+t_token					*lexer_token_search(const char *cmd);
+const t_token			*lexer_lexic_singletone(void);
 
 /*
 ** functions - lexer - utils
 */
 void					sh_command_inject(char *str, char *injection, int i);
+void					sh_command_repatriate(char *str, int i, int len);
 
 /*
 ** functions - exec
@@ -522,7 +522,7 @@ void					sh_search_init(t_shell *sh);
 /*
 ** terminal - multilines
 */
-void					sh_multilines(t_shell *sh);
+void					sh_multilines(t_shell *sh, char status);
 void					sh_multilines_close(t_shell *sh);
 
 /*

@@ -6,11 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/10/25 12:11:12 by dlaurent         ###   ########.fr        #
-=======
-#    Updated: 2018/10/23 22:11:39 by dlaurent         ###   ########.fr        #
->>>>>>> d00c490... [feature] moving glob and dollard to lexer folder, starting heredoc
+#    Updated: 2018/10/25 12:12:25 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,15 +106,15 @@ SRC			=	shell.c														\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
 				functions/lexer/heredoc/heredoc.c							\
-				functions/lexer/lexer_delete.c								\
-				functions/lexer/lexer_entry.c								\
-				functions/lexer/lexer_fill.c								\
-				functions/lexer/lexer_lexic_singletone.c					\
-				functions/lexer/lexer_token_add.c							\
-				functions/lexer/lexer_token_backquote.c						\
-				functions/lexer/lexer_token_doublequote.c					\
-				functions/lexer/lexer_token_search.c						\
-				functions/lexer/lexer_token_singlequote.c					\
+				functions/lexer/tokenize/delete.c							\
+				functions/lexer/tokenize/entry.c							\
+				functions/lexer/tokenize/fill.c								\
+				functions/lexer/tokenize/lexic_singletone.c					\
+				functions/lexer/tokenize/token_add.c						\
+				functions/lexer/tokenize/token_backquote.c					\
+				functions/lexer/tokenize/token_doublequote.c				\
+				functions/lexer/tokenize/token_search.c						\
+				functions/lexer/tokenize/token_singlequote.c				\
 				functions/lexer/utils/inject.c								\
 				functions/lexer/utils/repatriate.c							\
 				functions/parser/build.c									\
@@ -314,6 +310,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/heredoc
+				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures

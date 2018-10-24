@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 15:19:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 11:51:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ static void	sh_reset_sh(t_shell *sh)
 
 void		sh_command_run(t_shell *sh)
 {
+	char	status;
+
+	status = 0;
 	sh_move_end(sh);
 	ft_putchar('\n');
 	if (sh->buffer.display_len)
 	{
-		ft_bzero(sh->buffer.parsed, ARG_MAX);
-		ft_strcpy(sh->buffer.parsed, sh->buffer.content);
-		if (sh_command_lexer(sh, sh->env, sh->buffer.parsed) == FALSE)
-			return (sh_multilines(sh));
+		if ((status = sh_command_lexer(sh)) > 0)
+			return (sh_multilines(sh, status));
+		else if (status < 0)
+			return (sh_reset_sh(sh));
 		sh->modes.multiline = FALSE;
 		if (!sh_command_empty(sh->buffer.parsed))
 		{

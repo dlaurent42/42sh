@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 20:14:00 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 12:38:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool	sh_command_lexer(t_shell *sh, t_env *env, char *str)
+char		sh_command_lexer(t_shell *sh)
 {
-	if (!sh_command_parse_backslash(str))
-		return (FALSE);
-	if (!sh_command_quotes_check(str))
-		return (FALSE);
-	sh_command_expand_dollars(sh, env, str);
-	sh_command_expand_tile(sh, env, str);
-	sh_command_trim(str);
-	lexer_entry(str);
-	return (TRUE);
+	char	*str;
+	t_env	*env;
+
+	ft_bzero(sh->buffer.parsed, ARG_MAX);
+	ft_strcpy(sh->buffer.parsed, sh->buffer.content);
+	str = sh->buffer.parsed;
+	env = sh->env;
+	if (sh->modes.heredoc == FALSE)
+		return (lexer_entry(sh, str));
+	return (sh_heredoc(sh, NULL));
 }

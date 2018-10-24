@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_entry.c                                      :+:      :+:    :+:   */
+/*   entry.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 11:53:10 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 16:04:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 11:58:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	lexer_entry(char *cmd)
+char	lexer_entry(t_shell *sh, char *cmd)
 {
+	char	status;
 	t_lexer lexer;
 
 	ft_bzero((void *)&lexer, sizeof(t_lexer));
-	lexer_fill(&lexer, cmd);
-	lexer_delete(&lexer);
+	lexer_fill(&lexer, cmd); // A remplacer par ce qu'il y a ci-dessous
+//	if ((status = lexer_fill(&lexer, cmd)) != 0)
+//		lexer_delete(&lexer);
+	sh->lexer = lexer;
+	return (status);
 }
