@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 17:36:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:45:04 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -580,5 +580,7 @@ char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
 char					execute_semicolon(t_shell *sh, t_token_tree *tree);
 char					execute_conditions(t_shell *sh, t_token_tree *tree);
 char					execute_pipe(t_shell *sh, t_token_tree *tree);
+char					execute_left_redirection(t_shell *sh,
+													t_token_tree *tree);
 
 #endif
