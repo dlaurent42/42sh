@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 13:19:43 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 13:35:15 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void			tree_group_token(t_lexer lexer, t_token_tree **head,
 	if (len == 0 || !(new = new_tree_node()))
 		return ;
 	new->size = len;
-	new->type = 0;
+	new->type = (len > 1 ? 0 : get_tree_token_type(lexer.tokens[begin]));
 	if (!(new->tokens = (char **)ft_memalloc(sizeof(char *) * len)))
 	{
 		ft_memdel((void **)&new);
@@ -82,13 +82,13 @@ t_token_tree		*build_list(t_lexer lexer)
 		i++;
 	}
 	tree_group_token(lexer, &head, len, i - len);
-	while (head)
-	{
-		printf("List: size: %zu | Elements: ", head->size);
-		for (size_t i = 0; i < head->size; i++)
-			printf("%s ", head->tokens[i]);
-		printf("\n");
-		head = head->next;
-	}
+	// while (head)
+	// {
+	// 	printf("Class: %d | size: %zu | Elements: ", head->type, head->size);
+	// 	for (size_t i = 0; i < head->size; i++)
+	// 		printf("%s ", head->tokens[i]);
+	// 	printf("\n");
+	// 	head = head->next;
+	// }
 	return (head);
 }
