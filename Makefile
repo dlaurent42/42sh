@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 08:17:11 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/24 13:56:49 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,6 +158,7 @@ SRC			=	shell.c														\
 				structures/shell/termios.c									\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
+				structures/ast/clean.c										\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -256,6 +257,8 @@ SRC			=	shell.c														\
 				functions/lexer/lexer_token_singlequote.c					\
 				functions/ast/build_list.c									\
 				functions/ast/tree.c										\
+				functions/ast/get_tree_token_type.c							\
+				functions/ast/build_token_tree.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
