@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:48:12 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:25:13 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ void		sh_command_run(t_shell *sh)
 			command_add(sh, true);
 			sh->modes.exec = TRUE;
 			sh_build_tree(sh, sh->buffer.parsed);
-			// printf("============OLD===============\n");
-			// sh_command_parser(
-			// 	sh,
-			// 	sh->env,
-			// 	sh->bin,
-			// 	sh->buffer.parsed);
 		}
 	}
 	sh_reset_sh(sh);
