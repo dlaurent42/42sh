@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 01:06:51 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 07:56:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			parse_obj(t_shell *sh, char **argv)
+static bool			parse_obj(t_shell *sh, char *argv)
 {
 	char			*path;
 	char			*ptr_to_last_word;
@@ -20,17 +20,19 @@ static bool			parse_obj(t_shell *sh, char **argv)
 	t_obj			*last_obj;
 
 	last_obj = NULL;
-	argv++;
 	if (!(obj = auto_create_obj()))
 		return (false);
 	ptr_to_last_word = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ');
 	if (ptr_to_last_word && *(ptr_to_last_word + 1) == '/')
 		path = ft_strdups("/");
 	else if (ptr_to_last_word && *(ptr_to_last_word + 1) == '~')
+	{
 		path = ft_strdups(env_search(sh->env, "HOME"));
+		argv++;
+	}
 	else
 		path = ft_strdups(".");
-	if (!path || !(auto_path(obj, path, *argv)))
+	if (!path || !(auto_path(obj, path, argv)))
 	{
 		free(obj);
 		return (false);
@@ -101,7 +103,7 @@ bool				auto_get_obj(t_shell *sh)
 {
 	if (sh->ac->auto_mode != AUTO_NON)
 	{
-		if (!(parse_obj(sh, sh->ac->argv)))
+		if (!(parse_obj(sh, *(sh->ac->argv + 1))))
 			return (false);
 	}
 	if (sh->ac->auto_mode == AUTO_BIN)

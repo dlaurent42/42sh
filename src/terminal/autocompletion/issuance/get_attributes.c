@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:25:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 07:44:59 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 08:02:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ static bool			get_initial(t_shell *sh, t_obj *obj)
 	obj->data.parent_path = (slash)
 		? ft_strndup(obj->data.path, slash - obj->data.path)
 		: ft_strdup(".");
-	ft_printf("\n\nStr:    %s", obj->data.str);
-	ft_printf("\n\nParent: %s", obj->data.parent_path);
-	ft_printf("\n\nNormal: %s", obj->data.path);
-	ft_printf("\n\n");
 	if (ft_strcmps(obj->data.str, "."))
 		sh->ac->file_name = ft_strdup((slash) ? slash + 1 : obj->data.str);
 	else
