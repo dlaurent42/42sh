@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 15:47:39 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:13:27 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ void		sh_command_run(t_shell *sh)
 				sh->env,
 				sh->bin,
 				sh->buffer.parsed);
-			// Left for now
-			printf("============OLD===============\n");
-			sh_command_parser(
-				sh,
-				sh->env,
-				sh->bin,
-				sh->buffer.parsed);
+			// printf("============OLD===============\n");
+			// sh_command_parser(
+			// 	sh,
+			// 	sh->env,
+			// 	sh->bin,
+			// 	sh->buffer.parsed);
 		}
 	}
 	sh_reset_sh(sh);
