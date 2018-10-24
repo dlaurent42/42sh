@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:49:22 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:12:04 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void					error_no_path_var(t_shell *sh);
 void					error_import_export(int fd, char *path);
 int						error_pipe(void);
 int						error_fork(void);
+void					error_execution_tree(void);
 
 /*
 ** functions

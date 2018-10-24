@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:23:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 16:29:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:11:53 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ int		error_fork(void)
 {
 	ft_putendl_fd("fork error", 2);
 	return (1);
+}
+
+void	error_execution_tree(void)
+{
+	ft_putendl_fd("error while executing command", 2);
 }
