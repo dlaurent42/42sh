@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 12:12:25 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 12:13:46 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,11 @@ SRC			=	shell.c														\
 				functions/lexer/handlers/useless_quotes.c					\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
+				functions/lexer/heredoc/add.c								\
+				functions/lexer/heredoc/delete.c							\
 				functions/lexer/heredoc/heredoc.c							\
+				functions/lexer/heredoc/init.c								\
+				functions/lexer/heredoc/update.c							\
 				functions/lexer/tokenize/delete.c							\
 				functions/lexer/tokenize/entry.c							\
 				functions/lexer/tokenize/fill.c								\

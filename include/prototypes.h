@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:13:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:13:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,10 @@ void					sh_command_expand_dollars(
 ** functions - lexer - heredoc
 */
 char					sh_heredoc(t_shell *sh, char *str);
+char					sh_heredoc_add(t_shell *sh, char *heredoc);
+void					sh_heredoc_delete(t_shell *sh);
+char					sh_heredoc_init(t_shell *sh, char *heredoc);
+char					sh_heredoc_update(t_shell *sh);
 
 /*
 ** functions - lexer - tokenize

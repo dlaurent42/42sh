@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 12:46:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 14:05:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,17 +275,12 @@ typedef struct			s_read_dir
 **	position in buffer after injection of index
 ** 		idx contains a list of EOF separators
 */
-typedef struct			s_heredoc
+typedef struct			s_heredocs
 {
 	char				*keyword;
 	char				*value;
-	bool				close;
-}						t_heredoc;
-
-typedef struct			s_heredocs
-{
-	size_t				pos;
-	t_heredoc			hd[HD_ASCII_MAX + 1];
+	bool				closed;
+	struct s_heredocs	*next;
 }						t_heredocs;
 
 /*
@@ -333,6 +328,7 @@ typedef struct			s_shell
 	t_env				*env;
 	t_env				*alias;
 	t_read				*read;
+	t_heredocs			*heredocs;
 	t_modes				modes;
 	t_lexer				lexer;
 	t_cursor			cursor;
@@ -342,7 +338,6 @@ typedef struct			s_shell
 	t_search			search;
 	t_select			selection;
 	t_termios			termios;
-	t_heredocs			heredocs;
 }						t_shell;
 
 t_shell					*g_sh;
