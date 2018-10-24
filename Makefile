@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 15:54:43 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/24 16:07:00 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -261,6 +261,7 @@ SRC			=	shell.c														\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
 				functions/ast/operators/semicolon.c							\
+				functions/ast/operators/conditions.c						\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

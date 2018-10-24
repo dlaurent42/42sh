@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 15:53:21 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:05:50 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -577,6 +577,8 @@ int						execute_tree(t_shell *sh, t_env *env, t_bin *bin,
 char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
 
 char					execute_semicolon(t_shell *sh, t_env *env, t_bin *bin,
+										t_token_tree *tree);
+char					execute_conditions(t_shell *sh, t_env *env, t_bin *bin,
 										t_token_tree *tree);
 
 #endif
