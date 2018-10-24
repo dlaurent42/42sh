@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:18:36 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 17:09:05 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:21:34 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static void		exec_child(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 	exit(0);
 }
 
+/*
+** TODO: Don't forget to check return code. Is it suitable with shell.
+*/
 static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 {
 	pid_t	pid_left;
