@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 16:07:00 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/24 16:26:00 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/import_export.c										\
+				errors/execution.c										\
 				functions/redirect.c										\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
@@ -262,6 +263,7 @@ SRC			=	shell.c														\
 				functions/ast/exec.c										\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\
+				functions/ast/operators/pipe.c								\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
