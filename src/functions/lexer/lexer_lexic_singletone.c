@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:07:24 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 16:25:10 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 08:26:45 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ const t_token	*lexer_lexic_singletone(void)
 		{"\v", 1, TOKEN_BLANK},
 		{"\f", 1, TOKEN_BLANK},
 		{"\r", 1, TOKEN_BLANK},
-		{" ", 1, TOKEN_BLANK}
+		{" ", 1, TOKEN_BLANK},
+		{NULL, 0, TOKEN_NULL}
 	};
 
 	return (lexic);
