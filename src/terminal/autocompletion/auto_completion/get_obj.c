@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 22:43:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 01:06:51 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 static bool			parse_obj(t_shell *sh, char **argv)
 {
-	char			c[2];
+	char			*path;
 	char			*ptr_to_last_word;
 	t_obj			*obj;
 	t_obj			*last_obj;
 
-	c[0] = '.';
-	c[1] = '\0';
 	last_obj = NULL;
 	argv++;
 	if (!(obj = auto_create_obj()))
 		return (false);
 	ptr_to_last_word = ft_strrchr(sh->buffer.content + sh->buffer.ushift, ' ');
 	if (ptr_to_last_word && *(ptr_to_last_word + 1) == '/')
-		c[0] = '/';
-	if (!(auto_path(obj, c, *argv)))
+		path = ft_strdups("/");
+	else if (ptr_to_last_word && *(ptr_to_last_word + 1) == '~')
+		path = ft_strdups(env_search(sh->env, "HOME"));
+	else
+		path = ft_strdups(".");
+	if (!path || !(auto_path(obj, path, *argv)))
 	{
 		free(obj);
 		return (false);
 	}
+	free(path);
 	sh->ac->obj = obj;
 	return (true);
 }
