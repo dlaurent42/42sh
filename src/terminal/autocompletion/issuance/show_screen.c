@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 23:33:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void			do_loop(t_shell *sh, t_obj *head)
 	{
 		obj = head;
 		delete_str(sh);
-		sh_print_str(sh, sh->ac->select->data.str);
+		sh_print_str(sh, sh->ac->select->data.escaped_str);
 		if (sh->ac->select->ver_next == sh->ac->select)
 		{
 			if (sh->ac->select->data.dir)

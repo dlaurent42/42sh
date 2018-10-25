@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 10:32:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 23:32:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			auto_arrows_dispatcher(t_shell *sh)
 	char			*line;
 
 	line = sh->read->line;
-	sh->ac->del_file_name = sh->ac->select->data.str;
+	sh->ac->del_file_name = sh->ac->select->data.escaped_str;
 	if (line[2] == 65 || line[2] == 90)
 		auto_move_up(sh);
 	else if (line[2] == 66 || line[0] == 9)
