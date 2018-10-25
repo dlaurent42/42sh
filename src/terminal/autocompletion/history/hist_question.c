@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 09:56:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/25 10:02:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_cmd		*get_cmd_by_content(t_shell *sh, char *content,
 		return (NULL);
 	while (cmd && !ft_strstr(cmd->content, content))
 		cmd = cmd->next;
+	free(content);
 	return (cmd);
 }
 
