@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 16:57:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 19:19:05 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,9 +308,9 @@ void					lexer_token_add(
 							size_t size,
 							t_token_type type);
 char					lexer_delete(t_lexer *lexer, char status);
-void					lexer_token_singlequote(t_lexer *l, const char **cmd);
-void					lexer_token_doublequote(t_lexer *l, const char **cmd);
-void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+char					lexer_token_singlequote(t_lexer *l, const char **cmd);
+char					lexer_token_doublequote(t_lexer *l, const char **cmd);
+char					lexer_token_backquote(t_lexer *lexer, const char **cmd);
 t_token					*lexer_token_search(const char *cmd);
 const t_token			*lexer_lexic_singletone(void);
 

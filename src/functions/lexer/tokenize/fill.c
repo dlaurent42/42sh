@@ -3,47 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/24 18:22:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 19:32:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 {
+	char status;
+
+	status = STATUS_OK;
 	if (**cmd == '\"')
 	{
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
-		lexer_token_doublequote(lexer, cmd);
-		return (1);
+		status = lexer_token_doublequote(lexer, cmd);
+		*prev = *cmd;
 	}
 	else if (**cmd == '\'')
 	{
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
-		lexer_token_singlequote(lexer, cmd);
-		return (1);
+		status = lexer_token_singlequote(lexer, cmd);
+		*prev = *cmd;
 	}
 	else if (**cmd == '`')
 	{
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
-		lexer_token_backquote(lexer, cmd);
-		return (1);
+		status = lexer_token_backquote(lexer, cmd);
+		*prev = *cmd;
 	}
-	return (0);
+	return (status);
 }
 
 char		lexer_fill(t_lexer *lexer, const char *cmd)
 {
 	t_token		*match;
 	const char	*prev;
+	char		status;
 
 	prev = cmd;
+	status = STATUS_OK;
 	if (lexer_is_empty((char *)cmd))
 		return (-1);
 	while (*cmd != '\0')
@@ -58,11 +63,12 @@ char		lexer_fill(t_lexer *lexer, const char *cmd)
 			cmd += match->size;
 			prev = cmd;
 		}
-		else if (handle_quotes(lexer, &cmd, &prev))
-			prev = cmd;
+		else if (*cmd == '\"' || *cmd == '\'' || *cmd == '`')
+			if (status = handle_quotes(lexer, &cmd, &prev) != STATUS_OK)
+				return (status);
 		else
 			++cmd;
 	}
 	(prev != cmd) ? lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD) : 0;
-	return (0);
+	return (status);
 }
