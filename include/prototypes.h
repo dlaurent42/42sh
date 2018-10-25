@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 15:38:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 16:57:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,11 @@ char					sh_heredoc_add(t_shell *sh, char *heredoc);
 void					sh_heredoc_delete(t_shell *sh);
 char					sh_heredoc_init(t_shell *sh, char *heredoc);
 char					sh_heredoc_update(t_shell *sh);
+
+/*
+** functions - lexer - tilde
+*/
+char					*lexer_tilde(t_env *env, char *s, int i);
 
 /*
 ** functions - lexer - tokenize

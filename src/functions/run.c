@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 15:37:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 17:01:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,26 @@ static char	sh_command_run_lexer(
 	return (status);
 }
 
-// static char	sh_command_run_ast(
-// 	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
-// {
-// 	char			status;
-// 	t_token_tree	*list;
+static char	sh_command_run_ast(
+	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
+{
+	char			status;
+	t_token_tree	*list;
 
-// 	list = build_list(lexer);
-// 	lexer_delete(&lexer, status);
-// 	if ((list = build_token_tree(list)))
-// 	{
-// 		// TODO: Reorganise tree(prioritising)
-// 		status = execute_tree(sh, list); // returns last return code
-// 	}
-// 	else
-// 		status = error_execution_tree();
-// 	clean_tree(list);
-// 	return (status);
-// }
+	ft_printf(". Enters ast\n");
+	list = build_list(lexer);
+	lexer_delete(&lexer, status);
+	if ((list = build_token_tree(list)))
+	{
+		// TODO: Reorganise tree(prioritising)
+		status = execute_tree(sh, list); // returns last return code
+	}
+	else
+		status = error_execution_tree();
+	clean_tree(list);
+	ft_printf(". Exits ast with status %d\n", status);
+	return (status);
+}
 
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 {
@@ -78,13 +80,13 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		return (lexer_delete(&lexer, status));
 	}
 	sh->modes.multiline = FALSE;
-	if ((sh->modes.exec = TRUE) && bin == sh->bin)
+	if (!sh->modes.exec && (sh->modes.exec = TRUE) && bin == sh->bin)
 	{
 		ft_printf("Updating sh->bin\n");
 		sh->bin = bin_update(sh, env, bin);
 		command_add(sh, true);
 	}
+	status = sh_command_run_ast(sh, env, bin, lexer);
 	ft_printf("Exit command run\n");
-//	status = sh_command_run_ast(sh, env, bin, lexer);
 	return (lexer_delete(&lexer, status));
 }

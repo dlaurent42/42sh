@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 14:27:09 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 17:00:38 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,6 @@ SRC			=	shell.c														\
 				functions/lexer/glob/utils/pattern_strsplit.c				\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\
-				functions/lexer/handlers/expansions.c						\
 				functions/lexer/handlers/quotes.c							\
 				functions/lexer/handlers/useless_quotes.c					\
 				functions/lexer/handlers/tilde.c							\
@@ -109,6 +108,7 @@ SRC			=	shell.c														\
 				functions/lexer/heredoc/heredoc.c							\
 				functions/lexer/heredoc/init.c								\
 				functions/lexer/heredoc/update.c							\
+				functions/lexer/tilde/tilde.c								\
 				functions/lexer/tokenize/delete.c							\
 				functions/lexer/tokenize/fill.c								\
 				functions/lexer/tokenize/lexic_singletone.c					\
@@ -320,6 +320,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/heredoc
+				@mkdir -p $(OBJ_DIR)/functions/lexer/tilde
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
