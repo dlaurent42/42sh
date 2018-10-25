@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:14:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:14:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ char					*sh_dollar_expansion(char *str, t_env *env);
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
+char					*sh_glob_lexer(char *str);
 
 /*
 ** functions - lexer - glob - cbraces
@@ -315,6 +316,7 @@ bool					lexer_is_esc(char *str, int i);
 bool					lexer_need_esc(char c);
 void					lexer_repatriate(char *str, int i, int len);
 int						lexer_strcountif(char *str, char c);
+char					**lexer_strsplit(char *s, char c);
 
 /*
 ** functions - exec

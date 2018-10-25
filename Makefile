@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 12:14:25 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 12:14:58 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ SRC			=	shell.c														\
 				functions/lexer/utils/need_escape.c							\
 				functions/lexer/utils/repatriate.c							\
 				functions/lexer/utils/strcountif_esc.c						\
+				functions/lexer/utils/strsplit.c							\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\

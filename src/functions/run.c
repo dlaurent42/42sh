@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 21:27:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:04:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ static char	sh_command_run_lexer(t_shell *sh, t_env *env, t_lexer *lexer, char *
 	return (status);
 }
 
-static char	sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
-{
-	char			status;
-	t_token_tree	*list;
+// static char	sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
+// {
+// 	char			status;
+// 	t_token_tree	*list;
 
-	list = build_list(lexer);
-	lexer_delete(&lexer, status);
-	if ((list = build_token_tree(list)))
-	{
-		// TODO: Reorganise tree(prioritising)
-		status = execute_tree(sh, list); // returns last return code
-	}
-	else
-		status = error_execution_tree();
-	clean_tree(list);
-	return (status);
-}
+// 	list = build_list(lexer);
+// 	lexer_delete(&lexer, status);
+// 	if ((list = build_token_tree(list)))
+// 	{
+// 		// TODO: Reorganise tree(prioritising)
+// 		status = execute_tree(sh, list); // returns last return code
+// 	}
+// 	else
+// 		status = error_execution_tree();
+// 	clean_tree(list);
+// 	return (status);
+// }
 
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char *cmd)
 {
@@ -69,6 +69,6 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char *cmd)
 		sh->bin = bin_update(sh, env, bin);
 		command_add(sh, true);
 	}
-	status = sh_command_run_ast(sh, env, bin, lexer);
+//	status = sh_command_run_ast(sh, env, bin, lexer);
 	return (lexer_delete(&lexer, status));
 }
