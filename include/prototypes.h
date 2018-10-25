@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 23:52:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 01:48:41 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,6 +444,7 @@ void					auto_move_down(t_shell *sh);
 void					auto_move_left(t_shell *sh);
 void					auto_move_right(t_shell *sh);
 bool					auto_is_executeable(t_obj *obj);
+char					*auto_get_escaped_str(char *str);
 bool					contains_printable_characters(char *str);
 char					*move_past_leading_spaces(char *content);
 

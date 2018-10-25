@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 23:52:33 by dhojt            ###   ########.fr        #
+#    Updated: 2018/10/26 01:50:02 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -190,6 +190,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/is_executeable.c			\
 				terminal/autocompletion/issuance/read_dispatcher.c			\
 				terminal/autocompletion/issuance/do_special_modes.c			\
+				terminal/autocompletion/issuance/get_escaped_string.c		\
 				terminal/autocompletion/issuance/calc_len_file_name.c		\
 				terminal/autocompletion/issuance/calculate_number_of_columns.c\
 				terminal/autocompletion/history/history.c					\
