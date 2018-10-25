@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 14:38:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 15:19:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char		*sh_glob(char *str)
 	i = 0;
 	if (!str || !str[0])
 		return (str);
-	ft_printf("Globbing function received %s\n", str);
+	ft_printf(".... globbing function received %s\n", str);
 	expansion = NULL;
 	cbraces = sh_glob_cbraces(str);
 	cbracessplit = cbraces_strsplit(cbraces, ' ');
@@ -155,13 +155,16 @@ char	*lexer_glob(char *s, int start, int i)
 	char	*res;
 
 	stop = i;
+	ft_printf("... Enters lexer glob %s\n", s);
 	while ((s[stop] != '\0' && s[stop] != ' ' && s[stop] != '<'
 	&& s[stop] != '>' && s[stop] != '|' && s[stop] != '&')
 	|| lexer_is_esc(s, stop))
 		stop++;
 	res = sh_glob(ft_strsub(s, start, stop - start));
+	ft_printf(".... lexer glob %s\n", res);
 	lexer_repatriate(s, start, stop - start);
 	s = lexer_inject_dup(s, res, start);
 	ft_strdel(&res);
+	ft_printf("... Exit lexer glob %s\n", s);
 	return (s);
 }

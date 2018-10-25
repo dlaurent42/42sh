@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 19:59:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 14:39:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 15:34:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char		*sh_dollar_expansion(char *str, t_env *env)
 	char	*result;
 
 	expanded = NULL;
+	ft_printf(".... expansion function received %s\n", str);
 	if (!str || str[0] != '$' || !str[1] || !env)
 		return (str);
 	expanded = (str[1] == '{')
@@ -37,7 +38,8 @@ char		*lexer_expand(t_env *env, char *s, int start)
 	char	*expanded;
 
 	stop = start + 1;
-	if (s[stop])
+	ft_printf("... Enters lexer expansion %s\n", s);
+	if (!s[stop])
 		return (s);
 	if (s[stop] == '{')
 		while ((s[stop] != '\0' && s[stop] != '}') || lexer_is_esc(s, stop))
@@ -51,5 +53,6 @@ char		*lexer_expand(t_env *env, char *s, int start)
 	lexer_repatriate(s, start, stop - start);
 	s = lexer_inject_dup(s, expanded, start);
 	ft_strdel(&expanded);
+	ft_printf("... Exit lexer expansion %s\n", s);
 	return (s);
 }
