@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:52:51 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/25 13:03:53 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int						error_pipe(void);
 int						error_fork(void);
 char					error_execution_tree(void);
 char					error_execution_file(char *filename);
+char					error_file_permissions(char *filename);
 
 /*
 ** functions
