@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:23:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 17:36:15 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/25 10:20:04 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,12 @@ int		error_fork(void)
 char	error_execution_tree(void)
 {
 	ft_putendl_fd("error while executing command", 2);
+	return (1);
+}
+
+char	error_execution_file(char *filename)
+{
+	ft_putstr_fd("no such file or directory: ", 2);
+	ft_putendl_fd(filename, 2);
 	return (1);
 }
