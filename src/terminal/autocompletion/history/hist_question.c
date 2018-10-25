@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 08:17:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 06:56:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/25 06:57:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void			swap_content(t_shell *sh, char *ptr_to_exc, t_cmd *cmd, char *end_
 	int				number_of_deletions;
 	char			*track;
 
-	number_of_deletions = end_of_string - ptr_to_exc;
+	number_of_deletions = end_of_string - ptr_to_exc + 1;
 	track = sh->buffer.content + sh->buffer.ushift;
 	sh_move_home(sh);
 	while (track++ != ptr_to_exc)
