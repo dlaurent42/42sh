@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:14:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/25 14:29:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void					error_import_export(int fd, char *path);
 ** functions
 */
 void					sh_command_prepare(t_shell *sh);
+char					sh_command_run(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char *str);
+char					*sh_command_check(t_env *env, t_env *alias, char *s);
 
 /*
 ** functions - builtins
@@ -199,24 +205,21 @@ char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
 /*
-** functions - lexer
+** functions - lexer - aliases
 */
-char					sh_command_run(
-							t_shell *sh,
-							t_env *env,
-							t_bin *bin,
-							char *str);
+char					*lexer_aliases(t_env *aliases, char *s, int start);
 
 /*
 ** functions - lexer - dollar
 */
 char					*sh_dollar_expansion(char *str, t_env *env);
+char					*lexer_expand(t_env *env, char *str, int i);
 
 /*
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
-char					*sh_glob_lexer(char *str);
+char					*lexer_glob(char *s, int start, int i);
 
 /*
 ** functions - lexer - glob - cbraces
@@ -313,6 +316,8 @@ void					lexer_inject_cpy(char *str, char *injection, int i);
 char					*lexer_inject_dup(char *str, char *injection, int i);
 bool					lexer_is_empty(char *str);
 bool					lexer_is_esc(char *str, int i);
+bool					lexer_is_new_cmd(char *s, int pos);
+void					lexer_is_quote(char *s, int i, char *dq, char *sq);
 bool					lexer_need_esc(char c);
 void					lexer_repatriate(char *str, int i, int len);
 int						lexer_strcountif(char *str, char c);

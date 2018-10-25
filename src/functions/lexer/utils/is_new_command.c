@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_escape.c                                        :+:      :+:    :+:   */
+/*   is_new_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 16:48:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 14:36:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/25 13:56:30 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/25 14:10:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool		lexer_is_esc(char *str, int i)
+bool		lexer_is_new_cmd(char *s, int pos)
 {
-	int	tmp;
-	int	count;
+	int		i;
 
-	tmp = i;
-	count = 0;
-	if (!str[i])
-		return (FALSE);
-	if (str[i] == '\\')
-		while (++i && str[i] == '\\')
-			count++;
-	i = tmp;
-	while (--i >= 0 && str[i] == '\\')
-		count++;
-	return (count % 2);
+	i = pos - 1;
+	while (i >= 0)
+	{
+		if ((s[i] == '|' || s[i] == '&' || s[i] == ';' || s[i] == '`')
+		&& lexer_is_esc(s, i))
+			return (TRUE);
+		else if (s[i] != ' ' || lexer_is_esc(s, i))
+			return (FALSE);
+		i--;
+	}
+	if (i == 0)
+		return (TRUE);
+	return (FALSE);
 }

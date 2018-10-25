@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_escape.c                                        :+:      :+:    :+:   */
+/*   is_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 16:48:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 14:36:15 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/25 13:20:08 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/25 13:20:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool		lexer_is_esc(char *str, int i)
+void	lexer_is_quote(char *s, int i, char *dq, char *sq)
 {
-	int	tmp;
-	int	count;
-
-	tmp = i;
-	count = 0;
-	if (!str[i])
-		return (FALSE);
-	if (str[i] == '\\')
-		while (++i && str[i] == '\\')
-			count++;
-	i = tmp;
-	while (--i >= 0 && str[i] == '\\')
-		count++;
-	return (count % 2);
+	if (s[i] == '"' && i && s[i - 1] == '=' && !(*dq || *sq))
+		*dq = 2;
+	else if (s[i] == '\'' && i && s[i - 1] == '=' && !(*dq || *sq))
+		*sq = 2;
+	if (s[i] == '"' && !(*dq || *sq))
+		*dq = 1;
+	else if (s[i] == '\'' && !(*dq || *sq))
+		*sq = 1;
+	else if (s[i] == '"' && (*dq || *sq))
+		*dq = 0;
+	else if (s[i] == '"' && (*dq || *sq))
+		*sq = 0;
 }

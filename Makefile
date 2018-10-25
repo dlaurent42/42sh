@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/25 12:14:58 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/25 14:27:09 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/import_export.c										\
+				functions/check.c											\
 				functions/prepare.c											\
 				functions/run.c												\
 				functions/builtins/list_of_builtins.c						\
@@ -79,6 +80,7 @@ SRC			=	shell.c														\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/exec/run.c										\
+				functions/lexer/aliases/aliases.c							\
 				functions/lexer/dollar/dollar.c								\
 				functions/lexer/glob/glob.c									\
 				functions/lexer/glob/cbraces/cbraces.c						\
@@ -118,6 +120,8 @@ SRC			=	shell.c														\
 				functions/lexer/utils/inject.c								\
 				functions/lexer/utils/is_empty.c							\
 				functions/lexer/utils/is_escape.c							\
+				functions/lexer/utils/is_new_command.c						\
+				functions/lexer/utils/is_quote.c							\
 				functions/lexer/utils/need_escape.c							\
 				functions/lexer/utils/repatriate.c							\
 				functions/lexer/utils/strcountif_esc.c						\
@@ -306,6 +310,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
 				@mkdir -p $(OBJ_DIR)/functions/exec
 				@mkdir -p $(OBJ_DIR)/functions/lexer
+				@mkdir -p $(OBJ_DIR)/functions/lexer/aliases
 				@mkdir -p $(OBJ_DIR)/functions/lexer/dollar
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/cbraces
