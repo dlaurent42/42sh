@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 10:20:18 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/25 12:52:51 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -582,6 +582,8 @@ char					execute_semicolon(t_shell *sh, t_token_tree *tree);
 char					execute_conditions(t_shell *sh, t_token_tree *tree);
 char					execute_pipe(t_shell *sh, t_token_tree *tree);
 char					execute_left_redirection(t_shell *sh,
+													t_token_tree *tree);
+char					execute_right_redirection(t_shell *sh,
 													t_token_tree *tree);
 
 #endif

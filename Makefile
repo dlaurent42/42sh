@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/24 17:45:47 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/25 12:48:47 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -265,6 +265,7 @@ SRC			=	shell.c														\
 				functions/ast/operators/conditions.c						\
 				functions/ast/operators/pipe.c								\
 				functions/ast/operators/left_redirection.c					\
+				functions/ast/operators/right_redirection.c					\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
