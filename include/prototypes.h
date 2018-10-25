@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 20:10:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 23:52:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -449,6 +449,7 @@ char					*move_past_leading_spaces(char *content);
 
 bool					auto_history(t_shell *sh);
 void					auto_hist_double(t_shell *sh, bool *status);
+void					auto_hist_question(t_shell *sh, bool *status);
 void					auto_hist_number(t_shell *sh, bool *status);
 void					auto_hist_name(t_shell *sh, bool *status);
 bool					auto_hist_sed(t_shell *sh, bool *status);

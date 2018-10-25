@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/23 20:28:01 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/24 23:52:33 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -194,6 +194,7 @@ SRC			=	shell.c														\
 				terminal/autocompletion/issuance/calculate_number_of_columns.c\
 				terminal/autocompletion/history/history.c					\
 				terminal/autocompletion/history/hist_double.c				\
+				terminal/autocompletion/history/hist_question.c				\
 				terminal/autocompletion/history/hist_name.c					\
 				terminal/autocompletion/history/hist_sed.c					\
 				terminal/autocompletion/history/hist_number.c				\

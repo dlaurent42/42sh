@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:05:58 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 18:27:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/24 23:52:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool				auto_history(t_shell *sh)
 	if (status)
 		return (false);
 	auto_hist_double(sh, &status);
+	auto_hist_question(sh, &status);
 	auto_hist_number(sh, &status);
 	auto_hist_name(sh, &status);
 	return (status);
