@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 17:18:49 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 23:30:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 01:16:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static void			*get_escaped_str(char *str)
 	}
 	if (!(new_str = ft_strnew(len)))
 		return (NULL);
+	ptr = new_str;
 	while (*str)
 	{
 		if (glob_need_esc(*str))
-			*new_str = '\\';
-		*(new_str++) = *(str++);
+			*(ptr++) = '\\';
+		*(ptr++) = *(str++);
 	}
 	return (new_str);
 }
