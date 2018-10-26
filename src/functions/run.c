@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 17:01:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/26 15:44:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	sh_command_run_lexer(
 		: sh_heredoc(sh, NULL);
 	return (status);
 }
-
+/*
 static char	sh_command_run_ast(
 	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
 {
@@ -60,7 +60,7 @@ static char	sh_command_run_ast(
 	ft_printf(". Exits ast with status %d\n", status);
 	return (status);
 }
-
+*/
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 {
 	char			status;
@@ -86,7 +86,9 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		sh->bin = bin_update(sh, env, bin);
 		command_add(sh, true);
 	}
-	status = sh_command_run_ast(sh, env, bin, lexer);
+	//status = sh_command_run_ast(sh, env, bin, lexer);
+	for (size_t i = 0; i < lexer.size;i++)
+		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
 	ft_printf("Exit command run\n");
 	return (lexer_delete(&lexer, status));
 }

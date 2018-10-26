@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/25 19:32:51 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/26 15:53:34 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
 		status = lexer_token_doublequote(lexer, cmd);
-		*prev = *cmd;
+		*prev = &(**cmd);
 	}
 	else if (**cmd == '\'')
 	{
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
 		status = lexer_token_singlequote(lexer, cmd);
-		*prev = *cmd;
+		*prev = &(**cmd);
 	}
 	else if (**cmd == '`')
 	{
 		if (*prev != *cmd)
 			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_MERGE);
 		status = lexer_token_backquote(lexer, cmd);
-		*prev = *cmd;
+		*prev = &(**cmd);
 	}
 	return (status);
 }
@@ -63,8 +63,8 @@ char		lexer_fill(t_lexer *lexer, const char *cmd)
 			cmd += match->size;
 			prev = cmd;
 		}
-		else if (*cmd == '\"' || *cmd == '\'' || *cmd == '`')
-			if (status = handle_quotes(lexer, &cmd, &prev) != STATUS_OK)
+		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`')
+			&& ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
 				return (status);
 		else
 			++cmd;
