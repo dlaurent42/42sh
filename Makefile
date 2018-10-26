@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/26 10:35:26 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/26 11:26:38 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,6 +160,8 @@ SRC			=	shell.c														\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\
+				structures/ast/copy.c										\
+				structures/ast/last.c										\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -261,6 +263,9 @@ SRC			=	shell.c														\
 				functions/ast/get_tree_token_type.c							\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
+				functions/ast/reorganiser.c									\
+				functions/ast/reorganiser2.c								\
+				functions/ast/utils.c										\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\
 				functions/ast/operators/pipe.c								\
