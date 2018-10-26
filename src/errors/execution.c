@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:23:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/25 13:07:02 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 09:57:57 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,16 @@ char	error_execution_tree(void)
 
 char	error_execution_file(char *filename)
 {
-	ft_putstr_fd("no such file or directory: ", 2);
-	ft_putendl_fd(filename, 2);
+	if (access(filename, F_OK) != -1)
+	{
+		if (access(filename, R_OK) == -1)
+			return (error_file_permissions(filename));
+	}
+	else
+	{
+		ft_putstr_fd("no such file or directory: ", 2);
+		ft_putendl_fd(filename, 2);
+	}
 	return (1);
 }
 
