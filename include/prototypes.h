@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 13:03:53 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 10:14:12 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -586,5 +586,6 @@ char					execute_left_redirection(t_shell *sh,
 													t_token_tree *tree);
 char					execute_right_redirection(t_shell *sh,
 													t_token_tree *tree);
+char					left_heredoc(t_shell *sh, t_token_tree *tree);
 
 #endif
