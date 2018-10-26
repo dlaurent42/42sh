@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:30:34 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 17:35:57 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 11:16:07 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char		sh_build_tree(t_shell *sh, char *cmd)
 	lexer = lexer_entry(cmd);
 	list = build_list(lexer);
 	lexer_delete(&lexer);
+	reorganise_tokens(&list);
 	if ((list = build_token_tree(list)))
 	{
-		// TODO: Reorganise tree(prioritising)
 		ret = execute_tree(sh, list); // returns last return code
 	}
 	else
