@@ -6,20 +6,20 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 10:36:32 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 13:44:19 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** 0 - CMD
 ** 6 - ;
 ** 5 - || or &&
 ** 4 - |
 ** 3 - >&
 ** 2 - < or <<
 ** 1 - > or >>
+** 0 - CMD
 */
 int						execute_tree(t_shell *sh, t_token_tree *tree)
 {
