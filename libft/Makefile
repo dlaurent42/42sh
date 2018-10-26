@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 19:57:36 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/26 11:14:41 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,6 +122,7 @@ SRC =	ft_atoi.c\
 		match.c\
 		nmatch.c\
 		options.c\
+		ft_str2dup.c\
 		ft_printf/concatenate_content.c\
 		ft_printf/converter_arg_size_pt_one.c\
 		ft_printf/converter_arg_size_pt_two.c\
