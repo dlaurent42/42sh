@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:38:48 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 13:45:37 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 13:02:46 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	add_tree_node(t_token_tree **head, t_token_tree **last,
 	*last = new;
 }
 
-void 	add_tree_to_back(t_token_tree **head, t_token_tree *new)
+int 	add_tree_to_back(t_token_tree **head, t_token_tree *new)
 {
 	t_token_tree	*cpy;
 
@@ -35,4 +35,5 @@ void 	add_tree_to_back(t_token_tree **head, t_token_tree *new)
 			cpy = cpy->right;
 		cpy->right = new;
 	}
+	return (1);
 }
