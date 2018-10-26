@@ -93,6 +93,25 @@ bool				try_expansions(t_shell *sh)
 	return (auto_glob(sh) || auto_history(sh) || auto_env(sh));
 }
 
+/*
+** #PARAMS
+** performed_completion: status of is an expansion or autocompletion did happen
+** parsed_buffer: partial file name. if buffer == libft/sr parsed_buffer = sr
+**
+** #RETURN
+** bool - status of auto_completion. Returns true only if some auto completion
+** or expansion was succesfuk.
+**
+** auto_completion mode informs window resize to print auto_completion display
+**
+** auto completion happends only if no expansion was successful and that
+** tab was pressed.
+**
+** move cursor to end. auto completion only works with last item in buffer.
+**
+** auto_issuance only launches if all mallocs were successful
+*/
+
 bool				auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
