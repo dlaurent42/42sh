@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 02:17:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:26:34 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 			|| sh->ac->auto_mode == AUTO_NON)
 		return (NULL);
 	return (str);
-}
-
-static bool			create_ac(t_shell *sh, char *str)
-{
-	sh->ac->initial_file_name = str;
-	return (true);
 }
 
 static char			*get_env_var(t_shell *sh, char *ptr_to_dollar, int len)
@@ -113,8 +107,8 @@ bool				auto_completion(t_shell *sh)
 			sh,
 			sh->buffer.content + sh->buffer.ushift)))
 			return (false);
-		if (create_ac(sh, parsed_buffer)
-				&& auto_get_obj(sh))
+		sh->ac->initial_file_name = parsed_buffer;
+		if (auto_get_obj(sh))
 			auto_issuance(sh);
 		auto_free_ac(sh);
 		performed_completion = true;
