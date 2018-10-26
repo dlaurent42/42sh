@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 11:27:41 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 13:33:03 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -566,7 +566,7 @@ void					sh_window_resize(t_shell *sh);
 t_token_tree			*new_tree_node(void);
 void					add_tree_node(t_token_tree **head, t_token_tree **last,
 										t_token_tree *new);
-void 					add_tree_to_back(t_token_tree **head, t_token_tree *new);
+int 					add_tree_to_back(t_token_tree **head, t_token_tree *new);
 void					clean_tree(t_token_tree *tree);
 t_token_tree			*copy_tree_node(t_token_tree *obj);
 t_token_tree			*get_tree_last_node(t_token_tree *list);
@@ -580,8 +580,6 @@ size_t					get_tree_token_type(t_token token);
 t_token_tree			*build_token_tree(t_token_tree *list);
 int						execute_tree(t_shell *sh, t_token_tree *tree);
 char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
-void					reorganise_tokens(t_token_tree **list);
-void					reorganise_tokens_helper(t_token_tree **list);
 
 /*
 ** functions - ast - operators
