@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:15:36 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/22 17:00:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/26 02:03:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void			get_column_widths(t_shell *sh, t_obj *obj)
 	head = obj;
 	while (head)
 	{
+		if(!(head->data.escaped_str = auto_get_escaped_str(head->data.str)))
+			head->data.escaped_str = head->data.str;
 		if (!head->data.no_file)
 		{
 			auto_calc_len_file_name(sh, head);

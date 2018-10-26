@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 17:18:49 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 01:50:30 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:02:50 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ bool				auto_path(t_obj *obj, char *path, char *name)
 				*(tmp++) = *(name++);
 			obj->data.path = new_path;
 		}
-	if (!obj->data.str || !obj->data.path || !obj->data.escaped_str)
-	{
-		free(obj->data.str);
-		free(obj->data.path);
-		free(obj->data.escaped_str);
+	if (!obj->data.str || !obj->data.path)
 		return (false);
-	}
 	return (true);
 }
