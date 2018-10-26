@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/26 10:14:28 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/26 10:35:26 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -267,6 +267,7 @@ SRC			=	shell.c														\
 				functions/ast/operators/left_redirection.c					\
 				functions/ast/operators/right_redirection.c					\
 				functions/ast/operators/heredoc.c							\
+				functions/ast/operators/file_descriptor.c					\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/25 12:53:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 10:36:32 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int						execute_tree(t_shell *sh, t_token_tree *tree)
 		ret = execute_right_redirection(sh, tree);
 	else if (tree->type == 2)
 		ret = execute_left_redirection(sh, tree);
-	// else if (tree->type == 3)
-	// 	ret = execute_fd_aggr(tree);
+	else if (tree->type == 3)
+		ret = execute_fd_aggr(sh, tree);
 	else if (tree->type == 4)
 		ret = execute_pipe(sh, tree);
 	else if (tree->type == 5)
