@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 02:26:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:30:04 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ static bool			auto_env(t_shell *sh)
 	return (true);
 }
 
+bool				try_expansions(t_shell *sh)
+{
+	return (auto_glob(sh) || auto_history(sh) || auto_env(sh));
+}
+
 bool				auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
@@ -95,7 +100,7 @@ bool				auto_completion(t_shell *sh)
 
 	performed_completion = false;
 	sh->modes.auto_completion = TRUE;
-	if (auto_glob(sh) || auto_history(sh) || auto_env(sh))
+	if (try_expansions(sh))
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
