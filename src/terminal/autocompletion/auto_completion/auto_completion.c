@@ -12,6 +12,16 @@
 
 #include "shell.h"
 
+/*
+** #PARAMS
+** none
+**
+** #RETURN
+** bool - positive if an expansion method was successful.
+**
+** Attempts expansions in sequence until one is succesfull.
+*/
+
 static char			*get_auto_mode(t_shell *sh, char *content)
 {
 	char			*str;
@@ -42,7 +52,9 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 ** none
 **
 ** #RETURN
-** bool - status of auto_completion. Returns true only if some auto completion
+** bool - positive if an expansion method was successful.
+**
+** Attempts expansions in sequence until one is succesfull.
 */
 
 bool				try_expansions(t_shell *sh)
