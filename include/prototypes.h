@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 01:48:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 13:04:10 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,6 +447,8 @@ bool					auto_is_executeable(t_obj *obj);
 char					*auto_get_escaped_str(char *str);
 bool					contains_printable_characters(char *str);
 char					*move_past_leading_spaces(char *content);
+
+bool					auto_env(t_shell *sh);
 
 bool					auto_history(t_shell *sh);
 void					auto_hist_double(t_shell *sh, bool *status);
