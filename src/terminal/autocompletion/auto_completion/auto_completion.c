@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 13:04:42 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 13:06:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 		return (NULL);
 	return (str);
 }
+
+/*
+** #PARAMS
+** none
+**
+** #RETURN
+** bool - status of auto_completion. Returns true only if some auto completion
+*/
+
 bool				try_expansions(t_shell *sh)
 {
 	return (auto_glob(sh) || auto_history(sh) || auto_env(sh));
