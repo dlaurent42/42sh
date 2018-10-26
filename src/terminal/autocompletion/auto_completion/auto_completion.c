@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 20:52:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:17:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 
 static bool			create_ac(t_shell *sh, char *str)
 {
-	if (!(sh->ac->argv = (char **)malloc(sizeof(char *) * 3)))
-		return (false);
-	sh->ac->argv[0] = str;
-	sh->ac->argv[1] = str;
-	sh->ac->argv[2] = NULL;
+	sh->ac->initial_file_name = str;
 	return (true);
 }
 

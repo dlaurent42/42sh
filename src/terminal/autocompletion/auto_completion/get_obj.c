@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 23:43:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 14:30:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:19:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			parse_obj(t_shell *sh, char *argv)
+static bool			parse_obj(t_shell *sh, char *initial_file_name)
 {
 	char			*path;
 	char			*ptr_to_last_word;
@@ -26,11 +26,11 @@ static bool			parse_obj(t_shell *sh, char *argv)
 	else if (ptr_to_last_word && *(ptr_to_last_word + 1) == '~')
 	{
 		path = ft_strdups(env_search(sh->env, "HOME"));
-		argv++;
+		initial_file_name++;
 	}
 	else
 		path = ft_strdups(".");
-	if (!path || !(auto_path(obj, path, argv)))
+	if (!path || !(auto_path(obj, path, initial_file_name)))
 	{
 		free(obj);
 		return (false);
@@ -101,7 +101,7 @@ bool				auto_get_obj(t_shell *sh)
 {
 	if (sh->ac->auto_mode != AUTO_NON)
 	{
-		if (!(parse_obj(sh, *(sh->ac->argv + 1))))
+		if (!(parse_obj(sh, sh->ac->initial_file_name)))
 			return (false);
 	}
 	if (sh->ac->auto_mode == AUTO_BIN)

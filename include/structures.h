@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 23:24:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/26 02:22:20 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ typedef struct			s_obj
 
 typedef struct			s_ac
 {
-	char				**argv;
+	char				*initial_file_name;
 
 	char				*del_file_name;
 	char				*file_name;
