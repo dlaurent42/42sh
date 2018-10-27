@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 00:22:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:33:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void			insert_token_at_correct_place(
 	//MOVE PAST CURRENT_TOKEN's BASTARDS:
 	while (current_command
 			&& current_command->right
-			&& token_is_redirect(current_command->right))
+			&& !token_is_redirect(current_command->right))
 	{
 		ft_printf("Past bastards [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
@@ -135,8 +135,6 @@ static void			treat_current_command(t_token_tree *current_command)
 		}
 		usleep(250000);
 		current_token = get_next_token(current_token);
-		if (current_token)//DELETE
-			ft_printf("   \nNext token[%d][%s]\n", current_token->type, *current_token->tokens);
 	}
 }
 
@@ -178,7 +176,7 @@ int					reorganise_tokens(t_token_tree **list)
 	current_command = *list;
 	while (current_command)
 	{
-		ft_printf("END[%s]\n", *current_command->tokens);
+		ft_printf("END[%d][%s]\n", current_command->id, *current_command->tokens);
 		current_command = current_command->right;
 	}
 	ft_printf("\n----END REORGANISE----\n");
