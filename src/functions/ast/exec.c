@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:02:27 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:40:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 ** 1 - > or >>
 ** 0 - CMD
 */
+
 int						execute_tree(t_shell *sh, t_token_tree *tree)
 {
 	int		ret;
@@ -30,7 +31,7 @@ int						execute_tree(t_shell *sh, t_token_tree *tree)
 		return (0);
 	if (tree->type == 0)
 		ret = sh_command_run_ast(sh, sh->exec->env,
-			 	sh->exec->bin, tree->tokens);
+			sh->exec->bin, tree->tokens);
 	else if (tree->type == 1)
 		ret = execute_right_redirection(sh, tree);
 	else if (tree->type == 2)

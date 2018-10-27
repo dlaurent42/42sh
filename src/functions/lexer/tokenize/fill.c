@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 17:21:23 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 21:55:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 {
 	char status;
 
@@ -41,38 +41,41 @@ static char handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 	return (status);
 }
 
-char lexer_fill(t_lexer *lexer, const char *cmd)
+static void	lexer_fill_tmp(
+	t_token *match, t_lexer *lexer, const char *cmd, const char *prev)
 {
-	t_token *match;
-	const char *prev;
-	char status;
+	if (match->type == TOKEN_AGGREG)
+		lexer_token_add(
+			lexer, prev, cmd - prev + match->size, match->type);
+	else
+	{
+		if (prev != cmd)
+			lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
+		if (match->type != TOKEN_BLANK)
+			lexer_token_add(lexer, match->id, match->size, match->type);
+	}
+}
+
+char		lexer_fill(t_lexer *lexer, const char *cmd)
+{
+	t_token		*match;
+	char		status;
+	const char	*prev;
 
 	prev = cmd;
 	status = STATUS_OK;
-	if (lexer_is_empty((char *)cmd))
-		return (-1);
 	while (*cmd != '\0')
-	{
-		match = lexer_token_search(cmd);
-		if (match != NULL)
+		if ((match = lexer_token_search(cmd)))
 		{
-			if (match->type == TOKEN_AGGREG)
-				lexer_token_add(lexer, prev, cmd - prev + match->size, match->type);
-			else
-			{
-				if (prev != cmd)
-					lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
-				if (match->type != TOKEN_BLANK)
-					lexer_token_add(lexer, match->id, match->size, match->type);
-			}
+			lexer_fill_tmp(match, lexer, cmd, prev);
 			cmd += match->size;
 			prev = cmd;
 		}
-		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`') && ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
+		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`')
+		&& ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
 			return (status);
 		else
 			++cmd;
-	}
 	(prev != cmd) ? lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD) : 0;
 	return (status);
 }

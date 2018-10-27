@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:18:36 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 17:21:34 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:44:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void		exec_main(t_shell *sh, t_token_tree *tree, int fd[2], int st)
+static void	exec_main(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 {
 	dup2(fd[0], 0);
 	close(fd[1]);
@@ -24,7 +24,7 @@ static void		exec_main(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 	exit(0);
 }
 
-static void		exec_child(t_shell *sh, t_token_tree *tree, int fd[2], int st)
+static void	exec_child(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 {
 	dup2(fd[1], 1);
 	close(fd[0]);
@@ -37,6 +37,7 @@ static void		exec_child(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 /*
 ** TODO: Don't forget to check return code. Is it suitable with shell.
 */
+
 static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 {
 	pid_t	pid_left;
@@ -62,10 +63,11 @@ static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 ** std:
 ** 0 - in ; 1 - out
 */
+
 char		execute_pipe(t_shell *sh, t_token_tree *tree)
 {
 	int		fd[2];
-	int 	std[2];
+	int		std[2];
 
 	if (pipe(fd) == -1)
 		return (error_pipe());

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 10:13:36 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:42:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** TODO: check if you really need to close fd
 */
+
 static char	single_left_cursor(t_shell *sh, t_token_tree *tree, int fd)
 {
 	int		stdin;

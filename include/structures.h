@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:09:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:26:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,7 +305,8 @@ typedef enum			e_token_type
 	TOKEN_DOUBLEQUOTE = 8,
 	TOKEN_BACKQUOTE = 9,
 	TOKEN_MERGE = 10,
-	TOKEN_WORD = 11
+	TOKEN_WORD = 11,
+	TOKEN_NULL = 0
 }						t_token_type;
 
 typedef struct			s_token

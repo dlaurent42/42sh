@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_descriptor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 16:39:40 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:42:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
 	if ((fd[0] == 0 && !ft_strcmp(front, "0")) || fd[1] == 0 ||
-		(*back != '-' && fd[1] == 0) || ((fd[2] = dup(fd[0])) == -1))
-		 	return (error_file_descriptor());
+	(*back != '-' && fd[1] == 0) || ((fd[2] = dup(fd[0])) == -1))
+		return (error_file_descriptor());
 	(*back != '-') ? (dup2(fd[1], fd[0])) : (close(fd[0]));
 	ret = execute_tree(sh, tree->left);
 	dup2(fd[2], fd[0]);

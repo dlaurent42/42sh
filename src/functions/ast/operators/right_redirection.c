@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   right_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 12:46:49 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/25 13:04:01 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:43:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static char	execute_on_right(t_shell *sh, t_token_tree *tree, int fd)
 	return (ret);
 }
 
-char			execute_right_redirection(t_shell *sh, t_token_tree *tree)
+char		execute_right_redirection(t_shell *sh, t_token_tree *tree)
 {
 	int				fd;
 	int				ops;
 	char			*file;
-	t_token_tree 	*last;
+	t_token_tree	*last;
 
 	last = tree->right;
 	ops = O_WRONLY | O_CREAT;

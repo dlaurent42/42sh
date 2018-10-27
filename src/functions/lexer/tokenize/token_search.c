@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:14:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:10:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:45:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_token *lexer_token_search(const char *cmd)
+t_token	*lexer_token_search(const char *cmd)
 {
 	const t_token *lexic;
 

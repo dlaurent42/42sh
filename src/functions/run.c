@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:17:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:52:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,27 @@ static char	sh_command_run_lexer(
 
 	(void)env;
 	ft_bzero((void *)lexer, sizeof(t_lexer));
+	if (sh->modes.heredoc == FALSE && lexer_is_empty((char *)cmd))
+		return (STATUS_ERR);
 	status = (sh->modes.heredoc == FALSE)
 		? lexer_fill(lexer, cmd)
 		: sh_heredoc(sh, NULL);
 	return (status);
 }
 
-char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin, char *cmd)
+static char	sh_command_run_tree(
+	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
 {
 	char			ret;
-	t_lexer			lexer;
 	t_token_tree	*list;
 
-	if (!cmd)
-		return (1);
-	lexer = lexer_entry(cmd);
 	list = build_list(lexer);
-	lexer_delete(&lexer);
 	reorganise_tokens(&list);
 	if (!(sh->exec = sh_init_exec(env, bin)))
-		return (error_init_exec(sh));
+	{
+		clean_tree(list);
+		return (STATUS_ERR);
+	}
 	if ((list = build_token_tree(list)))
 		ret = execute_tree(sh, list);
 	else
@@ -62,7 +63,6 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin, char *cmd)
 	sh_destroy_exec(&(sh->exec));
 	return (ret);
 }
-
 
 static char	sh_command_check_lexer(t_lexer *lexer)
 {
@@ -116,7 +116,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		sh->bin = bin_update(sh, env, bin);
 		command_add(sh, true);
 	}
-	status = sh_command_run_ast(sh, env, bin, lexer);
+	status = sh_command_run_tree(sh, env, bin, lexer);
 	for (size_t i = 0; i < lexer.size;i++)
 		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
 	ft_printf("Exit command run\n");

@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/27 21:15:35 by dlaurent         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY: 		all clean fclean re
 
 NAME 		= 	shell
@@ -29,7 +17,6 @@ SRC			=	shell.c														\
 				functions/run.c												\
 				terminal/signals/stop_acquisition.c							\
 				functions/ast/build_list.c									\
-				functions/ast/tree.c										\
 				functions/ast/get_tree_token_type.c							\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
@@ -145,6 +132,11 @@ SRC			=	shell.c														\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
+				structures/ast/add.c										\
+				structures/ast/new.c										\
+				structures/ast/clean.c										\
+				structures/ast/copy.c										\
+				structures/ast/last.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -193,11 +185,6 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.git.c							\
 				structures/shell/termios.c									\
 				structures/shell/exec.c										\
-				structures/ast/add.c										\
-				structures/ast/new.c										\
-				structures/ast/clean.c										\
-				structures/ast/copy.c										\
-				structures/ast/last.c										\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -355,7 +342,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
-				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/glob
