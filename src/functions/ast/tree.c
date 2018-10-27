@@ -6,7 +6,11 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:30:34 by azaliaus          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/26 20:55:32 by azaliaus         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/26 22:55:03 by azaliaus         ###   ########.fr       */
+>>>>>>> 314b09aefe9ce8fff4d89343fd2ffa8d58184d60
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +27,7 @@ char		sh_build_tree(t_shell *sh, char *cmd)
 	lexer = lexer_entry(cmd);
 	list = build_list(lexer);
 	lexer_delete(&lexer);
-	// reorganise_tokens(&list);
+	reorganise_tokens(&list);
 	if ((list = build_token_tree(list)))
 	{
 		// printf("Node: %s\n", list->tokens[0]);
