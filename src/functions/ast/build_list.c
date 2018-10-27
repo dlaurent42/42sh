@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/24 17:23:34 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/26 21:06:21 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ static bool			tree_splice_point(t_lexer lexer, size_t i)
 	return (false);
 }
 
-/*
-**	TODO: it uses bad style of adding to chain list.
-**					FIX IT
-*/
 static void			tree_group_token(t_lexer lexer, t_token_tree **head,
 										size_t len, size_t begin)
 {
@@ -43,10 +39,7 @@ static void			tree_group_token(t_lexer lexer, t_token_tree **head,
 	new->size = len;
 	new->type = (len > 1 ? 0 : get_tree_token_type(lexer.tokens[begin]));
 	if (!(new->tokens = (char **)ft_memalloc(sizeof(char *) * (len + 1))))
-	{
-		ft_memdel((void **)&new);
 		return ;
-	}
 	new->tokens[len] = NULL;
 	i = 0;
 	while (i < len)
@@ -67,8 +60,8 @@ t_token_tree		*build_list(t_lexer lexer)
 	head = NULL;
 	len = 0;
 	i = 0;
-	// for (size_t x = 0; x < lexer.size; x++)
-	// 	printf("%zu: token: %s | type: %d\n", x, lexer.tokens[x].id, lexer.tokens[x].type);
+	for (size_t x = 0; x < lexer.size; x++)
+		printf("%zu: token: %s | type: %d\n", x, lexer.tokens[x].id, lexer.tokens[x].type);
 	while (i < lexer.size)
 	{
 		if (tree_splice_point(lexer, i))
