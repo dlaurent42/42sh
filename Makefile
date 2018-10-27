@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/26 23:35:04 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/27 13:28:37 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -264,8 +264,6 @@ SRC			=	shell.c														\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
 				functions/ast/reorganiser.c									\
-				functions/ast/reorganiser2.c								\
-				functions/ast/utils.c										\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\
 				functions/ast/operators/pipe.c								\

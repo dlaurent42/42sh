@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 23:40:19 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 13:28:53 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -581,10 +581,6 @@ t_token_tree			*build_token_tree(t_token_tree *list);
 int						execute_tree(t_shell *sh, t_token_tree *tree);
 char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr);
 int						reorganise_tokens(t_token_tree **list);
-
-void		arrange_nodes_in_priority(t_token_tree **list);
-void		skip_and_sort(t_token_tree **tkns, t_token_tree **lst_sep);
-int			in_range(int i, int start, int end);
 
 /*
 ** functions - ast - operators

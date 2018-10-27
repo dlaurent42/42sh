@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 21:06:21 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 13:27:23 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_token_tree		*build_list(t_lexer lexer)
 	{
 		if (tree_splice_point(lexer, i))
 		{
-			// printf("Found sperator! Len: %zu | From: %zu\n", len, i - len);
 			tree_group_token(lexer, &head, len, i - len);
 			tree_group_token(lexer, &head, 1, i);
 			len = 0;
