@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 23:52:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:22:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	next_token = token;
 	if (next_token)	
 		next_token = next_token->right;
-	while (!token_is_redirect(next_token))
+	while (next_token && !token_is_redirect(next_token))
 		next_token = next_token->right;
 	return (next_token);
 }
@@ -56,22 +56,22 @@ static void			insert_token_at_correct_place(
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
 	{
-		ft_printf("Moved past [%s]\n", *current_command->tokens);
+		ft_printf("Moved past [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = get_next_token(current_command);
 	}
 
 	//MOVE ONE AFTER THE ABOVE TOKEN:
 	if (current_command
 			&& current_command->right
-			&& token_is_treatable(current_command->right))
+			&& !token_is_redirect(current_command->right))
 		current_command = current_command->right;
 
 	//MOVE TO POINT DIRECTLY BEFORE POINT OF INSERTION:
 	while (current_command
 			&& current_command->right
-			&& token_is_treatable(current_command->right))
+			&& !token_is_redirect(current_command->right))
 	{
-		ft_printf("Move directly prior\n");
+		ft_printf("Moved directly prior past [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
 	}
 
@@ -86,20 +86,21 @@ static void			insert_token_at_correct_place(
 	//MOVE PAST CURRENT_TOKEN's BASTARDS:
 	while (current_command
 			&& current_command->right
-			&& token_is_treatable(current_command->right))
+			&& token_is_redirect(current_command->right))
 	{
-		ft_printf("Move past bastards\n");
+		ft_printf("Past bastards [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
-		sleep(1);
+		usleep(250000);
 	}
 
 	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
 	current_command->right = placeholder;
 
 	//MOVE TO OLD->RIGHT POINTER TO CURRENT_TOKEN:
-	while (current_command && current_command->right != current_token)
+	while (current_command && current_command->right
+			&& current_command->right != current_token)
 	{
-		ft_printf("Move prior to old->right to current_token\n");
+		ft_printf("Old->right [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
 	}
 
@@ -123,7 +124,7 @@ static void			treat_current_command(t_token_tree *current_command)
 			type = current_token->type;
 			ft_printf("    Type:[%d]\n", type);
 		}
-		sleep(1);
+		usleep(250000);
 		if (current_token->type < type)
 		{
 			ft_printf("    FIXING[%s]\n", *current_token->tokens);
@@ -132,10 +133,10 @@ static void			treat_current_command(t_token_tree *current_command)
 					current_command, current_token, next_token);
 			current_token = next_token;
 		}
-		sleep(1);
+		usleep(250000);
 		current_token = get_next_token(current_token);
 		if (current_token)//DELETE
-			ft_printf("     Next token[%d][%s]\n", current_token->type, *current_token->tokens);
+			ft_printf("   \nNext token[%d][%s]\n", current_token->type, *current_token->tokens);
 	}
 }
 
