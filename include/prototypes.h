@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:07:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:16:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,12 +300,6 @@ char					sh_heredoc_update(t_shell *sh);
 /*
 ** functions - lexer - tilde
 */
-<<<<<<< HEAD
-bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-// void					lexer_entry(char *cmd);
-t_lexer					lexer_entry(char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
-=======
 char					*lexer_tilde(t_env *env, char *s, int i);
 
 /*
@@ -313,7 +307,6 @@ char					*lexer_tilde(t_env *env, char *s, int i);
 */
 char					lexer_entry(t_lexer *lexer, char *cmd);
 char					lexer_fill(t_lexer *lexer, const char *cmd);
->>>>>>> feat/heredoc
 void					lexer_token_add(
 							t_lexer *lexer,
 							const char *src,
