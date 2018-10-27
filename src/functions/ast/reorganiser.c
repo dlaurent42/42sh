@@ -6,36 +6,46 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 19:51:12 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 20:09:52 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			token_is_treatable(t_token_tree *current_token)
+static bool			token_is_treatable(t_token_tree *token)
 {
-	if (!current_token
-			|| current_token->type == 4
-			|| current_token->type == 5
-			|| current_token->type == 6)
+	if (!token
+			|| token->type == 4
+			|| token->type == 5
+			|| token->type == 6)
 		return (false);
 	return (true);
 }
 
 static void			insert_token_at_correct_place(
-		t_token_tree *current_command,
-		t_token_tree *current_token)
+		t_token_tree *current_command, t_token_tree *current_token)
 {
-
 	if (current_token || current_command)
 		;
 }
+
+static t_token_tree	*next_token(t_token_tree *current_token)
+{
+	t_token_tree	*next_token;
+
+	next_token = current_token;
+	while (next_token && token_is_treatable(next_token))
+		next_token = next_token->right;
+	return (next_token);
+}
+	
+
 
 static void			treat_current_command(t_token_tree *current_command)
 {
 	int				type;
 	t_token_tree	*current_token;
-	t_token_tree	*placeholder;
+	t_token_tree	*next_token;
 
 	type = 0;
 	current_token = current_command;
@@ -44,10 +54,9 @@ static void			treat_current_command(t_token_tree *current_command)
 		type = (type < current_token->type) ? current_token->type : type;
 		if (current_token->type < type)
 		{
-			placeholder = current_token->right;
-			placeholder = (placeholder) ? placeholder->right : placeholder;
+			next_token = next_token(current_token);
 			insert_token_at_correct_place(current_command, current_token);
-			current_token = placeholder;
+			current_token = next_token;
 		}
 		current_token = (current_token) ? current_token->right : current_token;
 	}
@@ -75,9 +84,9 @@ static void			assign_token_ids(t_token_tree *list)
 
 int					reorganise_tokens(t_token_tree **list)
 {
-	ft_printf("\n----START REORGANISE----\n\n");
 	t_token_tree	*current_command;
 
+	ft_printf("\n----START REORGANISE----\n\n");
 	current_command = *list;
 	assign_token_ids(current_command);
 	while (current_command)
