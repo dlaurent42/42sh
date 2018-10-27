@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 16:39:57 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 17:53:36 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,8 @@ void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);
+t_exec					*sh_init_exec(t_env *env, t_bin *bin);
+void					sh_destroy_exec(t_exec **exec);
 
 /*
 ** terminal - auto_completion
@@ -574,7 +576,8 @@ t_token_tree			*get_tree_last_node(t_token_tree *list);
 /*
 ** functions - ast
 */
-char					sh_build_tree(t_shell *sh, char *cmd);
+char					sh_build_tree(t_shell *sh, t_env *env, t_bin *bin,
+															char *cmd);
 t_token_tree			*build_list(t_lexer lexer);
 size_t					get_tree_token_type(t_token token);
 t_token_tree			*build_token_tree(t_token_tree *list);
