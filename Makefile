@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/27 16:25:28 by azaliaus         ###   ########.fr        #
+#    Updated: 2018/10/27 17:55:06 by azaliaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,6 +157,7 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				structures/shell/termios.c									\
+				structures/shell/exec.c										\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\

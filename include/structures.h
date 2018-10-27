@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 15:48:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 17:40:37 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,12 @@ typedef struct			s_read_dir
 	struct dirent		*file;
 }						t_read_dir;
 
+typedef struct			s_exec
+{
+	t_env				*env;
+	t_bin				*bin;
+}						t_exec;
+
 typedef struct			s_shell
 {
 	t_ac				*ac;
@@ -278,6 +284,7 @@ typedef struct			s_shell
 	t_env				*env;
 	t_env				*alias;
 	t_read				*read;
+	t_exec				*exec;
 	t_modes				modes;
 	t_cursor			cursor;
 	t_prompt			prompt;
