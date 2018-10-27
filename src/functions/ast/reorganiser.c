@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:58:48 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 19:51:12 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,23 @@ static bool			token_is_treatable(t_token_tree *current_token)
 	return (true);
 }
 
-static void			insert_token_at_correct_place(t_token_tree *current_token)
+static void			insert_token_at_correct_place(
+		t_token_tree *current_command,
+		t_token_tree *current_token)
 {
-	if (current_token)
+
+	if (current_token || current_command)
 		;
 }
 
-static void			treat_current_command(t_token_tree *head)
+static void			treat_current_command(t_token_tree *current_command)
 {
 	int				type;
 	t_token_tree	*current_token;
 	t_token_tree	*placeholder;
 
 	type = 0;
-	current_token = head;
+	current_token = current_command;
 	while (token_is_treatable(current_token))
 	{
 		type = (type < current_token->type) ? current_token->type : type;
@@ -43,7 +46,7 @@ static void			treat_current_command(t_token_tree *head)
 		{
 			placeholder = current_token->right;
 			placeholder = (placeholder) ? placeholder->right : placeholder;
-			insert_token_at_correct_place(current_token);
+			insert_token_at_correct_place(current_command, current_token);
 			current_token = placeholder;
 		}
 		current_token = (current_token) ? current_token->right : current_token;
