@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 00:33:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 00:56:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,19 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	return (next_token);
 }
 
-static void			insert_token_at_correct_place(
+static t_token_tree	*insert_token_at_correct_place(
 		t_token_tree *current_command,
 		t_token_tree *current_token,
 		t_token_tree *next_token)
 {
 	t_token_tree	*placeholder;
+	t_token_tree	*old_pointer_to_current_token;;
 
 	//MOVE TO TOKEN PRIOR TO POINT OF INSERTION:
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
 	{
-		ft_printf("Moved past [%s][%d]\n", *current_command->tokens, current_command->id);
+		//ft_printf("Moved past [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = get_next_token(current_command);
 	}
 
@@ -71,7 +72,7 @@ static void			insert_token_at_correct_place(
 			&& current_command->right
 			&& !token_is_redirect(current_command->right))
 	{
-		ft_printf("Moved directly prior past [%s][%d]\n", *current_command->tokens, current_command->id);
+		//ft_printf("Moved directly prior past [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
 	}
 
@@ -88,9 +89,9 @@ static void			insert_token_at_correct_place(
 			&& current_command->right
 			&& !token_is_redirect(current_command->right))
 	{
-		ft_printf("Past bastards [%s][%d]\n", *current_command->tokens, current_command->id);
+		//ft_printf("Past bastards [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
-		usleep(250000);
+	//	usleep(250000);
 	}
 
 	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
@@ -100,12 +101,14 @@ static void			insert_token_at_correct_place(
 	while (current_command && current_command->right
 			&& current_command->right != current_token)
 	{
-		ft_printf("Old->right [%s][%d]\n", *current_command->tokens, current_command->id);
+		//ft_printf("Old->right [%s][%d]\n", *current_command->tokens, current_command->id);
 		current_command = current_command->right;
 	}
 
 	//SET OLD->RIGHT POINTER TO NEXT_TOKEN
+	old_pointer_to_current_token = current_command;
 	current_command->right = next_token;
+	return (old_pointer_to_current_token);
 }
 
 static void			treat_current_command(t_token_tree *current_command)
@@ -118,22 +121,22 @@ static void			treat_current_command(t_token_tree *current_command)
 	current_token = current_command;
 	while (current_token && current_token->type < 4)
 	{
-		ft_printf("    Current token[%s]\n", *current_token->tokens);
+		//ft_printf("\n    Current token[%s]\n", *current_token->tokens);
 		if (type < current_token->type)
 		{
 			type = current_token->type;
-			ft_printf("    Type:[%d]\n", type);
+			//ft_printf("    Type:[%d]\n", type);
 		}
-		usleep(250000);
+		//usleep(250000);
 		if (current_token->type < type)
 		{
-			ft_printf("    FIXING[%s]\n", *current_token->tokens);
+			//ft_printf("    FIXING[%s]\n", *current_token->tokens);
 			next_token = get_next_token(current_token);
-			insert_token_at_correct_place(
+			current_token = insert_token_at_correct_place(
 					current_command, current_token, next_token);
-			current_token = next_token;
+			//current_token = next_token;
 		}
-		usleep(250000);
+		//usleep(250000);
 		current_token = get_next_token(current_token);
 	}
 }
@@ -162,6 +165,15 @@ int					reorganise_tokens(t_token_tree **list)
 {
 	t_token_tree	*current_command;
 
+	//////BEFORE
+	//START
+	current_command = *list;
+	while (current_command)
+	{
+		ft_printf("START[%d][%s]\n", current_command->id, *current_command->tokens);
+		current_command = current_command->right;
+	}
+	//END
 	ft_printf("\n----START REORGANISE----\n\n");
 	current_command = *list;
 	assign_token_ids(current_command);
@@ -172,6 +184,8 @@ int					reorganise_tokens(t_token_tree **list)
 		move_to_next_command(&current_command);
 	}
 
+	ft_printf("\n----END REORGANISE----\n");
+	//////AFTER
 	//START
 	current_command = *list;
 	while (current_command)
@@ -179,6 +193,6 @@ int					reorganise_tokens(t_token_tree **list)
 		ft_printf("END[%d][%s]\n", current_command->id, *current_command->tokens);
 		current_command = current_command->right;
 	}
-	ft_printf("\n----END REORGANISE----\n");
+	//END
 	return (1);
 }
