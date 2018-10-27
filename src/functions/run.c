@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 15:44:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 18:16:56 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,29 @@ static char	sh_command_run_ast(
 	return (status);
 }
 */
+
+static char	sh_command_check_lexer(t_lexer *lexer)
+{
+	size_t	i;
+
+	i = 0;
+	ft_printf("Checking lexer, lexer size = %zu \n", lexer->size);
+	while (i < lexer->size)
+	{
+		ft_printf("Loop: %zu\n", i);
+		if (i == 0 && lexer->tokens[i].type < 6 && lexer->tokens[i].type != TOKEN_SEMICOLON)
+			return (STATUS_ERR);
+		if (lexer->tokens[i].type == TOKEN_PIPE && (i + 1) >= lexer->size)
+			return (STATUS_PIPE);
+		if ((lexer->tokens[i].type == TOKEN_AGGREG || lexer->tokens[i].type == TOKEN_MERGE)
+			&& 0/*&& token_merge()*/)
+			return (STATUS_ERR);
+		++i;
+	}
+	ft_printf("Finish checking lexer \n");
+	return (STATUS_OK);
+}
+
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 {
 	char			status;
@@ -75,6 +98,11 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	}
 	ft_printf("Command checks are now over %s\n", *cmd);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, *cmd)) != STATUS_OK)
+	{
+		ft_printf("Exit command run (1: wrong status = %d)\n", status);
+		return (lexer_delete(&lexer, status));
+	}
+	if ((status = sh_command_check_lexer(&lexer)) != STATUS_OK)
 	{
 		ft_printf("Exit command run (1: wrong status = %d)\n", status);
 		return (lexer_delete(&lexer, status));

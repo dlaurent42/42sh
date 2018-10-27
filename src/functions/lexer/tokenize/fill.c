@@ -6,13 +6,13 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/26 15:53:34 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 17:21:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static char handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 {
 	char status;
 
@@ -41,11 +41,11 @@ static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 	return (status);
 }
 
-char		lexer_fill(t_lexer *lexer, const char *cmd)
+char lexer_fill(t_lexer *lexer, const char *cmd)
 {
-	t_token		*match;
-	const char	*prev;
-	char		status;
+	t_token *match;
+	const char *prev;
+	char status;
 
 	prev = cmd;
 	status = STATUS_OK;
@@ -56,16 +56,20 @@ char		lexer_fill(t_lexer *lexer, const char *cmd)
 		match = lexer_token_search(cmd);
 		if (match != NULL)
 		{
-			if (prev != cmd)
-				lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
-			if (match->type != TOKEN_BLANK)
-				lexer_token_add(lexer, match->id, match->size, match->type);
+			if (match->type == TOKEN_AGGREG)
+				lexer_token_add(lexer, prev, cmd - prev + match->size, match->type);
+			else
+			{
+				if (prev != cmd)
+					lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
+				if (match->type != TOKEN_BLANK)
+					lexer_token_add(lexer, match->id, match->size, match->type);
+			}
 			cmd += match->size;
 			prev = cmd;
 		}
-		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`')
-			&& ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
-				return (status);
+		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`') && ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
+			return (status);
 		else
 			++cmd;
 	}
