@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:05:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:07:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ char					error_file_permissions(char *filename);
 /*
 ** functions
 */
-void					sh_command_run(t_shell *sh);
+void					sh_command_prepare(t_shell *sh);
+char					sh_command_run(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char **str);
+char					*sh_command_check(t_env *env, t_env *alias, char *s);
 
 /*
 ** functions - builtins
@@ -204,12 +210,24 @@ char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
 /*
-** functions - glob
+** functions - lexer - aliases
 */
-char					*sh_glob(char *str);
+char					*lexer_aliases(t_env *aliases, char *s, int start);
 
 /*
-** functions - glob - cbraces
+** functions - lexer - dollar
+*/
+char					*sh_dollar_expansion(char *str, t_env *env);
+char					*lexer_expand(t_env *env, char *str, int i);
+
+/*
+** functions - lexer - glob
+*/
+char					*sh_glob(char *str);
+char					*lexer_glob(char *s, int start, int i);
+
+/*
+** functions - lexer - glob - cbraces
 */
 char					*sh_glob_cbraces(char *str);
 bool					sh_glob_cbraces_check(char *str);
@@ -220,12 +238,7 @@ bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
 
 /*
-** functions - dollar
-*/
-char					*sh_dollar_expansion(char *str, t_env *env);
-
-/*
-** functions - glob - patterns
+** functions - lexer - glob - patterns
 */
 char					*sh_glob_pattern(char *str);
 char					*sh_glob_expand_ranges(t_filesystem *fs, char *str);
@@ -254,49 +267,12 @@ void					sh_glob_check_all_paths(
 								t_filesystem *fs2);
 
 /*
-** functions - glob - utils
+** functions - lexer - glob - utils
 */
-int						glob_strcountif(char *str, char c);
 bool					glob_match(char *s1, char *s2, char **lst);
-bool					glob_is_esc(char *str, int i);
-bool					glob_need_esc(char c);
 bool					glob_in_range(char *str, int pos);
-char					*sh_glob_inject(char *str, char *injection, int i);
 char					**cbraces_strsplit(char *s, char c);
 char					**pattern_strsplit(char *s, char c);
-void					sh_glob_repatriate(char *str, int i, int len);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(
-							t_shell *sh,
-							t_env *env,
-							char **argv);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
-
-/*
-** functions - lexer
-*/
-bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-// void					lexer_entry(char *cmd);
-t_lexer					lexer_entry(char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
-void					lexer_token_add(
-							t_lexer *lexer,
-							const char *src,
-							size_t size,
-							t_token_type type);
-void					lexer_delete(t_lexer *lexer);
-void					lexer_token_singlequote(t_lexer *l, const char **cmd);
-void					lexer_token_doublequote(t_lexer *l, const char **cmd);
-void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
-t_token					*lexer_token_search(const char *cmd);
-const t_token			*lexer_lexic_singletone(void);
 
 /*
 ** functions - lexer - handlers
@@ -313,10 +289,69 @@ void					sh_command_expand_dollars(
 							char *str);
 
 /*
+** functions - lexer - heredoc
+*/
+char					sh_heredoc(t_shell *sh, char *str);
+char					sh_heredoc_add(t_shell *sh, char *heredoc);
+void					sh_heredoc_delete(t_shell *sh);
+char					sh_heredoc_init(t_shell *sh, char *heredoc);
+char					sh_heredoc_update(t_shell *sh);
+
+/*
+** functions - lexer - tilde
+*/
+<<<<<<< HEAD
+bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
+// void					lexer_entry(char *cmd);
+t_lexer					lexer_entry(char *cmd);
+void					lexer_fill(t_lexer *lexer, const char *cmd);
+=======
+char					*lexer_tilde(t_env *env, char *s, int i);
+
+/*
+** functions - lexer - tokenize
+*/
+char					lexer_entry(t_lexer *lexer, char *cmd);
+char					lexer_fill(t_lexer *lexer, const char *cmd);
+>>>>>>> feat/heredoc
+void					lexer_token_add(
+							t_lexer *lexer,
+							const char *src,
+							size_t size,
+							t_token_type type);
+char					lexer_delete(t_lexer *lexer, char status);
+char					lexer_token_singlequote(t_lexer *l, const char **cmd);
+char					lexer_token_doublequote(t_lexer *l, const char **cmd);
+char					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+t_token					*lexer_token_search(const char *cmd);
+const t_token			*lexer_lexic_singletone(void);
+
+/*
 ** functions - lexer - utils
 */
-void					sh_command_inject(char *str, char *injection, int i);
-void					sh_command_repatriate(char *str, int i, int len);
+void					lexer_inject_cpy(char *str, char *injection, int i);
+char					*lexer_inject_dup(char *str, char *injection, int i);
+bool					lexer_is_empty(char *str);
+bool					lexer_is_esc(char *str, int i);
+bool					lexer_is_new_cmd(char *s, int pos);
+void					lexer_is_quote(char *s, int i, char *dq, char *sq);
+bool					lexer_need_esc(char c);
+void					lexer_repatriate(char *str, int i, int len);
+int						lexer_strcountif(char *str, char c);
+char					**lexer_strsplit(char *s, char c);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(
+							t_shell *sh,
+							t_env *env,
+							char **argv);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 
 /*
 ** functions - parser
@@ -520,7 +555,7 @@ void					sh_search_init(t_shell *sh);
 /*
 ** terminal - multilines
 */
-void					sh_multilines(t_shell *sh);
+void					sh_multilines(t_shell *sh, char status);
 void					sh_multilines_close(t_shell *sh);
 
 /*

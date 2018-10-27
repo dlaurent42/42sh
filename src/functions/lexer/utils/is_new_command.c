@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   is_new_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/25 13:56:30 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/25 14:10:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+bool		lexer_is_new_cmd(char *s, int pos)
 {
-	int	i;
+	int		i;
 
-	i = 0;
-	while (str[i])
+	i = pos - 1;
+	while (i >= 0)
 	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
+		if ((s[i] == '|' || s[i] == '&' || s[i] == ';' || s[i] == '`')
+		&& lexer_is_esc(s, i))
+			return (TRUE);
+		else if (s[i] != ' ' || lexer_is_esc(s, i))
+			return (FALSE);
+		i--;
 	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	if (i == 0)
+		return (TRUE);
+	return (FALSE);
 }

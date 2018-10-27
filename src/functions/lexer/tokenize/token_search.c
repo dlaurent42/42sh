@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   token_search.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/07 12:14:49 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/10/27 21:10:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+t_token *lexer_token_search(const char *cmd)
 {
-	int	i;
+	const t_token *lexic;
 
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
+	lexic = lexer_lexic_singletone();
+	if (cmd && lexic)
+		while (lexic->id)
 		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
+			if (ft_strncmp(cmd, lexic->id, lexic->size) == 0)
+				return ((t_token *)lexic);
+			++lexic;
 		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	return (NULL);
 }

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   is_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/25 13:20:08 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/25 13:20:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+void	lexer_is_quote(char *s, int i, char *dq, char *sq)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	if (s[i] == '"' && i && s[i - 1] == '=' && !(*dq || *sq))
+		*dq = 2;
+	else if (s[i] == '\'' && i && s[i - 1] == '=' && !(*dq || *sq))
+		*sq = 2;
+	if (s[i] == '"' && !(*dq || *sq))
+		*dq = 1;
+	else if (s[i] == '\'' && !(*dq || *sq))
+		*sq = 1;
+	else if (s[i] == '"' && (*dq || *sq))
+		*dq = 0;
+	else if (s[i] == '"' && (*dq || *sq))
+		*sq = 0;
 }

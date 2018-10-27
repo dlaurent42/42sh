@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trim.c                                             :+:      :+:    :+:   */
+/*   token_singlequote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 13:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:43 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/19 12:27:00 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/10/25 19:16:52 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_command_trim(char *str)
+char	lexer_token_singlequote(t_lexer *lexer, const char **cmd)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	lexer_repatriate(str, 0, i);
+	*cmd = *cmd + 1;
+	while (cmd[0][i] != '\'')
+	{
+		if (cmd[0][i] == '\0')
+			return (STATUS_SQUOTE);
+		++i;
+	}
+	lexer_token_add(lexer, *cmd, i, TOKEN_SINGLEQUOTE);
+	*cmd = *cmd + i + 1;
+	return (STATUS_OK);
 }

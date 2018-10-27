@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 13:50:36 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 14:00:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+char		sh_heredoc_add(t_shell *sh, char *heredoc)
 {
-	int	i;
+	t_heredocs	*tmp;
+	t_heredocs	*new;
 
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	tmp = sh->heredocs;
+	if (tmp)
+		while (tmp->next)
+			tmp = tmp->next;
+	if (!(new = (t_heredocs *)ft_memalloc(sizeof(t_heredocs))))
+		return (-1);
+	new->keyword = ft_strdups(heredoc);
+	(!sh->heredocs) ? sh->heredocs = new : 0;
+	(tmp) ? tmp->next = new : 0;
+	return (1);
 }

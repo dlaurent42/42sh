@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   is_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 14:53:18 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 14:55:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+bool		lexer_is_empty(char *str)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
+		if (str[i] != ' ' && str[i] != '\t')
+			return (FALSE);
+		i++;
 	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	return (TRUE);
 }

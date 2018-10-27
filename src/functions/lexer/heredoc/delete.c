@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 13:38:07 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 13:49:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+void		sh_heredoc_delete(t_shell *sh)
 {
-	int	i;
+	t_heredocs	*tmp;
 
-	i = 0;
-	while (str[i])
+	if (!sh || !sh->heredocs)
+		return ;
+	while (sh->heredocs)
 	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
+		tmp = sh->heredocs->next;
+		ft_strdel(&sh->heredocs->keyword);
+		ft_strdel(&sh->heredocs->value);
+		free(sh->heredocs);
+		sh->heredocs = tmp;
 	}
 }

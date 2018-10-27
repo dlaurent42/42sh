@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   is_escape.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 16:48:28 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/25 14:36:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+bool		lexer_is_esc(char *str, int i)
 {
-	int	i;
+	int	tmp;
+	int	count;
 
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	tmp = i;
+	count = 0;
+	if (!str[i])
+		return (FALSE);
+	if (str[i] == '\\')
+		while (++i && str[i] == '\\')
+			count++;
+	i = tmp;
+	while (--i >= 0 && str[i] == '\\')
+		count++;
+	return (count % 2);
 }

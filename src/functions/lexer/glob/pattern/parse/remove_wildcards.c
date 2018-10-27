@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   remove_wildcards.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/21 17:31:55 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 16:56:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+char		*glob_remove_wildcars(char *str)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
+		if (str[i] == '*' && str[i + 1] == '*'
+		&& !glob_in_range(str, i) && i && str[i - 1] != '/')
+			lexer_repatriate(str, i, 1);
+		else if (str[i] == '*' && str[i + 1] == '*'
+		&& !glob_in_range(str, i) && (str[i + 2] && str[i + 2] != '/'))
+			lexer_repatriate(str, i, 1);
 		else
 			i++;
 	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	return (str);
 }

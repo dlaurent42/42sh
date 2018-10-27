@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/26 11:13:34 by azaliaus         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/24 16:43:11 by dlaurent         ###   ########.fr       */
+>>>>>>> feat/heredoc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +175,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncasecmp(const char *s1, const char *s2, size_t len);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strncmps(const char *s1, const char *s2, size_t n);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strncpys(char *dst, const char *src, size_t len);
 char				*ft_strndup(const char *s1, size_t n);

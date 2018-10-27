@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   get_next.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/24 14:14:31 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 14:17:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+char	*sh_heredoc_get_next(t_shell *sh)
 {
-	int	i;
+	char		*returned;
+	t_heredocs	*next;
 
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	returned = NULL;
+	if (!sh->heredocs)
+		return (NULL);
+	if (!(returned = sh->heredocs->value))
+		returned = ft_strdups("");
+	ft_strdel(&sh->heredocs->value);
+	ft_strdel(&sh->heredocs->keyword);
+	next = sh->heredocs->next;
+	free(sh->heredocs);
+	sh->heredocs = next;
+	return (returned);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 11:14:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 17:58:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@
 # define GIT_HEAD		"/.git/HEAD"
 # define GIT_NAME_L		" \x1b[1;34;40mgit[\x1b[1;31;40m"
 # define GIT_NAME_R		"\x1b[1;34;40m]"
-# define MULT_PROMPT	"\x1b[1;31;40m\xe1\x90\x85\x1b[0m "
+# define MULT_PROMPT	" \x1b[1;31;40m\xe1\x90\x85\x1b[0m "
 # define ERR_PROMPT		" \x1b[1;31;40m▸\x1b[0m "
 # define VALID_PROMPT	" \x1b[1;32;40m▸\x1b[0m "
 
@@ -187,6 +187,18 @@
 # define BIN_MAX_SIZE	98317
 # define BIN_PRIME_1	53
 # define BIN_PRIME_2	97
+
+/*
+** lexer status codes
+*/
+# define STATUS_EMPTY	-2
+# define STATUS_ERR		-1
+# define STATUS_OK		0
+# define STATUS_DQUOTE	1
+# define STATUS_SQUOTE	2
+# define STATUS_BQUOTE	3
+# define STATUS_HEREDOC	4
+# define STATUS_PIPE	5
 
 /*
 ** globbing

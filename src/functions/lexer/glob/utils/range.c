@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useless_quotes.c                                   :+:      :+:    :+:   */
+/*   range.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/21 17:33:58 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/24 16:58:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+bool	glob_in_range(char *str, int pos)
 {
-	int	i;
+	int		i;
+	bool	in_range;
 
 	i = 0;
-	while (str[i])
+	in_range = FALSE;
+	if (pos == 0)
+		return (FALSE);
+	while (str[i] && i < pos)
 	{
-		if ((str[i] == '"' && str[i + 1] == '"')
-		|| (str[i] == '\'' && str[i + 1] == '\''))
-		{
-			lexer_repatriate(str, i, 2);
-			i = 0;
-		}
-		else
-			i++;
+		if (str[i] == '[' && !lexer_is_esc(str, i))
+			in_range = TRUE;
+		else if (str[i] == ']' && !lexer_is_esc(str, i)
+		&& in_range && i && str[i - 1] != '[')
+			in_range = FALSE;
+		i++;
 	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(str, 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
-	}
+	if (!str[i] && in_range)
+		return (FALSE);
+	return (in_range);
 }

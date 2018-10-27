@@ -1,3 +1,6 @@
+Verify closed fd
+	cat "test" | read &>-
+
 Verify shell behavior when using unicode
 
 Verify correct implementation of local/global variables
