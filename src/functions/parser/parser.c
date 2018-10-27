@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:14:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 18:01:43 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,7 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	return (sh_command_dispatch(sh, env, arr));
 }
 
-
-/*
-** IDEA: Only for testing purposes.
-*/
-char	sh_test_command_found(t_shell *sh, t_env *env, t_bin *bin,
+char	sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	char **arg)
 {
 	int		i;
