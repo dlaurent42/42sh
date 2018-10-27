@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 18:16:56 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 21:17:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,30 @@ static char	sh_command_run_lexer(
 		: sh_heredoc(sh, NULL);
 	return (status);
 }
-/*
-static char	sh_command_run_ast(
-	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
+
+char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin, char *cmd)
 {
-	char			status;
+	char			ret;
+	t_lexer			lexer;
 	t_token_tree	*list;
 
-	ft_printf(". Enters ast\n");
+	if (!cmd)
+		return (1);
+	lexer = lexer_entry(cmd);
 	list = build_list(lexer);
-	lexer_delete(&lexer, status);
+	lexer_delete(&lexer);
+	reorganise_tokens(&list);
+	if (!(sh->exec = sh_init_exec(env, bin)))
+		return (error_init_exec(sh));
 	if ((list = build_token_tree(list)))
-	{
-		// TODO: Reorganise tree(prioritising)
-		status = execute_tree(sh, list); // returns last return code
-	}
+		ret = execute_tree(sh, list);
 	else
-		status = error_execution_tree();
+		ret = error_execution_tree();
 	clean_tree(list);
-	ft_printf(". Exits ast with status %d\n", status);
-	return (status);
+	sh_destroy_exec(&(sh->exec));
+	return (ret);
 }
-*/
+
 
 static char	sh_command_check_lexer(t_lexer *lexer)
 {
@@ -114,7 +116,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		sh->bin = bin_update(sh, env, bin);
 		command_add(sh, true);
 	}
-	//status = sh_command_run_ast(sh, env, bin, lexer);
+	status = sh_command_run_ast(sh, env, bin, lexer);
 	for (size_t i = 0; i < lexer.size;i++)
 		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
 	ft_printf("Exit command run\n");
