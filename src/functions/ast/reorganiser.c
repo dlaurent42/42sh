@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 20:14:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 20:27:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,27 @@ static bool			token_is_treatable(t_token_tree *token)
 	return (true);
 }
 
-static void			insert_token_at_correct_place(
-		t_token_tree *current_command,
-		t_token_tree *current_token,
-		t_token_tree *next_token)
-{
-	if (current_token || current_command || next_token)
-		;
-}
-
-static t_token_tree	*get_next_token(t_token_tree *current_token)
+static t_token_tree	*get_next_token(t_token_tree *token)
 {
 	t_token_tree	*next_token;
 
-	next_token = current_token;
+	next_token = token;
 	while (next_token && token_is_treatable(next_token))
 		next_token = next_token->right;
 	return (next_token);
 }
-	
 
+//static void			insert_token_at_correct_place(
+//		t_token_tree *current_command,
+//		t_token_tree *current_token,
+//		t_token_tree *next_token)
+//{
+//	while (current_command && get_next_token(current_command)
+//			&& get_next_token(current_command)->right)
+//		current_command = get_next_token(current_command);
+//	if (current_token || current_command || next_token)
+//		;
+//}
 
 static void			treat_current_command(t_token_tree *current_command)
 {
@@ -57,8 +58,8 @@ static void			treat_current_command(t_token_tree *current_command)
 		if (current_token->type < type)
 		{
 			next_token = get_next_token(current_token);
-			insert_token_at_correct_place(
-					current_command, current_token, next_token);
+			//insert_token_at_correct_place(
+			//		current_command, current_token, next_token);
 			current_token = next_token;
 		}
 		current_token = (current_token) ? current_token->right : current_token;
