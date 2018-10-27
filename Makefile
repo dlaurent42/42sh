@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/27 21:11:49 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/27 21:13:40 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRC			=	shell.c														\
 				errors/path.c												\
 				errors/import_export.c										\
 				errors/execution.c											\
-				functions/redirect.c										\
 				functions/check.c											\
 				functions/prepare.c											\
 				functions/run.c												\
