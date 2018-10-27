@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 23:40:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 23:52:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ static bool			token_is_treatable(t_token_tree *token)
 	return (true);
 }
 
+static bool			token_is_redirect(t_token_tree *token)
+{
+	if (!token
+			|| (token->type != 1
+			&& token->type != 2
+			&& token->type != 3))
+		return (false);
+	return (true);
+}
+
+
 static t_token_tree	*get_next_token(t_token_tree *token)
 {
 	t_token_tree	*next_token;
@@ -29,10 +40,7 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	next_token = token;
 	if (next_token)	
 		next_token = next_token->right;
-	while (next_token
-			&& next_token->type != 1
-			&& next_token->type != 2
-			&& next_token->type != 3)
+	while (!token_is_redirect(next_token))
 		next_token = next_token->right;
 	return (next_token);
 }
@@ -48,7 +56,7 @@ static void			insert_token_at_correct_place(
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
 	{
-		ft_printf("Move token prior\n");
+		ft_printf("Moved past [%s]\n", *current_command->tokens);
 		current_command = get_next_token(current_command);
 	}
 
