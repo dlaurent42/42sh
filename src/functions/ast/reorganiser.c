@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:49:22 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:55:12 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void			treat_current_command(t_token_tree *head)
 {
 	int				type;
 	t_token_tree	*current_token;
+	t_token_tree	*placeholder;
 
 	type = 0;
 	current_token = head;
@@ -39,8 +40,12 @@ static void			treat_current_command(t_token_tree *head)
 	{
 		type = (type < current_token->type) ? current_token->type : type;
 		if (current_token->type < type)
+		{
+			placeholder = current_token->right;
 			insert_token_at_correct_place(current_token);
-		current_token = current_token->right;
+			current_token = placeholder;
+		}
+		current_token = (current_token) ? current_token->right : current_token;
 	}
 }
 
