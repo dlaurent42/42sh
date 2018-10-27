@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:51:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 00:42:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	}
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
-	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
-		env_insert_protected(sh, sh->env, "?", str);
 	if (arg)
 		while (arg[i])
 		{
@@ -92,7 +90,6 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 {
 	int		i;
 	char	*tmp;
-	char	*str;
 	char	ret;
 
 	i = 0;
@@ -103,10 +100,9 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		arg[0] = tmp;
 	}
 	ret = sh_command_found(sh, env, bin, &arg[0]);
-	str = ft_itoa(ret);
-	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
-		env_insert_protected(sh, sh->env, "?", str);
-	ft_strdel(&str);
+	ft_putendl_fd("from sh_command_run_ast : ", 2);
+	ft_putnbr_fd(ret, 2);
+	ft_putendl_fd("", 2);
 	return (ret);
 }
 

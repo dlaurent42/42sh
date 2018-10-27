@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:59:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 01:14:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static char	sh_command_run_tree(
 	t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
 {
 	char			ret;
+	char			*status;
 	t_token_tree	*list;
 
 	list = build_list(lexer);
@@ -55,13 +56,16 @@ static char	sh_command_run_tree(
 		clean_tree(list);
 		return (STATUS_ERR);
 	}
-	if ((list = build_token_tree(list)))
-		ret = execute_tree(sh, list);
-	else
-		ret = error_execution_tree();
+	list = build_token_tree(list);
+	ret = (list) ? execute_tree(sh, list) : error_execution_tree();
+	status = (sh) ? ft_itoa(ret) : ft_strdups("0");
+	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
+		env_insert_protected(sh, sh->env, "?", status);
+	ft_printf("env search is %s (sh_command_run_tree)\n", env_search(sh->env, "?"));
+	ft_strdel(&status);
 	clean_tree(list);
 	sh_destroy_exec(&(sh->exec));
-	return (ret);
+	return (STATUS_OK);
 }
 
 static char	sh_command_check_lexer(t_lexer *lexer)
@@ -127,6 +131,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		ft_printf("Added command to hist\n");
 	}
 	status = sh_command_run_tree(sh, env, bin, lexer);
+	ft_printf("env search is %s (sh_command_run)\n", env_search(sh->env, "?"));
 	ft_printf("tree has finished with status %d\n", status);
 	for (size_t i = 0; i < lexer.size;i++)
 		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);

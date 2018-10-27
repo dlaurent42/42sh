@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:25:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 01:15:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		sh_command_prepare(t_shell *sh)
 	char	status;
 
 	status = 0;
+	g_exit_code = 0;
 	sh_move_end(sh);
 	ft_putchar('\n');
 	ft_strdel(&sh->buffer.parsed);

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:24:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 01:11:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void					error_import_export(int fd, char *path);
 int						error_pipe(void);
 int						error_fork(void);
 char					error_execution_tree(void);
-char					error_execution_file(char *filename);
-char					error_file_permissions(char *filename);
+char					error_execution_file(t_shell *sh, char *filename);
+char					error_file_permissions(t_shell *sh, char *filename);
 
 /*
 ** functions

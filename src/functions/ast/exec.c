@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 22:14:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 01:15:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ int		execute_tree(t_shell *sh, t_token_tree *tree)
 		ret = execute_conditions(sh, tree);
 	else if (tree->type == 6)
 		ret = execute_semicolon(sh, tree);
+	if (tree->type == 0)
+	{
+		g_sh->exe = ret;
+		ft_printf("g_sh->exe has been set to %d\n", ret);
+	}
+	ft_printf("execute tree is returning %d\n", ret);
 	return (ret);
 }

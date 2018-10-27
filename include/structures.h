@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:26:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 00:54:17 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 typedef struct passwd	t_passwd;
 typedef struct timeval	t_timeval;
+
+int g_exit_code;
 
 typedef struct			s_cmd_attr
 {
@@ -340,6 +342,7 @@ typedef struct			s_token_tree
 typedef struct			s_shell
 {
 	t_ac				*ac;
+	int					exe;
 	char				*hist;
 	pid_t				pid;
 	t_bin				*bin;

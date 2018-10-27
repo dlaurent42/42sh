@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:42:32 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 23:40:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char		execute_left_redirection(t_shell *sh, t_token_tree *tree)
 	{
 		file = (last->left) ? last->left->tokens[0] : last->tokens[0];
 		if (type == 1 && ((fd = open(file, O_RDONLY)) == -1))
-			return (error_execution_file(file));
+			return (error_execution_file(sh, file));
 		(last->left && last->right) ? close(fd) : 0;
 		if (last->right)
 			type = (!ft_strcmp(tree->tokens[0], "<<") ? 2 : 1);

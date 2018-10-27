@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 12:46:49 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:43:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 23:40:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		execute_right_redirection(t_shell *sh, t_token_tree *tree)
 		}
 		file = (last->left ? last->left->tokens[0] : last->tokens[0]);
 		if ((fd = open(file, ops, 0644)) == -1)
-			return (error_file_permissions(file));
+			return (error_file_permissions(sh, file));
 		(last->left && last->right ? close(fd) : 0);
 		last = last->right;
 	}
