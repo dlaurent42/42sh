@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/27 21:13:40 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/27 21:15:35 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,21 @@ SRC			=	shell.c														\
 				functions/check.c											\
 				functions/prepare.c											\
 				functions/run.c												\
+				terminal/signals/stop_acquisition.c							\
+				functions/ast/build_list.c									\
+				functions/ast/tree.c										\
+				functions/ast/get_tree_token_type.c							\
+				functions/ast/build_token_tree.c							\
+				functions/ast/exec.c										\
+				functions/ast/reorganiser.c									\
+				functions/ast/operators/semicolon.c							\
+				functions/ast/operators/conditions.c						\
+				functions/ast/operators/pipe.c								\
+				functions/ast/operators/left_redirection.c					\
+				functions/ast/operators/right_redirection.c					\
+				functions/ast/operators/heredoc.c							\
+				functions/ast/operators/file_descriptor.c					\
+				functions/ast/operators/file_descriptor_utils.c				\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
@@ -270,34 +285,7 @@ SRC			=	shell.c														\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
-				terminal/signals/resize.c									\
-				terminal/signals/stop_acquisition.c							\
-<<<<<<< HEAD
-=======
-				functions/lexer/lexer_delete.c								\
-				functions/lexer/lexer_entry.c								\
-				functions/lexer/lexer_fill.c								\
-				functions/lexer/lexer_lexic_singletone.c					\
-				functions/lexer/lexer_token_add.c							\
-				functions/lexer/lexer_token_backquote.c						\
-				functions/lexer/lexer_token_doublequote.c					\
-				functions/lexer/lexer_token_search.c						\
-				functions/lexer/lexer_token_singlequote.c					\
-				functions/ast/build_list.c									\
-				functions/ast/tree.c										\
-				functions/ast/get_tree_token_type.c							\
-				functions/ast/build_token_tree.c							\
-				functions/ast/exec.c										\
-				functions/ast/reorganiser.c									\
-				functions/ast/operators/semicolon.c							\
-				functions/ast/operators/conditions.c						\
-				functions/ast/operators/pipe.c								\
-				functions/ast/operators/left_redirection.c					\
-				functions/ast/operators/right_redirection.c					\
-				functions/ast/operators/heredoc.c							\
-				functions/ast/operators/file_descriptor.c					\
-				functions/ast/operators/file_descriptor_utils.c				\
->>>>>>> feat/ast
+				terminal/signals/resize.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
@@ -327,6 +315,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
+				@mkdir -p $(OBJ_DIR)/functions/ast
+				@mkdir -p $(OBJ_DIR)/functions/ast/operators
 				@mkdir -p $(OBJ_DIR)/functions/builtins
 				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
@@ -357,9 +347,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
-				@mkdir -p $(OBJ_DIR)/functions/ast
-				@mkdir -p $(OBJ_DIR)/functions/ast/operators
 				@mkdir -p $(OBJ_DIR)/structures
+				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
@@ -367,7 +356,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/term
-				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/glob
