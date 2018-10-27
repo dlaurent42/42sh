@@ -6,18 +6,18 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 00:56:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 01:22:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static bool			token_is_treatable(t_token_tree *token)
+static bool			token_is_boundry(t_token_tree *token)
 {
 	if (!token
-			|| token->type == 4
-			|| token->type == 5
-			|| token->type == 6)
+			|| (token->type == 4
+			&& token->type == 5
+			&& token->type == 6))
 		return (false);
 	return (true);
 }
@@ -143,9 +143,9 @@ static void			treat_current_command(t_token_tree *current_command)
 
 static void			move_to_next_command(t_token_tree **current_command)
 {
-	while (*current_command && token_is_treatable(*current_command))
+	while (*current_command && !token_is_boundry(*current_command))
 		*current_command = (*current_command)->right;
-	while (*current_command && !token_is_treatable(*current_command))
+	while (*current_command && token_is_boundry(*current_command))
 		*current_command = (*current_command)->right;
 }
 
