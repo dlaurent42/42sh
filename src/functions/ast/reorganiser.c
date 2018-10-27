@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:55:12 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:58:48 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void			treat_current_command(t_token_tree *head)
 		if (current_token->type < type)
 		{
 			placeholder = current_token->right;
+			placeholder = (placeholder) ? placeholder->right : placeholder;
 			insert_token_at_correct_place(current_token);
 			current_token = placeholder;
 		}
