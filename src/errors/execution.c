@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:23:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 09:57:57 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:30:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+/*
+** if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
+**		env_insert_protected(sh, sh->env, "?", "1");
+*/
 
 int		error_pipe(void)
 {
@@ -49,5 +54,5 @@ char	error_file_permissions(char *filename)
 {
 	ft_putstr_fd("permission denied: ", 2);
 	ft_putendl_fd(filename, 2);
-	return (1);
+	return (STATUS_PERMISSION_DENIED);
 }

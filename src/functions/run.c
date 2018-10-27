@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:52:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:59:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,15 +110,26 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		return (lexer_delete(&lexer, status));
 	}
 	sh->modes.multiline = FALSE;
-	if (!sh->modes.exec && (sh->modes.exec = TRUE) && bin == sh->bin)
+	if (sh && bin == sh->bin)
 	{
 		ft_printf("Updating sh->bin\n");
 		sh->bin = bin_update(sh, env, bin);
+		bin = sh->bin;
+		ft_printf("Updated sh->bin\n");
+	}
+	(sh->modes.exec)
+		? ft_printf("Exec mode is On\n")
+		: ft_printf("Exec mode is Off\n");
+	if (!sh->modes.exec && (sh->modes.exec = TRUE))
+	{
+		ft_printf("Adding command to hist\n");
 		command_add(sh, true);
+		ft_printf("Added command to hist\n");
 	}
 	status = sh_command_run_tree(sh, env, bin, lexer);
+	ft_printf("tree has finished with status %d\n", status);
 	for (size_t i = 0; i < lexer.size;i++)
 		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
-	ft_printf("Exit command run\n");
+	ft_printf("Exit command run with status %d\n", status);
 	return (lexer_delete(&lexer, status));
 }

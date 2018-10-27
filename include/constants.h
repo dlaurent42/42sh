@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 17:58:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:25:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,14 +191,16 @@
 /*
 ** lexer status codes
 */
-# define STATUS_EMPTY	-2
-# define STATUS_ERR		-1
-# define STATUS_OK		0
-# define STATUS_DQUOTE	1
-# define STATUS_SQUOTE	2
-# define STATUS_BQUOTE	3
-# define STATUS_HEREDOC	4
-# define STATUS_PIPE	5
+# define STATUS_EMPTY	            -2
+# define STATUS_ERR		            -1
+# define STATUS_OK		            0
+# define STATUS_DQUOTE	            1
+# define STATUS_SQUOTE	            2
+# define STATUS_BQUOTE	            3
+# define STATUS_HEREDOC	            4
+# define STATUS_PIPE	            5
+# define STATUS_PERMISSION_DENIED	126
+# define STATUS_NOT_FOUND	        127
 
 /*
 ** globbing

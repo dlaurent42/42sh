@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 21:38:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:18:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ t_shell		*sh_new(char **environ)
 	t_shell		*sh;
 
 	if (!(sh = (t_shell *)ft_memalloc(sizeof(t_shell))))
+	{
+		ft_printf("01\n");
 		error_malloc_sh(sh);
+	}
 	sh_set_termios(sh);
 	sh_set_window(sh);
 	sh->env = env_new(sh, environ);
@@ -40,7 +43,10 @@ t_shell		*sh_new(char **environ)
 	command_import(sh);
 	sh_set_prompt(sh);
 	if (!sh->prompt.content)
+	{
+		ft_printf("02\n");
 		error_malloc_sh(sh);
+	}
 	g_sh = sh;
 	return (sh);
 }

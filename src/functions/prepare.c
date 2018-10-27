@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:11:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:25:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void		sh_command_prepare(t_shell *sh)
 	ft_putchar('\n');
 	ft_strdel(&sh->buffer.parsed);
 	sh->buffer.parsed = ft_strdups(sh->buffer.content);
-	if ((status = sh_command_run(sh, sh->env, sh->bin, &sh->buffer.parsed)) > 0)
+	if ((status = sh_command_run(sh, sh->env, sh->bin, &sh->buffer.parsed)) > 0
+	&& status < STATUS_PERMISSION_DENIED)
 		return (sh_multilines(sh, status));
 	sh_reset_sh(sh);
 }

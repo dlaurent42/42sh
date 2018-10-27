@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 21:13:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:32:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 	sh->prompt.content = ft_strjoins(
 							sh_multiline_assess_status(status),
 							MULT_PROMPT);
-	sh->prompt.content = ft_strjoinf(sh->prompt.content, MULT_PROMPT, 1);
 	sh->prompt.len = 3 + sh_multilines_assess_status_len(status);
 	sh->prompt.len_mod = sh->prompt.len % sh->window.width;
 	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;

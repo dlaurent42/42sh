@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:20:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 20:17:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:03:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*sh_echo_backslash_c(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == '\\' && s[i + 1] == 'c')
 		{

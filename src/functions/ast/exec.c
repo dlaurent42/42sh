@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:40:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:14:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** 0 - CMD
 */
 
-int						execute_tree(t_shell *sh, t_token_tree *tree)
+int		execute_tree(t_shell *sh, t_token_tree *tree)
 {
 	int		ret;
 

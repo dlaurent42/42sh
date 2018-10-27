@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:57:47 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 22:51:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static char	sh_command_err(char *cmd, int err)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
-		return (127);
+		return (STATUS_NOT_FOUND);
 	}
 	if (err == 2)
 	{
 		ft_putstr_fd("permission denied: ", 2);
 		ft_putendl_fd(cmd, 2);
-		return (126);
+		return (STATUS_PERMISSION_DENIED);
 	}
 	return (0);
 }
@@ -44,7 +44,8 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	}
 	else if (arr && arr[0] && sh_is_not_builtin(arr[0]))
 	{
-		if (!(obj = bin_search(bin, arr[0])) || access(obj->path, F_OK) != 0)
+		if (!(obj = bin_search(bin, arr[0])) || !obj->path
+		|| access(obj->path, F_OK) != 0)
 			return (sh_command_err(arr[0], 1));
 		if (access(obj->path, R_OK) != 0 || access(obj->path, X_OK) != 0)
 			return (sh_command_err(arr[0], 2));
