@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:11:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:34:25 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,23 @@ static bool			token_is_treatable(t_token_tree *current_token)
 
 static void			treat_current_command(t_token_tree *head)
 {
+	int				type;
 	t_token_tree	*current_token;
 
+	type = 0;
 	current_token = head;
 	while (token_is_treatable(current_token))
 	{
 		current_token = current_token->right;
 	}
+}
+
+static void			move_to_next_command(t_token_tree **current_command)
+{
+	while (*current_command && token_is_treatable(*current_command))
+		*current_command = (*current_command)->right;
+	while (*current_command && !token_is_treatable(*current_command))
+		*current_command = (*current_command)->right;
 }
 
 static void			assign_token_ids(t_token_tree *list)
@@ -56,10 +66,7 @@ int					reorganise_tokens(t_token_tree **list)
 	{
 		ft_printf("Current command [%s]\n", *current_command->tokens);
 		treat_current_command(current_command);
-		while (current_command && token_is_treatable(current_command))
-			current_command = current_command->right;
-		while (current_command && !token_is_treatable(current_command))
-			current_command = current_command->right;
+		move_to_next_command(&current_command);
 	}
 	ft_printf("\n----END REORGANISE----\n");
 	return (1);
