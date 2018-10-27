@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 17:57:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:08:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,20 @@ static void			assign_token_ids(t_token_tree *list)
 
 int					reorganise_tokens(t_token_tree **list)
 {
+	ft_printf("\n----START REORGANISE----\n\n");
 	t_token_tree	*current_command;
 
 	current_command = *list;
-	assign_token_ids(*list);
-	while (current_command && !token_is_treatable(current_command))
+	assign_token_ids(current_command);
+	while (current_command)
 	{
+		ft_printf("Current command [%s]\n", *current_command->tokens);
 		treat_current_command(current_command);
-		while (current_command && !token_is_treatable(current_command))
-		{
+		while (current_command && token_is_treatable(current_command))
 			current_command = current_command->right;
-		}	
+		while (current_command && !token_is_treatable(current_command))
+			current_command = current_command->right;
 	}
+	ft_printf("\n----END REORGANISE----\n");
 	return (1);
 }
