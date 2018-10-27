@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:25:56 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 00:17:34 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 11:02:30 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void		arrange_nodes_in_priority(t_token_tree **list)
 		printf("Node: %s\n", sorted->tokens[0]);
 		sorted = sorted->right;
 	}
-	// re_assign_to_tkns(shell, sorted);
+	// reassgn tokens.
 }
