@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 13:31:06 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 17:34:01 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,27 @@
 // 	return (1);
 // }
 
-int			reorganise_tokens(t_token_tree **list)
+//static bool			tokens_are_ordered(t_token_tree *list)
+//{
+//	return (true);
+//}
+
+static void			assign_token_ids(t_token_tree *list)
+{
+	int				i;
+
+	i = 0;
+	while (list)
+	{
+		list->id = i++;
+		list = list->right;
+	}
+}
+
+int					reorganise_tokens(t_token_tree **list)
 {
 	(void)list;
+	assign_token_ids(*list);
 	// reogranisation(list);
 	// arrange_nodes_in_priority(list);
 	return (1);
