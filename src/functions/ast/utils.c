@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 23:27:06 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 23:45:45 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 11:07:07 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	skip_and_sort(t_token_tree **tkns, t_token_tree **lst_sep)
 	(!(*tkns) || in_range((*tkns)->type, 4, 6)) ? tkns_sort(lst_sep) : (0);
 }
 
+
+// ======== FROM OLD SHELL =============
 // int		prev_node_not_fd_aggr(t_token_tree *start, t_token_tree *end)
 // {
 // 	while (start->right != end)
