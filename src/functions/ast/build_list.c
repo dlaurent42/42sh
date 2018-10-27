@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 13:39:52 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 16:44:12 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ t_token_tree		*build_list(t_lexer lexer)
 	head = NULL;
 	len = 0;
 	i = 0;
-	printf("Lexer output:\n");
-	for (size_t x = 0; x < lexer.size; x++)
-		printf("%zu: token: %s | type: %d\n", x, lexer.tokens[x].id, lexer.tokens[x].type);
+	// printf("Lexer output:\n");
+	// for (size_t x = 0; x < lexer.size; x++)
+	// 	printf("%zu: token: %s | type: %d\n", x, lexer.tokens[x].id, lexer.tokens[x].type);
 	while (i < lexer.size)
 	{
 		if (tree_splice_point(lexer, i))
