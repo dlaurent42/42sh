@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 13:27:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 13:38:23 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			tree_group_token(t_lexer lexer, t_token_tree **head,
 	new->size = len;
 	new->type = (len > 1 ? 0 : get_tree_token_type(lexer.tokens[begin]));
 	if (!(new->tokens = (char **)ft_memalloc(sizeof(char *) * (len + 1))))
-		return ;
+		error_malloc_reader(g_sh, "token");
 	new->tokens[len] = NULL;
 	i = 0;
 	while (i < len)
