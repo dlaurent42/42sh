@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:25:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 22:06:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,48 @@ static void			insert_token_at_correct_place(
 		t_token_tree *current_token,
 		t_token_tree *next_token)
 {
+	t_token_tree	*placeholder;
+
+	//MOVE TO TOKEN PRIOR TO POINT OF INSERTION:
 	while (current_command && get_next_token(current_command)
-			&& get_next_token(current_command)->right)
+			&& get_next_token(current_command)->type <= current_token->type)
 		current_command = get_next_token(current_command);
-	if (current_token || current_command || next_token)
-		;
+
+	//MOVE ONE AFTER THE ABOVE TOKEN:
+	if (current_command
+			&& current_command->right
+			&& token_is_treatable(current_command->right))
+		current_command = current_command->right;
+
+	//MOVE TO POINT DIRECTLY BEFORE POINT OF INSERTION:
+	while (current_command
+			&& current_command->right
+			&& token_is_treatable(current_command->right))
+		current_command = current_command->right;
+
+	placeholder = current_command->right;
+
+	//SET NEXT OF CURENT COMMAND TO CURRENT_TOKEN:
+	current_command->right = current_token;
+
+	//MOVE ONTO CURRENT_TOKEN:
+	current_command = current_command->right;
+
+	//MOVE PAST CURRENT_TOKEN's BASTARDS:
+	while (current_command
+			&& current_command->right
+			&& token_is_treatable(current_command->right))
+		current_command = current_command->right;
+
+	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
+	current_command->right = placeholder;
+
+	//MOVE TO OLD->RIGHT POINTER TO CURRENT_TOKEN:
+	while (current_command && current_command->right != current_token)
+		current_command = current_command->right;
+
+	//SET OLD->RIGHT POINTER TO NEXT_TOKEN
+	current_command->right = next_token;
 }
 
 static void			treat_current_command(t_token_tree *current_command)
