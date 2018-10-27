@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:34:25 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:49:22 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static bool			token_is_treatable(t_token_tree *current_token)
 	return (true);
 }
 
+static void			insert_token_at_correct_place(t_token_tree *current_token)
+{
+	if (current_token)
+		;
+}
+
 static void			treat_current_command(t_token_tree *head)
 {
 	int				type;
@@ -31,6 +37,9 @@ static void			treat_current_command(t_token_tree *head)
 	current_token = head;
 	while (token_is_treatable(current_token))
 	{
+		type = (type < current_token->type) ? current_token->type : type;
+		if (current_token->type < type)
+			insert_token_at_correct_place(current_token);
 		current_token = current_token->right;
 	}
 }
