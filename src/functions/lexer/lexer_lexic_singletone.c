@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lexic_singletone.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:07:24 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/23 20:12:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 21:06:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ const t_token	*lexer_lexic_singletone(void)
 		{"\f", 1, TOKEN_BLANK},
 		{"\r", 1, TOKEN_BLANK},
 		{" ", 1, TOKEN_BLANK},
-		{NULL, 0, TOKEN_NULL},
+		{NULL, 0, TOKEN_NULL}
 	};
 
 	return (lexic);

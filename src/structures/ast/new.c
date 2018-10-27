@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_token_backquote.c                            :+:      :+:    :+:   */
+/*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 16:19:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/24 10:04:17 by azaliaus         ###   ########.fr       */
+/*   Created: 2018/10/23 20:46:06 by azaliaus          #+#    #+#             */
+/*   Updated: 2018/10/26 11:09:26 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	lexer_token_backquote(t_lexer *lexer, const char **cmd)
+t_token_tree		*new_tree_node(void)
 {
-	int i;
+	t_token_tree		*ret;
 
-	i = 0;
-	*cmd = *cmd + 1;
-	while (cmd[0][i] != '`')
-	{
-		if (cmd[0][i] == '\0')
-			break ;
-		++i;
-	}
-	lexer_token_add(lexer, *cmd, i, TOKEN_BACKQUOTE);
-	*cmd = *cmd + i + 1;
+	if (!(ret = (t_token_tree *)ft_memalloc(sizeof(t_token_tree))))
+		return (NULL);
+	ret->tokens = NULL;
+	ret->size = 0;
+	ret->type = 0;
+	ret->left = NULL;
+	ret->right = NULL;
+	return (ret);
 }

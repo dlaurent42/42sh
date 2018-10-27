@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 23:52:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 21:05:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void					error_malloc_bin(t_shell *sh, t_bin *b, char *name);
 void					error_malloc_reader(t_shell *sh, char *name);
 void					error_no_path_var(t_shell *sh);
 void					error_import_export(int fd, char *path);
+int						error_pipe(void);
+int						error_fork(void);
+char					error_execution_tree(void);
+char					error_execution_file(char *filename);
+char					error_file_permissions(char *filename);
 
 /*
 ** functions
@@ -278,7 +283,8 @@ char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 ** functions - lexer
 */
 bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-void					lexer_entry(char *cmd);
+// void					lexer_entry(char *cmd);
+t_lexer					lexer_entry(char *cmd);
 void					lexer_fill(t_lexer *lexer, const char *cmd);
 void					lexer_token_add(
 							t_lexer *lexer,
@@ -417,6 +423,8 @@ void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);
+t_exec					*sh_init_exec(t_env *env, t_bin *bin);
+void					sh_destroy_exec(t_exec **exec);
 
 /*
 ** terminal - auto_completion
@@ -562,5 +570,46 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 void					signal_catching(void);
 void					sh_sigint_reset(t_shell *sh, char *last_return);
 void					sh_window_resize(t_shell *sh);
+
+/*
+** structures - ast
+*/
+t_token_tree			*new_tree_node(void);
+void					add_tree_node(t_token_tree **head, t_token_tree **last,
+										t_token_tree *new);
+int 					add_tree_to_back(t_token_tree **head, t_token_tree *new);
+void					clean_tree(t_token_tree *tree);
+t_token_tree			*copy_tree_node(t_token_tree *obj);
+t_token_tree			*get_tree_last_node(t_token_tree *list);
+
+/*
+** functions - ast
+*/
+char					sh_build_tree(t_shell *sh, t_env *env, t_bin *bin,
+															char *cmd);
+t_token_tree			*build_list(t_lexer lexer);
+size_t					get_tree_token_type(t_token token);
+t_token_tree			*build_token_tree(t_token_tree *list);
+int						execute_tree(t_shell *sh, t_token_tree *tree);
+char					sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
+														char **arg);
+int						reorganise_tokens(t_token_tree **list);
+
+/*
+** functions - ast - operators
+*/
+char					execute_semicolon(t_shell *sh, t_token_tree *tree);
+char					execute_conditions(t_shell *sh, t_token_tree *tree);
+char					execute_pipe(t_shell *sh, t_token_tree *tree);
+char					execute_left_redirection(t_shell *sh,
+													t_token_tree *tree);
+char					execute_right_redirection(t_shell *sh,
+													t_token_tree *tree);
+char					left_heredoc(t_shell *sh, t_token_tree *tree);
+char					execute_fd_aggr(t_shell *sh, t_token_tree *tree);
+char					*get_front_descriptor(char *cmd, size_t len,
+													int closed);
+char					*get_back_descriptor(char *cmd);
+char					error_file_descriptor(void);
 
 #endif

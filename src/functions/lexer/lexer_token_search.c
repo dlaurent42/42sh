@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_token_search.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:14:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/23 20:17:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/27 21:06:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_token	*lexer_token_search(const char *cmd)
+t_token *lexer_token_search(const char *cmd)
 {
 	const t_token *lexic;
 

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 13:56:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 18:01:43 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,29 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	while (arr[++i])
 		sh_remove_useless_quotes(arr[i]);
 	return (sh_command_dispatch(sh, env, arr));
+}
+
+char	sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
+	char **arg)
+{
+	int		i;
+	char	*tmp;
+	char	*str;
+	char	ret;
+
+	i = 0;
+	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
+	{
+		tmp = realpath(arg[0], NULL);
+		ft_strdel(&arg[0]);
+		arg[0] = tmp;
+	}
+	ret = sh_command_found(sh, env, bin, &arg[0]);
+	str = ft_itoa(ret);
+	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
+		env_insert_protected(sh, sh->env, "?", str);
+	ft_strdel(&str);
+	return (ret);
 }
 
 static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,

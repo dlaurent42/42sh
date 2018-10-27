@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_token_backquote.c                            :+:      :+:    :+:   */
+/*   semicolon.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 16:19:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/24 10:04:17 by azaliaus         ###   ########.fr       */
+/*   Created: 2018/10/24 15:50:01 by azaliaus          #+#    #+#             */
+/*   Updated: 2018/10/24 17:22:50 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	lexer_token_backquote(t_lexer *lexer, const char **cmd)
+char		execute_semicolon(t_shell *sh, t_token_tree *tree)
 {
-	int i;
+	int		ret;
 
-	i = 0;
-	*cmd = *cmd + 1;
-	while (cmd[0][i] != '`')
-	{
-		if (cmd[0][i] == '\0')
-			break ;
-		++i;
-	}
-	lexer_token_add(lexer, *cmd, i, TOKEN_BACKQUOTE);
-	*cmd = *cmd + i + 1;
+	ret = 0;
+	if (!tree)
+		return (0);
+	ret = execute_tree(sh, tree->left);
+	ret = execute_tree(sh, tree->right);
+	return (ret);
 }

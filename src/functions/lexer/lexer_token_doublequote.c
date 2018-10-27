@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:12:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/22 16:07:22 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/24 10:04:14 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	lexer_token_doublequote(t_lexer *lexer, const char **cmd)
 		++i;
 	}
 	lexer_token_add(lexer, *cmd, i, TOKEN_DOUBLEQUOTE);
-	*cmd = *cmd + i;
+	*cmd = *cmd + i + 1;
 }

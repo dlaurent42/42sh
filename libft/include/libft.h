@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 14:42:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/26 11:13:34 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ char				*ft_strtrim(char const *s);
 void				ft_sort_wordtab(char **tab);
 int					match(char *s1, char *s2);
 int					nmatch(char *s1, char *s2);
+char				**ft_str2dup(char **arr);
 
 /*
 ** Linked lists
