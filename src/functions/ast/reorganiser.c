@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 18:08:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 18:11:20 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void			treat_current_command(t_token_tree *head)
 
 static void			assign_token_ids(t_token_tree *list)
 {
-	int				i;
+	int				id;
 
-	i = 0;
+	id = 0;
 	while (list)
 	{
-		list->id = i++;
+		list->id = id++;
 		list = list->right;
 	}
 }
