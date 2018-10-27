@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 22:06:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 23:21:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	t_token_tree	*next_token;
 
 	next_token = token;
-	if (!token_is_treatable(next_token))
+	if (next_token)	
 		next_token = next_token->right;
-	while (next_token && token_is_treatable(next_token))
+	while (next_token && (next_token->type > 0 && next_token->type < 4))
 		next_token = next_token->right;
 	return (next_token);
 }
@@ -44,7 +44,10 @@ static void			insert_token_at_correct_place(
 	//MOVE TO TOKEN PRIOR TO POINT OF INSERTION:
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
+	{
+		ft_printf("Move token prior\n");
 		current_command = get_next_token(current_command);
+	}
 
 	//MOVE ONE AFTER THE ABOVE TOKEN:
 	if (current_command
@@ -56,7 +59,10 @@ static void			insert_token_at_correct_place(
 	while (current_command
 			&& current_command->right
 			&& token_is_treatable(current_command->right))
+	{
+		ft_printf("Move directly prior\n");
 		current_command = current_command->right;
+	}
 
 	placeholder = current_command->right;
 
@@ -70,14 +76,20 @@ static void			insert_token_at_correct_place(
 	while (current_command
 			&& current_command->right
 			&& token_is_treatable(current_command->right))
+	{
+		ft_printf("Move past bastards\n");
 		current_command = current_command->right;
+	}
 
 	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
 	current_command->right = placeholder;
 
 	//MOVE TO OLD->RIGHT POINTER TO CURRENT_TOKEN:
 	while (current_command && current_command->right != current_token)
+	{
+		ft_printf("Move prior to old->right to current_token\n");
 		current_command = current_command->right;
+	}
 
 	//SET OLD->RIGHT POINTER TO NEXT_TOKEN
 	current_command->right = next_token;
@@ -91,17 +103,25 @@ static void			treat_current_command(t_token_tree *current_command)
 
 	type = 0;
 	current_token = current_command;
-	while (token_is_treatable(current_token))
+	while (current_token && current_token->type < 4)
 	{
-		type = (type < current_token->type) ? current_token->type : type;
+		ft_printf("    Current token[%s]\n", *current_token->tokens);
+		if (type < current_token->type)
+		{
+			type = current_token->type;
+			ft_printf("    Type:[%d]", type);
+		}
 		if (current_token->type < type)
 		{
+			ft_printf("    FIXING[%s]\n", *current_token->tokens);
 			next_token = get_next_token(current_token);
 			insert_token_at_correct_place(
 					current_command, current_token, next_token);
 			current_token = next_token;
 		}
-		current_token = (current_token) ? current_token->right : current_token;
+		current_token = get_next_token(current_token);
+		if (current_token)//DELETE
+			ft_printf("     Next token[%s]\n", *current_token->tokens);
 	}
 }
 
