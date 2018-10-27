@@ -6,15 +6,12 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 13:38:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/27 13:38:55 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-/*
-**	IDEA: remake it, to make less bulky
-*/
 static bool			tree_splice_point(t_lexer lexer, size_t i)
 {
 	if (lexer.tokens[i].type == TOKEN_ANDIF ||
