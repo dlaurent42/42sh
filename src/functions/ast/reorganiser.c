@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 10:03:33 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 12:26:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	next_token = token;
 	if (next_token)	
 		next_token = next_token->right;
-	while (next_token && !token_is_redirect(next_token))
+	while (next_token && next_token->type == 0)
 		next_token = next_token->right;
 	return (next_token);
 }
@@ -70,6 +70,7 @@ static t_token_tree	*insert_token_at_correct_place(
 			&& !token_is_redirect(current_command->right))
 		current_command = current_command->right;
 
+	//PLACE HOLDER IS POINT AFTER INSERTION
 	placeholder = current_command->right;
 
 	//SET NEXT OF CURENT COMMAND TO CURRENT_TOKEN:
@@ -81,8 +82,11 @@ static t_token_tree	*insert_token_at_correct_place(
 	//MOVE PAST CURRENT_TOKEN's BASTARDS:
 	while (current_command
 			&& current_command->right
-			&& !token_is_redirect(current_command->right))
+			&& current_command->right->type == 0)
+	{
+		ft_printf("\t\tBASTARD: [%d][%s]\n", current_command->id, *current_command->tokens);
 		current_command = current_command->right;
+	}
 
 	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
 	current_command->right = placeholder;
@@ -108,10 +112,12 @@ static void			treat_current_command(t_token_tree *current_command)
 	current_token = current_command;
 	while (current_token && current_token->type < 4)
 	{
+		ft_printf("\tCurent token: [%d][%s]\n", current_token->id, *current_token->tokens);
 		if (type < current_token->type)
 			type = current_token->type;
 		if (current_token->type < type)
 		{
+			ft_printf("\t\tFIX:[%d][%s]\n", current_token->id, *current_token->tokens);
 			next_token = get_next_token(current_token);
 			current_token = insert_token_at_correct_place(
 					current_command, current_token, next_token);
@@ -145,6 +151,8 @@ int					reorganise_tokens(t_token_tree **list)
 {
 	t_token_tree	*current_command;
 
+	current_command = *list;
+	assign_token_ids(current_command);
 	//////BEFORE
 	//START
 	current_command = *list;
@@ -153,14 +161,14 @@ int					reorganise_tokens(t_token_tree **list)
 		ft_printf("START[%d][%s]\n", current_command->id, *current_command->tokens);
 		current_command = current_command->right;
 	}
+	current_command = *list;
 	//END
 	ft_printf("\n----START REORGANISE----\n\n");
-	current_command = *list;
-	assign_token_ids(current_command);
 	while (current_command)
 	{
-		ft_printf("Current command [%s]\n", *current_command->tokens);
+		ft_printf("treat command[%d][%s]\n", current_command->id, *current_command->tokens);
 		treat_current_command(current_command);
+		ft_printf("end command[%d][%s]\n", current_command->id, *current_command->tokens);
 		move_to_next_command(&current_command);
 	}
 
