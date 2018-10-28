@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:35:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 20:46:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 21:21:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,17 @@ static void	sh_move_cursor(t_shell *sh)
 		: sh->buffer.display_len;
 	sh->cursor.abs_pos = sh->buffer.display_len;
 	sh->cursor.rel_pos = sh->buffer.unicode_len;
-	sh->buffer.display_len = ft_strlenu(sh->buffer.content + sh->buffer.ushift);
-	sh->buffer.unicode_len = ft_strlens(sh->buffer.content + sh->buffer.ushift);
 	sh_move_to_xy(sh, x, y);
 }
 
-static void	sh_delete_words(t_shell *sh, int i, int rel_pos_end)
+static void	sh_delete_words(t_shell *sh, int i, int delta)
 {
-	while (i < rel_pos_end)
+	while (sh->buffer.content[sh->buffer.ushift + i + delta])
 	{
 		sh->buffer.content[sh->buffer.ushift + i] =
 		sh->buffer.content[
 			sh->buffer.ushift
-			+ rel_pos_end
-			+ i
-			- sh->cursor.rel_pos];
+			+ i + delta];
 		i++;
 	}
 	while (sh->buffer.content[sh->buffer.ushift + i])
@@ -72,6 +68,6 @@ void		sh_delete_previous_word(t_shell *sh)
 		- abs_pos_end + sh->cursor.abs_pos;
 	sh->buffer.unicode_len = sh->buffer.unicode_len
 		- rel_pos_end + sh->cursor.rel_pos;
-	sh_delete_words(sh, i, rel_pos_end);
+	sh_delete_words(sh, i, rel_pos_end - i);
 	sh_move_cursor(sh);
 }
