@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/21 16:27:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 18:44:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	sig_handler(int signo)
 void		signal_catching(void)
 {
 	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGWINCH\n");
+		ft_putendl_fd("\ncan't catch SIGWINCH", 2);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
-		ft_printf("\ncan't catch SIGINT");
+		ft_putendl_fd("\ncan't catch SIGINT", 2);
 }

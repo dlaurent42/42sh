@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 13:04:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 20:30:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PROTOTYPES_H
 
 # include "shell.h"
-
-void					sh_debug(t_shell *sh, char *msg, char *str);
 
 /*
 ** errors
@@ -26,11 +24,23 @@ void					error_malloc_bin(t_shell *sh, t_bin *b, char *name);
 void					error_malloc_reader(t_shell *sh, char *name);
 void					error_no_path_var(t_shell *sh);
 void					error_import_export(int fd, char *path);
+int						error_pipe(void);
+int						error_fork(void);
+char					error_execution_tree(void);
+char					error_execution_file(t_shell *sh, char *filename);
+char					error_file_permissions(t_shell *sh, char *filename);
 
 /*
 ** functions
 */
-void					sh_command_run(t_shell *sh);
+void					sh_command_prepare(t_shell *sh);
+char					sh_command_run(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char **str);
+char					*sh_command_check(t_env *env, char *s, int type);
+char					*sh_replace_aliases(t_env *alias, char *s);
 
 /*
 ** functions - builtins
@@ -199,12 +209,24 @@ char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
 /*
-** functions - glob
+** functions - lexer - aliases
 */
-char					*sh_glob(char *str);
+char					*lexer_aliases(t_env *aliases, char *s, int start);
 
 /*
-** functions - glob - cbraces
+** functions - lexer - dollar
+*/
+char					*sh_dollar_expansion(char *str, t_env *env);
+char					*lexer_expand(t_env *env, char *str, int i);
+
+/*
+** functions - lexer - glob
+*/
+char					*sh_glob(char *str);
+char					*lexer_glob(char *s, int start, int i);
+
+/*
+** functions - lexer - glob - cbraces
 */
 char					*sh_glob_cbraces(char *str);
 bool					sh_glob_cbraces_check(char *str);
@@ -215,12 +237,7 @@ bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
 
 /*
-** functions - dollar
-*/
-char					*sh_dollar_expansion(char *str, t_env *env);
-
-/*
-** functions - glob - patterns
+** functions - lexer - glob - patterns
 */
 char					*sh_glob_pattern(char *str);
 char					*sh_glob_expand_ranges(t_filesystem *fs, char *str);
@@ -249,48 +266,12 @@ void					sh_glob_check_all_paths(
 								t_filesystem *fs2);
 
 /*
-** functions - glob - utils
+** functions - lexer - glob - utils
 */
-int						glob_strcountif(char *str, char c);
 bool					glob_match(char *s1, char *s2, char **lst);
-bool					glob_is_esc(char *str, int i);
-bool					glob_need_esc(char c);
 bool					glob_in_range(char *str, int pos);
-char					*sh_glob_inject(char *str, char *injection, int i);
 char					**cbraces_strsplit(char *s, char c);
 char					**pattern_strsplit(char *s, char c);
-void					sh_glob_repatriate(char *str, int i, int len);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(
-							t_shell *sh,
-							t_env *env,
-							char **argv);
-
-/*
-** functions - exec
-*/
-char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
-
-/*
-** functions - lexer
-*/
-bool					sh_command_lexer(t_shell *sh, t_env *env, char *str);
-void					lexer_entry(char *cmd);
-void					lexer_fill(t_lexer *lexer, const char *cmd);
-void					lexer_token_add(
-							t_lexer *lexer,
-							const char *src,
-							size_t size,
-							t_token_type type);
-void					lexer_delete(t_lexer *lexer);
-void					lexer_token_singlequote(t_lexer *l, const char **cmd);
-void					lexer_token_doublequote(t_lexer *l, const char **cmd);
-void					lexer_token_backquote(t_lexer *lexer, const char **cmd);
-t_token					*lexer_token_search(const char *cmd);
-const t_token			*lexer_lexic_singletone(void);
 
 /*
 ** functions - lexer - handlers
@@ -307,10 +288,65 @@ void					sh_command_expand_dollars(
 							char *str);
 
 /*
+** functions - lexer - heredoc
+*/
+bool					sh_heredocs_all_close(t_shell *sh);
+char					sh_heredoc(t_shell *sh, char *str);
+char					sh_heredoc_add(t_shell *sh, char *heredoc);
+void					sh_heredoc_delete(t_shell *sh);
+char					sh_heredoc_init(t_shell *sh, char *heredoc);
+char					sh_heredoc_update(t_shell *sh);
+char					*sh_heredoc_get_next(t_shell *sh);
+
+/*
+** functions - lexer - tilde
+*/
+char					*lexer_tilde(t_env *env, char *s, int i);
+
+/*
+** functions - lexer - tokenize
+*/
+char					lexer_entry(t_lexer *lexer, char *cmd);
+char					lexer_fill(t_lexer *lexer, const char *cmd);
+void					lexer_token_add(
+							t_lexer *lexer,
+							const char *src,
+							size_t size,
+							t_token_type type);
+char					lexer_delete(t_lexer *lexer, char status);
+char					lexer_token_merge(t_lexer *lexer, size_t i);
+char					lexer_token_singlequote(t_lexer *l, const char **cmd);
+char					lexer_token_doublequote(t_lexer *l, const char **cmd);
+char					lexer_token_backquote(t_lexer *lexer, const char **cmd);
+t_token					*lexer_token_search(const char *cmd);
+const t_token			*lexer_lexic_singletone(void);
+
+/*
 ** functions - lexer - utils
 */
-void					sh_command_inject(char *str, char *injection, int i);
-void					sh_command_repatriate(char *str, int i, int len);
+void					lexer_inject_cpy(char *str, char *injection, int i);
+char					*lexer_inject_dup(char *str, char *injection, int i);
+bool					lexer_is_empty(char *str);
+bool					lexer_is_esc(char *str, int i);
+bool					lexer_is_new_cmd(char *s, int pos);
+void					lexer_is_quote(char *s, int i, char *dq, char *sq);
+bool					lexer_need_esc(char c);
+void					lexer_repatriate(char *str, int i, int len);
+int						lexer_strcountif(char *str, char c);
+char					**lexer_strsplit(char *s, char c);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(
+							t_shell *sh,
+							t_env *env,
+							char **argv);
+
+/*
+** functions - exec
+*/
+char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 
 /*
 ** functions - parser
@@ -417,6 +453,8 @@ void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
 t_shell					*sh_new(char **environ);
+t_exec					*sh_init_exec(t_env *env, t_bin *bin);
+void					sh_destroy_exec(t_exec **exec);
 
 /*
 ** terminal - auto_completion
@@ -515,7 +553,7 @@ void					sh_search_init(t_shell *sh);
 /*
 ** terminal - multilines
 */
-void					sh_multilines(t_shell *sh);
+void					sh_multilines(t_shell *sh, char status);
 void					sh_multilines_close(t_shell *sh);
 
 /*
@@ -565,5 +603,47 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 void					signal_catching(void);
 void					sh_sigint_reset(t_shell *sh, char *last_return);
 void					sh_window_resize(t_shell *sh);
+
+/*
+** structures - ast
+*/
+t_token_tree			*new_tree_node(void);
+void					add_tree_node(t_token_tree **head, t_token_tree **last,
+										t_token_tree *new);
+int						add_tree_to_back(t_token_tree **h, t_token_tree *new);
+void					clean_tree(t_token_tree *tree);
+t_token_tree			*copy_tree_node(t_token_tree *obj);
+t_token_tree			*get_tree_last_node(t_token_tree *list);
+
+/*
+** functions - ast
+*/
+t_token_tree			*build_list(t_lexer lexer);
+size_t					get_tree_token_type(t_token token);
+t_token_tree			*build_token_tree(t_token_tree *list);
+int						execute_tree(t_shell *sh, t_token_tree *tree);
+char					sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
+														t_token_tree *tree);
+int						reorganise_tokens(t_token_tree **list);
+void					reorganise_command(t_token_tree *curent_command);
+char					**arg_merge(char **tokens, int *blank_space);
+
+/*
+** functions - ast - operators
+*/
+char					execute_semicolon(t_shell *sh, t_token_tree *tree);
+char					execute_conditions(t_shell *sh, t_token_tree *tree);
+char					execute_pipe(t_shell *sh, t_token_tree *tree);
+char					execute_left_redirection(t_shell *sh,
+													t_token_tree *tree);
+char					execute_right_redirection(t_shell *sh,
+													t_token_tree *tree);
+char					left_heredoc(
+							t_shell *sh, t_token_tree *tree, int count);
+char					execute_fd_aggr(t_shell *sh, t_token_tree *tree);
+char					*get_front_descriptor(char *cmd, size_t len,
+													int closed);
+char					*get_back_descriptor(char *cmd);
+char					error_file_descriptor(void);
 
 #endif

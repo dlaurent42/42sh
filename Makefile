@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/03 22:00:53 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/26 13:02:40 by dhojt            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY: 		all clean fclean re
 
 NAME 		= 	shell
@@ -19,11 +7,30 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
-				debug.c														\
 				errors/malloc.c												\
 				errors/path.c												\
 				errors/import_export.c										\
-				functions/redirect.c										\
+				errors/execution.c											\
+				functions/aliases.c											\
+				functions/check.c											\
+				functions/prepare.c											\
+				functions/run.c												\
+				terminal/signals/stop_acquisition.c							\
+				functions/ast/build_list.c									\
+				functions/ast/get_tree_token_type.c							\
+				functions/ast/build_token_tree.c							\
+				functions/ast/exec.c										\
+				functions/ast/reorganiser.c									\
+				functions/ast/reorganise_command.c							\
+				functions/ast/arg_merge.c									\
+				functions/ast/operators/semicolon.c							\
+				functions/ast/operators/conditions.c						\
+				functions/ast/operators/pipe.c								\
+				functions/ast/operators/left_redirection.c					\
+				functions/ast/operators/right_redirection.c					\
+				functions/ast/operators/heredoc.c							\
+				functions/ast/operators/file_descriptor.c					\
+				functions/ast/operators/file_descriptor_utils.c				\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
@@ -77,48 +84,64 @@ SRC			=	shell.c														\
 				functions/builtins/utils/is_binary.c						\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
-				functions/dollar/dollar.c									\
 				functions/exec/run.c										\
-				functions/glob/glob.c										\
-				functions/glob/cbraces/cbraces.c							\
-				functions/glob/cbraces/check.c								\
-				functions/glob/cbraces/dot.c								\
-				functions/glob/cbraces/list.c								\
-				functions/glob/cbraces/start_and_stop.c						\
-				functions/glob/pattern/pattern.c							\
-				functions/glob/pattern/parse/expand_ranges.c				\
-				functions/glob/pattern/parse/remove_wildcards.c				\
-				functions/glob/pattern/paths/add.c							\
-				functions/glob/pattern/paths/check.c						\
-				functions/glob/utils/escape.c								\
-				functions/glob/utils/inject.c								\
-				functions/glob/utils/match.c								\
-				functions/glob/utils/range.c								\
-				functions/glob/utils/repatriate.c							\
-				functions/glob/utils/cbraces_strsplit.c						\
-				functions/glob/utils/pattern_strsplit.c						\
-				functions/lexer/lexer.c										\
+				functions/lexer/aliases/aliases.c							\
+				functions/lexer/dollar/dollar.c								\
+				functions/lexer/glob/glob.c									\
+				functions/lexer/glob/cbraces/cbraces.c						\
+				functions/lexer/glob/cbraces/check.c						\
+				functions/lexer/glob/cbraces/dot.c							\
+				functions/lexer/glob/cbraces/list.c							\
+				functions/lexer/glob/cbraces/start_and_stop.c				\
+				functions/lexer/glob/pattern/pattern.c						\
+				functions/lexer/glob/pattern/parse/expand_ranges.c			\
+				functions/lexer/glob/pattern/parse/remove_wildcards.c		\
+				functions/lexer/glob/pattern/paths/add.c					\
+				functions/lexer/glob/pattern/paths/check.c					\
+				functions/lexer/glob/utils/match.c							\
+				functions/lexer/glob/utils/range.c							\
+				functions/lexer/glob/utils/cbraces_strsplit.c				\
+				functions/lexer/glob/utils/pattern_strsplit.c				\
 				functions/lexer/handlers/backslash.c						\
 				functions/lexer/handlers/empty.c							\
-				functions/lexer/handlers/expansions.c						\
 				functions/lexer/handlers/quotes.c							\
 				functions/lexer/handlers/useless_quotes.c					\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
-				functions/lexer/lexer_delete.c								\
-				functions/lexer/lexer_entry.c								\
-				functions/lexer/lexer_fill.c								\
-				functions/lexer/lexer_lexic_singletone.c					\
-				functions/lexer/lexer_token_add.c							\
-				functions/lexer/lexer_token_backquote.c						\
-				functions/lexer/lexer_token_doublequote.c					\
-				functions/lexer/lexer_token_search.c						\
-				functions/lexer/lexer_token_singlequote.c					\
+				functions/lexer/heredoc/add.c								\
+				functions/lexer/heredoc/all_closed.c						\
+				functions/lexer/heredoc/delete.c							\
+				functions/lexer/heredoc/get_next.c							\
+				functions/lexer/heredoc/heredoc.c							\
+				functions/lexer/heredoc/init.c								\
+				functions/lexer/heredoc/update.c							\
+				functions/lexer/tilde/tilde.c								\
+				functions/lexer/tokenize/delete.c							\
+				functions/lexer/tokenize/fill.c								\
+				functions/lexer/tokenize/lexic_singletone.c					\
+				functions/lexer/tokenize/token_add.c						\
+				functions/lexer/tokenize/token_backquote.c					\
+				functions/lexer/tokenize/token_doublequote.c				\
+				functions/lexer/tokenize/token_search.c						\
+				functions/lexer/tokenize/token_singlequote.c				\
+				functions/lexer/tokenize/token_merge.c						\
 				functions/lexer/utils/inject.c								\
+				functions/lexer/utils/is_empty.c							\
+				functions/lexer/utils/is_escape.c							\
+				functions/lexer/utils/is_new_command.c						\
+				functions/lexer/utils/is_quote.c							\
+				functions/lexer/utils/need_escape.c							\
 				functions/lexer/utils/repatriate.c							\
+				functions/lexer/utils/strcountif_esc.c						\
+				functions/lexer/utils/strsplit.c							\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
+				structures/ast/add.c										\
+				structures/ast/new.c										\
+				structures/ast/clean.c										\
+				structures/ast/copy.c										\
+				structures/ast/last.c										\
 				structures/binaries/delete.c								\
 				structures/binaries/hash.c									\
 				structures/binaries/initialize.c							\
@@ -166,6 +189,7 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.folder.c						\
 				structures/shell/set_prompt.git.c							\
 				structures/shell/termios.c									\
+				structures/shell/exec.c										\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -255,8 +279,7 @@ SRC			=	shell.c														\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
-				terminal/signals/resize.c									\
-				terminal/signals/stop_acquisition.c							\
+				terminal/signals/resize.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
@@ -286,6 +309,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 				@mkdir -p $(OBJ_DIR)/errors
 				@mkdir -p $(OBJ_DIR)/functions
+				@mkdir -p $(OBJ_DIR)/functions/ast
+				@mkdir -p $(OBJ_DIR)/functions/ast/operators
 				@mkdir -p $(OBJ_DIR)/functions/builtins
 				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
@@ -300,26 +325,30 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
-				@mkdir -p $(OBJ_DIR)/functions/dollar
 				@mkdir -p $(OBJ_DIR)/functions/exec
-				@mkdir -p $(OBJ_DIR)/functions/glob
-				@mkdir -p $(OBJ_DIR)/functions/glob/cbraces
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/parse
-				@mkdir -p $(OBJ_DIR)/functions/glob/pattern/paths
-				@mkdir -p $(OBJ_DIR)/functions/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer
+				@mkdir -p $(OBJ_DIR)/functions/lexer/aliases
+				@mkdir -p $(OBJ_DIR)/functions/lexer/dollar
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/cbraces
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/parse
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/paths
+				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/utils
 				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
+				@mkdir -p $(OBJ_DIR)/functions/lexer/heredoc
+				@mkdir -p $(OBJ_DIR)/functions/lexer/tilde
+				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/structures
+				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/structures/binaries
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
-				@mkdir -p $(OBJ_DIR)/structures/term
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/env

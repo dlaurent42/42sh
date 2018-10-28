@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:58:11 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 22:27:28 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:00:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	sh_command_tilde_replace(t_shell *sh, t_env *env, char *str, int i)
 	(void)sh;
 	pw = getpwuid(getuid());
 	s = (env_search(env, "HOME")) ? env_search(env, "HOME") : pw->pw_dir;
-	sh_command_repatriate(str, i, 1);
-	sh_command_inject(str, s, i);
+	lexer_repatriate(str, i, 1);
+	lexer_inject_dup(str, s, i);
 }
 
 void		sh_command_expand_tile(t_shell *sh, t_env *env, char *str)

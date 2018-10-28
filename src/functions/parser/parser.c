@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 13:56:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:56:19 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static char	sh_command_err(char *cmd, int err)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
-		return (127);
+		return (STATUS_NOT_FOUND);
 	}
 	if (err == 2)
 	{
 		ft_putstr_fd("permission denied: ", 2);
 		ft_putendl_fd(cmd, 2);
-		return (126);
+		return (STATUS_PERMISSION_DENIED);
 	}
 	return (0);
 }
@@ -44,7 +44,8 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	}
 	else if (arr && arr[0] && sh_is_not_builtin(arr[0]))
 	{
-		if (!(obj = bin_search(bin, arr[0])) || access(obj->path, F_OK) != 0)
+		if (!(obj = bin_search(bin, arr[0])) || !obj->path
+		|| access(obj->path, F_OK) != 0)
 			return (sh_command_err(arr[0], 1));
 		if (access(obj->path, R_OK) != 0 || access(obj->path, X_OK) != 0)
 			return (sh_command_err(arr[0], 2));
@@ -74,8 +75,6 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	}
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
-	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size) && str)
-		env_insert_protected(sh, sh->env, "?", str);
 	if (arg)
 		while (arg[i])
 		{
@@ -84,6 +83,32 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 		}
 	(arg) ? free(arg) : 0;
 	ft_strdel(&str);
+}
+
+char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
+	t_token_tree *tree)
+{
+	int		i;
+	char	*tmp;
+	char	ret;
+	char	**arg;
+
+	i = 0;
+	arg = tree->tokens;
+	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
+	{
+		tmp = realpath(arg[0], NULL);
+		ft_strdel(&arg[0]);
+		arg[0] = tmp;
+	}
+	while (arg[i])
+	{
+		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
+		i++;
+	}
+	// arg = arg_merge(arg, tree->blanks);
+	ret = sh_command_found(sh, env, bin, &arg[0]);
+	return (ret);
 }
 
 void		sh_command_parser(t_shell *sh, t_env *env, t_bin *bin, char *str)

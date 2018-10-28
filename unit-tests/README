@@ -1,0 +1,1 @@
+All tests have to be performed with Valgrind, with fsanitize, with and without environment, with and without unicode, with and without escape characters

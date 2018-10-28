@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 13:38:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 17:34:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:06:24 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ static void	sh_welcome_history(void)
 	ft_putendl("  ↑ .............. previous command");
 	ft_putendl("  ↓ .............. next command");
 	ft_putendl("  Ctrl + R ....... search command");
+	ft_putendl("  !! ............. gets last command");
+	ft_putendl("  !27 ............ gets command with id 27");
+	ft_putendl("  !-42 ........... gets 42nd most recent command");
+	ft_putendl("  !foo ........... gets command by strncmp(cmd, \"foo\", 3)");
+	ft_putendl("  !?foo .......... gets command by strstr(cmd, \"foo)\")");
+	ft_putendl("  bar!?foo?bar ... gets command by strstr(cmd, \"foo)\")");
+	ft_putendl("  ^foo^bar^ ...... gets last command but applies s/foo/bar");
 }
 
 void		sh_welcome(void)

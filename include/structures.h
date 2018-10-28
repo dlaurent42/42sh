@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 02:22:20 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 20:30:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 typedef struct passwd	t_passwd;
 typedef struct timeval	t_timeval;
+
+int g_exit_code;
 
 typedef struct			s_cmd_attr
 {
@@ -100,7 +102,7 @@ typedef struct			s_buffer
 	int					ushift;
 	int					dshift;
 	char				content[ARG_MAX + 1];
-	char				parsed[ARG_MAX + 1];
+	char				*parsed;
 	char				stored[ARG_MAX + 1];
 	t_cmd				*cmd;
 }						t_buffer;
@@ -134,7 +136,8 @@ typedef struct			s_modes
 	unsigned char		search			: 1;
 	unsigned char		multiline		: 1;
 	unsigned char		exec			: 1;
-	unsigned char		others			: 2;
+	unsigned char		heredoc			: 1;
+	unsigned char		others			: 1;
 }						t_modes;
 
 typedef struct			s_select
@@ -269,25 +272,19 @@ typedef struct			s_read_dir
 	struct dirent		*file;
 }						t_read_dir;
 
-typedef struct			s_shell
+typedef struct			s_exec
 {
-	t_ac				*ac;
-	char				*hist;
-	pid_t				pid;
-	t_bin				*bin;
-	t_cmd				*cmd;
 	t_env				*env;
-	t_env				*alias;
-	t_read				*read;
-	t_modes				modes;
-	t_cursor			cursor;
-	t_prompt			prompt;
-	t_window			window;
-	t_buffer			buffer;
-	t_search			search;
-	t_select			selection;
-	t_termios			termios;
-}						t_shell;
+	t_bin				*bin;
+}						t_exec;
+
+typedef struct			s_heredocs
+{
+	char				*keyword;
+	char				*value;
+	bool				closed;
+	struct s_heredocs	*next;
+}						t_heredocs;
 
 /*
 ** Lexer
@@ -300,19 +297,21 @@ typedef enum			e_token_type
 	TOKEN_REDIR = 3,
 	TOKEN_SEMICOLON = 4,
 	TOKEN_PIPE = 5,
-	TOKEN_BLANK = 6,
-	TOKEN_SINGLEQUOTE = 7,
-	TOKEN_DOUBLEQUOTE = 8,
-	TOKEN_BACKQUOTE = 9,
-	TOKEN_AGGREG = 10,
-	TOKEN_MERGE = 11,
-	TOKEN_WORD = 12
+	TOKEN_AGGREG = 6,
+	TOKEN_HEREDOC = 7,
+	TOKEN_BLANK = 8,
+	TOKEN_SINGLEQUOTE = 9,
+	TOKEN_DOUBLEQUOTE = 10,
+	TOKEN_BACKQUOTE = 11,
+	TOKEN_MERGE = 12,
+	TOKEN_WORD = 13,
 }						t_token_type;
 
 typedef struct			s_token
 {
 	char				*id;
 	int					size;
+	int					blank_before;
 	t_token_type		type;
 }						t_token;
 
@@ -322,7 +321,46 @@ typedef struct			s_lexer
 	size_t				capacity;
 	size_t				size;
 	char				*cmd;
+	int					word;
 }						t_lexer;
+
+/*
+** Tokens for AST
+*/
+typedef struct			s_token_tree
+{
+	char				**tokens;
+	int					*t_type;
+	int					*blanks;
+	size_t				size;
+	int					type;
+	struct s_token_tree	*left;
+	struct s_token_tree	*right;
+}						t_token_tree;
+
+typedef struct			s_shell
+{
+	t_ac				*ac;
+	int					exe;
+	char				*hist;
+	pid_t				pid;
+	t_bin				*bin;
+	t_cmd				*cmd;
+	t_env				*env;
+	t_env				*alias;
+	t_read				*read;
+	t_exec				*exec;
+	t_heredocs			*heredocs;
+	t_modes				modes;
+	t_lexer				lexer;
+	t_cursor			cursor;
+	t_prompt			prompt;
+	t_window			window;
+	t_buffer			buffer;
+	t_search			search;
+	t_select			selection;
+	t_termios			termios;
+}						t_shell;
 
 t_shell					*g_sh;
 

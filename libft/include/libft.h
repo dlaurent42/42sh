@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 14:42:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:15:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncasecmp(const char *s1, const char *s2, size_t len);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strncmps(const char *s1, const char *s2, size_t n);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strncpys(char *dst, const char *src, size_t len);
 char				*ft_strndup(const char *s1, size_t n);
@@ -188,6 +189,7 @@ char				*ft_strtrim(char const *s);
 void				ft_sort_wordtab(char **tab);
 int					match(char *s1, char *s2);
 int					nmatch(char *s1, char *s2);
+char				**ft_str2dup(char **arr);
 
 /*
 ** Linked lists

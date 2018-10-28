@@ -1,0 +1,32 @@
+@adam
+
+Run complicated commands with priorities
+Reorganizer checks:
+
+	$> echo $OLDPWD $PWD ; cd / ; echo $OLDPWD $PWD
+	$>
+
+TEST stupid stuff with file descriptors and test it's behavior
+	$> cat something >&
+		SHELL RETURNS:	parse error near `\n'
+	$> cat something <&
+		SHELL RETURNS:	parse error near `\n'
+	$> cat something >&-
+		SHELL RETURNS: 	cat: something: No such file or directory
+						cat: stdout: Bad file descriptor
+	$> cat something <&-
+		SHELL RETURNS:	cat: something: No such file or directory
+	$> cat no_file 2>&-
+		SHELL RETURNS:	nothing
+	$> cat no_file 2<&-
+		SHELL RETURNS:	nothing
+
+
+	$>
+	$>
+	$>
+	$>
+	$>
+	$>
+	$>
+	$>

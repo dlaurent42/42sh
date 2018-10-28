@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 12:16:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 22:19:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:43:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void			print_colour(t_shell *sh, t_obj *obj)
 	if (obj->data.sock)
 		ft_putstr(COL_SOCK);
 	if (obj == sh->ac->select)
-		ft_printf(COL_BG);
+		ft_putstr(COL_BG);
 	ft_printf("%.*s", sh->window.width - 1, obj->data.str);
 }
 

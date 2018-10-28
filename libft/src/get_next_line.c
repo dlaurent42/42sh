@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 13:55:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/09/05 21:35:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:01:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static	t_gnl	*fd_already_stored(int const fd, t_gnl *r)
 		r = r->next;
 	if (r->fd == fd)
 		return (r);
-	else
-		return (add_r(fd, r));
+	return (add_r(fd, r));
 }
 
 static int		handle_r(t_gnl **r)
@@ -73,7 +72,7 @@ static int		handle_r(t_gnl **r)
 			tmp = tmp->next;
 		}
 	}
-	free((*r));
+	free(*r);
 	return (0);
 }
 

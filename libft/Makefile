@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/16 19:57:36 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/28 16:56:39 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
@@ -87,6 +87,7 @@ SRC =	ft_atoi.c\
 		ft_strncasecmp.c\
 		ft_strncat.c\
 		ft_strncmp.c\
+		ft_strncmps.c\
 		ft_strncpy.c\
 		ft_strncpys.c\
 		ft_strndup.c\
@@ -122,6 +123,7 @@ SRC =	ft_atoi.c\
 		match.c\
 		nmatch.c\
 		options.c\
+		ft_str2dup.c\
 		ft_printf/concatenate_content.c\
 		ft_printf/converter_arg_size_pt_one.c\
 		ft_printf/converter_arg_size_pt_two.c\

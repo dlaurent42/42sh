@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 13:05:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/12 13:06:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/24 16:59:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void		sh_command_trim(char *str)
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
-	sh_command_repatriate(str, 0, i);
+	lexer_repatriate(str, 0, i);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:35:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/04 19:05:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:44:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void		sh_delete_current_char(t_shell *sh)
 	sh_perform_deletion(sh);
 	ft_putstr(K_DEL);
 	ft_putstr(K_LEFT);
-	ft_printf("%s",
-		sh->buffer.content
+	ft_putstr(sh->buffer.content
 		+ sh->buffer.ushift + sh->cursor.rel_pos);
 	sh_move_cursor(sh, display_len);
 }
