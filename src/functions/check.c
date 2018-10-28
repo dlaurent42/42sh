@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:38:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:35:20 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool	check_tilde_conditions(char *s, int i, char in_sq, char in_dq)
 	&& !lexer_is_esc(s, i));
 }
 
-char		*sh_command_check(t_env *env, char *s)
+char		*sh_command_check(t_env *env, char *s, int type)
 {
 	int		i;
 	int		start;
@@ -47,11 +47,11 @@ char		*sh_command_check(t_env *env, char *s)
 
 	i = 0;
 	start = 0;
-	in_dquote = 0;
-	in_squote = 0;
+	in_dquote = (type == TOKEN_SINGLEQUOTE);
+	in_squote = (type == TOKEN_DOUBLEQUOTE);
 	while (s[i])
 	{
-		lexer_is_quote(s, i, &in_dquote, &in_squote);
+		// lexer_is_quote(s, i, &in_dquote, &in_squote);
 		if (i && s[i - 1] == ' ' && !lexer_is_esc(s, i - 1) && s[i] != ' ')
 			start = i;
 		if (check_tilde_conditions(s, i, in_squote, in_squote) && env)

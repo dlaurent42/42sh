@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:42:05 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:28:10 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ static void			tree_group_token(t_lexer lexer, t_token_tree **head,
 	new->type = (len > 1 ? 0 : get_tree_token_type(lexer.tokens[begin]));
 	if (!(new->tokens = (char **)ft_memalloc(sizeof(char *) * (len + 1))))
 		error_malloc_reader(g_sh, "token");
+	if (!(new->t_type = (int *)ft_memalloc(sizeof(int) * (len))))
+		error_malloc_reader(g_sh, "token");
 	new->tokens[len] = NULL;
 	i = 0;
 	while (i < len)
 	{
 		new->tokens[i] = ft_strdup(lexer.tokens[i + begin].id);
+		new->t_type[i] = lexer.tokens[i + begin].type;
 		i++;
 	}
 	add_tree_to_back(head, new);

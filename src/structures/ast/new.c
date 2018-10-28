@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:46:06 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/26 11:09:26 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:28:45 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_token_tree		*new_tree_node(void)
 	if (!(ret = (t_token_tree *)ft_memalloc(sizeof(t_token_tree))))
 		return (NULL);
 	ret->tokens = NULL;
+	ret->t_type = NULL;
 	ret->size = 0;
 	ret->type = 0;
 	ret->left = NULL;
