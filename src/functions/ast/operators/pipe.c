@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:18:36 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:34:04 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 12:40:29 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 	waitpid(pid_left, &stat[1], 0);
 	if ((WIFEXITED(stat[0])))
 		return (WEXITSTATUS(stat[0]));
-	return (WIFEXITED(stat[1]) ? WEXITSTATUS(stat[0]) : STATUS_ERR );
+	return (WIFEXITED(stat[1]) ? WEXITSTATUS(stat[0]) : STATUS_ERR);
 }
 
 /*
