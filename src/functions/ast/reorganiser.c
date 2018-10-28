@@ -6,11 +6,23 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 15:44:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 17:33:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+static char			**squash_type_zero(t_toke_tree *current_command)
+{
+	int				len;
+	char			**tokens;
+	t_token_tree	*track;
+
+	len = 0;
+	tokens = NULL;
+	track = current_command;
+	while (track && track->type == 0 && ++len)
+		track = track->right;
+}
 
 static bool			token_is_boundry(t_token_tree *token)
 {
@@ -30,7 +42,7 @@ static void			move_to_next_command(t_token_tree **current_command)
 		*current_command = (*current_command)->right;
 }
 
-void				reorganise_tokens(t_token_tree **list)
+void				reorganise_tokens(t_token_tree **list)//Change to bool
 {
 	t_token_tree	*current_command;
 
