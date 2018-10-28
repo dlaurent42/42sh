@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:02:56 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 16:36:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 16:41:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ char		sh_heredoc_update(t_shell *sh)
 	tmp->value = ft_strjoinf(
 		tmp->value,
 		sh->buffer.content + sh->buffer.ushift,
+		1);
+	tmp->value = ft_strjoinf(
+		tmp->value,
+		"\n",
 		1);
 	ft_bzero(
 		(void *)(sh->buffer.content + sh->buffer.ushift),
