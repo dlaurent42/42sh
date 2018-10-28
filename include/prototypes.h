@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 01:11:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 12:20:55 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,7 @@ char					sh_heredoc_add(t_shell *sh, char *heredoc);
 void					sh_heredoc_delete(t_shell *sh);
 char					sh_heredoc_init(t_shell *sh, char *heredoc);
 char					sh_heredoc_update(t_shell *sh);
+char					*sh_heredoc_get_next(t_shell *sh);
 
 /*
 ** functions - lexer - tilde
@@ -631,7 +632,8 @@ char					execute_left_redirection(t_shell *sh,
 													t_token_tree *tree);
 char					execute_right_redirection(t_shell *sh,
 													t_token_tree *tree);
-char					left_heredoc(t_shell *sh, t_token_tree *tree);
+char					left_heredoc(
+							t_shell *sh, t_token_tree *tree, size_t count);
 char					execute_fd_aggr(t_shell *sh, t_token_tree *tree);
 char					*get_front_descriptor(char *cmd, size_t len,
 													int closed);
