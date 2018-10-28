@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 15:16:24 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:42:54 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ void				reorganise_command(t_token_tree *current_command)
 	current_token = current_command;
 	while (current_token && current_token->type < 4)
 	{
-		if (type < current_token->type)
-			type = current_token->type;
+		type = (type < current_token->type) ? current_token->type : type;
 		if (current_token->type == 3 && current_token->right
 				&& current_token->right->type == 0)
 		{
