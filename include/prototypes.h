@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:36:44 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:17:23 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -637,7 +637,7 @@ char					execute_left_redirection(t_shell *sh,
 char					execute_right_redirection(t_shell *sh,
 													t_token_tree *tree);
 char					left_heredoc(
-							t_shell *sh, t_token_tree *tree, size_t count);
+							t_shell *sh, t_token_tree *tree, int count);
 char					execute_fd_aggr(t_shell *sh, t_token_tree *tree);
 char					*get_front_descriptor(char *cmd, size_t len,
 													int closed);

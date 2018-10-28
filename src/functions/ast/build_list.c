@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:08:41 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 17:28:10 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:59:18 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static bool			tree_splice_point(t_lexer lexer, size_t i)
 		lexer.tokens[i].type == TOKEN_REDIR ||
 		lexer.tokens[i].type == TOKEN_SEMICOLON ||
 		lexer.tokens[i].type == TOKEN_PIPE ||
-		lexer.tokens[i].type == TOKEN_REDIR);
+		lexer.tokens[i].type == TOKEN_REDIR ||
+		lexer.tokens[i].type == TOKEN_HEREDOC);
 }
 
 static void			tree_group_token(t_lexer lexer, t_token_tree **head,

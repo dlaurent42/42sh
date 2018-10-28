@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:38:40 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:17:16 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char		execute_left_redirection(t_shell *sh, t_token_tree *tree)
 {
 	int					fd;
 	int					type;
-	size_t				hdoc_count;
+	int					hdoc_count;
 	char				*file;
 	t_token_tree		*last;
 
 	last = tree->right;
-	type = (!ft_strcmp(tree->tokens[0], "<<") ? 2 : 1);
+	type = ((!ft_strcmp(tree->tokens[0], "<<")) ? 2 : 1);
 	hdoc_count = (type == 2 ? 1 : 0);
 	while (last)
 	{

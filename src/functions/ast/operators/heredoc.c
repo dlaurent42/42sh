@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:59:48 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:24:11 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:18:36 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,23 @@ static void	execute_heredoc_main(
 }
 
 static void	execute_heredoc_child(
-			t_shell *sh, int stdout, size_t count, int fd[2])
+			t_shell *sh, int count, int stdout, int fd[2])
 {
 	char		*str;
 
 	str = NULL;
 	dup2(fd[1], 1);
 	close(fd[0]);
-	while (count > 1)
-	{
-		ft_strdel(&str);
+	while (count--)
 		str = sh_heredoc_get_next(sh);
-		count--;
-	}
 	ft_putstr_fd(str, 1);
-	ft_strdel(&str);
 	dup2(stdout, 1);
 	close(stdout);
 	exit(0);
 }
 
 static char	do_heredoc(
-			t_shell *sh, t_token_tree *tree, int std[2], size_t count)
+			t_shell *sh, t_token_tree *tree, int std[2], int count)
 {
 	int		fd[2];
 	int		status;
@@ -72,7 +67,7 @@ static char	do_heredoc(
 	return (0);
 }
 
-char		left_heredoc(t_shell *sh, t_token_tree *tree, size_t count)
+char		left_heredoc(t_shell *sh, t_token_tree *tree, int count)
 {
 	int		std[2];
 
