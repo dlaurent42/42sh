@@ -12,6 +12,7 @@ SRC			=	shell.c														\
 				errors/path.c												\
 				errors/import_export.c										\
 				errors/execution.c											\
+				functions/aliases.c											\
 				functions/check.c											\
 				functions/prepare.c											\
 				functions/run.c												\

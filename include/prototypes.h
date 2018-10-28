@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:16:35 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:40:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char					sh_command_run(
 							t_env *env,
 							t_bin *bin,
 							char **str);
-char					*sh_command_check(t_env *env, t_env *alias, char *s);
+char					*sh_command_check(t_env *env, char *s);
+char					*sh_replace_aliases(t_env *alias, char *s);
 
 /*
 ** functions - builtins
