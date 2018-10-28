@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:40:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 15:45:26 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -621,7 +621,7 @@ t_token_tree			*build_token_tree(t_token_tree *list);
 int						execute_tree(t_shell *sh, t_token_tree *tree);
 char					sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 														char **arg);
-int						reorganise_tokens(t_token_tree **list);
+void					reorganise_tokens(t_token_tree **list);
 void					reorganise_command(t_token_tree *curent_command);
 
 /*
