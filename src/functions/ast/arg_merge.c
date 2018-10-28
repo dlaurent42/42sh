@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   arg_merge.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 19:47:23 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 19:47:44 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/28 20:06:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void    ft_deltab(char **content)
+void	ft_deltab(char **content)
 {
-	int     i;
+	int	i;
 
 	i = 0;
 	while (content[i])
@@ -22,7 +22,7 @@ void    ft_deltab(char **content)
 	free(content);
 }
 
-int     ft_tablen(char **str)
+int		ft_tablen(char **str)
 {
 	int i;
 
@@ -33,10 +33,10 @@ int     ft_tablen(char **str)
 	return (i);
 }
 
-char    **push(char **parent, char *value)
+char	**push(char **parent, char *value)
 {
-	char    **son;
-	int     len;
+	char	**son;
+	int		len;
 
 	len = ft_tablen(parent);
 	if ((son = (char **)malloc(sizeof(char *) * (len + 2))) == NULL)
@@ -49,11 +49,11 @@ char    **push(char **parent, char *value)
 	return (son);
 }
 
-char    **arg_merge(char **tokens, int *blank_space)
+char	**arg_merge(char **tokens, int *blank_space)
 {
-	char    **new;
-	char    *actual;
-	int     i;
+	char	**new;
+	char	*actual;
+	int		i;
 
 	i = 0;
 	new = NULL;
