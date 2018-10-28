@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 19:40:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 19:42:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void			move_to_next_command(t_token_tree **current_command)
 		*current_command = (*current_command)->right;
 }
 
-int					reorganise_tokens(t_token_tree **list)//Change to bool
+int					reorganise_tokens(t_token_tree **list)
 {
 	t_token_tree	*current_command;
 
