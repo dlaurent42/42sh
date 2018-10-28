@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexic_singletone.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:07:24 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:28:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 14:59:18 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const t_token	*lexer_lexic_singletone(void)
 		{"<&", 2, TOKEN_AGGREG},
 		{"||", 2, TOKEN_ORIF},
 		{">>", 2, TOKEN_REDIR},
-		{"<<", 2, TOKEN_REDIR},
+		{"<<", 2, TOKEN_HEREDOC},
 		{"<", 1, TOKEN_REDIR},
 		{">", 1, TOKEN_REDIR},
 		{";", 1, TOKEN_SEMICOLON},
