@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 13:55:37 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 17:29:02 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:02:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void		clean_node(t_token_tree *node)
 	}
 	ft_memdel((void **)&(node->tokens));
 	ft_memdel((void **)&(node->t_type));
+	ft_memdel((void **)&(node->blanks));
 	ft_memdel((void **)&node);
 }
 
