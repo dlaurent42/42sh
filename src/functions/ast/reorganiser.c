@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:51:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 12:54:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,12 @@ static void			treat_current_command(t_token_tree *current_command)
 	current_token = current_command;
 	while (current_token && current_token->type < 4)
 	{
-		ft_printf("\tCurent token: [%d][%s]\n", current_token->id, *current_token->tokens);
 		if (type < current_token->type)
 			type = current_token->type;
 		if (current_token->type == 3
 				&& current_token->right
 				&& current_token->right->type == 0)
 		{
-			ft_printf("\t\tFIX:[%d][%s]\n", current_token->type, *current_token->tokens);
 			current_token = current_token->right;
 			next_token = get_next_token(current_token);
 			current_token = insert_token_at_correct_place(
@@ -124,7 +122,6 @@ static void			treat_current_command(t_token_tree *current_command)
 		}
 		else if (current_token->type < type)
 		{
-			ft_printf("\t\tFIX:[%d][%s]\n", current_token->type, *current_token->tokens);
 			next_token = get_next_token(current_token);
 			current_token = insert_token_at_correct_place(
 					current_command, current_token, next_token);
@@ -164,10 +161,7 @@ int					reorganise_tokens(t_token_tree **list)
 	//START
 	current_command = *list;
 	while (current_command)
-	{
-		ft_printf("START[%d][%s]\n", current_command->id, *current_command->tokens);
 		current_command = current_command->right;
-	}
 	current_command = *list;
 	//END
 	ft_printf("\n----START REORGANISE----\n\n");
