@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:10:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 00:19:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:42:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ void				env_insert_protected(
 	t_env_item	*curr_item;
 
 	i = 1;
-	if (k && k[0] == '?')
-		ft_printf("... Inserting protected equal to %s\n", v);
 	if (!env_key_is_protected(k))
 		return ;
 	item = env_new_item(sh, env, k, v);

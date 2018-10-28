@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:17:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:45:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PROTOTYPES_H
 
 # include "shell.h"
-
-void					sh_debug(t_shell *sh, char *msg, char *str);
 
 /*
 ** errors

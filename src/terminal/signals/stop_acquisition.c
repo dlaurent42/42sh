@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 15:16:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/23 16:41:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:44:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void		sh_sigint_reset(t_shell *sh, char *last_return)
 		env_insert_protected(sh, sh->env, "?", last_return);
 	(sh) ? sh_set_prompt(sh) : 0;
 	(sh) ? sh_print_prompt(sh) : 0;
-	ft_printf(CURSOR_SHOW);
+	ft_putstr(CURSOR_SHOW);
 }

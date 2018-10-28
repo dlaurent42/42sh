@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:49:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:42:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,10 @@ t_bin_obj	*bin_search(t_bin *bin, const char *key)
 	i = 1;
 	if (!bin)
 		return (NULL);
-	ft_printf("Looking for key: %s\n", key);
-	ft_printf("Bin size is %d\n", bin->size);
 	index = bin_get_hash(key, bin->size, 0);
-	ft_printf("Bin index is %d\n", index);
 	item = bin->items[index];
 	while (item)
 	{
-		ft_printf("... key is %s\n", item->key);
 		if (item != &bin->del && !ft_strcmps(item->key, key))
 			return (item->value);
 		index = bin_get_hash(key, bin->size, i);

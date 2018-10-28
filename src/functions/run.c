@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:26:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:42:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static char	sh_command_run_lexer(
 
 	(void)env;
 	ft_bzero((void *)lexer, sizeof(t_lexer));
-	ft_printf("Mode heredoc is %d\n", sh->modes.heredoc);
 	if (sh->modes.heredoc == FALSE && lexer_is_empty((char *)cmd))
 		return (STATUS_ERR);
 	if (sh_heredocs_all_close(sh))
@@ -54,7 +53,6 @@ static char	sh_command_run_tree(
 	status = (sh) ? ft_itoa(ret) : ft_strdups("0");
 	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
 		env_insert_protected(sh, sh->env, "?", status);
-	ft_printf("env search is %s (sh_command_run_tree)\n", env_search(sh->env, "?"));
 	ft_strdel(&status);
 	clean_tree(list);
 	sh_destroy_exec(&(sh->exec));
@@ -98,38 +96,17 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	if (sh->env == env && !sh->modes.heredoc)
 		*cmd = sh_replace_aliases(sh->alias, *cmd);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, cmd)) != STATUS_OK)
-	{
-		ft_printf("Exit command run (1: wrong status = %d)\n", status);
 		return (lexer_delete(&lexer, status));
-	}
 	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
-	{
-		ft_printf("Exit command run (2: wrong status = %d)\n", status);
 		return (lexer_delete(&lexer, status));
-	}
 	sh->modes.multiline = FALSE;
 	if (sh && bin == sh->bin)
 	{
-		ft_printf("Updating sh->bin\n");
 		sh->bin = bin_update(sh, env, bin);
 		bin = sh->bin;
-		ft_printf("Updated sh->bin\n");
 	}
 	if (!sh->modes.exec && (sh->modes.exec = TRUE) && !sh->modes.heredoc)
-	{
-		ft_printf("Adding command to hist\n");
 		command_add(sh, true);
-		ft_printf("Added command to hist\n");
-	}
-	ft_printf("lexer size is %d\n", lexer.size);
 	status = sh_command_run_tree(sh, env, bin, lexer);
-	ft_printf("env search is %s (sh_command_run)\n", env_search(sh->env, "?"));
-	ft_printf("tree has finished with status %d\n", status);
-	int		i;
-
-	i = -1;
-	while (++i < (int)lexer.size)
-		ft_printf("...token[%d]=%s (%d)\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
-	ft_printf("Exit command run with status %d\n", status);
 	return (lexer_delete(&lexer, status));
 }

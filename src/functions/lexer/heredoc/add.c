@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 13:50:36 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 16:36:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:40:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char		sh_heredoc_add(t_shell *sh, char *heredoc)
 	new->keyword = ft_strdups(heredoc);
 	(!sh->heredocs) ? sh->heredocs = new : 0;
 	(tmp) ? tmp->next = new : 0;
-	ft_printf("Adding : %s\n", heredoc);
 	sh->modes.heredoc = TRUE;
 	return (STATUS_HEREDOC);
 }
