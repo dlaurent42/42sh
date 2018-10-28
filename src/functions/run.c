@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:49:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:49:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	status = sh_command_run_tree(sh, env, bin, lexer);
 	ft_printf("env search is %s (sh_command_run)\n", env_search(sh->env, "?"));
 	ft_printf("tree has finished with status %d\n", status);
-	
+
 	ft_printf("Exit command run with status %d\n", status);
 	return (lexer_delete(&lexer, status));
 }
