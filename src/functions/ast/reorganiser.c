@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:54:49 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 12:55:20 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ static t_token_tree	*insert_token_at_correct_place(
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
 		current_command = get_next_token(current_command);
-
-	//MOVE ONE AFTER THE ABOVE TOKEN:
-	if (current_command
-			&& current_command->right
-			&& !token_is_redirect(current_command->right))
-		current_command = current_command->right;
 
 	//MOVE TO POINT DIRECTLY BEFORE POINT OF INSERTION:
 	while (current_command
