@@ -21,6 +21,7 @@ SRC			=	shell.c														\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
 				functions/ast/reorganiser.c									\
+				functions/ast/reorganise_command.c							\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\
 				functions/ast/operators/pipe.c								\
