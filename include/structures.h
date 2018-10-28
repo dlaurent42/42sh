@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:31:13 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:25:21 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,6 +310,7 @@ typedef struct			s_token
 {
 	char				*id;
 	int					size;
+	int					blank_before;
 	t_token_type		type;
 }						t_token;
 
@@ -319,6 +320,7 @@ typedef struct			s_lexer
 	size_t				capacity;
 	size_t				size;
 	char				*cmd;
+	int					word;
 }						t_lexer;
 
 /*

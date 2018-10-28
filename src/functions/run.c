@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:26:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:26:13 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static char	sh_command_check_lexer(t_shell *sh, t_lexer *lexer)
 			return (STATUS_ERR);
 		if (lexer->tokens[i].type == TOKEN_PIPE && (i + 1) >= lexer->size)
 			return (STATUS_PIPE);
-		if ((lexer->tokens[i].type == TOKEN_AGGREG || lexer->tokens[i].type == TOKEN_MERGE)
-			&& lexer_token_merge(lexer, i) != STATUS_OK)
+		if (lexer->tokens[i].type == TOKEN_AGGREG && lexer_token_merge(lexer, i) != STATUS_OK)
 			return (STATUS_ERR);
 		if (lexer->tokens[i].type == TOKEN_HEREDOC)
 		{
@@ -129,7 +128,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 
 	i = -1;
 	while (++i < (int)lexer.size)
-		ft_printf("...token[%d]=%s (%d)\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
+		ft_printf("...token[%d]=%s (%d) (%d)\n", i, lexer.tokens[i].id, lexer.tokens[i].type, lexer.tokens[i].blank_before);
 	ft_printf("Exit command run with status %d\n", status);
 	return (lexer_delete(&lexer, status));
 }
