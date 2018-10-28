@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 14:40:45 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 14:58:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,43 +122,28 @@ static void			move_to_next_command(t_token_tree **current_command)
 		*current_command = (*current_command)->right;
 }
 
-static void			assign_token_ids(t_token_tree *list)
-{
-	int				id;
-
-	id = 3;
-	while (list)
-	{
-		list->id = id++;
-		list = list->right;
-	}
-}
-
 int					reorganise_tokens(t_token_tree **list)
 {
 	t_token_tree	*current_command;
 
 	current_command = *list;
-	assign_token_ids(current_command);
 	//////BEFORE
 	//START
 	current_command = *list;
 	while (current_command)
+	{
+		ft_printf("END[%s]\n", *current_command->tokens);
 		current_command = current_command->right;
+	}
 	current_command = *list;
 	//END
-	ft_printf("\n----START REORGANISE----\n\n");
 	while (current_command)
 	{
-		ft_printf("treat command[%d][%s]\n",
-				current_command->id,
-				*current_command->tokens);
+		ft_printf("treat command[%s]\n", *current_command->tokens);
 
 		treat_current_command(current_command);
 
-		ft_printf("end command[%d][%s]\n",
-				current_command->id,
-				*current_command->tokens);
+		ft_printf("end command[%s]\n", *current_command->tokens);
 
 		move_to_next_command(&current_command);
 	}
@@ -169,7 +154,7 @@ int					reorganise_tokens(t_token_tree **list)
 	current_command = *list;
 	while (current_command)
 	{
-		ft_printf("END[%d][%s]\n", current_command->id, *current_command->tokens);
+		ft_printf("END[%s]\n", *current_command->tokens);
 		current_command = current_command->right;
 	}
 	//END
