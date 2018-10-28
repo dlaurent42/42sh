@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 10:00:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 10:03:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ static void			assign_token_ids(t_token_tree *list)
 	while (list)
 	{
 		list->id = id++;
-		list->reorganise = list->right;
+		list->reorganise = (!token_is_boundry(list->right)) ? list->right : NULL;
 		list = list->right;
 	}
 }
