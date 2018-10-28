@@ -120,6 +120,7 @@ SRC			=	shell.c														\
 				functions/lexer/tokenize/token_doublequote.c				\
 				functions/lexer/tokenize/token_search.c						\
 				functions/lexer/tokenize/token_singlequote.c				\
+				functions/lexer/tokenize/token_merge.c						\
 				functions/lexer/utils/inject.c								\
 				functions/lexer/utils/is_empty.c							\
 				functions/lexer/utils/is_escape.c							\

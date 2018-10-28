@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 00:54:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 14:56:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,19 +296,20 @@ typedef struct			s_heredocs
 */
 typedef enum			e_token_type
 {
-	TOKEN_ANDIF = 0,
-	TOKEN_ORIF = 1,
-	TOKEN_REDIR = 2,
-	TOKEN_SEMICOLON = 3,
-	TOKEN_PIPE = 4,
-	TOKEN_AGGREG = 5,
-	TOKEN_BLANK = 6,
-	TOKEN_SINGLEQUOTE = 7,
-	TOKEN_DOUBLEQUOTE = 8,
-	TOKEN_BACKQUOTE = 9,
-	TOKEN_MERGE = 10,
-	TOKEN_WORD = 11,
-	TOKEN_NULL = 0
+	TOKEN_NULL = 0,
+	TOKEN_ANDIF = 1,
+	TOKEN_ORIF = 2,
+	TOKEN_REDIR = 3,
+	TOKEN_SEMICOLON = 4,
+	TOKEN_PIPE = 5,
+	TOKEN_AGGREG = 6,
+	TOKEN_HEREDOC = 7,
+	TOKEN_BLANK = 8,
+	TOKEN_SINGLEQUOTE = 9,
+	TOKEN_DOUBLEQUOTE = 10,
+	TOKEN_BACKQUOTE = 11,
+	TOKEN_MERGE = 12,
+	TOKEN_WORD = 13,
 }						t_token_type;
 
 typedef struct			s_token
