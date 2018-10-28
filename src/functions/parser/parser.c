@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 00:42:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 15:38:39 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		tmp = realpath(arg[0], NULL);
 		ft_strdel(&arg[0]);
 		arg[0] = tmp;
+	}
+	while (arg[i])
+	{
+		arg[i] = sh_command_check(env, arg[i]);
+		i++;
 	}
 	ret = sh_command_found(sh, env, bin, &arg[0]);
 	ft_putendl_fd("from sh_command_run_ast : ", 2);
