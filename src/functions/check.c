@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 19:06:32 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:09:01 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static bool	check_glob_conditions(char *s, int i, char in_sq, char in_dq)
 	&& !lexer_is_esc(s, i));
 }
 
-static bool	check_expand_conditions(char *s, int i, char in_sq, char in_dq)
+static bool	check_expand_conditions(char *s, int i, char in_sq)
 {
 	return (
-	!in_sq && !in_dq
+	!in_sq
 	&& s[i] == '$'
 	&& !lexer_is_esc(s, i));
 }
@@ -57,7 +57,7 @@ char		*sh_command_check(t_env *env, char *s, int type)
 			s = lexer_tilde(env, s, i);
 		if (check_glob_conditions(s, i, in_squote, in_dquote))
 			s = lexer_glob(s, start, i);
-		if (check_expand_conditions(s, i, in_squote, in_dquote) && env)
+		if (check_expand_conditions(s, i, in_squote) && env)
 			s = lexer_expand(env, s, i);
 		i++;
 	}
