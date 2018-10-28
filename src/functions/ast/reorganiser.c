@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 15:01:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:05:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	t_token_tree	*next_token;
 
 	next_token = token;
-	if (next_token)	
+	if (next_token)
 		next_token = next_token->right;
 	while (next_token && next_token->type == 0)
 		next_token = next_token->right;
@@ -40,7 +40,7 @@ static t_token_tree	*insert_token_at_correct_place(
 		t_token_tree *next_token)
 {
 	t_token_tree	*placeholder;
-	t_token_tree	*old_pointer_to_current_token;;
+	t_token_tree	*old_pointer_to_current_token;
 
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
