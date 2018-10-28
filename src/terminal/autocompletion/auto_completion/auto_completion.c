@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:57:00 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 16:05:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ static char			*get_auto_mode(t_shell *sh, char *content)
 
 bool				try_expansions(t_shell *sh)
 {
-	return (auto_glob(sh) || auto_history(sh) || auto_env(sh));
+	if (ft_strcmps(sh->read->line, K_TAB))
+		return (auto_history(sh));
+	else
+		return (auto_glob(sh) || auto_history(sh) || auto_env(sh));
 }
 
 /*
