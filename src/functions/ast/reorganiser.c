@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 18:42:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 19:09:49 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ static char			**get_new_token_array(t_token_tree *current_command)
 {
 	int				size;
 	char			**tokens;
+	char			**tokens_head;
 	char			**track_tokens;
 	t_token_tree	*track_command;
 
 	size = 0;
 	track_command = current_command;
+	//CALCULATE SIZE OF ARRAY
 	while (track_command && track_command->type == 0)
 	{
 		track_tokens = track_command->tokens;
@@ -28,9 +30,9 @@ static char			**get_new_token_array(t_token_tree *current_command)
 			track_tokens++;
 		track_command = track_command->right;
 	}
-	if (!(tokens = (char **)memmalloc(sizeof(char *) * (size + 1))))
+	if (!(tokens = (char **)ft_memalloc(sizeof(char *) * (size + 1))))
 		return (NULL);
-
+	tokens_head = tokens;
 	//FILL NEW ARRAY:
 	track_command = current_command;
 	while (track_command && track_command->type == 0)
@@ -38,13 +40,14 @@ static char			**get_new_token_array(t_token_tree *current_command)
 		track_tokens = track_command->tokens;
 		while (*track_tokens)
 		{
-			token
+			*tokens = *track_tokens;
+			tokens++;
 			track_tokens++;
 		}
 		track_command = track_command->right;
 	}
-	ft_printf("\n\nSIZE:[%d]\n\n", size);
-	return (NULL);
+	free(current_command->tokens);
+	return (tokens_head);
 }
 
 static char			**squash_type_zero(t_token_tree *current_command)
@@ -89,8 +92,8 @@ void				reorganise_tokens(t_token_tree **list)//Change to bool
 	while (current_command)
 	{
 		reorganise_command(current_command);
-		if (!squash_type_zero(current_command))
-			;//return BAD HIT HAPPENED.
+		if (!(current_command->tokens = squash_type_zero(current_command)))
+			return ;//NULL
 		move_to_next_command(&current_command);
 	}
 }
