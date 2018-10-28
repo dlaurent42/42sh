@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:55:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 14:03:00 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 	return (status);
 }
 
-static void	lexer_fill_tmp(
+static void	lexer_handle_match(
 	t_token *match, t_lexer *lexer, const char *cmd, const char *prev)
 {
 	if (match->type == TOKEN_AGGREG)
@@ -67,13 +67,15 @@ char		lexer_fill(t_lexer *lexer, const char *cmd)
 	while (*cmd != '\0')
 		if ((match = lexer_token_search(cmd)))
 		{
-			lexer_fill_tmp(match, lexer, cmd, prev);
+			lexer_handle_match(match, lexer, cmd, prev);
 			cmd += match->size;
 			prev = cmd;
 		}
-		else if ((*cmd == '\"' || *cmd == '\'' || *cmd == '`')
-		&& ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK))
-			return (status);
+		else if (*cmd == '\"' || *cmd == '\'' || *cmd == '`')
+		{
+			if ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK)
+				return (status);
+		}
 		else
 			++cmd;
 	(prev != cmd) ? lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD) : 0;

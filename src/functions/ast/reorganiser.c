@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 15:16:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:19:46 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,10 @@ int					reorganise_tokens(t_token_tree **list)
 	t_token_tree	*current_command;
 
 	current_command = *list;
-	//////BEFORE
-	//START
-	current_command = *list;
 	while (current_command)
 	{
-		ft_printf("END[%s]\n", *current_command->tokens);
-		current_command = current_command->right;
-	}
-	current_command = *list;
-	//END
-	while (current_command)
-	{
-		ft_printf("treat command[%s]\n", *current_command->tokens);
-
 		reorganise_command(current_command);
-
-		ft_printf("end command[%s]\n", *current_command->tokens);
-
 		move_to_next_command(&current_command);
 	}
-
-	ft_printf("\n----END REORGANISE----\n");
-	//////AFTER
-	//START
-	current_command = *list;
-	while (current_command)
-	{
-		ft_printf("END[%s]\n", *current_command->tokens);
-		current_command = current_command->right;
-	}
-	//END
 	return (1);
 }

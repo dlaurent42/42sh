@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:43:06 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 15:48:44 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,35 @@ static char	sh_command_run_tree(
 	return (STATUS_OK);
 }
 
-static char	sh_command_check_lexer(t_lexer *lexer)
+static char	sh_command_check_lexer(t_shell *sh, t_lexer *lexer)
 {
 	size_t	i;
 
 	i = 0;
-	ft_printf("Checking lexer, lexer size = %zu \n", lexer->size);
 	while (i < lexer->size)
 	{
-		ft_printf("Loop: %zu\n", i);
 		if (i == 0 && lexer->tokens[i].type < 6 && lexer->tokens[i].type != TOKEN_SEMICOLON)
 			return (STATUS_ERR);
 		if (lexer->tokens[i].type == TOKEN_PIPE && (i + 1) >= lexer->size)
 			return (STATUS_PIPE);
 		if ((lexer->tokens[i].type == TOKEN_AGGREG || lexer->tokens[i].type == TOKEN_MERGE)
-			&& 0/*&& token_merge()*/)
+			&& lexer_token_merge(lexer, i) != STATUS_OK)
 			return (STATUS_ERR);
+		if (lexer->tokens[i].type == TOKEN_HEREDOC)
+		{
+			if ((i + 1) >= lexer->size)
+				return (STATUS_ERR);
+			sh_heredoc(sh, lexer->tokens[i + 1].id);
+			return (STATUS_HEREDOC);
+		}
 		++i;
 	}
-	ft_printf("Finish checking lexer \n");
 	return (STATUS_OK);
 }
 
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 {
+	(void)bin;
 	char			status;
 	t_lexer			lexer;
 
@@ -89,7 +94,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		ft_printf("Exit command run (1: wrong status = %d)\n", status);
 		return (lexer_delete(&lexer, status));
 	}
-	if ((status = sh_command_check_lexer(&lexer)) != STATUS_OK)
+	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
 	{
 		ft_printf("Exit command run (1: wrong status = %d)\n", status);
 		return (lexer_delete(&lexer, status));
@@ -114,8 +119,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	status = sh_command_run_tree(sh, env, bin, lexer);
 	ft_printf("env search is %s (sh_command_run)\n", env_search(sh->env, "?"));
 	ft_printf("tree has finished with status %d\n", status);
-	for (size_t i = 0; i < lexer.size;i++)
-		ft_printf("token[%zu] = %s %d\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
+
 	ft_printf("Exit command run with status %d\n", status);
 	return (lexer_delete(&lexer, status));
 }
