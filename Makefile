@@ -12,6 +12,7 @@ SRC			=	shell.c														\
 				errors/path.c												\
 				errors/import_export.c										\
 				errors/execution.c											\
+				functions/aliases.c											\
 				functions/check.c											\
 				functions/prepare.c											\
 				functions/run.c												\
@@ -21,6 +22,7 @@ SRC			=	shell.c														\
 				functions/ast/build_token_tree.c							\
 				functions/ast/exec.c										\
 				functions/ast/reorganiser.c									\
+				functions/ast/reorganise_command.c							\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\
 				functions/ast/operators/pipe.c								\

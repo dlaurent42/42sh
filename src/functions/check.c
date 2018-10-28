@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 17:17:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 15:38:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ static bool	check_expand_conditions(char *s, int i, char in_sq, char in_dq)
 	&& !lexer_is_esc(s, i));
 }
 
-static bool	check_alias_conditions(char *s, int i, char in_sq, char in_dq)
-{
-	return (
-	!in_sq && !in_dq
-	&& s[i] != '\0' && s[i] != ' ' && s[i] != '<' && s[i] != '>'
-	&& s[i] != '|' && s[i] != '&'
-	&& lexer_is_new_cmd(s, i));
-}
-
 static bool	check_tilde_conditions(char *s, int i, char in_sq, char in_dq)
 {
 	return (
@@ -47,7 +38,7 @@ static bool	check_tilde_conditions(char *s, int i, char in_sq, char in_dq)
 	&& !lexer_is_esc(s, i));
 }
 
-char		*sh_command_check(t_env *env, t_env *alias, char *s)
+char		*sh_command_check(t_env *env, char *s)
 {
 	int		i;
 	int		start;
@@ -69,8 +60,6 @@ char		*sh_command_check(t_env *env, t_env *alias, char *s)
 			s = lexer_glob(s, start, i);
 		if (check_expand_conditions(s, i, in_squote, in_dquote) && env)
 			s = lexer_expand(env, s, i);
-		if (check_alias_conditions(s, i, in_squote, in_dquote) && alias)
-			s = lexer_aliases(alias, s, i);
 		i++;
 	}
 	return (s);

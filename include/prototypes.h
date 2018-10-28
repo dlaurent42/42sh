@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:19:45 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/28 15:45:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char					sh_command_run(
 							t_env *env,
 							t_bin *bin,
 							char **str);
-char					*sh_command_check(t_env *env, t_env *alias, char *s);
+char					*sh_command_check(t_env *env, char *s);
+char					*sh_replace_aliases(t_env *alias, char *s);
 
 /*
 ** functions - builtins
@@ -622,6 +623,7 @@ int						execute_tree(t_shell *sh, t_token_tree *tree);
 char					sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 														char **arg);
 int						reorganise_tokens(t_token_tree **list);
+void					reorganise_command(t_token_tree *curent_command);
 
 /*
 ** functions - ast - operators
