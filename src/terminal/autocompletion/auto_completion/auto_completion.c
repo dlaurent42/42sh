@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/26 13:06:32 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:57:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,12 @@ bool				try_expansions(t_shell *sh)
 ** auto_issuance only launches if all mallocs were successful
 */
 
-bool				auto_completion(t_shell *sh)
+static bool			try_auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
 	char			*parsed_buffer;
 
 	performed_completion = false;
-	sh->modes.auto_completion = TRUE;
 	if (try_expansions(sh))
 		performed_completion = true;
 	else if (!ft_strcmps(sh->read->line, K_TAB))
@@ -106,6 +105,20 @@ bool				auto_completion(t_shell *sh)
 		auto_free_ac(sh);
 		performed_completion = true;
 	}
+	return (performed_completion);
+}
+
+
+bool				auto_completion(t_shell *sh)
+{
+	bool			performed_completion;
+
+	performed_completion = false;
+
+	ft_putstr(CURSOR_HIDE);
+	sh->modes.auto_completion = TRUE;
+	performed_completion = try_auto_completion(sh);
 	sh->modes.auto_completion = FALSE;
+	ft_putstr(CURSOR_SHOW);
 	return (performed_completion);
 }
