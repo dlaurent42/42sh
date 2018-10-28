@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:54:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:54:44 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
 		i++;
 	}
+	arg = arg_merge(arg, tree->blanks);
 	ret = sh_command_found(sh, env, bin, &arg[0]);
 	return (ret);
 }
