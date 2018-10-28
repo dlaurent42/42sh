@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:18:36 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 01:11:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 12:34:04 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ static char	exec_child(t_shell *sh, t_token_tree *tree, int fd[2], int st)
 	exit(res);
 }
 
-/*
-** TODO: Don't forget to check return code. Is it suitable with shell.
-*/
-
 static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 {
 	pid_t	pid_left;
@@ -63,9 +59,7 @@ static int	do_pipe(t_shell *sh, t_token_tree *tree, int fd[2], int std[2])
 	waitpid(pid_left, &stat[1], 0);
 	if ((WIFEXITED(stat[0])))
 		return (WEXITSTATUS(stat[0]));
-	if ((WIFEXITED(stat[1])))
-		ft_printf("return status from pipe1 is %d\n", WEXITSTATUS(stat[1]));
-	return (WIFEXITED(stat[0]) && WEXITSTATUS(stat[0]) == 0);
+	return (WIFEXITED(stat[1]) ? WEXITSTATUS(stat[0]) : STATUS_ERR );
 }
 
 /*
