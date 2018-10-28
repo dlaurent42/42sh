@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_descriptor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 21:42:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 16:06:46 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 		error_malloc_reader(sh, "token");
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
-	if ((fd[0] == 0 && !ft_strcmp(front, "0")) || fd[1] == 0 ||
+	if ((fd[0] == 0 && !ft_strcmp(front, "0")) /*|| fd[1] == 0*/ ||
 	(*back != '-' && fd[1] == 0) || ((fd[2] = dup(fd[0])) == -1))
 		return (error_file_descriptor());
 	(*back != '-') ? (dup2(fd[1], fd[0])) : (close(fd[0]));
@@ -45,7 +45,7 @@ char		execute_fd_aggr(t_shell *sh, t_token_tree *tree)
 
 	len = 0;
 	cmd = tree->tokens[0];
-	while (cmd[len] != '>' || cmd[len] != '<')
+	while (cmd[len] != '\0' && (cmd[len] != '>' && cmd[len] != '<'))
 		len++;
 	if (!(front = get_front_descriptor(cmd, len,
 				(!ft_strncmp(cmd + len, ">&", 2) ? 1 : 0))))

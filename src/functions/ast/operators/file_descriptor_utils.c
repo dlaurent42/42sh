@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 16:24:19 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/27 16:40:08 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 16:06:45 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,9 @@ char		*get_front_descriptor(char *cmd, size_t len, int closed)
 {
 	char		*ret;
 
-	if (len != 0)
+	if (!len || !(ret = ft_strndup(cmd, len)))
 	{
-		if (!(ret = ft_strndup(cmd, len)))
-			if (!(ret = ft_strdup(closed ? "1" : "0")))
-				return (NULL);
-	}
-	else
-	{
-		if (!(ret = ft_strdup(cmd + 2)))
+		if (!(ret = ft_strdup(closed ? "1" : "0")))
 			return (NULL);
 	}
 	return (ret);
