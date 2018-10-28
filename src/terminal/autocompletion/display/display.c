@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 16:35:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:51:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/27 09:38:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int			calculate_offset(t_shell *sh)
 	calc = nbr - (int)nbr;
 	calc *= 10;
 	len = (int)calc;
+	if (!(int)nbr)
+		return (1);
 	return (len >= 1 ? (int)nbr + 1 : (int)nbr);
 }
 
