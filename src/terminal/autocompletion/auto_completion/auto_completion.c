@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 16:05:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 20:32:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,11 @@ static bool			try_auto_completion(t_shell *sh)
 	return (performed_completion);
 }
 
-
 bool				auto_completion(t_shell *sh)
 {
 	bool			performed_completion;
 
 	performed_completion = false;
-
 	ft_putstr(CURSOR_HIDE);
 	sh->modes.auto_completion = TRUE;
 	performed_completion = try_auto_completion(sh);
