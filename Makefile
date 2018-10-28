@@ -109,6 +109,7 @@ SRC			=	shell.c														\
 				functions/lexer/handlers/tilde.c							\
 				functions/lexer/handlers/trim.c								\
 				functions/lexer/heredoc/add.c								\
+				functions/lexer/heredoc/all_closed.c						\
 				functions/lexer/heredoc/delete.c							\
 				functions/lexer/heredoc/get_next.c							\
 				functions/lexer/heredoc/heredoc.c							\

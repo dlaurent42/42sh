@@ -6,7 +6,7 @@
 #    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/27 21:37:11 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/28 16:56:39 by dlaurent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))

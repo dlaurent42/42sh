@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 15:49:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 17:10:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,6 +292,7 @@ void					sh_command_expand_dollars(
 /*
 ** functions - lexer - heredoc
 */
+bool					sh_heredocs_all_close(t_shell *sh);
 char					sh_heredoc(t_shell *sh, char *str);
 char					sh_heredoc_add(t_shell *sh, char *heredoc);
 void					sh_heredoc_delete(t_shell *sh);
