@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 14:58:00 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 15:01:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,24 @@ static t_token_tree	*insert_token_at_correct_place(
 	t_token_tree	*placeholder;
 	t_token_tree	*old_pointer_to_current_token;;
 
-	//MOVE TO TOKEN PRIOR TO POINT OF INSERTION:
 	while (current_command && get_next_token(current_command)
 			&& get_next_token(current_command)->type <= current_token->type)
 		current_command = get_next_token(current_command);
-	//MOVE TO POINT DIRECTLY BEFORE POINT OF INSERTION:
 	while (current_command
 			&& current_command->right
 			&& !token_is_redirect(current_command->right))
 		current_command = current_command->right;
-	//PLACE HOLDER IS POINT AFTER INSERTION
 	placeholder = current_command->right;
-	//SET NEXT OF CURENT COMMAND TO CURRENT_TOKEN:
 	current_command->right = current_token;
-	//MOVE ONTO CURRENT_TOKEN:
 	current_command = current_command->right;
-	//MOVE PAST CURRENT_TOKEN's BASTARDS:
 	while (current_command
 			&& current_command->right
 			&& current_command->right->type == 0)
 		current_command = current_command->right;
-	//SET CURRENT_TOTAL's BASTARD TO PLACEHOLDER.
 	current_command->right = placeholder;
-	//MOVE TO OLD->RIGHT POINTER TO CURRENT_TOKEN:
 	while (current_command && current_command->right
 			&& current_command->right != current_token)
 		current_command = current_command->right;
-	//SET OLD->RIGHT POINTER TO NEXT_TOKEN
 	old_pointer_to_current_token = current_command;
 	current_command->right = next_token;
 	return (old_pointer_to_current_token);
