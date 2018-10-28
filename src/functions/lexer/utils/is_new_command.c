@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:56:30 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 14:10:11 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 14:58:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool		lexer_is_new_cmd(char *s, int pos)
 			return (FALSE);
 		i--;
 	}
-	if (i == 0)
+	if (i < 0)
 		return (TRUE);
 	return (FALSE);
 }
