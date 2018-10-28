@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 08:44:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/28 12:57:32 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,7 +335,6 @@ typedef struct			s_token_tree
 	size_t				size;
 	int					type;
 	int					id;
-	struct s_token_tree	*reorganise;
 	struct s_token_tree	*left;
 	struct s_token_tree	*right;
 }						t_token_tree;
