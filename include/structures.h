@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:29:40 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:31:13 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,12 +277,6 @@ typedef struct			s_exec
 	t_bin				*bin;
 }						t_exec;
 
-/*
-** heredoc:
-** 		pos parameter corresponds to last relative
-**	position in buffer after injection of index
-** 		idx contains a list of EOF separators
-*/
 typedef struct			s_heredocs
 {
 	char				*keyword;
