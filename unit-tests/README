@@ -1,0 +1,14 @@
+All tests have to be performed with Valgrind, with fsanitize, with and without environment, with and without unicode, with and without escape characters
+
+Verify closed fd
+	cat "test" | read &>-
+
+Verify shell behavior when using unicode
+
+Verify malloc (github/dlaurent42/secure_malloc)
+
+Verify limits of str, arr, _t * by modifying constants in .h
+
+Verify shell exec without variables used in env_search
+
+Verify forbidden functions

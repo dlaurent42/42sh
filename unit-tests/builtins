@@ -1,0 +1,209 @@
+Builtins alias [-p] and unalias [-a]:
+
+    $> alias
+    $> alias -
+    $> alias -x
+    $> alias -p
+    $> alias -p --
+    $> alias -- -p
+    $> alias =
+    $> alias =toto
+    $> alias toto
+    $> alias toto=
+    $> alias toto=tutu
+    $> alias -- toto=tutu
+    $> alias toto==tutu
+    $> alias toto=toto=toto=
+    $> alias toto='toto=toto='
+    $> alias toto="toto=toto="
+    $> alias ✗
+    $> alias ✗=
+    $> alias =✗
+    $> alias ✗=✗-✗
+
+    + set an alias and modify it
+    + check correct implementation from ast
+    + check with redirections
+
+    $> unalias
+    $> unalias -
+    $> unalias -x
+    $> alias toto=tutu && unalias -a && alias
+    $> alias toto=tutu && unalias -- -a && alias
+    $> alias toto=tutu && unalias toto && alias
+    $> alias toto=tutu && unalias -- toto && alias
+
+Builtins setenv [-p] and unsetenv (no option for unsetenv):
+
+    $> setenv ?=0               (is protected, cannot set it)
+    $> setenv HISTFILE=""       (is private, cannot set it)
+    $> setenv l==ls             (double equality means search for binary)
+
+    + perform same tests as alias
+
+    $> unsetenv ?
+    $> unsetenv HISTFILE
+    $> unsetenv l
+
+    + check limit of env variables (set in constants, use primary numbers if you modify the constant)
+
+Builtins export [-p] and unset  (no option for unset):
+
+    $> export ?=0               (is protected, cannot export it)
+    $> export HOME              (already public, cannot export it)
+    $> export HOME=/Users/toto
+    $> export HISTFILE
+    $> export l==ls             (double equality means search for binary)
+
+    $> unset PATH               (is not local, cannot unset it)
+
+Builtin env [-i] [-u]:
+
+    # Testing options
+    $> env
+    $> env -i
+    $> env -- -i
+    $> env -iiii
+
+    # Testing display mode
+    $> env
+    $> env toto
+    $> env toto=tutu
+    $> env toto=tutu toto=tututu
+    $> env toto=tutu toto=tututu -u
+    $> env toto=tutu toto=tututu -u toto
+    $> env toto=tutu -u toto toto=tututu
+    $> env -i -u
+    $> env -i -u HOME
+    $> env -u HOME
+
+    # Testing exec mode
+    $> env ls
+    $> env -- blabla
+    $> env -- ls                (work -> if not PATH, PATH is set to /usr/bin/:/bin/)
+    $> env -i ls                (work -> if not PATH, PATH is set to /usr/bin/:/bin/)
+    $> env -i echo "toto"       (work -> call builtin)
+    $> env -i git status        (doesn't work -> not in /usr/bin/:/bin/)
+    $> env -i ./shell
+    $> env -i "pwd | echo"      (should not work, pwd | echo should be executed as pwd "| echo", if it works then it is a bonus) 
+
+Builtin cd [-L|[-P [-e]] [-]:
+
+    # Testing HOME
+    $> cd
+    $> cd --
+    $> unsetenv HOME && cd
+    $> unsetenv HOME && cd --
+    $> unsetenv HOME && cd ~
+    $> unsetenv HOME && cd -- ~
+
+    # Testing absolute path and options
+    $> cd /absolute/path
+    $> cd -P -x /absolute/path
+    $> cd -P /absolute/path
+    $> cd -P -L /absolute/path
+    $> cd -P -e /absolute/path
+    $> cd -L -e /absolute/path
+    $> cd -PLePe /absolute/path
+
+    # Testing relative path and options
+    $> cd /relative/path
+    $> cd -P -x /relative/path
+    $> cd -P /relative/path
+    $> cd -P -L /relative/path
+    $> cd -P -e /relative/path
+    $> cd -L -e /relative/path
+    $> cd -PLePe /relative/path
+
+    # Testing stupid paths
+    $> cd ./../.././.././././../.././
+
+    # Testing --
+    $> cd -- /relative/path
+    $> cd -P -x -- /relative/path
+    $> cd -P -- /relative/path
+    $> cd -P -L -- /relative/path
+    $> cd -P -e -- /relative/path
+    $> cd -L -e -- /relative/path
+    $> cd -PLePe -- /relative/path
+
+    # Testing symlinks (to be created)
+        -P means no follow
+        -L means follow
+
+    # Sames tests with folder containing special characters (space, [, etc.)
+    # Sames tests with folder containing unicode characters (✗)
+
+    # Testing - option
+    $> cd -
+    $> cd - /path
+    $> unsetenv OLDPWD && cd -
+    $> unsetenv OLDPWD PWD && cd -
+
+    # Testing CDPATH
+    $> setenv CDPATH=/ && cd bin
+    $> setenv CDPATH=$HOME && cd Documents
+    $> setenv CDPATH=$HOME/ && cd Documents
+    $> setenv CDPATH=/./../ && cd bin
+    $> setenv CDPATH=/./../ && cd bin/
+
+    + test with redirections
+
+Builtin echo [-n]:
+
+    # Testing options without printing anything
+    $> echo
+    $> echo -n -n
+    $> echo -- -n
+    $> echo -a
+    $> echo -nnnnnnnn
+
+    # Testing escape sequences
+    $> echo -n '\c'
+    $> echo -n \t
+    $> echo -n '\t'
+    $> echo -n "\t"
+    $> echo -n \t\\n\\\\\\\v\t\ \w
+    $> echo -n '\t\\n\\\\\\\v\t\ \w'
+    $> echo -n "\t\\n\\\\\\\v\t\ \w"
+
+    # Basic tests
+    $> echo I am a bitch
+    $> echo "I am" "a" 'bitch'
+    $> echo "I am" "a" '\nbi\ctch'
+    $> echo -n I am a bitch
+    $> echo -nI am a bitch
+    $> echo -n "I am" "a" 'bitch'
+    $> echo -n"I am" "a" 'bitch'
+    $> echo -n "I am" "a" '\nbi\ctch'
+    $> echo -n"I am" "a" '\nbi\ctch'
+
+Builtin exit:
+
+    $> env -i exit    (should not exit)
+    $> exit             
+    $> exit -1
+    $> exit 1
+    $> exit `a very big number`
+    $> exit toto
+    $> exit 1 2 3 4
+    $> exit "1 2 3 4"
+
+    Nota: exit status is unsigned char typed (0->255)
+
+Builtin history [see nota]:
+
+ 	Nota: history builtin can have only one option (except for p and s):
+ 	    history [n]
+ 	    history -c
+ 	    history -d offset
+ 	    history [-anrw] [filename]
+ 	    history -ps arg
+
+    To test history builtin, please refer to src/functions/builtins/history/history.c
+
+Builtin read:
+
+    To test read builtin, please refer to src/functions/builtins/read/read.c
+
+    + test with closed fd as redirection
