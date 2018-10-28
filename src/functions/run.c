@@ -6,26 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 01:14:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 15:40:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static char	sh_command_run_checks(t_shell *sh, t_env *env, char **cmd)
-{
-	ft_printf(". Enters command checks\n");
-	if (!*cmd || lexer_is_empty(*cmd))
-	{
-		ft_printf(". Exits command checks (STATUS EMPTY)\n");
-		return (STATUS_EMPTY);
-	}
-	*cmd = (sh->env == env)
-		? sh_command_check(env, sh->alias, *cmd)
-		: sh_command_check(env, NULL, *cmd);
-	ft_printf(". Exits command checks (STATUS OK)\n");
-	return (STATUS_OK);
-}
 
 static char	sh_command_run_lexer(
 	t_shell *sh, t_env *env, t_lexer *lexer, char *cmd)
@@ -97,11 +82,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 
 	status = STATUS_OK;
 	ft_printf("Enters command run %s\n", *cmd);
-	if ((status = sh_command_run_checks(sh, env, cmd)) != STATUS_OK)
-	{
-		ft_printf("Exit command run (1: wrong status = %d)\n", status);
-		return (status);
-	}
+	*cmd = (sh->env == env) ? sh_replace_aliases(sh->alias, *cmd) : 0;
 	ft_printf("Command checks are now over %s\n", *cmd);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, *cmd)) != STATUS_OK)
 	{
