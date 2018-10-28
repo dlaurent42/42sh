@@ -6,15 +6,11 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:11:12 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 12:38:40 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-/*
-** TODO: check if you really need to close fd
-*/
 
 static char	single_left_cursor(t_shell *sh, t_token_tree *tree, int fd)
 {
@@ -26,6 +22,7 @@ static char	single_left_cursor(t_shell *sh, t_token_tree *tree, int fd)
 	ret = execute_tree(sh, tree->left);
 	dup2(stdin, 0);
 	close(stdin);
+	close(fd);
 	return (ret);
 }
 
