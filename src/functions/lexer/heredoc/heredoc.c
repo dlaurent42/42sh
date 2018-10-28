@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 22:12:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 14:02:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 16:07:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,20 @@
 char		sh_heredoc(t_shell *sh, char *heredoc)
 {
 	if ((heredoc == NULL || heredoc[0] == '\0') && sh->modes.heredoc == FALSE)
+	{
+		ft_printf("sh_heredoc [1]: exit on error\n");
 		return (-1);
+	}
 	if (sh->modes.heredoc == FALSE)
+	{
+		ft_printf("sh_heredoc [2]: init\n");
 		return (sh_heredoc_init(sh, heredoc));
+	}
 	if (sh->modes.heredoc == TRUE && heredoc)
+	{
+		ft_printf("sh_heredoc [3]: add\n");
 		return (sh_heredoc_add(sh, heredoc));
+	}
+	ft_printf("sh_heredoc [4]: update\n");
 	return (sh_heredoc_update(sh));
 }
