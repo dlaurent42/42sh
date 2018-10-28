@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:35:20 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:51:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char		*sh_command_check(t_env *env, char *s, int type)
 	in_squote = (type == TOKEN_DOUBLEQUOTE);
 	while (s[i])
 	{
-		// lexer_is_quote(s, i, &in_dquote, &in_squote);
 		if (i && s[i - 1] == ' ' && !lexer_is_esc(s, i - 1) && s[i] != ' ')
 			start = i;
 		if (check_tilde_conditions(s, i, in_squote, in_squote) && env)

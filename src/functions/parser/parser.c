@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 17:36:22 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 18:54:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		i++;
 	}
 	ret = sh_command_found(sh, env, bin, &arg[0]);
-	ft_putendl_fd("from sh_command_run_ast : ", 2);
-	ft_putnbr_fd(ret, 2);
-	ft_putendl_fd("", 2);
 	return (ret);
 }
 

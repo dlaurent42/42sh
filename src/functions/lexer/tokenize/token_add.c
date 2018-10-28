@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:53 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 18:36:15 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/28 18:55:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void lexer_token_add(t_lexer *lexer, const char *src, size_t size,
-					 t_token_type type)
+void	lexer_token_add(t_lexer *lexer, const char *src, size_t size,
+	t_token_type type)
 {
 	t_token new;
 

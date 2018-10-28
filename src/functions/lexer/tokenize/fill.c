@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 18:35:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/28 18:56:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 {
 	char status;
 
@@ -41,7 +41,7 @@ static char handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
 	return (status);
 }
 
-static void lexer_handle_match(
+static void	lexer_handle_match(
 	t_token *match, t_lexer *lexer, const char *cmd, const char *prev)
 {
 	if (match->type == TOKEN_AGGREG)
@@ -55,11 +55,11 @@ static void lexer_handle_match(
 	}
 }
 
-char lexer_fill(t_lexer *lexer, const char *cmd)
+char		lexer_fill(t_lexer *lexer, const char *cmd)
 {
-	t_token *match;
-	char status;
-	const char *prev;
+	t_token		*match;
+	char		status;
+	const char	*prev;
 
 	match = NULL;
 	prev = cmd;
