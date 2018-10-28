@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:56:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:36:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		return (lexer_delete(&lexer, status));
 	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
 		return (lexer_delete(&lexer, status));
+	if (lexer.size == 0 && env_search(env, "?"))
+		return (ft_atoi(env_search(env, "?")));
+	else if (lexer.size == 0)
+		return (STATUS_OK);
 	sh->modes.multiline = FALSE;
 	if (sh && bin == sh->bin)
 	{
