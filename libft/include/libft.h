@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 21:15:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/28 21:34:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void				ft_sort_wordtab(char **tab);
 int					match(char *s1, char *s2);
 int					nmatch(char *s1, char *s2);
 char				**ft_str2dup(char **arr);
+void				ft_deltab(void *content);
 
 /*
 ** Linked lists

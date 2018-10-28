@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 20:47:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/28 21:32:27 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	}
 	arg = arg_merge(arg, tree->blanks);
 	ret = sh_command_found(sh, env, bin, &arg[0]);
+	ft_deltab(arg);
 	return (ret);
 }
 
