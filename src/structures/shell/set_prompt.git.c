@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 16:04:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:39:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static char	*sh_get_git_branch_name(char *location)
 
 static char	*sh_prompt_get_next_location(char *location)
 {
-	unsigned char	i;
-	unsigned char	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
