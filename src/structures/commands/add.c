@@ -6,11 +6,30 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 21:35:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/09 18:49:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:55:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static void	command_parse_cmd_content(t_shell *sh)
+{
+	size_t	i;
+
+	i = 0;
+	if (!sh->cmd)
+		return ;
+	while (sh->cmd->content[i])
+	{
+		if (sh->cmd->content[i] == '\n')
+		{
+			lexer_repatriate(sh->cmd->content, i, 1);
+			sh->cmd->display_len--;
+			sh->cmd->unicode_len--;
+		}
+		i++;
+	}
+}
 
 void		command_add_str_based(t_shell *sh, char *str, bool is_new)
 {
@@ -31,6 +50,7 @@ void		command_add_str_based(t_shell *sh, char *str, bool is_new)
 	new->last = (sh->cmd) ? sh->cmd->last : new;
 	(sh->cmd) ? sh->cmd->prev = new : 0;
 	sh->cmd = new;
+	command_parse_cmd_content(sh);
 }
 
 void		command_add(t_shell *sh, bool is_new)
@@ -50,4 +70,5 @@ void		command_add(t_shell *sh, bool is_new)
 	new->last = (sh->cmd) ? sh->cmd->last : new;
 	(sh->cmd) ? sh->cmd->prev = new : 0;
 	sh->cmd = new;
+	command_parse_cmd_content(sh);
 }
