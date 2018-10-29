@@ -39,8 +39,10 @@ static void			fill_buffer_with_wild(t_shell *sh, t_obj *obj)
 static void			do_loop(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
+	bool			first_print;
 
 	obj = head;
+	first_print = true;
 	while (sh->modes.auto_completion)
 	{
 		obj = head;
@@ -56,7 +58,8 @@ static void			do_loop(t_shell *sh, t_obj *head)
 				sh_print_str(sh, " ");
 			break ;
 		}
-		auto_display(sh, obj);
+		auto_display(sh, obj, first_print);
+		first_print = false;
 		read(0, sh->read->line, 4);
 		if (sh->read->line[0] == 4)
 			break ;

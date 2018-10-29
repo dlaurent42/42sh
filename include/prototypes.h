@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 20:30:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 16:50:59 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -460,7 +460,7 @@ void					sh_destroy_exec(t_exec **exec);
 ** terminal - auto_completion
 */
 bool					auto_completion(t_shell *sh);
-void					auto_display(t_shell *sh, t_obj *obj);
+void					auto_display(t_shell *sh, t_obj *obj, bool first_print);
 bool					auto_get_obj(t_shell *sh);
 void					auto_free_obj(t_obj **obj);
 t_obj					*auto_create_obj(void);

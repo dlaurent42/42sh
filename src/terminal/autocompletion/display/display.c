@@ -85,7 +85,7 @@ static void			print_display(t_shell *sh, t_obj *head, int len)
 	obj->hor_prev = last_obj;
 }
 
-void				auto_display(t_shell *sh, t_obj *obj)
+void				auto_display(t_shell *sh, t_obj *obj, bool first_print)
 {
 	int				x;
 	int				y;
@@ -94,7 +94,8 @@ void				auto_display(t_shell *sh, t_obj *obj)
 	auto_calculate_number_of_columns(sh);
 	x = sh->cursor.x;
 	y = sh->cursor.y;
-	auto_clear_selection_screen(sh);
+	if (!first_print)
+		auto_clear_selection_screen(sh);
 	if (sh->cursor.x != 0)
 		ft_putchar('\n');
 	sh->ac->number_of_printed_rows = 1;
