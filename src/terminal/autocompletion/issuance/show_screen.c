@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 23:33:54 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/29 17:23:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ static void			fill_buffer_with_wild(t_shell *sh, t_obj *obj)
 	}
 }
 
+static void			do_loop_if(t_shell *sh)
+{
+	if (sh->ac->select->data.dir)
+		sh_print_str(sh, "/");
+	else if (sh->ac->select->data.env && sh->ac->auto_mode != AUTO_ENV)
+		sh_print_str(sh, "=");
+	else
+		sh_print_str(sh, " ");
+}
+
 static void			do_loop(t_shell *sh, t_obj *head)
 {
 	t_obj			*obj;
@@ -50,12 +60,7 @@ static void			do_loop(t_shell *sh, t_obj *head)
 		sh_print_str(sh, sh->ac->select->data.escaped_str);
 		if (sh->ac->select->ver_next == sh->ac->select)
 		{
-			if (sh->ac->select->data.dir)
-				sh_print_str(sh, "/");
-			else if (sh->ac->select->data.env && sh->ac->auto_mode != AUTO_ENV)
-				sh_print_str(sh, "=");
-			else
-				sh_print_str(sh, " ");
+			do_loop_if(sh);
 			break ;
 		}
 		auto_display(sh, obj, first_print);

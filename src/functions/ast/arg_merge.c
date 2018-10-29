@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   arg_merge.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 19:47:23 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 21:34:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/29 17:22:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int     ft_tablen(char **str)
+int		ft_tablen(char **str)
 {
 	int i;
 
@@ -23,10 +23,10 @@ int     ft_tablen(char **str)
 	return (i);
 }
 
-char    **push(char **parent, char *value)
+char	**push(char **parent, char *value)
 {
-	char    **son;
-	int     len;
+	char	**son;
+	int		len;
 
 	len = ft_tablen(parent);
 	if ((son = (char **)malloc(sizeof(char *) * (len + 2))) == NULL)
@@ -43,11 +43,11 @@ char    **push(char **parent, char *value)
 	return (son);
 }
 
-char    **arg_merge(char **tokens, int *blank_space)
+char	**arg_merge(char **tokens, int *blank_space)
 {
-	char    **new;
-	char    *arg;
-	int     i;
+	char	**new;
+	char	*arg;
+	int		i;
 
 	new = NULL;
 	if (tokens == NULL || *tokens == NULL)

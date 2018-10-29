@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_deltab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 21:33:46 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 21:35:20 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/29 17:21:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_deltab(void *content)
+void	ft_deltab(void *content)
 {
-    char **tmp;
-    int i;
+	int		i;
+	char	**tmp;
 
-    i = 0;
-    tmp = (char **)content;
-    while (tmp[i])
-        free(tmp[i++]);
-    free(tmp);
+	i = 0;
+	tmp = (char **)content;
+	while (tmp[i])
+		free(tmp[i++]);
+	free(tmp);
 }
