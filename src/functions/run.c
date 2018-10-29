@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 11:01:26 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/29 17:38:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,40 @@ static char	sh_command_run_tree(
 	return (STATUS_OK);
 }
 
+static bool	is_operator(t_token_type type)
+{
+	return (type >= TOKEN_ANDIF && type <= TOKEN_HEREDOC);
+}
+
 static char	sh_command_check_lexer(t_shell *sh, t_lexer *lexer)
 {
-	t_token	token;
-	size_t	i;
+	int		i;
 	char	status;
+	t_token	token;
 
-	i = 0;
+	i = -1;
 	status = STATUS_OK;
-	while (i < lexer->size)
+	while (++i < (int)lexer->size)
 	{
 		token = lexer->tokens[i];
-		if ((i + 1) >= lexer->size)
-		{
-			if (token.type == TOKEN_PIPE)
-				return (STATUS_PIPE);
-			else if (token.type >= TOKEN_ANDIF && token.type <= TOKEN_HEREDOC)
-				return (STATUS_ERR);
-		}
-		if (token.type >= TOKEN_ANDIF && token.type <= TOKEN_HEREDOC && (i == 0
-				|| (lexer->tokens[i + 1].type >= TOKEN_ANDIF
-				&& lexer->tokens[i + 1].type <= TOKEN_HEREDOC)))
+		if ((i + 1) >= (int)lexer->size && token.type == TOKEN_PIPE)
+			return (STATUS_PIPE);
+		else if ((i + 1) >= (int)lexer->size && is_operator(token.type))
+			return (STATUS_ERR);
+		if (is_operator(token.type) && (i == 0
+		|| lexer->tokens[i + 1].type == TOKEN_SEMICOLON
+		|| is_operator(lexer->tokens[i + 1].type)))
 			return (STATUS_ERR);
 		if (token.type == TOKEN_AGGREG
 			&& lexer_token_merge(lexer, i) != STATUS_OK)
 			return (STATUS_ERR);
 		if (lexer->tokens[i].type == TOKEN_HEREDOC)
-		{
 			if ((status = sh_heredoc(sh, lexer->tokens[i + 1].id)) == -1)
 				return (status);
-		}
-		++i;
 	}
 	return (status);
 }
+
 char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 {
 	char			status;
@@ -104,10 +104,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	if ((status = sh_command_run_lexer(sh, env, &lexer, cmd)) != STATUS_OK)
 		return (lexer_delete(&lexer, status));
 	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
-	{
-		printf("error: %d\n", status);
 		return (lexer_delete(&lexer, status));
-	}
 	if (lexer.size == 0 && env_search(env, "?"))
 		return (ft_atoi(env_search(env, "?")));
 	else if (lexer.size == 0)
