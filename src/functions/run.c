@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 20:24:11 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/28 22:25:56 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	sh_command_run_lexer(
 
 	(void)env;
 	ft_bzero((void *)lexer, sizeof(t_lexer));
-	if (sh->modes.heredoc == FALSE && lexer_is_empty((char *)cmd))
+	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
 		return (STATUS_ERR);
 	if (sh_heredocs_all_close(sh))
 		status = lexer_fill(lexer, *cmd);

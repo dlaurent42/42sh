@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+         #
+#    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/28 16:56:39 by dlaurent         ###   ########.fr        #
+#    Updated: 2018/10/28 21:32:55 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,6 +124,7 @@ SRC =	ft_atoi.c\
 		nmatch.c\
 		options.c\
 		ft_str2dup.c\
+		ft_deltab.c\
 		ft_printf/concatenate_content.c\
 		ft_printf/converter_arg_size_pt_one.c\
 		ft_printf/converter_arg_size_pt_two.c\
