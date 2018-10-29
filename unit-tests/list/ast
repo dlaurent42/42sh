@@ -22,9 +22,9 @@ TEST stupid stuff with file descriptors and test it's behavior
 		SHELL RETURNS:	nothing
 
 
-	$>
-	$>
-	$>
+	$> cat /dev/urandom | ./shell
+	$> ls | grep e | grep a > toto ; cat toto ; rm toto
+	$> 
 	$>
 	$>
 	$>

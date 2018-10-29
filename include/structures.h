@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 16:08:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:27:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,10 +295,10 @@ typedef enum			e_token_type
 	TOKEN_ANDIF = 1,
 	TOKEN_ORIF = 2,
 	TOKEN_REDIR = 3,
-	TOKEN_SEMICOLON = 4,
-	TOKEN_PIPE = 5,
-	TOKEN_AGGREG = 6,
-	TOKEN_HEREDOC = 7,
+	TOKEN_PIPE = 4,
+	TOKEN_AGGREG = 5,
+	TOKEN_HEREDOC = 6,
+	TOKEN_SEMICOLON = 7,
 	TOKEN_BLANK = 8,
 	TOKEN_SINGLEQUOTE = 9,
 	TOKEN_DOUBLEQUOTE = 10,
