@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:11:37 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 15:30:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:47:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ char		sh_cd_nofollow(t_shell *sh, t_env *env, char *value, char *path)
 	t_stat	lstats;
 
 	rpath = (path) ? path : sh_cd_get_real_path(sh, env, value);
-	if (access(rpath, F_OK) == -1 || lstat(rpath, &lstats) == -1)
+	if (ft_strlens(rpath) >= PATH_MAX)
+	{
+		ft_strdel(&rpath);
+		return (sh_cd_error(value, path, 7));
+	}
+	if (!rpath || access(rpath, F_OK) == -1 || lstat(rpath, &lstats) == -1)
 		return (sh_cd_error(value, rpath, 1));
 	if (chdir(rpath) == -1)
 		return (sh_cd_error(value, rpath, 3));
@@ -60,6 +65,11 @@ char		sh_cd_nofollow_dash(t_shell *sh, t_env *env, char *val, char *path)
 	t_stat	lstats;
 
 	rpath = (path) ? path : sh_cd_get_real_path(sh, env, val);
+	if (ft_strlens(rpath) >= PATH_MAX)
+	{
+		ft_strdel(&rpath);
+		return (sh_cd_error(val, path, 7));
+	}
 	if (!rpath || access(rpath, F_OK) == -1 || lstat(rpath, &lstats) == -1)
 		return (sh_cd_error(val, rpath, 1));
 	if (chdir(rpath) == -1)

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 21:32:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:44:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 	t_stat	lstats;
 
 	path = sh_cd_get_real_path(sh, env, sh_cd_remove_last_slash(value));
+	if (ft_strlens(path) >= PATH_MAX)
+		return (sh_cd_error(value, path, 7));
 	if (!path || access(path, F_OK) == -1 || lstat(path, &lstats) == -1)
 		return (sh_cd_error(value, path, 1));
 	if (!S_ISLNK(lstats.st_mode) && !dash)
