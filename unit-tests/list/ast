@@ -24,7 +24,7 @@ TEST stupid stuff with file descriptors and test it's behavior
 
 	$> cat /dev/urandom | ./shell
 	$> ls | grep e | grep a > toto ; cat toto ; rm toto
-	$> 
+	$> echo a||echo b&&echo c&&echo d;cat e&&cat f||cat g&&cat h'
 	$>
 	$>
 	$>
