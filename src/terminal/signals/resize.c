@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 19:03:45 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 17:24:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 16:00:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		sh_window_resize(t_shell *sh)
 	else
 	{
 		sh_resize_normal_mode(sh, x, y);
-		if (sh->modes.auto_completion)
+		if (sh->modes.auto_completion && sh->ac)
 			auto_display(sh, sh->ac->window_resize);
 	}
 }
