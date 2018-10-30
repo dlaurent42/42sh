@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 19:59:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:21:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 17:36:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 char		*sh_dollar_expansion(char *str, t_env *env)
 {
+	int		i;
 	char	*expanded;
 	char	*result;
 
+	i = 0;
 	expanded = NULL;
 	if (!str || str[0] != '$' || !str[1] || !env)
 		return (str);
@@ -28,6 +30,13 @@ char		*sh_dollar_expansion(char *str, t_env *env)
 	ft_strdel(&str);
 	if (!result)
 		return (ft_strdups(""));
+	while (result[i])
+	{
+		if (lexer_need_esc(result[i]) && !lexer_is_esc(result, i))
+			result = lexer_inject_dup(result, "\\", i);
+		i++;
+	}
+	ft_printf("Resulting expasion is: %s\n", result);
 	return (result);
 }
 

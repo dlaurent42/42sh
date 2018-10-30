@@ -88,6 +88,7 @@ SRC			=	shell.c														\
 				functions/lexer/aliases/aliases.c							\
 				functions/lexer/dollar/dollar.c								\
 				functions/lexer/glob/glob.c									\
+				functions/lexer/glob/lexer.c								\
 				functions/lexer/glob/cbraces/cbraces.c						\
 				functions/lexer/glob/cbraces/check.c						\
 				functions/lexer/glob/cbraces/dot.c							\
