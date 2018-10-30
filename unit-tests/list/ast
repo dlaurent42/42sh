@@ -31,7 +31,7 @@ TEST stupid stuff with file descriptors and test it's behavior
 	$> ls -a ; ls | cat | cat -e ; base64 /dev/urandom | head -c 1000 | grep 42 | wc -l && ls || ls -la ; ls ; ls -a ; ls | cat | cat -e ; base64 /dev/urandom | head -c 1000 | grep 42 | wc -l && ls || ls -la ; ls
 	$> pwd > file && pwd >> file || ls | cat && ls | cat >> file || ls
 
-		Rreorganiser output should be :        (pwd > file) && (pwd >> file) && (ls | cat >> file) || (ls | cat) || (ls)
+		Reorganizer output should be :        (pwd > file) && (pwd >> file) && (ls | cat >> file) || (ls | cat) || (ls)
 
 	$>
 	$>
