@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 14:38:39 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 15:00:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	arg = arg_merge(arg, tree->blanks);
 	tree->tokens = arg;
 	ft_putstr_fd("After merge:\n", 2);
+	lexer_glob(&tree);
 	i = 0;
 	while (tree->tokens[i])
 	{
@@ -129,13 +130,10 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		ft_putnbr_fd(i, 2);
 		ft_putstr_fd("]: ", 2);
 		ft_putstr_fd(tree->tokens[i], 2);
-		ft_putstr_fd(" (", 2);
-		ft_putnbr_fd(tree->t_type[i], 2);
-		ft_putstr_fd(")\n", 2);
+		ft_putstr_fd("\n", 2);
 		i++;
 	}
-	lexer_glob(&tree);
-	ret = sh_command_found(sh, env, bin, &arg[0]);
+	ret = sh_command_found(sh, env, bin, &tree->tokens[0]);
 	return (ret);
 }
 
