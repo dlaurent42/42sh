@@ -52,7 +52,6 @@ static void	sh_cd_follow_insert_env(t_shell *sh, t_env *env, char *path)
 char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 {
 	char	*path;
-	char	*rpath;
 	t_stat	lstats;
 
 	path = sh_cd_get_real_path(sh, env, sh_cd_remove_last_slash(value));
@@ -64,12 +63,6 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 		return (sh_cd_nofollow(sh, env, value, path));
 	if (!S_ISLNK(lstats.st_mode) && dash)
 		return (sh_cd_nofollow_dash(sh, env, value, path));
-	if (ft_strcmps(rpath = realpath(path, NULL), path) == 0)
-	{
-		ft_strdel(&rpath);
-		return (sh_cd_error(value, path, 2));
-	}
-	ft_strdel(&rpath);
 	if (chdir(path) == -1)
 		return (sh_cd_error(value, path, 3));
 	sh_cd_follow_insert_env(sh, env, path);

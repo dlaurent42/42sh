@@ -21,7 +21,7 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 	path = NULL;
 	rpath = NULL;
 	if (param[0] == '/')
-		return (realpath(param, NULL));
+		return (ft_strdups(param));
 	if (param[0] == '\0')
 		return (ft_strdup(env_search(env, "HOME")));
 	if ((cdpath = env_search(env, "CDPATH")) && cdpath[0] && param[0] != '.')
@@ -31,7 +31,7 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 	if (!path)
 		return (NULL);
 	path = ft_strjoinf(path, param, 1);
-	rpath = realpath(path, NULL);
+	rpath = ft_strdups(path);
 	ft_strdel(&path);
 	return (rpath);
 }
