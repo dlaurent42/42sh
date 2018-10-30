@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 15:16:15 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/30 17:02:16 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,13 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	char *str)
 {
 	int		i;
-	//char	*tmp;
 	char	**arg;
 
 	i = 0;
 	if (!(arg = sh_command_build(str)))
 		return (ft_strdel(&str));
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
-	{
 		ft_realpath(&arg[0]);
-	//	ft_strdel(&arg[0]);
-	//	arg[0] = tmp;
-	}
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
 	if (arg)
@@ -89,18 +84,13 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	t_token_tree *tree)
 {
 	int		i;
-	//char	*tmp;
 	char	ret;
 	char	**arg;
 
 	i = 0;
 	arg = tree->tokens;
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
-	{
 		ft_realpath(&arg[0]);
-	//	ft_strdel(&arg[0]);
-	//	arg[0] = tmp;
-	}
 	while (arg[i])
 	{
 		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
