@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 16:48:53 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/30 15:16:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	char *str)
 {
 	int		i;
-	char	*tmp;
+	//char	*tmp;
 	char	**arg;
 
 	i = 0;
@@ -69,9 +69,9 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 		return (ft_strdel(&str));
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
 	{
-		tmp = realpath(arg[0], NULL);
-		ft_strdel(&arg[0]);
-		arg[0] = tmp;
+		ft_realpath(&arg[0]);
+	//	ft_strdel(&arg[0]);
+	//	arg[0] = tmp;
 	}
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
@@ -89,7 +89,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	t_token_tree *tree)
 {
 	int		i;
-	char	*tmp;
+	//char	*tmp;
 	char	ret;
 	char	**arg;
 
@@ -97,9 +97,9 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	arg = tree->tokens;
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
 	{
-		tmp = realpath(arg[0], NULL);
-		ft_strdel(&arg[0]);
-		arg[0] = tmp;
+		ft_realpath(&arg[0]);
+	//	ft_strdel(&arg[0]);
+	//	arg[0] = tmp;
 	}
 	while (arg[i])
 	{
