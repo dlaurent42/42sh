@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/30 22:45:57 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 22:58:17 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static bool			token_is_boundry(t_token_tree *token)
 	if (!token
 			|| (token->type != 4
 				&& token->type != 5
-				&& token->type != 6))
+				&& token->type != 6
+				&& token->type != 7))
 		return (false);
 	return (true);
 }
