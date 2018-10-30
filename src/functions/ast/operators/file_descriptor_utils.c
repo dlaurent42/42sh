@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 16:24:19 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 16:06:45 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/30 09:34:35 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		error_file_descriptor(void)
 {
 	ft_putendl_fd("error: bad file descriptor", 2);
-	return (1);
+	return (STATUS_ERR);
 }
 
 char		*get_front_descriptor(char *cmd, size_t len, int closed)
