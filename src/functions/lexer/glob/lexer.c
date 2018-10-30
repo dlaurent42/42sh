@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:52:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:39:00 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 20:25:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static t_lexer_glob	*add_node_lexer_glob(t_lexer_glob *current, char *s, int typ
 	new->head = (current) ? current->head : new;
 	new->len = (current) ? current->len + 1 : 1;
 	(current) ? current->next = new : 0;
-	new->s = ft_strdups(lexer_backslash(s, type));
+	s = lexer_backslash(s, type);
+	new->s = ft_strdupf(s);
 	return (new);
 }
 
@@ -39,6 +40,7 @@ static t_lexer_glob	*add_splitted_node_lexer_glob(t_lexer_glob *current, char *s
 		current = add_node_lexer_glob(current, arr[i], type);
 		i++;
 	}
+	ft_strdel(&s);
 	(arr) ? free (arr) : 0;
 	return (current);
 }
@@ -51,13 +53,15 @@ static void			lexer_glob_token_tree(t_token_tree **tree, t_lexer_glob *glob)
 	i = 0;
 	if (!glob)
 		return ;
+	if (*tree && (*tree)->tokens)
+		free((*tree)->tokens);
 	if (!((*tree)->tokens = (char **)ft_memalloc(sizeof(char *) * (glob->len + 1))))
 		return ;
 	glob = glob->head;
 	while (glob)
 	{
 		tmp = glob->next;
-		(*tree)->tokens[i] = ft_strdups(glob->s);
+		(*tree)->tokens[i] = ft_strdupf(glob->s);
 		free(glob);
 		glob = tmp;
 		i++;
