@@ -6,26 +6,40 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:52:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:57:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 18:56:50 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static t_lexer_glob	*add_node_lexer_glob(t_lexer_glob *current, char *s)
+static t_lexer_glob	*add_node_lexer_glob(t_lexer_glob *current, char *s, int type)
 {
+	int				i;
 	t_lexer_glob	*new;
 
+	i = 0;
 	if (!(new = (t_lexer_glob *)ft_memalloc(sizeof(t_lexer_glob))))
 		return (NULL);
 	new->head = (current) ? current->head : new;
 	new->len = (current) ? current->len + 1 : 1;
 	(current) ? current->next = new : 0;
+	if (type == TOKEN_WORD && s)
+		while (s[i])
+		{
+			if (s[i] == '\\')
+			{
+				lexer_repatriate(&(*s), i, 1);
+				while (s[i] == '\\')
+					i++;
+			}
+			else
+				i++;
+		}
 	new->s = ft_strdups(s);
 	return (new);
 }
 
-static t_lexer_glob	*add_splitted_node_lexer_glob(t_lexer_glob *current, char *s)
+static t_lexer_glob	*add_splitted_node_lexer_glob(t_lexer_glob *current, char *s, int type)
 {
 	int			i;
 	char		**arr;
@@ -34,7 +48,7 @@ static t_lexer_glob	*add_splitted_node_lexer_glob(t_lexer_glob *current, char *s
 	arr = lexer_strsplit(s, ' ');
 	while (arr && arr[i])
 	{
-		current = add_node_lexer_glob(current, arr[i]);
+		current = add_node_lexer_glob(current, arr[i], type);
 		i++;
 	}
 	(arr) ? free (arr) : 0;
@@ -95,12 +109,12 @@ void				lexer_glob(t_token_tree **tree)
 			if (glob_conditions((*tree)->tokens[i]))
 				(*tree)->tokens[i] = sh_glob((*tree)->tokens[i]);
 			glob = (ft_strcmps(res, (*tree)->tokens[i]) == 0)
-				? add_node_lexer_glob(glob, (*tree)->tokens[i])
-				: add_splitted_node_lexer_glob(glob, (*tree)->tokens[i]);
+				? add_node_lexer_glob(glob, (*tree)->tokens[i], (*tree)->t_type[i])
+				: add_splitted_node_lexer_glob(glob, (*tree)->tokens[i], (*tree)->t_type[i]);
 			ft_strdel(&res);
 		}
 		else
-			glob = add_node_lexer_glob(glob, (*tree)->tokens[i]);
+			glob = add_node_lexer_glob(glob, (*tree)->tokens[i], (*tree)->t_type[i]);
 		i++;
 	}
 	return (lexer_glob_token_tree(tree, glob));

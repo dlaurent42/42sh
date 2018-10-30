@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 19:59:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:36:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:00:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char		*sh_dollar_expansion(char *str, t_env *env)
 			result = lexer_inject_dup(result, "\\", i);
 		i++;
 	}
-	ft_printf("Resulting expasion is: %s\n", result);
 	return (result);
 }
 
