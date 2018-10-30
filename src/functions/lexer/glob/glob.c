@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:26 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 14:40:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 16:18:01 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,6 @@ char	*sh_glob(char *str)
 	return (expansion);
 }
 
-// char	*lexer_glob(char *s, int start, int i)
-// {
-// 	int		stop;
-// 	char	*res;
-
-// 	stop = i;
-// 	while ((s[stop] != '\0' && s[stop] != ' ' && s[stop] != '<'
-// 	&& s[stop] != '>' && s[stop] != '|' && s[stop] != '&')
-// 	|| lexer_is_esc(s, stop))
-// 		stop++;
-// 	res = sh_glob(ft_strsub(s, start, stop - start));
-// 	lexer_repatriate(s, start, stop - start);
-// 	s = lexer_inject_dup(s, res, start);
-// 	ft_strdel(&res);
-// 	return (s);
-// }
-
-typedef struct			s_lexer_glob
-{
-	size_t				len;
-	char				*s;
-	struct s_lexer_glob	*head;
-	struct s_lexer_glob	*next;
-}						t_lexer_glob;
-
 t_lexer_glob	*add_node_lexer_glob(t_lexer_glob *current, char *s)
 {
 	t_lexer_glob	*new;
@@ -111,7 +86,6 @@ t_lexer_glob	*add_splitted_node_lexer_glob(t_lexer_glob *current, char *s)
 
 	i = 0;
 	arr = lexer_strsplit(s, ' ');
-	// ft_strdel(&s);
 	while (arr && arr[i])
 	{
 		current = add_node_lexer_glob(current, arr[i]);
@@ -129,7 +103,6 @@ void	lexer_glob_token_tree(t_token_tree **tree, t_lexer_glob *glob)
 	i = 0;
 	if (!glob)
 		return ;
-	//ft_memdel((void *)&((*tree)->tokens));
 	if (!((*tree)->tokens = (char **)ft_memalloc(sizeof(char *) * (glob->len + 1))))
 		return ;
 	glob = glob->head;
@@ -137,7 +110,6 @@ void	lexer_glob_token_tree(t_token_tree **tree, t_lexer_glob *glob)
 	{
 		tmp = glob->next;
 		(*tree)->tokens[i] = ft_strdups(glob->s);
-		//ft_strdel(&glob->s);
 		free(glob);
 		glob = tmp;
 		i++;
@@ -165,7 +137,6 @@ void	lexer_glob(t_token_tree **tree)
 		}
 		else
 			glob = add_node_lexer_glob(glob, (*tree)->tokens[i]);
-		//ft_strdel(&(*tree)->tokens[i]);
 		i++;
 	}
 	return (lexer_glob_token_tree(tree, glob));
