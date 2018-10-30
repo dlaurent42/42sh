@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:56:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 22:55:21 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -628,6 +628,7 @@ char					sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 														t_token_tree *tree);
 int						reorganise_tokens(t_token_tree **list);
 void					reorganise_command(t_token_tree *curent_command);
+void					reorganise_and_or(t_token_tree *curent_command);
 char					**arg_merge(char **tokens, int *blank_space);
 
 /*
