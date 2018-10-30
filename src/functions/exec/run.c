@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 23:47:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 14:03:46 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 		execve(cmd[0], cmd, env);
 	else
 	{
+		signal_catching();
 		pid = wait(&status);
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
