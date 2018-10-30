@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/28 21:32:55 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/10/30 15:08:57 by dhojt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC =	ft_atoi.c\
 		ft_putstr.c\
 		ft_putstr_fd.c\
 		ft_putstr_multi.c\
+		ft_realpath.c\
 		ft_strcasecmp.c\
 		ft_strcat.c\
 		ft_strchr.c\

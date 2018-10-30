@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:50:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 21:34:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/30 15:12:33 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define F_SPACE 3
 # define F_HASHTAG 4
 # define NB_FLAGS 5
+# define RL_BUFSIZE	1024
 
 # define S_H 1
 # define S_HH 2
@@ -58,6 +59,7 @@
 # include <unistd.h>
 # include <wchar.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct		s_list
 {
@@ -232,6 +234,11 @@ int					get_next_line(int const fd, char **line);
 ** options
 */
 unsigned long		options(char **argv);
+
+/*
+** sym_link
+*/
+bool				ft_realpath(char **path);
 
 /*
 ** 	~~~~~~~~~~~~~~~~~~~~ PRINTF FUNCTIONS ~~~~~~~~~~~~~~~~~~~~ **
