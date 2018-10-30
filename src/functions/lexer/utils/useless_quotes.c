@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:55:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		sh_remove_useless_quotes(char *str)
+void		lexer_remove_useless_quotes(char *str)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ void		sh_remove_useless_quotes(char *str)
 		if ((str[i] == '"' && str[i + 1] == '"')
 		|| (str[i] == '\'' && str[i + 1] == '\''))
 		{
-			lexer_repatriate(str, i, 2);
+			lexer_repatriate(&(*str), i, 2);
 			i = 0;
 		}
 		else
@@ -30,7 +30,7 @@ void		sh_remove_useless_quotes(char *str)
 	}
 	if (str[0] == '\'' || str[0] == '"')
 	{
-		lexer_repatriate(str, 0, 1);
+		lexer_repatriate(&(*str), 0, 1);
 		str[ft_strlens(str) - 1] = '\0';
 	}
 }

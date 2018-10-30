@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:52:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 18:56:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:39:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,7 @@ static t_lexer_glob	*add_node_lexer_glob(t_lexer_glob *current, char *s, int typ
 	new->head = (current) ? current->head : new;
 	new->len = (current) ? current->len + 1 : 1;
 	(current) ? current->next = new : 0;
-	if (type == TOKEN_WORD && s)
-		while (s[i])
-		{
-			if (s[i] == '\\')
-			{
-				lexer_repatriate(&(*s), i, 1);
-				while (s[i] == '\\')
-					i++;
-			}
-			else
-				i++;
-		}
-	new->s = ft_strdups(s);
+	new->s = ft_strdups(lexer_backslash(s, type));
 	return (new);
 }
 

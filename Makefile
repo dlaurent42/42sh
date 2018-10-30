@@ -103,12 +103,6 @@ SRC			=	shell.c														\
 				functions/lexer/glob/utils/range.c							\
 				functions/lexer/glob/utils/cbraces_strsplit.c				\
 				functions/lexer/glob/utils/pattern_strsplit.c				\
-				functions/lexer/handlers/backslash.c						\
-				functions/lexer/handlers/empty.c							\
-				functions/lexer/handlers/quotes.c							\
-				functions/lexer/handlers/useless_quotes.c					\
-				functions/lexer/handlers/tilde.c							\
-				functions/lexer/handlers/trim.c								\
 				functions/lexer/heredoc/add.c								\
 				functions/lexer/heredoc/all_closed.c						\
 				functions/lexer/heredoc/delete.c							\
@@ -126,6 +120,7 @@ SRC			=	shell.c														\
 				functions/lexer/tokenize/token_search.c						\
 				functions/lexer/tokenize/token_singlequote.c				\
 				functions/lexer/tokenize/token_merge.c						\
+				functions/lexer/utils/backslash.c							\
 				functions/lexer/utils/inject.c								\
 				functions/lexer/utils/is_empty.c							\
 				functions/lexer/utils/is_escape.c							\
@@ -135,6 +130,7 @@ SRC			=	shell.c														\
 				functions/lexer/utils/repatriate.c							\
 				functions/lexer/utils/strcountif_esc.c						\
 				functions/lexer/utils/strsplit.c							\
+				functions/lexer/utils/useless_quotes.c						\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
@@ -336,7 +332,6 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/parse
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/pattern/paths
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/utils
-				@mkdir -p $(OBJ_DIR)/functions/lexer/handlers
 				@mkdir -p $(OBJ_DIR)/functions/lexer/heredoc
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tilde
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize

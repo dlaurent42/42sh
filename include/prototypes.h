@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 16:17:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:56:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,8 @@ const t_token			*lexer_lexic_singletone(void);
 /*
 ** functions - lexer - utils
 */
+void					lexer_remove_useless_quotes(char *str);
+char					*lexer_backslash(char *s, int type);
 void					lexer_inject_cpy(char *str, char *injection, int i);
 char					*lexer_inject_dup(char *str, char *injection, int i);
 bool					lexer_is_empty(char *str);

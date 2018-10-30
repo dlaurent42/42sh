@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 20:40:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 16:59:27 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/10/30 19:39:16 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/10/30 19:49:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	sh_command_replace_backslash_octal(char *s, int i)
+static char	*lexer_replace_backslash_octal(char *s, int i)
 {
 	int	j;
 	int	val;
@@ -20,25 +20,24 @@ static void	sh_command_replace_backslash_octal(char *s, int i)
 	j = i + 1;
 	val = 0;
 	if (!ft_isdigit(s[j]))
-		return ;
+		return (s);
 	while (ft_isdigit(s[j]) && j <= i + 3)
 	{
 		val = val * 8 + (s[j] - 48);
 		j++;
 	}
 	if (val > 127)
-		return ;
+		return (s);
 	s[i] = val;
-	lexer_repatriate(s, i + 1, j - i);
+	lexer_repatriate(&(*s), i + 1, j - i);
+	return (s);
 }
 
-static bool	sh_command_replace_backslah(char *s, int i)
+static char	*lexer_replace_backslash(char *s, int i)
 {
 	bool	is_escaped;
 
 	is_escaped = FALSE;
-	if (s[i + 1] == '\0')
-		return (FALSE);
 	if (s[i + 1] == '\\' && (is_escaped = TRUE))
 		s[i] = '\\';
 	else if (s[i + 1] == 'a' && (is_escaped = TRUE))
@@ -55,50 +54,25 @@ static bool	sh_command_replace_backslah(char *s, int i)
 		s[i] = '\t';
 	else if (s[i + 1] == 'v' && (is_escaped = TRUE))
 		s[i] = '\v';
-	(is_escaped)
-		? lexer_repatriate(s, i + 1, 1)
-		: sh_command_replace_backslash_octal(s, i);
-	return (TRUE);
+	else if (ft_isdigit(s[i + 1]))
+		s = lexer_replace_backslash_octal(s, i);
+	(is_escaped) ? lexer_repatriate(&(*s), i + 1, 1) : 0;
+	return (s);
 }
 
-static void	sh_command_get_isquote(char *s, int i, char *dq, char *sq)
-{
-	if (s[i] == '"' && i && s[i - 1] == '=' && !(*dq || *sq))
-		*dq = 2;
-	else if (s[i] == '\'' && i && s[i - 1] == '=' && !(*dq || *sq))
-		*sq = 2;
-	if (s[i] == '"' && !(*dq || *sq))
-		*dq = 1;
-	else if (s[i] == '\'' && !(*dq || *sq))
-		*sq = 1;
-	else if (s[i] == '"' && (*dq || *sq))
-		*dq = 0;
-	else if (s[i] == '"' && (*dq || *sq))
-		*sq = 0;
-}
-
-bool		sh_command_parse_backslash(char *s)
+char		*lexer_backslash(char *s, int type)
 {
 	int		i;
-	char	in_dquote;
-	char	in_squote;
 
 	i = 0;
-	in_dquote = 0;
-	in_squote = 0;
-	while (s[i])
+	while (s && s[i])
 	{
-		sh_command_get_isquote(s, i, &in_dquote, &in_squote);
-		if (s[i] == '\\' && (in_squote == 1 || in_dquote == 1))
-		{
-			if (!sh_command_replace_backslah(s, i))
-				return (FALSE);
-		}
-		else if (s[i] == '\\' && !s[i + 1] && !in_squote && !in_dquote)
-			return (FALSE);
-		else if (s[i] == '\\' && !in_squote && !in_dquote && (s[i] = s[i + 1]))
-			lexer_repatriate(s, i + 1, 1);
-		i += (s[i]) ? 1 : 0;
+		if (s[i] == '\\' && s[i + 1] && type == TOKEN_WORD)
+			lexer_repatriate(&(*s), i, 1);
+		if (s[i] == '\\' && s[i + 1]
+		&& (type == TOKEN_SINGLEQUOTE || type == TOKEN_DOUBLEQUOTE))
+			s = lexer_replace_backslash(s, i);
+		i++;
 	}
-	return (TRUE);
+	return (s);
 }

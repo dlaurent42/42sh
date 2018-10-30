@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:06:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/30 19:57:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 		arr[0] = ft_strdups(obj->path);
 	}
 	while (arr[++i])
-		sh_remove_useless_quotes(arr[i]);
+		lexer_remove_useless_quotes(arr[i]);
 	return (sh_command_dispatch(sh, env, arr));
 }
 
