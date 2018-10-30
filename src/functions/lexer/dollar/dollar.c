@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 19:59:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:40:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 17:14:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ char		*sh_dollar_expansion(char *str, t_env *env)
 	char	*result;
 
 	expanded = NULL;
+	ft_printf("strsub is : %s\n", str);
 	if (!str || str[0] != '$' || !str[1] || !env)
 		return (str);
 	expanded = (str[1] == '{')
 		? ft_strsub(str, 2, ft_strlens(str) - 3)
 		: ft_strdups(str + 1);
+	ft_printf("expanded is : %s\n", str);
 	result = ft_strdups(env_search(env, expanded));
 	ft_strdel(&expanded);
-	if (!result)
-		return (str);
 	ft_strdel(&str);
+	if (!result)
+		return (ft_strdups(""));
 	return (result);
 }
 
@@ -40,8 +42,11 @@ char		*lexer_expand(t_env *env, char *s, int start)
 	if (!s[stop])
 		return (s);
 	if (s[stop] == '{')
+	{
 		while ((s[stop] != '\0' && s[stop] != '}') || lexer_is_esc(s, stop))
 			stop++;
+		stop++;
+	}
 	else
 		while ((s[stop] != '\0' && s[stop] != ' ' && s[stop] != '<'
 		&& s[stop] != '>' && s[stop] != '|' && s[stop] != '&')
