@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 21:51:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 22:28:14 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	sh_last_char(t_shell *sh)
 	sh->cursor.y--;
 	sh->cursor.x--;
 	tcsetattr(ttyfd, TCSANOW, &term[0]);
-	(sh->cursor.x) ? ft_putchar('\n') : 0;
+	(sh->cursor.x) ? ft_putendl(COL_WHIGHLIGHT"%"COL_CLR) : 0;
 	close(ttyfd);
 }
 

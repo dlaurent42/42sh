@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:25:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 22:28:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@
 # define COL_CLR		"\x1b[0m"
 # define COL_SELCT		"\x1b[7;37;40m"
 # define COL_FOLDER		"\x1b[1;32;40m"
+# define COL_WHIGHLIGHT	"\e[7;37;40m"
 
 /*
 ** autocompletion
