@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:02:16 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/30 17:06:05 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,10 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		i++;
 	}
 	arg = arg_merge(arg, tree->blanks);
+	ft_deltab(tree->tokens);
 	tree->tokens = arg;
-	ret = sh_command_found(sh, env, bin, &arg[0]);
+	lexer_glob(&tree);
+	ret = sh_command_found(sh, env, bin, &tree->tokens[0]);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/27 22:32:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/29 16:48:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void		sh_multilines(t_shell *sh, char status)
 	sh->modes.multiline = TRUE;
 	sh_multilines_prompt(sh, status);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
-	sh->buffer.display_len += sh->buffer.dshift;
-	sh->buffer.unicode_len += sh->buffer.ushift;
+	if (sh->buffer.unicode_len < ARG_MAX)
+		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
+	sh->buffer.display_len += sh->buffer.dshift + 1;
+	sh->buffer.unicode_len += sh->buffer.ushift + 1;
 	sh->buffer.dshift = sh->buffer.display_len;
 	sh->buffer.ushift = sh->buffer.unicode_len;
 	sh->buffer.display_len = 0;
