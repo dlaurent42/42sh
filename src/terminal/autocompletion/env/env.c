@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 13:00:52 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/26 13:01:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/30 16:48:42 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ static char			*get_env_var(t_shell *sh, char *ptr_to_dollar, int len)
 	return (env);
 }
 
+static void			print_env_str(t_shell *sh, char *env)
+{
+	char			*expanded;
+
+	if ((expanded = auto_get_escaped_str(env)))
+	{
+		sh_print_str(sh, expanded);
+		free(expanded);
+	}
+	else
+		sh_print_str(sh, env);
+}
+
 bool				auto_env(t_shell *sh)
 {
 	int				len;
@@ -58,7 +71,7 @@ bool				auto_env(t_shell *sh)
 		sh_move_right(sh);
 	while (len--)
 		sh_delete_current_char(sh);
-	sh_print_str(sh, env);
+	print_env_str(sh, env);
 	sh_move_end(sh);
 	return (true);
 }
