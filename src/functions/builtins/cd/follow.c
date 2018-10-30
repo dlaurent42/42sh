@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 11:44:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 16:11:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 	return (path);
 }
 
+static char	*sh_cd_get_real_path_pwd(t_shell *sh, t_env *env, char *param)
+{
+	char	*new;
+
+	(void)sh;
+	new = ft_strjoins("/", param + sh_cd_remove_troll(param));
+	new = ft_strjoinf(env_search(env, "PWD"), new, 2);
+	new = sh_cd_parse_path(new);
+	return (new);
+}
+
 static void	sh_cd_follow_insert_env(t_shell *sh, t_env *env, char *path)
 {
 	if ((env_search(env, "OLDPWD") || env->count + 1 < env->size)
@@ -55,7 +66,9 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 	char	*rpath;
 	t_stat	lstats;
 
-	path = sh_cd_get_real_path(sh, env, sh_cd_remove_last_slash(value));
+	path = (value && value[0] != '/' && env_search(env, "PWD"))
+		? sh_cd_get_real_path_pwd(sh, env, sh_cd_remove_last_slash(value))
+		: sh_cd_get_real_path(sh, env, sh_cd_remove_last_slash(value));
 	if (ft_strlens(path) >= PATH_MAX)
 		return (sh_cd_error(value, path, 7));
 	if (!path || access(path, F_OK) == -1 || lstat(path, &lstats) == -1)
