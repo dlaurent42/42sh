@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 19:42:14 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/30 22:45:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char			**get_new_token_array(t_token_tree *current_command,
 	char			**tokens;
 	char			**tokens_head;
 	char			**track_tokens;
+	t_token_tree	*tmp;
 	t_token_tree	*track_command;
 
 	if (!(tokens = (char **)ft_memalloc(sizeof(char *) * (size + 1))))
@@ -33,9 +34,14 @@ static char			**get_new_token_array(t_token_tree *current_command,
 			tokens++;
 			track_tokens++;
 		}
+		tmp = track_command;
 		track_command = track_command->right;
+		free(tmp->tokens);
+		if (tmp != current_command)
+			free(tmp);
 	}
-	free(current_command->tokens);
+	//free(current_command->tokens);
+	current_command->right = track_command;
 	return (tokens_head);
 }
 
@@ -96,5 +102,23 @@ int					reorganise_tokens(t_token_tree **list)
 			return (STATUS_ERR);
 		move_to_next_command(&current_command);
 	}
+ 	//////AFTER
+ 	//START
+	ft_printf("\n----END REORGANISE----\n");
+ 	current_command = *list;
+	char **tokens;
+	int i = 0;
+ 	while (current_command)
+ 	{
+		tokens = current_command->tokens;
+		ft_printf("TOKEN %2d\n", i++);
+		while (*tokens)
+		{
+ 			ft_printf("END[%s]\n", *tokens);
+			tokens++;
+		}
+ 		current_command = current_command->right;
+ 	}
+ 	//END
 	return (STATUS_OK);
 }
