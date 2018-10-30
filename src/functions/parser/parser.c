@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 16:48:53 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/30 14:38:39 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,35 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
 		i++;
 	}
+	i = 0;
+	ft_putstr_fd("Before merge:\n", 2);
+	while (tree->tokens[i])
+	{
+		ft_putstr_fd("\tToken [", 2);
+		ft_putnbr_fd(i, 2);
+		ft_putstr_fd("]: ", 2);
+		ft_putstr_fd(tree->tokens[i], 2);
+		ft_putstr_fd(" (", 2);
+		ft_putnbr_fd(tree->t_type[i], 2);
+		ft_putstr_fd(")\n", 2);
+		i++;
+	}
 	arg = arg_merge(arg, tree->blanks);
 	tree->tokens = arg;
+	ft_putstr_fd("After merge:\n", 2);
+	i = 0;
+	while (tree->tokens[i])
+	{
+		ft_putstr_fd("\tToken [", 2);
+		ft_putnbr_fd(i, 2);
+		ft_putstr_fd("]: ", 2);
+		ft_putstr_fd(tree->tokens[i], 2);
+		ft_putstr_fd(" (", 2);
+		ft_putnbr_fd(tree->t_type[i], 2);
+		ft_putstr_fd(")\n", 2);
+		i++;
+	}
+	lexer_glob(&tree);
 	ret = sh_command_found(sh, env, bin, &arg[0]);
 	return (ret);
 }
