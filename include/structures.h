@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 17:27:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/30 16:18:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,14 @@ typedef struct			s_glob
 	char				**strsplit;
 	t_filesystem		**fs;
 }						t_glob;
+
+typedef struct			s_lexer_glob
+{
+	size_t				len;
+	char				*s;
+	struct s_lexer_glob	*head;
+	struct s_lexer_glob	*next;
+}						t_lexer_glob;
 
 typedef struct			s_data
 {
