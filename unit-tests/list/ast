@@ -29,7 +29,10 @@ TEST stupid stuff with file descriptors and test it's behavior
 	$> echo lol | wc -l | xargs echo; echo lol | wc -l | xargs echo | cat -e
 	$> echo "error" >&2 && echo "msg"; echo "check stderr restored" >&2; echo "check stdout restored"
 	$> ls -a ; ls | cat | cat -e ; base64 /dev/urandom | head -c 1000 | grep 42 | wc -l && ls || ls -la ; ls ; ls -a ; ls | cat | cat -e ; base64 /dev/urandom | head -c 1000 | grep 42 | wc -l && ls || ls -la ; ls
-	$>
+	$> pwd > file && pwd >> file || ls | cat && ls | cat >> file || ls
+
+		Rreorganiser output should be :        (pwd > file) && (pwd >> file) && (ls | cat >> file) || (ls | cat) || (ls)
+
 	$>
 	$>
 	$>
