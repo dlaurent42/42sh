@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:55:16 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/31 13:37:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 14:03:57 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static t_token_tree	*insert_token_at_correct_place(
 	current_command = current_command->right;
 	while (current_command
 			&& current_command->right
-			&& current_command->right->type == 0
-			&& current_command->right->type == 1
-			&& current_command->right->type == 2
-			&& current_command->right->type == 3
-			&& current_command->right->type == 4)
+			&& (current_command->right->type == 0
+			|| current_command->right->type == 1
+			|| current_command->right->type == 2
+			|| current_command->right->type == 3
+			|| current_command->right->type == 4))
 		current_command = current_command->right;
 	current_command->right = placeholder;
 	while (current_command && current_command->right
