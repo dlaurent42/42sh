@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 11:21:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 22:30:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ char					sh_command_run(
 							t_env *env,
 							t_bin *bin,
 							char **str);
+char					sh_command_check_lexer(t_shell *sh, t_lexer *lexer);
+char					sh_command_run_lexer(
+							t_shell *sh,
+							t_env *env,
+							t_lexer *lexer,
+							char **cmd);
+char					sh_command_run_tree(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							t_lexer lexer);
 char					*sh_command_check(t_env *env, char *s, int type);
 char					*sh_replace_aliases(t_env *alias, char *s);
 
