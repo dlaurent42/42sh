@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:57:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 17:35:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	if (!(arg = sh_command_build(str)))
 		return (ft_strdel(&str));
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
-		ft_realpath(&arg[0]);
+		if (!ft_realpath(&arg[0]))
+			return ((void)sh_command_err(arg[0], 1));
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
 	if (arg)
@@ -90,7 +91,8 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	i = 0;
 	arg = tree->tokens;
 	if (arg && arg[0] && arg[0][0] == '.' && arg[0][1] == '/')
-		ft_realpath(&arg[0]);
+		if (!ft_realpath(&arg[0]))
+			return (sh_command_err(arg[0], 1));
 	while (arg[i])
 	{
 		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
