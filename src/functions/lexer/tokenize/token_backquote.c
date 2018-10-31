@@ -6,25 +6,23 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:19:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:10:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 15:05:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	lexer_token_backquote(t_lexer *lexer, const char **cmd)
+char	lexer_token_backquote(t_lexer *lexer, char *cmd, int *i, int *j)
 {
-	int i;
-
-	i = 0;
-	*cmd = *cmd + 1;
-	while (cmd[0][i] != '`')
+	*i = *i + 1;
+	while (cmd[*i] != '`' && !lexer_is_esc(cmd, *i))
 	{
-		if (cmd[0][i] == '\0')
+		if (cmd[*i] == '\0')
 			return (STATUS_BQUOTE);
-		++i;
+		*i = *i + 1;
 	}
-	lexer_token_add(lexer, *cmd, i, TOKEN_BACKQUOTE);
-	*cmd = *cmd + i + 1;
+	*j = *j + 1;
+	lexer_token_add(lexer, cmd + *j, *i - *j, TOKEN_BACKQUOTE);
+	*i = *i + 1;
 	return (STATUS_OK);
 }

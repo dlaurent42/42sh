@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:30:52 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:55:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 14:59:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,5 @@ void		lexer_remove_useless_quotes(char *str)
 		}
 		else
 			i++;
-	}
-	if (str[0] == '\'' || str[0] == '"')
-	{
-		lexer_repatriate(&(*str), 0, 1);
-		str[ft_strlens(str) - 1] = '\0';
 	}
 }

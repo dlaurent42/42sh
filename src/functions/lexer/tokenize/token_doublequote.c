@@ -6,25 +6,23 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:12:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:10:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 15:06:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char	lexer_token_doublequote(t_lexer *lexer, const char **cmd)
+char	lexer_token_doublequote(t_lexer *lexer, char *cmd, int *i, int *j)
 {
-	int	i;
-
-	i = 0;
-	*cmd = *cmd + 1;
-	while (cmd[0][i] != '\"')
+	*i = *i + 1;
+	while (cmd[*i] != '\"' && !lexer_is_esc(cmd, *i))
 	{
-		if (cmd[0][i] == '\0')
+		if (cmd[*i] == '\0')
 			return (STATUS_DQUOTE);
-		++i;
+		*i = *i + 1;
 	}
-	lexer_token_add(lexer, *cmd, i, TOKEN_DOUBLEQUOTE);
-	*cmd = *cmd + i + 1;
+	*j = *j + 1;
+	lexer_token_add(lexer, cmd + *j, *i - *j, TOKEN_DOUBLEQUOTE);
+	*i = *i + 1;
 	return (STATUS_OK);
 }

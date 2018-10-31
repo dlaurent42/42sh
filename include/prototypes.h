@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:56:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 11:21:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,18 +307,30 @@ char					*lexer_tilde(t_env *env, char *s, int i);
 ** functions - lexer - tokenize
 */
 char					lexer_entry(t_lexer *lexer, char *cmd);
-char					lexer_fill(t_lexer *lexer, const char *cmd);
+char					lexer_fill(t_lexer *lexer, char *cmd);
 void					lexer_token_add(
 							t_lexer *lexer,
-							const char *src,
+							char *src,
 							size_t size,
 							t_token_type type);
 char					lexer_delete(t_lexer *lexer, char status);
 char					lexer_token_merge(t_lexer *lexer, size_t i);
-char					lexer_token_singlequote(t_lexer *l, const char **cmd);
-char					lexer_token_doublequote(t_lexer *l, const char **cmd);
-char					lexer_token_backquote(t_lexer *lexer, const char **cmd);
-t_token					*lexer_token_search(const char *cmd);
+char					lexer_token_singlequote(
+							t_lexer *l,
+							char *cmd,
+							int *i,
+							int *j);
+char					lexer_token_doublequote(
+							t_lexer *lexer,
+							char *cmd,
+							int *i,
+							int *j);
+char					lexer_token_backquote(
+							t_lexer *lexer,
+							char *cmd,
+							int *i,
+							int *j);
+t_token					*lexer_token_search(char *cmd);
 const t_token			*lexer_lexic_singletone(void);
 
 /*

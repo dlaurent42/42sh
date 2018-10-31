@@ -6,80 +6,74 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 18:56:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 15:21:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	handle_quotes(t_lexer *lexer, const char **cmd, const char **prev)
+static char	handle_quotes(t_lexer *lexer, char *cmd, int *i, int *j)
 {
-	char status;
+	char	status;
 
 	status = STATUS_OK;
-	if (**cmd == '\"')
+	if (!(cmd[*i] == '\"' || cmd[*i] == '\'' || cmd[*i] == '`')
+	|| lexer_is_esc(cmd, *i))
+		return (status);
+	if (*j != *i)
 	{
-		if (*prev != *cmd)
-			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_WORD);
-		status = lexer_token_doublequote(lexer, cmd);
-		*prev = &(**cmd);
+		lexer_token_add(lexer, cmd + *j, *i - *j, TOKEN_WORD);
+		*j = *i;
 	}
-	else if (**cmd == '\'')
-	{
-		if (*prev != *cmd)
-			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_WORD);
-		status = lexer_token_singlequote(lexer, cmd);
-		*prev = &(**cmd);
-	}
-	else if (**cmd == '`')
-	{
-		if (prev != cmd)
-			lexer_token_add(lexer, *prev, *cmd - *prev, TOKEN_WORD);
-		status = lexer_token_backquote(lexer, cmd);
-		*prev = &(**cmd);
-	}
+	if (cmd[*i] == '\"' && !lexer_is_esc(cmd, *i))
+		status = lexer_token_doublequote(lexer, cmd, i, j);
+	else if (cmd[*i] == '\'' && !lexer_is_esc(cmd, *i))
+		status = lexer_token_singlequote(lexer, cmd, i, j);
+	else if (cmd[*i] == '`' && !lexer_is_esc(cmd, *i))
+		status = lexer_token_backquote(lexer, cmd, i, j);
+	*j = *i;
 	return (status);
 }
 
 static void	lexer_handle_match(
-	t_token *match, t_lexer *lexer, const char *cmd, const char *prev)
+	t_token *match, t_lexer *lexer, char *cmd, char *prev)
 {
 	if (match->type == TOKEN_AGGREG)
 		lexer_token_add(
 			lexer, prev, cmd - prev + match->size, match->type);
 	else
 	{
-		if (prev != cmd)
+		if (cmd != prev)
 			lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
 		lexer_token_add(lexer, match->id, match->size, match->type);
 	}
 }
 
-char		lexer_fill(t_lexer *lexer, const char *cmd)
+char		lexer_fill(t_lexer *lexer, char *cmd)
 {
+	int			i;
+	int			j;
 	t_token		*match;
 	char		status;
-	const char	*prev;
 
-	match = NULL;
-	prev = cmd;
+	i = 0;
+	j = 0;
 	status = STATUS_OK;
-	while (*cmd != '\0')
-	{
-		if ((match = lexer_token_search(cmd)))
+	while (cmd && cmd[i])
+		if ((match = lexer_token_search(cmd + i)))
 		{
-			lexer_handle_match(match, lexer, cmd, prev);
-			cmd += match->size;
-			prev = cmd;
+			lexer_handle_match(match, lexer, cmd + i, cmd + j);
+			i += match->size;
+			j = i;
 		}
-		else if (*cmd == '\"' || *cmd == '\'' || *cmd == '`')
+		else if ((cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '`')
+		&& !lexer_is_esc(cmd, i))
 		{
-			if ((status = handle_quotes(lexer, &cmd, &prev)) != STATUS_OK)
+			if ((status = handle_quotes(lexer, cmd, &i, &j)) != STATUS_OK)
 				return (status);
 		}
 		else
-			++cmd;
-	}
-	(prev != cmd) ? lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD) : 0;
+			i++;
+	(i != j) ? lexer_token_add(lexer, cmd + j, i - j, TOKEN_WORD) : 0;
 	return (status);
 }

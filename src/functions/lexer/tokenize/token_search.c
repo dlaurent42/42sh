@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:14:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/27 21:45:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 11:43:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_token	*lexer_token_search(const char *cmd)
+t_token	*lexer_token_search(char *cmd)
 {
 	const t_token *lexic;
 
@@ -20,7 +20,7 @@ t_token	*lexer_token_search(const char *cmd)
 	if (cmd && lexic)
 		while (lexic->id)
 		{
-			if (ft_strncmp(cmd, lexic->id, lexic->size) == 0)
+			if (ft_strncmps(cmd, lexic->id, lexic->size) == 0)
 				return ((t_token *)lexic);
 			++lexic;
 		}
