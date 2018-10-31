@@ -6,15 +6,16 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 17:36:26 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/31 13:54:16 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** 6 - ;
-** 5 - || or &&
+** 7 - ;
+** 6 - ||
+** 5 - &&
 ** 4 - |
 ** 3 - >&
 ** 2 - < or <<
@@ -40,9 +41,9 @@ int		execute_tree(t_shell *sh, t_token_tree *tree)
 		ret = execute_fd_aggr(sh, tree);
 	else if (tree->type == 4)
 		ret = execute_pipe(sh, tree);
-	else if (tree->type == 5)
+	else if (tree->type == 5 || tree->type == 6)
 		ret = execute_conditions(sh, tree);
-	else if (tree->type == 6)
+	else if (tree->type == 7)
 		ret = execute_semicolon(sh, tree);
 	if (tree->type == 0)
 		g_sh->exe = ret;
