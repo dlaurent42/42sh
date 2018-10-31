@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/30 10:49:11 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/31 13:36:32 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
 	if ((fd[0] == 0 && !ft_strcmp(front, "0")) || (*back != '-' && fd[1] == 0))
+	{
+		ft_strdel(&back);	
 		return (error_file_descriptor());
+	}
 	fd[2] = dup(fd[0]);
 	(*back != '-') ? (dup2(fd[1], fd[0])) : (close(fd[0]));
 	ret = execute_tree(sh, tree->left);
