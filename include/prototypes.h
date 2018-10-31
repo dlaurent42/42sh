@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 11:21:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:30:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int						error_fork(void);
 char					error_execution_tree(void);
 char					error_execution_file(t_shell *sh, char *filename);
 char					error_file_permissions(t_shell *sh, char *filename);
+char					parse_error(char *err);
 
 /*
 ** functions
