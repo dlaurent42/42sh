@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 22:58:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 13:40:37 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static char			**squash_type_zero(t_token_tree *current_command)
 	return (current_command->tokens);
 }
 
+static void			move_past_next_semicolon(t_token_tree **current_command)
+{
+	while (*current_command && (*current_command)->type != 7)
+		*current_command = (*current_command)->right;
+	while (*current_command && (*current_command)->type == 7)
+		*current_command = (*current_command)->right;
+}
+
 static bool			token_is_boundry(t_token_tree *token)
 {
 	if (!token
@@ -103,6 +111,12 @@ int					reorganise_tokens(t_token_tree **list)
 			return (STATUS_ERR);
 		move_to_next_command(&current_command);
 	}
+	current_command = *list;
+	while (current_command)
+	{
+		reorganise_and_or(current_command);
+		move_past_next_semicolon(&current_command);
+	}
  	//////AFTER
  	//START
 	ft_printf("\n----END REORGANISE----\n");
@@ -112,10 +126,10 @@ int					reorganise_tokens(t_token_tree **list)
  	while (current_command)
  	{
 		tokens = current_command->tokens;
-		ft_printf("TOKEN %2d\n", i++);
+		ft_printf("TOKEN %2d (type %d)\n", i++, current_command->type);
 		while (*tokens)
 		{
- 			ft_printf("END[%s]\n", *tokens);
+ 			ft_printf("\t[%s]\n", *tokens);
 			tokens++;
 		}
  		current_command = current_command->right;
