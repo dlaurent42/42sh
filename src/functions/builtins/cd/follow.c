@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 17:05:07 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 10:39:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ static void	sh_cd_follow_insert_env(t_shell *sh, t_env *env, char *path)
 		env_insert(sh, env, "PWD", path);
 }
 
+static char	sh_cd_follow_del_and_return(
+	char *rpath, char *value, char *path, char status)
+{
+	ft_strdel(&rpath);
+	return (sh_cd_error(value, path, status));
+}
+
 char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 {
 	char	*path;
@@ -78,10 +85,7 @@ char		sh_cd_follow(t_shell *sh, t_env *env, char *value, char dash)
 	if (!S_ISLNK(lstats.st_mode) && dash)
 		return (sh_cd_nofollow_dash(sh, env, value, path));
 	if (ft_strcmps(rpath = realpath(path, NULL), path) == 0)
-	{
-		ft_strdel(&rpath);
-		return (sh_cd_error(value, path, 2));
-	}
+		return (sh_cd_follow_del_and_return(rpath, value, path, 2));
 	ft_strdel(&rpath);
 	if (chdir(path) == -1)
 		return (sh_cd_error(value, path, 3));
