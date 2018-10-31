@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token_merge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 14:10:48 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/31 13:48:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/31 21:14:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char lexer_token_merge(t_lexer *lexer, size_t i)
+char	lexer_token_merge(t_lexer *lexer, size_t i)
 {
-
 	if ((i + 1) >= lexer->size)
 		return (STATUS_ERR);
 	lexer->tokens[i].size += ft_strlens(lexer->tokens[i + 1].id);

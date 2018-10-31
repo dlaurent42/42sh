@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_descriptor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 13:36:32 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:14:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 	fd[1] = ft_atoi(back);
 	if ((fd[0] == 0 && !ft_strcmp(front, "0")) || (*back != '-' && fd[1] == 0))
 	{
-		ft_strdel(&back);	
+		ft_strdel(&back);
 		return (error_file_descriptor());
 	}
 	fd[2] = dup(fd[0]);
