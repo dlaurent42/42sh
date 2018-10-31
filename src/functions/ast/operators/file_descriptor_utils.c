@@ -6,15 +6,18 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 16:24:19 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/30 09:34:35 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:55:10 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		error_file_descriptor(void)
+char		error_file_descriptor(char **back)
 {
-	ft_putendl_fd("error: bad file descriptor", 2);
+	ft_putstr_fd("sh: ", 2);
+	ft_putstr_fd(*back, 2);
+	ft_putendl_fd(": bad file descriptor", 2);
+	ft_strdel(back);
 	return (STATUS_ERR);
 }
 

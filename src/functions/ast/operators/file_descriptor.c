@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_descriptor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 21:14:38 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:56:23 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 		error_malloc_reader(sh, "token");
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
-	if ((fd[0] == 0 && !ft_strcmp(front, "0")) || (*back != '-' && fd[1] == 0))
-	{
-		ft_strdel(&back);
-		return (error_file_descriptor());
-	}
+	if ((*back != '-' && fd[1] > 2))
+		return (error_file_descriptor(&back));
+	(fd[1] < 0) ? fd[1] = 0 : (0);
 	fd[2] = dup(fd[0]);
-	(*back != '-') ? (dup2(fd[1], fd[0])) : (close(fd[0]));
+	(*back != '-' && (fd[1] != 0 || ft_strcmp(front, "0"))) ?
+		(dup2(fd[1], fd[0])) : (close(fd[0]));
 	ret = execute_tree(sh, tree->left);
 	dup2(fd[2], fd[0]);
 	close(fd[2]);

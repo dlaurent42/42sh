@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 21:30:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:57:55 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -659,6 +659,6 @@ char					execute_fd_aggr(t_shell *sh, t_token_tree *tree);
 char					*get_front_descriptor(char *cmd, size_t len,
 													int closed);
 char					*get_back_descriptor(char *cmd);
-char					error_file_descriptor(void);
+char					error_file_descriptor(char **back);
 
 #endif
