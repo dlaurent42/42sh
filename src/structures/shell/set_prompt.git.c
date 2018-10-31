@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 11:39:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 10:24:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,23 @@ static char	*sh_get_git_branch_name(char *location)
 {
 	int		fd;
 	char	*line;
+	char	*position;
 
 	line = NULL;
-	if (!(location = ft_strcat(location, GIT_HEAD)))
+	if (!(position = ft_strjoins(location, GIT_HEAD)))
 		return (NULL);
-	if ((fd = open(location, O_RDONLY)) == -1)
+	if ((fd = open(position, O_RDONLY)) == -1)
+	{
+		ft_strdel(&position);
 		return (NULL);
+	}
 	if (get_next_line(fd, &line) == -1)
+	{
+		ft_strdel(&position);
 		return (NULL);
+	}
 	close(fd);
+	ft_strdel(&position);
 	return (line);
 }
 

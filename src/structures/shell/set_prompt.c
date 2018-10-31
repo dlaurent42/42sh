@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 15:42:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 10:34:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,26 @@ static void	sh_set_prompt_properties(t_shell *sh, unsigned char has_git)
 
 static void	sh_set_prompt_location(t_shell *sh)
 {
-	char	*curr_location;
+	size_t		len;
+	char		*curr_location;
 
-	curr_location = ft_strdups(sh->prompt.location);
-	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
-	if (env_search(sh->env, "PWD"))
+	curr_location = NULL;
+	if (sh->env && env_search(sh->env, "PWD"))
 	{
+		if (sh->prompt.location
+		&& ft_strcmps(env_search(sh->env, "PWD"), sh->prompt.location) == 0)
+			return ;
+		ft_strdel(&sh->prompt.location);
 		sh->prompt.location = ft_strdups(env_search(sh->env, "PWD"));
-		ft_strdel(&curr_location);
 	}
-	else if (!(sh->prompt.location = getcwd(sh->prompt.location, PATH_MAX)))
+	else if ((curr_location = getcwd(curr_location, PATH_MAX)))
+	{
+		ft_strdel(&sh->prompt.location);
 		sh->prompt.location = curr_location;
-	else
-		ft_strdel(&curr_location);
+	}
+	len = ft_strlens(sh->prompt.location);
+	while (sh->prompt.location[--len] == '/')
+		sh->prompt.location[len] = '\0';
 }
 
 void		sh_set_prompt(t_shell *sh)
