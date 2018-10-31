@@ -23,6 +23,7 @@ SRC			=	shell.c														\
 				functions/ast/reorganiser.c									\
 				functions/ast/reorganise_command.c							\
 				functions/ast/reorganise_and_or.c							\
+				functions/ast/reorganise_squashing.c						\
 				functions/ast/arg_merge.c									\
 				functions/ast/operators/semicolon.c							\
 				functions/ast/operators/conditions.c						\

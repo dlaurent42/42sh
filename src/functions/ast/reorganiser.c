@@ -6,71 +6,11 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 13:40:37 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 14:20:08 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static char			**get_new_token_array(t_token_tree *current_command,
-		int size)
-{
-	char			**tokens;
-	char			**tokens_head;
-	char			**track_tokens;
-	t_token_tree	*tmp;
-	t_token_tree	*track_command;
-
-	if (!(tokens = (char **)ft_memalloc(sizeof(char *) * (size + 1))))
-		return (NULL);
-	tokens_head = tokens;
-	track_command = current_command;
-	while (track_command && track_command->type == 0)
-	{
-		track_tokens = track_command->tokens;
-		while (*track_tokens)
-		{
-			*tokens = *track_tokens;
-			tokens++;
-			track_tokens++;
-		}
-		tmp = track_command;
-		track_command = track_command->right;
-		free(tmp->tokens);
-		if (tmp != current_command)
-			free(tmp);
-	}
-	//free(current_command->tokens);
-	current_command->right = track_command;
-	return (tokens_head);
-}
-
-static char			**squash_type_zero(t_token_tree *current_command)
-{
-	int				len;
-	int				size;
-	char			**track_tokens;
-	t_token_tree	*track;
-
-	len = 0;
-	size = 0;
-	track = current_command;
-	while (track && track->type == 0 && ++len)
-		track = track->right;
-	if (len > 1)
-	{
-		track = current_command;
-		while (track && track->type == 0)
-		{
-			track_tokens = track->tokens;
-			while (*track_tokens && ++size)
-				track_tokens++;
-			track = track->right;
-		}
-		return (get_new_token_array(current_command, size));
-	}
-	return (current_command->tokens);
-}
 
 static void			move_past_next_semicolon(t_token_tree **current_command)
 {
@@ -117,23 +57,5 @@ int					reorganise_tokens(t_token_tree **list)
 		reorganise_and_or(current_command);
 		move_past_next_semicolon(&current_command);
 	}
- 	//////AFTER
- 	//START
-	ft_printf("\n----END REORGANISE----\n");
- 	current_command = *list;
-	char **tokens;
-	int i = 0;
- 	while (current_command)
- 	{
-		tokens = current_command->tokens;
-		ft_printf("TOKEN %2d (type %d)\n", i++, current_command->type);
-		while (*tokens)
-		{
- 			ft_printf("\t[%s]\n", *tokens);
-			tokens++;
-		}
- 		current_command = current_command->right;
- 	}
- 	//END
 	return (STATUS_OK);
 }
