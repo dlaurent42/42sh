@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 10:34:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 22:05:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	sh_set_prompt_location(t_shell *sh)
 		sh->prompt.location = curr_location;
 	}
 	len = ft_strlens(sh->prompt.location);
-	while (sh->prompt.location[--len] == '/')
+	while (--len && sh->prompt.location[len] == '/')
 		sh->prompt.location[len] = '\0';
 }
 

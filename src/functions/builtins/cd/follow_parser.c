@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 00:46:36 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 22:26:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 22:06:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char		*sh_cd_remove_last_slash(char *param)
 
 	if ((len = ft_strlens(param) - 1) == 0)
 		return (param);
-	while (len >= 0 && param[len] == '/')
+	while (len > 0 && param[len] == '/')
 	{
 		param[len] = '\0';
 		len--;
