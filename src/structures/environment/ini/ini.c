@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 11:59:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 12:31:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 18:54:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		env_initialize_local(t_shell *sh)
 {
+	if (!sh)
+		return ;
 	sh_env_init_home(sh);
 	sh_env_init_config(sh);
 	sh_env_init_histfile(sh);
