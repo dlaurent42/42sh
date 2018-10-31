@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realpath.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 14:30:52 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/30 15:12:38 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/10/31 17:51:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <sys/stat.h>
+
+static char			*ft_replace_dot_slash(char *path)
+{
+	char	*new;
+
+	new = NULL;
+	if (!path || path[0] != '.' || path[1] != '/')
+		return (path);
+	if (!(new = getcwd(new, PATH_MAX)))
+		return (path);
+	new = ft_strjoinf(new, path + 1, 1);
+	ft_strdel(&path);
+	return (new);
+}
 
 bool				ft_realpath(char **path)
 {
@@ -34,5 +48,6 @@ bool				ft_realpath(char **path)
 		if (!(*path = ft_strdups(sym_path)))
 			return (false);
 	}
+	*path = ft_replace_dot_slash(*path);
 	return (true);
 }
