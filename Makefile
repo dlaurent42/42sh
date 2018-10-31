@@ -7,10 +7,11 @@ CFLAGS		= 	-g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
-				errors/malloc.c												\
-				errors/path.c												\
-				errors/import_export.c										\
 				errors/execution.c											\
+				errors/import_export.c										\
+				errors/malloc.c												\
+				errors/parsing.c											\
+				errors/path.c												\
 				functions/aliases.c											\
 				functions/check.c											\
 				functions/prepare.c											\

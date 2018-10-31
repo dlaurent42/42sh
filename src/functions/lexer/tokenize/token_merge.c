@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 14:10:48 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/31 21:14:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:17:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 char	lexer_token_merge(t_lexer *lexer, size_t i)
 {
 	if ((i + 1) >= lexer->size)
+	{
+		ft_printf("Return is in lexer_token_merge\n");
 		return (STATUS_ERR);
+	}
 	lexer->tokens[i].size += ft_strlens(lexer->tokens[i + 1].id);
 	lexer->tokens[i].id = ft_strjoinf(
 		lexer->tokens[i].id,
