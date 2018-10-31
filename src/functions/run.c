@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 17:05:23 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/10/31 21:06:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static char	sh_command_run_tree(
 	list = build_token_tree(list);
 	ret = (list) ? execute_tree(sh, list) : error_execution_tree();
 	status = (sh) ? ft_itoa(ret) : ft_strdups("0");
-	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
-		env_insert_protected(sh, sh->env, "?", status);
+	if ((env_search(env, "?") || env->count + 1 < env->size))
+		env_insert_protected(sh, env, "?", status);
 	ft_strdel(&status);
 	clean_tree(list);
 	sh_destroy_exec(&(sh->exec));
@@ -115,7 +115,8 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		sh->bin = bin_update(sh, env, bin);
 		bin = sh->bin;
 	}
-	if (!sh->modes.exec && (sh->modes.exec = TRUE) && !sh->modes.heredoc)
+	if (sh == g_sh && !sh->modes.exec
+	&& (sh->modes.exec = TRUE) && !sh->modes.heredoc)
 		command_add(sh, true);
 	status = sh_command_run_tree(sh, env, bin, lexer);
 	return (lexer_delete(&lexer, status));
