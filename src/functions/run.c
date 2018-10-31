@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 17:38:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/10/31 17:05:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	sh_command_run_lexer(
 	(void)env;
 	ft_bzero((void *)lexer, sizeof(t_lexer));
 	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
-		return (STATUS_ERR);
+		return (STATUS_EMPTY);
 	if (sh_heredocs_all_close(sh))
 		status = lexer_fill(lexer, *cmd);
 	else
