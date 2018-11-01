@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:12:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/31 15:06:03 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 16:56:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	lexer_token_doublequote(t_lexer *lexer, char *cmd, int *i, int *j)
 {
 	*i = *i + 1;
-	while (cmd[*i] != '\"' && !lexer_is_esc(cmd, *i))
+	while (cmd[*i] != '\"' || (cmd[*i] == '\"' && lexer_is_esc(cmd, *i)))
 	{
 		if (cmd[*i] == '\0')
 			return (STATUS_DQUOTE);
