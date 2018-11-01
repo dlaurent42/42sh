@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/31 15:21:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 10:22:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,34 @@ static char	handle_quotes(t_lexer *lexer, char *cmd, int *i, int *j)
 	return (status);
 }
 
+static bool	lexer_check_n(char *cmd, char *prev)
+{
+	char	*number;
+	bool	ret;
+
+	ret = TRUE;
+	number = ft_strndup(prev, cmd - prev);
+	if (ft_strlens(number) != 1)
+		ret = FALSE;
+	else if (ft_isdigit((int)*number) != 1)
+		ret = FALSE;
+	ft_strdel(&number);
+	return (ret);
+}
+
 static void	lexer_handle_match(
 	t_token *match, t_lexer *lexer, char *cmd, char *prev)
 {
 	if (match->type == TOKEN_AGGREG)
-		lexer_token_add(
-			lexer, prev, cmd - prev + match->size, match->type);
+	{
+		if (cmd != prev && lexer_check_n(cmd, prev) == FALSE)
+		{
+			lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
+			lexer_token_add(lexer, match->id, match->size, match->type);
+		}
+		else
+			lexer_token_add(lexer, prev, cmd - prev + match->size, match->type);
+	}
 	else
 	{
 		if (cmd != prev)
