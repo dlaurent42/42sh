@@ -15,7 +15,10 @@ SRC			=	shell.c														\
 				functions/aliases.c											\
 				functions/check.c											\
 				functions/prepare.c											\
+				functions/brackets.c												\
 				functions/run.c												\
+				functions/run.lexer.c										\
+				functions/run.tree.c										\
 				terminal/signals/stop_acquisition.c							\
 				functions/ast/build_list.c									\
 				functions/ast/get_tree_token_type.c							\
