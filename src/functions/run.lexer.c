@@ -3,14 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   run.lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 22:34:01 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 12:41: by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+int     braclose(char *str, char c, int i, int b)
+{
+    while (b && *(++str) && (i++))
+        if (*str == c)
+            b++;
+        else if (*str == (c == '(' ? ')' : c + 2))
+            b--;
+    return (i);
+}
+
+char	brackets(char *str, char c)
+{
+	char status;
+
+    if (*str == c)
+        return (STATUS_OK);
+    else if (!*str)
+        return (STATUS_WHEREISBRACKET);
+    else if (*str == ')')
+        return (STATUS_ERR);
+    else if (*str == '}')
+        return (STATUS_ERR);
+    else if (*str == ']')
+        return (STATUS_ERR);
+    else if (*str == '(')
+    {
+        if ((status = brackets(str + 1, ')')) != STATUS_OK)
+            return (status == STATUS_ERR ? STATUS_ERR : STATUS_PARENTHESIS);
+        else if ((status = brackets(str + braclose(str, *str, 1, 1), c)) != STATUS_OK)
+            return (status);
+        else
+            return (STATUS_OK);
+    }
+     else if (*str == '{')
+    {
+        if ((status = brackets(str + 1, '}')) != STATUS_OK)
+            return (status == STATUS_ERR ? STATUS_ERR : STATUS_CURLY);
+        else if ((status = brackets(str + braclose(str, *str, 1, 1), c)) != STATUS_OK)
+            return (status);
+        else
+            return (STATUS_OK);
+    }
+     else if (*str == '[')
+    {
+        if ((status = brackets(str + 1, ']')) != STATUS_OK)
+            return (status == STATUS_ERR ? STATUS_ERR : STATUS_SQUARE);
+        else if ((status = brackets(str + braclose(str, *str, 1, 1), c)) != STATUS_OK)
+            return (status);
+        else
+            return (STATUS_OK);
+    }
+    else
+        return (brackets(str + 1, c));
+}
 
 char	sh_command_run_lexer(
 	t_shell *sh, t_env *env, t_lexer *lexer, char **cmd)
@@ -21,7 +76,9 @@ char	sh_command_run_lexer(
 	ft_bzero((void *)lexer, sizeof(t_lexer));
 	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
 		return (STATUS_EMPTY);
-	if (sh_heredocs_all_close(sh))
+	if ((status = brackets(*cmd, '\0')) != STATUS_OK)
+		printf("%d\n", status);
+	else if (sh_heredocs_all_close(sh))
 		status = lexer_fill(lexer, *cmd);
 	else
 	{

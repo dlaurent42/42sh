@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 22:28:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 13:22:04 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,10 @@
 # define STATUS_BQUOTE	            3
 # define STATUS_HEREDOC	            4
 # define STATUS_PIPE	            5
+# define STATUS_PARENTHESIS         6
+# define STATUS_SQUARE              7
+# define STATUS_CURLY               8
+# define STATUS_WHEREISBRACKET      66
 # define STATUS_PERMISSION_DENIED	126
 # define STATUS_NOT_FOUND	        127
 

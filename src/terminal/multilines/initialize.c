@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 16:48:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 13:24:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static int	sh_multilines_assess_status_len(char status)
 		return (7);
 	if (status == STATUS_PIPE)
 		return (4);
+	if (status == STATUS_PARENTHESIS)
+		return (11);
+	if (status == STATUS_SQUARE)
+		return (14);
+	if (status == STATUS_CURLY)
+		return (13);
 	return (1);
 }
 
@@ -37,6 +43,12 @@ static char	*sh_multiline_assess_status(char status)
 		return ("heredoc");
 	if (status == STATUS_PIPE)
 		return ("pipe");
+	if (status == STATUS_PARENTHESIS)
+		return ("parenthesis");
+	if (status == STATUS_SQUARE)
+		return ("square-bracket");
+	if (status == STATUS_CURLY)
+		return ("curly-braces");
 	return ("?");
 }
 
