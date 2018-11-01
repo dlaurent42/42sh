@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 15:30:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 15:51:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		sh_command_run_lexer(
 	(void)env;
 	ft_bzero((void *)lexer, sizeof(t_lexer));
 	if ((status = brackets(*cmd, '\0')) != STATUS_OK)
-		;
+		return (status == STATUS_ERR ? parse_error("\\n") : status);
 	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
 		return (STATUS_EMPTY);
 	else if (sh_heredocs_all_close(sh))
@@ -33,7 +33,7 @@ char		sh_command_run_lexer(
 			status = lexer_fill(lexer, *cmd);
 		}
 	}
-	return (status);
+	return (status == STATUS_ERR ? parse_error("\\n") : status);
 }
 
 static bool	is_operator(t_token_type type)
