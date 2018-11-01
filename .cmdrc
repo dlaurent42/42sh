@@ -1,5 +1,12 @@
 j3Y72kqqTtENSVPoufEpmMB0sbQsr9Tt
 
-     
-	 	
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls -G'
+alias lsa='ls -lah'   
 
+alias bye='exit'	 	
+alias adios='exit'	 	
+
+alias fuckoff='echo "You, fuck off"'
