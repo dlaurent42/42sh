@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:14:31 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 14:17:40 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 12:10:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*sh_heredoc_get_next(t_shell *sh)
 	returned = NULL;
 	if (!sh->heredocs)
 		return (NULL);
-	if (!(returned = sh->heredocs->value))
+	if (!(returned = ft_strdups(sh->heredocs->value)))
 		returned = ft_strdups("");
 	ft_strdel(&sh->heredocs->value);
 	ft_strdel(&sh->heredocs->keyword);
