@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 14:18:56 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/01 12:16:04 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/01 12:47:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 static bool			get_new_token_array(t_token_tree *current_command,
 		int size)
 {
-	char			**tokens_head;
-	char			**track_tokens;
-	int				*blanks_head;
-	int				*track_blanks;
-	int				*t_type_head;
-	int				*track_t_type;
 	t_token_tree	new;
+	t_token_tree	head;
+	t_token_tree	follow;
 	t_token_tree	*tmp;
 	t_token_tree	*track_command;
 
@@ -35,20 +31,20 @@ static bool			get_new_token_array(t_token_tree *current_command,
 		free(new.t_type);
 		return (false);
 	}
-	tokens_head = new.tokens;
-	blanks_head = new.blanks;
-	t_type_head = new.t_type;
+	head.tokens = new.tokens;
+	head.blanks = new.blanks;
+	head.t_type = new.t_type;
 	track_command = current_command;
 	while (track_command && track_command->type == 0)
 	{
-		track_tokens = track_command->tokens;
-		track_blanks = track_command->blanks;
-		track_t_type = track_command->t_type;
-		while (*track_tokens)
+		follow.tokens = track_command->tokens;
+		follow.blanks = track_command->blanks;
+		follow.t_type = track_command->t_type;
+		while (*follow.tokens)
 		{
-			*(new.tokens++) = *(track_tokens++);
-			*(new.t_type++) = *(track_t_type++);
-			*(new.blanks++) = *(track_blanks++);
+			*(new.tokens++) = *(follow.tokens++);
+			*(new.t_type++) = *(follow.t_type++);
+			*(new.blanks++) = *(follow.blanks++);
 		}
 		tmp = track_command;
 		track_command = track_command->right;
@@ -59,9 +55,9 @@ static bool			get_new_token_array(t_token_tree *current_command,
 			free(tmp);
 	}
 	current_command->right = track_command;
-	current_command->tokens = tokens_head;
-	current_command->t_type = t_type_head;
-	current_command->blanks = blanks_head;
+	current_command->tokens = head.tokens;
+	current_command->t_type = head.t_type;
+	current_command->blanks = head.blanks;
 	return (true);
 }
 
