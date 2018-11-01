@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 12:27:00 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/01 16:55:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 17:00:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	lexer_token_singlequote(t_lexer *lexer, char *cmd, int *i, int *j)
 {
 	*i = *i + 1;
-	while (cmd[*i] != '\'' || (cmd[*i] == '\'' && lexer_is_esc(cmd, *i)))
+	while (cmd[*i] != '\'')
 	{
 		if (cmd[*i] == '\0')
 			return (STATUS_SQUOTE);
