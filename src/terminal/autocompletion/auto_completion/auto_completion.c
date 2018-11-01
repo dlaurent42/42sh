@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 01:28:20 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 20:32:23 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 18:38:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static bool			try_auto_completion(t_shell *sh)
 	else if (!ft_strcmps(sh->read->line, K_TAB))
 	{
 		sh_move_end(sh);
+		(sh->ac) ? auto_free_ac(sh) : 0;
 		if (!(sh->ac = (t_ac *)malloc(sizeof(t_ac))))
 			return (false);
 		ft_bzero(sh->ac, sizeof(t_ac));
