@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 14:28:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 14:37:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ char		sh_command_check_lexer(t_shell *sh, t_lexer *l)
 		if ((i + 1) >= (int)l->size && t.type == TOKEN_PIPE)
 			return (STATUS_PIPE);
 		else if ((i + 1) >= (int)l->size && is_operator(t.type))
-			return (STATUS_ERR);
+			return (parse_error("\\n"));
 		if (is_operator(t.type) && (i == 0
 			|| l->tokens[i + 1].type == TOKEN_SEMICOLON
 			|| is_operator(l->tokens[i + 1].type)
 			|| (i - 1 >= 0 && l->tokens[i - 1].type == TOKEN_SEMICOLON)))
-			return (STATUS_ERR);
+			return (parse_error(l->tokens[i].id));
 		if (t.type == TOKEN_AGGREG && lexer_token_merge(l, i) != STATUS_OK)
-			return (STATUS_ERR);
+			return (parse_error("\\n"));
 		if (l->tokens[i].type == TOKEN_HEREDOC)
 			if ((status = sh_heredoc(sh, l->tokens[i + 1].id)) == -1)
 				return (status);

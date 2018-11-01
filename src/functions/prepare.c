@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 13:13:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 14:42:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ void		sh_command_prepare(t_shell *sh)
 	if ((status = sh_command_run(sh, sh->env, sh->bin, &sh->buffer.parsed)) > 0
 	&& status < STATUS_PERMISSION_DENIED)
 		return (sh_multilines(sh, status));
+	else if (status == STATUS_ERR && sh && sh->env
+	&& (env_search(sh->env, "?") || (!env_search(sh->env, "?")
+	&& sh->env->count + 1 < sh->env->size)))
+		env_insert_protected(sh, sh->env, "?", "1");
 	ft_strdel(&sh->buffer.parsed);
 	sh_last_char(sh);
 	sh_reset_sh(sh);
