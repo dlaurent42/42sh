@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 14:11:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/11/01 14:18:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char		sh_command_check_lexer(t_shell *sh, t_lexer *lexer)
 			return (STATUS_ERR);
 		if (is_operator(token.type) && (i == 0
 					|| lexer->tokens[i + 1].type == TOKEN_SEMICOLON
-					|| is_operator(lexer->tokens[i + 1].type)))
+					|| is_operator(lexer->tokens[i + 1].type)
+					|| (i - 1 >= 0 && lexer->tokens[i - 1].type == TOKEN_SEMICOLON)))
 			return (STATUS_ERR);
 		if (token.type == TOKEN_AGGREG
 				&& lexer_token_merge(lexer, i) != STATUS_OK)
