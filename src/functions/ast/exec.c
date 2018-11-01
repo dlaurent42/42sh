@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:31:46 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 13:54:16 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/01 15:16:41 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		execute_tree(t_shell *sh, t_token_tree *tree)
 
 	ret = 0;
 	if (!tree)
-		return (0);
+		return (g_sh->exe);
 	if (tree->type == 0)
 		ret = sh_command_run_ast(sh, sh->exec->env,
 			sh->exec->bin, tree);
