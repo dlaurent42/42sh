@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 20:09:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 10:49:14 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static bool	check_expand_conditions(char *s, int i, char in_sq)
 	return (
 	!in_sq
 	&& s[i] == '$'
+	&& s[i + 1] != '\0'
 	&& !lexer_is_esc(s, i));
 }
 
