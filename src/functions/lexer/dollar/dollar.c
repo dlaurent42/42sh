@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 19:59:08 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 19:00:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 18:29:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char		*lexer_expand(t_env *env, char *s, int start)
 		stop++;
 	}
 	else
-		while ((s[stop] != '\0' && s[stop] != ' ' && s[stop] != '<'
-		&& s[stop] != '>' && s[stop] != '|' && s[stop] != '&')
-		|| lexer_is_esc(s, stop))
+		while (s[stop] != '\0' && s[stop] != ' ' && s[stop] != '<'
+		&& s[stop] != '\\' && s[stop] != '>' && s[stop] != '|'
+		&& s[stop] != '&' && s[stop] != '/')
 			stop++;
 	expanded = sh_dollar_expansion(ft_strsub(s, start, stop - start), env);
 	lexer_repatriate(s, start, stop - start);
