@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 14:02:56 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 15:02:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 16:02:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static char	sh_heredoc_update_close(t_shell *sh, t_heredocs *heredocs)
 	heredocs->closed = TRUE;
 	if (!heredocs->next)
 	{
+		ft_strdel(&sh->buffer.parsed);
 		ft_bzero(
 			(void *)(sh->buffer.content + sh->buffer.ushift),
 			ARG_MAX);
-		ft_strdel(&sh->buffer.parsed);
 		sh->buffer.parsed = ft_strdups(sh->buffer.content);
 		return (STATUS_OK);
 	}
@@ -49,8 +49,5 @@ char		sh_heredoc_update(t_shell *sh)
 		1);
 	if (ft_strlens(tmp->value) >= ARG_MAX)
 		tmp->value[0] = '\0';
-	ft_bzero(
-		(void *)(sh->buffer.content + sh->buffer.ushift),
-		ARG_MAX);
 	return (STATUS_HEREDOC);
 }
