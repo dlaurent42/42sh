@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 22:54:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 14:20:08 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/01 11:55:01 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int					reorganise_tokens(t_token_tree **list)
 	while (current_command)
 	{
 		reorganise_command(current_command);
-		if (!(current_command->tokens = squash_type_zero(current_command)))
+		if (!(squash_type_zero(current_command)))
 			return (STATUS_ERR);
 		move_to_next_command(&current_command);
 	}
