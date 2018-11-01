@@ -6,11 +6,30 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 14:18:56 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/01 12:47:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/01 12:53:45 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+
+static bool			get_mallocs(int size, t_token_tree *new, t_token_tree *head)
+{
+	new->tokens = (char **)ft_memalloc(sizeof(char *) * (size + 1));
+	new->blanks = (int *)ft_memalloc(sizeof(int) * (size));
+	new->t_type = (int *)ft_memalloc(sizeof(int) * (size));
+	if (!new->tokens || !new->blanks || !new->t_type)
+	{
+		free(new->tokens);
+		free(new->blanks);
+		free(new->t_type);
+		return (false);
+	}
+	head->tokens = new->tokens;
+	head->blanks = new->blanks;
+	head->t_type = new->t_type;
+	return (true);
+}
 
 static bool			get_new_token_array(t_token_tree *current_command,
 		int size)
@@ -21,19 +40,8 @@ static bool			get_new_token_array(t_token_tree *current_command,
 	t_token_tree	*tmp;
 	t_token_tree	*track_command;
 
-	new.tokens = (char **)ft_memalloc(sizeof(char *) * (size + 1));
-	new.blanks = (int *)ft_memalloc(sizeof(int) * (size));
-	new.t_type = (int *)ft_memalloc(sizeof(int) * (size));
-	if (!new.tokens || !new.blanks || !new.t_type)
-	{
-		free(new.tokens);
-		free(new.blanks);
-		free(new.t_type);
+	if (!get_mallocs(size, &new, &head))
 		return (false);
-	}
-	head.tokens = new.tokens;
-	head.blanks = new.blanks;
-	head.t_type = new.t_type;
 	track_command = current_command;
 	while (track_command && track_command->type == 0)
 	{
