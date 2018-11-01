@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 19:49:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 13:19:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	command_parse_and_add(t_shell *sh, char *content)
 	if (!(new = (t_cmd *)ft_memalloc(sizeof(t_cmd))))
 		return (FALSE);
 	new->id = (sh->cmd) ? sh->cmd->id + 1 : 1;
-	ft_strcpy(new->content, content);
+	ft_strncpy(new->content, content, ARG_MAX);
 	new->display_len = ft_strlenu(new->content);
 	new->unicode_len = ft_strlens(new->content);
 	new->next = (sh->cmd) ? sh->cmd : NULL;
