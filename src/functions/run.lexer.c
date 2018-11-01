@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 14:18:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/11/01 14:28:13 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,30 @@ static bool	is_operator(t_token_type type)
 	return (type >= TOKEN_ANDIF && type <= TOKEN_HEREDOC);
 }
 
-char		sh_command_check_lexer(t_shell *sh, t_lexer *lexer)
+char		sh_command_check_lexer(t_shell *sh, t_lexer *l)
 {
 	int		i;
 	char	status;
-	t_token	token;
+	t_token	t;
 
 	i = -1;
 	status = STATUS_OK;
-	while (++i < (int)lexer->size)
+	while (++i < (int)l->size)
 	{
-		token = lexer->tokens[i];
-		if ((i + 1) >= (int)lexer->size && token.type == TOKEN_PIPE)
+		t = l->tokens[i];
+		if ((i + 1) >= (int)l->size && t.type == TOKEN_PIPE)
 			return (STATUS_PIPE);
-		else if ((i + 1) >= (int)lexer->size && is_operator(token.type))
+		else if ((i + 1) >= (int)l->size && is_operator(t.type))
 			return (STATUS_ERR);
-		if (is_operator(token.type) && (i == 0
-					|| lexer->tokens[i + 1].type == TOKEN_SEMICOLON
-					|| is_operator(lexer->tokens[i + 1].type)
-					|| (i - 1 >= 0 && lexer->tokens[i - 1].type == TOKEN_SEMICOLON)))
+		if (is_operator(t.type) && (i == 0
+			|| l->tokens[i + 1].type == TOKEN_SEMICOLON
+			|| is_operator(l->tokens[i + 1].type)
+			|| (i - 1 >= 0 && l->tokens[i - 1].type == TOKEN_SEMICOLON)))
 			return (STATUS_ERR);
-		if (token.type == TOKEN_AGGREG
-				&& lexer_token_merge(lexer, i) != STATUS_OK)
+		if (t.type == TOKEN_AGGREG && lexer_token_merge(l, i) != STATUS_OK)
 			return (STATUS_ERR);
-		if (lexer->tokens[i].type == TOKEN_HEREDOC)
-			if ((status = sh_heredoc(sh, lexer->tokens[i + 1].id)) == -1)
+		if (l->tokens[i].type == TOKEN_HEREDOC)
+			if ((status = sh_heredoc(sh, l->tokens[i + 1].id)) == -1)
 				return (status);
 	}
 	return (status);
