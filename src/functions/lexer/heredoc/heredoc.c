@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 22:12:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:41:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 13:17:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 char		sh_heredoc(t_shell *sh, char *heredoc)
 {
-	if ((heredoc == NULL || heredoc[0] == '\0') && sh->modes.heredoc == FALSE)
+	if (((heredoc == NULL || heredoc[0] == '\0') && sh->modes.heredoc == FALSE)
+	|| sh->buffer.unicode_len + sh->buffer.ushift + 1 >= ARG_MAX)
 		return (STATUS_ERR);
 	if (sh->modes.heredoc == FALSE)
 		return (sh_heredoc_init(sh, heredoc));

@@ -6,11 +6,28 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 16:48:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 13:22:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static void	sh_reset_sh(t_shell *sh)
+{
+	ft_bzero(sh->buffer.content, sh->buffer.unicode_len + sh->buffer.ushift);
+	sh->buffer.display_len = 0;
+	sh->buffer.unicode_len = 0;
+	sh->buffer.dshift = 0;
+	sh->buffer.ushift = 0;
+	sh->buffer.cmd = NULL;
+	sh->read->unicode_bytes_left = 0;
+	sh->pid = 0;
+	ft_strdel(&sh->buffer.parsed);
+	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
+	ft_bzero((void *)&sh->modes, sizeof(t_modes));
+	sh_set_prompt(sh);
+	sh_print_prompt(sh);
+}
 
 static int	sh_multilines_assess_status_len(char status)
 {
@@ -54,11 +71,14 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 
 void		sh_multilines(t_shell *sh, char status)
 {
+	ft_strdel(&sh->buffer.parsed);
+	if (ft_strlens(sh->buffer.content) < ARG_MAX)
+		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
+	else
+		return (sh_reset_sh(sh));
 	sh->modes.multiline = TRUE;
 	sh_multilines_prompt(sh, status);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
-	if (sh->buffer.unicode_len < ARG_MAX)
-		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
 	sh->buffer.display_len += sh->buffer.dshift + 1;
 	sh->buffer.unicode_len += sh->buffer.ushift + 1;
 	sh->buffer.dshift = sh->buffer.display_len;
