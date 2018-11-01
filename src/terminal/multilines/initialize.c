@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 14:23:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 15:21:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	sh_reset_sh(t_shell *sh)
 	sh->buffer.cmd = NULL;
 	sh->read->unicode_bytes_left = 0;
 	sh->pid = 0;
-	ft_strdel(&sh->buffer.parsed);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
 	sh_set_prompt(sh);
@@ -83,7 +82,6 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 
 void		sh_multilines(t_shell *sh, char status)
 {
-	ft_strdel(&sh->buffer.parsed);
 	if (ft_strlens(sh->buffer.content) < ARG_MAX)
 		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
 	else

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 21:35:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 13:19:26 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 15:10:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	command_parse_cmd_content(t_shell *sh)
 			sh->cmd->display_len--;
 			sh->cmd->unicode_len--;
 		}
-		i++;
+		else
+			i++;
 	}
 }
 
