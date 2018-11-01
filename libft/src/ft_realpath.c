@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 14:30:52 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/31 17:51:52 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 21:03:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ bool				ft_realpath(char **path)
 	if (lstat(*path, &stat))
 		return (false);
 	type = stat.st_mode;
+	if (S_ISDIR(type))
+		return (false);
 	if ((S_IFLNK & type) == S_IFLNK)
 	{
 		if ((len = readlink(*path, sym_path, RL_BUFSIZE)) == -1)
