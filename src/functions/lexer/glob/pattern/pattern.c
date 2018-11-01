@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 15:35:32 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 12:12:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 20:45:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ static void		sh_glob_delete_filesystem(t_filesystem *fs)
 static char		*sh_glob_pattern_final(t_glob *glob)
 {
 	int		i;
+	int		j;
 	char	*result;
 
-	i = 0;
+	i = -1;
+	j = -1;
 	result = (glob->result) ? ft_strdups(glob->result) : NULL;
-	while (glob->strsplit[i])
-	{
-		ft_strdel(&glob->strsplit[i]);
+	while (glob->fs[++i])
 		sh_glob_delete_filesystem(glob->fs[i]);
-		i++;
-	}
+	while (glob->strsplit[++j])
+		ft_strdel(&glob->strsplit[j]);
 	ft_strdel(&glob->result);
 	free(glob->strsplit);
 	free(glob->fs);
