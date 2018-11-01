@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 16:39:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 16:40:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static bool	check_tilde_conditions(char *s, int i, char in_sq, char in_dq)
 	return (
 	!in_sq && !in_dq
 	&& s[i] == '~'
+	&& (s[i + 1] == '\0' || s[i + 1] == '/')
 	&& (i == 0 || s[i - 1] == ' ' || s[i - 1] == '<' || s[i - 1] == '>'
 		|| s[i - 1] == '|' || s[i - 1] == '&')
 	&& !lexer_is_esc(s, i));
