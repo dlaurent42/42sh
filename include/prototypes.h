@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 14:22:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 16:24:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,7 +475,7 @@ t_read					*read_new(t_shell *sh);
 void					sh_config_import(t_shell *sh);
 void					sh_delete(t_shell *sh);
 void					sh_set_prompt(t_shell *sh);
-void					sh_set_termios(t_shell *sh);
+char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
