@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:12:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 10:49:14 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/01 16:39:09 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char		*sh_command_check(t_env *env, char *s, int type)
 	{
 		if (i && s[i - 1] == ' ' && !lexer_is_esc(s, i - 1) && s[i] != ' ')
 			start = i;
-		if (check_tilde_conditions(s, i, in_squote, in_squote) && env)
+		if (check_tilde_conditions(s, i, in_squote, in_dquote) && env)
 			s = lexer_tilde(env, s, i);
 		else if (check_expand_conditions(s, i, in_squote) && env)
 			s = lexer_expand(env, s, i);
