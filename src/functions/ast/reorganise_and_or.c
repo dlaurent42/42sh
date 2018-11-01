@@ -6,7 +6,7 @@
 /*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:55:16 by dhojt             #+#    #+#             */
-/*   Updated: 2018/10/31 14:22:21 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/01 13:57:59 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static t_token_tree	*get_next_token(t_token_tree *token)
 	next_token = token;
 	if (next_token)
 		next_token = next_token->right;
-	while (next_token && next_token->type != 5 && next_token->type != 6)
+	while (next_token && next_token->type != 5
+		&& next_token->type != 6
+		&& next_token->type != 7)
 		next_token = next_token->right;
 	return (next_token);
 }
