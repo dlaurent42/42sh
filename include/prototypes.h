@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 22:30:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 14:04:18 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char					sh_command_run_tree(
 							t_lexer lexer);
 char					*sh_command_check(t_env *env, char *s, int type);
 char					*sh_replace_aliases(t_env *alias, char *s);
+char					brackets(char *str, char c);
 
 /*
 ** functions - builtins

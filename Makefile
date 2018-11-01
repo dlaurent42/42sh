@@ -14,6 +14,7 @@ SRC			=	shell.c														\
 				functions/aliases.c											\
 				functions/check.c											\
 				functions/prepare.c											\
+				functions/brackets.c												\
 				functions/run.c												\
 				functions/run.lexer.c										\
 				functions/run.tree.c										\
