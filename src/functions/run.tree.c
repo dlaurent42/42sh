@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:27:46 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 22:28:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/01 18:09:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	sh_command_run_tree(t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
 	list = build_token_tree(list);
 	ret = (list) ? execute_tree(sh, list) : error_execution_tree();
 	status = (sh) ? ft_itoa(ret) : ft_strdups("0");
-	if ((env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
+	if (sh == g_sh &&
+	(env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
 		env_insert_protected(sh, sh->env, "?", status);
 	ft_strdel(&status);
 	clean_tree(list);
