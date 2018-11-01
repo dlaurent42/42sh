@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/01 10:22:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/11/01 19:21:54 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,18 @@ static char	handle_quotes(t_lexer *lexer, char *cmd, int *i, int *j)
 	return (status);
 }
 
-static bool	lexer_check_n(char *cmd, char *prev)
+static bool	lexer_check_n(char *cmd, char *prev, t_token_type type)
 {
 	char	*number;
 	bool	ret;
 
+	(void)type;
 	ret = TRUE;
 	number = ft_strndup(prev, cmd - prev);
 	if (ft_strlens(number) != 1)
 		ret = FALSE;
-	else if (ft_isdigit((int)*number) != 1)
+	else if (ft_isdigit((int)*number) != 1
+		&& (type == TOKEN_REDIR && number[0] != '&'))
 		ret = FALSE;
 	ft_strdel(&number);
 	return (ret);
@@ -53,9 +55,10 @@ static bool	lexer_check_n(char *cmd, char *prev)
 static void	lexer_handle_match(
 	t_token *match, t_lexer *lexer, char *cmd, char *prev)
 {
-	if (match->type == TOKEN_AGGREG)
+	if (match->type == TOKEN_AGGREG || ft_strcmps(match->id, ">") == 0
+		|| ft_strcmps(match->id, ">>") == 0)
 	{
-		if (cmd != prev && lexer_check_n(cmd, prev) == FALSE)
+		if (cmd != prev && lexer_check_n(cmd, prev, match->type) == FALSE)
 		{
 			lexer_token_add(lexer, prev, cmd - prev, TOKEN_WORD);
 			lexer_token_add(lexer, match->id, match->size, match->type);
