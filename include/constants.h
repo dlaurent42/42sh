@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 14:15:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 14:35:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@
 #  define ARG_MAX 		262144
 # endif
 # define LINE_SIZE		9
-# define SHELL_NAME		"cmd"
+# define SHELL_NAME		"42sh"
 
 /*
 ** history
