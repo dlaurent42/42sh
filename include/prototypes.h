@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 13:33:04 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 13:35:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ char					*sh_parse_quotes(char *arg);
 char					sh_command_check_lexer(t_shell *sh, t_lexer *lexer);
 char					*sh_command_check(t_env *env, char *s, int type);
 char					*sh_replace_aliases(t_env *alias, char *s);
-char					brackets(char *str, char c);
+char					lexer_check_brackets(char *str, char c);
 
 /*
 ** functions - lexer - aliases
