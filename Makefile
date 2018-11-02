@@ -33,6 +33,7 @@ SRC			=	shell.c														\
 				functions/backtick/execute.c								\
 				functions/backtick/check.c									\
 				functions/backtick/prep.c									\
+				functions/backtick/capture.c								\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
@@ -286,11 +287,7 @@ SRC			=	shell.c														\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c
-<<<<<<< HEAD
 #				functions/check/brackets.c									\
-=======
-#				functions/brackets.c												\
->>>>>>> e7296ce... rush commit
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

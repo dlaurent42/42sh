@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 14:35:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:06:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,5 +215,10 @@
 */
 # define GLOB_MAX_PATHS	125
 # define GLOB_ASCII_MAX	30
+
+/*
+** backtick
+*/
+# define BACKTICK_BUFF	256
 
 #endif

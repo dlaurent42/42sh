@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:05:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:06:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void					backtick_check(
 								t_token_tree *tree);
 char					*backtick_prep(
 							t_shell *sh, t_env *env, t_bin *bin, char *token);
+char					*backtick_capture(int fd);
 
 /*
 ** functions - backtick
