@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 20:30:02 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 20:44:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/10/31 21:08:30 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char		*backtick_prep(t_shell *sh, t_env *env, t_bin *bin, char *token)
 		return (ft_strdups(""));
 	ret = execute_backtick(sh, env, bin, lexer);
 	lexer_delete(&lexer, status);
+	ft_strdel(&token);
 	return (ret);
 }
