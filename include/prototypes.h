@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 17:57:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 17:57:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ char					*sh_replace_aliases(t_env *alias, char *s);
 char					sh_command_check_lexer(t_shell *sh, t_lexer *lexer);
 char					sh_command_run_lexer(
 						t_shell *sh, t_env *env, t_lexer *lexer, char **cmd);
+
+/*
+** functions - backtick
+*/
+char					*execute_backtick(
+							t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer);
+void					backtick_check(
+							t_shell *sh, t_env *env, t_bin *bin,
+								t_token_tree *tree);
+char					*backtick_prep(
+							t_shell *sh, t_env *env, t_bin *bin, char *token);
 
 /*
 ** functions - backtick
