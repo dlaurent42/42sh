@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 16:25:50 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:22:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	sh_set_window(t_shell *sh, int argc)
 	ioctl(0, TIOCGWINSZ, &window);
 	sh->window.width = window.ws_col;
 	sh->window.height = window.ws_row;
+	(void)argc;
 	(argc == 1) ? ft_putstr(CLEAR_SCREEN) : 0;
 	(argc == 1) ? ft_putstr(CLEAR_HIST) : 0;
 }

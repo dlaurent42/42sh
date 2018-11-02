@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 16:44:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 18:12:58 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,20 @@ static void	sh_close_all(t_shell *sh)
 char		sh_read(t_shell *sh)
 {
 	(!sh->modes.subshell) ? sh_print_prompt(sh) : 0;
-	while ((!sh->modes.subshell && TRUE)
-	|| (sh->modes.subshell && sh->modes.multiline))
+	while ((!sh->modes.subshell && TRUE) || sh->modes.subshell == 1)
 	{
-		if (((sh->modes.subshell && !sh->modes.multiline)
-		|| !sh->modes.subshell)
-		&& read(0, sh->read->line, LINE_SIZE - 1) == -1)
-			break ;
-		if (sh->read->line[0] == 4 && !sh->modes.multiline
-		&& sh->buffer.display_len + sh->buffer.dshift)
-			sh_delete_current_char(sh);
-		else if (sh->read->line[0] == 4
-		&& !sh->modes.multiline && !sh->modes.heredoc)
-			break ;
-		else if (sh->read->line[0] == 4
+		if (((sh->modes.subshell && sh->modes.multiline)
+		|| !sh->modes.subshell))
+			if (read(0, sh->read->line, LINE_SIZE - 1) == -1)
+				break ;
+		if (sh->read->line[0] == 4
 		&& sh->modes.heredoc && !sh->buffer.display_len)
 			sh_close_all(sh);
+		if (sh->read->line[0] == 4
+		&& sh->buffer.display_len + sh->buffer.dshift)
+			sh_delete_current_char(sh);
+		else if (sh->read->line[0] == 4 && !sh->modes.multiline)
+			break ;
 		sh_read_dispatcher(sh);
 		ft_bzero(sh->read->line, LINE_SIZE);
 	}

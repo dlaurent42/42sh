@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 16:20:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:42:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	sh_reset_sh(t_shell *sh)
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
 	(!subshell) ? sh_set_prompt(sh) : 0;
 	(!subshell) ? sh_print_prompt(sh) : 0;
-	sh->modes.subshell = subshell;
+	sh->modes.subshell = (subshell) ? 2 : 0;
 }
 
 void		sh_command_prepare(t_shell *sh)
@@ -107,10 +107,9 @@ void		sh_command_prepare(t_shell *sh)
 
 	status = 0;
 	g_exit_code = 0;
-	ft_printf("command prepare : subshell=%d multiline=%d\n", sh->modes.subshell, sh->modes.multiline);
 	(!sh->modes.subshell || (sh->modes.subshell && sh->modes.multiline))
 		? sh_move_end(sh) : 0;
-	(!sh->modes.subshell) ? ft_putchar('\n') : 0;
+	(!sh->modes.subshell || sh->modes.multiline) ? ft_putchar('\n') : 0;
 	if (!(sh->buffer.parsed = ft_strdups(sh->buffer.content)))
 		sh->buffer.parsed = ft_strdups("");
 	if ((status = sh_command_run(sh, sh->env, sh->bin, &sh->buffer.parsed)) > 0

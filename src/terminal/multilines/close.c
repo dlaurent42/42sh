@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 20:31:41 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 15:56:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 18:29:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	sh_multilines_close(t_shell *sh)
 	sh->read->unicode_bytes_left = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
-	ft_putchar('\n');
+	(!subshell) ? ft_putchar('\n') : 0;
 	if (env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size)
 		env_insert_protected(sh, sh->env, "?", "0");
 	(!subshell) ? sh_set_prompt(sh) : 0;
 	(!subshell) ? sh_print_prompt(sh) : 0;
+	sh->modes.subshell = (subshell) ? 2 : 0;
 }

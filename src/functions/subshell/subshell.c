@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 14:53:51 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 16:17:10 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:31:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		sh_subshell(t_shell *sh, char **argv)
 		sh->buffer.unicode_len = 0;
 		sh->buffer.display_len = 0;
 		sh->read->line[0] = '\n';
-		sh->modes.multiline = TRUE;
 		sh->modes.subshell = TRUE;
 		sh_read(sh);
 		i++;

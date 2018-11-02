@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 16:33:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:41:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 
 static void	sh_multiline_buffer(t_shell *sh, char status)
 {
+	size_t	len;
+
+	len = ft_strlens(sh->buffer.content);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	if (status != STATUS_NEWLINE)
-		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
+		sh->buffer.content[len] = '\n';
 	else
-		sh->buffer.content[
-			sh->buffer.unicode_len
-			+ sh->buffer.ushift
-			- 1] = '\0';
+		sh->buffer.content[len - 1] = '\0';
 	sh->buffer.display_len = ft_strlenu(sh->buffer.content);
 	sh->buffer.unicode_len = ft_strlens(sh->buffer.content);
 	sh->buffer.dshift = sh->buffer.display_len;
@@ -88,5 +88,4 @@ void		sh_multilines(t_shell *sh, char status)
 	sh_multiline_buffer(sh, status);
 	sh->modes.multiline = TRUE;
 	sh_multilines_prompt(sh, status);
-	ft_printf("Multilines : subshell=%d multiline=%d\n", sh->modes.subshell, sh->modes.multiline);
 }
