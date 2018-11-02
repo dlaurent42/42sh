@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 16:18:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 15:42:06 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ typedef struct			s_modes
 	unsigned char		exec			: 1;
 	unsigned char		heredoc			: 1;
 	unsigned char		globbing		: 1;
+	unsigned char		subshell		: 1;
+	unsigned char		fill			: 7;
 }						t_modes;
 
 typedef struct			s_select

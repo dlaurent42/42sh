@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 14:27:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 16:33:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	sh_reset_sh(t_shell *sh)
 {
+	bool	subshell;
+
+	subshell = sh->modes.subshell;
 	ft_bzero(sh->buffer.content, sh->buffer.unicode_len + sh->buffer.ushift);
 	sh->buffer.display_len = 0;
 	sh->buffer.unicode_len = 0;
@@ -24,8 +27,8 @@ static void	sh_reset_sh(t_shell *sh)
 	sh->pid = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
-	sh_set_prompt(sh);
-	sh_print_prompt(sh);
+	(!subshell) ? sh_set_prompt(sh) : 0;
+	(!subshell) ? sh_print_prompt(sh) : 0;
 }
 
 static char	*sh_multiline_assess_status(char status)
@@ -63,20 +66,14 @@ static void	sh_multiline_buffer(t_shell *sh, char status)
 {
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	if (status != STATUS_NEWLINE)
-	{
 		sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift] = '\n';
-		sh->buffer.display_len += sh->buffer.dshift + 1;
-		sh->buffer.unicode_len += sh->buffer.ushift + 1;
-	}
 	else
-	{
 		sh->buffer.content[
 			sh->buffer.unicode_len
 			+ sh->buffer.ushift
 			- 1] = '\0';
-		sh->buffer.display_len += sh->buffer.dshift - 1;
-		sh->buffer.unicode_len += sh->buffer.ushift - 1;
-	}
+	sh->buffer.display_len = ft_strlenu(sh->buffer.content);
+	sh->buffer.unicode_len = ft_strlens(sh->buffer.content);
 	sh->buffer.dshift = sh->buffer.display_len;
 	sh->buffer.ushift = sh->buffer.unicode_len;
 	sh->buffer.display_len = 0;
@@ -91,4 +88,5 @@ void		sh_multilines(t_shell *sh, char status)
 	sh_multiline_buffer(sh, status);
 	sh->modes.multiline = TRUE;
 	sh_multilines_prompt(sh, status);
+	ft_printf("Multilines : subshell=%d multiline=%d\n", sh->modes.subshell, sh->modes.multiline);
 }

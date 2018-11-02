@@ -147,6 +147,7 @@ SRC			=	shell.c														\
 				functions/run/run.c											\
 				functions/run/run.lexer.c									\
 				functions/run/run.tree.c									\
+				functions/subshell/subshell.c								\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\
@@ -354,6 +355,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/functions/run
+				@mkdir -p $(OBJ_DIR)/functions/subshell
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/structures/binaries

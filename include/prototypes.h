@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:10:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:26:45 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,6 +409,11 @@ char					sh_command_run_tree(
 char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 
 /*
+** functions - subshell
+*/
+int						sh_subshell(t_shell *sh, char **argv);
+
+/*
 ** structures - binaries
 */
 long					bin_get_hash(const char *sh, const int b, const int a);
@@ -501,7 +506,7 @@ char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
-t_shell					*sh_new(char **environ);
+t_shell					*sh_new(char **environ, int argc);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);
 
@@ -618,7 +623,7 @@ void					sh_select_print(t_shell *sh);
 /*
 ** terminal - read
 */
-void					sh_read(t_shell *sh);
+char					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_dispatcher(t_shell *sh);
 void					sh_deletion_dispatcher(t_shell *sh);

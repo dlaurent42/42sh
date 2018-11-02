@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 11:59:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 16:44:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ static void	sh_close_all(t_shell *sh)
 	sh->read->line[0] = '\n';
 }
 
-void		sh_read(t_shell *sh)
+char		sh_read(t_shell *sh)
 {
-	sh_print_prompt(sh);
-	while (TRUE)
+	(!sh->modes.subshell) ? sh_print_prompt(sh) : 0;
+	while ((!sh->modes.subshell && TRUE)
+	|| (sh->modes.subshell && sh->modes.multiline))
 	{
-		if (read(0, sh->read->line, LINE_SIZE - 1) == -1)
+		if (((sh->modes.subshell && !sh->modes.multiline)
+		|| !sh->modes.subshell)
+		&& read(0, sh->read->line, LINE_SIZE - 1) == -1)
 			break ;
 		if (sh->read->line[0] == 4 && !sh->modes.multiline
 		&& sh->buffer.display_len + sh->buffer.dshift)
@@ -48,4 +51,5 @@ void		sh_read(t_shell *sh)
 		sh_read_dispatcher(sh);
 		ft_bzero(sh->read->line, LINE_SIZE);
 	}
+	return (EXIT_SUCCESS);
 }
