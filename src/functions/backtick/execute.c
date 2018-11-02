@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 19:19:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/02 13:52:21 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/02 14:12:02 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char		*backtick_process(t_shell *sh, t_token_tree *list)
 
 	stdout = dup(1);
 	pipe(fd);
-	if ((pid = fork()) == 0)
+	if ((pid = fork()) == -1)
+		return (ft_strdups(""));
+	else if (pid == 0)
 	{
 		dup2(fd[1], 1);
 		close(fd[0]);
