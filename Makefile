@@ -1,6 +1,6 @@
 .PHONY: 		all clean fclean re
 
-NAME 		= 	shell
+NAME 		= 	42sh
 
 CC 			=	gcc
 CFLAGS		= 	-O3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs

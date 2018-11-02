@@ -5,7 +5,7 @@
 # Executable && lib
 *.a
 *a.out
-/shell
+/42sh
 
 # Compiled sources
 *obj
