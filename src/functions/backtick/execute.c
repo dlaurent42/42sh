@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 19:19:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 18:06:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:07:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		*backtick_process(t_shell *sh, t_token_tree *list)
+static char		*backtick_process(t_shell *sh, t_token_tree *list)
 {
 	int		fd[2];
 	int		stdout;
