@@ -6,29 +6,14 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 19:19:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 21:18:39 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/02 13:52:21 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		*execute_backtick(
-				t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
+char		*backtick_process(t_shell *sh, t_token_tree *list)
 {
-	char			*ret;
-	t_token_tree	*list;
-
-	ret = NULL;
-	list = build_list(lexer);
-	reorganise_tokens(&list);
-	t_exec *exec = sh->exec;
-	if (!(sh->exec = sh_init_exec(env, bin)))
-	{
-		clean_tree(list);
-		return (ft_strdups(""));
-	}
-	list = build_token_tree(list);
-
 	int fd[2];
 	int len;
 	int stdout;
@@ -37,8 +22,6 @@ char		*execute_backtick(
 
 	stdout = dup(1);
 	pipe(fd);
-
-
 	if ((pid = fork()) == 0)
 	{
 		dup2(fd[1], 1);
@@ -52,12 +35,22 @@ char		*execute_backtick(
 		close(fd[1]);
 		len = read(fd[0], buff, 255);
 		buff[len] = '\0';
-		ret = ft_strdups(buff);
 	}
 	close(fd[0]);
 	close(fd[1]);
+	return (ft_strdups(buff));
+}
+
+char		*execute_backtick(t_shell *sh, t_lexer lexer)
+{
+	char			*ret;
+	t_token_tree	*list;
+
+	ret = NULL;
+	list = build_list(lexer);
+	reorganise_tokens(&list);
+	list = build_token_tree(list);
+	ret = backtick_process(sh, list);
 	clean_tree(list);
-	sh_destroy_exec(&(sh->exec));
-	sh->exec = exec;
 	return (ret);
 }

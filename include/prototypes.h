@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 17:57:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 17:58:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ char					*backtick_prep(
 /*
 ** functions - backtick
 */
-char					*execute_backtick(
-							t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer);
+char					*execute_backtick(t_shell *sh, t_lexer lexer);
 void					backtick_check(
 							t_shell *sh, t_env *env, t_bin *bin,
 								t_token_tree *tree);

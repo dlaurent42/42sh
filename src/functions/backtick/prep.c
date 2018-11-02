@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 20:30:02 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 21:08:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/02 13:40:13 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char		*backtick_prep(t_shell *sh, t_env *env, t_bin *bin, char *token)
 	char		status;
 	t_lexer		lexer;
 
+	(void)bin;
 	if (sh->env == env && !sh->modes.heredoc)
 		token = sh_replace_aliases(sh->alias, token);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, &token)) != STATUS_OK)
@@ -32,7 +33,7 @@ char		*backtick_prep(t_shell *sh, t_env *env, t_bin *bin, char *token)
 	}
 	if (lexer.size == 0)
 		return (ft_strdups(""));
-	ret = execute_backtick(sh, env, bin, lexer);
+	ret = execute_backtick(sh, lexer);
 	lexer_delete(&lexer, status);
 	ft_strdel(&token);
 	return (ret);
