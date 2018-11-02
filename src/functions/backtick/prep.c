@@ -6,19 +6,18 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 20:30:02 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 18:07:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:08:08 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		*backtick_prep(t_shell *sh, t_env *env, t_bin *bin, char *token)
+char		*backtick_prep(t_shell *sh, t_env *env, char *token)
 {
 	char		*ret;
 	char		status;
 	t_lexer		lexer;
 
-	(void)bin;
 	if (sh->env == env && !sh->modes.heredoc)
 		token = sh_replace_aliases(sh->alias, token);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, &token)) != STATUS_OK)

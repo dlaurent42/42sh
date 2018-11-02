@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:06:27 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:08:16 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,8 @@ void					backtick_check(
 							t_shell *sh, t_env *env, t_bin *bin,
 								t_token_tree *tree);
 char					*backtick_prep(
-							t_shell *sh, t_env *env, t_bin *bin, char *token);
+							t_shell *sh, t_env *env, char *token);
 char					*backtick_capture(int fd);
-
-/*
-** functions - backtick
-*/
-char					*execute_backtick(t_shell *sh, t_lexer lexer);
-void					backtick_check(
-							t_shell *sh, t_env *env, t_bin *bin,
-								t_token_tree *tree);
-char					*backtick_prep(
-							t_shell *sh, t_env *env, t_bin *bin, char *token);
-
-/*
-** functions - backtick
-*/
-char					*execute_backtick(t_shell *sh, t_lexer lexer);
-void					backtick_check(
-							t_shell *sh, t_env *env, t_bin *bin,
-								t_token_tree *tree);
-char					*backtick_prep(
-							t_shell *sh, t_env *env, t_bin *bin, char *token);
 
 /*
 ** functions - builtins
@@ -280,7 +260,8 @@ char					*lexer_expand(t_env *env, char *str, int i);
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
-void					lexer_glob(t_token_tree **tree);
+void					lexer_glob(
+							t_shell *sh, t_env *env, t_token_tree **tree);
 
 /*
 ** functions - lexer - glob - cbraces
