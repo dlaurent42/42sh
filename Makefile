@@ -85,7 +85,6 @@ SRC			=	shell.c														\
 				functions/builtins/utils/path_from_filename.c				\
 				functions/check/aliases.c									\
 				functions/check/check.c										\
-				functions/check/brackets.c									\
 				functions/check/lexer.c										\
 				functions/lexer/aliases/aliases.c							\
 				functions/lexer/dollar/dollar.c								\
@@ -284,6 +283,7 @@ SRC			=	shell.c														\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c
+#				functions/check/brackets.c									\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 

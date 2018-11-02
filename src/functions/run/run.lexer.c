@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 13:48:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 14:17:10 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ char		sh_command_run_lexer(
 	status = STATUS_OK;
 	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
 		return (STATUS_EMPTY);
+	else if (sh->modes.heredoc == FALSE
+	&& sh->buffer.content[sh->buffer.unicode_len + sh->buffer.ushift
+	- 1] == '\\' && !lexer_is_esc(sh->buffer.content, sh->buffer.unicode_len
+	+ sh->buffer.ushift - 1))
+		return (STATUS_NEWLINE);
 	else if (sh_heredocs_all_close(sh))
 		status = lexer_fill(lexer, *cmd);
 	else
