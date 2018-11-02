@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run.lexer.c                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/31 22:29:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 15:51:12 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/11/02 13:29:40 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/11/02 13:29:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-char		sh_command_run_lexer(
-		t_shell *sh, t_env *env, t_lexer *lexer, char **cmd)
-{
-	char	status;
-
-	(void)env;
-	ft_bzero((void *)lexer, sizeof(t_lexer));
-	if ((status = brackets(*cmd, '\0')) != STATUS_OK)
-		return (status == STATUS_ERR ? parse_error("\\n") : status);
-	if (sh->modes.heredoc == FALSE && lexer_is_empty(*cmd))
-		return (STATUS_EMPTY);
-	else if (sh_heredocs_all_close(sh))
-		status = lexer_fill(lexer, *cmd);
-	else
-	{
-		if ((status = sh_heredoc(sh, NULL)) == STATUS_OK)
-		{
-			cmd = &sh->buffer.parsed;
-			status = lexer_fill(lexer, *cmd);
-		}
-	}
-	return (status == STATUS_ERR ? parse_error("\\n") : status);
-}
 
 static bool	is_operator(t_token_type type)
 {

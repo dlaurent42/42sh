@@ -12,13 +12,6 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/parsing.c											\
 				errors/path.c												\
-				functions/aliases.c											\
-				functions/check.c											\
-				functions/prepare.c											\
-				functions/brackets.c												\
-				functions/run.c												\
-				functions/run.lexer.c										\
-				functions/run.tree.c										\
 				terminal/signals/stop_acquisition.c							\
 				functions/ast/build_list.c									\
 				functions/ast/get_tree_token_type.c							\
@@ -90,7 +83,10 @@ SRC			=	shell.c														\
 				functions/builtins/utils/is_binary.c						\
 				functions/builtins/utils/parse_quotes.c						\
 				functions/builtins/utils/path_from_filename.c				\
-				functions/exec/run.c										\
+				functions/check/aliases.c									\
+				functions/check/check.c										\
+				functions/check/brackets.c									\
+				functions/check/lexer.c										\
 				functions/lexer/aliases/aliases.c							\
 				functions/lexer/dollar/dollar.c								\
 				functions/lexer/glob/glob.c									\
@@ -140,6 +136,11 @@ SRC			=	shell.c														\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
+				functions/run/execute.c										\
+				functions/run/prepare.c										\
+				functions/run/run.c											\
+				functions/run/run.lexer.c									\
+				functions/run/run.tree.c									\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\
@@ -328,7 +329,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unset
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
-				@mkdir -p $(OBJ_DIR)/functions/exec
+				@mkdir -p $(OBJ_DIR)/functions/check
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/aliases
 				@mkdir -p $(OBJ_DIR)/functions/lexer/dollar
@@ -343,6 +344,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
+				@mkdir -p $(OBJ_DIR)/functions/run
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/structures/binaries

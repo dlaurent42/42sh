@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 16:24:47 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 13:33:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,6 @@ char					error_execution_tree(void);
 char					error_execution_file(t_shell *sh, char *filename);
 char					error_file_permissions(t_shell *sh, char *filename);
 char					parse_error(char *err);
-
-/*
-** functions
-*/
-void					sh_command_prepare(t_shell *sh);
-char					sh_command_run(
-							t_shell *sh,
-							t_env *env,
-							t_bin *bin,
-							char **str);
-char					sh_command_check_lexer(t_shell *sh, t_lexer *lexer);
-char					sh_command_run_lexer(
-							t_shell *sh,
-							t_env *env,
-							t_lexer *lexer,
-							char **cmd);
-char					sh_command_run_tree(
-							t_shell *sh,
-							t_env *env,
-							t_bin *bin,
-							t_lexer lexer);
-char					*sh_command_check(t_env *env, char *s, int type);
-char					*sh_replace_aliases(t_env *alias, char *s);
-char					brackets(char *str, char c);
 
 /*
 ** functions - builtins
@@ -222,6 +198,14 @@ char					*sh_get_path_from_filename(char *filename);
 char					*sh_parse_quotes(char *arg);
 
 /*
+** functions - check
+*/
+char					sh_command_check_lexer(t_shell *sh, t_lexer *lexer);
+char					*sh_command_check(t_env *env, char *s, int type);
+char					*sh_replace_aliases(t_env *alias, char *s);
+char					brackets(char *str, char c);
+
+/*
 ** functions - lexer - aliases
 */
 char					*lexer_aliases(t_env *aliases, char *s, int start);
@@ -371,11 +355,6 @@ char					sh_command_dispatch(
 							char **argv);
 
 /*
-** functions - exec
-*/
-char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
-
-/*
 ** functions - parser
 */
 char					**sh_command_build(char *str);
@@ -385,6 +364,27 @@ void					sh_command_parser(
 							t_env *env,
 							t_bin *bin,
 							char *str);
+
+/*
+** functions - run
+*/
+void					sh_command_prepare(t_shell *sh);
+char					sh_command_run(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							char **str);
+char					sh_command_run_lexer(
+							t_shell *sh,
+							t_env *env,
+							t_lexer *lexer,
+							char **cmd);
+char					sh_command_run_tree(
+							t_shell *sh,
+							t_env *env,
+							t_bin *bin,
+							t_lexer lexer);
+char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 
 /*
 ** structures - binaries
