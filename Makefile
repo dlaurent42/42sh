@@ -286,7 +286,11 @@ SRC			=	shell.c														\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
 				terminal/signals/resize.c
+<<<<<<< HEAD
 #				functions/check/brackets.c									\
+=======
+#				functions/brackets.c												\
+>>>>>>> e7296ce... rush commit
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
