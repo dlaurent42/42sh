@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 17:41:54 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 19:34:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,16 @@ static void	sh_reset_sh(t_shell *sh)
 
 static char	*sh_multiline_assess_status(char status)
 {
-	if (status == STATUS_DQUOTE)
-		return ("dquote");
-	if (status == STATUS_SQUOTE)
-		return ("squote");
-	if (status == STATUS_BQUOTE)
-		return ("bquote");
-	if (status == STATUS_HEREDOC)
-		return ("heredoc");
-	if (status == STATUS_PIPE)
-		return ("pipe");
-	if (status == STATUS_SUBSHELL)
-		return ("subshell");
-	if (status == STATUS_NEWLINE)
-		return ("newline");
+	char	*ret;
+
+	ret = "?";
+	(status == STATUS_DQUOTE) ? ret = ("dquote") : 0;
+	(status == STATUS_SQUOTE) ? ret = ("squote") : 0;
+	(status == STATUS_BQUOTE) ? ret = ("bquote") : 0;
+	(status == STATUS_HEREDOC) ? ret = ("heredoc") : 0;
+	(status == STATUS_PIPE) ? ret = ("pipe") : 0;
+	(status == STATUS_SUBSHELL) ? ret = ("subshell") : 0;
+	(status == STATUS_NEWLINE) ? ret = ("newline") : 0;
 	return ("?");
 }
 
@@ -57,6 +53,11 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 							sh_multiline_assess_status(status),
 							MULT_PROMPT);
 	sh->prompt.len = 3 + ft_strlens(sh_multiline_assess_status(status));
+	if (sh->modes.subshell)
+	{
+		sh->prompt.content = ft_strjoinf("subsh ", sh->prompt.content, 2);
+		sh->prompt.len += 6;
+	}
 	sh->prompt.len_mod = sh->prompt.len % sh->window.width;
 	sh->prompt.rows = sh->prompt.len / sh->window.width + 1;
 	sh_print_prompt(sh);

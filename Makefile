@@ -121,6 +121,7 @@ SRC			=	shell.c														\
 				functions/lexer/tokenize/delete.c							\
 				functions/lexer/tokenize/fill.c								\
 				functions/lexer/tokenize/lexic_singletone.c					\
+				functions/lexer/tokenize/subshell.c							\
 				functions/lexer/tokenize/token_add.c						\
 				functions/lexer/tokenize/token_backquote.c					\
 				functions/lexer/tokenize/token_doublequote.c				\

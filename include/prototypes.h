@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:26:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:27:07 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,11 @@ void					lexer_token_add(
 							t_token_type type);
 char					lexer_delete(t_lexer *lexer, char status);
 char					lexer_token_merge(t_lexer *lexer, size_t i);
+char					lexer_handle_subshell(
+							t_lexer *lexer,
+							char *cmd,
+							int *i,
+							int *j);
 char					lexer_token_singlequote(
 							t_lexer *l,
 							char *cmd,
