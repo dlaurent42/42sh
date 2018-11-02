@@ -30,6 +30,9 @@ SRC			=	shell.c														\
 				functions/ast/operators/heredoc.c							\
 				functions/ast/operators/file_descriptor.c					\
 				functions/ast/operators/file_descriptor_utils.c				\
+				functions/backtick/execute.c								\
+				functions/backtick/check.c									\
+				functions/backtick/prep.c									\
 				functions/builtins/list_of_builtins.c						\
 				functions/builtins/alias/add.c								\
 				functions/builtins/alias/alias.c							\
@@ -315,6 +318,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions
 				@mkdir -p $(OBJ_DIR)/functions/ast
 				@mkdir -p $(OBJ_DIR)/functions/ast/operators
+				@mkdir -p $(OBJ_DIR)/functions/backtick
 				@mkdir -p $(OBJ_DIR)/functions/builtins
 				@mkdir -p $(OBJ_DIR)/functions/builtins/alias
 				@mkdir -p $(OBJ_DIR)/functions/builtins/cd
