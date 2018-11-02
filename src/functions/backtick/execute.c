@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 19:19:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 18:07:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:07:30 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static char		*backtick_process(t_shell *sh, t_token_tree *list)
 	{
 		dup2(fd[1], 1);
 		close(fd[1]);
+		write(1, "\b", 1);
 		(list) ? execute_tree(sh, list) : error_execution_tree();
 		exit(sh->exe);
 	}
@@ -40,7 +41,7 @@ static char		*backtick_process(t_shell *sh, t_token_tree *list)
 	return (ret);
 }
 
-char		*execute_backtick(t_shell *sh, t_lexer lexer)
+char			*execute_backtick(t_shell *sh, t_lexer lexer)
 {
 	char			*ret;
 	t_token_tree	*list;
