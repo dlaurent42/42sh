@@ -1,7 +1,7 @@
 NAME = libdyn.a
 CC = gcc
 RM = rm -rf
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -O3 -g3 -Wall -Werror -Wextra
 CPPFLAGS = -I./incs
 
 SRC_PATH = srcs/

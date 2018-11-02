@@ -1,21 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/03 14:50:12 by dlaurent          #+#    #+#              #
-#    Updated: 2018/10/30 15:08:57 by dhojt            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY: all clean fclean re
 
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -g3 -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -O3 -g3 -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
