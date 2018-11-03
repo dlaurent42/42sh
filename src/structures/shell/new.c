@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 16:26:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:20:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	sh_set_window(t_shell *sh)
 	ft_putstr(CLEAR_HIST);
 }
 
-t_shell		*sh_new(char **environ)
+t_shell		*sh_new(char *name, char **environ)
 {
 	t_shell		*sh;
 
@@ -33,7 +33,7 @@ t_shell		*sh_new(char **environ)
 		error_malloc_sh(sh);
 	sh_set_window(sh);
 	sh->env = env_new(sh, environ);
-	env_initialize_local(sh);
+	env_initialize_local(sh, name);
 	sh->alias = env_new(sh, NULL);
 	sh_config_import(sh);
 	sh->bin = bin_new(sh, sh->env);

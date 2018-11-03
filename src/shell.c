@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:42:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:31:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			main(int argc, char **argv, char **environ)
 	(void)argc;
 	(void)argv;
 	sh = NULL;
-	sh = sh_new(environ);
+	sh = sh_new(argv[0], environ);
 	sh_welcome();
 	signal_catching();
 	sh_read(sh);

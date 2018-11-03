@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 19:09:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:13:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -464,7 +464,7 @@ void					env_insert_protected(
 							char *k,
 							char *v);
 void					env_initialize(t_shell *sh, t_env *env, char **e);
-void					env_initialize_local(t_shell *sh);
+void					env_initialize_local(t_shell *sh, char *name);
 void					sh_env_init_config(t_shell *sh);
 void					sh_env_init_histfile(t_shell *sh);
 void					sh_env_init_home(t_shell *sh);
@@ -472,7 +472,7 @@ void					sh_env_init_ppid(t_shell *sh);
 void					sh_env_init_ps(t_shell *sh);
 void					sh_env_init_pwd(t_shell *sh);
 void					sh_env_init_shlvl(t_shell *sh);
-void					sh_env_init_specials(t_shell *sh);
+void					sh_env_init_specials(t_shell *sh, char *name);
 void					sh_env_init_term(t_shell *sh);
 void					env_local_to_public(t_env *env, char *key, char *value);
 void					env_insert_item_into_array(t_env *e, char *k, char *v);
@@ -501,7 +501,7 @@ char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
-t_shell					*sh_new(char **environ);
+t_shell					*sh_new(char *name, char **environ);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);
 
