@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:08:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:08:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,14 @@ char					*sh_replace_aliases(t_env *alias, char *s);
 char					*lexer_aliases(t_env *aliases, char *s, int start);
 
 /*
+** functions - lexer - backtick
+*/
+t_lexer_glob			*add_node_lexer_backtick(
+							t_lexer_glob *current, char *s, int type);
+size_t					backtick_splice_points(char *s);
+
+
+/*
 ** functions - lexer - dollar
 */
 char					*sh_dollar_expansion(char *str, t_env *env);
@@ -262,6 +270,8 @@ char					*lexer_expand(t_env *env, char *str, int i);
 char					*sh_glob(char *str);
 void					lexer_glob(
 							t_shell *sh, t_env *env, t_token_tree **tree);
+t_lexer_glob	*add_node_lexer_glob(
+							t_lexer_glob *current, char *s, int type);
 
 /*
 ** functions - lexer - glob - cbraces
@@ -386,6 +396,8 @@ bool					lexer_need_esc(char c);
 void					lexer_repatriate(char *str, int i, int len);
 int						lexer_strcountif(char *str, char c);
 char					**lexer_strsplit(char *s, char c);
+char					**lexer_strsplit_ws(char *s);
+bool					glob_conditions(char *str);
 
 /*
 ** functions - exec

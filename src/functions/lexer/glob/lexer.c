@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:52:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 23:50:50 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/03 13:57:11 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static t_lexer_glob	*add_node_lexer_glob(
+t_lexer_glob	*add_node_lexer_glob(
 	t_lexer_glob *current, char *s, int type)
 {
 	int				i;
@@ -72,23 +72,6 @@ static void			lexer_glob_token_tree(
 	}
 }
 
-static bool			glob_conditions(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=' && !lexer_is_esc(str, i))
-			return (FALSE);
-		if ((str[i] == '*' || str[i] == '?' || str[i] == '[' || str[i] == '{')
-		&& !lexer_is_esc(str, i))
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
 static void			do_glob(t_token_tree **t, int i, t_lexer_glob **glob)
 {
 	char	*res;
@@ -101,24 +84,6 @@ static void			do_glob(t_token_tree **t, int i, t_lexer_glob **glob)
 		: add_splitted_node_lexer_glob(
 			*glob, (*t)->tokens[i], (*t)->t_type[i]);
 	ft_strdel(&res);
-}
-
-static t_lexer_glob	*add_node_lexer_backtick(
-	t_lexer_glob *current, char *s, int type)
-{
-	int			i;
-	char		**arr;
-
-	i = 0;
-	arr = lexer_strsplit(s, ' ');
-	while (arr && arr[i])
-	{
-		current = add_node_lexer_glob(current, arr[i], type);
-		i++;
-	}
-	ft_strdel(&s);
-	(arr) ? free(arr) : 0;
-	return (current);
 }
 
 void				lexer_glob(t_shell *sh, t_env *env, t_token_tree **t)
@@ -135,7 +100,7 @@ void				lexer_glob(t_shell *sh, t_env *env, t_token_tree **t)
 		else if ((*t)->t_type[i] == TOKEN_BACKQUOTE)
 		{
 			(*t)->tokens[i] = backtick_prep(sh, env, (*t)->tokens[i]);
-			glob = (backtick_splice_points((*t)->tokens[i]) > 0) ? // splicing points | SPLICE BY WHITESPACES.
+			glob = (backtick_splice_points((*t)->tokens[i]) > 0) ?
 			add_node_lexer_backtick(glob, (*t)->tokens[i], (*t)->t_type[i]) :
 			add_node_lexer_glob(glob, (*t)->tokens[i], (*t)->t_type[i]);
 		}

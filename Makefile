@@ -91,6 +91,8 @@ SRC			=	shell.c														\
 				functions/check/check.c										\
 				functions/check/lexer.c										\
 				functions/lexer/aliases/aliases.c							\
+				functions/lexer/backtick/lexer.c							\
+				functions/lexer/backtick/splice_point.c						\
 				functions/lexer/dollar/dollar.c								\
 				functions/lexer/glob/glob.c									\
 				functions/lexer/glob/lexer.c								\
@@ -108,6 +110,7 @@ SRC			=	shell.c														\
 				functions/lexer/glob/utils/range.c							\
 				functions/lexer/glob/utils/cbraces_strsplit.c				\
 				functions/lexer/glob/utils/pattern_strsplit.c				\
+				functions/lexer/glob/utils/conditions.c						\
 				functions/lexer/heredoc/add.c								\
 				functions/lexer/heredoc/all_closed.c						\
 				functions/lexer/heredoc/delete.c							\
@@ -135,6 +138,7 @@ SRC			=	shell.c														\
 				functions/lexer/utils/repatriate.c							\
 				functions/lexer/utils/strcountif_esc.c						\
 				functions/lexer/utils/strsplit.c							\
+				functions/lexer/utils/strsplit_ws.c							\
 				functions/lexer/utils/useless_quotes.c						\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
@@ -337,6 +341,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/check
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/aliases
+				@mkdir -p $(OBJ_DIR)/functions/lexer/backtick
 				@mkdir -p $(OBJ_DIR)/functions/lexer/dollar
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob
 				@mkdir -p $(OBJ_DIR)/functions/lexer/glob/cbraces
