@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/01 19:21:54 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/02 21:44:15 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	handle_quotes(t_lexer *lexer, char *cmd, int *i, int *j)
 	char	status;
 
 	status = STATUS_OK;
+	if (cmd[*i] == '(')
+		return (lexer_handle_subshell(lexer, cmd, i, j));
 	if (!(cmd[*i] == '\"' || cmd[*i] == '\'' || cmd[*i] == '`')
 	|| lexer_is_esc(cmd, *i))
 		return (status);
@@ -91,8 +93,8 @@ char		lexer_fill(t_lexer *lexer, char *cmd)
 			i += match->size;
 			j = i;
 		}
-		else if ((cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '`')
-		&& !lexer_is_esc(cmd, i))
+		else if ((cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '`'
+		|| cmd[i] == '(') && !lexer_is_esc(cmd, i))
 		{
 			if ((status = handle_quotes(lexer, cmd, &i, &j)) != STATUS_OK)
 				return (status);

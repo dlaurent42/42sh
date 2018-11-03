@@ -12,6 +12,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/parsing.c											\
 				errors/path.c												\
+				errors/subshell.c											\
 				terminal/signals/stop_acquisition.c							\
 				functions/ast/build_list.c									\
 				functions/ast/get_tree_token_type.c							\
@@ -122,6 +123,7 @@ SRC			=	shell.c														\
 				functions/lexer/tokenize/delete.c							\
 				functions/lexer/tokenize/fill.c								\
 				functions/lexer/tokenize/lexic_singletone.c					\
+				functions/lexer/tokenize/subshell.c							\
 				functions/lexer/tokenize/token_add.c						\
 				functions/lexer/tokenize/token_backquote.c					\
 				functions/lexer/tokenize/token_doublequote.c				\
@@ -148,6 +150,8 @@ SRC			=	shell.c														\
 				functions/run/run.c											\
 				functions/run/run.lexer.c									\
 				functions/run/run.tree.c									\
+				functions/subshell/subshell.c								\
+				functions/subshell/execute.c								\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\
@@ -355,6 +359,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
 				@mkdir -p $(OBJ_DIR)/functions/run
+				@mkdir -p $(OBJ_DIR)/functions/subshell
 				@mkdir -p $(OBJ_DIR)/structures
 				@mkdir -p $(OBJ_DIR)/structures/ast
 				@mkdir -p $(OBJ_DIR)/structures/binaries

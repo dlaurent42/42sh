@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 15:16:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 18:44:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/02 15:55:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void		sh_sigint_reset(t_shell *sh, char *last_return)
 {
+	bool	subshell;
+
 	if (!sh)
 		return ;
+	subshell = sh->modes.subshell;
 	sh_move_end(sh);
 	ft_putchar('\n');
 	ft_bzero(sh->buffer.content, sh->buffer.unicode_len + sh->buffer.ushift);
@@ -31,7 +34,7 @@ void		sh_sigint_reset(t_shell *sh, char *last_return)
 	if (sh->env
 	&& (env_search(sh->env, "?") || sh->env->count + 1 < sh->env->size))
 		env_insert_protected(sh, sh->env, "?", last_return);
-	(sh) ? sh_set_prompt(sh) : 0;
-	(sh) ? sh_print_prompt(sh) : 0;
+	(sh && !subshell) ? sh_set_prompt(sh) : 0;
+	(sh && !subshell) ? sh_print_prompt(sh) : 0;
 	ft_putstr(CURSOR_SHOW);
 }

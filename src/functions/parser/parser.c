@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:08:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:17:05 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 	ft_deltab(tree->tokens);
 	tree->tokens = arg;
 	lexer_glob(sh, env, &tree);
-	ret = sh_command_found(sh, env, bin, &tree->tokens[0]);
+	ret = (tree->tokens[0] && tree->t_type[0] == TOKEN_SUBSHELL)
+		? execute_subshell(sh, env, tree) :
+		sh_command_found(sh, env, bin, &tree->tokens[0]);
 	return (ret);
 }
 

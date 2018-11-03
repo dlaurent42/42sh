@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:13:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:34:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char					error_execution_tree(void);
 char					error_execution_file(t_shell *sh, char *filename);
 char					error_file_permissions(t_shell *sh, char *filename);
 char					parse_error(char *err);
+char					error_subshell(void);
 
 /*
 ** functions - backtick
@@ -332,6 +333,11 @@ void					lexer_token_add(
 							t_token_type type);
 char					lexer_delete(t_lexer *lexer, char status);
 char					lexer_token_merge(t_lexer *lexer, size_t i);
+char					lexer_handle_subshell(
+							t_lexer *lexer,
+							char *cmd,
+							int *i,
+							int *j);
 char					lexer_token_singlequote(
 							t_lexer *l,
 							char *cmd,
@@ -407,6 +413,15 @@ char					sh_command_run_tree(
 							t_bin *bin,
 							t_lexer lexer);
 char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
+
+/*
+** functions - subshell
+*/
+int						sh_subshell(t_shell *sh, char **argv);
+char					execute_subshell(
+									t_shell *sh,
+									t_env *env,
+									t_token_tree *tree);
 
 /*
 ** structures - binaries
@@ -501,7 +516,7 @@ char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
 char					*sh_get_git_branch(char *location);
-t_shell					*sh_new(char *name, char **environ);
+t_shell					*sh_new(char **environ, int argc);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);
 
@@ -618,7 +633,7 @@ void					sh_select_print(t_shell *sh);
 /*
 ** terminal - read
 */
-void					sh_read(t_shell *sh);
+char					sh_read(t_shell *sh);
 void					sh_print_prompt(t_shell *sh);
 void					sh_read_dispatcher(t_shell *sh);
 void					sh_deletion_dispatcher(t_shell *sh);
