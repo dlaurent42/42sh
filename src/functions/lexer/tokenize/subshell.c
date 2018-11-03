@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:09:51 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 21:44:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 21:24:12 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ char		lexer_handle_subshell(t_lexer *lexer, char *cmd, int *i, int *j)
 	while ((cmd[*i] == ')' && (count || lexer_is_esc(cmd, *i)))
 	|| cmd[*i] != ')')
 	{
+		if (cmd[*i] == '\0')
+			return (STATUS_SUBSHELL);
 		if ((move = manage_quotes(cmd, *i)) == -1)
 			return (STATUS_OK);
 		*i = move;
-		if (cmd[*i] == '\0')
-			return (STATUS_SUBSHELL);
 		if (cmd[*i] == '(' && !lexer_is_esc(cmd, *i))
 			count++;
 		if (cmd[*i] == ')' && !(count || lexer_is_esc(cmd, *i)))
