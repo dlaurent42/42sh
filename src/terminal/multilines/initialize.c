@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/02 19:34:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:42:53 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*sh_multiline_assess_status(char status)
 	(status == STATUS_PIPE) ? ret = ("pipe") : 0;
 	(status == STATUS_SUBSHELL) ? ret = ("subshell") : 0;
 	(status == STATUS_NEWLINE) ? ret = ("newline") : 0;
-	return ("?");
+	return (ret);
 }
 
 static void	sh_multilines_prompt(t_shell *sh, char status)
@@ -83,6 +83,7 @@ static void	sh_multiline_buffer(t_shell *sh, char status)
 
 void		sh_multilines(t_shell *sh, char status)
 {
+	ft_printf("Status from sh_multilines : %d\n", status);
 	ft_strdel(&sh->buffer.parsed);
 	if (ft_strlens(sh->buffer.content) >= ARG_MAX)
 		return (sh_reset_sh(sh));
