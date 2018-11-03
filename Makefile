@@ -31,7 +31,6 @@ SRC			=	shell.c														\
 				functions/ast/operators/file_descriptor.c					\
 				functions/ast/operators/file_descriptor_utils.c				\
 				functions/backtick/execute.c								\
-				functions/backtick/check.c									\
 				functions/backtick/prep.c									\
 				functions/backtick/capture.c								\
 				functions/builtins/list_of_builtins.c						\
