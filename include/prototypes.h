@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:27:19 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:28:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ char					*lexer_expand(t_env *env, char *str, int i);
 char					*sh_glob(char *str);
 void					lexer_glob(
 							t_shell *sh, t_env *env, t_token_tree **tree);
-t_lexer_glob	*add_node_lexer_glob(
+t_lexer_glob			*add_node_lexer_glob(
 							t_lexer_glob *current, char *s, int type);
 
 /*
