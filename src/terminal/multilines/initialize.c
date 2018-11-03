@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:42:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:47:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	sh_multiline_buffer(t_shell *sh, char status)
 
 void		sh_multilines(t_shell *sh, char status)
 {
-	ft_printf("Status from sh_multilines : %d\n", status);
 	ft_strdel(&sh->buffer.parsed);
 	if (ft_strlens(sh->buffer.content) >= ARG_MAX)
 		return (sh_reset_sh(sh));
