@@ -98,6 +98,7 @@ SRC			=	shell.c														\
 				functions/lexer/glob/cbraces/cbraces.c						\
 				functions/lexer/glob/cbraces/check.c						\
 				functions/lexer/glob/cbraces/dot.c							\
+				functions/lexer/glob/cbraces/dot.replace.c					\
 				functions/lexer/glob/cbraces/list.c							\
 				functions/lexer/glob/cbraces/start_and_stop.c				\
 				functions/lexer/glob/pattern/pattern.c						\

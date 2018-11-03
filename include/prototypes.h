@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:10:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 19:09:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,10 +237,8 @@ char					*lexer_expand(t_env *env, char *str, int i);
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
-void					lexer_glob(
-							t_shell *sh, t_env *env, t_token_tree **tree);
-t_lexer_glob	*add_node_lexer_glob(
-							t_lexer_glob *current, char *s, int type);
+void					lexer_glob(t_shell *sh, t_env *env, t_token_tree **tree);
+t_lexer_glob			*add_node_lexer_glob(t_lexer_glob *current, char *s, int type);
 
 /*
 ** functions - lexer - glob - cbraces
@@ -250,6 +248,8 @@ bool					sh_glob_cbraces_check(char *str);
 bool					sh_glob_cbraces_start_stop(t_cbraces *cb);
 char					sh_glob_cbraces_dots(t_cbraces *cb);
 void					sh_glob_cbraces_dots_expand(t_cbraces *cb);
+void					sh_glob_cbraces_rp_num(t_cbraces *cb);
+void					sh_glob_cbraces_rp_alpha(t_cbraces *cb);
 bool					sh_glob_cbraces_list(t_cbraces *cb);
 void					sh_glob_cbraces_expand(t_cbraces *cb);
 
