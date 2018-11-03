@@ -12,6 +12,7 @@ SRC			=	shell.c														\
 				errors/malloc.c												\
 				errors/parsing.c											\
 				errors/path.c												\
+				errors/subshell.c											\
 				terminal/signals/stop_acquisition.c							\
 				functions/ast/build_list.c									\
 				functions/ast/get_tree_token_type.c							\

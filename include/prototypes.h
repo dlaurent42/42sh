@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:28:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 20:16:08 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char					error_execution_tree(void);
 char					error_execution_file(t_shell *sh, char *filename);
 char					error_file_permissions(t_shell *sh, char *filename);
 char					parse_error(char *err);
+char					error_subshell(void);
 
 /*
 ** functions - backtick
@@ -420,7 +421,6 @@ int						sh_subshell(t_shell *sh, char **argv);
 char					execute_subshell(
 									t_shell *sh,
 									t_env *env,
-									t_bin *bin,
 									t_token_tree *tree);
 
 /*
