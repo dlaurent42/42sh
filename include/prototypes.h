@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 18:27:07 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/03 18:27:19 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,6 +417,11 @@ char					sh_command_dispatch(t_shell *sh, t_env *env, char **a);
 ** functions - subshell
 */
 int						sh_subshell(t_shell *sh, char **argv);
+char					execute_subshell(
+									t_shell *sh,
+									t_env *env,
+									t_bin *bin,
+									t_token_tree *tree);
 
 /*
 ** structures - binaries

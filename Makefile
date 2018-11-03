@@ -149,6 +149,7 @@ SRC			=	shell.c														\
 				functions/run/run.lexer.c									\
 				functions/run/run.tree.c									\
 				functions/subshell/subshell.c								\
+				functions/subshell/execute.c								\
 				structures/ast/add.c										\
 				structures/ast/new.c										\
 				structures/ast/clean.c										\
