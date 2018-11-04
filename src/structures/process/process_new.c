@@ -6,15 +6,15 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:26:40 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 14:26:41 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 15:31:13 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_process			*process_new(void)
+t_process				*process_new(void)
 {
-	t_process		*new_process;
+	t_process			*new_process;
 
 	if (!(new_process = (t_process *)ft_memalloc(sizeof(t_process))))
 		return (NULL);
