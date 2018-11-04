@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:26:25 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 16:06:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 16:20:50 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Adds process to head of the list.
 */
 
-bool				process_add(t_shell *sh, pid_t pid, t_cmd *cmd)
+bool				process_add(t_shell *sh, pid_t pid, char *cmd)
 {
 	t_process		*new_process;
 
