@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 15:29:02 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/04 16:01:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,7 +372,6 @@ typedef struct			s_shell
 	t_env				*alias;
 	t_read				*read;
 	t_exec				*exec;
-	t_heredocs			*heredocs;
 	t_modes				modes;
 	t_lexer				lexer;
 	t_cursor			cursor;
@@ -382,6 +381,8 @@ typedef struct			s_shell
 	t_search			search;
 	t_select			selection;
 	t_termios			termios;
+	t_process			*process;
+	t_heredocs			*heredocs;
 }						t_shell;
 
 t_shell					*g_sh;
