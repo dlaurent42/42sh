@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:47:33 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/04 12:06:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,16 @@ static void	sh_multilines_prompt(t_shell *sh, char status)
 
 static void	sh_multiline_buffer(t_shell *sh, char status)
 {
+	int		i;
 	size_t	len;
 
+	i = sh->buffer.ushift - 1;
 	len = ft_strlens(sh->buffer.content);
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
-	if (status != STATUS_NEWLINE)
+	if (status == STATUS_HEREDOC && sh->buffer.ushift)
+		while (sh->buffer.content[++i])
+			sh->buffer.content[i] = '\0';
+	else if (status != STATUS_NEWLINE)
 		sh->buffer.content[len] = '\n';
 	else
 		sh->buffer.content[len - 1] = '\0';
