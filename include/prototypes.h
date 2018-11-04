@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:48:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:48:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -531,16 +531,17 @@ void					sh_destroy_exec(t_exec **exec);
 /*
 ** structures - process
 */
+void					jobs_display(t_shell *sh);
 bool					process_add(t_shell *sh, pid_t pid, char *cmd);
 bool					process_destroy(t_shell *sh, t_process *process);
 bool					process_destroy_all(t_shell *sh);
 bool					process_destroy_id(t_shell *sh, int id);
 bool					process_destroy_pid(t_shell *sh, pid_t pid);
 void					process_display(t_process *process);
-void					jobs_display(t_shell *sh);
 t_process				*process_get(t_shell *sh, int id, pid_t pid);
 t_process				*process_get_id(t_shell *sh, int id);
 t_process				*process_get_pid(t_shell *sh, pid_t pid);
+void					process_id_assign(t_shell *sh);
 t_process				*process_new(void);
 
 /*
