@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 13:39:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 14:14:51 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/04 14:39:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ static void	sh_heredoc_repatriate(t_lexer *lexer, int i, int cmd_pos)
 	|| lexer->tokens[i].type == TOKEN_BACKQUOTE
 	|| lexer->tokens[i].type == TOKEN_WORD)
 	{
-		j = (int)lexer->size - 1;
+		j = i;
 		tmp_id = ft_strdups(lexer->tokens[i].id);
 		tmp_type = lexer->tokens[i].type;
 		tmp_blank = lexer->tokens[i].blank_before;
 		while (cmd_pos + 1 <= j)
 		{
-			ft_printf("Moving %s in place of %s\n", lexer->tokens[j + 1].id, lexer->tokens[j].id);
 			ft_strdel(&(lexer->tokens[j].id));
-			lexer->tokens[j].id = ft_strdupf(lexer->tokens[j - 1].id);
+			lexer->tokens[j].id = ft_strdups(lexer->tokens[j - 1].id);
 			lexer->tokens[j].type = lexer->tokens[j - 1].type;
 			lexer->tokens[j].blank_before = lexer->tokens[j - 1].blank_before;
 			j--;
 		}
-		lexer->tokens[cmd_pos + 1].id = tmp_id;
-		lexer->tokens[cmd_pos + 1].type = tmp_type;
-		lexer->tokens[cmd_pos + 1].blank_before = tmp_blank;
+		ft_strdel(&(lexer->tokens[j].id));
+		lexer->tokens[cmd_pos].id = tmp_id;
+		lexer->tokens[cmd_pos].type = tmp_type;
+		lexer->tokens[cmd_pos].blank_before = tmp_blank;
 		cmd_pos++;
 		i++;
 	}

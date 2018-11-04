@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:59:48 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/01 12:00:04 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/04 14:40:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static void	execute_heredoc_child(
 	dup2(fd[1], 1);
 	close(fd[0]);
 	while (count--)
+	{
+		ft_strdel(&str);
 		str = sh_heredoc_get_next(sh);
+	}
 	ft_putstr_fd(str ? str : "", 1);
 	dup2(stdout, 1);
 	close(stdout);

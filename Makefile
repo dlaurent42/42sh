@@ -3,7 +3,7 @@
 NAME 		= 	42sh
 
 CC 			=	gcc
-CFLAGS		= 	-O3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
+CFLAGS		= 	-O3 -g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
