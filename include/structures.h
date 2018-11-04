@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 16:01:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 16:19:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,7 +356,7 @@ typedef struct 			s_process
 	int					fd[10];
 	int					status;
 	pid_t				pid;
-	t_cmd				*cmd;
+	char				*cmd;
 	struct s_process	*next;
 }						t_process;
 
