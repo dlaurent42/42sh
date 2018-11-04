@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_display_jobs.c                             :+:      :+:    :+:   */
+/*   jobs_display.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 16:30:14 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 16:30:55 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 17:13:02 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				process_display_jobs(t_shell *sh)
+void				jobs_display(t_shell *sh)
 {
 	t_process		*process;
 
