@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:55:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 16:09:05 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 16:23:19 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool				process_destroy(t_shell *sh, t_process *process)
 		else
 			return (false);
 	}
+	free(process->cmd);
 	free(process);
 	return (true);
 }
