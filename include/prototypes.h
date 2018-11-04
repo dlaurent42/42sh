@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:47:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:47:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -538,6 +538,7 @@ bool					process_destroy_pid(t_shell *sh, pid_t pid);
 t_process				*process_get(t_shell *sh, int id, pid_t pid);
 t_process				*process_get_id(t_shell *sh, int id);
 t_process				*process_get_pid(t_shell *sh, pid_t pid);
+void					process_display_jobs(t_shell *sh);
 t_process				*process_new(void);
 
 /*
