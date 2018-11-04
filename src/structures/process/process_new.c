@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:26:40 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 15:31:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 16:11:40 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ t_process				*process_new(void)
 	if (!(new_process = (t_process *)ft_memalloc(sizeof(t_process))))
 		return (NULL);
 	new_process->pid = -1;
-	return (new_process)
+	return (new_process);
 }
