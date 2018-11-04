@@ -210,6 +210,7 @@ SRC			=	shell.c														\
 				structures/shell/exec.c										\
 				structures/process/process_add.c							\
 				structures/process/process_destroy.c						\
+				structures/process/process_destroy_all.c						\
 				structures/process/process_destroy_id.c						\
 				structures/process/process_destroy_pid.c					\
 				structures/process/process_display.c						\
