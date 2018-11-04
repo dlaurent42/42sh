@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 16:30:14 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 17:13:02 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 17:14:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void				jobs_display(t_shell *sh)
 	process = sh->process;
 	while (process)
 	{
-		ft_printf("id[%4d] | Process [%s]\n", process->id, process->cmd);
+		process_display(process);
 		process = process->next;
 	}
 }
