@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 13:29:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 13:10:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/04 15:45:24 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ static bool	is_error_token_minus_one(t_lexer *l, t_token t, int i)
 
 static bool	is_error_token_current(t_lexer *l, t_token t, int i)
 {
-	return (i && t.blank_before == 0 && t.id
+	return ((i == 0 && t.type == TOKEN_AMPERSAND)
+	|| (i && t.blank_before == 0 && t.id
 	&& (t.id[0] == '(' || t.id[0] == ')')
-	&& l->tokens[i - 1].type >= TOKEN_SINGLEQUOTE);
+	&& l->tokens[i - 1].type >= TOKEN_SINGLEQUOTE));
 }
 
 char		sh_command_check_lexer(t_shell *sh, t_lexer *l)
