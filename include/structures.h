@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 20:14:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:45:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,6 +349,17 @@ typedef struct			s_token_tree
 	struct s_token_tree	*left;
 	struct s_token_tree	*right;
 }						t_token_tree;
+
+typedef struct 			s_process
+{
+	int					id;
+	int					fd[10];
+	int					status;
+	pid_t				pid;
+	t_cmd				*cmd;
+	struct s_process	*next;
+	struct s_process	*head;
+}						t_process;
 
 typedef struct			s_shell
 {
