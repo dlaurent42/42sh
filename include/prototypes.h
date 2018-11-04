@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 20:40:45 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:46:26 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,6 +527,18 @@ char					*sh_get_git_branch(t_shell *sh, char *location);
 t_shell					*sh_new(int argc, char **argv, char **environ);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);
+
+/*
+** structures - process
+*/
+bool					process_add(t_shell *sh, int *fd, pid_t pid, t_cmd *cmd);
+bool					process_destroy(t_shell *sh, t_process *process);
+bool					process_destroy_id(t_shell *sh, int id);
+bool					process_destroy_pid(t_shell *sh, pid_t pid);
+t_process				*process_get(t_shell *sh, int id, pid_t pid);
+t_process				*process_get_id(t_shell *sh, int id);
+t_process				*process_get_pid(t_shell *sh, pid_t pid);
+t_process				*process_new(void);
 
 /*
 ** terminal - auto_completion
