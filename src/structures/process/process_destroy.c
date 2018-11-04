@@ -6,15 +6,15 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:55:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 15:27:37 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 15:30:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-bool			process_destroy(t_shell *sh, t_process *process)
+bool				process_destroy(t_shell *sh, t_process *process)
 {
-	t_process	*tmp;
+	t_process		*tmp;
 
 	if (!process || !sh->process)
 		return (false);
