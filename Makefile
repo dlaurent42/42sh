@@ -208,6 +208,14 @@ SRC			=	shell.c														\
 				structures/shell/set_prompt.git.c							\
 				structures/shell/termios.c									\
 				structures/shell/exec.c										\
+				structures/process/process_add.c							\
+				structures/process/process_destroy.c						\
+				structures/process/process_destroy_id.c						\
+				structures/process/process_destroy_pid.c					\
+				structures/process/process_get.c							\
+				structures/process/process_get_id.c							\
+				structures/process/process_get_pid.c						\
+				structures/process/process_new.c							\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\
 				terminal/autocompletion/auto_completion/get_obj.c			\
@@ -372,6 +380,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/gnl
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
+				@mkdir -p $(OBJ_DIR)/structures/process
 				@mkdir -p $(OBJ_DIR)/terminal
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion
 				@mkdir -p $(OBJ_DIR)/terminal/autocompletion/env
