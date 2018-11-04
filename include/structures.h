@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 14:20:23 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 15:29:02 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,6 +309,7 @@ typedef enum			e_token_type
 	TOKEN_AGGREG = 5,
 	TOKEN_HEREDOC = 6,
 	TOKEN_SEMICOLON = 7,
+	TOKEN_AMPERSAND = 7,
 	TOKEN_BLANK = 8,
 	TOKEN_SINGLEQUOTE = 9,
 	TOKEN_DOUBLEQUOTE = 10,

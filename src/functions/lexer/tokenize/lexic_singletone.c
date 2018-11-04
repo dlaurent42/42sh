@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:07:24 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/10/28 18:28:56 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/11/04 14:57:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 const t_token	*lexer_lexic_singletone(void)
 {
 	static const	t_token lexic[] = {
+		{.id = "&", .size = 1, .type = TOKEN_AMPERSAND},
 		{.id = "&&", .size = 2, .type = TOKEN_ANDIF},
 		{.id = ">&", .size = 2, .type = TOKEN_AGGREG},
 		{.id = "<&", .size = 2, .type = TOKEN_AGGREG},
