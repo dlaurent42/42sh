@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 16:32:19 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 16:33:03 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 17:26:58 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void				process_display(t_process *process)
 {
 	if (process)
-		ft_printf("id[%4d] | Process [%s]\n", process->id, process->cmd);
+		ft_printf("[%d] %6d %s\n", process->id, process->pid, process->cmd);
 }
