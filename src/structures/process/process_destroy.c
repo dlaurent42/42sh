@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_add.c                                      :+:      :+:    :+:   */
+/*   process_destroy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/04 14:26:25 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 15:21:00 by dhojt            ###   ########.fr       */
+/*   Created: 2018/11/04 14:55:04 by dhojt             #+#    #+#             */
+/*   Updated: 2018/11/04 15:27:37 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-/*
-** Adds process to head of the list.
-*/
-
-bool			process_add(t_shell *sh, int *fd, pid_t pid, t_cmd *cmd)
+bool			process_destroy(t_shell *sh, t_process *process)
 {
-	t_process	*new_process;
+	t_process	*tmp;
 
-	if (!(new_process = process_new()))
+	if (!process || !sh->process)
 		return (false);
-	new_process->id = (sh->process) ? sh->process->id + 1 : 1;
-	new_process->fd = fd;
-	new_process->status = 0;//WHAT SHOULD THIS BE?
-	new_process->pid = pid;
-	new_process->cmd = cmd;
-	new_process->next = sh->process;
-	sh->process = new_process;
+	if (process == sh->process)
+		sh->process = sh->process->next;
+	else
+	{
+		while (tmp && tmp->next && tmp->next != process)
+			tmp = tmp->next;
+		if (tmp && tmp->next && tmp->next = process)
+			tmp->next = tmp->next->next;
+		else
+			return (false);
+	}
+	free(process):
 	return (true);
 }
