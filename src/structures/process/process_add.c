@@ -6,28 +6,27 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:26:25 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 14:26:29 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 14:40:31 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** Adds process to end and increses it's id.
+** Adds process to head of the list.
 */
 
-void			process_add(t_process **head, t_process *new)
+bool			process_add(t_shell *sh, int *fd, pid_t pid, t_cmd *cmd)
 {
-	t_process	*cpy;
+	t_process	*new_process;
 
-	cpy = *head;
-	if (!(*head))
-		*head = new;
-	else
-	{
-		while (cpy->next)
-			cpy = cpy->next;
-		cpy->next = new;
-		new->id = cpy->id + 1;
-	}
+	if (!(new_process = process_new()))
+		return (false);
+	new_process->id = (sh->process) ? sh->process->id + 1 : 1;
+	new_process->fd = fd;
+	new_process->status = 0;//WHAT SHOULD THIS BE?
+	new_process->pid = pid;
+	new_process->cmd = cmd;
+	new_process->next = sh->process;
+	sh->process = new_process;
 }
