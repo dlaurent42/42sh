@@ -118,6 +118,7 @@ SRC			=	shell.c														\
 				functions/lexer/heredoc/get_next.c							\
 				functions/lexer/heredoc/heredoc.c							\
 				functions/lexer/heredoc/init.c								\
+				functions/lexer/heredoc/orga.c								\
 				functions/lexer/heredoc/update.c							\
 				functions/lexer/tilde/tilde.c								\
 				functions/lexer/tokenize/delete.c							\

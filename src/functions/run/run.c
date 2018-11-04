@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 12:07:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/04 13:41:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		return (lexer_delete(&lexer, status));
 	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
 		return (lexer_delete(&lexer, status));
+	int	i;
+
+	i = -1;
+	while (++i < (int)lexer.size)
+		ft_printf("token[%d]=%s (%d)\n", i, lexer.tokens[i].id, lexer.tokens[i].type);
 	if (lexer.size == 0 && env_search(env, "?"))
 		return (ft_atoi(env_search(env, "?")));
 	else if (lexer.size == 0)
