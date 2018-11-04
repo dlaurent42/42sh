@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:26:25 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 14:40:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 15:21:00 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ bool			process_add(t_shell *sh, int *fd, pid_t pid, t_cmd *cmd)
 	new_process->cmd = cmd;
 	new_process->next = sh->process;
 	sh->process = new_process;
+	return (true);
 }
