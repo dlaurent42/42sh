@@ -6,7 +6,7 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:55:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 16:23:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/04 18:03:55 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool				process_destroy(t_shell *sh, t_process *process)
 {
 	t_process		*tmp;
 
-	tmp = process;
+	tmp = sh->process;
 	if (!process || !sh->process)
 		return (false);
 	if (process == sh->process)
