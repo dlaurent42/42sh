@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 15:58:07 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:43:06 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,22 @@ char					*sh_replace_aliases(t_env *alias, char *s);
 /*
 ** char					lexer_check_brackets(char *str, char c);
 */
+
+/*
+** functions - jobs
+*/
+void					job_launch(t_job *job, int foreground);
+void					put_job_in_foreground(t_job *job, int cont);
+void					job_wait(t_job *job);
+/*
+** functions - process
+*/
+void					process_launch(
+							t_process *p,
+							pid_t pgid,
+							int fd[3],
+							int foreground);
+int						process_status(pid_t pid, int status);
 
 /*
 ** functions - lexer - aliases
@@ -505,6 +521,8 @@ t_env					*env_copy(t_shell *sh, t_env *src);
 */
 void					job_destroy_all(t_job *job);
 t_job					*job_new(void);
+int						job_is_completed(t_job *job);
+int						job_is_stopped(t_job *job);
 
 /*
 ** structures - reader

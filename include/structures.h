@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 13:58:31 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 16:38:00 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,6 +358,7 @@ typedef struct 			s_process
 	char				completed;
 	char				stopped;
 	char				**argv;
+	t_env				*env;
 	pid_t				pid;
 	char				*cmd;
 	struct s_process	*next;
