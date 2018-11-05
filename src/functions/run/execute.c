@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 15:57:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 16:31:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);
-		job = job_new();
+		job = job_new(); // Move this to more approprate place.
 		res = sh_command_exec(sh, argv, env->environment);
 
 		sh_set_termios(sh);
