@@ -205,6 +205,7 @@ SRC			=	shell.c														\
 				structures/environment/ini/term.c							\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
+				structures/jobs/delete.c									\
 				structures/jobs/completed.c									\
 				structures/jobs/stopped.c									\
 				structures/read/delete.c									\
