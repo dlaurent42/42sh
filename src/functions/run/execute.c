@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 16:31:33 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 16:51:52 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 {
 	char	res;
-	t_job	*job;
+	t_job		*job;
+	t_process	*p;
 
 	if (!argv || !argv[0])
 		return (1);
@@ -73,7 +74,15 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	{
 		sh_unset_termios(sh);
 		job = job_new(); // Move this to more approprate place.
-		res = sh_command_exec(sh, argv, env->environment);
+		sh->job = job;
+		p = process_new();
+		p->argv = argv;
+		p->env = env;
+		job->first_process = p;
+		job_launch(job, 1);
+		//res = sh_command_exec(sh, argv, env->environment);
+		(void)sh_command_exec;
+		res = STATUS_OK;
 
 		sh_set_termios(sh);
 	}

@@ -90,6 +90,12 @@ SRC			=	shell.c														\
 				functions/check/aliases.c									\
 				functions/check/check.c										\
 				functions/check/lexer.c										\
+				functions/jobs/foreground.c									\
+				functions/jobs/launch.c										\
+				functions/jobs/notification.c								\
+				functions/jobs/wait.c										\
+				functions/process/launch.c									\
+				functions/process/status.c									\
 				functions/lexer/aliases/aliases.c							\
 				functions/lexer/backtick/lexer.c							\
 				functions/lexer/backtick/splice_point.c						\
@@ -200,6 +206,8 @@ SRC			=	shell.c														\
 				structures/gnl/gnl.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
+				structures/jobs/completed.c									\
+				structures/jobs/stopped.c									\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
@@ -360,6 +368,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unsetenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/utils
 				@mkdir -p $(OBJ_DIR)/functions/check
+				@mkdir -p $(OBJ_DIR)/functions/jobs
 				@mkdir -p $(OBJ_DIR)/functions/lexer
 				@mkdir -p $(OBJ_DIR)/functions/lexer/aliases
 				@mkdir -p $(OBJ_DIR)/functions/lexer/backtick
@@ -375,6 +384,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/lexer/tokenize
 				@mkdir -p $(OBJ_DIR)/functions/lexer/utils
 				@mkdir -p $(OBJ_DIR)/functions/parser
+				@mkdir -p $(OBJ_DIR)/functions/process
 				@mkdir -p $(OBJ_DIR)/functions/run
 				@mkdir -p $(OBJ_DIR)/functions/subshell
 				@mkdir -p $(OBJ_DIR)/structures

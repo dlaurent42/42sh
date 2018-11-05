@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:49:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:50:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,22 @@ char					*sh_replace_aliases(t_env *alias, char *s);
 /*
 ** char					lexer_check_brackets(char *str, char c);
 */
+
+/*
+** functions - jobs
+*/
+void					job_launch(t_job *job, int foreground);
+void					put_job_in_foreground(t_job *job, int cont);
+void					job_wait(t_job *job);
+/*
+** functions - process
+*/
+void					process_launch(
+							t_process *p,
+							pid_t pgid,
+							int fd[3],
+							int foreground);
+int						process_status(pid_t pid, int status);
 
 /*
 ** functions - lexer - aliases
@@ -513,7 +529,12 @@ void					gnl_delete(t_shell *sh);
 */
 void					job_destroy_all(t_job *job);
 t_job					*job_new(void);
+<<<<<<< HEAD
 >>>>>>> d8b9971... Begining of job implamentation.
+=======
+int						job_is_completed(t_job *job);
+int						job_is_stopped(t_job *job);
+>>>>>>> 59d6526... Not working, but compiling.
 
 /*
 ** structures - reader
