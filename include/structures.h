@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 16:19:58 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/05 13:58:31 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,10 +355,24 @@ typedef struct 			s_process
 	int					id;
 	int					fd[10];
 	int					status;
+	char				completed;
+	char				stopped;
+	char				**argv;
 	pid_t				pid;
 	char				*cmd;
 	struct s_process	*next;
 }						t_process;
+
+typedef struct			s_job
+{
+  char					*command;
+  t_process				*first_process;
+  pid_t					pgid;			/* process group ID */
+  char					notified;
+  struct termios		tmodes;			/* saved terminal modes (not sure if needed) */
+  int					fd[3];
+  struct s_job			*next;
+}						t_job;
 
 typedef struct			s_shell
 {
@@ -370,6 +384,7 @@ typedef struct			s_shell
 	t_cmd				*cmd;
 	t_env				*env;
 	t_env				*alias;
+	t_job				*job;
 	t_read				*read;
 	t_exec				*exec;
 	t_modes				modes;

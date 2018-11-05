@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 18:31:17 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/05 15:58:07 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -499,6 +499,12 @@ char					*env_search_local(t_env *env, const char *key);
 char					env_delete_item_from_array(t_env *env, const char *key);
 t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
+
+/*
+** structures - jobs
+*/
+void					job_destroy_all(t_job *job);
+t_job					*job_new(void);
 
 /*
 ** structures - reader

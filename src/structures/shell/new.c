@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:36:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/05 14:00:52 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_shell		*sh_new(int argc, char **argv, char **environ)
 		error_malloc_sh(sh);
 	sh_set_window(sh, argc);
 	sh->env = env_new(sh, environ);
+	sh->job = NULL;
 	env_initialize_local(sh, argv[0]);
 	sh->alias = env_new(sh, NULL);
 	sh_config_import(sh);

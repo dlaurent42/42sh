@@ -195,6 +195,8 @@ SRC			=	shell.c														\
 				structures/environment/ini/shlvl.c							\
 				structures/environment/ini/specials.c						\
 				structures/environment/ini/term.c							\
+				structures/jobs/new.c										\
+				structures/jobs/destroy.c									\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
@@ -378,6 +380,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
+				@mkdir -p $(OBJ_DIR)/structures/jobs
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/process
