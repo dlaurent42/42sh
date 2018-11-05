@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:27:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 17:39:17 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 19:14:59 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		job_notification(void)
 		next = job->next;
 		if (job_is_completed(job))
 		{
-			ft_putendl_fd("Job completed!", 2);
+			job_message(job, "completed");
 			if (last)
 				last->next = next;
 			else
@@ -45,7 +45,7 @@ void		job_notification(void)
 		}
 		else if (job_is_stopped(job) && !job->notified)
 		{
-        	ft_putendl_fd("Job stopped!", 2);
+        	job_message(job, "stopped");
 			job->notified = 1;
 			last = job;
 		}

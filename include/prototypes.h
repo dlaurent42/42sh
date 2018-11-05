@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 17:43:06 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 19:15:10 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,11 @@ char					*sh_replace_aliases(t_env *alias, char *s);
 */
 void					job_launch(t_job *job, int foreground);
 void					put_job_in_foreground(t_job *job, int cont);
+void					put_job_in_background(t_job *job, int cont);
 void					job_wait(t_job *job);
+void					job_message(t_job *job, char *status);
+void					job_notification(void);
+
 /*
 ** functions - process
 */

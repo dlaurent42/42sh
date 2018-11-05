@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 16:51:52 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 20:15:31 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 		p = process_new();
 		p->argv = argv;
 		p->env = env;
+		job->pgid = getpid();
 		job->first_process = p;
 		job_launch(job, 1);
 		//res = sh_command_exec(sh, argv, env->environment);
