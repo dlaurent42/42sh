@@ -208,6 +208,7 @@ SRC			=	shell.c														\
 				structures/gnl/gnl.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
+				structures/jobs/delete.c									\
 				structures/jobs/completed.c									\
 				structures/jobs/stopped.c									\
 				structures/read/delete.c									\

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:50:14 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:50:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -538,7 +538,11 @@ t_job					*job_new(void);
 =======
 int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
+<<<<<<< HEAD
 >>>>>>> 59d6526... Not working, but compiling.
+=======
+void					job_delete(t_job *job);
+>>>>>>> 49ae1f0... [fix] Memory leak fix.
 
 /*
 ** structures - reader
