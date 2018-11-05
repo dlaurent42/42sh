@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run.c                                              :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/30 14:03:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/05 15:57:46 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 {
 	char	res;
+	t_job	*job;
 
 	if (!argv || !argv[0])
 		return (1);
@@ -71,7 +72,9 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);
+		job = job_new();
 		res = sh_command_exec(sh, argv, env->environment);
+
 		sh_set_termios(sh);
 	}
 	else

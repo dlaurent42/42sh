@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:48:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:49:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -503,10 +503,17 @@ t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
 
 /*
+<<<<<<< HEAD
 ** structures - gnl
 */
 int						sh_gnl(t_shell *sh, int const fd, char **line);
 void					gnl_delete(t_shell *sh);
+=======
+** structures - jobs
+*/
+void					job_destroy_all(t_job *job);
+t_job					*job_new(void);
+>>>>>>> d8b9971... Begining of job implamentation.
 
 /*
 ** structures - reader

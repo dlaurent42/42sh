@@ -198,6 +198,8 @@ SRC			=	shell.c														\
 				structures/environment/ini/term.c							\
 				structures/gnl/delete.c										\
 				structures/gnl/gnl.c										\
+				structures/jobs/new.c										\
+				structures/jobs/destroy.c									\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\
@@ -381,7 +383,11 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
+<<<<<<< HEAD
 				@mkdir -p $(OBJ_DIR)/structures/gnl
+=======
+				@mkdir -p $(OBJ_DIR)/structures/jobs
+>>>>>>> d8b9971... Begining of job implamentation.
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/process
