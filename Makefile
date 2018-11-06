@@ -203,6 +203,7 @@ SRC			=	shell.c														\
 				structures/environment/ini/shlvl.c							\
 				structures/environment/ini/specials.c						\
 				structures/environment/ini/term.c							\
+				structures/jobs/add.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
 				structures/jobs/delete.c									\

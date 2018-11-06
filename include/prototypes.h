@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 21:15:26 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 13:33:30 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,6 +528,7 @@ t_job					*job_new(void);
 int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
 void					job_delete(t_job *job);
+void					job_add(t_shell *sh, t_job *new);
 
 /*
 ** structures - reader
