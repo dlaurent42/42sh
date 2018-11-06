@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:39:32 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 19:39:18 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 09:02:14 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void		job_launch(t_job *job, int foreground)
 	int				std[3];
 
 	std[0] = job->fd[0];
+	std[2] = job->fd[2];
 	p = job->first_process;
 	while (p)
 	{
@@ -46,25 +47,18 @@ void		job_launch(t_job *job, int foreground)
 		else
 		{
 			p->pid = pid;
-			if (1) // shell is active; not sure if needed
-			{
-				ft_printf("p->pid = %d | job->pgid = %d");
-				if (!job->pgid)
-					job->pgid = pid;
-				setpgid(pid, job->pgid);
-			}
+			ft_printf("p->pid = %d\n", p->pid);
+			(!job->pgid) ? job->pgid = pid : (0);
+			setpgid(pid, job->pgid);
 		}
-		// Cleanup after pipes
-		if (std[0] != job->fd[0])
-			close(std[0]);
-		if (std[1] != job->fd[1])
-			close(std[1]);
+		(std[0] != job->fd[0]) ? close(std[0]) : (0);
+		(std[1] != job->fd[1]) ? close(std[1]) : (0);
 		std[0] = fd[0];
 		p = p->next;
 	}
 	job_message(job, "launched");
 	ft_printf("job->pgid = %d\n", job->pgid);
-	if (0) // shell is active ; not sure if needed
+	if (0) // shell is not active ; not sure if needed
 		job_wait(job);
 	else if (foreground)
 		put_job_in_foreground(job, 0);
