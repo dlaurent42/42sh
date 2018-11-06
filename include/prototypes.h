@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:50:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:50:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -542,7 +542,11 @@ int						job_is_stopped(t_job *job);
 >>>>>>> 59d6526... Not working, but compiling.
 =======
 void					job_delete(t_job *job);
+<<<<<<< HEAD
 >>>>>>> 49ae1f0... [fix] Memory leak fix.
+=======
+void					job_add(t_shell *sh, t_job *new);
+>>>>>>> caf7c2d... Signal games.
 
 /*
 ** structures - reader

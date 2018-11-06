@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 08:59:35 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 16:14:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 		return (sh_unset(sh, env, cmd + 1));
 	if (ft_strcmps(cmd[0], "unsetenv") == 0)
 		return (sh_unsetenv(sh, env, cmd + 1));
+	// Testing fg (Dav already recoded it.)
+	if (ft_strcmps(cmd[0], "fg") == 0)
+	{
+		if (sh->job)
+		{
+			sh_unset_termios(sh);
+			put_job_in_foreground(sh->job, 1);
+		}
+		else
+			ft_printf("fg: no current job\n");
+		return (STATUS_OK);
+	}
 	return (-1);
 }
 
@@ -74,23 +86,23 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	{
 		sh_unset_termios(sh);
 		job = job_new(); // Move this to more approprate place.
-		sh->job = job;
+		job_add(sh, job);
 		p = process_new();
 		p->argv = argv;
 		p->env = env;
 		job->pgid = getpid();
 		job->first_process = p;
-		/*t_process *p2 = process_new();
+		/* Pipe working example
 		p2->argv = (char **)ft_memalloc(sizeof(char *) * 2);
 		p2->argv[0] = ft_strdups("/usr/bin/less");
 		p2->argv[1] = NULL;
 		p2->env = env;
-		p->next = p2;*/
-		job_launch(job, 1);
+		p->next = p2;
+		*/
+		job_launch(job, 1); // 1 - for non '&' job
 		//res = sh_command_exec(sh, argv, env->environment);
 		(void)sh_command_exec;
-		res = STATUS_OK;
-
+		res = STATUS_OK; // Solve issue with it;
 		sh_set_termios(sh);
 	}
 	else

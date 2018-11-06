@@ -206,6 +206,7 @@ SRC			=	shell.c														\
 				structures/environment/ini/term.c							\
 				structures/gnl/delete.c										\
 				structures/gnl/gnl.c										\
+				structures/jobs/add.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
 				structures/jobs/delete.c									\

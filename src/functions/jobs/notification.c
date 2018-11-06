@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:27:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 21:15:44 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 14:59:57 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		job_notification(void)
 		}
 		else if (job_is_stopped(job) && !job->notified)
 		{
-        	job_message(job, "stopped");
+        	job_message(job, "suspended");
 			job->notified = 1;
 			last = job;
 		}
