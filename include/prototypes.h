@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 13:32:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:32:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -502,6 +502,12 @@ t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
 
 /*
+** structures - gnl
+*/
+int						sh_gnl(t_shell *sh, int const fd, char **line);
+void					gnl_delete(t_shell *sh);
+
+/*
 ** structures - reader
 */
 void					read_delete(t_read *read);
@@ -516,7 +522,7 @@ void					sh_set_prompt(t_shell *sh);
 char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
-char					*sh_get_git_branch(char *location);
+char					*sh_get_git_branch(t_shell *sh, char *location);
 t_shell					*sh_new(int argc, char **argv, char **environ);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);

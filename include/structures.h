@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 15:44:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:14:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,7 @@ typedef struct			s_shell
 	int					exe;
 	char				*hist;
 	pid_t				pid;
+	t_gnl				*gnl;
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;

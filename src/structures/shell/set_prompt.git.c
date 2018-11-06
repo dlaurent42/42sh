@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 15:08:42 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 10:24:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:32:44 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	*sh_get_git_branch_name(char *location)
+static char	*sh_get_git_branch_name(t_shell *sh, char *location)
 {
 	int		fd;
 	char	*line;
@@ -26,7 +26,7 @@ static char	*sh_get_git_branch_name(char *location)
 		ft_strdel(&position);
 		return (NULL);
 	}
-	if (get_next_line(fd, &line) == -1)
+	if (sh_gnl(sh, fd, &line) == -1)
 	{
 		ft_strdel(&position);
 		return (NULL);
@@ -71,7 +71,7 @@ static char	*sh_prompt_format_git(char *git)
 	return (formatted);
 }
 
-char		*sh_get_git_branch(char *location)
+char		*sh_get_git_branch(t_shell *sh, char *location)
 {
 	char			*git;
 	DIR				*dir;
@@ -87,7 +87,7 @@ char		*sh_get_git_branch(char *location)
 			if (dirent->d_namlen == 4
 			&& ft_strcmps(dirent->d_name, GIT_EXT) == 0)
 			{
-				git = sh_get_git_branch_name(location);
+				git = sh_get_git_branch_name(sh, location);
 				break ;
 			}
 		closedir(dir);

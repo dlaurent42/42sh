@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:38:43 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 13:19:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:29:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		command_import(t_shell *sh)
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
 		return (error_import_export(fd, path));
-	while (get_next_line(fd, &buffer) == 1)
+	while (sh_gnl(sh, fd, &buffer) == 1)
 	{
 		if (command_parse_and_add(sh, buffer) == 0)
 		{

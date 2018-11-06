@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 20:21:04 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/31 22:05:48 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:33:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		sh_set_prompt(t_shell *sh)
 		return ;
 	sh->prompt.content = sh_get_folder_name(sh->env, sh->prompt.location, len);
 	sh_set_prompt_location(sh);
-	if ((git = sh_get_git_branch(sh->prompt.location)))
+	if ((git = sh_get_git_branch(sh, sh->prompt.location)))
 		sh->prompt.content = ft_strjoinf(sh->prompt.content, git, 3);
 	sh->prompt.content = (ft_atoi(env_search(sh->env, "?")) == 0)
 		? ft_strjoinf(sh->prompt.content, VALID_PROMPT, 1)

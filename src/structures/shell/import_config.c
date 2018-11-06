@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 19:24:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/17 21:36:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:30:04 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		sh_config_import(t_shell *sh)
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !sh_config_key_verified(fd))
 		return (error_import_export(fd, path));
-	while (get_next_line(fd, &buffer) == 1)
+	while (sh_gnl(sh, fd, &buffer) == 1)
 	{
 		if (buffer && buffer[0] != '#' && sh_config_not_empty_line(buffer))
 			if (sh_config_parse_and_add(sh, buffer) == FALSE)
