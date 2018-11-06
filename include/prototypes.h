@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:50:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:51:57 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ void					put_job_in_background(t_job *job, int cont);
 void					job_wait(t_job *job);
 void					job_message(t_job *job, char *status);
 void					job_notification(void);
+void					job_continue(t_job *job, int foreground);
 
 /*
 ** functions - process
@@ -523,30 +524,20 @@ t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
 
 /*
-<<<<<<< HEAD
 ** structures - gnl
 */
 int						sh_gnl(t_shell *sh, int const fd, char **line);
 void					gnl_delete(t_shell *sh);
-=======
+
+/*
 ** structures - jobs
 */
 void					job_destroy_all(t_job *job);
 t_job					*job_new(void);
-<<<<<<< HEAD
->>>>>>> d8b9971... Begining of job implamentation.
-=======
 int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
-<<<<<<< HEAD
->>>>>>> 59d6526... Not working, but compiling.
-=======
 void					job_delete(t_job *job);
-<<<<<<< HEAD
->>>>>>> 49ae1f0... [fix] Memory leak fix.
-=======
 void					job_add(t_shell *sh, t_job *new);
->>>>>>> caf7c2d... Signal games.
 
 /*
 ** structures - reader

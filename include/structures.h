@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:49:56 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:52:27 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,7 @@ typedef struct			s_shell
 	char				*hist;
 	pid_t				pid;
 	t_gnl				*gnl;
+	pid_t				shell_pgid;
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
