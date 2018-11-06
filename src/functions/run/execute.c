@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 16:14:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:03:40 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 	if (ft_strcmps(cmd[0], "fg") == 0)
 	{
 		if (sh->job)
-		{
-			sh_unset_termios(sh);
-			put_job_in_foreground(sh->job, 1);
-		}
+			job_continue(sh->job, 1);
 		else
 			ft_printf("fg: no current job\n");
 		return (STATUS_OK);
@@ -85,12 +82,15 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);
+		ft_printf("Shell_PID: %d\n", sh->shell_pgid);
 		job = job_new(); // Move this to more approprate place.
 		job_add(sh, job);
 		p = process_new();
 		p->argv = argv;
 		p->env = env;
-		job->pgid = getpid();
+		// job->pgid = getpid();
+		// job->pgid = getpgrp();
+		job->pgid = 0;
 		job->first_process = p;
 		/* Pipe working example
 		p2->argv = (char **)ft_memalloc(sizeof(char *) * 2);
