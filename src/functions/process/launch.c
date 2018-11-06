@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:54:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 18:31:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 18:50:54 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		process_launch(t_process *p, pid_t pgid, int fd[3], int foreground)
 		(pid == 0) ? pgid = pid : (0);
 		setpgid(pid, pgid);
 		if (foreground)
-			tcsetpgrp(STDIN_FILENO, pgid); // from header. not sure what to do;
+			tcsetpgrp(STDIN_FILENO, pgid);
 		// signal reset -> not sure if needed
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
