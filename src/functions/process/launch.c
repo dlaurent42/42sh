@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:54:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/06 18:50:54 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 09:48:20 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void		process_launch(t_process *p, pid_t pgid, int fd[3], int foreground)
 	if (1) // shell active ; not sure is needed
 	{
 		pid = getpid();
-		(pid == 0) ? pgid = pid : (0);
+		if (pgid == 0)
+			pgid = pid;
 		setpgid(pid, pgid);
 		if (foreground)
 			tcsetpgrp(STDIN_FILENO, pgid);
-		// signal reset -> not sure if needed
+		// Setting signals to default for execution
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGTSTP, SIG_DFL);

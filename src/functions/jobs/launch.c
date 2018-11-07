@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:39:32 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/06 14:07:33 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 10:45:45 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ void		job_launch(t_job *job, int foreground)
 			process_launch(p, job->pgid, std, foreground);
 		else
 		{
-			signal_catching();
+			// signal_catching();
 			p->pid = pid;
 			ft_printf("p->pid = %d\n", p->pid);
-			(!job->pgid) ? job->pgid = pid : (0);
+			if (!job->pgid)
+				job->pgid = pid;
 			setpgid(pid, job->pgid);
 		}
 		(std[0] != job->fd[0]) ? close(std[0]) : (0);
