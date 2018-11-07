@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:39:32 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 15:37:19 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:04:32 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		job_launch(t_job *job, int foreground)
 		else
 		{
 			p->pid = pid;
-			// ft_printf("p->pid = %d\n", p->pid);
 			(!job->pgid) ? job->pgid = pid : (0);
 			setpgid(pid, job->pgid);
 		}
@@ -51,7 +50,6 @@ void		job_launch(t_job *job, int foreground)
 		p = p->next;
 	}
 	job_message(job, "launched");
-	// ft_printf("job->pgid = %d\n", job->pgid);
 	(foreground) ?
 		put_job_in_foreground(job, 0) : put_job_in_background(job, 0);
 }
