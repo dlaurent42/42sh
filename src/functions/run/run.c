@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 14:43:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/07 21:54:49 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 		bin = sh->bin;
 	}
 	if (sh == g_sh && !sh->modes.exec
-	&& (sh->modes.exec = TRUE) && !sh->modes.heredoc)
+	&& (sh->modes.exec = TRUE))
 		command_add(sh, true);
 	status = sh_command_run_tree(sh, env, bin, lexer);
 	return (lexer_delete(&lexer, status));
