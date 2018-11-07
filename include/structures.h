@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 19:38:35 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:23:08 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,6 +370,7 @@ typedef struct			s_job
   t_process				*first_process;
   pid_t					pgid;			/* process group ID */
   char					notified;
+  char					notifications;
   struct termios		tmodes;			/* saved terminal modes (not sure if needed) */
   int					fd[3];
   struct s_job			*next;
