@@ -96,6 +96,7 @@ SRC			=	shell.c														\
 				functions/jobs/launch.c										\
 				functions/jobs/message.c									\
 				functions/jobs/notification.c								\
+				functions/jobs/utils.c										\
 				functions/jobs/wait.c										\
 				functions/process/launch.c									\
 				functions/process/status.c									\

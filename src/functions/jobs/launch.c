@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:39:32 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 10:45:45 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:37:19 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,21 @@ void		job_launch(t_job *job, int foreground)
 		if (p->next)
 		{
 			if (pipe(fd) == -1)
-			{
-				ft_putendl_fd("pipe error", 2);
-				exit(1);
-			}
+				return (job_error(job, 1));
 			std[1] = fd[1];
 		}
 		else
 			std[1] = job->fd[1];
 		// /for pipes
 		if ((pid = fork()) == -1)
-		{
-			ft_putendl_fd("fork error", 2);
-			exit(1);
-		}
+			return (job_error(job, 0));
 		else if (pid == 0)
 			process_launch(p, job->pgid, std, foreground);
 		else
 		{
-			// signal_catching();
 			p->pid = pid;
-			ft_printf("p->pid = %d\n", p->pid);
-			if (!job->pgid)
-				job->pgid = pid;
+			// ft_printf("p->pid = %d\n", p->pid);
+			(!job->pgid) ? job->pgid = pid : (0);
 			setpgid(pid, job->pgid);
 		}
 		(std[0] != job->fd[0]) ? close(std[0]) : (0);
@@ -59,11 +51,7 @@ void		job_launch(t_job *job, int foreground)
 		p = p->next;
 	}
 	job_message(job, "launched");
-	ft_printf("job->pgid = %d\n", job->pgid);
-	if (0) // shell is not active ; not sure if needed
-		job_wait(job);
-	else if (foreground)
-		put_job_in_foreground(job, 0);
-	else
-		put_job_in_background(job, 0);
+	// ft_printf("job->pgid = %d\n", job->pgid);
+	(foreground) ?
+		put_job_in_foreground(job, 0) : put_job_in_background(job, 0);
 }
