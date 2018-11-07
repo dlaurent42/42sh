@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 13:29:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 22:42:58 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:01:00 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_error_subshell(t_lexer *l, t_token t, int i, char direction)
 {
-	if (direction == 1 && t.type == TOKEN_SUBSHELL && (((i + 1) <= (int)l->size
+	if (direction == 1 && t.type == TOKEN_SUBSHELL && (((i + 1) < (int)l->size
 	&& l->tokens[i + 1].type >= TOKEN_SINGLEQUOTE)))
 		return (TRUE);
 	return (direction == -1 && t.type == TOKEN_SUBSHELL &&
