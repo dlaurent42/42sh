@@ -321,6 +321,7 @@ SRC			=	shell.c														\
 				terminal/select/unselect.c									\
 				terminal/select/utils.c										\
 				terminal/signals/catch.c									\
+				terminal/signals/default.c									\
 				terminal/signals/resize.c
 #				functions/check/brackets.c									\
 
