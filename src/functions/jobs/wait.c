@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:13:00 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 09:27:53 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 14:29:22 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		job_wait(t_job *job)
 	pid_t	pid;
 
 	pid = waitpid(WAIT_ANY, &status, WUNTRACED);
-	ft_printf("Waiting for pid = %d\n", pid);
 	while (!process_status(pid, status)
 	&& !job_is_stopped(job)
 	&& !job_is_completed(job))
