@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 13:28:29 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 14:35:39 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,5 @@ void		signal_catching(void)
 		ft_putendl_fd("\ncan't catch SIGINT", 2);
 	(g_sh->job) ? signal(SIGTSTP, sig_job) : signal(SIGTSTP, SIG_DFL);
 	// ADDED ONLY FOR TESTING
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGQUIT, SIG_IGN);
-	// signal(SIGTSTP, SIG_IGN);
-	// signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	// signal(SIGCHLD, SIG_IGN);
 }
