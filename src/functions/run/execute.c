@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 20:03:40 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:41:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,11 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);
-		ft_printf("Shell_PID: %d\n", sh->shell_pgid);
 		job = job_new(); // Move this to more approprate place.
 		job_add(sh, job);
 		p = process_new();
 		p->argv = argv;
 		p->env = env;
-		// job->pgid = getpid();
-		// job->pgid = getpgrp();
 		job->pgid = 0;
 		job->first_process = p;
 		/* Pipe working example
