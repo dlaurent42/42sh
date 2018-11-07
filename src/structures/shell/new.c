@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 10:41:24 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:27:53 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ t_shell		*sh_new(int argc, char **argv, char **environ)
 	if (sh_set_termios(sh) != STATUS_OK && argc == 1)
 		error_malloc_sh(sh);
 	sh_set_window(sh, argc);
-
-	sh->shell_pgid = getpid();					// ---- JUST ADDED ----
-	setpgid(sh->shell_pgid, sh->shell_pgid);	// ---- JUST ADDED ----
- 	tcsetpgrp(STDIN_FILENO, sh->shell_pgid);	// ---- JUST ADDED ----
-
+	sh->jc = 1;
+	sh->shell_pgid = getpid();
 	sh->env = env_new(sh, environ);
 	sh->job = NULL;
 	env_initialize_local(sh, argv[0]);

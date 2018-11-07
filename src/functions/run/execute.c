@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 13:41:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:23:07 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,20 @@ char		sh_command_dispatch(t_shell *sh, t_env *env, char **argv)
 	if (sh_is_not_builtin(argv[0]))
 	{
 		sh_unset_termios(sh);
-		job = job_new(); // Move this to more approprate place.
-		job_add(sh, job);
-		p = process_new();
-		p->argv = argv;
-		p->env = env;
-		job->pgid = 0;
-		job->first_process = p;
-		/* Pipe working example
-		p2->argv = (char **)ft_memalloc(sizeof(char *) * 2);
-		p2->argv[0] = ft_strdups("/usr/bin/less");
-		p2->argv[1] = NULL;
-		p2->env = env;
-		p->next = p2;
-		*/
-		job_launch(job, 1); // 1 - for non '&' job
-		//res = sh_command_exec(sh, argv, env->environment);
-		(void)sh_command_exec;
-		res = STATUS_OK; // Solve issue with it;
+		if (sh->jc)
+		{
+			job = job_new();
+			job_add(sh, job);
+			p = process_new();
+			p->argv = argv;
+			p->env = env;
+			job->pgid = 0;
+			job->first_process = p;
+			job_launch(job, 1);
+			res = STATUS_OK;
+		}
+		else
+			res = sh_command_exec(sh, argv, env->environment);
 		sh_set_termios(sh);
 	}
 	else
