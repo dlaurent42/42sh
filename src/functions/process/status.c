@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:15:58 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 18:19:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 10:25:17 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ int		process_status(pid_t pid, int status)
 		return (-1);
 	}
 	else if (pid == 0 || errno == ECHILD) /* No processes ready to report.  */
+	{
+		ft_putendl_fd("[process_status]No process is ready", 2);
 		return (-1);
+	}
 	else
 	{
     	/* Other weird errors.  */
-		perror("waitpid");
+		ft_putendl_fd("waitpid error", 2);
 		return (-1);
 	}
 }
