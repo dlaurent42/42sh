@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 15:20:57 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:28:36 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void					job_wait(t_job *job);
 void					job_message(t_job *job, char *status);
 void					job_notification(void);
 void					job_continue(t_job *job, int foreground);
+void					job_error(t_job *job, int pipe);
 
 /*
 ** functions - process
