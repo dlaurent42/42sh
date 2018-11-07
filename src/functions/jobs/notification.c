@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:27:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 10:32:09 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:19:24 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ void		update_status(void)
 	int		status;
 	pid_t	pid;
 
-	pid = waitpid(WAIT_ANY, &status, WUNTRACED|WNOHANG);
-	ft_printf("[update_status] pid = %d\n", pid);
-  	while (!process_status(pid, status))
-		pid = waitpid(WAIT_ANY, &status, WUNTRACED|WNOHANG);
+	pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
+	while (!process_status(pid, status))
+		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
 }
 
 void		job_notification(void)
@@ -43,16 +42,15 @@ void		job_notification(void)
 			else
 				g_sh->job = next;
 			job_delete(job);
-			// signal_catching();
 		}
 		else if (job_is_stopped(job) && !job->notified)
 		{
-        	job_message(job, "suspended");
+			job_message(job, "suspended");
 			job->notified = 1;
 			last = job;
 		}
 		else
-        	last = job;
+			last = job;
 		job = next;
 	}
 }

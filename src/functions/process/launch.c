@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:54:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 09:48:20 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:23:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,11 @@ void		process_launch(t_process *p, pid_t pgid, int fd[3], int foreground)
 {
 	pid_t		pid;
 
-	if (1) // shell active ; not sure is needed
-	{
-		pid = getpid();
-		if (pgid == 0)
-			pgid = pid;
-		setpgid(pid, pgid);
-		if (foreground)
-			tcsetpgrp(STDIN_FILENO, pgid);
-		// Setting signals to default for execution
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTSTP, SIG_DFL);
-		signal(SIGTTIN, SIG_DFL);
-		signal(SIGTTOU, SIG_DFL);
-		signal(SIGCHLD, SIG_DFL);
-	}
+	pid = getpid();
+	(pgid == 0) ? pgid = pid : (0);
+	setpgid(pid, pgid);
+	(foreground) ? tcsetpgrp(STDIN_FILENO, pgid) : (0);
+	signal_default();
 	if (fd[0] != STDIN_FILENO)
 	{
 		dup2(fd[0], STDIN_FILENO);
@@ -47,8 +36,7 @@ void		process_launch(t_process *p, pid_t pgid, int fd[3], int foreground)
 		dup2(fd[2], STDERR_FILENO);
 		close(fd[2]);
 	}
-	ft_printf("Launching process: %s\n", p->argv[0]);
 	execve(p->argv[0], p->argv, p->env->environment);
-	ft_putendl_fd("Error on execve(process/launch.c)", 2);
+	ft_putendl_fd("Error on executing process", 2);
 	exit(1);
 }
