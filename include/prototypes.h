@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:51:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:52:48 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -722,6 +722,7 @@ int						sh_get_start_rel_from_abs(t_shell *sh);
 void					signal_catching(void);
 void					sh_sigint_reset(t_shell *sh, char *last_return);
 void					sh_window_resize(t_shell *sh);
+void					signal_default(void);
 
 /*
 ** structures - ast
