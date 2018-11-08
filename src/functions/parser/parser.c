@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:54:34 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:55:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 		if (access(arr[0], R_OK) != 0 || access(arr[0], X_OK) != 0)
 			return (sh_command_err(arr[0], 2));
 	}
-	else if (arr && arr[0] && sh_is_not_builtin(arr[0]))
+	else if (arr && arr[0] && (sh_is_not_builtin(arr[0]) || sh->jc_muted))
 	{
 		if (!(obj = bin_search(bin, arr[0])) || !obj->path
 		|| access(obj->path, F_OK) != 0)
