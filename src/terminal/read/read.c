@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 16:17:46 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:24:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	sh_read_stop(t_shell *sh)
 		sh_delete_current_char(sh);
 	else if (sh->job)
 	{
-		ft_putstr_fd("sh: you have suspended jobs.", 2);
+		ft_putstr_fd("\nsh: you have suspended jobs.", 2);
 		sh_sigint_reset(sh, "0");
 	}
 	else if (!sh->modes.multiline)
