@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 20:23:45 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:21:54 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static void	sh_reset_sh(t_shell *sh)
 	sh->buffer.cmd = NULL;
 	sh->read->unicode_bytes_left = 0;
 	sh->pid = 0;
+	sh->jc_muted = 0;
 	ft_bzero((void *)&sh->cursor, sizeof(t_cursor));
 	ft_bzero((void *)&sh->modes, sizeof(t_modes));
 	(sh->jc) ? job_notification() : (0);
