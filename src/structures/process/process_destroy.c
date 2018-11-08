@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_destroy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 14:55:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:04 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/08 22:19:42 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ bool				process_destroy(t_shell *sh, t_process *process)
 		else
 			return (false);
 	}
-	free(process->cmd);
 	free(process);
-	process_id_assign(sh);
 	return (true);
 }
