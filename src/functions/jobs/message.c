@@ -6,21 +6,21 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 18:05:58 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 11:38:09 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:53:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
 /*
-** Added notification to
+** TODO: Added notification to commented place.
 */
 void		job_message_suspended(t_job *job)
 {
 	t_process		*p;
 
 	job->notified = 1;
-	job->notifications = 1;
+	// job->notifications = 1;
 	p = job->first_process;
 	ft_putstr_fd("[JOB_ID] ", 2);
 	while (p)
