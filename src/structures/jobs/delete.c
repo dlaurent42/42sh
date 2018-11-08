@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 21:13:18 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/05 21:15:06 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 19:16:24 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void		job_delete(t_job *job)
 		p = p->next;
 		(tmp) ? free(tmp) : (0);
 	}
+	free(job->command);
 	free(job);
 }
