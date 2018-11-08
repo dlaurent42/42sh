@@ -92,6 +92,7 @@ SRC			=	shell.c														\
 				functions/check/lexer.c										\
 				functions/jobs/background.c									\
 				functions/jobs/continue.c									\
+				functions/jobs/execute.c									\
 				functions/jobs/foreground.c									\
 				functions/jobs/launch.c										\
 				functions/jobs/message.c									\
