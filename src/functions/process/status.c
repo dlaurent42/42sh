@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:15:58 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 14:28:34 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:41:32 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	process_status_err(pid_t pid)
 	return (-1);
 }
 
-static int	process_found(t_process *p, int status)
+static int	process_found(t_job *job, t_process *p, int status)
 {
 	p->status = status;
 	if (WIFSTOPPED(status))
@@ -34,7 +34,7 @@ static int	process_found(t_process *p, int status)
 	{
 		p->completed = 1;
 		if (WIFSIGNALED(status))
-			ft_putendl_fd("Terminated by singal!", 2);
+			job->notifications = 0; // ft_putendl_fd("Terminated by singal!", 2);
 	}
 	return (0);
 }
@@ -53,7 +53,7 @@ int			process_status(pid_t pid, int status)
 		while (p)
 		{
 			if (p->pid == pid)
-				return (process_found(p, status));
+				return (process_found(job, p, status));
 			p = p->next;
 		}
 		job = job->next;
