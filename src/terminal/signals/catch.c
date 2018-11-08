@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 11:52:33 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 14:30:59 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	sig_handler(int signo)
 	if (signo == SIGWINCH)
 		sh_window_resize(g_sh);
 	if (signo == SIGINT && g_sh->pid > 0)
-		kill(g_sh->pid, SIGKILL);
+		kill(g_sh->pid, SIGINT);
 	else if (signo == SIGINT && g_sh->modes.multiline && !g_sh->modes.subshell)
 		sh_multilines_close(g_sh);
 	else if (signo == SIGINT && !g_sh->modes.exec && !g_sh->modes.globbing
