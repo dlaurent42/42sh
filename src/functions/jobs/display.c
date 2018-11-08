@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:26:03 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 22:09:43 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 22:27:49 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			jobs_display(t_job *job)
 	{
 		rank = job_get_rank(job);
 		status = job_get_status(job);
-		ft_printf("[%d] %c %s %s\n", job->id, rank, status, job->command);
+		ft_printf("[%d] %c %6s %s\n", job->id, rank, status, job->command);
 		job = job->next;
 	}
 }
