@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 20:27:53 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 13:34:24 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_shell		*sh_new(int argc, char **argv, char **environ)
 	if (sh_set_termios(sh) != STATUS_OK && argc == 1)
 		error_malloc_sh(sh);
 	sh_set_window(sh, argc);
-	sh->jc = 1;
+	sh->jc = (argc > 1) ? 0 : 1;
 	sh->shell_pgid = getpid();
 	sh->env = env_new(sh, environ);
 	sh->job = NULL;
