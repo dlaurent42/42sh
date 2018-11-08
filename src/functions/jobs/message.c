@@ -6,23 +6,21 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 18:05:58 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 11:53:33 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 22:06:17 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-/*
-** TODO: Added notification to commented place.
-*/
 void		job_message_suspended(t_job *job)
 {
 	t_process		*p;
 
 	job->notified = 1;
-	// job->notifications = 1;
 	p = job->first_process;
-	ft_putstr_fd("[JOB_ID] ", 2);
+	ft_putstr_fd("[", 2);
+	ft_putnbr_fd(job->id, 2);
+	ft_putstr_fd("] ", 2);
 	while (p)
 	{
 		ft_putnbr_fd(p->pid, 2);
@@ -42,7 +40,9 @@ void		job_message(t_job *job, char *status)
 	if (!job->notifications)
 		return ;
 	p = job->first_process;
-	ft_putstr_fd("[JOB_ID] ", 2);
+	ft_putstr_fd("[", 2);
+	ft_putnbr_fd(job->id, 2);
+	ft_putstr_fd("] ", 2);
 	while (p)
 	{
 		ft_putnbr_fd(p->pid, 2);

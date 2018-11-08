@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:55:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:56:21 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,14 +365,15 @@ typedef struct 			s_process
 
 typedef struct			s_job
 {
-  char					*command;
-  t_process				*first_process;
-  pid_t					pgid;
-  char					notified;
-  char					notifications;
-  struct termios		tmodes;
-  int					fd[3];
-  struct s_job			*next;
+	int					id;
+	char				*command;
+	t_process			*first_process;
+	pid_t				pgid;
+	char				notified;
+	char				notifications;
+	struct termios		tmodes;
+	int					fd[3];
+	struct s_job		*next;
 }						t_job;
 
 typedef struct			s_shell
