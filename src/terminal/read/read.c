@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 16:10:01 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/05 19:17:55 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:17:46 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ static void	sh_close_all(t_shell *sh)
 	sh->read->line[0] = '\n';
 }
 
+static bool	sh_read_stop(t_shell *sh)
+{
+	if (sh->read->line[0] != 4)
+		return (FALSE);
+	if (sh->modes.heredoc && !sh->buffer.display_len)
+		sh_close_all(sh);
+	else if (sh->buffer.display_len + sh->buffer.dshift)
+		sh_delete_current_char(sh);
+	else if (sh->job)
+	{
+		ft_putstr_fd("sh: you have suspended jobs.", 2);
+		sh_sigint_reset(sh, "0");
+	}
+	else if (!sh->modes.multiline)
+		return (TRUE);
+	return (FALSE);
+}
+
 char		sh_read(t_shell *sh)
 {
 	(!sh->modes.subshell) ? sh_print_prompt(sh) : 0;
@@ -38,13 +56,7 @@ char		sh_read(t_shell *sh)
 		|| !sh->modes.subshell))
 			if (read(0, sh->read->line, LINE_SIZE - 1) == -1)
 				break ;
-		if (sh->read->line[0] == 4
-		&& sh->modes.heredoc && !sh->buffer.display_len)
-			sh_close_all(sh);
-		if (sh->read->line[0] == 4
-		&& sh->buffer.display_len + sh->buffer.dshift)
-			sh_delete_current_char(sh);
-		else if (sh->read->line[0] == 4 && !sh->modes.multiline)
+		if (sh_read_stop(sh))
 			break ;
 		sh_read_dispatcher(sh);
 		ft_bzero(sh->read->line, LINE_SIZE);
