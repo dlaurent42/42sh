@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:56:21 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:56:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,14 +352,12 @@ typedef struct			s_token_tree
 
 typedef struct 			s_process
 {
-	int					id;
 	int					status;
 	char				completed;
 	char				stopped;
 	char				**argv;
 	t_env				*env;
 	pid_t				pid;
-	char				*cmd;
 	struct s_process	*next;
 }						t_process;
 

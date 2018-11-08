@@ -232,13 +232,10 @@ SRC			=	shell.c														\
 				structures/process/process_add.c							\
 				structures/process/process_destroy.c						\
 				structures/process/process_destroy_all.c					\
-				structures/process/process_destroy_id.c						\
 				structures/process/process_destroy_pid.c					\
 				structures/process/process_display.c						\
 				structures/process/process_get.c							\
-				structures/process/process_get_id.c							\
 				structures/process/process_get_pid.c						\
-				structures/process/process_id_assign.c						\
 				structures/process/process_new.c							\
 				terminal/autocompletion/auto_completion/auto_completion.c	\
 				terminal/autocompletion/auto_completion/free_ac.c			\

@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:01:39 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 11:37:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 22:22:17 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_job		*job_new(void)
 	job->fd[1] = STDOUT_FILENO;
 	job->fd[2] = STDERR_FILENO;
 	job->notifications = 0;
+	job->id = 1;
 	job->next = NULL;
 	return (job);
 }
