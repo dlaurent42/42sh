@@ -6,11 +6,28 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 15:49:45 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:07:02 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static char	sh_check_other_builtins(t_shell *sh, t_env *env, char **cmd)
+{
+	(void)env;
+	if (ft_strcmps(cmd[0], "fg") == 0)
+		return (buildin_jobs_fg(sh, cmd + 1));
+	if (ft_strcmps(cmd[0], "bg") == 0)
+		return (buildin_jobs_bg(sh, cmd + 1));
+	if (ft_strcmps(cmd[0], "jobs") == 0)
+		return (buildin_jobs(sh, cmd + 1));
+	if (ft_strcmps(cmd[0], "help") == 0)
+	{
+		sh_welcome();
+		return (STATUS_OK);
+	}
+	return (-1);
+}
 
 static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 {
@@ -38,16 +55,7 @@ static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 		return (sh_unset(sh, env, cmd + 1));
 	if (ft_strcmps(cmd[0], "unsetenv") == 0)
 		return (sh_unsetenv(sh, env, cmd + 1));
-	// Testing fg (Dav already recoded it.)
-	if (ft_strcmps(cmd[0], "fg") == 0)
-	{
-		if (sh->job)
-			job_continue(sh->job, 1);
-		else
-			ft_printf("fg: no current job\n");
-		return (STATUS_OK);
-	}
-	return (-1);
+	return (sh_check_other_builtins(sh, env, cmd));
 }
 
 static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
