@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:54:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:54:47 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,7 +353,6 @@ typedef struct			s_token_tree
 typedef struct 			s_process
 {
 	int					id;
-	int					fd[10];
 	int					status;
 	char				completed;
 	char				stopped;
@@ -368,10 +367,10 @@ typedef struct			s_job
 {
   char					*command;
   t_process				*first_process;
-  pid_t					pgid;			/* process group ID */
+  pid_t					pgid;
   char					notified;
   char					notifications;
-  struct termios		tmodes;			/* saved terminal modes (not sure if needed) */
+  struct termios		tmodes;
   int					fd[3];
   struct s_job			*next;
 }						t_job;
