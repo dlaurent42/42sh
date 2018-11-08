@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 20:42:09 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:54:34 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	sh_command_err(char *cmd, int err)
 {
-	if (err == 1)
+	if (err == 1 && !lexer_is_empty(cmd))
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
