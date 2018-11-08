@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 17:07:02 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:58:22 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	sh_command_dispatch_builtinsr(t_shell *sh, t_env *env, char **cmd)
 
 static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 {
-	pid_t	pid;
 	int		status;
 
 	if ((sh->pid = fork()) == -1)
@@ -71,9 +70,9 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 	{
 		// signal_catching();
 		/* TODO: Check it real good. MAYBE SET IGNORE */
-		signal_default();
-		pid = wait(&status);
-		if (WIFEXITED(status))
+		// signal_default();
+		waitpid(sh->pid, &status, 0);
+		if ((WIFEXITED(status)))
 			return (WEXITSTATUS(status));
 	}
 	return (-1);
