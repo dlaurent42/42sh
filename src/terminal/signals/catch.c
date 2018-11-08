@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 18:53:24 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 11:29:10 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:52:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,6 @@ static void	sig_handler(int signo)
 		sh_sigint_reset(g_sh, "1");
 }
 
-void		sig_job(int signo)
-{
-	(void)signo;
-	ft_putendl_fd("Got signal from CTRL + Z", 2);
-	if (!g_sh->job)
-	{
-		ft_putendl_fd("There is no job to do!", 2);
-		// kill(g_sh->pid, SIGTSTP);
-	}
-}
-
 void		signal_catching(void)
 {
 	signal(SIGSEGV, sig_handler);
@@ -43,7 +32,6 @@ void		signal_catching(void)
 		ft_putendl_fd("\ncan't catch SIGWINCH", 2);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		ft_putendl_fd("\ncan't catch SIGINT", 2);
-	(g_sh->jc && g_sh->job) ?
-		signal(SIGTSTP, sig_job) : signal(SIGTSTP, SIG_DFL);
+	signal(SIGTSTP, SIG_IGN);
 	(g_sh->jc) ? signal(SIGTTOU, SIG_IGN) : (0);
 }
