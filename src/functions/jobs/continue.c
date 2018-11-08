@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:08:27 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/06 18:10:46 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 22:00:24 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	job_mark_as_running(t_job *job)
 	t_process		*p;
 
 	p = job->first_process;
+	job->notified = 0;
 	while (p)
 	{
 		p->stopped = 0;
