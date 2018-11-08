@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:06:51 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 17:02:37 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:38:59 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		put_job_in_foreground(t_job *job, int cont)
 {
-	ft_printf("[foreground] Setting thread: job->pgid = %d\n", job->pgid);
 	tcsetpgrp(STDIN_FILENO, job->pgid);
 	if (cont)
 	{
