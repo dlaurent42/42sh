@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:21:48 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/28 12:35:35 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:20:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,15 @@ char	sh_exit(t_shell *sh, t_env *env, char **argv)
 	}
 	status = (argc) ? ft_atoi(argv[0]) % 256 : 0;
 	status = (status < 0) ? 256 + status : status;
-	if (sh->env == env)
+	if (sh->env == env && sh->job == NULL)
 	{
 		sh_delete(sh);
 		exit(status);
+	}
+	else if (sh->job == NULL)
+	{
+		ft_putendl_fd("sh: you have suspended jobs.", 2);
+		return (0);
 	}
 	return (status);
 }

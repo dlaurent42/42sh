@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 14:09:16 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/16 18:00:53 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:18:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void		sh_read_dispatcher(t_shell *sh)
 		sh_history_search(sh);
 	else if (sh->read->line[0] == 9)
 		auto_completion(sh);
-	else
+	else if (sh->read->line[0])
 		sh_fill_buffer(sh);
 }
