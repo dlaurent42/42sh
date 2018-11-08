@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 16:18:36 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/28 12:40:29 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 10:51:06 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,14 @@ char		execute_pipe(t_shell *sh, t_token_tree *tree)
 {
 	int		fd[2];
 	int		std[2];
+	int		ret;
 
 	if (pipe(fd) == -1)
 		return (error_pipe());
 	std[0] = dup(0);
 	std[1] = dup(1);
-	return (do_pipe(sh, tree, fd, std));
+	sh->jc = 0;
+	ret = do_pipe(sh, tree, fd, std);
+	sh->jc = 1;
+	return (ret);
 }
