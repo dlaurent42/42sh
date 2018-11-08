@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:15:58 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 14:38:59 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:21:15 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ int			process_status(pid_t pid, int status)
 		}
 		job = job->next;
 	}
-	ft_putendl_fd("NO child process", 2);
+	ft_putendl_fd("No child process", 2);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:54:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:55:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,13 @@ char					sh_history_option_warn(
 							t_env *env,
 							char *path,
 							char c);
+
+/*
+** functions - builtins - jobcontrol
+*/
+char					buildin_jobs_bg(t_shell *sh, char **argv);
+char					buildin_jobs_fg(t_shell *sh, char **argv);
+char					buildin_jobs(t_shell *sh, char **argv);
 
 /*
 ** functions - builtins - read
@@ -561,11 +568,11 @@ char					*sh_get_git_branch(t_shell *sh, char *location);
 t_shell					*sh_new(int argc, char **argv, char **environ);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);
+void					jobs_display(t_job *job);
 
 /*
 ** structures - process
 */
-void					jobs_display(t_shell *sh);
 bool					process_add(t_shell *sh, pid_t pid, char *cmd);
 bool					process_destroy(t_shell *sh, t_process *process);
 bool					process_destroy_all(t_shell *sh);

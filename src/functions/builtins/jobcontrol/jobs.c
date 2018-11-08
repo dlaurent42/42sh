@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add.c                                              :+:      :+:    :+:   */
+/*   jobs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 13:21:13 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 17:39:11 by azaliaus         ###   ########.fr       */
+/*   Created: 2018/11/08 16:37:37 by azaliaus          #+#    #+#             */
+/*   Updated: 2018/11/08 17:25:53 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		job_add(t_shell *sh, t_job *new)
+char		buildin_jobs(t_shell *sh, char **argv)
 {
-	t_job		*curr;
+	t_job		*job;
 
-	curr = sh->job;
-	if (!curr)
-		sh->job = new;
-	else
+	if (ft_count_argv((void **)argv))
 	{
-		while (curr->next)
-			curr = curr->next;
-		curr->next = new;
+		ft_putendl("jobs: bad option");
+		return (STATUS_ERR);
 	}
+	job = sh->job;
+	if (!job)
+		ft_putendl("jobs: no jobs");
+	else
+		jobs_display(sh->job);
+	return (STATUS_OK);
 }

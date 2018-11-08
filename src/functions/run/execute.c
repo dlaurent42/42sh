@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:55:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:55:51 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 		execve(cmd[0], cmd, env);
 	else
 	{
-		// signal_catching();
-		/* TODO: Check it real good. MAYBE SET IGNORE */
-		// signal_default();
 		waitpid(sh->pid, &status, 0);
 		if ((WIFEXITED(status)))
 			return (WEXITSTATUS(status));

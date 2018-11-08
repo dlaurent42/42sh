@@ -63,6 +63,9 @@ SRC			=	shell.c														\
 				functions/builtins/history/options.sp.c						\
 				functions/builtins/history/options.warn.c					\
 				functions/builtins/history/print.c							\
+				functions/builtins/jobcontrol/jobs.c						\
+				functions/builtins/jobcontrol/jobs_bg.c						\
+				functions/builtins/jobcontrol/jobs_fg.c						\
 				functions/builtins/read/assign.c							\
 				functions/builtins/read/error.c								\
 				functions/builtins/read/options.arguments.c					\
@@ -92,6 +95,7 @@ SRC			=	shell.c														\
 				functions/check/lexer.c										\
 				functions/jobs/background.c									\
 				functions/jobs/continue.c									\
+				functions/jobs/display.c									\
 				functions/jobs/execute.c									\
 				functions/jobs/foreground.c									\
 				functions/jobs/launch.c										\
@@ -231,7 +235,6 @@ SRC			=	shell.c														\
 				structures/process/process_destroy_id.c						\
 				structures/process/process_destroy_pid.c					\
 				structures/process/process_display.c						\
-				structures/process/jobs_display.c							\
 				structures/process/process_get.c							\
 				structures/process/process_get_id.c							\
 				structures/process/process_get_pid.c						\
@@ -369,6 +372,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/functions/builtins/exit
 				@mkdir -p $(OBJ_DIR)/functions/builtins/export
 				@mkdir -p $(OBJ_DIR)/functions/builtins/history
+				@mkdir -p $(OBJ_DIR)/functions/builtins/jobcontrol
 				@mkdir -p $(OBJ_DIR)/functions/builtins/read
 				@mkdir -p $(OBJ_DIR)/functions/builtins/setenv
 				@mkdir -p $(OBJ_DIR)/functions/builtins/unalias

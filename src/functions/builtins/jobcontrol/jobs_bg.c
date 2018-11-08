@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jobs_display.c                                     :+:      :+:    :+:   */
+/*   jobs_bg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/04 16:30:14 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/04 17:29:37 by dhojt            ###   ########.fr       */
+/*   Created: 2018/11/08 16:38:34 by azaliaus          #+#    #+#             */
+/*   Updated: 2018/11/08 17:22:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void				jobs_display(t_shell *sh)
+char		buildin_jobs_bg(t_shell *sh, char **argv)
 {
-	t_process		*process;
+	t_job		*job;
 
-	process = sh->process;
-	if (!process)
-		ft_printf("jobs: no jobs\n");
+	(void)argv;
+	job = sh->job;
+	if (!job)
+		ft_putendl("bg: no current job");
 	else
 	{
-		ft_printf("jobs:\n");
-		while (process)
-		{
-			process_display(process);
-			process = process->next;
-		}
+		// Implement numbers ant etc;
+		job_continue(sh->job, 0);
 	}
+	return (STATUS_OK);
+	// return (jobs_finder(sh, argv, JOBS_BG));
 }
