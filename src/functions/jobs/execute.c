@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:52:11 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 14:43:24 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:00:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int			sh_do_job(t_shell *sh, char **argv, t_env *env)
 
 	ret = STATUS_OK;
 	job = job_new();
+	job->notifications = sh->jc_muted;
 	job_add(sh, job);
 	p = process_new();
 	p->argv = argv;
 	p->env = env;
 	job->first_process = p;
-	job_launch(job, 1);
+	job_launch(job, (sh->jc_muted == 1) ? 0 : 1);
 	// Replace it with nanosleep
 	usleep(2000);
 	if (env_search(env, "?"))

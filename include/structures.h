@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 13:42:17 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 14:58:27 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,6 +383,7 @@ typedef struct			s_shell
 	pid_t				pid;
 	pid_t				shell_pgid;
 	char				jc;
+	char				jc_muted;
 	t_bin				*bin;
 	t_cmd				*cmd;
 	t_env				*env;
