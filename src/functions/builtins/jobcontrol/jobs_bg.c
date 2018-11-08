@@ -6,12 +6,17 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:38:34 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 17:22:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/08 21:58:04 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
+/*
+** For Dav:
+** fg w/o number should make affect the last process of sh->job list.
+** w/ number should call job with that job_id. (also ID needs to be appended.)
+*/
 char		buildin_jobs_bg(t_shell *sh, char **argv)
 {
 	t_job		*job;
