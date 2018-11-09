@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:01:39 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 10:19:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:35:36 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_job		*job_new(int muted, char **argv)
 	job->notifications = muted;
 	job->command = ft_str2tostr(argv);
 	job->id = 1;
+	job->rank = 2;
 	job->next = NULL;
 	return (job);
 }
