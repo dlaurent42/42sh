@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:26:03 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 15:50:26 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:17:09 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,25 @@ static char		*job_get_status(t_job *job)
 
 void			jobs_display(t_job *job)
 {
+	int			i;
+	int			max;
 	char		rank;
 	char		*status;
+	t_job		*tmp;
 
 	if (!job)
 		return ;
-	while (job)
+	i = 0;
+	max = job_get_max_id(job);
+	while (i < max + 1)
 	{
-		rank = job_get_rank(job);
-		status = job_get_status(job);
-		ft_printf("[%d] %c %6s %s\n", job->id, rank, status, job->command);
-		job = job->next;
+		tmp = job_get_by_id(job, i);
+		if (tmp)
+		{
+			rank = job_get_rank(tmp);
+			status = job_get_status(tmp);
+			ft_printf("[%d] %c %s %s\n", tmp->id, rank, status, tmp->command);
+		}
+		i++;
 	}
 }

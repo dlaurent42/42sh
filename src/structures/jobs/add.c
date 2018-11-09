@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:21:13 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 15:41:14 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:01:30 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void		job_add(t_shell *sh, t_job *new)
 	else
 	{
 		job_decrese_all_ranks(sh->job);
+		new->id = get_id;
 		while (curr->next)
 			curr = curr->next;
 		curr->next = new;
-		new->id = get_id;
 	}
 }
