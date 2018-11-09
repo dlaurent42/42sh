@@ -6,13 +6,13 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 12:10:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/09 12:12:19 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 12:21:28 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char				*jobs_launch(t_shell *sh, char **argv, int mode)
+char				buildin_jobs_launch(t_shell *sh, char **argv, int mode)
 {
 	t_job		*job;
 
@@ -25,13 +25,13 @@ char				*jobs_launch(t_shell *sh, char **argv, int mode)
 		{
 			while (job->next)
 				job = job->next;
-			job_continue(job, 0); // <- 1 - foreground | 0 - background
+			job_continue(job, mode); // <- 1 - foreground | 0 - background
 		}
 		else if (ft_count_argv((void **)argv) == 1)
 		{
 			// Dav: do stuff
 			// Return proper job and run this
-			job_continue(job, 0); // <- 1 - foreground | 0 - background
+			job_continue(job, mode); // <- 1 - foreground | 0 - background
 		}
 		else
 		{
