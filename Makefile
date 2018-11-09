@@ -403,11 +403,8 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
-<<<<<<< HEAD
 				@mkdir -p $(OBJ_DIR)/structures/gnl
-=======
 				@mkdir -p $(OBJ_DIR)/structures/jobs
->>>>>>> d8b9971... Begining of job implamentation.
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/process
