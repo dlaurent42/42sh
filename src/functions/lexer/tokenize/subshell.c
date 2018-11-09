@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:09:51 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/06 20:41:31 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:37:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static int	manage_quotes(char *cmd, int i)
 	return (i);
 }
 
+static bool	lexer_handle_subshell_condition(char *cmd, size_t count, int i)
+{
+	return ((cmd[i] == ')' && (count || lexer_is_esc(cmd, i)))
+	|| cmd[i] != ')');
+}
+
 char		lexer_handle_subshell(t_lexer *lexer, char *cmd, int *i, int *j)
 {
 	int		move;
@@ -36,8 +42,7 @@ char		lexer_handle_subshell(t_lexer *lexer, char *cmd, int *i, int *j)
 
 	count = 0;
 	*i = *i + 1;
-	while ((cmd[*i] == ')' && (count || lexer_is_esc(cmd, *i)))
-	|| cmd[*i] != ')')
+	while (lexer_handle_subshell_condition(cmd, count, *i))
 	{
 		if (cmd[*i] == '\0')
 			return (STATUS_SUBSHELL);
@@ -46,7 +51,9 @@ char		lexer_handle_subshell(t_lexer *lexer, char *cmd, int *i, int *j)
 		*i = move;
 		if (cmd[*i] == '(' && !lexer_is_esc(cmd, *i))
 			count++;
-		if (cmd[*i] == ')' && !(count || lexer_is_esc(cmd, *i)))
+		else if (cmd[*i] == ')' && count == 0 && !lexer_is_esc(cmd, *i))
+			break ;
+		else if (cmd[*i] == ')' && count && !lexer_is_esc(cmd, *i))
 			count--;
 		*i = *i + 1;
 	}
