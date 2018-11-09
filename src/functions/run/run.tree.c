@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 22:27:46 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 18:09:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 22:49:40 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	sh_command_run_tree(t_shell *sh, t_env *env, t_bin *bin, t_lexer lexer)
 	char			*status;
 	t_token_tree	*list;
 
+	// for (size_t i = 0; i < lexer.size; i++)
+	// 	ft_printf("Token: %s | type: %d\n", lexer.tokens[i].id, lexer.tokens[i].type);
 	list = build_list(lexer);
 	reorganise_tokens(&list);
 	if (!(sh->exec = sh_init_exec(env, bin)))
