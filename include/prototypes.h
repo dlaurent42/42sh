@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 14:04:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:02:05 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -535,15 +535,12 @@ t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
 
 /*
-<<<<<<< HEAD
 ** structures - gnl
 */
 int						sh_gnl(t_shell *sh, int const fd, char **line);
 void					gnl_delete(t_shell *sh);
 
 /*
-=======
->>>>>>> 2ef4e01089b733506378c833a681bc0e3afd8d38
 ** structures - jobs
 */
 void					job_destroy_all(t_job *job);

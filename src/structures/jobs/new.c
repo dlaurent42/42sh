@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:01:39 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 10:19:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:01:32 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	str2_sizes(char	**argv)
+static int	str2_sizes(char **argv)
 {
 	int		i;
 	int		ret;
