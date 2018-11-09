@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 20:30:02 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 18:08:08 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:41:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ char		*backtick_prep(t_shell *sh, t_env *env, char *token)
 		token = sh_replace_aliases(sh->alias, token);
 	if ((status = sh_command_run_lexer(sh, env, &lexer, &token)) != STATUS_OK)
 	{
+		ft_strdel(&token);
 		lexer_delete(&lexer, status);
 		return (ft_strdups(""));
 	}
+	ft_strdel(&token);
 	if ((status = sh_command_check_lexer(sh, &lexer)) != STATUS_OK)
 	{
 		lexer_delete(&lexer, status);
@@ -35,6 +37,5 @@ char		*backtick_prep(t_shell *sh, t_env *env, char *token)
 	if (!(ret = execute_backtick(sh, lexer)))
 		ret = ft_strdups("");
 	lexer_delete(&lexer, status);
-	ft_strdel(&token);
 	return (ret);
 }
