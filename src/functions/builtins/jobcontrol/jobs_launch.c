@@ -6,17 +6,31 @@
 /*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 12:10:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/09 12:21:28 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 13:16:01 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+t_job				*get_latest_job(t_shell *sh)
+{
+	t_job			*job;
+
+	job = sh->job;
+	while (jobs && job->next)
+		job = job->next;
+	return (job);
+}
 
 char				buildin_jobs_launch(t_shell *sh, char **argv, int mode)
 {
 	t_job		*job;
 
 	job = sh->job;
+	if (!ft_count_argv((void **)argv))
+		job = get_latest_job(sh);
+	else
+		job = sh->jobs;
 	if (!job)
 		ft_putendl("bg: no current job");
 	else
