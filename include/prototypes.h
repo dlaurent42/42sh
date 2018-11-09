@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 21:07:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 23:09:31 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,7 +387,7 @@ char					lexer_token_backquote(
 							char *cmd,
 							int *i,
 							int *j);
-t_token					*lexer_token_search(char *cmd);
+t_token					*lexer_token_search(char *cmd, int i);
 const t_token			*lexer_lexic_singletone(void);
 
 /*
