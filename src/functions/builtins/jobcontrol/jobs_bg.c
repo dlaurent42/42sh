@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:38:34 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 09:22:35 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 09:23:48 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char		buildin_jobs_bg(t_shell *sh, char **argv)
 {
 	t_job		*job;
 
-	(void)argv;
 	job = sh->job;
 	if (!job)
 		ft_putendl("bg: no current job");
@@ -31,11 +30,13 @@ char		buildin_jobs_bg(t_shell *sh, char **argv)
 		{
 			while (job->next)
 				job = job->next;
-			job_continue(sh->job, 0); // <- 1 - foreground | 0 - background
+			job_continue(job, 0); // <- 1 - foreground | 0 - background
 		}
 		else if (ft_count_argv((void **)argv) == 1)
 		{
 			// Dav: do stuff
+			// Return proper job and run this
+			job_continue(job, 0); // <- 1 - foreground | 0 - background
 		}
 		else
 		{
