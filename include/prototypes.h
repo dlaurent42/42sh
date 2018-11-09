@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:58:36 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:59:02 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ char					sh_history_option_warn(
 */
 char					buildin_jobs_bg(t_shell *sh, char **argv);
 char					buildin_jobs_fg(t_shell *sh, char **argv);
+char					buildin_jobs_launch(t_shell *sh, char **argv, int mode);
 char					buildin_jobs(t_shell *sh, char **argv);
 
 /*
