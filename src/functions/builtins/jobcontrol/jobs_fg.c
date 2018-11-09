@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:41:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 22:02:05 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 09:22:10 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,21 @@ char		buildin_jobs_fg(t_shell *sh, char **argv)
 		ft_putendl("fg: no current job");
 	else
 	{
-		// Implement numbers ant etc;
-		job_continue(sh->job, 1); // <- 1 - foreground | 0 - background
+		if (!ft_count_argv((void **)argv))
+		{
+			while (job->next)
+				job = job->next;
+			job_continue(sh->job, 1); // <- 1 - foreground | 0 - background
+		}
+		else if (ft_count_argv((void **)argv) == 1)
+		{
+			// Dav: do stuff
+		}
+		else
+		{
+			ft_putendl("fg: too much arguments");
+			return (STATUS_OK);
+		}
 	}
 	return (STATUS_OK);
 	// return (jobs_finder(sh, argv, JOBS_FG));
