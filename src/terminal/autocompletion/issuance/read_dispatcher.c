@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 17:23:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/25 23:32:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/07 17:12:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void				auto_read_dispatcher(t_shell *sh)
 			else
 				sh_print_str(sh, " ");
 		}
-		else
+		else if (sh->read->line[0] != 4)
 			sh_fill_buffer(sh);
 		auto_clear_selection_screen(sh);
 		sh->modes.auto_completion = FALSE;

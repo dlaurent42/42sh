@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splice_point.c                                     :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/03 13:44:28 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 14:01:30 by dlaurent         ###   ########.fr       */
+/*   Created: 2018/11/06 20:24:08 by dlaurent          #+#    #+#             */
+/*   Updated: 2018/11/06 20:28:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char		ft_is_space(char c)
+void	gnl_delete(t_shell *sh)
 {
-	return (c != '\0' &&
-	(
-		c == '\t'
-		|| c == '\n'
-		|| c == '\v'
-		|| c == '\f'
-		|| c == '\r'
-		|| c == ' '));
-}
+	t_gnl	*tmp;
 
-size_t			backtick_splice_points(char *s)
-{
-	int		i;
-	size_t	n;
-
-	i = 0;
-	n = 0;
-	while (s[i])
+	tmp = NULL;
+	if (!sh->gnl)
+		return ;
+	sh->gnl = sh->gnl->head;
+	while (sh->gnl)
 	{
-		while (ft_is_space(s[i]) && !lexer_is_esc(s, i))
-			i++;
-		if (s[i])
-			n++;
-		while (s[i] && (!ft_is_space(s[i]) || lexer_is_esc(s, i)))
-			i++;
+		tmp = sh->gnl->next;
+		ft_strdel(&sh->gnl->buff);
+		ft_strdel(&sh->gnl->content);
+		free(sh->gnl);
+		sh->gnl = tmp;
 	}
-	return (n);
+	sh->gnl = NULL;
 }

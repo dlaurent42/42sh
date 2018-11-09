@@ -6,13 +6,13 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 17:52:35 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 13:57:11 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:40:00 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_lexer_glob	*add_node_lexer_glob(
+t_lexer_glob		*add_node_lexer_glob(
 	t_lexer_glob *current, char *s, int type)
 {
 	int				i;

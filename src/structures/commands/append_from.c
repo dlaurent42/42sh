@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 20:08:50 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/01 13:19:30 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:29:38 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		command_append_from(t_shell *sh, t_env *env, char *path)
 		return ;
 	if ((fd = open(path, O_RDONLY)) == -1 || !command_key_verified(fd))
 		return ;
-	while (get_next_line(fd, &buffer) == 1)
+	while (sh_gnl(sh, fd, &buffer) == 1)
 	{
 		if (command_parse_and_add(sh, buffer, id, ++row) == 0)
 		{

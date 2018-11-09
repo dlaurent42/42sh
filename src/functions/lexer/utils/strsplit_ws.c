@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strsplit_ws.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 13:37:56 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 13:43:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:41:52 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static char		ft_is_space(char c)
 {
 	return (c != '\0' &&
-		(
-			c == '\t'
-			|| c == '\n'
-			|| c == '\v'
-			|| c == '\f'
-			|| c == '\r'
-			|| c == ' '
-		));
+	(
+		c == '\t'
+		|| c == '\n'
+		|| c == '\v'
+		|| c == '\f'
+		|| c == '\r'
+		|| c == ' '));
 }
 
 static char		let_n_char(char *s, size_t id_w, size_t id_c)

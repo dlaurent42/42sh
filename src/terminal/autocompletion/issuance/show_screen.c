@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 20:03:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/29 17:23:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/07 17:12:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static void			do_loop(t_shell *sh, t_obj *head)
 		auto_display(sh, obj, first_print);
 		first_print = false;
 		read(0, sh->read->line, 4);
-		if (sh->read->line[0] == 4)
-			break ;
 		auto_read_dispatcher(sh);
 		ft_bzero(sh->read->line, LINE_SIZE);
 	}

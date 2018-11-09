@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 12:05:13 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 14:04:59 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PROTOTYPES_H
 
 # include "shell.h"
+
+int						main(int argc, char **argv, char **environ);
 
 /*
 ** errors
@@ -269,10 +271,8 @@ char					*lexer_expand(t_env *env, char *str, int i);
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
-void					lexer_glob(
-							t_shell *sh, t_env *env, t_token_tree **tree);
-t_lexer_glob			*add_node_lexer_glob(
-							t_lexer_glob *current, char *s, int type);
+void					lexer_glob(t_shell *sh, t_env *e, t_token_tree **t);
+t_lexer_glob			*add_node_lexer_glob(t_lexer_glob *c, char *s, int t);
 
 /*
 ** functions - lexer - glob - cbraces
@@ -341,6 +341,7 @@ void					sh_command_expand_dollars(
 /*
 ** functions - lexer - heredoc
 */
+char					sh_heredoc_orga(t_lexer *lexer, char status);
 bool					sh_heredocs_all_close(t_shell *sh);
 char					sh_heredoc(t_shell *sh, char *str);
 char					sh_heredoc_add(t_shell *sh, char *heredoc);
@@ -534,6 +535,15 @@ t_env					*env_new(t_shell *sh, char **environ);
 t_env					*env_copy(t_shell *sh, t_env *src);
 
 /*
+<<<<<<< HEAD
+** structures - gnl
+*/
+int						sh_gnl(t_shell *sh, int const fd, char **line);
+void					gnl_delete(t_shell *sh);
+
+/*
+=======
+>>>>>>> 2ef4e01089b733506378c833a681bc0e3afd8d38
 ** structures - jobs
 */
 void					job_destroy_all(t_job *job);
@@ -558,7 +568,7 @@ void					sh_set_prompt(t_shell *sh);
 char					sh_set_termios(t_shell *sh);
 void					sh_unset_termios(t_shell *sh);
 char					*sh_get_folder_name(t_env *e, char *l, size_t len);
-char					*sh_get_git_branch(char *location);
+char					*sh_get_git_branch(t_shell *sh, char *location);
 t_shell					*sh_new(int argc, char **argv, char **environ);
 t_exec					*sh_init_exec(t_env *env, t_bin *bin);
 void					sh_destroy_exec(t_exec **exec);

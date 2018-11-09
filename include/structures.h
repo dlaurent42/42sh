@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 10:21:22 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 14:04:43 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,6 +380,7 @@ typedef struct			s_shell
 	int					exe;
 	char				*hist;
 	pid_t				pid;
+	t_gnl				*gnl;
 	pid_t				shell_pgid;
 	char				jc;
 	char				jc_muted;

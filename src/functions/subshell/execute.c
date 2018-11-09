@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 17:56:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 20:19:16 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/06 20:40:37 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-int				main(int argc, char **argv, char **environ);
 
 static char		**build_argv(char *token, t_shell *sh)
 {

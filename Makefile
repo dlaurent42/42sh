@@ -3,7 +3,7 @@
 NAME 		= 	42sh
 
 CC 			=	gcc
-CFLAGS		= 	-O3 -g -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
+CFLAGS		= 	-O3 -g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -134,6 +134,7 @@ SRC			=	shell.c														\
 				functions/lexer/heredoc/get_next.c							\
 				functions/lexer/heredoc/heredoc.c							\
 				functions/lexer/heredoc/init.c								\
+				functions/lexer/heredoc/orga.c								\
 				functions/lexer/heredoc/update.c							\
 				functions/lexer/tilde/tilde.c								\
 				functions/lexer/tokenize/delete.c							\
@@ -211,6 +212,8 @@ SRC			=	shell.c														\
 				structures/environment/ini/shlvl.c							\
 				structures/environment/ini/specials.c						\
 				structures/environment/ini/term.c							\
+				structures/gnl/delete.c										\
+				structures/gnl/gnl.c										\
 				structures/jobs/add.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
@@ -400,6 +403,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/commands
 				@mkdir -p $(OBJ_DIR)/structures/environment
 				@mkdir -p $(OBJ_DIR)/structures/environment/ini
+				@mkdir -p $(OBJ_DIR)/structures/gnl
 				@mkdir -p $(OBJ_DIR)/structures/jobs
 				@mkdir -p $(OBJ_DIR)/structures/read
 				@mkdir -p $(OBJ_DIR)/structures/shell
