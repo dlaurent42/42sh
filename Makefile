@@ -66,6 +66,7 @@ SRC			=	shell.c														\
 				functions/builtins/jobcontrol/jobs.c						\
 				functions/builtins/jobcontrol/jobs_bg.c						\
 				functions/builtins/jobcontrol/jobs_fg.c						\
+				functions/builtins/jobcontrol/jobs_launch.c						\
 				functions/builtins/read/assign.c							\
 				functions/builtins/read/error.c								\
 				functions/builtins/read/options.arguments.c					\
