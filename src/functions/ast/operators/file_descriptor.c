@@ -6,11 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/11/09 22:58:43 by azaliaus         ###   ########.fr       */
-=======
-/*   Updated: 2018/11/09 21:00:47 by azaliaus         ###   ########.fr       */
->>>>>>> faaca0df408078dd82718f840940f8fd37aeba21
+/*   Updated: 2018/11/10 00:49:56 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +26,37 @@ static int	check_fd(int fd)
 	return (ret);
 }
 
+static char do_redir(t_shell *sh, t_token_tree *tree, char *front, char *cmd)
+{
+	int		fd[2];
+	int		stdin;
+	char	ret;
+	char	*back;
+
+	if (!(back = get_back_descriptor(cmd)))
+		error_malloc_reader(sh, "token");
+	fd[0] = ft_atoi(front);
+	fd[1] = ft_atoi(back);
+	ft_printf("Executing redir <&\nFront: %d\nBack: %d\n", fd[0], fd[1]);
+	(fd[1] < 0) ? fd[1] = 0 : (0);
+	stdin = dup(fd[1]);
+	dup2(fd[0], fd[1]);
+	ret = execute_tree(sh, tree->left);
+	dup2(stdin, fd[1]);
+	close(stdin);
+	ft_strdel(&back);
+	return (ret);
+}
+
 static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 								char *cmd)
 {
-	int		closed;
 	char	*back;
 	char	ret;
 	int		fd[3];
 
-	closed = (!ft_strncmp(cmd, ">&", 2) ? 1 : 0);
+	if (!(!ft_strncmp(cmd, ">&", 2)))
+		return (do_redir(sh, tree, front, cmd));
 	if (!(back = get_back_descriptor(cmd)))
 		error_malloc_reader(sh, "token");
 	fd[0] = ft_atoi(front);
