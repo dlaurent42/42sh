@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 14:01:13 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:43:33 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static char	sh_command_err(char *cmd, int err)
 {
 	if (err == 1 && !lexer_is_empty(cmd))
 	{
-		ft_putstr_fd("command not found: ", 2);
+		ft_putstr_fd("sh: command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
 		return (STATUS_NOT_FOUND);
 	}
 	if (err == 2)
 	{
-		ft_putstr_fd("permission denied: ", 2);
+		ft_putstr_fd("sh: permission denied: ", 2);
 		ft_putendl_fd(cmd, 2);
 		return (STATUS_PERMISSION_DENIED);
 	}
