@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:26:25 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/04 12:06:55 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 17:26:31 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	sh_multiline_buffer(t_shell *sh, char status)
 	if (status == STATUS_HEREDOC && sh->buffer.ushift)
 		while (sh->buffer.content[++i])
 			sh->buffer.content[i] = '\0';
+	else if (status == STATUS_BQUOTE)
+		sh->buffer.content[len] = ';';
 	else if (status != STATUS_NEWLINE)
 		sh->buffer.content[len] = '\n';
 	else
