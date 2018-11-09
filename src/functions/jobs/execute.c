@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:52:11 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 19:14:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:16:06 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ static char	*ft_str2tostr(char **argv)
 	{
 		x = 0;
 		while (argv[i][x])
-		{
-			ret[cursor++] = argv[i][x];
-			x++;
-		}
+			ret[cursor++] = argv[i][x++];
 		(argv[i + 1]) ? ret[cursor++] = ' ' : (0);
 		i++;
 	}
@@ -70,8 +67,6 @@ int			sh_do_job(t_shell *sh, char **argv, t_env *env)
 	p->env = env;
 	job->first_process = p;
 	job_launch(job, (sh->jc_muted == 1) ? 0 : 1);
-	// Replace it with nanosleep
-	usleep(2000);
 	if (env_search(env, "?"))
 		ret =  (ft_atoi(env_search(env, "?")));
 	return (ret);
