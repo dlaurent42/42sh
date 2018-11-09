@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 10:19:48 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:22:29 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,6 @@ t_lexer_glob			*add_node_lexer_backtick(
 							t_lexer_glob *current, char *s, int type);
 size_t					backtick_splice_points(char *s);
 
-
 /*
 ** functions - lexer - dollar
 */
@@ -269,8 +268,10 @@ char					*lexer_expand(t_env *env, char *str, int i);
 ** functions - lexer - glob
 */
 char					*sh_glob(char *str);
-void					lexer_glob(t_shell *sh, t_env *env, t_token_tree **tree);
-t_lexer_glob			*add_node_lexer_glob(t_lexer_glob *current, char *s, int type);
+void					lexer_glob(
+							t_shell *sh, t_env *env, t_token_tree **tree);
+t_lexer_glob			*add_node_lexer_glob(
+							t_lexer_glob *current, char *s, int type);
 
 /*
 ** functions - lexer - glob - cbraces

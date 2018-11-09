@@ -6,13 +6,13 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:27:08 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/07 16:27:38 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:32:33 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		update_status(void)
+static void		update_status(void)
 {
 	int		status;
 	pid_t	pid;
@@ -22,7 +22,15 @@ void		update_status(void)
 		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
 }
 
-void		job_notification(void)
+static void		shift_jobs(t_job *last, t_job *next)
+{
+	if (last)
+		last->next = next;
+	else
+		g_sh->job = next;
+}
+
+void			job_notification(void)
 {
 	t_job		*job;
 	t_job		*last;
@@ -37,19 +45,15 @@ void		job_notification(void)
 		if (job_is_completed(job))
 		{
 			job_message(job, "done");
-			if (last)
-				last->next = next;
-			else
-				g_sh->job = next;
+			shift_jobs(last, next);
 			job_delete(job);
 		}
-		else if (job_is_stopped(job) && !job->notified)
+		else
 		{
-			job_message_suspended(job);
+			(job_is_stopped(job) && !job->notified)
+				? job_message_suspended(job) : (0);
 			last = job;
 		}
-		else
-			last = job;
 		job = next;
 	}
 }

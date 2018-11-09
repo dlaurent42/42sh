@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 13:44:28 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/03 13:45:31 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:24:19 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static char		ft_is_space(char c)
 {
 	return (c != '\0' &&
-		(
-			c == '\t'
-			|| c == '\n'
-			|| c == '\v'
-			|| c == '\f'
-			|| c == '\r'
-			|| c == ' '
-		));
+	(
+		c == '\t'
+		|| c == '\n'
+		|| c == '\v'
+		|| c == '\f'
+		|| c == '\r'
+		|| c == ' '
+	));
 }
 
-size_t		backtick_splice_points(char *s)
+size_t			backtick_splice_points(char *s)
 {
 	int		i;
 	size_t	n;

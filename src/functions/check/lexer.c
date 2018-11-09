@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 13:29:40 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 20:01:00 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:25:02 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	is_error_token_plus_one(t_lexer *l, t_token t, int i)
 	return (is_error_subshell(l, t, i, 1)
 	|| (t.type >= TOKEN_ANDIF && t.type <= TOKEN_HEREDOC && (i == 0
 	|| ((i + 1) <= (int)l->size && l->tokens[i + 1].type == TOKEN_SEMICOLON)
-	|| ((i + 1) <= (int)l->size	&& l->tokens[i + 1].type >= TOKEN_ANDIF
+	|| ((i + 1) <= (int)l->size && l->tokens[i + 1].type >= TOKEN_ANDIF
 	&& l->tokens[i + 1].type <= TOKEN_HEREDOC))));
 }
 
