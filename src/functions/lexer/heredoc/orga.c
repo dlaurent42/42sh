@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 13:39:09 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 11:05:24 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:20:03 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ static void	sh_heredoc_repatriate_loop(t_lexer *lexer, int i, int cmd_pos)
 static void	sh_heredoc_repatriate(t_lexer *lexer, int i, int cmd_pos)
 {
 	i += 2;
-	if (i >= (int)lexer->size)
-		return ;
-	while (lexer->tokens[i].type == TOKEN_SINGLEQUOTE
+	while (i < (int)lexer->size
+	&& (lexer->tokens[i].type == TOKEN_SINGLEQUOTE
 	|| lexer->tokens[i].type == TOKEN_DOUBLEQUOTE
 	|| lexer->tokens[i].type == TOKEN_BACKQUOTE
-	|| lexer->tokens[i].type == TOKEN_WORD)
+	|| lexer->tokens[i].type == TOKEN_WORD))
 	{
 		sh_heredoc_repatriate_loop(lexer, i, cmd_pos);
 		cmd_pos++;

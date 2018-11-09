@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 20:27:17 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/07 21:54:49 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:23:28 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		sh_command_run(t_shell *sh, t_env *env, t_bin *bin, char **cmd)
 	else if (lexer.size == 0)
 		return (STATUS_OK);
 	sh->modes.multiline = FALSE;
-	if (sh && bin == sh->bin)
+	if (sh && bin == sh->bin && !sh->modes.heredoc)
 	{
 		sh->bin = bin_update(sh, env, bin);
 		bin = sh->bin;
