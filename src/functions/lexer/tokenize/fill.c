@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/09 21:09:27 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 23:09:41 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static char	handle_quotes(t_lexer *lexer, char *cmd, int *i, int *j)
 	char	status;
 
 	status = STATUS_OK;
-	if (cmd[*i] == '(')
+	if (cmd[*i] == '(' && lexer_is_new_cmd(cmd, *i))
 		return (lexer_handle_subshell(lexer, cmd, i, j));
+	else if (cmd[*i] == '(')
+		return (STATUS_ERR);
 	if (!(cmd[*i] == '\"' || cmd[*i] == '\'' || cmd[*i] == '`')
 	|| lexer_is_esc(cmd, *i))
 		return (status);
@@ -87,9 +89,7 @@ char		lexer_fill(t_lexer *lexer, char *cmd)
 	j = 0;
 	status = STATUS_OK;
 	while (cmd && cmd[i])
-		if (lexer_is_esc(cmd, i))
-			i++;
-		else if ((match = lexer_token_search(cmd + i)))
+		if ((match = lexer_token_search(cmd, i)))
 		{
 			lexer_handle_match(match, lexer, cmd + i, cmd + j);
 			i += match->size;
