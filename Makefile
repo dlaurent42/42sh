@@ -209,6 +209,7 @@ SRC			=	shell.c														\
 				structures/environment/ini/ppid.c							\
 				structures/environment/ini/ps.c								\
 				structures/environment/ini/pwd.c							\
+				structures/environment/ini/shell.c							\
 				structures/environment/ini/shlvl.c							\
 				structures/environment/ini/specials.c						\
 				structures/environment/ini/term.c							\
