@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:41:42 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 09:24:08 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 09:25:26 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char		buildin_jobs_fg(t_shell *sh, char **argv)
 {
 	t_job		*job;
 
-	(void)argv;
 	job = sh->job;
 	if (!job)
 		ft_putendl("fg: no current job");
