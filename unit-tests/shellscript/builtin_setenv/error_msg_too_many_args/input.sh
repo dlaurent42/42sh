@@ -1,1 +1,0 @@
-setenv a b c

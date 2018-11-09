@@ -1,3 +1,0 @@
-false
-exit
-echo bbb

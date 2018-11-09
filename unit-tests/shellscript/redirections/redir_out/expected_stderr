@@ -1,3 +1,0 @@
-42sh: execution: /tmp/testfile: illegal file descriptor name
-cat: /tmp/testfile: No such file or directory
-rm: /tmp/testfile: No such file or directory

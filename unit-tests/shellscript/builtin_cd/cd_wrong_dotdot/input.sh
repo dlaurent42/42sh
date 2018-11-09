@@ -1,2 +1,0 @@
-cd /tmp
-cd toto/..

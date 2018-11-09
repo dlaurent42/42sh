@@ -1,1 +1,0 @@
-env echo abc

@@ -1,2 +1,0 @@
-/bin/kill -l
-ls
