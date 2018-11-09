@@ -6,13 +6,52 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:01:39 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 22:22:17 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:19:30 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_job		*job_new(void)
+static int	str2_sizes(char	**argv)
+{
+	int		i;
+	int		ret;
+
+	ret = 0;
+	i = 0;
+	while (argv[i])
+	{
+		ret += ft_strlen(argv[i]);
+		if (argv[i + 1])
+			ret++;
+		i++;
+	}
+	return (ret);
+}
+
+static char	*ft_str2tostr(char **argv)
+{
+	int		i;
+	int		x;
+	int		cursor;
+	char	*ret;
+
+	if (!(ret = ft_strnew(str2_sizes(argv))))
+		return (NULL);
+	i = 0;
+	cursor = 0;
+	while (argv[i])
+	{
+		x = 0;
+		while (argv[i][x])
+			ret[cursor++] = argv[i][x++];
+		(argv[i + 1]) ? ret[cursor++] = ' ' : (0);
+		i++;
+	}
+	return (ret);
+}
+
+t_job		*job_new(int muted, char **argv)
 {
 	t_job		*job;
 
@@ -21,7 +60,8 @@ t_job		*job_new(void)
 	job->fd[0] = STDIN_FILENO;
 	job->fd[1] = STDOUT_FILENO;
 	job->fd[2] = STDERR_FILENO;
-	job->notifications = 0;
+	job->notifications = muted;
+	job->command = ft_str2tostr(argv);
 	job->id = 1;
 	job->next = NULL;
 	return (job);

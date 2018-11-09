@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 22:21:03 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:19:48 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -535,7 +535,7 @@ t_env					*env_copy(t_shell *sh, t_env *src);
 ** structures - jobs
 */
 void					job_destroy_all(t_job *job);
-t_job					*job_new(void);
+t_job					*job_new(int muted, char **argv);
 int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
 void					job_delete(t_job *job);
