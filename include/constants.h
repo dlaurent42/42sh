@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 12:03:18 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 12:15:14 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,6 @@
 ** job control
 */
 # define JOBS_FG	1
-# define JOBS_BG	2
+# define JOBS_BG	0
 
 #endif
