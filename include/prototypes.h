@@ -6,7 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/09 15:02:05 by dlaurent         ###   ########.fr       */
+=======
+/*   Updated: 2018/11/09 16:15:55 by azaliaus         ###   ########.fr       */
+>>>>>>> feature/jctest
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -549,6 +553,8 @@ int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
 void					job_delete(t_job *job);
 void					job_add(t_shell *sh, t_job *new);
+t_job					*job_get_by_id(t_job *job, int id);
+int						job_get_max_id(t_job *job);
 
 /*
 ** structures - reader

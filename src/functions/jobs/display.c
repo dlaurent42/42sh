@@ -6,35 +6,69 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:26:03 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 22:27:49 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:17:09 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <limits.h>
 
-static size_t	jobs_ahead(t_job *job)
+static t_job	*job_get_top(t_job *job)
 {
-	size_t		ret;
+	t_job		*cpy;
+	int			top;
 
-	ret = 0;
+	cpy = job;
+	top = INT_MIN;
+	while (cpy)
+	{
+		if (cpy->rank > top)
+			top = cpy->rank;
+		cpy = cpy->next;
+	}
 	while (job)
 	{
+		if (job->rank == top)
+			return (job);
 		job = job->next;
-		(job) ? ret++ : (0);
 	}
-	return (ret);
+	return (NULL);
+}
+
+static t_job	*job_get_sec(t_job *job, t_job *top)
+{
+	t_job		*cpy;
+	int			sec;
+
+	cpy = job;
+	sec = INT_MIN;
+	while (cpy)
+	{
+		if (cpy->rank > sec && cpy != top)
+			sec = cpy->rank;
+		cpy = cpy->next;
+	}
+	while (job)
+	{
+		if (job->rank == sec)
+			return (job);
+		job = job->next;
+	}
+	return (NULL);
 }
 
 static char		job_get_rank(t_job *job)
 {
-	char		ret;
-	size_t		j_ahead;
+	t_job		*top;
+	t_job		*sec;
 
-	ret = ' ';
-	j_ahead = jobs_ahead(job);
-	if (j_ahead <= 1)
-		ret = (j_ahead == 0 ? '+' : '-');
-	return (ret);
+	top = job_get_top(job);
+	sec = job_get_sec(job, top);
+	if (job == top)
+		return ('+');
+	if (job == sec)
+		return ('-');
+	return (' ');
 }
 
 static char		*job_get_status(t_job *job)
@@ -50,16 +84,25 @@ static char		*job_get_status(t_job *job)
 
 void			jobs_display(t_job *job)
 {
+	int			i;
+	int			max;
 	char		rank;
 	char		*status;
+	t_job		*tmp;
 
 	if (!job)
 		return ;
-	while (job)
+	i = 0;
+	max = job_get_max_id(job);
+	while (i < max + 1)
 	{
-		rank = job_get_rank(job);
-		status = job_get_status(job);
-		ft_printf("[%d] %c %6s %s\n", job->id, rank, status, job->command);
-		job = job->next;
+		tmp = job_get_by_id(job, i);
+		if (tmp)
+		{
+			rank = job_get_rank(tmp);
+			status = job_get_status(tmp);
+			ft_printf("[%d] %c %s %s\n", tmp->id, rank, status, tmp->command);
+		}
+		i++;
 	}
 }

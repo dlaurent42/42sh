@@ -217,9 +217,11 @@ SRC			=	shell.c														\
 				structures/jobs/add.c										\
 				structures/jobs/new.c										\
 				structures/jobs/destroy.c									\
+				structures/jobs/get_max_id.c								\
 				structures/jobs/delete.c									\
 				structures/jobs/completed.c									\
 				structures/jobs/stopped.c									\
+				structures/jobs/get_by_id.c									\
 				structures/read/delete.c									\
 				structures/read/new.c										\
 				structures/shell/delete.c									\

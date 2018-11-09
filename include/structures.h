@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 14:04:43 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:35:10 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,6 +364,7 @@ typedef struct			s_process
 typedef struct			s_job
 {
 	int					id;
+	int					rank;
 	char				*command;
 	t_process			*first_process;
 	pid_t				pgid;
