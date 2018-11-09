@@ -6,11 +6,25 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/10/31 21:56:23 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:12:41 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static int	check_fd(int fd)
+{
+	int		dummy;
+	int		ret;
+
+	ret = 1;
+	dummy = dup(fd);
+	if (dummy == -1)
+		ret = 0;
+	else
+		close(dummy);
+	return (ret);
+}
 
 static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 								char *cmd)
@@ -25,7 +39,7 @@ static char	do_aggregation(t_shell *sh, t_token_tree *tree, char *front,
 		error_malloc_reader(sh, "token");
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
-	if ((*back != '-' && fd[1] > 2))
+	if ((*back != '-' && fd[1] > 10) || !check_fd(fd[1]))
 		return (error_file_descriptor(&back));
 	(fd[1] < 0) ? fd[1] = 0 : (0);
 	fd[2] = dup(fd[0]);
