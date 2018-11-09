@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 16:37:18 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:07:29 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -520,6 +520,7 @@ void					sh_env_init_home(t_shell *sh);
 void					sh_env_init_ppid(t_shell *sh);
 void					sh_env_init_ps(t_shell *sh);
 void					sh_env_init_pwd(t_shell *sh);
+void					sh_env_init_shell(t_shell *sh, char *path);
 void					sh_env_init_shlvl(t_shell *sh);
 void					sh_env_init_specials(t_shell *sh, char *name);
 void					sh_env_init_term(t_shell *sh);

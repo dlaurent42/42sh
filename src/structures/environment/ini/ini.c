@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 11:59:07 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:30:02 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:06:54 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		env_initialize_local(t_shell *sh, char *name)
 		return ;
 	realname = ft_strdups(name + get_exe_name(name));
 	sh_env_init_home(sh);
+	sh_env_init_shell(sh, name);
 	sh_env_init_specials(sh, realname);
 	sh_env_init_config(sh);
 	sh_env_init_histfile(sh);
