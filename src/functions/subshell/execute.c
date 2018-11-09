@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 17:56:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/06 20:40:37 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:43:52 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static int		subshell_main(int argc, char **argv, char **environ)
+{
+	int			status;
+	t_shell		*sh;
+
+	sh = NULL;
+	sh = sh_new(argc, argv, environ);
+	(argc == 1) ? sh_welcome() : 0;
+	signal_catching();
+	status = (argc == 1)
+		? sh_read(sh)
+		: sh_subshell(sh, argv + 1);
+	sh_delete(sh);
+	return (status);
+}
 
 static char		**build_argv(char *token, t_shell *sh)
 {
@@ -31,12 +47,14 @@ char			execute_subshell(
 	int			status;
 	char		**arr;
 
+	if (!tree->tokens[0] || lexer_is_empty(tree->tokens[0]))
+		return (STATUS_OK);
 	if (!(arr = build_argv(tree->tokens[0], sh)))
 		return (error_subshell());
 	if ((pid = fork()) == -1)
 		return (error_subshell());
 	else if (pid == 0)
-		exit(main(2, arr, env->environment));
+		exit(subshell_main(2, arr, env->environment));
 	else
 	{
 		pid = wait(&status);

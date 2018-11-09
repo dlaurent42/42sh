@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:41:06 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:36:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:36:15 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int			main(int argc, char **argv, char **environ)
 {
-	int			status;
 	t_shell		*sh;
 
+	(void)argc;
+	(void)argv;
 	sh = NULL;
-	sh = sh_new(argc, argv, environ);
-	(argc == 1) ? sh_welcome() : 0;
+	sh = sh_new(1, argv, environ);
+	sh_welcome();
 	signal_catching();
-	status = (argc == 1)
-		? sh_read(sh)
-		: sh_subshell(sh, argv + 1);
+	sh_read(sh);
 	sh_delete(sh);
-	return (status);
+	return (0);
 }
