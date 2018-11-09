@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 22:56:42 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 23:07:25 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static char	single_left_cursor(t_shell *sh, t_token_tree *tree, int fd)
 	int		stdin;
 	char	ret;
 	char	*front;
+	int		fd_targ;
 
 	front = get_fd(tree->tokens[0]);
-	ft_printf("Current FD: %s\n", front);
-	stdin = dup(0);
-	dup2(fd, 0);
+	fd_targ = (front ? ft_atoi(front) : 0);
+	ft_strdel(&front);
+	stdin = dup(fd_targ);
+	dup2(fd, fd_targ);
 	ret = execute_tree(sh, tree->left);
-	dup2(stdin, 0);
+	dup2(stdin, fd_targ);
 	close(stdin);
 	close(fd);
 	return (ret);

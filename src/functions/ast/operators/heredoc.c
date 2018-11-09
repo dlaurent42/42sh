@@ -3,30 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:59:48 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/04 14:40:57 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 23:10:27 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static void	execute_heredoc_main(
+static char		*get_fd(char *token)
+{
+	int			i;
+	char		*ret;
+
+	ret = NULL;
+	i = 0;
+	while (token[i] && token[i] != '<')
+		i++;
+	if (i > 0)
+		ret = ft_strndup(token, i);
+	return (ret);
+}
+
+static void		execute_heredoc_main(
 			t_shell *sh, t_token_tree *tree, int stdin, int fd[2])
 {
 	int		status;
+	char	*front;
+	int		fd_targ;
 
-	dup2(fd[0], 0);
+	front = get_fd(tree->tokens[0]);
+	fd_targ = (front ? ft_atoi(front) : 0);
+	ft_strdel(&front);
+	dup2(fd[0], fd_targ);
 	close(fd[1]);
 	wait(&status);
 	execute_tree(sh, tree->left);
-	dup2(stdin, 0);
+	dup2(stdin, fd_targ);
 	close(stdin);
 	exit(0);
 }
 
-static void	execute_heredoc_child(
+static void		execute_heredoc_child(
 			t_shell *sh, int count, int stdout, int fd[2])
 {
 	char		*str;
@@ -45,7 +64,7 @@ static void	execute_heredoc_child(
 	exit(0);
 }
 
-static char	do_heredoc(
+static char		do_heredoc(
 			t_shell *sh, t_token_tree *tree, int std[2], int count)
 {
 	int		fd[2];
@@ -70,7 +89,7 @@ static char	do_heredoc(
 	return (0);
 }
 
-char		left_heredoc(t_shell *sh, t_token_tree *tree, int count)
+char			left_heredoc(t_shell *sh, t_token_tree *tree, int count)
 {
 	int		std[2];
 
