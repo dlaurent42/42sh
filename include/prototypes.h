@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:56:44 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:57:25 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -543,7 +543,7 @@ void					gnl_delete(t_shell *sh);
 ** structures - jobs
 */
 void					job_destroy_all(t_job *job);
-t_job					*job_new(void);
+t_job					*job_new(int muted, char **argv);
 int						job_is_completed(t_job *job);
 int						job_is_stopped(t_job *job);
 void					job_delete(t_job *job);
