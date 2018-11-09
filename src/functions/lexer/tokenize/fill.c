@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/02 21:44:15 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:09:27 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ char		lexer_fill(t_lexer *lexer, char *cmd)
 	j = 0;
 	status = STATUS_OK;
 	while (cmd && cmd[i])
-		if ((match = lexer_token_search(cmd + i)))
+		if (lexer_is_esc(cmd, i))
+			i++;
+		else if ((match = lexer_token_search(cmd + i)))
 		{
 			lexer_handle_match(match, lexer, cmd + i, cmd + j);
 			i += match->size;
