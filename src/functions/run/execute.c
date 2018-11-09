@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 14:57:19 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 13:56:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:57:11 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ static char	sh_command_exec(t_shell *sh, char **cmd, char **env)
 		if ((WIFEXITED(status)))
 			return (WEXITSTATUS(status));
 		if ((WIFSTOPPED(status)))
+		{
+			kill(sh->pid, SIGKILL);
 			return (WIFSTOPPED(status));
+		}
 	}
 	return (-1);
 }
