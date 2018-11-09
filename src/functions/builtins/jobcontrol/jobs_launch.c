@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jobs_launch.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhojt <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dhojt <dhojt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 12:10:04 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/09 14:50:34 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/09 14:57:05 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_job				*get_process_by_pid(t_job *job, pid_t pid)
 		while (process)
 		{
 			if (process->pid == pid)
-				return (job);	
+				return (job);
 			process = process->next;
 		}
 		job = job->next;
@@ -77,6 +77,11 @@ char				buildin_jobs_launch(t_shell *sh, char **argv, int mode)
 			job = get_job_by_id(sh->job, ft_atoi(argv[1]));
 		else if (!ft_strcmps(argv[0], "-p"))
 			job = get_process_by_pid(sh->job, ft_atoi(argv[1]));
+	}
+	else
+	{
+		ft_printf("%s: wrong options\n", (mode == JOBS_FG) ? "fg" : "bg");
+		return (STATUS_ERR);
 	}
 	if (!job)
 		ft_printf("%s: no jobs\n", (mode == JOBS_FG) ? "fg" : "bg");

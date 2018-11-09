@@ -6,18 +6,11 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:37:37 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 21:56:29 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 14:57:51 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-/*
-** For Dav:
-** Processes stored this way:
-** sh->job contains first process launched.
-** everything is in chain list.(you can make it into linked list if you prefer that)
-*/
 
 char		buildin_jobs(t_shell *sh, char **argv)
 {
