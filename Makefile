@@ -66,7 +66,7 @@ SRC			=	shell.c														\
 				functions/builtins/jobcontrol/jobs.c						\
 				functions/builtins/jobcontrol/jobs_bg.c						\
 				functions/builtins/jobcontrol/jobs_fg.c						\
-				functions/builtins/jobcontrol/jobs_launch.c						\
+				functions/builtins/jobcontrol/jobs_launch.c					\
 				functions/builtins/read/assign.c							\
 				functions/builtins/read/error.c								\
 				functions/builtins/read/options.arguments.c					\
@@ -329,7 +329,6 @@ SRC			=	shell.c														\
 				terminal/signals/catch.c									\
 				terminal/signals/default.c									\
 				terminal/signals/resize.c
-#				functions/check/brackets.c									\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_ALL))
 
