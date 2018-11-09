@@ -6,13 +6,13 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:01:39 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 15:35:36 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:52:31 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	str2_sizes(char	**argv)
+static int		str2_sizes(char **argv)
 {
 	int		i;
 	int		ret;
@@ -29,7 +29,7 @@ static int	str2_sizes(char	**argv)
 	return (ret);
 }
 
-static char	*ft_str2tostr(char **argv)
+static char		*ft_str2tostr(char **argv)
 {
 	int		i;
 	int		x;
@@ -51,7 +51,7 @@ static char	*ft_str2tostr(char **argv)
 	return (ret);
 }
 
-t_job		*job_new(int muted, char **argv)
+t_job			*job_new(int muted, char **argv)
 {
 	t_job		*job;
 
