@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 14:00:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:31:55 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	sh_delete(t_shell *sh)
 {
+	bool	subshell;
+
 	if (!sh)
 		return ;
 	process_destroy_all(sh);
+	subshell = sh->modes.subshell;
 	(sh->ac) ? auto_free_ac(sh) : 0;
 	(sh->cmd) ? command_export_all(sh) : 0;
 	(sh->cmd) ? command_delete_all(sh) : 0;
@@ -32,6 +35,6 @@ void	sh_delete(t_shell *sh)
 	(sh->prompt.content) ? ft_strdel(&sh->prompt.content) : 0;
 	(sh->prompt.location) ? ft_strdel(&sh->prompt.location) : 0;
 	sh_heredoc_delete(sh);
-	sh_unset_termios(sh);
+	(subshell == FALSE) ? sh_unset_termios(sh) : 0;
 	free(sh);
 }

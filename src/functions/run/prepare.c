@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 15:21:54 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/09 21:26:35 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ void		sh_command_prepare(t_shell *sh)
 	&& sh->env->count + 1 < sh->env->size)))
 		env_insert_protected(sh, sh->env, "?", "1");
 	ft_strdel(&sh->buffer.parsed);
-	sh_last_char(sh);
+	(!sh->modes.subshell) ? sh_last_char(sh) : 0;
 	sh_reset_sh(sh);
 }
