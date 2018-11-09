@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 07:09:03 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/03 20:19:17 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 12:03:18 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,11 @@
 ** backtick
 */
 # define BACKTICK_BUFF	256
+
+/*
+** job control
+*/
+# define JOBS_FG	1
+# define JOBS_BG	2
 
 #endif
