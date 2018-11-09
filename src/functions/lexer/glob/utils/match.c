@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:16:13 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/24 17:11:12 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:56:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 static bool		check_list(char c, char idx, char **lst)
 {
-	int		i;
-	int		lst_len;
-	bool	neg;
+	int				i;
+	int				lst_len;
+	unsigned char	index;
+	bool			neg;
 
 	i = 0;
 	lst_len = 0;
+	index = (unsigned char)idx;
 	while (lst[lst_len])
 		lst_len++;
-	if (idx > lst_len)
+	if (index > lst_len)
 		return (FALSE);
-	neg = (lst[(int)idx - 1][0] == '!') ? TRUE : FALSE;
-	while (lst[(int)idx - 1][i])
+	neg = (lst[(int)index - 1][0] == '!') ? TRUE : FALSE;
+	while (lst[(int)index - 1][i])
 	{
-		if (lst[(int)idx - 1][i] == c && neg == FALSE)
+		if (lst[(int)index - 1][i] == c && neg == FALSE)
 			return (TRUE);
-		else if (lst[(int)idx - 1][i] == c && neg == TRUE)
+		else if (lst[(int)index - 1][i] == c && neg == TRUE)
 			return (FALSE);
 		i++;
 	}
