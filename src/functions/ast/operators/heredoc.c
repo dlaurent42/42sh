@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 10:59:48 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/10 16:02:11 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 16:08:23 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char		*get_fd(char *token)
+static char	*get_fd(char *token)
 {
 	int			i;
 	char		*ret;
@@ -26,7 +26,7 @@ static char		*get_fd(char *token)
 	return (ret);
 }
 
-static void		execute_heredoc_main(
+static void	execute_heredoc_main(
 			t_shell *sh, t_token_tree *tree, int stdin, int fd[2])
 {
 	int		status;
