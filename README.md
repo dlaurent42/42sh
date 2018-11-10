@@ -397,3 +397,4 @@ unsetenv name [...]
 - Inhibitors """ (double quote), "’" (simple quote) and "\" (backslash).
 - Job control
 - Subshells "( . )"
+- Fast execution `$> ./foo` == `$> foo`
