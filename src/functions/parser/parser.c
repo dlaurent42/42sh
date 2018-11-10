@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 14:50:11 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/10 14:58:18 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static char	sh_command_err(char *cmd)
 {
 	if (access(cmd, F_OK) == -1 && !lexer_is_empty(cmd))
 	{
-		ft_putstr_fd("sh: command not found: ", 2);
+		ft_putstr_fd("42sh: command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
 		return (STATUS_NOT_FOUND);
 	}
 	else
 	{
-		ft_putstr_fd("sh: permission denied: ", 2);
+		ft_putstr_fd("42sh: permission denied: ", 2);
 		ft_putendl_fd(cmd, 2);
 		return (STATUS_PERMISSION_DENIED);
 	}
@@ -54,35 +54,6 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	while (arr[++i])
 		lexer_remove_useless_quotes(arr[i]);
 	return (sh_command_dispatch(sh, env, arr));
-}
-
-static bool	sh_command_test_path(char **arg)
-{
-	char	*path_in_pwd;
-
-	if (!arg || !arg[0])
-		return (true);
-	if ((arg[0][0] == '.' && arg[0][1] == '/') || arg[0][0] == '/')
-	{
-		if (ft_realpath(&arg[0]) == FALSE)
-			return (false);
-	}
-	else if ((path_in_pwd = ft_strjoin("./", arg[0])) && access(path_in_pwd, X_OK) != -1)
-	{
-		if (ft_realpath(&path_in_pwd) == FALSE)
-		{
-			ft_strdel(&path_in_pwd);
-			return (false);
-		}
-		else
-		{
-			ft_strdel(&arg[0]);
-			arg[0] = path_in_pwd;
-		}
-	}
-	else
-		ft_strdel(&path_in_pwd);
-	return (true);
 }
 
 static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,

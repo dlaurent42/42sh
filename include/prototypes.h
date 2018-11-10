@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 11:22:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 15:45:15 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,6 +426,7 @@ void					sh_command_parser(
 							t_env *env,
 							t_bin *bin,
 							char *str);
+bool					sh_command_test_path(char **arg);
 
 /*
 ** functions - run

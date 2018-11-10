@@ -162,6 +162,7 @@ SRC			=	shell.c														\
 				functions/parser/build.c									\
 				functions/parser/is_not_builtin.c							\
 				functions/parser/parser.c									\
+				functions/parser/test_path.c								\
 				functions/run/execute.c										\
 				functions/run/prepare.c										\
 				functions/run/run.c											\
