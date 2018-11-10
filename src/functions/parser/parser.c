@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 10:23:10 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/10 10:30:53 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 	i = 0;
 	if (!(arg = sh_command_build(str)))
 		return (ft_strdel(&str));
-	path_in_pwd = ft_strjoin("./", arg[0]);
 	if (arg && arg[0])
 	{
 		if ((arg[0][0] == '.' && arg[0][1] == '/') || arg[0][0] == '/')
@@ -91,6 +90,8 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 				arg[0] = path_in_pwd;
 			}
 		}
+		else
+			ft_strdel(&path_in_pwd);
 	}
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
@@ -137,6 +138,8 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 				arg[0] = path_in_pwd;
 			}
 		}
+		else
+			ft_strdel(&path_in_pwd);
 	}
 	while (arg[i])
 	{
