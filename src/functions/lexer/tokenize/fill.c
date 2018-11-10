@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 12:13:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/11/09 23:09:41 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 16:04:01 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	lexer_check_n(char *cmd, char *prev, t_token_type type)
 	if (ft_strlens(number) != 1)
 		ret = FALSE;
 	else if (ft_isdigit((int)*number) != 1
-		&& (type == TOKEN_REDIR && number[0] != '&'))
+		&& ((type == TOKEN_REDIR || type == TOKEN_HEREDOC) && number[0] != '&'))
 		ret = FALSE;
 	ft_strdel(&number);
 	return (ret);
@@ -60,7 +60,8 @@ static void	lexer_handle_match(
 	t_token *match, t_lexer *lexer, char *cmd, char *prev)
 {
 	if (match->type == TOKEN_AGGREG || ft_strcmps(match->id, ">") == 0
-		|| ft_strcmps(match->id, ">>") == 0)
+	|| ft_strcmps(match->id, ">>") == 0 || ft_strcmps(match->id, "<") == 0
+	|| ft_strcmps(match->id, "<<") == 0)
 	{
 		if (cmd != prev && lexer_check_n(cmd, prev, match->type) == FALSE)
 		{
