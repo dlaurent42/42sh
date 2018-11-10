@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 10:52:36 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/10 14:50:11 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	else if (arr && arr[0] && (sh_is_not_builtin(arr[0]) || sh->jc_muted))
 	{
 		if (!(obj = bin_search(bin, arr[0])) || !obj->path
-		|| access(obj->path, F_OK) != 0)
+				|| access(obj->path, F_OK) != 0)
 			return (sh_command_err(arr[0]));
 		if (access(obj->path, R_OK) != 0 || access(obj->path, X_OK) != 0)
 			return (sh_command_err(arr[0]));
@@ -56,42 +56,46 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	return (sh_command_dispatch(sh, env, arr));
 }
 
+static bool	sh_command_test_path(char **arg)
+{
+	char	*path_in_pwd;
+
+	if (!arg || !arg[0])
+		return (true);
+	if ((arg[0][0] == '.' && arg[0][1] == '/') || arg[0][0] == '/')
+	{
+		if (ft_realpath(&arg[0]) == FALSE)
+			return (false);
+	}
+	else if ((path_in_pwd = ft_strjoin("./", arg[0])) && access(path_in_pwd, X_OK) != -1)
+	{
+		if (ft_realpath(&path_in_pwd) == FALSE)
+		{
+			ft_strdel(&path_in_pwd);
+			return (false);
+		}
+		else
+		{
+			ft_strdel(&arg[0]);
+			arg[0] = path_in_pwd;
+		}
+	}
+	else
+		ft_strdel(&path_in_pwd);
+	return (true);
+}
+
 static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
-	char *str)
+		char *str)
 {
 	int		i;
 	char	**arg;
-	char	*path_in_pwd;
 
 	i = 0;
 	if (!(arg = sh_command_build(str)))
 		return (ft_strdel(&str));
-	if (arg && arg[0])
-	{
-		if ((arg[0][0] == '.' && arg[0][1] == '/') || arg[0][0] == '/')
-		{
-			if (ft_realpath(&arg[0]) == FALSE)
-			{
-				return ((void)sh_command_err(arg[0]));
-			}
-		}
-		else if ((path_in_pwd = ft_strjoin("./", arg[0]))
-				&& access(path_in_pwd, X_OK) != -1)
-		{
-			if (ft_realpath(&path_in_pwd) == FALSE)
-			{
-				ft_strdel(&path_in_pwd);
-				return ((void)sh_command_err(arg[0]));
-			}
-			else
-			{
-				ft_strdel(&arg[0]);
-				arg[0] = path_in_pwd;
-			}
-		}
-		else
-			ft_strdel(&path_in_pwd);
-	}
+	if (!(sh_command_test_path(arg)))
+		return ((void)sh_command_err(arg[0]));
 	ft_strdel(&str);
 	str = ft_itoa(sh_command_found(sh, env, bin, &arg[0]));
 	if (arg)
@@ -105,41 +109,16 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 }
 
 char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
-	t_token_tree *tree)
+		t_token_tree *tree)
 {
 	int		i;
 	char	ret;
 	char	**arg;
-	char	*path_in_pwd;
 
 	i = 0;
 	arg = tree->tokens;
-	if (arg && arg[0])
-	{
-		if ((arg[0][0] == '.' && arg[0][1] == '/') || arg[0][0] == '/')
-		{
-			if (ft_realpath(&arg[0]) == FALSE)
-			{
-				return (sh_command_err(arg[0]));
-			}
-		}
-		else if ((path_in_pwd = ft_strjoin("./", arg[0]))
-				&& access(path_in_pwd, X_OK) != -1)
-		{
-			if (ft_realpath(&path_in_pwd) == FALSE)
-			{
-				ft_strdel(&path_in_pwd);
-				return (sh_command_err(arg[0]));
-			}
-			else
-			{
-				ft_strdel(&arg[0]);
-				arg[0] = path_in_pwd;
-			}
-		}
-		else
-			ft_strdel(&path_in_pwd);
-	}
+	if (!(sh_command_test_path(arg)))
+		return (sh_command_err(arg[0]));
 	while (arg[i])
 	{
 		arg[i] = sh_command_check(env, arg[i], tree->t_type[i]);
