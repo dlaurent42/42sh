@@ -6,27 +6,11 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 16:10:57 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 19:37:20 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 19:46:22 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-static bool	env_has_unicode(const char *k)
-{
-	int		i;
-
-	i = 0;
-	if (!k)
-		return (FALSE);
-	while (k[i])
-	{
-		if (k[i] < 0)
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
 
 char		*env_search_public(t_env *env, const char *key)
 {
@@ -35,8 +19,6 @@ char		*env_search_public(t_env *env, const char *key)
 	t_env_item	*item;
 
 	i = 1;
-	if (env_has_unicode(key))
-		return (NULL);
 	if ((index = env_get_hash(key, env->size, 0)) < 0)
 		return (NULL);
 	item = env->items[index];
@@ -60,8 +42,6 @@ char		*env_search_local(t_env *env, const char *key)
 	t_env_item	*item;
 
 	i = 1;
-	if (env_has_unicode(key))
-		return (NULL);
 	if ((index = env_get_hash(key, env->size, 0)) < 0)
 		return (NULL);
 	item = env->items[index];
@@ -85,8 +65,6 @@ char		*env_search(t_env *env, const char *key)
 	t_env_item	*item;
 
 	i = 1;
-	if (env_has_unicode(key))
-		return (NULL);
 	if ((index = env_get_hash(key, env->size, 0)) < 0)
 		return (NULL);
 	item = env->items[index];
