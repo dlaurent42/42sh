@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 17:56:26 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 20:43:52 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 11:25:20 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,27 @@ static char		**build_argv(char *token, t_shell *sh)
 	return (arr);
 }
 
-char			execute_subshell(
-				t_shell *sh, t_env *env, t_token_tree *tree)
+char			execute_subshell_env(t_env *env, char **arr)
+{
+	pid_t		pid;
+	int			status;
+
+	if (!arr || lexer_is_empty(arr[0]))
+		return (STATUS_OK);
+	if ((pid = fork()) == -1)
+		return (error_subshell());
+	else if (pid == 0)
+		exit(subshell_main(2, arr, env->environment));
+	else
+	{
+		pid = wait(&status);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+	}
+	return (STATUS_OK);
+}
+
+char			execute_subshell(t_shell *sh, t_env *env, t_token_tree *tree)
 {
 	pid_t		pid;
 	int			status;
