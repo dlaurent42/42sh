@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 18:51:16 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 02:02:42 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,26 @@ static char	*sh_cd_get_real_path_pwd(t_shell *sh, t_env *env, char *param)
 		? ft_strjoinf(cdpath, new, 2)
 		: ft_strjoinf(env_search(env, "PWD"), new, 2);
 	new = sh_cd_parse_path(new);
+	if (new[0] == '\0')
+	{
+		ft_strdel(&new);
+		new = ft_strdups("/");
+	}
 	return (new);
 }
 
 static void	sh_cd_follow_insert_env(t_shell *sh, t_env *env, char *path)
 {
+	char	*rpath;
+
+	rpath = NULL;
+	(path[0] != '/') ? rpath = ft_strjoins("/", path) : 0;
 	if ((env_search(env, "OLDPWD") || env->count + 1 < env->size)
 	&& env_search(env, "PWD"))
 		env_insert(sh, env, "OLDPWD", env_search(env, "PWD"));
 	if (env_search(env, "PWD") || env->count + 1 < env->size)
-		env_insert(sh, env, "PWD", path);
+		env_insert(sh, env, "PWD", rpath);
+	ft_strdel(&rpath);
 }
 
 static char	sh_cd_follow_del_and_return(
