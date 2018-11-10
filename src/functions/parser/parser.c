@@ -6,21 +6,21 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:20:39 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 10:30:53 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/10 10:52:36 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	sh_command_err(char *cmd, int err)
+static char	sh_command_err(char *cmd)
 {
-	if (err == 1 && !lexer_is_empty(cmd))
+	if (access(cmd, F_OK) == -1 && !lexer_is_empty(cmd))
 	{
 		ft_putstr_fd("sh: command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
 		return (STATUS_NOT_FOUND);
 	}
-	if (err == 2)
+	else
 	{
 		ft_putstr_fd("sh: permission denied: ", 2);
 		ft_putendl_fd(cmd, 2);
@@ -37,18 +37,17 @@ static char	sh_command_found(t_shell *sh, t_env *env, t_bin *bin, char **arr)
 	i = 0;
 	if (arr && arr[0] && arr[0][0] == '/')
 	{
-		if (access(arr[0], F_OK) != 0)
-			return (sh_command_err(arr[0], 1));
-		if (access(arr[0], R_OK) != 0 || access(arr[0], X_OK) != 0)
-			return (sh_command_err(arr[0], 2));
+		if (access(arr[0], F_OK) != 0 || access(arr[0], R_OK) != 0
+				|| access(arr[0], X_OK) != 0)
+			return (sh_command_err(arr[0]));
 	}
 	else if (arr && arr[0] && (sh_is_not_builtin(arr[0]) || sh->jc_muted))
 	{
 		if (!(obj = bin_search(bin, arr[0])) || !obj->path
 		|| access(obj->path, F_OK) != 0)
-			return (sh_command_err(arr[0], 1));
+			return (sh_command_err(arr[0]));
 		if (access(obj->path, R_OK) != 0 || access(obj->path, X_OK) != 0)
-			return (sh_command_err(arr[0], 2));
+			return (sh_command_err(arr[0]));
 		ft_strdel(&arr[0]);
 		arr[0] = ft_strdups(obj->path);
 	}
@@ -73,7 +72,7 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 		{
 			if (ft_realpath(&arg[0]) == FALSE)
 			{
-				return ((void)sh_command_err(arg[0], 1));
+				return ((void)sh_command_err(arg[0]));
 			}
 		}
 		else if ((path_in_pwd = ft_strjoin("./", arg[0]))
@@ -82,7 +81,7 @@ static void	sh_command_parse_dispatch(t_shell *sh, t_env *env, t_bin *bin,
 			if (ft_realpath(&path_in_pwd) == FALSE)
 			{
 				ft_strdel(&path_in_pwd);
-				return ((void)sh_command_err(arg[0], 1));
+				return ((void)sh_command_err(arg[0]));
 			}
 			else
 			{
@@ -121,7 +120,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 		{
 			if (ft_realpath(&arg[0]) == FALSE)
 			{
-				return (sh_command_err(arg[0], 1));
+				return (sh_command_err(arg[0]));
 			}
 		}
 		else if ((path_in_pwd = ft_strjoin("./", arg[0]))
@@ -130,7 +129,7 @@ char		sh_command_run_ast(t_shell *sh, t_env *env, t_bin *bin,
 			if (ft_realpath(&path_in_pwd) == FALSE)
 			{
 				ft_strdel(&path_in_pwd);
-				return (sh_command_err(arg[0], 1));
+				return (sh_command_err(arg[0]));
 			}
 			else
 			{
