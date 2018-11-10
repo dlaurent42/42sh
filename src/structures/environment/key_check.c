@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 11:17:15 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/10/18 13:52:22 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 02:26:18 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ bool	env_key_is_ok(char *name)
 	int	i;
 
 	i = 0;
-	if (!name || !name[0] || (!ft_isalpha(name[0]) && name[0] != '_'))
+	if (!name || !name[0] || (!ft_isalpha(name[0]) && name[0 != '_']))
 		return (FALSE);
-	while (name[i])
+	while (name[++i])
 	{
-		if (!ft_isalnum(name[i]) || name[i] == '_')
+		if (!ft_isalnum(name[i]))
 			return (FALSE);
-		i++;
 	}
 	return (TRUE);
 }
