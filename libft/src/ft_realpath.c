@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 14:30:52 by dhojt             #+#    #+#             */
-/*   Updated: 2018/11/10 10:17:31 by dhojt            ###   ########.fr       */
+/*   Updated: 2018/11/10 12:55:56 by dhojt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*ft_replace_dot_slash(char *path)
 		return (path);
 	if (!(new = getcwd(new, PATH_MAX)))
 		return (path);
-	if(!(new = ft_strjoinf(new, path + 1, 1)))
+	if (!(new = ft_strjoinf(new, path + 1, 1)))
 		return (path);
 	ft_strdel(&path);
 	return (new);
