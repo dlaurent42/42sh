@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:01:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 15:35:10 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 13:51:05 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,9 +371,17 @@ typedef struct			s_job
 	char				notified;
 	char				notifications;
 	struct termios		tmodes;
-	int					fd[3];
+	int					fd[10];
 	struct s_job		*next;
 }						t_job;
+
+typedef struct			s_redir
+{
+	int					front;
+	int					back;
+	int					close;
+	struct s_redir		*next;
+}						t_redir;
 
 typedef struct			s_shell
 {
@@ -396,6 +404,7 @@ typedef struct			s_shell
 	t_lexer				lexer;
 	t_cursor			cursor;
 	t_prompt			prompt;
+	t_redir				*redir;
 	t_window			window;
 	t_buffer			buffer;
 	t_search			search;

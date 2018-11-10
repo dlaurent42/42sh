@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:34:55 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/10 00:49:56 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 15:07:48 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,23 @@ static int	check_fd(int fd)
 static char do_redir(t_shell *sh, t_token_tree *tree, char *front, char *cmd)
 {
 	int		fd[2];
-	int		stdin;
-	char	ret;
-	char	*back;
+	char		ret;
+	char		*back;
+	t_redir		*new;
 
 	if (!(back = get_back_descriptor(cmd)))
 		error_malloc_reader(sh, "token");
 	fd[0] = ft_atoi(front);
 	fd[1] = ft_atoi(back);
-	ft_printf("Executing redir <&\nFront: %d\nBack: %d\n", fd[0], fd[1]);
+	if (fd[1] > 9)
+		return (error_file_descriptor(&back));
 	(fd[1] < 0) ? fd[1] = 0 : (0);
-	stdin = dup(fd[1]);
-	dup2(fd[0], fd[1]);
+	new = redir_new();
+	new->front = fd[0];
+	new->back = fd[1];
+	new->close = 0;
+	redir_add(&sh->redir, new);
 	ret = execute_tree(sh, tree->left);
-	dup2(stdin, fd[1]);
-	close(stdin);
 	ft_strdel(&back);
 	return (ret);
 }

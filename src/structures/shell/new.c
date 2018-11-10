@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:31:18 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 13:34:24 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 13:49:13 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_shell		*sh_new(int argc, char **argv, char **environ)
 	sh->shell_pgid = getpid();
 	sh->env = env_new(sh, environ);
 	sh->job = NULL;
+	sh->redir = NULL;
 	env_initialize_local(sh, argv[0]);
 	sh->alias = env_new(sh, NULL);
 	sh_config_import(sh);

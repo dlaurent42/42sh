@@ -6,7 +6,7 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:44:04 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/09 23:07:25 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 14:55:22 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	single_left_cursor(t_shell *sh, t_token_tree *tree, int fd)
 	dup2(fd, fd_targ);
 	ret = execute_tree(sh, tree->left);
 	dup2(stdin, fd_targ);
-	close(stdin);
+	(stdin != -1) ? close(stdin) : (0);
 	close(fd);
 	return (ret);
 }

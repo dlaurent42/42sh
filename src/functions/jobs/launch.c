@@ -6,11 +6,12 @@
 /*   By: azaliaus <azaliaus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:39:32 by azaliaus          #+#    #+#             */
-/*   Updated: 2018/11/08 11:31:30 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 15:19:55 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <errno.h>
 
 void		job_launch(t_job *job, int foreground)
 {
@@ -18,6 +19,7 @@ void		job_launch(t_job *job, int foreground)
 	pid_t			pid;
 	int				std[3];
 
+	redir_load_job(job, g_sh->redir);
 	std[0] = job->fd[0];
 	std[1] = job->fd[1];
 	std[2] = job->fd[2];
@@ -36,6 +38,7 @@ void		job_launch(t_job *job, int foreground)
 		}
 		p = p->next;
 	}
+	redir_destroy(&g_sh->redir);
 	job_message(job, "launched");
 	(foreground) ?
 		put_job_in_foreground(job, 0) : put_job_in_background(job, 0);

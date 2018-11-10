@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/13 18:03:23 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 21:07:29 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 13:56:00 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,6 +558,14 @@ int						job_get_max_id(t_job *job);
 */
 void					read_delete(t_read *read);
 t_read					*read_new(t_shell *sh);
+
+/*
+** structures - redir
+*/
+t_redir					*redir_new(void);
+void					redir_add(t_redir **list, t_redir *new);
+void					redir_destroy(t_redir **list);
+void					redir_load_job(t_job *job, t_redir *redir);
 
 /*
 ** structures - shell

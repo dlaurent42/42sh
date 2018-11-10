@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 19:13:12 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/09 14:00:59 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 13:52:51 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	sh_delete(t_shell *sh)
 	(sh->alias) ? env_delete(sh->alias) : 0;
 	(sh->bin) ? bin_delete(sh->bin) : 0;
 	(sh->read) ? read_delete(sh->read) : 0;
+	(sh->redir) ? redir_destroy(&sh->redir) : 0;
 	(sh->exec) ? sh_destroy_exec(&(sh->exec)) : 0;
 	(sh->buffer.parsed) ? ft_strdel(&sh->buffer.parsed) : 0;
 	(sh->selection.content) ? ft_strdel(&sh->selection.content) : 0;

@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 00:59:34 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/08 15:21:54 by azaliaus         ###   ########.fr       */
+/*   Updated: 2018/11/10 14:44:20 by azaliaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static void	sh_reset_sh(t_shell *sh)
 	sh->buffer.dshift = 0;
 	sh->buffer.ushift = 0;
 	sh->buffer.cmd = NULL;
+	redir_destroy(&sh->redir);
 	sh->read->unicode_bytes_left = 0;
 	sh->pid = 0;
 	sh->jc_muted = 0;

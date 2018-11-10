@@ -225,6 +225,10 @@ SRC			=	shell.c														\
 				structures/jobs/get_by_id.c									\
 				structures/read/delete.c									\
 				structures/read/new.c										\
+				structures/redir/new.c										\
+				structures/redir/add.c										\
+				structures/redir/destroy.c									\
+				structures/redir/load.c										\
 				structures/shell/delete.c									\
 				structures/shell/import_config.c							\
 				structures/shell/new.c										\
@@ -408,6 +412,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)/structures/gnl
 				@mkdir -p $(OBJ_DIR)/structures/jobs
 				@mkdir -p $(OBJ_DIR)/structures/read
+				@mkdir -p $(OBJ_DIR)/structures/redir
 				@mkdir -p $(OBJ_DIR)/structures/shell
 				@mkdir -p $(OBJ_DIR)/structures/process
 				@mkdir -p $(OBJ_DIR)/terminal
