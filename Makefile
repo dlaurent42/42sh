@@ -3,7 +3,7 @@
 NAME 		= 	42sh
 
 CC 			=	gcc
-CFLAGS		= 	-O3 -g3 -Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
+CFLAGS		= 	-Wall -Wextra -Werror -I$(INC_DIR) -I./libdyn/incs
 
 SRC_DIR 	=	./src/
 SRC			=	shell.c														\
@@ -348,9 +348,9 @@ INC 		=	shell.h														\
 
 INCS 		=	$(addprefix $(INC_DIR), $(INC))
 
-all:	 		shell
+all:	 		$(NAME)
 
-shell:			$(OBJ_DIR) $(OBJS)
+$(NAME):		$(OBJ_DIR) $(OBJS)
 				@make -C libdyn/
 				@make -C libft/
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L libft/ -L libdyn/ -lft -ldyn -lcurses
