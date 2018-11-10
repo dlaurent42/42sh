@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 23:19:28 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 02:02:42 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 20:58:56 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*sh_cd_get_real_path(t_shell *sh, t_env *env, char *param)
 	path = NULL;
 	new = param + sh_cd_remove_troll(param);
 	if (new[0] == '/')
-		return (ft_strdups(param));
+		return (realpath(param, NULL));
 	if (new[0] == '\0' && env_search(env, "HOME"))
 		return (ft_strdups(env_search(env, "HOME")));
 	if (new[0] == '\0')
@@ -52,7 +52,7 @@ static char	*sh_cd_get_real_path_pwd(t_shell *sh, t_env *env, char *param)
 		? ft_strjoinf(cdpath, new, 2)
 		: ft_strjoinf(env_search(env, "PWD"), new, 2);
 	new = sh_cd_parse_path(new);
-	if (new[0] == '\0')
+	if (new[0] == '\0' || new[0] == '.')
 	{
 		ft_strdel(&new);
 		new = ft_strdups("/");
