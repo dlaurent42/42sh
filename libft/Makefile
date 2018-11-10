@@ -3,7 +3,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -O3 -g3 -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
 
 SRC_DIR = ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
