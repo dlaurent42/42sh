@@ -6,7 +6,7 @@
 /*   By: dlaurent <dlaurent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 16:15:53 by dlaurent          #+#    #+#             */
-/*   Updated: 2018/11/10 19:25:25 by dlaurent         ###   ########.fr       */
+/*   Updated: 2018/11/10 19:37:40 by dlaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_bin_obj	*bin_search(t_bin *bin, const char *key)
 	{
 		if (item != &bin->del && !ft_strcmps(item->key, key))
 			return (item->value);
-		index = bin_get_hash(key, bin->size, i);
+		if ((index = bin_get_hash(key, bin->size, i)) < 0)
+			return (NULL);
 		item = bin->items[index];
 		i++;
 	}
